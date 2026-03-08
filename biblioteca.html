@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
 <head>
@@ -423,13 +423,15 @@
         .art-img-wrap {
             overflow: hidden;
             position: relative;
-            height: 320px;
+            min-height: 320px;
             background: #0a0a14;
-            cursor: pointer
+            cursor: pointer;
+            align-self: stretch
         }
 
         @media(max-width:860px) {
             .art-img-wrap {
+                min-height: 220px;
                 height: 220px
             }
         }
@@ -920,8 +922,9 @@
 
         // ARTICLES DATA
         const ARTS = [
-            { num: '01', cat: 'f', catLabel: 'Fisica Cuantica', catCls: 'cat-f', title: 'El gato de <em>Schrodinger</em>', excerpt: 'En 1935, Erwin Schrodinger propuso un experimento mental que aun hoy divide a fisicos y filosofos. Si la mecanica cuantica vale para los atomos, ¿por que no vale tambien para los gatos? La paradoja no es un error de la teoria. Es su exito lo que produce el escandalo conceptual.', meta: '18 min lectura · Fisica + Filosofia · Inaugural', eq: '$|\\Psi\\rangle = \\frac{1}{\\sqrt{2}}(|vivo\\rangle+|muerto\\rangle)$', bg: 'linear-gradient(135deg,rgba(7,8,22,.92),rgba(15,20,55,.88))', link: 'schrodinger.html', published: true },
-            { num: '02', cat: 'f', catLabel: 'Relatividad Especial', catCls: 'cat-f', title: 'La Relatividad <em>Especial</em>: cuando el espacio y el tiempo se doblan', excerpt: '1905, el annus mirabilis de Einstein. Un empleado de la oficina de patentes de Berna publica cuatro articulos que cambian para siempre nuestra idea del espacio, el tiempo y la masa. ¿Que significa que el tiempo transcurra mas lentamente para quien se mueve rapido?', meta: 'Proximamente · Einstein 1905 · Fisica', eq: '$E=mc^2$', bg: 'linear-gradient(135deg,#0f172a,#1e3a5f)', link: null, published: false },
+            { num: '01', cat: 'f', catLabel: 'Fisica Cuantica', catCls: 'cat-f', title: 'El gato de <em>Schrodinger</em>', excerpt: 'En 1935, Erwin Schrodinger propuso un experimento mental que aun hoy divide a fisicos y filosofos. Si la mecanica cuantica vale para los atomos, ¿por que no vale tambien para los gatos? La paradoja no es un error de la teoria. Es su exito lo que produce el escandalo conceptual.', meta: '18 min lectura · Fisica + Filosofia · Inaugural', eq: '$|\\Psi\\rangle = \\frac{1}{\\sqrt{2}}(|vivo\\rangle+|muerto\\rangle)$', bg: 'linear-gradient(135deg,rgba(7,8,22,.92),rgba(15,20,55,.88))', bgImg: 'universo.jpg', link: 'schrodinger.html', published: true },
+            { num: '02', cat: 'fi', catLabel: 'Historia de la Ciencia', catCls: 'cat-fi', title: 'De <em>Dhaka</em> a Berlín: Bose y Einstein', excerpt: 'Un joven profesor indio resuelve un problema matemático que atormentaba a Europa sobre la luz. Al ser rechazado, decide enviarle una audaz carta directamente a Albert Einstein, forjando una colaboración histórica y descubriendo el quinto estado de la materia.', meta: '15 min lectura · Epistemología · Física', eq: '$\\text{Bose-Einstein} \\to \\text{Bosones}$', bg: 'linear-gradient(135deg,rgba(20,15,10,.82),rgba(30,22,15,.9))', bgImg: 'bose-einstein.jpeg', link: 'bose-einstein.html', published: true },
+            { num: '03', cat: 'f', catLabel: 'Relatividad Especial', catCls: 'cat-f', title: 'La Relatividad <em>Especial</em>: cuando el espacio y el tiempo se doblan', excerpt: '1905, el annus mirabilis de Einstein. Un empleado de la oficina de patentes de Berna publica cuatro articulos que cambian para siempre nuestra idea del espacio, el tiempo y la masa. ¿Que significa que el tiempo transcurra mas lentamente para quien se mueve rapido?', meta: 'Proximamente · Einstein 1905 · Fisica', eq: '$E=mc^2$', bg: 'linear-gradient(135deg,#0f172a,#1e3a5f)', bgImg: 'universo.jpg', link: null, published: false },
             { num: '03', cat: 'f', catLabel: 'Relatividad General', catCls: 'cat-f', title: 'La Relatividad <em>General</em>: la gravedad como geometria del cosmos', excerpt: 'La gravedad no es una fuerza que actua a distancia: es la curvatura del espacio-tiempo producida por la masa y la energia. Einstein tardo diez anos en completar su teoria. Agujeros negros, ondas gravitacionales y la expansion del universo son sus hijos predilectos.', meta: 'Proximamente · Einstein 1915 · Fisica', eq: '$G_{\\mu\\nu}=\\frac{8\\pi G}{c^4}T_{\\mu\\nu}$', bg: 'linear-gradient(135deg,#1a0a2e,#2d1457)', link: null, published: false },
             { num: '04', cat: 'q', catLabel: 'Quimica · IA', catCls: 'cat-q', title: 'AlphaFold y el Premio <em>Nobel</em>: cuando la IA resuelve un misterio de 50 anos', excerpt: 'Durante decadas, predecir la estructura tridimensional de una proteina a partir de su secuencia de aminoacidos resistio todos los intentos. En 2020, DeepMind de Google lo resolvio con inteligencia artificial. En 2024, sus creadores recibieron el Nobel de Quimica. ¿Comprende realmente la vida una maquina?', meta: 'Proximamente · Google DeepMind · Nobel Quimica 2024', eq: 'Nobel 2024 · DeepMind', bg: 'linear-gradient(135deg,#0a2e1a,#0f4529)', link: null, published: false },
             { num: '05', cat: 'i', catLabel: 'Inteligencia Artificial', catCls: 'cat-i', title: '¿Pueden pensar las <em>maquinas</em>? De Turing a Claude y Gemini', excerpt: 'Anthropic creo Claude; Google, Gemini. Ambas organizaciones publican investigaciones sobre emergencia cognitiva, razonamiento y capacidades imprevistas en modelos de lenguaje masivos. ¿Son inteligentes, o son espejos estadisticos extraordinariamente detallados de nuestra propia mente?', meta: 'Proximamente · Anthropic & Google · IA', eq: '$\\text{Turing Test} \\Rightarrow ?$', bg: 'linear-gradient(135deg,#2d1a00,#4a2d00)', link: null, published: false },
@@ -944,7 +947,7 @@
                 row.dataset.cat = a.cat;
                 row.innerHTML = `
       <div class="art-img-wrap">
-        <div class="art-img-bg" style="background-image:${a.bg},url('universo.jpg');background-size:cover;background-position:center"></div>
+        <div class="art-img-bg" style="background-image:${a.bg},url('${a.bgImg || 'universo.jpg'}');background-size:cover, cover;background-position:center;background-blend-mode: overlay;"></div>
         <div class="art-img-overlay"></div>
         <div class="art-img-eq">${a.eq}</div>
         ${!a.published ? '<div class="art-soon">Proximo</div>' : ''}

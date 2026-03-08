@@ -990,6 +990,47 @@
             transform: translateY(-2px);
         }
 
+        /* ===================== BIBLIOTECA PREVIEW ===================== */
+        #biblioteca-preview {
+            background: linear-gradient(160deg, #070817 0%, #0d1128 100%);
+            padding: 88px 0;
+            border-top: 1px solid rgba(250,204,21,.07);
+            border-bottom: 1px solid rgba(250,204,21,.07);
+        }
+        .bib-inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        .bib-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 52px; flex-wrap: wrap; gap: 24px; }
+        .bib-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 12px; }
+        .bib-main-title { font-family: 'Playfair Display', serif; font-size: clamp(30px, 4.5vw, 52px); font-weight: 900; color: #f0ece4; line-height: 1.05; }
+        .bib-main-title em { color: var(--yellow); font-style: italic; }
+        .bib-main-desc { font-family: 'Libre Baskerville', serif; font-size: 14px; color: rgba(200,192,180,.65); line-height: 1.75; max-width: 360px; margin-top: 14px; }
+        .btn-bib { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(250,204,21,.4); color: var(--yellow); background: transparent; padding: 12px 28px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; transition: all var(--transition); white-space: nowrap; align-self: flex-start; text-decoration: none; }
+        .btn-bib:hover { background: var(--yellow); color: #000; transform: translateY(-2px); }
+        .bib-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        @media (max-width: 860px) { .bib-grid { grid-template-columns: 1fr; } }
+        .bib-card { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); transition: all .45s cubic-bezier(.4,0,.2,1); cursor: pointer; display: flex; flex-direction: column; text-decoration: none; }
+        .bib-card:hover { transform: translateY(-8px); border-color: rgba(250,204,21,.3); box-shadow: 0 28px 70px rgba(0,0,0,.55); }
+        .bib-card-img { height: 230px; position: relative; overflow: hidden; }
+        .bib-card-bg { position: absolute; inset: 0; background-size: cover !important; background-position: center !important; transition: transform .65s cubic-bezier(.34,1.2,.64,1); }
+        .bib-card:hover .bib-card-bg { transform: scale(1.09); }
+        .bib-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,22,.92) 0%, transparent 65%); }
+        .bib-card-eq { position: absolute; bottom: 14px; left: 18px; font-family: 'Libre Baskerville', serif; color: rgba(250,204,21,.75); font-size: 13px; z-index: 2; }
+        .bib-cat-badge { position: absolute; top: 14px; right: 14px; background: rgba(0,0,0,.72); border: 1px solid rgba(250,204,21,.25); color: var(--yellow); font-size: 9px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; backdrop-filter: blur(6px); z-index: 3; }
+        .bib-pub-badge { position: absolute; top: 14px; left: 14px; background: var(--yellow); color: #000; font-size: 9px; font-weight: 800; letter-spacing: .12em; padding: 4px 10px; border-radius: 999px; z-index: 3; }
+        .bib-card-body { padding: 28px 32px; background: linear-gradient(150deg, #0f1225, #131828); flex: 1; display: flex; flex-direction: column; }
+        .bib-card-title { font-family: 'Playfair Display', serif; font-size: clamp(1.25rem, 2.2vw, 1.6rem); font-weight: 900; color: #f0ece4; line-height: 1.15; margin-bottom: 12px; }
+        .bib-card-title em { color: var(--yellow); font-style: italic; }
+        .bib-card-excerpt { font-family: 'Libre Baskerville', serif; font-size: 13.5px; line-height: 1.85; color: rgba(200,192,180,.8); margin-bottom: 20px; flex: 1; }
+        .bib-card-meta { font-size: 10px; color: rgba(255,255,255,.35); letter-spacing: .1em; display: flex; align-items: center; gap: 8px; }
+        .bib-card-meta i { color: var(--yellow-dark); }
+        .bib-card-cta { display: inline-flex; align-items: center; gap: 8px; color: var(--yellow); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-top: 18px; transition: gap .3s; }
+        .bib-card:hover .bib-card-cta { gap: 13px; }
+        .bib-soon-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 20px; }
+        .bib-soon-card { background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.06); border-radius: 14px; padding: 16px 20px; display: flex; gap: 14px; align-items: center; transition: border-color .3s; }
+        .bib-soon-card:hover { border-color: rgba(250,204,21,.15); }
+        .bib-soon-icon { font-size: 22px; flex-shrink: 0; }
+        .bib-soon-label { font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 4px; }
+        .bib-soon-name { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: rgba(240,236,228,.6); line-height: 1.25; }
+
         /* ===================== MEMORIA SECTION ===================== */
         #memoria {
             background: #0a0a0a;
@@ -2585,7 +2626,7 @@
                 <a href="#">FILÓSOF@S</a>
                 <a href="24-marzo.html">MEMORIA 24M</a>
                 <a href="#">ACTUALIDAD CTS</a>
-                <a href="#">PODCAST</a>
+                <a href="podcast.html">PODCAST</a>
                 <a href="biblioteca.html">BIBLIOTECA</a>
                 <a href="#">ARCHIVOS</a>
             </div>
@@ -2605,6 +2646,7 @@
             <li class="mobile-nav-item"><a href="24-marzo.html" class="mobile-nav-link red" onclick="closeMenu()">24 de Marzo
                     • Memoria</a></li>
             <li class="mobile-nav-item"><a href="#footer" class="mobile-nav-link" onclick="closeMenu()">Revista</a></li>
+            <li class="mobile-nav-item"><a href="podcast.html" class="mobile-nav-link" onclick="closeMenu()"><i class="fa-solid fa-podcast" style="margin-right:6px;color:var(--yellow)"></i>Podcast</a></li>
         </ul>
     </nav>
 
@@ -2799,6 +2841,61 @@
                 <button class="btn-read-more" onclick="openUnit(1)">
                     LEER DOSIER <i class="fa-solid fa-arrow-right"></i>
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- BIBLIOTECA DIVULGATIVA PREVIEW -->
+    <section id="biblioteca-preview">
+        <div class="bib-inner">
+            <div class="bib-header reveal">
+                <div>
+                    <div class="bib-eyebrow">📚 Lecturas recomendadas · Fuera del programa</div>
+                    <h2 class="bib-main-title">Biblio<em>teca</em><br>Divulgativa</h2>
+                    <p class="bib-main-desc">Física cuántica, biología, inteligencia artificial y matemática — explicados con rigor filosófico y estilo de revista. Para ir más allá del aula.</p>
+                </div>
+                <a href="biblioteca.html" class="btn-bib">Ver colección completa <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="bib-grid reveal">
+                <a href="schrodinger.html" class="bib-card">
+                    <div class="bib-card-img">
+                        <div class="bib-card-bg" style="background: linear-gradient(135deg,rgba(7,8,22,.9),rgba(15,20,55,.88)) center/cover,url('universo.jpg') center/cover;"></div>
+                        <div class="bib-card-overlay"></div>
+                        <div class="bib-pub-badge">PUBLICADO</div>
+                        <div class="bib-cat-badge">Física Cuántica</div>
+                        <div class="bib-card-eq">|Ψ⟩ = ½(|vivo⟩+|muerto⟩)</div>
+                    </div>
+                    <div class="bib-card-body">
+                        <h3 class="bib-card-title">El gato de <em>Schrödinger</em></h3>
+                        <p class="bib-card-excerpt">En 1935, Schrödinger propuso un experimento mental que aún divide a físicos y filósofos. La paradoja no es un error de la teoría: es su éxito lo que produce el escándalo conceptual.</p>
+                        <div class="bib-card-meta"><i class="fa-regular fa-clock"></i> 18 min · Física + Filosofía · Inaugural</div>
+                        <span class="bib-card-cta">Leer artículo <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <a href="bose-einstein.html" class="bib-card">
+                    <div class="bib-card-img">
+                        <div class="bib-card-bg" style="background: linear-gradient(135deg,rgba(20,15,10,.85),rgba(30,22,15,.9)) center/cover,url('bose-einstein.jpeg') center/cover;"></div>
+                        <div class="bib-card-overlay"></div>
+                        <div class="bib-pub-badge">PUBLICADO</div>
+                        <div class="bib-cat-badge">Historia de la Ciencia</div>
+                        <div class="bib-card-eq">Bose-Einstein → Bosones</div>
+                    </div>
+                    <div class="bib-card-body">
+                        <h3 class="bib-card-title">De <em>Dhaka</em> a Berlín: Bose y Einstein</h3>
+                        <p class="bib-card-excerpt">Un joven profesor indio rechazado por las revistas le escribe directamente a Einstein, forjando una colaboración histórica que descubrió el quinto estado de la materia.</p>
+                        <div class="bib-card-meta"><i class="fa-regular fa-clock"></i> 15 min · Epistemología · Física</div>
+                        <span class="bib-card-cta">Leer artículo <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="bib-soon-row reveal">
+                <div class="bib-soon-card"><div class="bib-soon-icon">⚛️</div><div><div class="bib-soon-label">Próximamente</div><div class="bib-soon-name">La Relatividad Especial — el annus mirabilis de Einstein</div></div></div>
+                <div class="bib-soon-card"><div class="bib-soon-icon">🧬</div><div><div class="bib-soon-label">Próximamente</div><div class="bib-soon-name">AlphaFold y el Nobel: cuando la IA resuelve la vida</div></div></div>
+                <div class="bib-soon-card"><div class="bib-soon-icon">🤖</div><div><div class="bib-soon-label">Próximamente</div><div class="bib-soon-name">¿Pueden pensar las máquinas? De Turing a Claude</div></div></div>
+                <div class="bib-soon-card"><div class="bib-soon-icon">🌀</div><div><div class="bib-soon-label">Próximamente</div><div class="bib-soon-name">Caos y Determinismo: el efecto mariposa</div></div></div>
             </div>
         </div>
     </section>

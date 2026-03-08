@@ -1849,7 +1849,40 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+    
+        /* ======================================================
+           FOOTER NAV CONTEXTUAL - diseno unificado entre clases
+           ====================================================== */
+        .class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:56px 24px 40px;margin-top:0;position:relative}
+        .class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+        .class-footer-nav-inner{max-width:980px;margin:0 auto}
+        .cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px}
+        .cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+        .cfn-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;align-items:stretch;margin-bottom:28px}
+        @media(max-width:600px){.cfn-grid{grid-template-columns:1fr;gap:8px}}
+        .cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);text-decoration:none;color:inherit;transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+        .cfn-card.cfn-next{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.2);justify-content:flex-end;text-align:right}
+        .cfn-card.cfn-next:hover{background:rgba(250,204,21,.13);border-color:rgba(250,204,21,.55);box-shadow:0 12px 40px rgba(250,204,21,.15)}
+        .cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 8px}
+        .cfn-card.cfn-home:hover{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.35)}
+        .cfn-card.cfn-disabled{opacity:.32;pointer-events:none;cursor:default}
+        .cfn-arrow{font-size:16px;color:rgba(255,255,255,.2);flex-shrink:0;transition:transform .25s,color .25s}
+        .cfn-card:hover .cfn-arrow{color:#facc15}
+        .cfn-card.cfn-prev:hover .cfn-arrow{transform:translateX(-5px)}
+        .cfn-card.cfn-next:hover .cfn-arrow{transform:translateX(5px)}
+        .cfn-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+        .cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.5)}
+        .cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+        .cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+        .cfn-card.cfn-next .cfn-title{color:#facc15}
+        .cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4);transition:color .25s}
+        .cfn-card.cfn-home:hover .cfn-home-icon{color:#facc15}
+        .cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+        .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+        .cfn-credits a{color:rgba(250,204,21,.32);text-decoration:none;transition:color .2s}
+        .cfn-credits a:hover{color:#facc15}
+        </style>
 </head>
 
 <body>
@@ -3219,38 +3252,35 @@
     </main>
 
     <!-- ══ FOOTER ════════════════════════════════════════════════ -->
-    <footer class="art-footer">
-        <div class="art-footer-inner">
-            <div class="footer-nav">
-                <a href="unidad1-clase3.html" class="footer-nav-card">
-                    <div class="fn-icon">←</div>
-                    <div>
-                        <div class="fn-label">Clase anterior</div>
-                        <div class="fn-title">La Carga Teórica de la Observación</div>
-                    </div>
-                </a>
-                <a href="index.html" class="footer-nav-card">
-                    <div class="fn-icon">🏠</div>
-                    <div>
-                        <div class="fn-label">Volver al inicio</div>
-                        <div class="fn-title">Revista Filosofía &amp; Ciencia</div>
-                    </div>
-                </a>
-                <a href="unidad1-clase5.html" class="footer-nav-card primary">
-                    <div class="fn-icon">→</div>
-                    <div>
-                        <div class="fn-label">Próxima clase</div>
-                        <div class="fn-title">Kepler y Newton: Gravitación Universal</div>
-                    </div>
-                </a>
+        <!-- == FOOTER NAV CONTEXTUAL == -->
+    <nav class="class-footer-nav">
+        <div class="class-footer-nav-inner">
+            <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+            <div class="cfn-grid">
+            <a href="unidad1-clase3.html" class="cfn-card cfn-prev">
+                <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                <div class="cfn-body">
+                    <span class="cfn-badge">U1 · C-03</span>
+                    <span class="cfn-dir">Clase anterior</span>
+                    <span class="cfn-title">La Carga Teorica de la Observacion</span>
+                </div>
+            </a>
+            <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+                <i class="fa-solid fa-house cfn-home-icon"></i>
+                <span class="cfn-home-label">Inicio</span>
+            </a>
+            <a href="unidad1-clase5.html" class="cfn-card cfn-next">
+                <div class="cfn-body">
+                    <span class="cfn-badge">U1 · C-05</span>
+                    <span class="cfn-dir">Clase siguiente</span>
+                    <span class="cfn-title">Kepler y Newton</span>
+                </div>
+                <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
             </div>
-            <div class="footer-credits">
-                Filosofía e Historia de la Ciencia y la Tecnología · 6to Año ·
-                <a href="index.html">Los Polvorines, 2025</a>
-            </div>
+            <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2025</a></p>
         </div>
-    </footer>
-
+    </nav>
     <script>
         // ── DARK MODE ────────────────────────────────────────────────
         function toggleDark() {

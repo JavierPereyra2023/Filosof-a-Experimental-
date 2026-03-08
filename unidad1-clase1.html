@@ -116,7 +116,6 @@
         #art-hero {
             background:
                 linear-gradient(to left, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 32%, rgba(0,0,0,.97) 58%),
-                url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ptolemy_by_Cristofano_dell%27Altissimo.jpg/440px-Ptolemy_by_Cristofano_dell%27Altissimo.jpg') right top/auto 100% no-repeat,
                 url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80') center/cover no-repeat;
             text-shadow: 0 2px 24px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.5);
             min-height: 92vh;
@@ -208,7 +207,6 @@
             .article-wrap { grid-template-columns: 1fr 320px; gap: 64px; }
         }
         /* MAIN CONTENT */
-        .article-main {}
         .article-section { margin-bottom: 56px; }
         /* Dropcap */
         .dropcap::first-letter {
@@ -223,6 +221,7 @@
             font-family: 'Libre Baskerville', serif;
             font-size: 17px; line-height: 1.85;
             color: var(--text2); margin-bottom: 20px;
+            text-align: justify;
         }
         .article-p strong { color: var(--text); font-weight: 700; }
         .article-p em { font-style: italic; }
@@ -338,6 +337,7 @@
         }
         .callout p {
             font-size: 14px; line-height: 1.7; color: var(--text2);
+            text-align: justify;
         }
         .callout p + p { margin-top: 10px; }
         /* Concept grid */
@@ -362,6 +362,7 @@
         .concept-name.red { color: var(--red); }
         .concept-def {
             font-size: 13px; line-height: 1.65; color: var(--text2);
+            text-align: justify;
         }
         /* Timeline */
         .timeline { margin: 32px 0; }
@@ -466,7 +467,6 @@
         }
 
         /* ===================== SIDEBAR ===================== */
-        .article-sidebar {}
         .sidebar-sticky { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 20px; }
         .sidebar-card {
             background: var(--card);
@@ -604,7 +604,40 @@
         /* ===================== REVEAL ===================== */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-    </style>
+    
+        /* ======================================================
+           FOOTER NAV CONTEXTUAL - diseno unificado entre clases
+           ====================================================== */
+        .class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:56px 24px 40px;margin-top:0;position:relative}
+        .class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+        .class-footer-nav-inner{max-width:980px;margin:0 auto}
+        .cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px}
+        .cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+        .cfn-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;align-items:stretch;margin-bottom:28px}
+        @media(max-width:600px){.cfn-grid{grid-template-columns:1fr;gap:8px}}
+        .cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);text-decoration:none;color:inherit;transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+        .cfn-card.cfn-next{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.2);justify-content:flex-end;text-align:right}
+        .cfn-card.cfn-next:hover{background:rgba(250,204,21,.13);border-color:rgba(250,204,21,.55);box-shadow:0 12px 40px rgba(250,204,21,.15)}
+        .cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 8px}
+        .cfn-card.cfn-home:hover{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.35)}
+        .cfn-card.cfn-disabled{opacity:.32;pointer-events:none;cursor:default}
+        .cfn-arrow{font-size:16px;color:rgba(255,255,255,.2);flex-shrink:0;transition:transform .25s,color .25s}
+        .cfn-card:hover .cfn-arrow{color:#facc15}
+        .cfn-card.cfn-prev:hover .cfn-arrow{transform:translateX(-5px)}
+        .cfn-card.cfn-next:hover .cfn-arrow{transform:translateX(5px)}
+        .cfn-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+        .cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.5)}
+        .cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+        .cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+        .cfn-card.cfn-next .cfn-title{color:#facc15}
+        .cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4);transition:color .25s}
+        .cfn-card.cfn-home:hover .cfn-home-icon{color:#facc15}
+        .cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+        .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+        .cfn-credits a{color:rgba(250,204,21,.32);text-decoration:none;transition:color .2s}
+        .cfn-credits a:hover{color:#facc15}
+        </style>
 </head>
 <body>
 <div id="progress"></div>
@@ -621,7 +654,7 @@
             <span>Unidad 1</span> · Clase 1 de 8
         </div>
     </div>
-    <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+    <div class="topnav-center">FILOSOFÍA&CIENCIA · 2026</div>
     <div class="topnav-right">
         <button class="nav-btn" onclick="window.location.href='unidad1-clase2.html'">
             Clase 2 <i class="fa-solid fa-arrow-right"></i>
@@ -655,7 +688,7 @@
         <div class="hero-meta-sep"></div>
         <div class="hero-meta-item">
             <i class="fa-solid fa-calendar"></i>
-            <span>Ciclo 2025</span>
+            <span>Ciclo 2026</span>
         </div>
         <div class="hero-meta-sep"></div>
         <div class="hero-meta-item">
@@ -779,7 +812,7 @@
 
             <div class="figure reveal" style="max-width:300px;margin:0 auto;">
                 <img class="figure-img" style="height:auto;max-height:360px;object-fit:contain;background:#1a1a1a;padding:16px;"
-                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ptolemy_by_Cristofano_dell%27Altissimo.jpg/440px-Ptolemy_by_Cristofano_dell%27Altissimo.jpg"
+                     src="Ptolomeo.avif"
                      alt="Retrato de Claudio Ptolomeo"
                      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                 <div class="figure-img-placeholder" style="display:none;">⭐</div>
@@ -1321,27 +1354,35 @@
 </main>
 
 <!-- FOOTER NAV -->
-<div class="article-footer-nav">
-    <div class="footer-nav-link prev" onclick="window.location.href='index.html'">
-        <span class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></span>
-        <div>
-            <div class="footer-nav-direction">Volver a</div>
-            <div class="footer-nav-title">Inicio — Todas las Unidades</div>
+    <!-- == FOOTER NAV CONTEXTUAL == -->
+    <nav class="class-footer-nav">
+        <div class="class-footer-nav-inner">
+            <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+            <div class="cfn-grid">
+            <a href="index.html" class="cfn-card cfn-prev">
+                <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                <div class="cfn-body">
+                    <span class="cfn-badge">INICIO</span>
+                    <span class="cfn-dir">Volver a</span>
+                    <span class="cfn-title">Revista Filosofía&amp;Ciencia</span>
+                </div>
+            </a>
+            <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+                <i class="fa-solid fa-house cfn-home-icon"></i>
+                <span class="cfn-home-label">Inicio</span>
+            </a>
+            <a href="unidad1-clase2.html" class="cfn-card cfn-next">
+                <div class="cfn-body">
+                    <span class="cfn-badge">U1 · C-02</span>
+                    <span class="cfn-dir">Clase siguiente</span>
+                    <span class="cfn-title">Copernico y el Heliocentrismo</span>
+                </div>
+                <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            </div>
+            <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2025</a></p>
         </div>
-    </div>
-    <div style="text-align:center; font-size:12px; color:var(--text3);">
-        <div style="font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--text);">FILOSOFÍA&CIENCIA</div>
-        Unidad 1 · Clase 1 de 8
-    </div>
-    <div class="footer-nav-link" onclick="window.location.href='unidad1-clase2.html'">
-        <div style="text-align:right;">
-            <div class="footer-nav-direction">Siguiente clase</div>
-            <div class="footer-nav-title">Copérnico y la Revolución del Centro</div>
-        </div>
-        <span class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></span>
-    </div>
-</div>
-
+    </nav>
 <!-- ===================== JS ===================== -->
 <script>
     // Dark mode

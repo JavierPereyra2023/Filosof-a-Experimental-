@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca: De Dhaka a Berlín, la historia de Bose y Einstein | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }, svg: { fontCache: 'global' } };</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, .6);
+            --transition: .3s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; width: 100%; object-fit: cover; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+        #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--yellow), #f97316); z-index: 9999; }
+        #topnav { position: sticky; top: 0; z-index: 500; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; box-shadow: var(--shadow); }
+        .topnav-left, .topnav-right { display: flex; align-items: center; gap: 12px; }
+        .back-link, .nav-btn { font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--text3); }
+        .nav-btn { background: none; border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: all var(--transition); }
+        .nav-btn:hover { border-color: var(--yellow); color: var(--text); }
+        .topnav-center { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--text2); display: none; }
+        @media(min-width:900px) { .topnav-center { display: block; } }
+
+        /* HERO */
+        #art-hero {
+            background-color: #080604;
+            background-image: linear-gradient(160deg, rgba(31, 18, 8, 0.8) 0%, rgba(8, 6, 4, 1) 100%), url('bose_portada.jpg');
+            background-size: cover, 32%;
+            background-position: center, calc(100% - 24px) bottom;
+            background-repeat: no-repeat, no-repeat;
+            background-blend-mode: overlay, normal;
+            min-height: 90vh; color: #fff; padding: 88px 24px 64px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero-breadcrumb, .hero-title, .hero-subtitle, .hero-meta { position: relative; z-index: 2; }
+        .hero-breadcrumb { display: flex; gap: 8px; justify-content: center; margin-bottom: 22px; }
+        .badge { padding: 4px 14px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+        .badge.yellow { background: var(--yellow); color: #000; }
+        .badge.outline { border: 1px solid rgba(255, 255, 255, .28); background: rgba(255, 255, 255, .08); }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 6rem); line-height: .92; letter-spacing: -.03em; margin-bottom: 16px; }
+        .hero-title em { color: var(--yellow); }
+        .hero-subtitle { max-width: 800px; font-size: clamp(1rem, 2vw, 1.22rem); line-height: 1.8; color: rgba(255, 255, 255, .84); }
+        .hero-meta { margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; font-size: 13px; color: rgba(255, 255, 255, .8); }
+        
+        /* LAYOUT */
+        main { max-width: 1380px; margin: 0 auto; padding: 48px 24px 80px; }
+        .layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 42px; }
+        @media(max-width:1120px) { .layout { grid-template-columns: 1fr; } }
+        
+        .kicker { display: inline-block; margin-bottom: 16px; font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--yellow-dark); }
+        .h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.6rem); line-height: 1.05; margin-bottom: 24px; color: #fff;}
+        .h2 span { color: var(--yellow-dark); font-style: italic; }
+        .p { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; line-height: 1.85; color: var(--text2); margin-bottom: 24px; text-align: justify;}
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 4.8rem; line-height: .86; padding-right: 12px; color: var(--yellow-dark); }
+        
+        /* MEDIA & FIGURES */
+        .figure { margin: 40px 0; border-radius: 16px; overflow: hidden; background: var(--bg2); border: 1px solid var(--border); }
+        .figure-img-wrap { overflow: hidden; }
+        .figure-img { width: 100%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); filter: grayscale(80%) contrast(1.1); }
+        .figure:hover .figure-img { transform: scale(1.02); filter: grayscale(20%); }
+        .figure-caption { padding: 16px 24px; font-size: 13px; color: var(--text3); border-top: 1px solid var(--border); font-family: 'Inter', sans-serif; display: flex; align-items: flex-start; gap: 12px;}
+        .figure-caption i { color: var(--yellow-dark); margin-top: 3px; font-size: 14px;}
+        
+        .flex-gallery { display: flex; gap: 20px; margin: 32px 0; flex-wrap: wrap; }
+        .flex-item { flex: 1 1 300px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); position: relative;}
+        .flex-item img { height: 100%; object-fit: cover; filter: grayscale(100%); transition: all 0.5s;}
+        .flex-item:hover img { filter: grayscale(50%) sepia(80%) hue-rotate(5deg) saturate(280%) contrast(1.1); transform: scale(1.05);}
+        .label-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 20px 16px 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;}
+
+        /* PANELS */
+        .eq-panel { padding: 32px; background: linear-gradient(180deg, rgba(20, 15, 10, .96), rgba(30, 22, 15, .92)); border: 1px solid #3a2a1a; margin: 36px 0; border-radius: 20px; box-shadow: var(--shadow); }
+        .eq-panel small { display: block; margin-bottom: 12px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(250, 204, 21, .84); }
+        .math { color: var(--yellow); font-size: clamp(1.5rem, 3vw, 2.6rem); text-align: center; margin-bottom: 20px; }
+        .eq-panel p { font-family: 'Libre Baskerville', serif; color: rgba(255, 255, 255, .78); line-height: 1.8; text-align: justify;}
+
+        .quote-block { margin: 48px 0; padding: 40px; background: linear-gradient(135deg, rgba(250, 204, 21, 0.05), transparent); border-left: 4px solid var(--yellow); border-radius: 0 16px 16px 0; }
+        .quote-block p { font-family: 'Playfair Display', serif; font-size: 24px; line-height: 1.5; color: var(--text); font-style: italic; margin-bottom: 16px; }
+        .quote-block cite { font-size: 12px; font-weight: 700; color: var(--yellow-dark); letter-spacing: 0.1em; text-transform: uppercase; font-style: normal; }
+
+        /* SIDEBAR */
+        #sidebar { position: sticky; top: 82px; display: flex; flex-direction: column; gap: 24px; }
+        @media(max-width:1120px) { #sidebar { position: static; margin-top: 40px; } }
+        .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: var(--shadow);}
+        .sidebar-card b { display: block; margin-bottom: 16px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border); padding-bottom: 12px;}
+        .toc { display: grid; gap: 12px; }
+        .toc a { font-size: 13px; color: var(--text2); display: flex; gap: 12px; align-items: baseline; transition: color 0.2s; }
+        .toc a:hover { color: var(--yellow-dark); }
+        .toc span { font-size: 10px; color: var(--yellow-dark); font-weight: 800; }
+        
+        .concept-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .concept-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .concept-item h4 { font-size: 13px; font-weight: 700; color: var(--yellow); margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase;}
+        .concept-item p { font-size: 13px; line-height: 1.6; color: var(--text3); }
+        
+        /* FOOTER NAV */
+        .footer-nav { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-nav a { display: flex; align-items: center; gap: 16px; background: var(--bg2); padding: 16px 24px; border-radius: 16px; border: 1px solid var(--border); transition: all 0.3s; }
+        .footer-nav a:hover { border-color: var(--yellow); transform: translateY(-3px); }
+        .footer-nav .label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+        .footer-nav .title { font-size: 14px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px;}
+        .footer-nav .title i { color: var(--yellow-dark); }
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Inicio</a>
+            <a href="biblioteca.html" class="nav-btn" style="margin-left:8px;"><i class="fa-solid fa-book-open"></i> Biblioteca</a>
+        </div>
+        <div class="topnav-center">Biblioteca · De Dhaka a Berlín</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> PDF</button>
+        </div>
+    </nav>
+
+    <header id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="badge yellow">Biblioteca</span>
+            <span class="badge outline">Historia de la Ciencia</span>
+        </div>
+        <h1 class="hero-title">
+            De Dhaka a Berlín:<br>la historia de <em>Bose</em> y <em>Einstein</em>
+        </h1>
+        <p class="hero-subtitle">
+            Un joven profesor indio resuelve un problema que atormentaba a los europeos, su manuscrito es rechazado, y decide enviarle una carta directamente al físico más famoso del mundo. Una lección magistral sobre colaboración, prejuicios y el nacimiento del quinto estado de la materia.
+        </p>
+        <div class="hero-meta">
+            <span><i class="fa-regular fa-clock" style="color:var(--yellow-dark)"></i> 15 min lectura</span>
+            <span><i class="fa-solid fa-globe" style="color:var(--yellow-dark)"></i> Epistemología Cuántica</span>
+            <span><i class="fa-solid fa-feather" style="color:var(--yellow-dark)"></i> Ciclo 2026</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="layout">
+            <div class="content">
+                
+                <section id="problema" style="margin-bottom: 60px;">
+                    <div class="kicker">Contexto</div>
+                    <h2 class="h2">Un problema con la <span>luz</span></h2>
+                    <p class="p dropcap">
+                        A principios de la década de 1920, la mecánica cuántica era un terreno pantanoso. Max Planck había demostrado que la luz se emitía en "cuantos" de energía, y Albert Einstein reafirmó que la luz misma viajaba en paquetes individuales (los <strong>fotones</strong>). Pero existía un problema matemático fundamental que incomodaba profundamente a los físicos experimentales y teóricos de Europa.
+                    </p>
+                    <p class="p">
+                        La ley de radiación del cuerpo negro de Planck funcionaba perfectamente, pero no existía una forma rigurosa de derivarla matemáticamente sin recurrir a trucos conceptuales o mezclar la nueva física cuántica con las viejas reglas del electromagnetismo clásico de Maxwell. Era como intentar construir un motor moderno usando piezas de un carruaje romano.
+                    </p>
+                </section>
+
+                <hr class="divider">
+
+                <section id="snbose" style="margin-bottom: 60px;">
+                    <div class="kicker">Satyendra Nath Bose</div>
+                    <h2 class="h2">El profesor en <span>Dhaka</span></h2>
+                    
+                    <div class="flex-gallery">
+                        <div class="flex-item">
+                            <img src="bose.jpg" alt="Satyendra Nath Bose">
+                            <div class="label-overlay">S. N. Bose en su juventud</div>
+                        </div>
+                        <div class="flex-item">
+                            <img src="Einstein.jpg" alt="Albert Einstein">
+                            <div class="label-overlay">Albert Einstein en 1921</div>
+                        </div>
+                    </div>
+
+                    <p class="p">
+                        A miles de kilómetros de los sofisticados laboratorios y salones de Europa continental, se encontraba la Universidad de Dhaka (en ese entonces India británica, hoy Bangladesh). Allí, un joven profesor de física llamado <strong>Satyendra Nath Bose</strong> dictaba sus clases intentando explicar a sus alumnos las deficiencias de las deducciones matemáticas de Planck y Einstein.
+                    </p>
+                    <p class="p">
+                        En 1924, mientras intentaba demostrar por qué las matemáticas existentes <em>no</em> funcionaban, Bose cometió lo que en estadística clásica se consideraría un error. En lugar de contar a las partículas como objetos distinguibles (como si fueran canicas numeradas A y B), asumió intrínsecamente que los fotones individuales eran <strong>absolutamente indistinguibles</strong> entre sí.
+                    </p>
+                    
+                    <div class="eq-panel">
+                        <small>El principio del conteo cuántico</small>
+                        <div class="math">Un error que cambió el mundo</div>
+                        <p>
+                            En el lanzamiento de dos monedas (estadística de Maxwell-Boltzmann), tienes cuatro resultados posibles: Cara-Cara, Ceca-Ceca, Cara-Ceca y Ceca-Cara. Cada uno tiene una probabilidad de 1/4.<br><br>
+                            Bose postuló que en la escala cuántica de partículas de luz, las monedas pierden su identidad. No hay diferencia entre lanzar <em>primero</em> Cara y <em>después</em> Ceca, o al revés. El universo solo registra: "Dos caras, dos cecas, o una de cada una". Hay solo tres macroestados, y cada uno tiene probabilidad 1/3. Esto cambia drásticamente toda la matemática física.
+                        </p>
+                    </div>
+
+                    <div style="background: #0f172a; border-radius: 16px; padding: 24px; margin: 36px 0; border: 1px solid #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <div style="text-align: center; margin-bottom: 16px;">
+                            <span style="font-size: 11px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow-dark);">Modelo Dinámico</span>
+                            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; margin-top: 4px;">El Gas de Fotones</h4>
+                            <p style="font-size: 13px; color: #94a3b8; font-family: 'Inter', sans-serif; margin-top: 8px;">Partículas de luz concebidas como un gas ideal indistinguible dentro de una cavidad térmica.</p>
+                        </div>
+                        <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice" style="width: 100%; height: auto; min-height: 200px; border-radius: 12px; background: #020617; border: 1px solid #1e293b;">
+                            <defs>
+                                <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#facc15" stop-opacity="1" />
+                                    <stop offset="40%" stop-color="#eab308" stop-opacity="0.8" />
+                                    <stop offset="100%" stop-color="#ca8a04" stop-opacity="0" />
+                                </radialGradient>
+                                <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="3" result="blur" />
+                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                </filter>
+                            </defs>
+                            
+                            <!-- Partículas (Fotones) -->
+                            <g filter="url(#blur)">
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="100;700;400;100" dur="6s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="50;250;100;50" dur="7s" repeatCount="indefinite" />
+                                </circle>
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="700;100;500;700" dur="5s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="250;50;200;250" dur="8s" repeatCount="indefinite" />
+                                </circle>
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="400;200;600;400" dur="7s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="150;280;40;150" dur="6s" repeatCount="indefinite" />
+                                </circle>
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="50;300;750;50" dur="8s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="80;200;120;80" dur="5s" repeatCount="indefinite" />
+                                </circle>
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="600;100;300;600" dur="9s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="220;60;250;220" dur="7s" repeatCount="indefinite" />
+                                </circle>
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="250;650;150;250" dur="6.5s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="20;180;260;20" dur="8.5s" repeatCount="indefinite" />
+                                </circle>
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="750;50;400;750" dur="7.5s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="120;270;30;120" dur="5.5s" repeatCount="indefinite" />
+                                </circle>
+                                <circle r="8" fill="url(#glow)">
+                                    <animate attributeName="cx" values="350;550;50;350" dur="5s" repeatCount="indefinite" />
+                                    <animate attributeName="cy" values="250;50;150;250" dur="9s" repeatCount="indefinite" />
+                                </circle>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <p class="p">
+                        Mágicamente, aplicando esta nueva forma de contar estadísticas, la ley de Planck emergía a la perfección de las ecuaciones cuánticas, sin necesidad de usar física clásica alguna. Bose había resuelto el rompecabezas. Escribió su hallazgo en un papel llamado <em>"La ley de Planck y la hipótesis del cuanto de luz"</em>.
+                    </p>
+                    <p class="p">
+                        Lo envió para su publicación a la prestigiosa revista británica <em>Philosophical Magazine</em>. La respuesta del comité editorial europeo fue rotunda: el artículo fue rechazado.
+                    </p>
+                </section>
+
+                <hr class="divider">
+
+                <section id="lacarta" style="margin-bottom: 60px;">
+                    <div class="kicker">La Audacia de un Científico</div>
+                    <h2 class="h2">La carta que rompió <span>fronteras</span></h2>
+
+                    <p class="p">
+                        Bose se encontraba frustrado, pero convencido de su matemáticas deductivas. La academia occidental ignoraba sistemáticamente los manuscritos que llegaban de científicos de las colonias o alejados de los epicentros de poder (Múnich, Copenhague, Cambridge).
+                    </p>
+
+                    <div class="figure">
+                        <div class="figure-img-wrap">
+                            <img src="bose-einstein.jpeg" alt="Carta de Bose a Einstein">
+                        </div>
+                        <div class="figure-caption">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <div>
+                                <strong>La misiva decisiva (4 de junio de 1924)</strong>. Bose le escribe directamente a Albert Einstein adjuntándole su artículo, apelando a su rol como educador y sabio de la física. 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-block">
+                        <p>"Estimado señor, he tenido el atrevimiento de enviarle el artículo adjunto para su consideración e intercambio de opiniones. [...] Yo no sabría lo suficiente en alemán para la traducción del material... Estaré tan agradecido como encantado de que logre publicarlo en <em>Zeitschrift für Physik</em>..."</p>
+                        <cite>— Fragmento de la carta de S. N. Bose a Albert Einstein</cite>
+                    </div>
+
+                    <p class="p">
+                        ¿Qué hizo la superestrella mundial de la física al recibir una carta en inglés, no solicitada, escrita por un casi desconocido profesor indio? Einstein leyó el artículo. Inmediatamente comprendió que Bose no había cometido un error de despiste: había concebido, orgánicamente, la fundación estadística de la mecánica cuántica.
+                    </p>
+                    <p class="p">
+                        Einstein tradujo personalmente el artículo de Bose del inglés al alemán y lo envió a la revista científica por él. Para garantizar la adopción, adjuntó una nota personal afirmando que consideraba el trabajo de Bose como "un paso adelante extremadamente importante".
+                    </p>
+                </section>
+
+                <hr class="divider">
+
+                <section id="condensado" style="margin-bottom: 60px;">
+                    <div class="kicker">Colaboración Histórica</div>
+                    <h2 class="h2">El nacimiento de los <span>Bosones</span></h2>
+
+                    <p class="p">
+                        La historia no terminó ahí. Einstein comenzó a extrapolar las matemáticas que Bose le había enviado. Si la estadística de Bose funcionaba con fotones (partículas de luz sin masa que no ocupan espacio de forma exclusiva), ¿qué pasaría si aplicábamos esas mismas reglas a átomos con masa flotando en un gas ideal a temperaturas próximas al cero absoluto?
+                    </p>
+                    <p class="p">
+                        Einstein calculó que, forzadas a estar a temperaturas extremadamente frías, las partículas perderían su individualidad termodinámica. Ya no se comportarían como un puñado de canicas saltando independientemente, sino que todas colapsarían al mismo nivel base de energía mecánica, conformando un único y macroscópico <strong>superátomo</strong> cuántico u onda de estado.
+                    </p>
+
+                    <div class="eq-panel">
+                        <small>Un nuevo estado de la materia</small>
+                        <div class="math">Estadística de Bose-Einstein (BE)</div>
+                        <p>
+                            Este extraño comportamiento físico propuso un <em>quinto</em> estado de la materia. Ya no un sólido, ni un gas, ni un plasma. Ahora se llama <strong>Condensado de Bose-Einstein</strong>. Einstein predijo esto en 1925, guiado puramente por la matemática formulada por el joven científico indio.
+                        </p>
+                    </div>
+
+                    <p class="p">
+                        Tuvieron que pasar setenta años, en 1995, para que los experimentos modernos contaran con tecnología de refrigeración por láser suficiente como para enfriar átomos de rubidio cerca del cero absoluto y confirmar empíricamente la existencia física genuina del Condensado de Bose-Einstein en un laboratorio.
+                    </p>
+
+                    <div class="quote-block" style="border-color: var(--red); background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), transparent);">
+                        <p>A las partículas que obedecen estas reglas de indistinguibilidad se las nombró "Bosones" en honor al profesor hindú. De ahí el famoso "Bosón de Higgs".</p>
+                        <cite style="color: var(--red);">— El legado Inmortal</cite>
+                    </div>
+                </section>
+
+                <section id="reflexion">
+                    <div class="kicker">Conclusión Epistemológica</div>
+                    <h2 class="h2">Las barreras de la <span>Ciencia</span></h2>
+                    <p class="p">
+                        El proyecto histórico de la colaboración Bose-Einstein abre enormes debates filosóficos para ustedes en clase. Por un lado, nos enfrenta al sesgo sistemático de publicadores que validan o rechazan textos puramente en base al "capital cultural" (provenir de un imperio europeo occidental vs. una nación colonizada en Asia).
+                    </p>
+                    <p class="p">
+                        Por otro lado, nos muestra a la ciencia en su fase más utópica: la de un conocimiento puramente humano. Einstein representaba la cúspide académica mundial, y sin embargo operó en franca paridad empírica; traduciendo desinteresadamente la genialidad ajena, compartiendo el crédito y demostrando que la naturaleza es universal. 
+                    </p>
+                </section>
+
+            </div> <!-- End Content -->
+
+            <aside id="sidebar">
+                <div class="sidebar-card">
+                    <b>Temario</b>
+                    <div class="toc">
+                        <a href="#problema"><span>01</span> El Problema de la Luz</a>
+                        <a href="#snbose"><span>02</span> El Profesor Indio</a>
+                        <a href="#modelos"><span>03</span> Modelos vs Teorías</a>
+                        <a href="#lacarta"><span>04</span> La Carta Decisiva</a>
+                        <a href="#condensado"><span>05</span> Condensado de Olas</a>
+                        <a href="#reflexion"><span>06</span> Reflexiones en el Aula</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <b>Fichas Conceptuales</b>
+                    <div class="concept-item">
+                        <h4>Fotón</h4>
+                        <p>Partícula portadora de radiación electromagnética (luz) postulada por Planck e introducida propiamente por Einstein en 1905 resumiendo la dualidad onda-partícula.</p>
+                    </div>
+                    <div class="concept-item">
+                        <h4>Indistinguibilidad</h4>
+                        <p>En el plano cuántico las partículas idénticas de una misma clase (como los fotones) pierden su entidad individual, no es posible distinguirlas luego de interactuar porque no hay trayectoria local predecible.</p>
+                    </div>
+                    <div class="concept-item">
+                        <h4>Bosones</h4>
+                        <p>Familia de subpartículas que pueden agruparse en la misma región temporal, no sujetos al Principio de Exclusión de Pauli (a diferencia de los fermiones, los electrones).</p>
+                    </div>
+                    <div class="concept-item">
+                        <h4 style="color:#818cf8;">Modelo Científico</h4>
+                        <p>Representación idealizada que simplifica un fenómeno o sistema complejo para que pueda ser analizado lógicamente o estudiado matemáticamente. Un modelo es siempre una idealización teórica, no la "realidad desnuda".</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        
+        <div class="footer-nav">
+            <a href="biblioteca.html">
+                <i class="fa-solid fa-th-large" style="color:var(--yellow); font-size: 24px;"></i>
+                <div>
+                    <div class="label">Volver</div>
+                    <div class="title">Biblioteca Principal</div>
+                </div>
+            </a>
+            <a href="schrodinger.html">
+                <div>
+                    <div class="label" style="text-align: right;">Siguiente Artículo</div>
+                    <div class="title">El Gato de Schrödinger <i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement, 
+                  b = document.body,
+                  st = 'scrollTop',
+                  sh = 'scrollHeight';
+            const percent = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+            document.getElementById('progress').style.width = percent + '%';
+        });
+    </script>
+</body>
+</html>

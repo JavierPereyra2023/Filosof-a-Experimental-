@@ -146,9 +146,49 @@
 
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* PROGRESS BAR */
+        #prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--red), #f97316); z-index: 9999; transition: width .1s; pointer-events: none; }
+
+        /* STATS STRIP */
+        .stats-strip { background: linear-gradient(90deg, #1a0000, #2a0505); border-top: 1px solid rgba(239,68,68,.2); border-bottom: 1px solid rgba(239,68,68,.15); padding: 40px 24px; }
+        .stats-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0; }
+        .stat-item { text-align: center; flex: 1 1 140px; padding: 16px 8px; border-right: 1px solid rgba(239,68,68,.12); }
+        .stat-item:last-child { border-right: none; }
+        .stat-num { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; color: var(--red); line-height: 1; display: block; }
+        .stat-label { font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--text3); margin-top: 8px; display: block; line-height: 1.5; max-width: 130px; margin-left: auto; margin-right: auto; }
+
+        /* CALLOUT */
+        .callout { margin: 32px 0; padding: 24px 28px; border-radius: 14px; display: flex; gap: 18px; align-items: flex-start; }
+        .callout-red { background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.2); }
+        .callout-yellow { background: rgba(250,204,21,.05); border: 1px solid rgba(250,204,21,.2); }
+        .callout-icon { font-size: 22px; margin-top: 3px; flex-shrink: 0; }
+        .callout-red .callout-icon { color: var(--red); }
+        .callout-yellow .callout-icon { color: var(--yellow); }
+        .callout p { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.8; color: var(--text2); }
+        .callout strong { color: var(--text); }
+
+        /* STRASSERA QUOTE */
+        .quote-strassera { margin: 56px 0 32px; text-align: center; padding: 56px 40px; background: linear-gradient(135deg, rgba(239,68,68,.07), transparent 60%); border: 1px solid rgba(239,68,68,.18); border-radius: 20px; position: relative; overflow: hidden; }
+        .quote-strassera::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 240px; line-height: .7; color: rgba(239,68,68,.06); position: absolute; top: 10px; left: 16px; pointer-events: none; }
+        .quote-strassera p { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4.5vw, 3rem); font-weight: 900; color: var(--text); line-height: 1.15; margin-bottom: 24px; position: relative; z-index: 1; }
+        .quote-strassera p span { color: var(--red); font-style: italic; }
+        .quote-strassera cite { font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .18em; text-transform: uppercase; font-style: normal; }
+
+        /* QUESTIONS */
+        .questions-section { margin: 56px 0 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+        .questions-header { background: linear-gradient(90deg, rgba(239,68,68,.12), transparent); padding: 28px 32px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+        .questions-header i { font-size: 22px; color: var(--red); }
+        .questions-header h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800; color: var(--text); }
+        .q-list { padding: 8px 32px 8px; display: flex; flex-direction: column; }
+        .q-item { padding: 22px 0; border-bottom: 1px solid var(--border); display: flex; gap: 22px; align-items: flex-start; transition: background var(--transition); border-radius: 8px; }
+        .q-item:last-child { border-bottom: none; }
+        .q-num { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: var(--red); opacity: .35; line-height: 1; flex-shrink: 0; width: 38px; padding-top: 2px; }
+        .q-text { font-family: 'Libre Baskerville', serif; font-size: 15.5px; line-height: 1.8; color: var(--text2); padding-top: 4px; }
     </style>
 </head>
 <body>
+    <div id="prog"></div>
 
     <!-- TOP BAR -->
     <div id="topbar">
@@ -202,6 +242,32 @@
             <p class="article-hero-subtitle">Un recorrido histórico, epistemológico y ético por la dictadura cívico-militar (1976-1983). El impacto en la educación, la supresión de la verdad y el inquebrantable reclamo de justicia en el retorno a la democracia.</p>
         </div>
     </article>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip">
+        <div class="stats-inner">
+            <div class="stat-item">
+                <strong class="stat-num">30.000</strong>
+                <span class="stat-label">Detenidos-Desaparecidos</span>
+            </div>
+            <div class="stat-item">
+                <strong class="stat-num">+500</strong>
+                <span class="stat-label">Bebés apropiados y sustituidos</span>
+            </div>
+            <div class="stat-item">
+                <strong class="stat-num">+340</strong>
+                <span class="stat-label">CCDTyE identificados</span>
+            </div>
+            <div class="stat-item">
+                <strong class="stat-num">8.960</strong>
+                <span class="stat-label">Casos documentados CONADEP</span>
+            </div>
+            <div class="stat-item">
+                <strong class="stat-num">+133</strong>
+                <span class="stat-label">Nietos y Nietas restituidos</span>
+            </div>
+        </div>
+    </div>
 
     <div class="article-container">
         <!-- SIDEBAR -->
@@ -328,6 +394,17 @@
                     </div>
                 </div>
                 
+                <div class="info-card reveal">
+                    <div class="info-card-header">
+                        <div class="info-card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <h4 class="info-card-title">El Equipo Argentino de Antropología Forense (EAAF)</h4>
+                    </div>
+                    <div class="info-card-body">
+                        <p style="margin-bottom: 12px;">Fundado en 1984 con la colaboración del antropólogo estadounidense Clyde Snow, el <strong>EAAF</strong> fue pionero mundial en aplicar la antropología forense para identificar víctimas de violaciones a los Derechos Humanos. Su trabajo combina arqueología científica (excavación meticulosa de fosas clandestinas), osteología (análisis de huesos) e identificación por ADN.</p>
+                        <p>Hasta hoy, el EAAF ha identificado a más de <strong>1.200 personas desaparecidas</strong> en Argentina, devolviendo restos a sus familias y aportando pruebas irrefutables a los juicios. Su metodología es hoy un estándar internacional adoptado en Bosnia, Sudáfrica, Camboya, Guatemala y decenas de países más — un ejemplo concreto de cómo la ciencia puede servir a la justicia y a la memoria.</p>
+                    </div>
+                </div>
+
                 <div class="figure reveal">
                     <div class="figure-img-wrap">
                         <img src="madres_plaza.jpg" alt="Madres de Plaza de Mayo marchando" class="figure-img" style="aspect-ratio: 16/9; background-position: top;">
@@ -384,6 +461,12 @@
                         <div class="timeline-content">Tras años de lucha, en 2003 el Congreso Nacional anuló las leyes de impunidad, y en 2005 la Corte Suprema las declaró inconstitucionales, al igual que los indultos. Esto permitió la <strong>reapertura de los juicios por delitos de lesa humanidad</strong>. Hasta la fecha, cientos de represores han sido condenados en procesos judiciales con todas las garantías constitucionales, consolidando a la Argentina como un ejemplo mundial de Justicia transicional.</div>
                     </div>
                 </div>
+
+                <div class="quote-strassera reveal">
+                    <p>Señores Jueces: <span>¡Nunca Más!</span></p>
+                    <cite>— Julio César Strassera, Fiscal · Alegato final del Juicio a las Juntas · 22 de Diciembre de 1985</cite>
+                </div>
+
             </section>
 
             <section id="reflexion">
@@ -391,7 +474,37 @@
 
                 <p class="article-p reveal">Como estudiantes de filosofía de la ciencia, el análisis del terrorismo de Estado nos deja una enseñanza transversal a todo el programa: <strong>el conocimiento y la técnica nunca son neutrales.</strong> Desde los aparatos ideológicos intervenidos en escuelas hasta la medicina usada en torturas (como analizamos en la Unidad 7 con Milgram), el poder puede apropiarse de los saberes para fines exterminadores.</p>
 
-                <p class="article-p reveal" style="margin-bottom: 80px;">Pero al mismo tiempo, como demostraron las Abuelas de Plaza de Mayo impulsando la genética y el Equipo Argentino de Antropología Forense (EAAF), <strong>la ciencia también puede ser una de las herramientas más poderosas y precisas para hacer frente a la mentira institucional, reconstruir la memoria histórica y reclamar Justicia.</strong></p>
+                <p class="article-p reveal">Pero al mismo tiempo, como demostraron las Abuelas de Plaza de Mayo impulsando la genética y el EAAF, <strong>la ciencia también puede ser una de las herramientas más poderosas y precisas para hacer frente a la mentira institucional, reconstruir la memoria histórica y reclamar Justicia.</strong></p>
+
+                <div class="callout callout-yellow reveal">
+                    <i class="fa-solid fa-lightbulb callout-icon"></i>
+                    <p><strong>Para pensar con Hannah Arendt:</strong> En su análisis del juicio a Adolf Eichmann (Jerusalén, 1961), la filósofa acuñó el concepto de <strong>"banalidad del mal"</strong>: los crímenes más atroces no requieren monstruos, sino personas ordinarias que obedecen órdenes sin ejercer pensamiento crítico ni asumir responsabilidad moral. Médicos que redactaron fichas de tortura, ingenieros que construyeron los centros clandestinos, jueces que miraron para otro lado. ¿Cómo se vincula este concepto con la responsabilidad individual dentro de una maquinaria colectiva del horror?</p>
+                </div>
+
+                <div class="questions-section reveal">
+                    <div class="questions-header">
+                        <i class="fa-solid fa-comments"></i>
+                        <h3>Preguntas para la reflexión y el debate</h3>
+                    </div>
+                    <div class="q-list">
+                        <div class="q-item">
+                            <span class="q-num">01</span>
+                            <p class="q-text">El Estado afirmaba que "los desaparecidos son una incógnita". Usando conceptos de Kuhn, Popper o Lakatos (que estudiamos en la Unidad 1), ¿cómo podemos analizar filosóficamente esta declaración? ¿Es una hipótesis refutable, una anomalía ignorada o una estrategia retórica de protección del programa de investigación?</p>
+                        </div>
+                        <div class="q-item">
+                            <span class="q-num">02</span>
+                            <p class="q-text">¿En qué sentido el trabajo de las Abuelas de Plaza de Mayo y el EAAF es un ejemplo de "ciencia al servicio de la justicia"? ¿Qué dice esto sobre el mito de la neutralidad científica, uno de los debates centrales de nuestra Unidad 5?</p>
+                        </div>
+                        <div class="q-item">
+                            <span class="q-num">03</span>
+                            <p class="q-text">La dictadura censuró libros y expulsó docentes para controlar el conocimiento. Desde la epistemología, ¿qué relación existe entre el control del saber y el control político? ¿Puede una sociedad ser libre si no puede producir conocimiento crítico?</p>
+                        </div>
+                        <div class="q-item">
+                            <span class="q-num">04</span>
+                            <p class="q-text">Reflexionando sobre la "banalidad del mal" de Hannah Arendt: ¿qué responsabilidad tiene el ciudadano común, el científico o el técnico cuando sus conocimientos o su silencio son utilizados por un régimen criminal? ¿Existe una ética inherente a la actividad científica?</p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
         </div>
@@ -451,6 +564,9 @@
                 }
             });
         });
+
+        // PROGRESS BAR
+        window.addEventListener('scroll', () => { const d = document.documentElement; document.getElementById('prog').style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100 + '%'; }, { passive: true });
 
         // Smooth TOC scroll
         document.querySelectorAll('.toc-link').forEach(anchor => {

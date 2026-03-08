@@ -8,7 +8,14 @@
       "Bash(done)",
       "Bash(node -c \"D:/filosofia_experimental/unidad1-clase4.html\")",
       "WebFetch(domain:commons.wikimedia.org)",
-      "WebFetch(domain:en.wikipedia.org)"
+      "WebFetch(domain:en.wikipedia.org)",
+      "Bash(ls D:/filosofia_experimental/unidad*.html)",
+      "Bash(ls D:filosofia_experimentalunidad*.html)",
+      "Bash(__NEW_LINE_8da0f6c06efdf5f5__ echo \"\")",
+      "Bash(__NEW_LINE_17ace05e6afba544__ echo \"\")",
+      "Bash(__NEW_LINE_0732789400082b22__ echo \"\")",
+      "Bash(python3 _fix_footer_nav.py)",
+      "Bash(python D:/filosofia_experimental/_fix_footer_nav.py)"
     ]
   }
 }

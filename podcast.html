@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podcast — Filosofía & Ciencia 2025</title>
+  <meta name="description" content="Episodios de audio generados con NotebookLM sobre los contenidos de Filosofía e Historia de la Ciencia y la Tecnología — 6to Año, Los Polvorines.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===================================================
+       CSS VARIABLES — compartidas con index.html
+    =================================================== */
+    :root {
+      --yellow:      #facc15;
+      --yellow-dark: #eab308;
+      --red:         #dc2626;
+      --bg:          #f9f7f4;
+      --bg2:         #f0ede8;
+      --text:        #1a1a1a;
+      --text2:       #6b6560;
+      --border:      #e0d9d0;
+      --card-bg:     #ffffff;
+      --shadow:      0 4px 24px rgba(0,0,0,.08);
+      --header-bg:   #ffffff;
+      --radius:      14px;
+    }
+    .dark {
+      --bg:        #111111;
+      --bg2:       #1a1a1a;
+      --text:      #f0ece4;
+      --text2:     #9a9490;
+      --border:    #2a2a2a;
+      --card-bg:   #1e1e1e;
+      --shadow:    0 4px 24px rgba(0,0,0,.5);
+      --header-bg: #111111;
+    }
+
+    /* ===================================================
+       RESET
+    =================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background .3s, color .3s;
+      overflow-x: hidden;
+    }
+
+    /* ===================================================
+       READING PROGRESS BAR
+    =================================================== */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--yellow); width: 0%; z-index: 9999;
+      transition: width .08s linear;
+    }
+
+    /* ===================================================
+       TOP NAV
+    =================================================== */
+    .topnav {
+      position: sticky; top: 0; z-index: 900;
+      background: var(--header-bg);
+      border-bottom: 2px solid var(--yellow);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; height: 58px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+      transition: background .3s;
+    }
+    .topnav-left { display: flex; align-items: center; gap: 14px; }
+    .topnav-right { display: flex; align-items: center; gap: 6px; }
+
+    .tn-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--text); font-size: 16px; padding: 8px 10px;
+      border-radius: 8px; transition: background .2s, color .2s;
+      display: flex; align-items: center; gap: 6px;
+      text-decoration: none;
+    }
+    .tn-btn:hover { background: rgba(250,204,21,.15); color: var(--yellow-dark); }
+    .tn-back-label {
+      font-size: 13px; font-weight: 600; letter-spacing: .02em;
+      display: none;
+    }
+    @media (min-width: 520px) { .tn-back-label { display: inline; } }
+
+    .tn-sep { color: var(--border); font-size: 20px; font-weight: 200; }
+
+    .tn-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 700; color: var(--text);
+      text-decoration: none; letter-spacing: .02em;
+      white-space: nowrap;
+    }
+    .tn-brand em { color: var(--yellow); font-style: normal; }
+
+    .tn-section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--text2);
+      background: var(--bg2); padding: 3px 10px; border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* Dark toggle icon swap */
+    .dark .dark-icon::before { content: '\f185'; } /* sun */
+    .dark-icon::before { content: '\f186'; }       /* moon */
+
+    /* ===================================================
+       HERO
+    =================================================== */
+    .podcast-hero {
+      background: linear-gradient(160deg, #07080f 0%, #0d1020 55%, #07080f 100%);
+      padding: 88px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Soft glow */
+    .podcast-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 20%,
+        rgba(250,204,21,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* Subtle grid overlay */
+    .podcast-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 700; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--yellow);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; display: block; width: 36px; height: 1px;
+      background: rgba(250,204,21,.35);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 7vw, 4.4rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.08; margin-bottom: 18px;
+      letter-spacing: -.01em;
+    }
+    .hero-title em { color: var(--yellow); font-style: italic; }
+
+    .hero-subtitle {
+      font-size: clamp(15px, 2vw, 17px);
+      color: rgba(255,255,255,.58);
+      max-width: 540px; margin: 0 auto 44px;
+      line-height: 1.75;
+    }
+
+    /* ===================================================
+       WAVEFORM ANIMATION
+    =================================================== */
+    .waveform {
+      display: flex; align-items: center; justify-content: center;
+      gap: 5px; height: 56px; margin: 0 auto 48px;
+    }
+    .wave-bar {
+      width: 4px; border-radius: 3px;
+      background: var(--yellow);
+      transform-origin: bottom center;
+      animation: waveBounce 1.4s ease-in-out infinite;
+    }
+    .wave-bar.odd { background: rgba(250,204,21,.4); }
+    @keyframes waveBounce {
+      0%, 100% { transform: scaleY(.15); }
+      50%       { transform: scaleY(1); }
+    }
+
+    /* ===================================================
+       HERO STATS
+    =================================================== */
+    .hero-stats {
+      display: flex; justify-content: center; gap: 56px; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 900; color: var(--yellow);
+      display: block; line-height: 1;
+    }
+    .hero-stat-l {
+      font-size: 11px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.42);
+      margin-top: 5px; display: block;
+    }
+
+    /* ===================================================
+       MAIN LAYOUT
+    =================================================== */
+    .podcast-main {
+      max-width: 860px; margin: 0 auto; padding: 72px 24px 140px;
+    }
+
+    /* ===================================================
+       SECTION HEADER
+    =================================================== */
+    .sec-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 40px;
+    }
+    .sec-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.65rem; font-weight: 900; color: var(--text);
+      white-space: nowrap;
+    }
+    .sec-line { flex: 1; height: 1px; background: var(--border); }
+    .sec-badge {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text2);
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 4px 13px; border-radius: 20px; white-space: nowrap;
+    }
+    .sec-badge.live {
+      background: rgba(250,204,21,.1); color: var(--yellow-dark);
+      border-color: rgba(250,204,21,.3);
+    }
+
+    /* ===================================================
+       EPISODE GRID
+    =================================================== */
+    .episode-grid {
+      display: flex; flex-direction: column; gap: 20px;
+    }
+
+    /* ===================================================
+       EPISODE CARD
+    =================================================== */
+    .ep-card {
+      display: grid;
+      grid-template-columns: 116px 1fr;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      transition: transform .25s cubic-bezier(.4,0,.2,1),
+                  box-shadow .25s,
+                  border-color .25s;
+    }
+    .ep-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.13);
+      border-color: rgba(250,204,21,.3);
+    }
+    .ep-card.unavailable {
+      opacity: .72;
+    }
+    .ep-card.unavailable:hover {
+      transform: none;
+      border-color: var(--border);
+    }
+
+    /* Active playing indicator */
+    .ep-card.is-playing {
+      border-color: var(--yellow) !important;
+      box-shadow: 0 0 0 2px rgba(250,204,21,.2), var(--shadow) !important;
+    }
+
+    /* === EPISODE ART BLOCK === */
+    .ep-art {
+      min-height: 150px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px 10px; position: relative; overflow: hidden;
+      cursor: default;
+    }
+    /* Shine overlay */
+    .ep-art::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.14) 0%, transparent 55%);
+    }
+    /* Mini waveform lines decoration */
+    .ep-art::after {
+      content: '';
+      position: absolute; bottom: 10px; left: 0; right: 0; height: 24px;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,.1) 0px, rgba(255,255,255,.1) 2px,
+        transparent 2px, transparent 8px
+      );
+    }
+
+    .ep-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900; color: rgba(255,255,255,.9);
+      line-height: 1; position: relative; z-index: 1;
+    }
+    .ep-unit-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: rgba(255,255,255,.58);
+      margin-top: 6px; position: relative; z-index: 1;
+      text-align: center; line-height: 1.4;
+    }
+
+    /* === ART COLORS PER UNIT === */
+    .art-u1  { background: linear-gradient(150deg, #1e3a5f 0%, #1d4ed8 100%); }
+    .art-u2  { background: linear-gradient(150deg, #14532d 0%, #15803d 100%); }
+    .art-u3  { background: linear-gradient(150deg, #7f1d1d 0%, #dc2626 100%); }
+    .art-u4  { background: linear-gradient(150deg, #2e1065 0%, #7c3aed 100%); }
+    .art-u5  { background: linear-gradient(150deg, #0c4a6e 0%, #0284c7 100%); }
+    .art-u6  { background: linear-gradient(150deg, #451a03 0%, #c2410c 100%); }
+    .art-24m { background: linear-gradient(150deg, #0d0d0d 0%, #27272a 100%); }
+
+    /* === EPISODE BODY === */
+    .ep-body {
+      padding: 22px 26px;
+      display: flex; flex-direction: column; gap: 9px;
+    }
+
+    .ep-meta {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .ep-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+      border: 1px solid;
+    }
+    .ep-tag-available {
+      background: rgba(250,204,21,.1); color: #a16207;
+      border-color: rgba(250,204,21,.35);
+    }
+    .dark .ep-tag-available {
+      color: var(--yellow); border-color: rgba(250,204,21,.4);
+    }
+    .ep-tag-soon {
+      background: rgba(150,150,150,.08); color: var(--text2);
+      border-color: var(--border);
+    }
+    .ep-meta-item {
+      font-size: 11px; color: var(--text2);
+      display: flex; align-items: center; gap: 4px;
+    }
+
+    .ep-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.18rem; font-weight: 700; color: var(--text);
+      line-height: 1.3;
+    }
+    .ep-desc {
+      font-size: 13.5px; color: var(--text2);
+      line-height: 1.7; font-family: 'Libre Baskerville', serif;
+    }
+
+    .ep-footer {
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap; margin-top: 6px;
+    }
+
+    /* Play button */
+    .ep-play-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow); color: #111;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
+      padding: 9px 20px; border-radius: 8px; border: none;
+      cursor: pointer; transition: all .2s; text-decoration: none;
+    }
+    .ep-play-btn:hover {
+      background: var(--yellow-dark); transform: scale(1.03);
+    }
+    .ep-play-btn.is-playing {
+      background: #111; color: var(--yellow);
+      border: 1px solid var(--yellow);
+    }
+    .dark .ep-play-btn.is-playing {
+      background: rgba(250,204,21,.1); color: var(--yellow);
+    }
+    .ep-play-btn.disabled {
+      background: var(--bg2); color: var(--text2);
+      cursor: not-allowed; opacity: .7;
+    }
+    .ep-play-btn.disabled:hover { transform: none; }
+
+    /* Download button */
+    .ep-dl-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      padding: 9px 16px; border-radius: 8px;
+      border: 1px solid var(--border); color: var(--text2);
+      background: none; cursor: pointer; transition: all .2s;
+      text-decoration: none;
+    }
+    .ep-dl-btn:hover {
+      border-color: var(--yellow); color: var(--yellow-dark);
+      background: rgba(250,204,21,.06);
+    }
+    .ep-dl-btn.disabled {
+      opacity: .35; cursor: not-allowed; pointer-events: none;
+    }
+
+    .ep-coming-msg {
+      font-size: 12px; color: var(--text2); font-style: italic;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ===================================================
+       HOW-TO SECTION
+    =================================================== */
+    .howto-section {
+      margin-top: 80px; padding: 40px 44px;
+      background: var(--bg2); border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 600px) { .howto-section { padding: 28px 24px; } }
+
+    .howto-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--yellow-dark);
+      margin-bottom: 8px; display: block;
+    }
+    .howto-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700; color: var(--text);
+      margin-bottom: 28px;
+    }
+    .howto-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 22px;
+    }
+    .howto-item { display: flex; gap: 13px; align-items: flex-start; }
+    .howto-icon {
+      width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(250,204,21,.12); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 16px; color: var(--yellow-dark);
+    }
+    .howto-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .howto-item p  { font-size: 12px; color: var(--text2); line-height: 1.55; }
+
+    /* ===================================================
+       NAMING CONVENTION CALLOUT
+    =================================================== */
+    .naming-callout {
+      margin-top: 48px; padding: 28px 36px;
+      border-radius: var(--radius); border-left: 4px solid var(--yellow);
+      background: var(--card-bg); box-shadow: var(--shadow);
+    }
+    .naming-callout h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 14px;
+    }
+    .file-list {
+      display: flex; flex-direction: column; gap: 7px;
+      list-style: none;
+    }
+    .file-list li {
+      font-family: 'Courier New', monospace; font-size: 13px;
+      color: var(--text2); display: flex; align-items: center; gap: 10px;
+    }
+    .file-list li::before {
+      content: '📁'; font-size: 14px;
+    }
+    .file-list li span.fname {
+      color: var(--yellow-dark); font-weight: 600;
+    }
+    .dark .file-list li span.fname { color: var(--yellow); }
+
+    /* ===================================================
+       STICKY BOTTOM PLAYER
+    =================================================== */
+    #sticky-player {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 800;
+      background: linear-gradient(90deg, #08090f 0%, #0d1120 50%, #08090f 100%);
+      border-top: 2px solid rgba(250,204,21,.28);
+      padding: 10px 20px;
+      display: none; align-items: center; gap: 14px;
+      box-shadow: 0 -8px 40px rgba(0,0,0,.5);
+      transition: transform .3s cubic-bezier(.4,0,.2,1);
+    }
+    #sticky-player.active { display: flex; }
+
+    /* Art thumbnail in player */
+    .sp-thumb {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 900; color: #fff;
+    }
+
+    /* Episode info */
+    .sp-info { flex: 1; min-width: 0; }
+    .sp-title {
+      font-size: 13px; font-weight: 600; color: #fff;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .sp-sub {
+      font-size: 11px; color: rgba(255,255,255,.45); margin-top: 2px;
+    }
+
+    /* Controls */
+    .sp-controls { display: flex; align-items: center; gap: 6px; }
+    .sp-btn {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,.65); padding: 7px;
+      border-radius: 8px; transition: color .2s, background .2s;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; line-height: 1;
+    }
+    .sp-btn:hover { color: var(--yellow); background: rgba(250,204,21,.1); }
+    .sp-play-main {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--yellow) !important; color: #111 !important;
+      font-size: 15px !important;
+    }
+    .sp-play-main:hover { background: var(--yellow-dark) !important; }
+
+    /* Skip labels */
+    .sp-skip-wrap { display: flex; align-items: center; gap: 2px; }
+    .sp-skip-n { font-size: 9px; font-weight: 700; color: inherit; }
+
+    /* Progress area */
+    .sp-progress-area { flex: 1; min-width: 80px; }
+    .sp-time-row {
+      display: flex; justify-content: space-between;
+      font-size: 10px; color: rgba(255,255,255,.35); margin-bottom: 5px;
+    }
+    .sp-bar {
+      height: 4px; background: rgba(255,255,255,.12);
+      border-radius: 2px; cursor: pointer; position: relative;
+    }
+    .sp-bar:hover { height: 6px; }
+    #sp-fill { height: 100%; background: var(--yellow); border-radius: 2px; width: 0%; }
+
+    /* Close */
+    .sp-close { color: rgba(255,255,255,.25) !important; font-size: 16px !important; }
+
+    /* Hide progress on very small screens */
+    @media (max-width: 580px) { .sp-progress-area { display: none; } }
+
+    /* Hidden audio element */
+    #main-audio { display: none; }
+
+    /* ===================================================
+       FOOTER
+    =================================================== */
+    .podcast-footer {
+      background: #07080f; color: rgba(255,255,255,.4);
+      padding: 40px 24px 60px; text-align: center;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .podcast-footer .f-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: rgba(255,255,255,.75);
+      margin-bottom: 10px;
+    }
+    .podcast-footer .f-logo em { color: var(--yellow); font-style: normal; }
+    .podcast-footer p { font-size: 13px; line-height: 1.6; }
+    .podcast-footer a {
+      color: var(--yellow); text-decoration: none;
+      transition: opacity .2s;
+    }
+    .podcast-footer a:hover { opacity: .8; }
+
+    /* ===================================================
+       REVEAL ANIMATION
+    =================================================== */
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===================================================
+       RESPONSIVE
+    =================================================== */
+    @media (max-width: 600px) {
+      .ep-card { grid-template-columns: 86px 1fr; }
+      .ep-art  { min-height: 120px; padding: 16px 8px; }
+      .ep-num  { font-size: 2rem; }
+      .ep-body { padding: 16px 14px; }
+      .hero-stats { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading progress -->
+  <div id="progress-bar"></div>
+
+  <!-- Hidden audio element -->
+  <audio id="main-audio" preload="none"></audio>
+
+  <!-- ===================================================
+       TOP NAV
+  =================================================== -->
+  <nav class="topnav">
+    <div class="topnav-left">
+      <a href="index.html" class="tn-btn" title="Volver al inicio">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span class="tn-back-label">Inicio</span>
+      </a>
+      <span class="tn-sep">|</span>
+      <a href="index.html" class="tn-brand">Filosofía <em>&amp;</em> Ciencia</a>
+      <span class="tn-section-label">Podcast</span>
+    </div>
+    <div class="topnav-right">
+      <button class="tn-btn" onclick="toggleDark()" title="Cambiar modo">
+        <i class="fa-solid dark-icon"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===================================================
+       HERO
+  =================================================== -->
+  <header class="podcast-hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <i class="fa-solid fa-podcast"></i>
+        Filosofía &amp; Ciencia · Audio
+      </div>
+
+      <h1 class="hero-title">El <em>Podcast</em><br>de la Clase</h1>
+      <p class="hero-subtitle">
+        Episodios generados con NotebookLM sobre los contenidos de cada unidad.
+        Escuchá online o descargá para estudiar donde quieras.
+      </p>
+
+      <!-- Animated waveform -->
+      <div class="waveform" id="waveform"></div>
+
+      <!-- Stats -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-n" id="stat-total">6</span>
+          <span class="hero-stat-l">Episodios</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-n">3</span>
+          <span class="hero-stat-l">Unidades</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-n">IA</span>
+          <span class="hero-stat-l">NotebookLM</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================
+       MAIN
+  =================================================== -->
+  <main class="podcast-main">
+
+    <!-- Section header -->
+    <div class="sec-header reveal">
+      <h2>Episodios</h2>
+      <div class="sec-line"></div>
+      <span class="sec-badge" id="avail-badge">Próximamente</span>
+    </div>
+
+    <!-- Episode grid (populated by JS) -->
+    <div class="episode-grid" id="episode-grid"></div>
+
+    <!-- How-to -->
+    <div class="howto-section reveal">
+      <span class="howto-eyebrow">Guía de uso</span>
+      <h3 class="howto-title">¿Cómo usar los podcasts?</h3>
+      <div class="howto-grid">
+        <div class="howto-item">
+          <div class="howto-icon"><i class="fa-solid fa-headphones"></i></div>
+          <div>
+            <h4>Escuchar online</h4>
+            <p>Hacé clic en ▶ Reproducir y usá el reproductor que aparece en la parte inferior de la pantalla.</p>
+          </div>
+        </div>
+        <div class="howto-item">
+          <div class="howto-icon"><i class="fa-solid fa-download"></i></div>
+          <div>
+            <h4>Descargar</h4>
+            <p>Usá el botón Descargar para guardar el archivo de audio y escucharlo sin conexión a internet.</p>
+          </div>
+        </div>
+        <div class="howto-item">
+          <div class="howto-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div>
+            <h4>En el celular</h4>
+            <p>Funciona en cualquier dispositivo. En Android/iOS, mantené presionado Descargar para guardar el archivo.</p>
+          </div>
+        </div>
+        <div class="howto-item">
+          <div class="howto-icon"><i class="fa-solid fa-book-open"></i></div>
+          <div>
+            <h4>Complemento de estudio</h4>
+            <p>Los episodios repasan y amplían el programa. Ideales para escuchar antes del parcial o mientras viajás.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- File naming info -->
+    <div class="naming-callout reveal">
+      <h3>📁 Archivos de audio</h3>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.6">
+        Los archivos deben colocarse en la carpeta <code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px">audio/</code>
+        dentro del directorio del sitio, con los siguientes nombres:
+      </p>
+      <ul class="file-list">
+        <li><span class="fname">ep01-revolucion-heliocentrica.mp4</span></li>
+        <li><span class="fname">ep02-galileo-telescopio.mp4</span></li>
+        <li><span class="fname">ep03-kepler-newton-kuhn.mp4</span></li>
+        <li><span class="fname">ep04-pasteur-pouchet.mp4</span></li>
+        <li><span class="fname">ep05-metodologia-falsacionismo.mp4</span></li>
+        <li><span class="fname">ep06-ciencia-verdad-memoria.mp4</span></li>
+      </ul>
+      <p style="font-size:12px;color:var(--text2);margin-top:14px;font-style:italic">
+        Una vez que agregues un archivo, cambiá <code style="background:var(--bg2);padding:2px 6px;border-radius:4px">available: false</code>
+        a <code style="background:var(--bg2);padding:2px 6px;border-radius:4px">available: true</code>
+        en el array <code style="background:var(--bg2);padding:2px 6px;border-radius:4px">EPISODES</code> del script.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- ===================================================
+       STICKY BOTTOM PLAYER
+  =================================================== -->
+  <div id="sticky-player">
+    <div class="sp-thumb" id="sp-thumb">1</div>
+    <div class="sp-info">
+      <div class="sp-title" id="sp-title">–</div>
+      <div class="sp-sub" id="sp-sub">Filosofía &amp; Ciencia 2025</div>
+    </div>
+    <div class="sp-controls">
+      <!-- −15s -->
+      <button class="sp-btn" onclick="skipAudio(-15)" title="−15 segundos">
+        <span class="sp-skip-wrap">
+          <i class="fa-solid fa-rotate-left"></i>
+          <span class="sp-skip-n">15</span>
+        </span>
+      </button>
+      <!-- Play/Pause -->
+      <button class="sp-btn sp-play-main" id="sp-main-btn" onclick="togglePlay()" title="Reproducir / Pausar">
+        <i class="fa-solid fa-play" id="sp-play-icon"></i>
+      </button>
+      <!-- +30s -->
+      <button class="sp-btn" onclick="skipAudio(30)" title="+30 segundos">
+        <span class="sp-skip-wrap">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span class="sp-skip-n">30</span>
+        </span>
+      </button>
+    </div>
+    <!-- Progress -->
+    <div class="sp-progress-area">
+      <div class="sp-time-row">
+        <span id="sp-cur">0:00</span>
+        <span id="sp-dur">0:00</span>
+      </div>
+      <div class="sp-bar" id="sp-bar" onclick="seekAudio(event)">
+        <div id="sp-fill"></div>
+      </div>
+    </div>
+    <!-- Close -->
+    <button class="sp-btn sp-close" onclick="closePlayer()" title="Cerrar reproductor">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- ===================================================
+       FOOTER
+  =================================================== -->
+  <footer class="podcast-footer">
+    <div class="f-logo">Filosofía <em>&amp;</em> Ciencia</div>
+    <p>Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · Los Polvorines, Buenos Aires, 2025</p>
+    <p style="margin-top:8px">
+      Audio generado con <a href="https://notebooklm.google.com" target="_blank" rel="noopener">NotebookLM</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">Volver al inicio</a>
+    </p>
+  </footer>
+
+  <!-- ===================================================
+       JAVASCRIPT
+  =================================================== -->
+  <script>
+    /* =====================================================
+       EPISODES DATA ARRAY
+       Para activar un episodio:
+         1. Subí el archivo a la carpeta audio/
+         2. Cambiá available: false → available: true
+         3. Completá duration con el tiempo real (ej: "18:24")
+    ===================================================== */
+    const EPISODES = [
+      {
+        num: 1,
+        title: "La Revolución Heliocéntrica",
+        desc: "Del geocentrismo de Ptolomeo al modelo heliocéntrico de Copérnico. ¿Cómo cambia un paradigma? Epiciclos, anomalías y la resistencia al cambio científico en el siglo XVI.",
+        unit: "Unidad 1",
+        classes: "Clases 1 y 2",
+        artClass: "art-u1",
+        file: "audio/ep01-revolucion-heliocentrica.mp4",
+        duration: null,       // ej: "18:24" — completar cuando haya archivo
+        available: false
+      },
+      {
+        num: 2,
+        title: "Galileo y el Telescopio",
+        desc: "Las observaciones que cambiaron la historia: Júpiter, las fases de Venus, la Luna y la Vía Láctea. Carga teórica de la observación, el principio de inercia y la Inquisición.",
+        unit: "Unidad 1",
+        classes: "Clases 3 y 4",
+        artClass: "art-u1",
+        file: "audio/ep02-galileo-telescopio.mp4",
+        duration: null,
+        available: false
+      },
+      {
+        num: 3,
+        title: "Kepler, Newton y los Paradigmas de Kuhn",
+        desc: "Las tres leyes del movimiento planetario, la gravedad universal y la síntesis newtoniana. Luego Kuhn: ciencia normal, anomalías, crisis, revolución científica e inconmensurabilidad.",
+        unit: "Unidad 1",
+        classes: "Clases 5 y 6",
+        artClass: "art-u1",
+        file: "audio/ep03-kepler-newton-kuhn.mp4",
+        duration: null,
+        available: false
+      },
+      {
+        num: 4,
+        title: "Pasteur, Pouchet y la Generación Espontánea",
+        desc: "El debate más apasionante del siglo XIX. ¿Puede la vida surgir espontáneamente? Experimentos, controversias, política, sociedad y ciencia entrelazados en una disputa histórica.",
+        unit: "Unidad 2",
+        classes: "Unidad 2",
+        artClass: "art-u2",
+        file: "audio/ep04-pasteur-pouchet.mp4",
+        duration: null,
+        available: false
+      },
+      {
+        num: 5,
+        title: "Metodología: Popper, Lakatos y Feyerabend",
+        desc: "¿Qué hace que una teoría sea científica? El falsacionismo de Popper, los programas de investigación de Lakatos y el anarquismo metodológico de Feyerabend — todo contra todo.",
+        unit: "Unidad 3",
+        classes: "Unidad 3",
+        artClass: "art-u3",
+        file: "audio/ep05-metodologia-falsacionismo.mp4",
+        duration: null,
+        available: false
+      },
+      {
+        num: 6,
+        title: "Ciencia, Verdad y Memoria",
+        desc: "El caso de los médicos y científicos que colaboraron con la dictadura argentina. ¿Puede la ciencia ser usada al servicio del terror? Epistemología, ética y Memoria, Verdad y Justicia.",
+        unit: "24 de Marzo",
+        classes: "Ejes transversales",
+        artClass: "art-24m",
+        file: "audio/ep06-ciencia-verdad-memoria.mp4",
+        duration: null,
+        available: false
+      }
+    ];
+
+    /* =====================================================
+       BUILD EPISODE CARDS
+    ===================================================== */
+    function buildEpisodes() {
+      const grid = document.getElementById('episode-grid');
+      const totalAvail = EPISODES.filter(e => e.available).length;
+
+      // Update badge
+      const badge = document.getElementById('avail-badge');
+      if (totalAvail === 0) {
+        badge.textContent = 'Próximamente';
+        badge.className = 'sec-badge';
+      } else {
+        badge.textContent = totalAvail + ' disponible' + (totalAvail !== 1 ? 's' : '');
+        badge.className = 'sec-badge live';
+      }
+
+      EPISODES.forEach((ep, idx) => {
+        const card = document.createElement('div');
+        card.className = 'ep-card reveal' + (ep.available ? '' : ' unavailable');
+        card.id = 'ep-card-' + idx;
+
+        const tagHtml = ep.available
+          ? '<span class="ep-tag ep-tag-available">▶ Disponible</span>'
+          : '<span class="ep-tag ep-tag-soon">⏳ Próximamente</span>';
+
+        const durationHtml = (ep.available && ep.duration)
+          ? `<span class="ep-meta-item"><i class="fa-regular fa-clock"></i> ${ep.duration}</span>`
+          : '';
+
+        const footerHtml = ep.available
+          ? `<button class="ep-play-btn" id="play-btn-${idx}" onclick="playEpisode(${idx})">
+               <i class="fa-solid fa-play" id="play-icon-${idx}"></i>
+               <span id="play-label-${idx}">Reproducir</span>
+             </button>
+             <a href="${ep.file}" download class="ep-dl-btn">
+               <i class="fa-solid fa-download"></i> Descargar
+             </a>`
+          : `<button class="ep-play-btn disabled" disabled>
+               <i class="fa-solid fa-hourglass-half"></i> Próximamente
+             </button>
+             <span class="ep-coming-msg">
+               <i class="fa-solid fa-wand-magic-sparkles"></i>
+               En preparación con NotebookLM
+             </span>`;
+
+        card.innerHTML = `
+          <div class="ep-art ${ep.artClass}">
+            <span class="ep-num">${ep.num}</span>
+            <span class="ep-unit-badge">${ep.unit}</span>
+          </div>
+          <div class="ep-body">
+            <div class="ep-meta">
+              ${tagHtml}
+              ${durationHtml}
+              <span class="ep-meta-item">
+                <i class="fa-solid fa-book-open"></i> ${ep.classes}
+              </span>
+            </div>
+            <div class="ep-title">${ep.title}</div>
+            <div class="ep-desc">${ep.desc}</div>
+            <div class="ep-footer">${footerHtml}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    /* =====================================================
+       AUDIO PLAYER STATE
+    ===================================================== */
+    const audio    = document.getElementById('main-audio');
+    let currentIdx = null;
+    let playing    = false;
+
+    function playEpisode(idx) {
+      const ep = EPISODES[idx];
+      if (!ep.available) return;
+
+      // Reset previously playing card
+      if (currentIdx !== null && currentIdx !== idx) {
+        resetCardBtn(currentIdx);
+        document.getElementById('ep-card-' + currentIdx).classList.remove('is-playing');
+      }
+
+      currentIdx = idx;
+
+      // Load new source only if different
+      if (audio.dataset.src !== ep.file) {
+        audio.src = ep.file;
+        audio.dataset.src = ep.file;
+        audio.load();
+      }
+
+      audio.play()
+        .then(() => {
+          playing = true;
+          updatePlayerUI();
+        })
+        .catch(err => {
+          console.warn('Audio error:', err);
+          alert('No se pudo cargar el audio. Verificá que el archivo exista en la carpeta audio/.');
+        });
+
+      // Show sticky player
+      const sp = document.getElementById('sticky-player');
+      sp.classList.add('active');
+
+      // Update player info
+      document.getElementById('sp-title').textContent = `Ep. ${ep.num} — ${ep.title}`;
+      document.getElementById('sp-sub').textContent   = `${ep.unit} · ${ep.classes}`;
+      const thumb = document.getElementById('sp-thumb');
+      thumb.textContent = ep.num;
+      thumb.className   = 'sp-thumb ' + ep.artClass;
+
+      // Mark card as playing
+      document.getElementById('ep-card-' + idx).classList.add('is-playing');
+    }
+
+    function togglePlay() {
+      if (currentIdx === null) return;
+      if (playing) {
+        audio.pause();
+        playing = false;
+      } else {
+        audio.play();
+        playing = true;
+      }
+      updatePlayerUI();
+    }
+
+    function updatePlayerUI() {
+      // Global play/pause icon
+      document.getElementById('sp-play-icon').className =
+        playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+
+      // Card button (if visible)
+      if (currentIdx !== null) {
+        const btn   = document.getElementById('play-btn-' + currentIdx);
+        const icon  = document.getElementById('play-icon-' + currentIdx);
+        const label = document.getElementById('play-label-' + currentIdx);
+        if (btn) {
+          if (playing) {
+            btn.classList.add('is-playing');
+            icon.className  = 'fa-solid fa-pause';
+            label.textContent = 'Pausar';
+          } else {
+            btn.classList.remove('is-playing');
+            icon.className  = 'fa-solid fa-play';
+            label.textContent = 'Reproducir';
+          }
+        }
+      }
+    }
+
+    function resetCardBtn(idx) {
+      const btn   = document.getElementById('play-btn-' + idx);
+      const icon  = document.getElementById('play-icon-' + idx);
+      const label = document.getElementById('play-label-' + idx);
+      if (btn) {
+        btn.classList.remove('is-playing');
+        icon.className    = 'fa-solid fa-play';
+        label.textContent = 'Reproducir';
+      }
+    }
+
+    function skipAudio(secs) {
+      const t = audio.currentTime + secs;
+      audio.currentTime = Math.max(0, Math.min(audio.duration || 0, t));
+    }
+
+    function seekAudio(e) {
+      if (!audio.duration) return;
+      const bar  = document.getElementById('sp-bar');
+      const rect = bar.getBoundingClientRect();
+      const pct  = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+    }
+
+    function closePlayer() {
+      audio.pause();
+      playing = false;
+      if (currentIdx !== null) {
+        resetCardBtn(currentIdx);
+        document.getElementById('ep-card-' + currentIdx).classList.remove('is-playing');
+      }
+      document.getElementById('sticky-player').classList.remove('active');
+    }
+
+    function formatTime(s) {
+      if (!s || isNaN(s)) return '0:00';
+      const m   = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + String(sec).padStart(2, '0');
+    }
+
+    // Audio events
+    audio.addEventListener('timeupdate', () => {
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      document.getElementById('sp-fill').style.width = pct + '%';
+      document.getElementById('sp-cur').textContent  = formatTime(audio.currentTime);
+    });
+    audio.addEventListener('loadedmetadata', () => {
+      document.getElementById('sp-dur').textContent = formatTime(audio.duration);
+    });
+    audio.addEventListener('ended', () => {
+      playing = false;
+      updatePlayerUI();
+      document.getElementById('sp-fill').style.width = '100%';
+    });
+    audio.addEventListener('error', () => {
+      closePlayer();
+      alert('Error al cargar el audio. Verificá que el archivo exista en la carpeta audio/.');
+    });
+
+    /* =====================================================
+       WAVEFORM GENERATOR
+    ===================================================== */
+    function buildWaveform() {
+      const container = document.getElementById('waveform');
+      const N = 34;
+      for (let i = 0; i < N; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'wave-bar' + (i % 2 !== 0 ? ' odd' : '');
+        const maxH  = 18 + Math.random() * 36;
+        const delay = (i / N * 1.4).toFixed(2);
+        const dur   = (1.0 + Math.random() * 0.9).toFixed(2);
+        bar.style.cssText = `height:${maxH}px;animation-delay:${delay}s;animation-duration:${dur}s`;
+        container.appendChild(bar);
+      }
+    }
+
+    /* =====================================================
+       DARK MODE
+    ===================================================== */
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('dark', document.body.classList.contains('dark') ? '1' : '0');
+    }
+    if (localStorage.getItem('dark') === '1') document.body.classList.add('dark');
+
+    /* =====================================================
+       READING PROGRESS BAR
+    ===================================================== */
+    window.addEventListener('scroll', () => {
+      const doc     = document.documentElement;
+      const total   = doc.scrollHeight - doc.clientHeight;
+      const scrolled = doc.scrollTop;
+      document.getElementById('progress-bar').style.width =
+        (total > 0 ? (scrolled / total * 100) : 0) + '%';
+    });
+
+    /* =====================================================
+       REVEAL ON SCROLL
+    ===================================================== */
+    const revealObserver = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.06 }
+    );
+
+    /* =====================================================
+       INIT
+    ===================================================== */
+    buildWaveform();
+    buildEpisodes();
+    // Observe elements (including dynamically created cards)
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }, 60);
+  </script>
+
+</body>
+</html>
