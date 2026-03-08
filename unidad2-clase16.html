@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mendel y la Herencia: Del Modelo de Mezcla a los Factores Dominantes | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .dark {
+            --bg: #111111; --bg2: #1a1a1a; --bg3: #222222;
+            --card: #1e1e1e; --text: #f0ece4; --text2: #c8c0b4;
+            --text3: #888880; --border: #333333;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg); color: var(--text);
+            transition: background 0.4s, color 0.4s;
+        }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress {
+            position: fixed; top: 0; left: 0;
+            height: 3px; width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999; transition: width 0.1s;
+        }
+
+        /* ===================== TOP NAV ===================== */
+        #topnav {
+            position: sticky; top: 0; z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+        .topnav-left { display: flex; align-items: center; gap: 20px; }
+        .back-link {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 600;
+            letter-spacing: 0.08em; color: var(--text3);
+            transition: color var(--transition);
+        }
+        .back-link:hover { color: var(--text); }
+        .nav-sep { color: var(--border); }
+        .breadcrumb {
+            font-size: 12px; color: var(--text3);
+            display: none;
+        }
+        @media(min-width:640px){ .breadcrumb { display: block; } }
+        .breadcrumb span { color: var(--yellow-dark); font-weight: 600; }
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+        @media(min-width:900px){ .topnav-center { display: block; } }
+        .topnav-right { display: flex; align-items: center; gap: 12px; }
+        .nav-btn {
+            background: none; border: 1px solid var(--border);
+            color: var(--text3); cursor: pointer;
+            padding: 6px 14px; border-radius: 999px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.08em;
+            display: flex; align-items: center; gap: 6px;
+            transition: all var(--transition);
+        }
+        .nav-btn:hover { border-color: var(--yellow); color: var(--text); }
+        .dark-toggle-nav {
+            background: none; border: 1px solid var(--border);
+            width: 36px; height: 20px; border-radius: 999px;
+            position: relative; cursor: pointer;
+            transition: all var(--transition);
+        }
+        .dark-toggle-nav::after {
+            content: ''; position: absolute;
+            left: 3px; top: 50%; transform: translateY(-50%);
+            width: 13px; height: 13px; border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+        .dark .dark-toggle-nav { border-color: var(--yellow); background: var(--yellow); }
+        .dark .dark-toggle-nav::after { left: calc(100% - 16px); background: #000; }
+
+        /* ===================== ARTICLE HERO ===================== */
+        #art-hero {
+            background:
+                linear-gradient(to left, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 32%, rgba(0,0,0,.97) 58%),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ptolemy_by_Cristofano_dell%27Altissimo.jpg/440px-Ptolemy_by_Cristofano_dell%27Altissimo.jpg') right top/auto 100% no-repeat,
+                url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.5);
+            min-height: 92vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+        .hero-breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+            text-transform: uppercase; margin-bottom: 28px;
+        }
+        .hero-badge {
+            background: var(--yellow); color: #000;
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px; font-weight: 800;
+        }
+        .hero-badge-outline {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px;
+        }
+        .hero-eyebrow {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 7vw, 88px);
+            font-weight: 900; line-height: 0.95;
+            letter-spacing: -0.03em; margin-bottom: 24px;
+        }
+        .hero-title em { font-style: italic; color: var(--yellow); }
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255,255,255,0.8);
+            max-width: 640px; line-height: 1.65;
+            margin-bottom: 48px;
+        }
+        .hero-meta {
+            display: flex; align-items: center; justify-content: center;
+            gap: 24px; flex-wrap: wrap;
+            font-size: 12px; color: rgba(255,255,255,0.55);
+            letter-spacing: 0.05em;
+        }
+        .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+        .hero-meta i { color: var(--yellow); }
+        .hero-meta-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+        .hero-scroll-cue {
+            position: absolute; bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.4); font-size: 10px;
+            letter-spacing: 0.2em; text-transform: uppercase;
+        }
+        .scroll-dot {
+            width: 28px; height: 44px; border-radius: 14px;
+            border: 2px solid rgba(255,255,255,0.25);
+            display: flex; align-items: flex-start; justify-content: center;
+            padding-top: 6px;
+        }
+        .scroll-dot::after {
+            content: '';
+            width: 4px; height: 8px; border-radius: 2px;
+            background: rgba(255,255,255,0.4);
+            animation: scrolldot 1.8s infinite;
+        }
+        @keyframes scrolldot {
+            0%,100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(8px); opacity: 0.3; }
+        }
+
+        /* ===================== ARTICLE LAYOUT ===================== */
+        .article-wrap {
+            max-width: 1280px; margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+        @media(min-width:1024px){
+            .article-wrap { grid-template-columns: 1fr 320px; gap: 64px; }
+        }
+        /* MAIN CONTENT */
+        .article-main {}
+        .article-section { margin-bottom: 56px; }
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px; font-weight: 900;
+            line-height: 0.8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px; line-height: 1.85;
+            color: var(--text2); margin-bottom: 20px;
+        }
+        .article-p strong { color: var(--text); font-weight: 700; }
+        .article-p em { font-style: italic; }
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900; letter-spacing: -0.02em;
+            line-height: 1.1; color: var(--text);
+            margin-bottom: 20px;
+        }
+        .article-h2 span { color: var(--yellow-dark); font-style: italic; }
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            color: var(--text); margin: 32px 0 14px;
+        }
+        .section-label {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px; display: block;
+        }
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 5px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 120px; font-weight: 900;
+            color: var(--yellow); opacity: 0.15;
+            position: absolute; top: -20px; left: 16px;
+            line-height: 1;
+        }
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.4; color: var(--text);
+            position: relative; z-index: 1;
+        }
+        .pull-quote-author {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-top: 12px;
+        }
+        /* Image / Figure */
+        .figure {
+            margin: 36px 0;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .figure-img {
+            width: 100%; height: 320px;
+            object-fit: cover; display: block;
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .figure:hover .figure-img {
+            transform: scale(1.06);
+        }
+        .figure-img-placeholder {
+            width: 100%; height: 280px;
+            background: var(--bg3);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 12px;
+            font-size: 64px;
+        }
+        .figure-caption {
+            padding: 14px 20px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-size: 12px; color: var(--text3);
+            font-style: italic; line-height: 1.5;
+        }
+        .figure-caption strong { color: var(--text2); font-style: normal; }
+        /* Callout boxes */
+        .callout {
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+        .callout.yellow {
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+        .dark .callout.yellow {
+            background: linear-gradient(135deg, #2a2400, #1a1800);
+            border-color: #5a4a00;
+        }
+        .callout.dark-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+        .callout.red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fca5a5;
+        }
+        .dark .callout.red {
+            background: linear-gradient(135deg, #200808, #1a0606);
+            border-color: #7f1d1d;
+        }
+        .callout-tag {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        }
+        .callout.yellow .callout-tag { color: #92400e; }
+        .callout.red .callout-tag { color: #991b1b; }
+        .callout.dark-box .callout-tag { color: var(--yellow-dark); }
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 12px; color: var(--text);
+        }
+        .callout p {
+            font-size: 14px; line-height: 1.7; color: var(--text2);
+        }
+        .callout p + p { margin-top: 10px; }
+        /* Concept grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px; margin: 28px 0;
+        }
+        @media(min-width:640px){ .concept-grid { grid-template-columns: 1fr 1fr; } }
+        .concept-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px 22px;
+            border-top: 4px solid var(--yellow);
+        }
+        .concept-card.red-top { border-top-color: var(--red); }
+        .concept-name {
+            font-size: 12px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 8px;
+        }
+        .concept-name.red { color: var(--red); }
+        .concept-def {
+            font-size: 13px; line-height: 1.65; color: var(--text2);
+        }
+        /* Timeline */
+        .timeline { margin: 32px 0; }
+        .timeline-item {
+            display: flex; gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px; top: 36px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: var(--border);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800;
+            flex-shrink: 0; z-index: 1;
+        }
+        .timeline-dot.muted {
+            background: var(--bg3); color: var(--text3);
+            border: 2px solid var(--border);
+            font-size: 11px;
+        }
+        .timeline-year {
+            font-size: 11px; font-weight: 700;
+            color: var(--yellow-dark); letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+        .timeline-event { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .timeline-desc { font-size: 13px; color: var(--text3); line-height: 1.5; }
+        /* Divider */
+        .art-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 48px 0;
+        }
+
+        /* ===================== SIDEBAR ===================== */
+        .article-sidebar {}
+        .sidebar-sticky { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px; overflow: hidden;
+        }
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex; align-items: center; gap: 8px;
+        }
+        /* Table of contents */
+        .toc-list { list-style: none; padding: 12px 0; }
+        .toc-item a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px; color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .toc-item a:hover,
+        .toc-item a.active {
+            color: var(--text); background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+        .toc-num { font-size: 11px; color: var(--yellow-dark); font-weight: 700; min-width: 20px; }
+        /* Key concepts sidebar */
+        .concept-mini { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+        .concept-mini:last-child { border-bottom: none; }
+        .concept-mini-name {
+            font-size: 11px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 5px;
+        }
+        .concept-mini-def { font-size: 12px; line-height: 1.55; color: var(--text3); }
+        /* Philosopher card */
+        .philosopher-card {
+            display: flex; gap: 14px; align-items: flex-start;
+            padding: 16px 20px; border-bottom: 1px solid var(--border);
+        }
+        .philosopher-card:last-child { border-bottom: none; }
+        .philosopher-avatar {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--bg3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .philosopher-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .philosopher-dates { font-size: 11px; color: var(--yellow-dark); font-weight: 600; margin-bottom: 5px; }
+        .philosopher-bio { font-size: 12px; color: var(--text3); line-height: 1.5; }
+        /* Unit connection */
+        .unit-connection {
+            padding: 20px;
+        }
+        .unit-conn-item {
+            display: flex; gap: 12px; align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .unit-conn-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--yellow); margin-top: 5px; flex-shrink: 0;
+        }
+        .unit-conn-text { font-size: 12px; line-height: 1.5; color: var(--text2); }
+        /* Next class */
+        .next-class { padding: 20px; }
+        .next-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; }
+        .next-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
+        .btn-next {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--yellow); color: #000;
+            border: none; padding: 12px 16px;
+            border-radius: 12px; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; cursor: pointer;
+            transition: all var(--transition); width: 100%;
+        }
+        .btn-next:hover { background: var(--yellow-dark); }
+
+        /* ===================== DISCUSSION ===================== */
+        .discussion-section {
+            background: var(--bg3);
+            border-radius: 20px; padding: 40px;
+            margin: 48px 0;
+            border: 1px solid var(--border);
+        }
+        .discussion-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; font-weight: 900;
+            color: var(--text); margin-bottom: 24px;
+        }
+        .question-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .question-item {
+            display: flex; gap: 16px;
+            padding: 18px 20px;
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: border-color var(--transition);
+            cursor: pointer;
+        }
+        .question-item:hover { border-color: var(--yellow); }
+        .question-num {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; flex-shrink: 0;
+        }
+        .question-text { font-size: 14px; line-height: 1.6; color: var(--text2); padding-top: 5px; }
+
+        /* ===================== FOOTER NAV ===================== */
+        .article-footer-nav {
+            max-width: 1280px; margin: 0 auto;
+            padding: 40px 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid var(--border);
+            gap: 20px; flex-wrap: wrap;
+        }
+        .footer-nav-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 24px; border-radius: 16px;
+            background: var(--card); border: 1px solid var(--border);
+            transition: all var(--transition); cursor: pointer;
+            max-width: 300px;
+        }
+        .footer-nav-link:hover { border-color: var(--yellow); transform: translateX(4px); }
+        .footer-nav-link.prev:hover { transform: translateX(-4px); }
+        .footer-nav-direction { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+        .footer-nav-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+        .footer-nav-icon { font-size: 18px; color: var(--text3); }
+
+        /* ===================== REVEAL ===================== */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+
+        /* ===================== COMPARISON TABLE ===================== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 28px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            font-size: 14px;
+        }
+        .comparison-table thead th {
+            background: var(--bg3);
+            padding: 16px 20px;
+            text-align: left;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text);
+            border-bottom: 2px solid var(--border);
+        }
+        .comparison-table thead th:first-child {
+            background: var(--yellow);
+            color: #000;
+            font-weight: 800;
+        }
+        .comparison-table thead th.mendel-col {
+            background: linear-gradient(135deg, #166534, #15803d);
+            color: #fff;
+        }
+        .comparison-table tbody td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text2);
+            line-height: 1.6;
+            vertical-align: top;
+        }
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .comparison-table tbody td:first-child {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 13px;
+            letter-spacing: 0.02em;
+            background: var(--bg3);
+            min-width: 120px;
+        }
+        .comparison-table tbody tr:hover td {
+            background: var(--bg3);
+        }
+        .comparison-table tbody tr:hover td:first-child {
+            background: var(--border);
+        }
+
+        /* Punnett square */
+        .punnett-wrap {
+            background: #0a1a0a;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 36px 0;
+            display: flex; flex-direction: column; align-items: center;
+            border: 1px solid #1e3a1e;
+            overflow: hidden; position: relative;
+        }
+        .punnett-title {
+            color: rgba(255,255,255,0.6);
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 28px; text-align: center;
+        }
+        .punnett-title span { color: #4ade80; }
+        .punnett-grid {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            grid-template-rows: 60px 1fr 1fr;
+            gap: 4px;
+            max-width: 360px;
+            width: 100%;
+        }
+        .punnett-cell {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .punnett-cell:hover {
+            background: rgba(74,222,128,0.15);
+            transform: scale(1.05);
+        }
+        .punnett-header {
+            background: rgba(74,222,128,0.15);
+            color: #4ade80;
+            font-size: 22px;
+        }
+        .punnett-corner {
+            background: transparent;
+            font-size: 14px;
+            color: rgba(255,255,255,0.3);
+        }
+        .punnett-dominant { color: #4ade80; }
+        .punnett-recessive { color: #facc15; }
+        .punnett-caption {
+            font-size: 13px; color: rgba(255,255,255,0.45);
+            text-align: center; margin-top: 20px;
+            font-family: 'Libre Baskerville', serif; font-style: italic;
+            max-width: 420px; line-height: 1.6;
+        }
+        .punnett-legend {
+            display: flex; gap: 28px; flex-wrap: wrap;
+            justify-content: center; margin-top: 24px;
+        }
+        .punnett-legend-item {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; color: rgba(255,255,255,0.65);
+        }
+        .punnett-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+        /* Green callout */
+        .callout.green {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #86efac;
+        }
+        .dark .callout.green {
+            background: linear-gradient(135deg, #052e16, #042f2e);
+            border-color: #166534;
+        }
+        .callout.green .callout-tag { color: #166534; }
+        .dark .callout.green .callout-tag { color: #4ade80; }
+    </style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+    <div class="topnav-left">
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Volver
+        </a>
+        <span class="nav-sep">|</span>
+        <div class="breadcrumb">
+            <span>Unidad 2</span> · Clase 16
+        </div>
+    </div>
+    <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+    <div class="topnav-right">
+        <button class="nav-btn" onclick="window.location.href='unidad2-clase15.html'">
+            <i class="fa-solid fa-arrow-left"></i> Clase 15
+        </button>
+        <button class="nav-btn" onclick="window.print()">
+            <i class="fa-solid fa-file-pdf"></i> PDF
+        </button>
+        <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header id="art-hero" style="background:
+    linear-gradient(to left, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 32%, rgba(0,0,0,.97) 58%),
+    url('Gregor_Mendel_2.jpg') right top/auto 100% no-repeat,
+    url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600&q=80') center/cover no-repeat;
+    background-color: #000;">
+    <div class="hero-breadcrumb">
+        <span class="hero-badge">UNIDAD 2 · CLASE 16</span>
+        <span class="hero-badge-outline">HERENCIA Y PARADIGMAS</span>
+    </div>
+    <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6° Año</p>
+    <h1 class="hero-title">
+        Mendel y la<br><em>Herencia</em>:<br>Factores que<br>no se mezclan
+    </h1>
+    <p class="hero-subtitle">
+        Del modelo de mezcla a los factores dominantes y recesivos:
+        cómo un monje con guisantes demolió un paradigma de siglos
+        y nadie le prestó atención.
+    </p>
+    <div class="hero-meta">
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Prof. Filosofía & Ciencia</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-calendar"></i>
+            <span>Ciclo 2025</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-clock"></i>
+            <span>60 min · Clase 16</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Mendel · Herencia · Dominancia</span>
+        </div>
+    </div>
+    <div class="hero-scroll-cue">
+        <div class="scroll-dot"></div>
+        <span>Comenzar</span>
+    </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<main class="article-wrap">
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <article class="article-main">
+
+        <!-- INTRO -->
+        <div class="article-section reveal" id="sec-intro">
+            <span class="section-label">Introducción</span>
+            <h2 class="article-h2">El <span>enigma</span> de la herencia</h2>
+            <p class="article-p dropcap">
+                Durante siglos, la humanidad observó un hecho cotidiano pero misterioso: los hijos
+                se parecen a sus padres, pero no son idénticos a ellos. ¿Cómo se transmiten los rasgos
+                de una generación a la siguiente? ¿Por qué un hijo tiene los ojos de su madre y la nariz
+                de su padre? Antes de Gregor Mendel, la respuesta dominante era tan intuitiva como
+                <strong>equivocada</strong>: la herencia por mezcla.
+            </p>
+            <p class="article-p">
+                Según este modelo, los rasgos de los padres se <em>fundían</em> en la descendencia
+                como dos pinturas mezclándose en un balde. Si un padre era alto y la madre baja,
+                los hijos serían de estatura <strong>intermedia</strong>. Parecía obvio. Parecía
+                natural. Parecía correcto. Pero Mendel, un monje agustino en un monasterio de Brno,
+                demostró con <strong>matemática y guisantes</strong> que la herencia no funciona así.
+            </p>
+            <p class="article-p">
+                Lo que Mendel descubrió no fue solo biología: fue un <strong>cambio de paradigma</strong>.
+                Observó que existen <strong>factores dominantes</strong> que enmascaran a
+                <strong>factores recesivos</strong>, y que estos factores no se mezclan sino que se
+                transmiten como unidades discretas, intactas, de generación en generación.
+                La herencia no es una mezcla de pinturas: es un juego de cartas.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- CONTEXTO HISTÓRICO -->
+        <div class="article-section reveal" id="sec-contexto">
+            <span class="section-label">Contexto Histórico</span>
+            <h2 class="article-h2">Brno, 1856: un monje, un <span>jardín</span> y 28.000 plantas</h2>
+
+            <div class="figure reveal" style="max-width:340px;margin:0 auto;">
+                <img class="figure-img" style="height:auto;max-height:400px;object-fit:contain;background:#1a1a1a;padding:16px;"
+                     src="Gregor_Mendel_2.jpg"
+                     alt="Retrato de Gregor Mendel"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🌱</div>
+                <div class="figure-caption">
+                    <strong>Gregor Johann Mendel (1822–1884)</strong> Monje agustino y naturalista.
+                    En el jardín de su monasterio en Brno (actual República Checa) realizó
+                    experimentos con <strong>guisantes</strong> durante 8 años, cruzando
+                    casi 28.000 plantas y registrando meticulosamente cada resultado.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Mendel no era un biólogo profesional en el sentido moderno. Era un monje que había
+                estudiado física y matemáticas en la Universidad de Viena. Esta formación fue clave:
+                donde los naturalistas veían caracteres cualitativos, Mendel vio <strong>proporciones
+                numéricas</strong>. Donde otros describían, él <strong>contaba</strong>.
+            </p>
+
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">XVII</div>
+                    <div>
+                        <div class="timeline-year">Siglos XVII-XVIII</div>
+                        <div class="timeline-event">Domina el modelo de "herencia por mezcla"</div>
+                        <div class="timeline-desc">Se asume que los rasgos de ambos padres se funden en la descendencia. Sin base experimental, solo observación intuitiva.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">1856</div>
+                    <div>
+                        <div class="timeline-year">1856</div>
+                        <div class="timeline-event">Mendel comienza sus experimentos con guisantes</div>
+                        <div class="timeline-desc">Selecciona 7 caracteres de la planta Pisum sativum y establece líneas puras antes de cruzarlas sistemáticamente.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">1865</div>
+                    <div>
+                        <div class="timeline-year">1865</div>
+                        <div class="timeline-event">Mendel presenta sus resultados</div>
+                        <div class="timeline-desc">Lee su artículo ante la Sociedad de Historia Natural de Brno. La audiencia no comprende su enfoque matemático. La respuesta es: silencio.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot muted">1900</div>
+                    <div>
+                        <div class="timeline-year">1900</div>
+                        <div class="timeline-event">Redescubrimiento de Mendel</div>
+                        <div class="timeline-desc">De Vries, Correns y von Tschermak, trabajando independientemente, llegan a las mismas conclusiones y descubren que Mendel ya lo había hecho 35 años antes.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- MODELO DE MEZCLA -->
+        <div class="article-section reveal" id="sec-mezcla">
+            <span class="section-label">El Paradigma Anterior</span>
+            <h2 class="article-h2">La herencia por <span>mezcla</span>: el paradigma que Mendel derribó</h2>
+
+            <p class="article-p">
+                Antes de Mendel, la idea dominante era que la herencia funcionaba como la mezcla de
+                líquidos: los rasgos de padre y madre se <em>diluían</em> en cada generación. Esta
+                idea era tan intuitiva que ni siquiera se consideraba necesario probarla experimentalmente.
+                Era el <strong>sentido común</strong> elevado a teoría científica.
+            </p>
+
+            <div class="callout yellow reveal">
+                <div class="callout-tag">⚠️ El problema de Darwin</div>
+                <div class="callout-title">La mezcla amenazaba la selección natural</div>
+                <p>Charles Darwin, contemporáneo de Mendel, tenía un problema grave con su propia
+                teoría: si la herencia era por mezcla, cualquier variación favorable se <strong>diluiría</strong>
+                en pocas generaciones al cruzarse con individuos normales. La selección natural
+                no podría funcionar. Fleeming Jenkin señaló esta objeción en 1867, y Darwin nunca
+                pudo responderla satisfactoriamente. Irónicamente, la respuesta estaba en el trabajo
+                de Mendel, publicado apenas dos años antes, que Darwin <strong>jamás leyó</strong>.</p>
+            </div>
+
+            <p class="article-p">
+                El modelo de mezcla hacía una predicción clara: al cruzar una planta alta con una baja,
+                <strong>todas las descendientes serían de altura intermedia</strong>. Y si esas
+                intermedias se cruzaban entre sí, seguirían siendo intermedias. Los rasgos originales
+                —alto y bajo— habrían desaparecido para siempre, disueltos en la mezcla.
+            </p>
+
+            <p class="article-p">
+                Mendel demostró que eso <strong>no ocurría</strong>. Sus guisantes contaban otra historia.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- EL EXPERIMENTO -->
+        <div class="article-section reveal" id="sec-experimento">
+            <span class="section-label">El Experimento Crucial</span>
+            <h2 class="article-h2">Alta × baja: lo que Mendel <span>realmente</span> observó</h2>
+
+            <div class="figure reveal">
+                <img class="figure-img" style="height:auto;max-height:480px;object-fit:contain;background:#fff;padding:16px;"
+                     src="herencia_mezcla_mendel.png"
+                     alt="Comparación entre la predicción del modelo de mezcla y los resultados reales de Mendel"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🌱</div>
+                <div class="figure-caption">
+                    <strong>Izquierda: lo que predecía el modelo de mezcla</strong> — todas las plantas de F1 serían
+                    medianas, y en F2 seguirían medianas. <strong>Derecha: lo que Mendel observó</strong> — en F1
+                    todas fueron altas (no medianas), y en F2 aparecieron 3 altas por cada 1 baja. El rasgo
+                    "bajo" no se había disuelto: estaba <em>oculto</em>.
+                </div>
+            </div>
+
+            <div class="figure reveal">
+                <img class="figure-img" style="height:auto;max-height:520px;object-fit:contain;background:#fff;padding:16px;"
+                     src="filial_mendel.png"
+                     alt="Generaciones P, F1 y F2 en los ensayos de Mendel: cruzamiento alta × baja"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🌱</div>
+                <div class="figure-caption">
+                    <strong>Las tres generaciones del ensayo de Mendel.</strong> Generación P: planta alta × baja.
+                    Generación F1: todas altas (el factor dominante enmascara al recesivo).
+                    Generación F2 (autofertilización de F1): reaparece el rasgo bajo en proporción <strong>3 altas : 1 baja</strong>.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Mendel cruzó plantas de guisante de tallo alto (<strong>dominante</strong>) con plantas
+                de tallo bajo (<strong>recesivo</strong>). Si la herencia fuera por mezcla, la primera
+                generación (F1) debería tener plantas de <strong>altura intermedia</strong>. Pero no:
+                <strong>todas las plantas de F1 fueron altas</strong>.
+            </p>
+
+            <div class="callout dark-box reveal">
+                <div class="callout-tag">🔴 La anomalía que destruyó el paradigma</div>
+                <div class="callout-title">La reaparición del rasgo "perdido"</div>
+                <p>Cuando Mendel autofertilizó las plantas altas de F1, en la segunda generación (F2)
+                obtuvo una proporción asombrosa: <strong>787 plantas altas y 277 plantas bajas</strong>.
+                Aproximadamente <strong>3:1</strong>. El rasgo "bajo" no se había disuelto en la
+                mezcla: había estado <em>oculto</em> durante una generación entera y reapareció
+                intacto. Esto era imposible bajo el modelo de mezcla.</p>
+                <p style="margin-top:12px">La proporción 3:1 no era casualidad. Mendel la encontró en los
+                7 caracteres que estudió: forma de semilla, color de semilla, color de flor, forma de vaina,
+                color de vaina, posición de flor y altura de planta. <strong>Siempre 3:1.</strong>
+                Eso solo podía significar una cosa: había <em>reglas matemáticas</em> detrás de la herencia.</p>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "Los factores hereditarios no se fusionan en la descendencia,
+                    sino que se mantienen como unidades independientes que se segregan
+                    durante la formación de los gametos."
+                </p>
+                <p class="pull-quote-author">— Gregor Mendel, Experimentos sobre hibridación de plantas (1865)</p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- DOMINANCIA Y RECESIVIDAD -->
+        <div class="article-section reveal" id="sec-dominancia">
+            <span class="section-label">Concepto Central</span>
+            <h2 class="article-h2">Factores <span>dominantes</span> y recesivos</h2>
+
+            <p class="article-p">
+                Mendel propuso que cada carácter está determinado por un par de "factores"
+                (hoy los llamamos <strong>alelos</strong>). Cada progenitor aporta uno de sus
+                dos factores a la descendencia. Cuando los dos factores son diferentes, uno de ellos
+                —el <strong>dominante</strong>— se expresa y <em>enmascara</em> al otro
+                —el <strong>recesivo</strong>—. El recesivo sigue ahí, intacto, esperando
+                su oportunidad de manifestarse en la siguiente generación.
+            </p>
+
+            <div class="concept-grid reveal">
+                <div class="concept-card">
+                    <div class="concept-name">Factor Dominante</div>
+                    <div class="concept-def">
+                        El factor que se expresa cuando está presente, incluso si el otro factor
+                        es diferente. En los guisantes de Mendel: tallo <strong>alto</strong>,
+                        semilla <strong>lisa</strong>, flor <strong>violeta</strong>.
+                        Se representa con letra <strong>mayúscula (A)</strong>.
+                    </div>
+                </div>
+                <div class="concept-card red-top">
+                    <div class="concept-name red">Factor Recesivo</div>
+                    <div class="concept-def">
+                        El factor que solo se expresa cuando ambas copias son recesivas (homocigoto
+                        recesivo). "Desaparece" en F1 pero reaparece en F2. En los guisantes: tallo
+                        <strong>bajo</strong>, semilla <strong>rugosa</strong>, flor <strong>blanca</strong>.
+                        Se representa con letra <strong>minúscula (a)</strong>.
+                    </div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-name">Homocigoto</div>
+                    <div class="concept-def">
+                        Individuo con dos factores iguales: <strong>AA</strong> (homocigoto dominante)
+                        o <strong>aa</strong> (homocigoto recesivo). En ambos casos el fenotipo
+                        "muestra" exactamente lo que tiene.
+                    </div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-name">Heterocigoto</div>
+                    <div class="concept-def">
+                        Individuo con dos factores diferentes: <strong>Aa</strong>. Se ve igual
+                        que el homocigoto dominante (alto), pero <em>porta</em> el factor recesivo
+                        oculto. Es la clave de la proporción 3:1 en F2.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUNNETT SQUARE -->
+            <div class="punnett-wrap reveal">
+                <div class="punnett-title">
+                    <span>Cuadro de Punnett:</span> Cruce de heterocigotos (Aa × Aa) — Segunda Generación (F2)
+                </div>
+                <div class="punnett-grid">
+                    <div class="punnett-cell punnett-corner">♀ \ ♂</div>
+                    <div class="punnett-cell punnett-header">A</div>
+                    <div class="punnett-cell punnett-header">a</div>
+                    <div class="punnett-cell punnett-header">A</div>
+                    <div class="punnett-cell"><span class="punnett-dominant">A</span><span class="punnett-dominant">A</span></div>
+                    <div class="punnett-cell"><span class="punnett-dominant">A</span><span class="punnett-recessive">a</span></div>
+                    <div class="punnett-cell punnett-header">a</div>
+                    <div class="punnett-cell"><span class="punnett-dominant">A</span><span class="punnett-recessive">a</span></div>
+                    <div class="punnett-cell"><span class="punnett-recessive">a</span><span class="punnett-recessive">a</span></div>
+                </div>
+                <div class="punnett-legend">
+                    <div class="punnett-legend-item">
+                        <div class="punnett-legend-dot" style="background:#4ade80;"></div>
+                        <span>AA — Alto (homocigoto dominante)</span>
+                    </div>
+                    <div class="punnett-legend-item">
+                        <div class="punnett-legend-dot" style="background:linear-gradient(135deg,#4ade80,#facc15);"></div>
+                        <span>Aa — Alto (heterocigoto, porta el recesivo)</span>
+                    </div>
+                    <div class="punnett-legend-item">
+                        <div class="punnett-legend-dot" style="background:#facc15;"></div>
+                        <span>aa — Bajo (homocigoto recesivo)</span>
+                    </div>
+                </div>
+                <p class="punnett-caption">
+                    Resultado: <strong style="color:#4ade80">1 AA</strong> +
+                    <strong style="color:#86efac">2 Aa</strong> +
+                    <strong style="color:#facc15">1 aa</strong> = proporción fenotípica
+                    <strong style="color:#fff">3 altas : 1 baja</strong>.
+                    La proporción genotípica es 1:2:1.
+                </p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- CUADRO COMPARATIVO -->
+        <div class="article-section reveal" id="sec-comparacion">
+            <span class="section-label">Dos Paradigmas en Conflicto</span>
+            <h2 class="article-h2">Mezcla vs. Mendel: <span>dos visiones</span> de la herencia</h2>
+
+            <p class="article-p">
+                El choque entre el modelo de mezcla y los resultados de Mendel no fue solo un
+                desacuerdo técnico: fue un enfrentamiento entre dos maneras de pensar la naturaleza.
+                Uno se basaba en la <strong>intuición</strong>, el otro en la <strong>experimentación
+                cuantitativa</strong>.
+            </p>
+
+            <table class="comparison-table reveal">
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Modelo de Mezcla</th>
+                        <th class="mendel-col">Herencia Mendeliana</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mecanismo</td>
+                        <td>Los rasgos se <em>funden</em> como líquidos. La información se pierde irrecuperablemente.</td>
+                        <td>Los factores se transmiten como <strong>unidades discretas</strong>, sin alterarse.</td>
+                    </tr>
+                    <tr>
+                        <td>F1 (Alta × Baja)</td>
+                        <td>Todas las plantas de <strong>altura intermedia</strong>.</td>
+                        <td>Todas las plantas <strong>altas</strong> (el dominante enmascara al recesivo).</td>
+                    </tr>
+                    <tr>
+                        <td>F2</td>
+                        <td>Siguen siendo intermedias. El rasgo original <strong>nunca vuelve</strong>.</td>
+                        <td>Proporción <strong>3:1</strong>. El rasgo recesivo <strong>reaparece</strong> intacto.</td>
+                    </tr>
+                    <tr>
+                        <td>Base metodológica</td>
+                        <td>Observación cualitativa, sentido común, <strong>sin cuantificación</strong>.</td>
+                        <td>Experimentación controlada con <strong>análisis estadístico</strong> riguroso.</td>
+                    </tr>
+                    <tr>
+                        <td>Poder predictivo</td>
+                        <td>Vago: "se parecerán a ambos padres".</td>
+                        <td>Preciso: <strong>proporciones numéricas exactas</strong> (3:1, 1:2:1, 9:3:3:1).</td>
+                    </tr>
+                    <tr>
+                        <td>Compatibilidad con Darwin</td>
+                        <td>Incompatible: la selección natural <strong>se diluye</strong>.</td>
+                        <td>Perfectamente compatible: los alelos <strong>se conservan</strong> intactos.</td>
+                    </tr>
+                    <tr>
+                        <td>Estatus filosófico</td>
+                        <td>Paradigma basado en <strong>sentido común</strong> no testado.</td>
+                        <td>Paradigma basado en <strong>evidencia experimental</strong> cuantificada.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- CONTROVERSIA FILOSÓFICA -->
+        <div class="article-section reveal" id="sec-controversia">
+            <span class="section-label">Controversia y Paradigmas</span>
+            <h2 class="article-h2">¿Por qué nadie escuchó <span>a Mendel</span>?</h2>
+
+            <p class="article-p">
+                Aquí está la paradoja más fascinante de la historia de la ciencia: Mendel publicó
+                sus resultados en 1866. Eran correctos. Eran revolucionarios. Y fueron
+                <strong>completamente ignorados durante 35 años</strong>. ¿Por qué?
+            </p>
+
+            <div class="callout green reveal">
+                <div class="callout-tag">🧠 Análisis filosófico</div>
+                <div class="callout-title">Kuhn y la invisibilidad de Mendel</div>
+                <p>Desde la perspectiva de Thomas Kuhn, Mendel era un científico trabajando
+                <strong>fuera del paradigma dominante</strong>. La comunidad científica no tenía
+                el marco conceptual para entender lo que proponía. No existían los conceptos
+                de "gen", "alelo" ni "cromosoma". Mendel hablaba de "factores" invisibles
+                que se combinaban según reglas matemáticas. Para los naturalistas de la época,
+                acostumbrados a describir formas y clasificar especies, su trabajo parecía
+                una <em>abstracción matemática sin conexión con la realidad biológica</em>.</p>
+                <p>Además, Mendel era un monje en Brno, no un profesor en Londres, París o Berlín.
+                El peso institucional y geográfico importa en ciencia: este es un ejemplo perfecto
+                de cómo los <strong>factores externalistas</strong> determinan la recepción de una teoría.</p>
+            </div>
+
+            <div class="callout red reveal">
+                <div class="callout-tag">🔥 El debate central</div>
+                <div class="callout-title">¿Cambio de paradigma o acumulación de evidencia?</div>
+                <p><strong>Perspectiva kuhniana:</strong> La "revolución mendeliana" solo fue posible
+                cuando el paradigma anterior entró en crisis y la comunidad científica estuvo
+                preparada para un nuevo marco conceptual. Mendel fue un "anticipador" cuyo
+                descubrimiento no pudo ser asimilado por la ciencia normal de su tiempo.</p>
+                <p><strong>Perspectiva popperiana:</strong> Mendel aplicó el método hipotético-deductivo:
+                formuló una hipótesis (factores discretos con dominancia), dedujo consecuencias
+                observables (proporciones 3:1) y las <em>testó experimentalmente</em>. Su trabajo
+                es un ejemplo de buena ciencia según el falsacionismo. La comunidad falló al no
+                evaluar racionalmente la evidencia.</p>
+                <p><strong>Perspectiva externalista:</strong> La ciencia no es solo lógica y evidencia.
+                Es también <em>instituciones, prestigio, lenguaje y poder</em>. Mendel fue ignorado
+                no porque estuviera equivocado, sino porque estaba en el lugar equivocado,
+                hablando un lenguaje que nadie entendía.</p>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "Mi tiempo llegará."
+                </p>
+                <p class="pull-quote-author">— Gregor Mendel (atribuido, hacia el final de su vida)</p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- DISCUSIÓN -->
+        <div class="discussion-section reveal">
+            <h3 class="discussion-title">🤔 Para pensar y debatir</h3>
+            <ul class="question-list">
+                <li class="question-item">
+                    <div class="question-num">1</div>
+                    <p class="question-text">El modelo de mezcla era intuitivo y parecía correcto. ¿Podés pensar en otras creencias científicas actuales que se basan más en la intuición que en la evidencia experimental? ¿Qué haría falta para testearlas?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">2</div>
+                    <p class="question-text">Mendel fue ignorado durante 35 años. ¿Qué nos dice esto sobre la relación entre "tener razón" y "ser escuchado" en ciencia? ¿El conocimiento científico avanza solo por méritos lógicos o también por factores sociales?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">3</div>
+                    <p class="question-text">Darwin no conoció el trabajo de Mendel, pero la genética mendeliana resolvió su mayor problema teórico. ¿Qué nos enseña esto sobre la importancia de la comunicación entre disciplinas científicas?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">4</div>
+                    <p class="question-text">¿Es la historia de Mendel un ejemplo de "revolución científica" en el sentido de Kuhn, o de "conjeturas y refutaciones" en el sentido de Popper? ¿Cuál de las dos perspectivas explica mejor lo que pasó?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">5</div>
+                    <p class="question-text">Mendel usó matemáticas y estadística en biología cuando nadie lo hacía. ¿Podemos decir que su innovación fue tanto <em>metodológica</em> como teórica? ¿Cuánto importa el <em>cómo</em> se investiga además del <em>qué</em> se descubre?</p>
+                </li>
+            </ul>
+        </div>
+    </article>
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="article-sidebar">
+        <div class="sidebar-sticky">
+
+            <!-- TABLE OF CONTENTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-list"></i>
+                    Contenido de la clase
+                </div>
+                <ul class="toc-list">
+                    <li class="toc-item"><a href="#sec-intro" class="toc-link"><span class="toc-num">01</span> El enigma de la herencia</a></li>
+                    <li class="toc-item"><a href="#sec-contexto" class="toc-link"><span class="toc-num">02</span> Brno, 1856</a></li>
+                    <li class="toc-item"><a href="#sec-mezcla" class="toc-link"><span class="toc-num">03</span> La herencia por mezcla</a></li>
+                    <li class="toc-item"><a href="#sec-experimento" class="toc-link"><span class="toc-num">04</span> El experimento crucial</a></li>
+                    <li class="toc-item"><a href="#sec-dominancia" class="toc-link"><span class="toc-num">05</span> Dominantes y recesivos</a></li>
+                    <li class="toc-item"><a href="#sec-comparacion" class="toc-link"><span class="toc-num">06</span> Mezcla vs. Mendel</a></li>
+                    <li class="toc-item"><a href="#sec-controversia" class="toc-link"><span class="toc-num">07</span> ¿Por qué nadie escuchó?</a></li>
+                </ul>
+            </div>
+
+            <!-- CONCEPTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-key"></i>
+                    Conceptos clave
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Herencia por mezcla</div>
+                    <div class="concept-mini-def">Modelo pre-mendeliano que sostenía que los rasgos se funden al mezclarse, diluyéndose en cada generación.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Factor dominante</div>
+                    <div class="concept-mini-def">El factor que se expresa y enmascara al recesivo cuando ambos están presentes en un individuo heterocigoto.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Factor recesivo</div>
+                    <div class="concept-mini-def">El factor que solo se manifiesta cuando está en doble dosis (homocigoto). Puede permanecer oculto durante generaciones.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Proporción 3:1</div>
+                    <div class="concept-mini-def">La proporción fenotípica hallada por Mendel en F2: 3 individuos con fenotipo dominante por cada 1 con fenotipo recesivo.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Ley de Segregación</div>
+                    <div class="concept-mini-def">Los dos factores de un par se separan durante la formación de gametos, y cada gameto recibe solo uno.</div>
+                </div>
+            </div>
+
+            <!-- PHILOSOPHERS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Protagonistas
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🌱</div>
+                    <div>
+                        <div class="philosopher-name">Gregor Mendel</div>
+                        <div class="philosopher-dates">1822 – 1884 · Brno</div>
+                        <div class="philosopher-bio">Monje agustino. Descubrió las leyes de la herencia con guisantes. Ignorado 35 años. Hoy considerado el padre de la genética.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🐢</div>
+                    <div>
+                        <div class="philosopher-name">Charles Darwin</div>
+                        <div class="philosopher-dates">1809 – 1882 · Inglaterra</div>
+                        <div class="philosopher-bio">Autor de la teoría de la selección natural. Su gran problema —cómo se conservan las variaciones— fue resuelto por Mendel, pero nunca lo supo.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">📖</div>
+                    <div>
+                        <div class="philosopher-name">Hugo de Vries</div>
+                        <div class="philosopher-dates">1848 – 1935 · Países Bajos</div>
+                        <div class="philosopher-bio">Botánico que en 1900 redescubrió las leyes de Mendel independientemente. Junto a Correns y von Tschermak, rescataron su legado del olvido.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONNECTIONS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-link"></i>
+                    Conexiones con la Unidad
+                </div>
+                <div class="unit-connection">
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Paradigma:</strong> El modelo de mezcla es el paradigma derribado. La herencia mendeliana representa un cambio de paradigma en biología.</p>
+                    </div>
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Método científico:</strong> Mendel aplicó el método hipotético-deductivo con rigor cuantitativo inusual para su época.</p>
+                    </div>
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Factores externalistas:</strong> La recepción de Mendel fue determinada por su posición periférica y el lenguaje matemático que usó.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEXT CLASS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-backward"></i>
+                    Clase anterior
+                </div>
+                <div class="next-class">
+                    <div class="next-label">Clase 15 · Unidad 2</div>
+                    <div class="next-title">Pasteur vs. Pouchet: Hershey-Chase y Meselson-Stahl</div>
+                    <button class="btn-next" onclick="window.location.href='unidad2-clase15.html'" style="background:var(--bg3);color:var(--text);">
+                        <span>IR A CLASE 15</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </aside>
+
+</main>
+
+<!-- FOOTER NAV -->
+<nav class="article-footer-nav">
+    <a href="unidad2-clase15.html" class="footer-nav-link prev">
+        <div class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></div>
+        <div>
+            <div class="footer-nav-direction">Clase Anterior</div>
+            <div class="footer-nav-title">U2·C15 — Meselson-Stahl</div>
+        </div>
+    </a>
+    <div style="text-align:center; font-size:12px; color:var(--text3);">
+        <div style="font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--text);">FILOSOFÍA&CIENCIA</div>
+        Unidad 2 · Clase 16
+    </div>
+    <a href="unidad2-clase17.html" class="footer-nav-link">
+        <div style="text-align:right;">
+            <div class="footer-nav-direction">Siguiente Clase</div>
+            <div class="footer-nav-title">U2·C17 — La PCR y el ADN</div>
+        </div>
+        <div class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+</nav>
+
+<script>
+    // Dark mode
+    (function(){
+        const s = localStorage.getItem('theme');
+        if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){
+            document.documentElement.classList.add('dark');
+        }
+    })();
+    function toggleDark(){
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Progress bar
+    window.addEventListener('scroll', ()=>{
+        const d = document.documentElement;
+        const pct = (window.scrollY / (d.scrollHeight - d.clientHeight)) * 100;
+        document.getElementById('progress').style.width = pct + '%';
+    });
+
+    // Reveal on scroll
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Smooth scroll TOC
+    function scrollTo(id) {
+        const el = document.querySelector(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // TOC Active
+    const sections = document.querySelectorAll('.article-section[id]');
+    const tocItems = document.querySelectorAll('.toc-item');
+    const tocObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                tocItems.forEach(t => t.querySelector('a').classList.remove('active'));
+                const match = [...tocItems].find(t => t.querySelector('a').getAttribute('href') === '#' + e.target.id);
+                if (match) match.querySelector('a').classList.add('active');
+            }
+        });
+    }, { threshold: 0.35 });
+    sections.forEach(s => tocObs.observe(s));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+            const el = document.querySelector(a.getAttribute('href'));
+            if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        });
+    });
+
+    console.log('%c🌱 Clase 16 — Mendel y la Herencia — cargada.', 'color:#4ade80;font-weight:bold;font-family:monospace');
+</script>
+</body>
+</html>

@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakatos y Feyerabend: ¿Existe el Método? | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --blue: #2563eb;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, .6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .4s, color .4s;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width .1s;
+        }
+
+        /* TOPNAV */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background .4s, border-color .4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        /* HERO */
+        #art-hero {
+            background: linear-gradient(160deg, rgba(15, 23, 42, .85) 0%, rgba(2, 6, 23, .96) 100%), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop') center/cover no-repeat;
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-purple {
+            background: #7c3aed;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 6.5vw, 84px);
+            font-weight: 900;
+            line-height: .93;
+            letter-spacing: -.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(15px, 2.2vw, 20px);
+            color: rgba(255, 255, 255, .8);
+            max-width: 700px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .55);
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, .4);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, .25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, .4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: .3
+            }
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+            background: var(--yellow);
+            padding: 0;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 130px;
+            padding: 20px 16px;
+            text-align: center;
+            border-right: 1px solid rgba(0, 0, 0, .12);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, .65);
+            margin-top: 4px;
+        }
+
+        /* ARTICLE LAYOUT */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: .8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .art-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 56px 0;
+        }
+
+        /* CALLOUTS */
+        .callout {
+            background: var(--bg3);
+            border-left: 4px solid var(--yellow);
+            padding: 28px 32px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+
+        .callout-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 8px;
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .callout-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+        }
+
+        .callout.purple {
+            border-left-color: #7c3aed;
+            background: color-mix(in srgb, #7c3aed 5%, var(--bg3));
+        }
+
+        .callout.blue {
+            border-left-color: var(--blue);
+            background: color-mix(in srgb, var(--blue) 5%, var(--bg3));
+        }
+
+        .callout.red {
+            border-left-color: var(--red);
+            background: color-mix(in srgb, var(--red) 5%, var(--bg3));
+        }
+
+        .callout.dark-box {
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-left: 5px solid #7c3aed;
+            padding: 32px;
+            border-radius: 8px;
+            margin: 36px 0;
+        }
+
+        .callout.dark-box .callout-tag {
+            color: #a78bfa;
+        }
+
+        .callout.dark-box .callout-title {
+            color: #e9d5ff;
+        }
+
+        .callout.dark-box .callout-text {
+            color: #d1d5db;
+        }
+
+        .dark .callout.dark-box {
+            background: #0a0a14;
+            border-color: #4c1d95;
+        }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            padding: 40px 0;
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .pull-quote::before {
+            content: '\201C';
+            position: absolute;
+            top: -10px;
+            left: -12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 140px;
+            color: var(--yellow);
+            opacity: .2;
+            line-height: 1;
+        }
+
+        .pq-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(20px, 3vw, 30px);
+            line-height: 1.4;
+            color: var(--text);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .pq-source {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+        }
+
+        .pq-source span {
+            color: var(--yellow-dark);
+        }
+
+        /* DIGRESSION CARD */
+        .digression-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 40px 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .digression-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .digression-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+        }
+
+        @media(min-width: 768px) {
+            .digression-card {
+                flex-direction: row;
+                align-items: stretch;
+            }
+        }
+
+        .digression-img-container {
+            flex: 0 0 40%;
+            overflow: hidden;
+            position: relative;
+            min-height: 250px;
+        }
+
+        .digression-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease;
+        }
+
+        .digression-card:hover .digression-img {
+            transform: scale(1.08);
+        }
+
+        .digression-content {
+            padding: 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .digression-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+        }
+
+        .digression-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .digression-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        /* INTERACTIVE PIC DIAGRAM: PROGRAMA DE INVESTIGACION */
+        .lakatos-diagram {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px 24px;
+            margin: 32px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lakatos-diagram::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(37, 99, 235, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .lakatos-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .lakatos-subtitle {
+            font-size: 14px;
+            color: var(--text3);
+            margin-bottom: 40px;
+        }
+
+        .core-circle-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .belt-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed #3b82f6;
+            background: color-mix(in srgb, #3b82f6 5%, transparent);
+            animation: spin 30s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .belt-circle:hover {
+            border-color: #2563eb;
+            background: color-mix(in srgb, #3b82f6 15%, transparent);
+        }
+
+        .core-circle {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b, #ea580c);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 8px 24px rgba(234, 88, 12, 0.4);
+            z-index: 10;
+            cursor: pointer;
+            transition: transform .3s;
+            text-align: center;
+        }
+
+        .core-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .asteroid {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #ef4444;
+            border-radius: 50%;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+        }
+
+        .asteroid:nth-child(2) {
+            top: auto;
+            bottom: -6px;
+            background: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+        }
+
+        .asteroid:nth-child(3) {
+            top: 50%;
+            bottom: auto;
+            left: -6px;
+            transform: translateY(-50%);
+            background: #8b5cf6;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+        }
+
+        .asteroid:nth-child(4) {
+            top: 50%;
+            bottom: auto;
+            left: auto;
+            right: -6px;
+            transform: translateY(-50%);
+            background: #eab308;
+            box-shadow: 0 0 10px rgba(234, 179, 8, 0.6);
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .diagram-info-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+            text-align: left;
+            min-height: 140px;
+            border-left: 4px solid transparent;
+            transition: all .3s;
+        }
+
+        .diagram-info-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .diagram-info-box p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        /* FEYERABEND BOXES */
+        .feyerabend-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        @media(min-width:768px) {
+            .feyerabend-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .anark-card {
+            background: var(--bg2);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 32px;
+            text-align: center;
+            transition: all .2s;
+        }
+
+        .anark-card:hover {
+            transform: rotate(-1deg) scale(1.02);
+            border-color: #ef4444;
+            box-shadow: 8px 8px 0 rgba(239, 68, 68, 0.15);
+        }
+
+        .anark-icon {
+            font-size: 42px;
+            margin-bottom: 16px;
+            color: #ef4444;
+        }
+
+        .anark-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .anark-card p {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+
+        .comparison-table th {
+            background: var(--yellow);
+            color: #000;
+            font-weight: 700;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 11px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .comparison-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text2);
+        }
+
+        .comparison-table tr:hover td {
+            background: var(--bg3);
+        }
+
+        .comparison-table .label-cell {
+            font-weight: 600;
+            color: var(--text);
+            width: 25%;
+        }
+
+        /* SIDEBAR */
+        #sidebar {
+            position: sticky;
+            top: 70px;
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sb-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .sb-title {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .toc-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .toc-item:last-child {
+            border-bottom: none;
+        }
+
+        .toc-item:hover {
+            color: var(--yellow-dark);
+        }
+
+        .toc-item.active {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .toc-num {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--yellow);
+            min-width: 20px;
+        }
+
+        .toc-text {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .concept-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: var(--bg3);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            margin: 4px;
+            transition: all .2s;
+        }
+
+        .concept-pill:hover {
+            background: var(--yellow);
+            color: #000;
+        }
+
+        .phil-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phil-item:last-child {
+            border-bottom: none;
+        }
+
+        .phil-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .phil-info h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .phil-info p {
+            font-size: 11px;
+            color: var(--text3);
+        }
+
+        .nav-class-btn {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .nav-class-btn:hover,
+        .nav-class-btn.primary:hover {
+            transform: translateX(4px);
+        }
+
+        .nav-class-btn.primary {
+            background: var(--yellow);
+            border-color: var(--yellow-dark);
+        }
+
+        .nav-class-info .nav-class-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .nav-class-btn.primary .nav-class-label {
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .nav-class-info .nav-class-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .nav-class-btn.primary .nav-class-title {
+            color: #000;
+        }
+
+        /* DISCUSSION */
+        .questions-list {
+            counter-reset: q;
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+        }
+
+        .questions-list li {
+            counter-increment: q;
+            padding: 20px 20px 20px 56px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+        }
+
+        .questions-list li::before {
+            content: counter(q);
+            position: absolute;
+            left: 16px;
+            top: 20px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FOOTER */
+        .art-footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 32px;
+        }
+
+        .art-footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        @media(min-width:640px) {
+            .footer-nav {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-nav-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all .25s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-nav-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-nav-card.primary {
+            background: var(--yellow);
+        }
+
+        .fn-icon {
+            font-size: 24px;
+        }
+
+        .fn-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-card.primary .fn-label {
+            color: rgba(0, 0, 0, .55);
+        }
+
+        .fn-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-nav-card.primary .fn-title {
+            color: #000;
+        }
+
+        .footer-credits {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .footer-credits a {
+            color: var(--yellow-dark);
+        }
+
+        /* REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <!-- ══ TOP NAV ════════════════════════════════════════════════ -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Inicio</span>
+            </a>
+            <span class="nav-sep">|</span>
+            <div class="breadcrumb">Unidad 1 · <span>Clase 7</span></div>
+        </div>
+        <div class="topnav-center">Lakatos y Feyerabend: ¿Existe el Método?</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase6.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 6
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase8.html'">
+                Clase 8 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- ══ HERO ════════════════════════════════════════════════════ -->
+    <header id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDAD 4</span> <!-- Basado en el programa "Sucesión y Cambio de Teorías" -->
+            <span class="hero-badge-outline">CLASE 7</span>
+            <span class="hero-badge-purple">EPISTEMOLOGÍA</span>
+        </div>
+        <p class="hero-eyebrow">La crisis del método · 1970s</p>
+        <h1 class="hero-title">
+            Lakatos y Feyerabend<br>
+            ¿Existe el <em>Método?</em>
+        </h1>
+        <p class="hero-subtitle">
+            Tras el huracán desatado por Kuhn, dos pensadores intentaron redefinir la ciencia: Lakatos buscó salvar la
+            racionalidad a través de sus <em>Programas de Investigación</em>, mientras que Feyerabend abrazó con el lema
+            anarquista: <em>¡Todo vale!</em>
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item"><i class="fa-regular fa-clock"></i> 45 min lectura</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-flask"></i> Epistemología</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-shield-halved"></i> Cinturón Protector</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-bomb"></i> Anarquismo</div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Continuar</span>
+        </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-num">1970</div>
+            <div class="stat-label">"La Metodología" de Lakatos</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">1975</div>
+            <div class="stat-label">"Contra el Método"</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Todo Sirve (Feyerabend)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">PIC</div>
+            <div class="stat-label">Programas de Investigación</div>
+        </div>
+    </div>
+
+    <!-- ══ ARTICLE ══════════════════════════════════════════════════ -->
+    <main>
+        <div class="article-wrap">
+            <article>
+
+                <!-- §1 INTRO -->
+                <section class="article-section reveal" id="s-intro">
+                    <span class="section-label">§ 1 — El pánico en la filosofía</span>
+                    <h2 class="article-h2">Después de Kuhn: <span>¿La ciencia es irracional?</span></h2>
+                    <p class="article-p dropcap">
+                        La publicación de <em>La Estructura de las Revoluciones Científicas</em> por Thomas Kuhn produjo
+                        pánico en la filosofía de la ciencia. Si la adopción de un nuevo paradigma no obedecía a la
+                        lógica estricta sino a dinámicas sociales, persuasión o conversiones casi religiosas, ¿qué
+                        separaba entonces a la ciencia de la ideología o el dogma?
+                    </p>
+                    <p class="article-p">
+                        Ante la amenaza del relativismo sugerido por la "inconmensurabilidad", se desató una búsqueda
+                        frenética para restaurar un criterio de demarcación más realista que el viejo falsacionismo de
+                        Popper, pero que pudiera evitar caer en la conclusión de que en la ciencia no existe un progreso
+                        racional objetivo.
+                    </p>
+
+                    <div class="callout blue">
+                        <div class="callout-tag">Contexto histórico</div>
+                        <div class="callout-title">El dilema epistemológico</div>
+                        <p class="callout-text">Popper había argumentado que la ciencia procede por la refutación
+                            constante (falsacionismo). Kuhn había replicado remarcando que en la "ciencia normal", la
+                            comunidad protege su paradigma frente a las refutaciones. Dos caminos se abrieron: encontrar
+                            una vía intermedia metodológica o aceptar que el "método" es una ilusión autoritaria de las
+                            ciencias.</p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §2 LAKATOS -->
+                <section class="article-section reveal" id="s-lakatos">
+                    <span class="section-label">§ 2 — Imre Lakatos: Contexto y Vida</span>
+                    <h2 class="article-h2">Entre la guerra, el exilio y <span>la racionalidad</span></h2>
+                    <p class="article-p dropcap">
+                        <strong>Imre Lakatos</strong> (1922-1974) tuvo una vida marcada por la turbulencia del siglo XX.
+                        Nacido como Imre Lipschitz en Debrecen, Hungría, en el seno de una familia judía, estudió
+                        matemáticas, física y filosofía. Para evadir la persecución nazi durante la Segunda Guerra
+                        Mundial, cambió su nombre y vivió en la clandestinidad (su madre y abuela murieron en
+                        Auschwitz).
+                    </p>
+                    <p class="article-p">
+                        Tras la guerra, fue un activo funcionario comunista en Hungría, pero pronto cayó en desgracia y
+                        pasó tres años en prisión por "revisionismo". Durante la Revolución Húngara de 1956 contra el
+                        dominio soviético, huyó a Viena y finalmente se estableció en Inglaterra. Allí, en la <em>London
+                            intensa trayectoria vital —sobreviviente del nazismo y del estalinismo— moldeó su aversión
+                            profunda a cualquier forma de pensamiento dogmático o absolutista, ya fuera político o
+                            científico.
+                    </p>
+
+                    <div class="digression-card reveal">
+                        <div class="digression-img-container">
+                            <img src="lakatos.png" alt="Imre Lakatos en su estudio" class="digression-img">
+                        </div>
+                        <div class="digression-content">
+                            <div class="digression-tag">Filosofía en Contexto</div>
+                            <h3 class="digression-title">La Forja de un Antidogmático</h3>
+                            <p class="digression-text">La experiencia de Lakatos de vivir en carne propia dos
+                                totalitarismos extremos (el nazismo que exterminó a su familia, y el estalinismo que lo
+                                encarceló a él mismo tres años por "revisionista") fue determinante. En su obra madura,
+                                la exigencia de que el saber científico se justifique <em>racionalmente</em> frente a
+                                todos —y no por una fe dogmática, conversiones o un poder institucional dictatorial— es,
+                                en el fondo, una barricada epistemológica contra el autoritarismo político que arruinó
+                                la primera etapa de su vida.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="article-h2" style="font-size: clamp(20px, 3vw, 28px); margin-top: 40px;">Lakatos vs.
+                        Thomas Kuhn: <span>El rescate de la razón</span></h3>
+                    <p class="article-p">
+                        Lakatos fue, quizás, el pensador más hábil en intentar conciliar la insistencia de Popper en la
+                        racionalidad empírica con la descripción sociológica implacable de Kuhn. Para Kuhn, los cambios
+                        científicos (revoluciones) se asemejaban a conversiones religiosas o "psicología de masas",
+                        donde los científicos cambiaban de paradigma por persuasión social, dado que paradigmas
+                        distintos eran <em>inconmensurables</em>.
+                    </p>
+                    <p class="article-p">
+                        Para Lakatos, aceptar la visión de Kuhn significaba rendirse al relativismo y abandonar la idea
+                        de que la ciencia progresa de manera racional y objetiva. Sin embargo, también reconoció que
+                        Kuhn tenía razón en sus críticas a Popper: los científicos <strong>no</strong> abandonan una
+                        teoría apenas aparece una "falsación" o anomalía. La historia mostraba que los científicos son
+                        tenaces y protegen sus teorías.
+                    </p>
+                    <p class="article-p">
+                        La solución de Lakatos fue cambiar la unidad de evaluación del conocimiento. Ya no es la simple
+                        "teoría aislada" (Popper) ni el gigantesco y sociológico "paradigma" (Kuhn), sino algo a mitad
+                        de camino: el <strong>Programa de Investigación Científica (PIC)</strong>. Un programa es una
+                        sucesión de teorías emparentadas que se desarrollan en el tiempo, compartiendo una esencia
+                        inamovible pero transformándose mediante hipótesis secundarias para hacer frente a las
+                        anomalías. A diferencia de los paradigmas kuhnianos, diferentes PICs pueden coexistir, competir
+                        y ser comparados racionalmente según su capacidad para predecir nuevos hechos empíricos.
+                    </p>
+
+                    <div class="pull-quote">
+                        <p class="pq-text">"La ciencia no se asemeja al tipo de conjetura audaz seguida por una severa
+                            refutación... se parece más a programas de investigación prolongados apoyándose sobre un
+                            'núcleo firme'. Para Kuhn el cambio científico es una cuestión de psicología de masas; yo
+                            propongo una evaluación objetiva y racional."</p>
+                        <p class="pq-source">— Imre Lakatos, <span>La Metodología de los Programas de
+                                Investigación Científica</span></p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §3 NÚCLEO Y CINTURÓN -->
+                <section class="article-section reveal" id="s-nucleo">
+                    <span class="section-label">§ 3 — Anatomía del Programa</span>
+                    <h2 class="article-h2">Núcleo Duro y <span>Cinturón Protector</span></h2>
+                    <p class="article-p">
+                        Según Lakatos, todo PIC consta de dos componentes esenciales y dos conjuntos de reglas
+                        operativas (la heurística). El elemento inviolable es el <strong>Núcleo Firme o Duro</strong>,
+                        que concentra la esencia irrefutable del programa. A su alrededor se conforma el
+                        <strong>Cinturón Protector</strong> de hipótesis auxiliares, que como escudos, absorben los
+                        golpes empíricos de las anomalías modificándose para salvar la vida del núcleo duro.
+                    </p>
+
+                    <!-- INTERACTIVE PIC DEMO -->
+                    <div class="lakatos-diagram reveal" id="lakatos-diagram">
+                        <h3 class="lakatos-title">Anatomía de un P.I.C.</h3>
+                        <p class="lakatos-subtitle">Hacé click en el Núcleo y en el Cinturón para entender su relación
+                        </p>
+
+                        <div class="core-circle-container">
+                            <!-- Cinturon Protector -->
+                            <div class="belt-circle" onclick="showPicInfo('belt')" id="belt-btn">
+                                <div class="asteroid"></div>
+                                <div class="asteroid"></div>
+                                <div class="asteroid"></div>
+                                <div class="asteroid"></div>
+                            </div>
+                            <!-- Nucleo Duro -->
+                            <div class="core-circle" onclick="showPicInfo('core')" id="core-btn">
+                                <span>NÚCLEO<br>DURO</span>
+                            </div>
+                        </div>
+
+                        <div class="diagram-info-box" id="pic-info-box">
+                            <h4>Haz click en el diagrama</h4>
+                            <p>Selecciona los elementos para ver la lógica con la que la ciencia defiende sus ideas
+                                centrales (el Núcleo Duro) realizando modificaciones constantes y adaptaciones
+                                periféricas (el Cinturón Protector).</p>
+                        </div>
+                    </div>
+
+                    <p class="article-p">
+                        Esta dinámica explica perfectamente fenómenos históricos. Cuando a Newton no le cerraba la
+                        órbita de Urano, no tiró a la basura el núcleo duro (las leyes fundamentales de gravitación e
+                        inercia). Sus seguidores recurrieron al cinturón protector: <em>"Debe existir un planeta no
+                            observado que perturba a Urano"</em>. Tras los ajustes, el núcleo siguió a salvo.
+                    </p>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §4 HEURISTICA -->
+                <section class="article-section reveal" id="s-heuristica">
+                    <span class="section-label">§ 4 — Reglas de Juego</span>
+                    <h2 class="article-h2">Progresión vs <span>Degeneración</span></h2>
+                    <p class="article-p">
+                        La evolución del programa obedece a decisiones dirigidas por dos guías: la <em>heurística
+                            negativa</em> (que prohíbe tocar el núcleo duro) y la <em>heurística positiva</em> (que
+                        sugiere cómo desarrollar modelos cada vez más complejos para explicar más parte de la realidad).
+                    </p>
+                    <p class="article-p">
+                        Pero, ¿cómo distinguir un programa "científico" de una pseudociencia estancada? Lakatos no
+                        valora a la ciencia de manera fotográfica en un solo instante; su análisis es dinámico. Tenemos
+                        programas <strong>progresivos</strong> (cuando sus predicciones teóricas se anticipan a los
+                        nuevos descubrimientos empíricos, como cuando el descubrimiento de Neptuno dio la razón abismal
+                        a Newton) y programas <strong>degenerativos o estancados</strong> (cuando solo reaccionan a
+                        posteriori con hipótesis <em>ad hoc</em>, tratando desesperadamente de acomodar las fallas).
+                    </p>
+
+                    <div class="callout purple">
+                        <div class="callout-tag">El problema de la demarcación</div>
+                        <div class="callout-title">El criterio del abandono</div>
+                        <p class="callout-text">Para Lakatos, un PIC nunca es refutado estrictamente de inmediato
+                            mediante un "experimento crucial". En cambio, en un momento los científicos evalúan que un
+                            programa alternativo es más progresivo que el actual. Sin embargo, nunca es irrazonable
+                            aferrarse a un programa en degeneración; ¡siempre podría resurgir con una nueva heurística
+                            brillante!</p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §5 FEYERABEND Y ANARQUIA -->
+                <section class="article-section reveal" id="s-feyerabend">
+                    <span class="section-label">§ 5 — El rebelde de la ciencia</span>
+                    <h2 class="article-h2">Paul Feyerabend: <span>El Anarquismo Epistemológico</span></h2>
+                    <p class="article-p dropcap">
+                        Si Lakatos trabajaba diseñando reglas y heurísticas para justificar la ciencia, <strong>Paul
+                            Feyerabend</strong> tiró toda la baraja al aire. Feyerabend miró la historia de la ciencia y
+                        llegó a la conclusión contraria: los grandes triunfos del conocimiento (Copérnico, Galileo,
+                        Bohr, Einstein) ocurrieron <strong>exclusivamente gracias a la violación incesante y deliberada
+                            de todas y cada una de las reglas metodológicas posibles</strong>.
+                    </p>
+                    <p class="article-p">
+                        Su idea es provocadora: no hay ningún rasgo que caracterice al método científico que no haya
+                        sido descartado para lograr un progreso radical. La exigencia de un "método científico
+                        universal" es, en sus palabras, una ideología asfixiante y totalitaria propugnada por los
+                        teóricos institucionales para acaparar el poder del Estado y asfixiar la libre creatividad
+                        humana.
+                    </p>
+
+                    <div class="pull-quote" style="--yellow:#ef4444;">
+                        <p class="pq-text" style="color:var(--text);"> "El único principio que no inhibe el progreso es:
+                            <strong>Todo sirve (Anything goes)</strong>."
+                        </p>
+                        <p class="pq-source" style="color:var(--text3);">— Paul Feyerabend, <span
+                                style="color:#ef4444;">Contra el Método</span> (1975)</p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §6 CONTRA EL METODO -->
+                <section class="article-section reveal" id="s-contrametodo">
+                    <span class="section-label">§ 6 — La ciencia creativa</span>
+                    <h2 class="article-h2">Contra <span>el Método</span></h2>
+                    <p class="article-p">
+                        En su célebre libro <em>Contra el Método</em>, Feyerabend propone analizar detalladamente la
+                        revolución de Galileo para probar que nuestro héroe científico ganó la batalla usando propaganda
+                        teológica, mentiras, recursos psicológicos y argumentaciones contra-inductivas absurdas (la idea
+                        de inercia o la negación de los datos sensoriales inmediatos). Galileo no "demostró los hechos",
+                        sino que forzó una reinterpretación mágica del mundo, sin método lógico.
+                    </p>
+
+                    <div class="feyerabend-grid reveal">
+                        <div class="anark-card">
+                            <div class="anark-icon"><i class="fa-solid fa-bomb"></i></div>
+                            <h4>La Contrainducción</h4>
+                            <p>Para progresar, a veces hay que formular voluntariamente hipótesis que sean totalmente
+                                incompatibles con teorías bien establecidas y con los mismos hechos innegables de la
+                                experiencia. La verdad es que la evidencia suele ajustarse al marco anterior por mera
+                                rutina. Ignorar los "hechos puros" rompe el círculo y ayuda al progreso creativo.</p>
+                        </div>
+                        <div class="anark-card" style="border-color:#3b82f6;">
+                            <div class="anark-icon" style="color:#3b82f6;"><i class="fa-solid fa-masks-theater"></i>
+                            </div>
+                            <h4>Ciencia como Mito</h4>
+                            <p>La ciencia del siglo XX adquirió el rol que solía tener la Iglesia siglos atrás. Se la
+                                venera incondicionalmente, presentándose como el único acceso "puro" a la Realidad.
+                                Feyerabend nos insta a considerar la ciencia como un relato más, una forma de vida, no
+                                intrínsecamente superior en sus metodologías al mito, a la acupuntura china o al vudú.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="callout dark-box">
+                        <div class="callout-tag" style="color:#ef4444;">Separación de Estado y Ciencia</div>
+                        <div class="callout-title" style="color:#fca5a5;">Una propuesta política</div>
+                        <p class="callout-text">Como colofón, Feyerabend sugiere que, al igual que los fundadores de la
+                            democracia separaron a la religión del aparato estatal (para proteger a ambas), debería
+                            producirse una separación radical entre el Estado y la Ciencia Institucional. Los ciudadanos
+                            comunes, en comités, y no solo los "expertos científicos", tendrían que decidir sobre la
+                            financiación y el impacto ecológico-social de la ciencia.</p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §7 SINTESIS Y DEBATE -->
+                <section class="article-section reveal" id="s-sintesis">
+                    <span class="section-label">§ 7 — Comparativa y síntesis Final</span>
+                    <h2 class="article-h2">El fin de la búsqueda del <span>Método Único</span></h2>
+                    <p class="article-p">
+                        Lakatos y Feyerabend fueron buenos amigos personales pero férreos opositores filosóficos. Donde
+                        Lakatos aspiraba a delinear sofisticadas estructuras que permitieran justificar la historia de
+                        las ciencias en retrospectiva, Feyerabend se reía de esas "acrobacias intelectuales" con las que
+                        Lakatos salvaba a la "racionalidad" y lo llamaba 'un anarquista encubierto', dado que la
+                        evaluación de un "Programa en Degeneración" era interminable.
+                    </p>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Imre Lakatos</th>
+                                <th>Criterio Analizado</th>
+                                <th>Paul Feyerabend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="label-cell">El progreso en la historia es racional gracias a decisiones sobre
+                                    PIC progresivos.</td>
+                                <td><strong style="color:var(--text3);">Racionalidad de la Ciencia</strong></td>
+                                <td class="label-cell" style="color:#ef4444;">El éxito histórico depende de retórica,
+                                    contingencias políticas y violación de reglas, no del método objetivo.</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Cinturón protector se modifica, blindando lo esencial (núcleo).
+                                </td>
+                                <td><strong style="color:var(--text3);">Gestión de Anomalías</strong></td>
+                                <td class="label-cell" style="color:#ef4444;">Aceptar las falsaciones pero sin
+                                    deshacerse de nada; la creatividad manda.</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">La heurística prescribe rigurosamente el avance ordenado del
+                                    programa.</td>
+                                <td><strong style="color:var(--text3);">Método y Reglas</strong></td>
+                                <td class="label-cell" style="color:#ef4444;">Cualquier regla inhibe el potencial del
+                                    progreso humano. Todo sirve.</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">La Demarcación (Ciencia superior vs. Pseudociencia) es
+                                    fundamental.</td>
+                                <td><strong style="color:var(--text3);">Valor de la Ciencia</strong></td>
+                                <td class="label-cell" style="color:#ef4444;">Igualar la ciencia al nivel del mito;
+                                    desmitificarla frente al Estado democrático.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §8 PREGUNTAS DE DEBATE -->
+                <section class="article-section reveal" id="s-debate">
+                    <span class="section-label">§ 8 — Para pensar en clase</span>
+                    <h2 class="article-h2">Preguntas de <span>debate epistemológico</span></h2>
+                    <ol class="questions-list">
+                        <li>Si Feyerabend afirma que la ciencia institucional reprime la libertad creativa bajo un
+                            monopolio formativo, ¿creés que las escuelas imponen una idea demasiado rígida del
+                            conocimiento a los alumnos?</li>
+                        <li>Bajo el esquema de Lakatos, el hecho de que un programa esté "en estado degenerativo" no
+                            exige que éste se abandone inmediatamente. Si la medicina alternativa no es "progresiva",
+                            ¿está justificado su rechazo desde el estado o es puro autoritarismo como diría Feyerabend?
+                        </li>
+                        <li>Si Feyerabend defiende que un ciudadano legos podría tomar determinaciones políticas válidas
+                            contra el consejo de 'expertos de la ciencia', ¿cómo afrontaríamos coyunturas críticas como
+                            pandemias o emergencias climáticas basándonos en esta democratización epistemológica pura?
+                        </li>
+                        <li>¿Es justo o preciso describir a Lakatos como un anarquista encubierto argumentando que las
+                            etiquetas como "progresivo" o "estancado" realmente se estiran históricamente de acuerdo a
+                            las conveniencias personales de cada facción investigadora?</li>
+                    </ol>
+                </section>
+
+            </article>
+
+            <!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
+            <aside id="sidebar">
+                <div class="sb-card">
+                    <span class="sb-title">Contenido de esta clase</span>
+                    <div class="toc-item" onclick="scrollTo('#s-intro')">
+                        <div class="toc-num">1</div>
+                        <div class="toc-text">El pánico en la filosofía</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-lakatos')">
+                        <div class="toc-num">2</div>
+                        <div class="toc-text">Salvando la racionalidad (PIC)</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-nucleo')">
+                        <div class="toc-num">3</div>
+                        <div class="toc-text">Núcleo y Cinturón Protector</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-heuristica')">
+                        <div class="toc-num">4</div>
+                        <div class="toc-text">Heurística: Progresión vs Estancamiento</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-feyerabend')">
+                        <div class="toc-num">5</div>
+                        <div class="toc-text">El anarquismo epistemológico</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-contrametodo')">
+                        <div class="toc-num">6</div>
+                        <div class="toc-text">Contra el Método</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-sintesis')">
+                        <div class="toc-num">7</div>
+                        <div class="toc-text">Síntesis Final (Lakatos vs Feyerabend)</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-debate')">
+                        <div class="toc-num">8</div>
+                        <div class="toc-text">Debate epistemológico</div>
+                    </div>
+                </div>
+
+                <div class="sb-card">
+                    <span class="sb-title">Conceptos clave</span>
+                    <div style="display:flex;flex-wrap:wrap;">
+                        <span class="concept-pill">P.I.C.</span>
+                        <span class="concept-pill">Cinturón Protector</span>
+                        <span class="concept-pill">Núcleo Duro</span>
+                        <span class="concept-pill">Heurística</span>
+                        <span class="concept-pill">Anarquismo Epistemológico</span>
+                        <span class="concept-pill">Todo Sirve</span>
+                        <span class="concept-pill">Contrainducción</span>
+                        <span class="concept-pill">Racionalidad histórica</span>
+                    </div>
+                </div>
+
+                <div class="sb-card">
+                    <span class="sb-title">Filósofos en juego</span>
+                    <div class="phil-item">
+                        <div class="phil-avatar"
+                            style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Imre_Lakatos.jpg/440px-Imre_Lakatos.jpg');border:2px solid #3b82f6;">
+                        </div>
+                        <div class="phil-info">
+                            <h5>Imre Lakatos</h5>
+                            <p>Debrecen, 1922 — Londres, 1974</p>
+                        </div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar"
+                            style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Paul_Feyerabend.jpg/440px-Paul_Feyerabend.jpg');border:2px solid #ef4444;">
+                        </div>
+                        <div class="phil-info">
+                            <h5>Paul Feyerabend</h5>
+                            <p>Viena, 1924 — Zürich, 1994</p>
+                        </div>
+                    </div>
+
+                    <span class="sb-title" style="margin-top:24px;">Navegación de clases</span>
+                    <a href="unidad1-clase6.html" style="display:block;">
+                        <div class="nav-class-btn" style="margin-bottom:12px;">
+                            <i class="fa-solid fa-arrow-left" style="color:var(--text3);"></i>
+                            <div class="nav-class-info">
+                                <div class="nav-class-label">Clase anterior</div>
+                                <div class="nav-class-title">Kuhn: Paradigmas y Revoluciones</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="unidad1-clase8.html" style="display:block;">
+                        <div class="nav-class-btn primary">
+                            <div class="nav-class-info">
+                                <div class="nav-class-label">Próxima clase</div>
+                                <div class="nav-class-title">Articulación: Ciencia y Sociedad</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </aside>
+
+        </div><!-- /article-wrap -->
+    </main>
+
+    <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+    <footer class="art-footer">
+        <div class="art-footer-inner">
+            <div class="footer-nav">
+                <a href="unidad1-clase6.html" class="footer-nav-card">
+                    <div class="fn-icon">←</div>
+                    <div>
+                        <div class="fn-label">Clase anterior</div>
+                        <div class="fn-title">Kuhn: Paradigmas y Revoluciones</div>
+                    </div>
+                </a>
+                <a href="index.html" class="footer-nav-card">
+                    <div class="fn-icon">🏠</div>
+                    <div>
+                        <div class="fn-label">Volver al inicio</div>
+                        <div class="fn-title">Revista Filosofía &amp; Ciencia</div>
+                    </div>
+                </a>
+                <a href="unidad1-clase8.html" class="footer-nav-card primary">
+                    <div class="fn-icon">→</div>
+                    <div>
+                        <div class="fn-label">Próxima clase</div>
+                        <div class="fn-title">Articulación: Ciencia y Sociedad</div>
+                    </div>
+                </a>
+            </div>
+            <div class="footer-credits">
+                Filosofía e Historia de la Ciencia y la Tecnología · 6to Año ·
+                <a href="index.html">Los Polvorines, 2025</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── DARK MODE ──────────────────────────────────────────────
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+        // ── PROGRESS BAR ──────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+
+        // ── REVEAL ON SCROLL ──────────────────────────────────────
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // ── SMOOTH SCROLL TOC ──────────────────────────────────────
+        function scrollTo(id) {
+            const el = document.querySelector(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── TOC ACTIVE ─────────────────────────────────────────────
+        const sections = document.querySelectorAll('.article-section[id]');
+        const tocItems = document.querySelectorAll('.toc-item');
+        const tocObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    tocItems.forEach(t => t.classList.remove('active'));
+                    const match = [...tocItems].find(t => t.getAttribute('onclick')?.includes(e.target.id));
+                    if (match) match.classList.add('active');
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => tocObs.observe(s));
+
+        // ── LAKATOS DIAGRAM ───────────────────────────────────────
+        function showPicInfo(type) {
+            const box = document.getElementById('pic-info-box');
+            const coreBtn = document.getElementById('core-btn');
+            const beltBtn = document.getElementById('belt-btn');
+
+            if (type === 'core') {
+                coreBtn.style.transform = "scale(1.1)";
+                setTimeout(() => coreBtn.style.transform = "", 300);
+
+                box.style.borderLeftColor = "#f59e0b";
+                box.innerHTML = `<h4>Núcleo Duro (Heurística Negativa)</h4>
+        <p>El corazón inamovible de la teoría. Representa los axiomas fundamentales y la 'ontología' en la que confía ciegamente la comunidad investigadora. La regla dictamina que ante cualquier falla o anomalía de los modelos explicativos, a este Núcleo Fundamental jamás se le atribuye la culpa; permanece refutado y protegido para salvaguardar el programa y darle tiempo para florecer y desarrollar su sistema.</p>`;
+            } else {
+                beltBtn.style.background = "color-mix(in srgb, #3b82f6 30%, transparent)";
+                beltBtn.style.borderColor = "#1d4ed8";
+                setTimeout(() => {
+                    beltBtn.style.background = "";
+                    beltBtn.style.borderColor = "";
+                }, 300);
+
+                box.style.borderLeftColor = "#3b82f6";
+                box.innerHTML = `<h4>Cinturón Protector (Hipótesis Auxiliares)</h4>
+        <p>Un escudo laberíntico de predicciones secundarias e hipótesis suplementarias dispuestas alrededor del núcleo duro. Este cinturón absorbe y desvía la flecha de la crítica y la "falsación" (observaciones anómalas). Mientras el programa posea una "Heurística Positiva" brillante, el cinturón es alterado, sumando planetas invisibles o ecuaciones adaptativas, asimilando o resolviendo los problemas y salvando con éxito la honra teórica.</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Carga Teórica de la Observación | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #facc15; --yellow-dark: #eab308; --red: #dc2626;
+            --bg: #f9f7f4; --bg2: #ffffff; --bg3: #f1ede6;
+            --card: #ffffff; --text: #1a1a1a; --text2: #3d3d3d; --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .dark {
+            --bg:#111; --bg2:#1a1a1a; --bg3:#222;
+            --card:#1e1e1e; --text:#f0ece4; --text2:#c8c0b4; --text3:#888880;
+            --border:#333; --shadow:0 4px 24px rgba(0,0,0,.4); --shadow-lg:0 20px 60px rgba(0,0,0,.6);
+        }
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background .4s,color .4s;overflow-x:hidden;}
+        a{color:inherit;text-decoration:none;}
+        ::-webkit-scrollbar{width:5px;} ::-webkit-scrollbar-thumb{background:var(--yellow);}
+
+        /* PROGRESS */
+        #progress{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--yellow),#f97316);z-index:9999;transition:width .1s;}
+
+        /* TOPNAV */
+        #topnav{position:sticky;top:0;z-index:500;background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;box-shadow:var(--shadow);transition:background .4s,border-color .4s;}
+        .topnav-left{display:flex;align-items:center;gap:20px;}
+        .back-link{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--text3);transition:color var(--transition);}
+        .back-link:hover{color:var(--text);}
+        .nav-sep{color:var(--border);}
+        .breadcrumb{font-size:12px;color:var(--text3);display:none;}
+        @media(min-width:640px){.breadcrumb{display:block;}}
+        .breadcrumb span{color:var(--yellow-dark);font-weight:600;}
+        .topnav-center{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--text2);display:none;}
+        @media(min-width:900px){.topnav-center{display:block;}}
+        .topnav-right{display:flex;align-items:center;gap:12px;}
+        .nav-btn{background:none;border:1px solid var(--border);color:var(--text3);cursor:pointer;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.08em;display:flex;align-items:center;gap:6px;transition:all var(--transition);}
+        .nav-btn:hover{border-color:var(--yellow);color:var(--text);}
+        .dark-toggle-nav{background:none;border:1px solid var(--border);width:36px;height:20px;border-radius:999px;position:relative;cursor:pointer;transition:all var(--transition);}
+        .dark-toggle-nav::after{content:'';position:absolute;left:3px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:var(--text3);transition:all var(--transition);}
+        .dark .dark-toggle-nav{border-color:var(--yellow);background:var(--yellow);}
+        .dark .dark-toggle-nav::after{left:calc(100% - 16px);background:#000;}
+
+        /* HERO */
+        #art-hero{background:linear-gradient(to left,rgba(0,0,0,.1) 0%,rgba(0,0,0,.6) 32%,rgba(0,0,0,.97) 58%),url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Ludwig_Wittgenstein.jpg/440px-Ludwig_Wittgenstein.jpg') right top/auto 100% no-repeat,url('https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=1600&q=80') center/cover no-repeat;text-shadow:0 2px 24px rgba(0,0,0,.95),0 0 40px rgba(0,0,0,.5);min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:80px 24px 60px;position:relative;}
+        .hero-breadcrumb{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:28px;}
+        .hero-badge{background:var(--yellow);color:#000;padding:4px 14px;border-radius:999px;font-size:10px;font-weight:800;}
+        .hero-badge-outline{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:999px;font-size:10px;}
+        .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:20px;}
+        .hero-title{font-family:'Playfair Display',serif;font-size:clamp(34px,6.5vw,82px);font-weight:900;line-height:.95;letter-spacing:-.03em;margin-bottom:24px;}
+        .hero-title em{font-style:italic;color:var(--yellow);}
+        .hero-subtitle{font-family:'Libre Baskerville',serif;font-style:italic;font-size:clamp(15px,2.3vw,21px);color:rgba(255,255,255,.8);max-width:660px;line-height:1.65;margin-bottom:48px;}
+        .hero-meta{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.05em;}
+        .hero-meta-item{display:flex;align-items:center;gap:6px;}
+        .hero-meta i{color:var(--yellow);}
+        .hero-meta-sep{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.3);}
+        .hero-scroll-cue{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(255,255,255,.4);font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+        .scroll-dot{width:28px;height:44px;border-radius:14px;border:2px solid rgba(255,255,255,.25);display:flex;align-items:flex-start;justify-content:center;padding-top:6px;}
+        .scroll-dot::after{content:'';width:4px;height:8px;border-radius:2px;background:rgba(255,255,255,.4);animation:scrolldot 1.8s infinite;}
+        @keyframes scrolldot{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(8px);opacity:.3}}
+
+        /* ARTICLE LAYOUT */
+        .article-wrap{max-width:1280px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1fr;gap:48px;}
+        @media(min-width:1024px){.article-wrap{grid-template-columns:1fr 320px;gap:64px;}}
+        .article-section{margin-bottom:56px;}
+        .dropcap::first-letter{float:left;font-family:'Playfair Display',serif;font-size:82px;font-weight:900;line-height:.8;margin:8px 16px -4px 0;color:var(--yellow-dark);}
+        .article-p{font-family:'Libre Baskerville',serif;font-size:17px;line-height:1.85;color:var(--text2);margin-bottom:20px;}
+        .article-p strong{color:var(--text);font-weight:700;}
+        .article-p em{font-style:italic;}
+        .article-h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,38px);font-weight:900;letter-spacing:-.02em;line-height:1.1;color:var(--text);margin-bottom:20px;}
+        .article-h2 span{color:var(--yellow-dark);font-style:italic;}
+        .section-label{font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--yellow-dark);margin-bottom:12px;display:block;}
+        .art-divider{border:none;border-top:1px solid var(--border);margin:56px 0;}
+
+        /* CALLOUT BOXES */
+        .callout{background:var(--bg3);border-left:4px solid var(--yellow);padding:28px 32px;border-radius:0 12px 12px 0;margin:32px 0;}
+        .callout-tag{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow-dark);margin-bottom:8px;}
+        .callout-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:16px;}
+        .callout p{font-family:'Libre Baskerville',serif;font-size:15px;line-height:1.75;color:var(--text2);margin-bottom:12px;}
+        .callout p:last-child{margin-bottom:0;}
+        .callout.red-box{border-left-color:var(--red);background:color-mix(in srgb, var(--red) 6%, var(--bg3));}
+        .callout.dark-box{border-left-color:var(--text3);background:var(--bg3);}
+        .callout.green-box{border-left-color:#16a34a;background:color-mix(in srgb, #16a34a 6%, var(--bg3));}
+        .callout.violet-box{border-left-color:#7c3aed;background:color-mix(in srgb, #7c3aed 6%, var(--bg3));}
+
+        /* PULL QUOTE */
+        .pull-quote{border-top:3px solid var(--yellow);border-bottom:1px solid var(--border);padding:40px 0;margin:48px 0;text-align:center;}
+        .pull-quote-text{font-family:'Playfair Display',serif;font-size:clamp(19px,3vw,28px);font-style:italic;line-height:1.45;color:var(--text);max-width:680px;margin:0 auto 20px;}
+        .pull-quote-author{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);}
+
+        /* CONCEPT GRID */
+        .concept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:32px 0;}
+        .concept-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all var(--transition);box-shadow:var(--shadow);}
+        .concept-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--yellow);}
+        .concept-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;}
+        .concept-card h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;}
+        .concept-card p{font-size:13px;line-height:1.6;color:var(--text3);}
+
+        /* HIGHLIGHT BOX */
+        .highlight-box{background:var(--yellow);color:#000;padding:32px;border-radius:16px;margin:40px 0;}
+        .highlight-box h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;margin-bottom:12px;}
+        .highlight-box p{font-family:'Libre Baskerville',serif;font-size:15px;line-height:1.7;}
+
+        /* REVEAL */
+        .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+        .reveal.visible{opacity:1;transform:none;}
+
+        /* ── GESTALT DEMO ─────────────────────────────────────── */
+        .gestalt-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin:40px 0;}
+        .gestalt-header{padding:24px 32px 0;text-align:center;}
+        .gestalt-header h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--text);margin-bottom:6px;}
+        .gestalt-header p{font-size:13px;color:var(--text3);}
+        .gestalt-tabs{display:flex;gap:0;padding:20px 32px 0;}
+        .g-tab{flex:1;padding:10px;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:var(--bg2);color:var(--text3);transition:all var(--transition);}
+        .g-tab:first-child{border-radius:8px 0 0 8px;}
+        .g-tab:last-child{border-radius:0 8px 8px 0;}
+        .g-tab.active{background:var(--yellow);color:#000;border-color:var(--yellow);}
+        .gestalt-stage{padding:20px 32px 32px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+        @media(max-width:640px){.gestalt-stage{grid-template-columns:1fr;}}
+        .gestalt-svg-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+        .gestalt-svg-wrap svg{width:100%;max-width:240px;height:auto;border-radius:12px;}
+        .gestalt-label{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:4px 14px;border-radius:999px;}
+        .gestalt-label.pato{background:#3b82f6;color:#fff;}
+        .gestalt-label.conejo{background:#f97316;color:#fff;}
+        .gestalt-label.geo{background:#7c3aed;color:#fff;}
+        .gestalt-label.helio{background:#16a34a;color:#fff;}
+        .gestalt-explain{display:none;}
+        .gestalt-explain.active{display:block;}
+        .gestalt-explain h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:12px;}
+        .gestalt-explain p{font-family:'Libre Baskerville',serif;font-size:14px;line-height:1.7;color:var(--text2);margin-bottom:10px;}
+        .gestalt-explain .key-insight{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--yellow);padding:14px 18px;border-radius:0 8px 8px 0;margin-top:16px;font-size:13px;line-height:1.6;color:var(--text2);}
+        .g-toggle-btn{display:block;margin:0 auto 20px;background:var(--text);color:var(--bg);border:none;padding:10px 28px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all var(--transition);}
+        .g-toggle-btn:hover{background:var(--yellow);color:#000;}
+
+        /* ── COMPARISON TABLE ─────────────────────────────────── */
+        .compare-table{width:100%;border-collapse:collapse;margin:32px 0;font-size:14px;}
+        .compare-table th{background:var(--bg3);padding:14px 18px;text-align:left;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);border-bottom:2px solid var(--border);}
+        .compare-table td{padding:16px 18px;border-bottom:1px solid var(--border);color:var(--text2);line-height:1.6;vertical-align:top;}
+        .compare-table tr:hover td{background:var(--bg3);}
+        .compare-table td:first-child{font-weight:600;color:var(--text);}
+        .compare-table th:nth-child(2){color:#7c3aed;}
+        .compare-table th:nth-child(3){color:#16a34a;}
+
+        /* ── STEP PROCESS ─────────────────────────────────────── */
+        .step-list{margin:32px 0;}
+        .step-item{display:flex;gap:20px;margin-bottom:28px;align-items:flex-start;}
+        .step-num{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:var(--yellow);color:#000;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;}
+        .step-body h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px;}
+        .step-body p{font-size:14px;line-height:1.65;color:var(--text2);}
+
+        /* ── DISCUSSION ───────────────────────────────────────── */
+        .discussion-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin:32px 0;}
+        .discussion-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all var(--transition);}
+        .discussion-card:hover{border-color:var(--yellow);box-shadow:var(--shadow-lg);}
+        .disc-num{font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--yellow-dark);margin-bottom:10px;}
+        .discussion-card p{font-family:'Libre Baskerville',serif;font-size:14px;line-height:1.7;color:var(--text2);}
+
+        /* SIDEBAR */
+        .sidebar{display:flex;flex-direction:column;gap:20px;}
+        .sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;}
+        .sidebar-card-header{background:var(--bg3);border-bottom:1px solid var(--border);padding:14px 20px;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow-dark);display:flex;align-items:center;gap:8px;}
+        @media(min-width:1024px){.sidebar{position:sticky;top:72px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;}}
+        @media(min-width:1024px){.sidebar::-webkit-scrollbar{width:3px;} .sidebar::-webkit-scrollbar-thumb{background:var(--border);}}
+
+        /* TOC */
+        .toc-list{list-style:none;padding:12px 0;}
+        .toc-item a{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:var(--text3);transition:all var(--transition);border-left:3px solid transparent;}
+        .toc-item a:hover,.toc-item.active a{color:var(--text);background:var(--bg3);border-left-color:var(--yellow);}
+        .toc-item.active a{font-weight:600;}
+        .toc-num{font-size:11px;color:var(--yellow-dark);font-weight:700;min-width:20px;}
+
+        /* CONCEPTS */
+        .concept-list{display:flex;flex-direction:column;gap:12px;}
+        .concept-item{display:flex;align-items:flex-start;gap:12px;}
+        .c-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+        .concept-item h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;}
+        .concept-item p{font-size:12px;color:var(--text3);line-height:1.5;}
+
+        /* PHILOSOPHER PROFILES */
+        .phil-list{display:flex;flex-direction:column;gap:18px;}
+        .phil-card{display:flex;gap:14px;align-items:flex-start;}
+        .phil-avatar{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+        .phil-card h4{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;}
+        .phil-card p{font-size:12px;color:var(--text3);line-height:1.55;}
+        .phil-dates{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--yellow-dark);margin-bottom:4px;}
+
+        /* NAV BUTTONS */
+        .nav-class-btn{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--bg3);transition:all var(--transition);cursor:pointer;width:100%;}
+        .nav-class-btn:hover{border-color:var(--yellow);background:var(--bg2);}
+        .nav-class-btn.primary{background:var(--yellow);border-color:var(--yellow);color:#000;}
+        .nav-class-btn.primary:hover{background:var(--yellow-dark);}
+        .nav-class-btn i{font-size:14px;color:var(--text3);}
+        .nav-class-btn.primary i{color:#000;}
+        .nav-class-info{flex:1;text-align:left;}
+        .nav-class-label{font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:3px;}
+        .nav-class-btn.primary .nav-class-label{color:rgba(0,0,0,.6);}
+        .nav-class-title{font-size:13px;font-weight:600;color:var(--text);}
+        .nav-class-btn.primary .nav-class-title{color:#000;}
+
+        /* FOOTER */
+        .art-footer{background:var(--bg3);border-top:1px solid var(--border);padding:40px 24px;}
+        .art-footer-inner{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:32px;}
+        .footer-nav{display:flex;flex-direction:column;gap:16px;}
+        @media(min-width:640px){.footer-nav{flex-direction:row;gap:24px;}}
+        .footer-nav-card{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;align-items:center;gap:20px;transition:all var(--transition);}
+        .footer-nav-card:hover{border-color:var(--yellow);box-shadow:var(--shadow);}
+        .footer-nav-card.primary{background:var(--yellow);border-color:var(--yellow);}
+        .fn-icon{width:48px;height:48px;border-radius:12px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+        .footer-nav-card.primary .fn-icon{background:rgba(0,0,0,.1);}
+        .fn-label{font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+        .footer-nav-card.primary .fn-label{color:rgba(0,0,0,.6);}
+        .fn-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text);}
+        .footer-nav-card.primary .fn-title{color:#000;}
+        .footer-credits{text-align:center;font-size:12px;color:var(--text3);}
+        .footer-credits a{color:var(--yellow-dark);font-weight:600;}
+
+        /* STATS STRIP */
+        .stats-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin:40px 0;}
+        .stat-card{background:var(--bg2);padding:24px;text-align:center;}
+        .stat-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--yellow-dark);line-height:1;}
+        .stat-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:6px;}
+    </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ══ TOP NAV ════════════════════════════════════════════════ -->
+<nav id="topnav">
+    <div class="topnav-left">
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>REVISTA</span>
+        </a>
+        <span class="nav-sep">·</span>
+        <div class="breadcrumb">
+            <span>Unidad 1</span> — Teorías Científicas — Clase 3
+        </div>
+    </div>
+    <div class="topnav-center">La Carga Teórica de la Observación</div>
+    <div class="topnav-right">
+        <button class="nav-btn" onclick="window.location.href='unidad1-clase2.html'">
+            <i class="fa-solid fa-arrow-left"></i> Clase 2
+        </button>
+        <button class="nav-btn" onclick="window.location.href='unidad1-clase4.html'">
+            Clase 4 <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="dark-toggle-nav" id="darkToggle" onclick="toggleDark()" title="Modo oscuro"></button>
+    </div>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section id="art-hero">
+    <div class="hero-breadcrumb">
+        <span class="hero-badge">CLASE 3 · UNIDAD 1</span>
+        <span class="hero-badge-outline">FILOSOFÍA DE LA CIENCIA</span>
+    </div>
+    <p class="hero-eyebrow">Epistemología &amp; Percepción</p>
+    <h1 class="hero-title">La Carga Teórica<br>de la <em>Observación</em></h1>
+    <p class="hero-subtitle">
+        ¿Es posible ver sin interpretar? Hanson, Wittgenstein y el escándalo
+        filosófico de que dos científicos miren el mismo cielo y <em>vean cosas distintas</em>.
+    </p>
+    <div class="hero-meta">
+        <div class="hero-meta-item"><i class="fa-solid fa-book-open"></i> <span>Hanson · Wittgenstein · Popper</span></div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item"><i class="fa-solid fa-clock"></i> <span>Lectura: 20 min</span></div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item"><i class="fa-solid fa-eye-slash"></i> <span>Ver no es observar</span></div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item"><i class="fa-solid fa-calendar"></i> <span>Unidad 1 · 2025</span></div>
+    </div>
+    <div class="hero-scroll-cue">
+        <div class="scroll-dot"></div>
+        <span>Desplazá</span>
+    </div>
+</section>
+
+<!-- ══ ARTICLE ════════════════════════════════════════════════ -->
+<main class="article-wrap">
+<article>
+
+    <!-- ── 1. INTRODUCCIÓN ──────────────────────────────────── -->
+    <div class="article-section" id="sec-intro">
+        <span class="section-label">El escándalo del amanecer</span>
+        <h2 class="article-h2">Dos astrónomos en la <span>misma colina</span></h2>
+
+        <p class="article-p dropcap">
+            Es el año 1600. En una colina de Dinamarca, dos astrónomos contemplan el amanecer.
+            Uno es <strong>Tycho Brahe</strong>, el observador más meticuloso de su época,
+            firme defensor de un modelo geo-heliocéntrico: la Tierra quieta, el Sol moviéndose
+            a su alrededor. El otro es un joven <strong>Johannes Kepler</strong>, ya convencido
+            del heliocentrismo copernicano. Ambos miran el mismo horizonte. Ambos ven salir el Sol.
+        </p>
+        <p class="article-p">
+            Pero, ¿ven lo mismo? Brahe ve <em>el Sol que se eleva sobre la Tierra inmóvil</em>.
+            Kepler ve <em>la Tierra que rota hacia el Sol estacionario</em>. La experiencia sensorial
+            es idéntica. La interpretación es opuesta. Este experimento mental —propuesto por el
+            filósofo norteamericano <strong>Norwood Russell Hanson</strong>— se convirtió en el punto
+            de partida de una de las ideas más perturbadoras en filosofía de la ciencia:
+        </p>
+
+        <div class="highlight-box reveal">
+            <h3>Tesis de Hanson</h3>
+            <p>Las observaciones científicas no son datos "puros" y neutrales que luego se
+            interpretan mediante teorías. Las observaciones ya vienen <strong>cargadas de teoría</strong>
+            (theory-laden): lo que vemos depende de lo que ya sabemos, creemos y esperamos ver.
+            No hay acceso inocente a los hechos.</p>
+        </div>
+
+        <p class="article-p">
+            Esto no es un problema menor. Si las observaciones son la base del método científico,
+            pero las observaciones dependen de las teorías, ¿cómo pueden las observaciones
+            <strong>refutar o confirmar</strong> independientemente una teoría? El edificio entero del
+            empirismo clásico —la idea de que la ciencia parte de hechos objetivos y neutrales—
+            comienza a temblar.
+        </p>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 2. HANSON ─────────────────────────────────────────── -->
+    <div class="article-section reveal" id="sec-hanson">
+        <span class="section-label">El filósofo-piloto</span>
+        <h2 class="article-h2">Norwood Russell Hanson: <span>el hombre que cambió la mirada</span></h2>
+
+        <p class="article-p">
+            Hanson fue una figura extraordinaria y trágica. Nacido en 1924 en Estados Unidos,
+            fue piloto de caza en la Segunda Guerra Mundial antes de convertirse en filósofo.
+            Llegó a volar aviones supersónicos como hobby —murió en un accidente aéreo en 1967,
+            a los 42 años. Su obra principal, <strong><em>Patterns of Discovery</em> (1958)</strong>,
+            transformó para siempre el debate sobre qué significa observar.
+        </p>
+
+        <div class="stats-strip reveal">
+            <div class="stat-card">
+                <div class="stat-num">1924</div>
+                <div class="stat-label">Año de nacimiento</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">1958</div>
+                <div class="stat-label">Patterns of Discovery</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">42</div>
+                <div class="stat-label">Años de vida</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">∞</div>
+                <div class="stat-label">Influencia en epistemología</div>
+            </div>
+        </div>
+
+        <p class="article-p">
+            Hanson estaba fuertemente influenciado por la <strong>fenomenología</strong> y
+            la <strong>filosofía del lenguaje</strong> de Wittgenstein. A diferencia de los positivistas
+            lógicos del Círculo de Viena —quienes creían que era posible construir un "lenguaje
+            observacional" puro, separado del lenguaje teórico— Hanson argumentó que esta
+            separación es una ilusión filosófica.
+        </p>
+
+        <div class="callout reveal">
+            <div class="callout-tag">📖 Contexto intelectual</div>
+            <div class="callout-title">El debate que Hanson quería resolver</div>
+            <p>Los positivistas lógicos (Carnap, Schlick, Ayer) sostenían que había una distinción
+            clara entre <strong>enunciados observacionales</strong> (neutrales, verificables directamente:
+            "el termómetro marca 37°") y <strong>enunciados teóricos</strong> (construidos, dependientes
+            de teorías: "la temperatura del paciente es de 37°"). Para ellos, los enunciados
+            observacionales eran el fundamento seguro de toda la ciencia.</p>
+            <p>Hanson deconstruyó esta distinción. No es que el termómetro dé un dato puro:
+            leer "37°" ya implica comprensión de teorías de temperatura, escalas de medición,
+            funcionamiento del mercurio. Toda observación ya lleva teoría adentro.</p>
+        </div>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 3. VER COMO ──────────────────────────────────────── -->
+    <div class="article-section reveal" id="sec-vercomo">
+        <span class="section-label">Wittgenstein y el pato-conejo</span>
+        <h2 class="article-h2">Ver <span>como</span>: la distinción filosófica clave</h2>
+
+        <p class="article-p">
+            Hanson tomó de <strong>Ludwig Wittgenstein</strong> la distinción entre
+            <em>ver que</em> (ver el objeto) y <em>ver como</em> (ver el objeto bajo un aspecto).
+            En sus <em>Investigaciones Filosóficas</em>, Wittgenstein usó la famosa figura
+            ambigua del <strong>pato-conejo</strong> (originalmente de Jastrow, popularizada por Wittgenstein)
+            para ilustrar que el mismo estímulo visual puede ser percibido bajo aspectos radicalmente diferentes.
+        </p>
+
+        <p class="article-p">
+            Lo crucial no es solo que dos personas puedan "interpretar" la figura de dos formas.
+            Lo crucial es que cuando ves el conejo, <strong>literalmente ves un conejo</strong>:
+            tu experiencia perceptual está organizada como-conejo. No ves primero unas líneas
+            y luego piensas "oh, podría ser un conejo". Ves el conejo directamente. La teoría
+            —o mejor, el esquema conceptual— no viene después de la percepción. Viene antes. O más
+            precisamente: viene <em>en</em> la percepción misma.
+        </p>
+
+        <div class="pull-quote reveal">
+            <p class="pull-quote-text">
+                "No hay una observación pura, previa a toda teoría. Ver es ya una forma de saber."
+            </p>
+            <p class="pull-quote-author">— N. R. Hanson, <em>Patterns of Discovery</em>, 1958</p>
+        </div>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 4. DEMO GESTALT ──────────────────────────────────── -->
+    <div class="article-section reveal" id="sec-demo">
+        <span class="section-label">Experimento interactivo</span>
+        <h2 class="article-h2">Cambiá el <span>marco teórico</span>, cambiá lo que ves</h2>
+
+        <p class="article-p">
+            Las dos demostraciones siguientes ilustran el concepto de carga teórica.
+            En la primera, la misma imagen puede verse como pato o como conejo.
+            En la segunda, el mismo conjunto de posiciones planetarias puede
+            "verse" como movimiento epiciclar ptolemaico o como movimiento heliocéntrico copernicano.
+        </p>
+
+        <!-- GESTALT INTERACTIVE BOX -->
+        <div class="gestalt-wrap reveal">
+            <div class="gestalt-header">
+                <h3>Demos de Carga Teórica</h3>
+                <p>Seleccioná la pestaña y observá cómo cambia lo que "ves"</p>
+            </div>
+            <div class="gestalt-tabs">
+                <button class="g-tab active" onclick="switchGestalt('pato-conejo')">🦆 Pato-Conejo</button>
+                <button class="g-tab" onclick="switchGestalt('astro')">🌍 Aplicación Astronómica</button>
+            </div>
+            <div class="gestalt-stage">
+
+                <!-- LEFT: SVG visualization -->
+                <div class="gestalt-svg-wrap" id="gestalt-svg-area">
+                    <!-- Duck-rabbit SVG (default) -->
+                </div>
+
+                <!-- RIGHT: Explanation panels -->
+                <div>
+                    <div class="gestalt-explain active" id="exp-pato-conejo">
+                        <h4>La figura de Jastrow (1900)</h4>
+                        <p>Esta figura ambigua fue publicada por el psicólogo Joseph Jastrow en 1900 y
+                        popularizada por Wittgenstein. Usá el botón para "cambiar" tu marco de interpretación.</p>
+                        <p>Cuando ves el <strong>pato</strong>: el pico apunta hacia la izquierda,
+                        las "orejas" son plumas de la cola.</p>
+                        <p>Cuando ves el <strong>conejo</strong>: el pico es la boca, las "orejas"
+                        son orejas que apuntan hacia la derecha.</p>
+                        <div class="key-insight">
+                            <strong>La tesis de Hanson:</strong> No "cambias tu interpretación" después de ver.
+                            Directamente ves otra cosa. Tu marco teórico (las expectativas, el contexto, la
+                            preparación conceptual) estructura la percepción misma. Ver ya es saber.
+                        </div>
+                    </div>
+
+                    <div class="gestalt-explain" id="exp-astro">
+                        <h4>Los mismos datos, dos modelos</h4>
+                        <p>Usá el botón para alternar entre dos interpretaciones de idénticas posiciones
+                        planetarias registradas por astrónomos del siglo XVI.</p>
+                        <p>Con el marco <strong>ptolemaico</strong>: verás epiciclos sobre deferentes,
+                        la Tierra en el centro, el movimiento retrógrado como loop real.</p>
+                        <p>Con el marco <strong>copernicano</strong>: verás órbitas alrededor del Sol,
+                        el movimiento retrógrado como ilusión de perspectiva.</p>
+                        <div class="key-insight">
+                            <strong>La pregunta de Hanson:</strong> ¿Cuál de los dos astrónomos —Brahe
+                            o Kepler— observa con más "objetividad"? La respuesta incomoda: ambos observan
+                            igualmente, pero <em>desde</em> paradigmas distintos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="g-toggle-btn" id="gestalt-toggle" onclick="toggleGestaltView()">
+                🔄 CAMBIAR PERSPECTIVA
+            </button>
+        </div>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 5. LA CARGA TEÓRICA ──────────────────────────────── -->
+    <div class="article-section reveal" id="sec-carga">
+        <span class="section-label">El núcleo del problema</span>
+        <h2 class="article-h2">Carga teórica: <span>cinco consecuencias</span> para la ciencia</h2>
+
+        <p class="article-p">
+            La tesis de que las observaciones están cargadas de teoría no es una curiosidad
+            académica. Tiene consecuencias profundas para cómo entendemos el método científico,
+            la objetividad y la posibilidad misma de validar conocimiento. Analizamos las cinco más importantes:
+        </p>
+
+        <div class="step-list">
+            <div class="step-item reveal">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>No existe la "observación neutral"</h4>
+                    <p>Todo acto de observación científica está estructurado por conceptos teóricos previos.
+                    El biólogo que mira por el microscopio "ve" células porque ya aprendió la teoría celular.
+                    Un niño de 5 años mira el mismo preparado y ve colores y formas sin sentido teórico.
+                    La experiencia visual puede ser idéntica; lo que se <em>ve</em> es completamente distinto.</p>
+                </div>
+            </div>
+            <div class="step-item reveal">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                    <h4>La confirmación y la refutación son complejas</h4>
+                    <p>Si las observaciones ya llevan teoría, no pueden refutar independientemente
+                    la teoría que las estructura. Un experimento "crucial" (crucial experiment) que
+                    debería decidir entre dos teorías en realidad está siendo interpretado desde
+                    una de ellas. El científico puede siempre "ver" el resultado que confirma su marco.</p>
+                </div>
+            </div>
+            <div class="step-item reveal">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                    <h4>Los paradigmas estructuran lo visible</h4>
+                    <p>Esto conecta directamente con Kuhn. Durante la ciencia normal, los científicos
+                    perciben el mundo a través del paradigma vigente. Las anomalías (datos que no encajan)
+                    pueden literalmente no ser <em>vistas</em> porque el paradigma no tiene categorías
+                    para procesarlas. Los médicos no veían el lavado de manos como relevante antes de Semmelweis.</p>
+                </div>
+            </div>
+            <div class="step-item reveal">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>La inconmensurabilidad de paradigmas (conexión con Kuhn)</h4>
+                    <p>Si cada paradigma estructura la observación de forma distinta, entonces
+                    dos científicos de paradigmas distintos pueden estar literalmente observando
+                    "mundos distintos". Esto radicaliza el concepto de inconmensurabilidad:
+                    no solo no comparten teorías, sino que no comparten datos observacionales.</p>
+                </div>
+            </div>
+            <div class="step-item reveal">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h4>El papel del experto vs. el novato</h4>
+                    <p>El radiólogo experimentado "ve" la anomalía pulmonar en la radiografía al instante;
+                    el estudiante de medicina ve manchas grises. No es que el radiólogo analice más tiempo:
+                    directamente percibe patologías donde el novato no percibe nada diagnóstico.
+                    La experiencia (teoría internalizada) literalmente cambia la percepción.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 6. APLICACIÓN ASTRONÓMICA ───────────────────────── -->
+    <div class="article-section reveal" id="sec-astro">
+        <span class="section-label">Retorno al caso copernicano</span>
+        <h2 class="article-h2">¿Veían lo mismo <span>Brahe y Kepler</span>?</h2>
+
+        <p class="article-p">
+            Ahora podemos volver al caso que inauguró esta clase con nuevas herramientas conceptuales.
+            Tycho Brahe construyó el catálogo de observaciones astronómicas más preciso de su época.
+            Su trabajo fue meticuloso, sistemático, riguroso. Kepler usó exactamente esos mismos datos
+            para confirmar el heliocentrismo y descubrir sus tres leyes orbitales.
+        </p>
+        <p class="article-p">
+            ¿Cómo es posible que los mismos datos condujeran a conclusiones opuestas (geocentrismo vs.
+            heliocentrismo) en manos de dos científicos igualmente rigurosos? La respuesta de Hanson
+            es que Brahe y Kepler no solo "interpretaban" los datos de forma distinta: los datos que
+            percibían como relevantes, las anomalías que registraban como problemáticas, las regularidades
+            que les llamaban la atención, eran distintas desde el inicio.
+        </p>
+
+        <div class="callout violet-box reveal">
+            <div class="callout-tag">🔭 Caso histórico: la órbita de Marte</div>
+            <div class="callout-title">Los mismos datos, interpretaciones radicalmente diferentes</div>
+            <p><strong>Para Brahe:</strong> Las pequeñas discrepancias en las posiciones de Marte
+            eran errores de medición o epiciclos aún no calculados correctamente. El sistema geo-heliocéntrico
+            podía absorber esas anomalías con hipótesis auxiliares.</p>
+            <p><strong>Para Kepler:</strong> Las mismas discrepancias de 8 minutos de arco eran
+            anomalías imposibles de ignorar y apuntaban a que las órbitas no eran círculos sino
+            <em>elipses</em>. Eran la clave del sistema, no el ruido a eliminar.</p>
+            <p>Las 8 minutos de discrepancia estaban en los datos de ambos. Solo Kepler las "vio"
+            como anomalía fundamental. El marco teórico estructuró qué contaba como problema.</p>
+        </div>
+
+        <table class="compare-table reveal">
+            <thead>
+                <tr>
+                    <th>Dimensión</th>
+                    <th>🔵 Tycho Brahe (Geo-heliocéntrico)</th>
+                    <th>🟢 Johannes Kepler (Heliocéntrico)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>¿Qué ve en el amanecer?</td>
+                    <td>El Sol que se mueve sobre la Tierra fija</td>
+                    <td>La Tierra que rota hacia el Sol fijo</td>
+                </tr>
+                <tr>
+                    <td>¿Qué son los 8' de arco de Marte?</td>
+                    <td>Error de medición, ruido a corregir</td>
+                    <td>Anomalía fundamental → órbitas elípticas</td>
+                </tr>
+                <tr>
+                    <td>¿Qué es el movimiento retrógrado?</td>
+                    <td>Movimiento real del planeta (epiciclo)</td>
+                    <td>Ilusión óptica de perspectiva</td>
+                </tr>
+                <tr>
+                    <td>¿Qué observación buscan hacer?</td>
+                    <td>Medir posiciones exactas para refinar epiciclos</td>
+                    <td>Buscar patrones matemáticos de periodicidad orbital</td>
+                </tr>
+                <tr>
+                    <td>Rol del Sol en el sistema</td>
+                    <td>Planeta especial que orbita la Tierra</td>
+                    <td>Centro gravitacional del sistema</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 7. POPPER Y LA BASE EMPÍRICA ────────────────────── -->
+    <div class="article-section reveal" id="sec-popper">
+        <span class="section-label">Respuestas al problema</span>
+        <h2 class="article-h2">Popper y la <span>base empírica convencional</span></h2>
+
+        <p class="article-p">
+            Karl Popper, el filósofo del falsacionismo que estudiaremos en profundidad en la
+            Unidad 3, tuvo que enfrentar este problema de frente. Si las observaciones dependen
+            de teorías, ¿cómo pueden refutar teorías? Su respuesta fue pragmática y elegante:
+        </p>
+
+        <div class="callout green-box reveal">
+            <div class="callout-tag">💡 La solución de Popper</div>
+            <div class="callout-title">Enunciados básicos y convención</div>
+            <p>Popper propuso que los "enunciados básicos" (observacionales) son aquellos que
+            la comunidad científica <strong>decide aceptar como punto de partida</strong> por
+            convención provisional. No son datos puros: son enunciados teóricamente impregnados
+            que la comunidad, en un momento dado, trata como si fueran seguros para poder progresar.</p>
+            <p>No hay garantía absoluta. Siempre se puede cuestionar un enunciado básico y
+            pedir más evidencia. Pero la ciencia necesita detenerse en algún punto para poder
+            funcionar: se detiene en los enunciados básicos por un acuerdo tácito de la comunidad,
+            no porque sean filosóficamente incuestionables.</p>
+        </div>
+
+        <p class="article-p">
+            Esta solución popperiana introduce un elemento <strong>social y convencional</strong>
+            en el corazón del método científico. La ciencia no es solo lógica y datos: es también
+            una práctica social que requiere acuerdos intersubjetivos sobre qué cuenta como
+            evidencia válida. Esto abrirá la puerta a las sociologías del conocimiento científico
+            que estudiaremos en la Unidad 2.
+        </p>
+
+        <div class="concept-grid reveal">
+            <div class="concept-card">
+                <div class="concept-icon" style="background:color-mix(in srgb, #16a34a 12%, var(--bg3));">📋</div>
+                <h4>Enunciados básicos</h4>
+                <p>Los que la comunidad acepta como punto de partida. Teóricamente impregnados pero provisionalmente seguros.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon" style="background:color-mix(in srgb, #7c3aed 12%, var(--bg3));">🤝</div>
+                <h4>Convención científica</h4>
+                <p>Los datos no son neutrales: son acordados socialmente. La comunidad decide qué cuenta como evidencia.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon" style="background:color-mix(in srgb, #facc15 15%, var(--bg3));">🔄</div>
+                <h4>Regresión al infinito</h4>
+                <p>Todo enunciado puede ser cuestionado, requiriendo otro enunciado como base. En algún punto hay que parar.</p>
+            </div>
+            <div class="concept-card">
+                <div class="concept-icon" style="background:color-mix(in srgb, #dc2626 12%, var(--bg3));">⚡</div>
+                <h4>Intersubjetividad</h4>
+                <p>La objetividad científica no es la ausencia de sujeto: es el acuerdo entre múltiples sujetos racionales.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 8. SÍNTESIS ──────────────────────────────────────── -->
+    <div class="article-section reveal" id="sec-sintesis">
+        <span class="section-label">Síntesis de la clase</span>
+        <h2 class="article-h2">Qué aprendimos <span>hoy</span></h2>
+
+        <div class="callout dark-box reveal">
+            <div class="callout-tag">📌 Núcleo conceptual</div>
+            <div class="callout-title">La observación nunca es inocente</div>
+            <p>El empirismo clásico —ciencia = partir de hechos observados neutrales— resulta
+            filosóficamente insostenible. Las observaciones están estructuradas por marcos teóricos,
+            conceptos, expectativas y paradigmas previos. Hanson lo llamó <em>theory-ladenness</em>.</p>
+            <p>Esto no significa que la ciencia sea subjetiva o que todas las teorías sean
+            equivalentes. Significa que la objetividad científica es más compleja que simplemente
+            "mirar los hechos": requiere comunidades críticas, revisión de las bases teóricas
+            implícitas, y conciencia de los propios marcos interpretativos.</p>
+            <p>Para el caso copernicano que venimos estudiando: Copérnico no solo propuso un
+            modelo diferente. Propuso ver diferente. Enseñó a una generación de astrónomos
+            a percibir el cielo de otra manera. Y esa nueva percepción —<em>ver como</em> heliocéntrico—
+            fue lo que hizo posible el trabajo posterior de Kepler, Galileo y Newton.</p>
+        </div>
+
+        <div class="highlight-box reveal" style="margin-top:40px;">
+            <h3>Para la próxima clase</h3>
+            <p>La <strong>Clase 4</strong> abordará a <strong>Galileo</strong>: ¿qué ve un observador
+            pre-copernicano al mirar las lunas de Júpiter con el telescopio? La carga teórica filtra
+            la experiencia. Más adelante, en la <strong>Clase 6</strong>, Kuhn formalizará esto como
+            el concepto de <strong>paradigma</strong> y la lógica de las <strong>revoluciones científicas</strong>.</p>
+        </div>
+    </div>
+
+    <hr class="art-divider">
+
+    <!-- ── 9. PREGUNTAS DE REFLEXIÓN ────────────────────────── -->
+    <div class="article-section reveal" id="sec-preguntas">
+        <span class="section-label">Para pensar y debatir</span>
+        <h2 class="article-h2">Preguntas de <span>reflexión filosófica</span></h2>
+
+        <div class="discussion-grid">
+            <div class="discussion-card">
+                <div class="disc-num">PREGUNTA 01</div>
+                <p>Si dos médicos miran la misma radiografía y uno ve una anomalía que el otro no ve, ¿quién observa con más objetividad? ¿Es la mayor preparación teórica del experto una ventaja epistemológica o una forma de sesgo?</p>
+            </div>
+            <div class="discussion-card">
+                <div class="disc-num">PREGUNTA 02</div>
+                <p>Hanson dice que Brahe y Kepler "ven cosas distintas" al mirar el mismo amanecer. ¿Esto implica que la ciencia es relativista? ¿Hay alguna forma de comparar objetivamente dos paradigmas sin caer en el círculo vicioso de observar desde uno de ellos?</p>
+            </div>
+            <div class="discussion-card">
+                <div class="disc-num">PREGUNTA 03</div>
+                <p>Pensá en algún momento de tu vida cotidiana en que "viste" algo diferente porque cambiaste tu marco de referencia (una situación, una persona, un texto). ¿Podés identificar qué cambió en tu experiencia perceptual, no solo en tu interpretación posterior?</p>
+            </div>
+            <div class="discussion-card">
+                <div class="disc-num">PREGUNTA 04</div>
+                <p>¿Las noticias están "cargadas de teoría"? Cuando dos personas con visiones políticas distintas leen el mismo artículo periodístico, ¿están recibiendo los mismos datos? ¿Qué consecuencias tiene la tesis de Hanson para la epistemología del periodismo y la información?</p>
+            </div>
+            <div class="discussion-card">
+                <div class="disc-num">PREGUNTA 05</div>
+                <p>La solución de Popper (enunciados básicos por convención) introduce un elemento social en el corazón del método científico. ¿Cambia esto tu imagen de la ciencia como actividad "objetiva"? ¿Podría la objetividad ser una propiedad de las comunidades antes que de los individuos?</p>
+            </div>
+        </div>
+    </div>
+
+</article>
+
+<!-- ══ SIDEBAR ════════════════════════════════════════════════ -->
+<aside class="sidebar">
+
+    <!-- TOC -->
+    <div class="sidebar-card">
+        <div class="sidebar-card-header"><i class="fa-solid fa-list"></i> Contenido de la clase</div>
+        <ul class="toc-list">
+            <li class="toc-item" id="toc-intro">
+                <a href="#sec-intro"><span class="toc-num">01</span>Dos astrónomos en la misma colina</a>
+            </li>
+            <li class="toc-item" id="toc-hanson">
+                <a href="#sec-hanson"><span class="toc-num">02</span>Norwood Russell Hanson</a>
+            </li>
+            <li class="toc-item" id="toc-vercomo">
+                <a href="#sec-vercomo"><span class="toc-num">03</span>Ver como: Wittgenstein</a>
+            </li>
+            <li class="toc-item" id="toc-demo">
+                <a href="#sec-demo"><span class="toc-num">04</span>Demo interactiva</a>
+            </li>
+            <li class="toc-item" id="toc-carga">
+                <a href="#sec-carga"><span class="toc-num">05</span>Cinco consecuencias</a>
+            </li>
+            <li class="toc-item" id="toc-astro">
+                <a href="#sec-astro"><span class="toc-num">06</span>Brahe vs. Kepler</a>
+            </li>
+            <li class="toc-item" id="toc-popper">
+                <a href="#sec-popper"><span class="toc-num">07</span>Popper: base empírica</a>
+            </li>
+            <li class="toc-item" id="toc-sintesis">
+                <a href="#sec-sintesis"><span class="toc-num">08</span>Síntesis</a>
+            </li>
+            <li class="toc-item" id="toc-preguntas">
+                <a href="#sec-preguntas"><span class="toc-num">09</span>Preguntas de reflexión</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- KEY CONCEPTS -->
+    <div class="sidebar-card">
+        <div class="sidebar-card-header"><i class="fa-solid fa-key"></i> Conceptos clave</div>
+        <div class="concept-list" style="padding:20px;">
+            <div class="concept-item">
+                <div class="c-icon" style="background:color-mix(in srgb,var(--yellow) 20%,var(--bg3));">👁</div>
+                <div>
+                    <h4>Carga teórica</h4>
+                    <p>Las observaciones llevan teoría internalizada. No hay datos puros. (Theory-ladenness)</p>
+                </div>
+            </div>
+            <div class="concept-item">
+                <div class="c-icon" style="background:color-mix(in srgb,#3b82f6 20%,var(--bg3));">🦆</div>
+                <div>
+                    <h4>Ver como (Seeing-as)</h4>
+                    <p>Wittgenstein: percibir un objeto <em>bajo un aspecto</em>. El pato-conejo de Jastrow.</p>
+                </div>
+            </div>
+            <div class="concept-item">
+                <div class="c-icon" style="background:color-mix(in srgb,#7c3aed 20%,var(--bg3));">🔄</div>
+                <div>
+                    <h4>Switch gestáltico</h4>
+                    <p>El momento en que el aspecto percibido cambia súbitamente. Análogo al cambio de paradigma.</p>
+                </div>
+            </div>
+            <div class="concept-item">
+                <div class="c-icon" style="background:color-mix(in srgb,#16a34a 20%,var(--bg3));">📋</div>
+                <div>
+                    <h4>Enunciados básicos</h4>
+                    <p>Popper: observaciones aceptadas convencionalmente como punto de partida provisional.</p>
+                </div>
+            </div>
+            <div class="concept-item">
+                <div class="c-icon" style="background:color-mix(in srgb,#dc2626 20%,var(--bg3));">🤝</div>
+                <div>
+                    <h4>Intersubjetividad</h4>
+                    <p>La objetividad como acuerdo entre sujetos racionales, no como acceso directo al mundo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHILOSOPHER PROFILES -->
+    <div class="sidebar-card">
+        <div class="sidebar-card-header"><i class="fa-solid fa-user-graduate"></i> Protagonistas</div>
+        <div class="phil-list" style="padding:20px;">
+            <div class="phil-card">
+                <div class="phil-avatar" style="background:color-mix(in srgb,#facc15 20%,var(--bg3));">✈️</div>
+                <div>
+                    <div class="phil-dates">1924 — 1967</div>
+                    <h4>N. R. Hanson</h4>
+                    <p>Filósofo-piloto estadounidense. <em>Patterns of Discovery</em> (1958). Acuñó "theory-ladenness".</p>
+                </div>
+            </div>
+            <div class="phil-card">
+                <div class="phil-avatar" style="background:color-mix(in srgb,#3b82f6 20%,var(--bg3));">🎯</div>
+                <div>
+                    <div class="phil-dates">1889 — 1951</div>
+                    <h4>L. Wittgenstein</h4>
+                    <p>Filósofo austríaco. <em>Investigaciones Filosóficas</em>. La distinción "ver como / ver que".</p>
+                </div>
+            </div>
+            <div class="phil-card">
+                <div class="phil-avatar" style="background:color-mix(in srgb,#16a34a 20%,var(--bg3));">🔭</div>
+                <div>
+                    <div class="phil-dates">1546 — 1601</div>
+                    <h4>Tycho Brahe</h4>
+                    <p>Astrónomo danés. El observador más preciso antes del telescopio. Sus datos: base de Kepler.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT CONNECTIONS -->
+    <div class="sidebar-card">
+        <div class="sidebar-card-header"><i class="fa-solid fa-link"></i> Conexiones en la unidad</div>
+        <div style="font-size:13px;line-height:1.65;color:var(--text2);padding:16px 20px;">
+            <p style="margin-bottom:10px;">
+                <strong style="color:var(--text);">← Clase 1:</strong> Ptolomeo necesitaba hipótesis ad hoc
+                para "salvar" observaciones. Ahora sabemos que esas observaciones ya estaban estructuradas
+                por el paradigma geocéntrico.
+            </p>
+            <p style="margin-bottom:10px;">
+                <strong style="color:var(--text);">← Clase 2:</strong> Copérnico no solo cambió el modelo.
+                Cambió el marco desde el cual se percibían las anomalías. La Revolución Copernicana fue
+                también un switch gestáltico colectivo.
+            </p>
+            <p style="margin-bottom:10px;">
+                <strong style="color:var(--text);">→ Clase 4:</strong> Galileo y el telescopio: ¿qué ve
+                un astrónomo pre-copernicano al mirar las lunas de Júpiter? La carga teórica filtra
+                la experiencia antes de que pueda ser "dato".
+            </p>
+            <p>
+                <strong style="color:var(--text);">→ Clase 6:</strong> Kuhn elabora esta idea: los paradigmas
+                son marcos de percepción compartidos por comunidades científicas. La revolución científica
+                es el switch gestáltico a escala histórica.
+            </p>
+        </div>
+    </div>
+
+    <!-- NAV BUTTONS -->
+    <div>
+        <a href="unidad1-clase2.html" style="display:block;margin-bottom:12px;">
+            <div class="nav-class-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                <div class="nav-class-info">
+                    <div class="nav-class-label">Clase anterior</div>
+                    <div class="nav-class-title">Copérnico y la Revolución del Centro</div>
+                </div>
+            </div>
+        </a>
+        <a href="unidad1-clase4.html" style="display:block;">
+            <div class="nav-class-btn primary">
+                <div class="nav-class-info">
+                    <div class="nav-class-label">Próxima clase</div>
+                    <div class="nav-class-title">Galileo: El Telescopio, la Mecánica y el Juicio</div>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+    </div>
+
+</aside>
+</main>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer class="art-footer">
+    <div class="art-footer-inner">
+        <div class="footer-nav">
+            <a href="unidad1-clase2.html" class="footer-nav-card">
+                <div class="fn-icon">←</div>
+                <div>
+                    <div class="fn-label">Clase anterior</div>
+                    <div class="fn-title">Copérnico y la Revolución del Centro</div>
+                </div>
+            </a>
+            <a href="index.html" class="footer-nav-card">
+                <div class="fn-icon">🏠</div>
+                <div>
+                    <div class="fn-label">Volver al inicio</div>
+                    <div class="fn-title">Revista Filosofía &amp; Ciencia</div>
+                </div>
+            </a>
+            <a href="unidad1-clase4.html" class="footer-nav-card primary">
+                <div class="fn-icon">→</div>
+                <div>
+                    <div class="fn-label">Próxima clase</div>
+                    <div class="fn-title">Galileo: El Telescopio y el Juicio</div>
+                </div>
+            </a>
+        </div>
+        <div class="footer-credits">
+            Filosofía e Historia de la Ciencia y la Tecnología · 6to Año ·
+            <a href="index.html">Los Polvorines, 2025</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ── DARK MODE ────────────────────────────────────────────────
+function toggleDark() {
+    const html = document.documentElement;
+    html.classList.toggle('dark');
+    localStorage.setItem('darkMode', html.classList.contains('dark'));
+}
+(function() {
+    const saved = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'true' || (saved === null && prefersDark)) {
+        document.documentElement.classList.add('dark');
+    }
+})();
+
+// ── PROGRESS BAR ─────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+    const bar = document.getElementById('progress');
+    const doc = document.documentElement;
+    const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+    bar.style.width = pct + '%';
+});
+
+// ── REVEAL ON SCROLL ─────────────────────────────────────────
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(r => revealObs.observe(r));
+
+// ── ACTIVE TOC ───────────────────────────────────────────────
+const sections = [
+    { id: 'sec-intro',     toc: 'toc-intro'    },
+    { id: 'sec-hanson',    toc: 'toc-hanson'   },
+    { id: 'sec-vercomo',   toc: 'toc-vercomo'  },
+    { id: 'sec-demo',      toc: 'toc-demo'     },
+    { id: 'sec-carga',     toc: 'toc-carga'    },
+    { id: 'sec-astro',     toc: 'toc-astro'    },
+    { id: 'sec-popper',    toc: 'toc-popper'   },
+    { id: 'sec-sintesis',  toc: 'toc-sintesis' },
+    { id: 'sec-preguntas', toc: 'toc-preguntas'},
+];
+const tocObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        const pair = sections.find(s => s.id === e.target.id);
+        if (pair) {
+            document.getElementById(pair.toc)?.classList.toggle('active', e.isIntersecting);
+        }
+    });
+}, { rootMargin: '-20% 0px -60% 0px' });
+sections.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el) tocObs.observe(el);
+});
+
+// ── GESTALT DEMO ─────────────────────────────────────────────
+let currentTab = 'pato-conejo';
+let patoState = 'pato';
+let astroState = 'geo';
+
+// Duck-Rabbit SVG paths (Jastrow-style drawing)
+const duckRabbitSVG = `
+<svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg" style="border-radius:12px;background:#f9f7f4;">
+    <rect width="240" height="180" fill="#f9f7f4"/>
+    <!-- Cuerpo principal -->
+    <ellipse cx="118" cy="105" rx="70" ry="48" fill="#2a2a2a"/>
+    <!-- Cabeza -->
+    <ellipse cx="165" cy="82" rx="42" ry="36" fill="#2a2a2a"/>
+    <!-- Ojo -->
+    <circle cx="175" cy="72" r="7" fill="#f9f7f4"/>
+    <circle cx="175" cy="72" r="4" fill="#1a1a1a"/>
+    <circle cx="177" cy="70" r="1.5" fill="#fff"/>
+    <!-- Orejas / Pico izquierdo -->
+    <path d="M126,60 C110,30 82,18 70,24 C58,30 60,50 75,54 Z" fill="#2a2a2a"/>
+    <path d="M126,72 C108,44 80,32 66,40 C52,48 58,66 74,66 Z" fill="#2a2a2a"/>
+    <!-- Boca / Pico derecho  -->
+    <path d="M196,80 C220,72 232,80 220,92 C212,100 196,95 196,88 Z" fill="#2a2a2a"/>
+    <!-- Indicador de estado -->
+    <text id="duck-rabbit-label" x="120" y="168" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#888">Ver como: PATO 🦆</text>
+</svg>`;
+
+// Astronomical interpretations
+const astroGeoSVG = `
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" style="border-radius:12px;background:#050510;">
+    <rect width="240" height="240" fill="#050510"/>
+    <!-- Stars -->
+    <circle cx="20" cy="20" r="1" fill="white" opacity=".6"/>
+    <circle cx="220" cy="40" r="1" fill="white" opacity=".5"/>
+    <circle cx="30" cy="200" r="1.5" fill="white" opacity=".7"/>
+    <circle cx="210" cy="190" r="1" fill="white" opacity=".4"/>
+    <circle cx="120" cy="15" r="1" fill="white" opacity=".6"/>
+    <circle cx="200" cy="120" r="1.5" fill="white" opacity=".5"/>
+    <!-- TIERRA al centro -->
+    <circle cx="120" cy="120" r="18" fill="#1a4f8a"/>
+    <circle cx="120" cy="120" r="18" fill="url(#egeo)"/>
+    <text x="120" y="148" text-anchor="middle" fill="rgba(255,255,255,.5)" font-size="9" font-family="Inter,sans-serif" font-weight="700">TIERRA</text>
+    <!-- Deferente principal (sol orbita tierra) -->
+    <circle cx="120" cy="120" r="60" fill="none" stroke="rgba(251,191,36,.3)" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <!-- Sol en el deferente -->
+    <circle cx="180" cy="120" r="14" fill="#fbbf24" opacity=".9"/>
+    <text x="186" y="144" text-anchor="middle" fill="rgba(251,191,36,.7)" font-size="9" font-family="Inter,sans-serif" font-weight="700">SOL</text>
+    <!-- Epiciclo de Marte (centrado en punto del deferente del Sol + 90) -->
+    <circle cx="120" cy="60" r="30" fill="none" stroke="rgba(248,113,113,.3)" stroke-width="1.5" stroke-dasharray="3 5"/>
+    <!-- Marte en el epiciclo -->
+    <circle cx="150" cy="60" r="9" fill="#ef4444"/>
+    <text x="162" y="55" fill="rgba(248,113,113,.7)" font-size="9" font-family="Inter,sans-serif" font-weight="600">MARTE</text>
+    <!-- Líneas de movimiento -->
+    <line x1="120" y1="120" x2="180" y2="120" stroke="rgba(251,191,36,.2)" stroke-width="1"/>
+    <line x1="120" y1="60" x2="150" y2="60" stroke="rgba(248,113,113,.2)" stroke-width="1"/>
+    <!-- Ecuante (punto ficticio) -->
+    <circle cx="100" cy="120" r="3" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-dasharray="2 3"/>
+    <text x="82" y="136" fill="rgba(255,255,255,.3)" font-size="8" font-family="Inter,sans-serif">ecuante</text>
+    <!-- Label modelo -->
+    <text x="120" y="230" text-anchor="middle" fill="rgba(180,150,255,.8)" font-size="10" font-family="Inter,sans-serif" font-weight="700">MODELO PTOLEMAICO</text>
+    <defs>
+        <radialGradient id="egeo" cx="35%" cy="35%">
+            <stop offset="0%" stop-color="#4ade80"/>
+            <stop offset="40%" stop-color="#1a6bb5"/>
+            <stop offset="100%" stop-color="#0a3d6e"/>
+        </radialGradient>
+    </defs>
+</svg>`;
+
+const astroHelioSVG = `
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" style="border-radius:12px;background:#050510;">
+    <rect width="240" height="240" fill="#050510"/>
+    <circle cx="20" cy="20" r="1" fill="white" opacity=".6"/>
+    <circle cx="220" cy="40" r="1" fill="white" opacity=".5"/>
+    <circle cx="30" cy="200" r="1.5" fill="white" opacity=".7"/>
+    <circle cx="210" cy="190" r="1" fill="white" opacity=".4"/>
+    <circle cx="120" cy="15" r="1" fill="white" opacity=".6"/>
+    <circle cx="200" cy="120" r="1.5" fill="white" opacity=".5"/>
+    <!-- SOL al centro -->
+    <circle cx="120" cy="120" r="18" fill="#fbbf24" opacity=".95"/>
+    <circle cx="120" cy="120" r="24" fill="rgba(251,191,36,.2)"/>
+    <text x="120" y="148" text-anchor="middle" fill="rgba(251,191,36,.7)" font-size="9" font-family="Inter,sans-serif" font-weight="700">SOL</text>
+    <!-- Órbita Tierra -->
+    <circle cx="120" cy="120" r="55" fill="none" stroke="rgba(74,222,128,.3)" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <!-- Tierra -->
+    <circle cx="175" cy="120" r="9" fill="#1a4f8a"/>
+    <circle cx="175" cy="120" r="9" fill="url(#ehelio)"/>
+    <text x="188" y="137" fill="rgba(74,222,128,.7)" font-size="9" font-family="Inter,sans-serif" font-weight="600">TIERRA</text>
+    <!-- Órbita Marte -->
+    <circle cx="120" cy="120" r="88" fill="none" stroke="rgba(248,113,113,.3)" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <!-- Marte -->
+    <circle cx="120" cy="32" r="10" fill="#ef4444"/>
+    <text x="135" y="28" fill="rgba(248,113,113,.7)" font-size="9" font-family="Inter,sans-serif" font-weight="600">MARTE</text>
+    <!-- Radios -->
+    <line x1="120" y1="120" x2="175" y2="120" stroke="rgba(74,222,128,.15)" stroke-width="1"/>
+    <line x1="120" y1="120" x2="120" y2="32" stroke="rgba(248,113,113,.15)" stroke-width="1"/>
+    <!-- Label modelo -->
+    <text x="120" y="230" text-anchor="middle" fill="rgba(100,220,130,.8)" font-size="10" font-family="Inter,sans-serif" font-weight="700">MODELO COPERNICANO</text>
+    <defs>
+        <radialGradient id="ehelio" cx="35%" cy="35%">
+            <stop offset="0%" stop-color="#4ade80"/>
+            <stop offset="40%" stop-color="#1a6bb5"/>
+            <stop offset="100%" stop-color="#0a3d6e"/>
+        </radialGradient>
+    </defs>
+</svg>`;
+
+function switchGestalt(tab) {
+    currentTab = tab;
+    // Update tabs
+    document.querySelectorAll('.g-tab').forEach((t, i) => {
+        t.classList.toggle('active', (i === 0 && tab === 'pato-conejo') || (i === 1 && tab === 'astro'));
+    });
+    // Update explanation panels
+    document.getElementById('exp-pato-conejo').classList.toggle('active', tab === 'pato-conejo');
+    document.getElementById('exp-astro').classList.toggle('active', tab === 'astro');
+    // Update SVG area
+    renderGestaltSVG();
+}
+
+function renderGestaltSVG() {
+    const area = document.getElementById('gestalt-svg-area');
+    if (currentTab === 'pato-conejo') {
+        const label = patoState === 'pato' ?
+            `<span class="gestalt-label pato">🦆 PATO</span>` :
+            `<span class="gestalt-label conejo">🐰 CONEJO</span>`;
+        const svgMod = duckRabbitSVG.replace(
+            'Ver como: PATO 🦆',
+            patoState === 'pato' ? 'Ver como: PATO 🦆' : 'Ver como: CONEJO 🐰'
+        );
+        area.innerHTML = svgMod + label;
+    } else {
+        const label = astroState === 'geo' ?
+            `<span class="gestalt-label geo">🔵 PTOLEMAICO</span>` :
+            `<span class="gestalt-label helio">🟢 COPERNICANO</span>`;
+        const svg = astroState === 'geo' ? astroGeoSVG : astroHelioSVG;
+        area.innerHTML = svg + label;
+    }
+}
+
+function toggleGestaltView() {
+    if (currentTab === 'pato-conejo') {
+        patoState = patoState === 'pato' ? 'conejo' : 'pato';
+    } else {
+        astroState = astroState === 'geo' ? 'helio' : 'geo';
+    }
+    renderGestaltSVG();
+}
+
+// Init
+renderGestaltSVG();
+</script>
+</body>
+</html>

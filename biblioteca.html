@@ -1,0 +1,1027 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Divulgativa | FILOSOFIA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script>window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] }, svg: { fontCache: 'global' } };</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <style>
+        :root {
+            --y: #facc15;
+            --yd: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #fff;
+            --bg3: #f1ede6;
+            --card: #fff;
+            --t: #1a1a1a;
+            --t2: #3d3d3d;
+            --t3: #6b6b6b;
+            --brd: #e0d9d0;
+            --sh: 0 4px 24px rgba(0, 0, 0, .08);
+            --shl: 0 20px 60px rgba(0, 0, 0, .15);
+            --tr: .3s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --t: #f0ece4;
+            --t2: #c8c0b4;
+            --t3: #888880;
+            --brd: #333;
+            --sh: 0 4px 24px rgba(0, 0, 0, .4);
+            --shl: 0 20px 60px rgba(0, 0, 0, .6)
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--t);
+            overflow-x: hidden;
+            transition: background .4s, color .4s
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--y)
+        }
+
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, var(--y), #f97316);
+            z-index: 9999;
+            transition: width .1s
+        }
+
+        /* TOPNAV */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--brd);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--sh)
+        }
+
+        .tnl,
+        .tnr {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .back-link {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--t3);
+            transition: color var(--tr)
+        }
+
+        .back-link:hover {
+            color: var(--yd)
+        }
+
+        .tnc {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--t2);
+            display: none
+        }
+
+        @media(min-width:900px) {
+            .tnc {
+                display: block
+            }
+        }
+
+        .ypill {
+            background: var(--y);
+            color: #000;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .1em;
+            cursor: pointer;
+            transition: all var(--tr)
+        }
+
+        .ypill:hover {
+            background: var(--yd);
+            transform: scale(1.04)
+        }
+
+        .dtoggle {
+            background: none;
+            border: 1px solid var(--brd);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer
+        }
+
+        .dtoggle::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--t3);
+            transition: all var(--tr)
+        }
+
+        .dark .dtoggle {
+            border-color: var(--y);
+            background: var(--y)
+        }
+
+        .dark .dtoggle::after {
+            left: calc(100% - 16px);
+            background: #000
+        }
+
+        /* HERO */
+        #hero {
+            background: linear-gradient(160deg, rgba(7, 8, 22, .92) 0%, rgba(15, 20, 48, .97) 100%), url('universo.jpg') center/cover no-repeat;
+            min-height: 88vh;
+            color: #fff;
+            padding: 80px 24px 56px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .feq {
+            position: absolute;
+            font-family: 'Libre Baskerville', serif;
+            color: rgba(250, 204, 21, .15);
+            pointer-events: none;
+            transition: transform .5s ease;
+            white-space: nowrap
+        }
+
+        .hi {
+            position: relative;
+            z-index: 2;
+            max-width: 860px
+        }
+
+        .heye {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(250, 204, 21, .12);
+            border: 1px solid rgba(250, 204, 21, .28);
+            padding: 8px 22px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            color: var(--y)
+        }
+
+        .heye span {
+            background: var(--y);
+            color: #000;
+            padding: 3px 12px;
+            border-radius: 999px
+        }
+
+        .ht {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 9vw, 7.8rem);
+            line-height: .88;
+            letter-spacing: -.03em;
+            margin-bottom: 20px
+        }
+
+        .ht em {
+            color: var(--y);
+            font-style: italic
+        }
+
+        .hsub {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(1rem, 2vw, 1.18rem);
+            line-height: 1.85;
+            color: rgba(255, 255, 255, .8);
+            max-width: 700px;
+            margin: 0 auto 36px
+        }
+
+        .hstats {
+            display: flex;
+            gap: 44px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 28px
+        }
+
+        .hstat strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--y);
+            line-height: 1
+        }
+
+        .hstat span {
+            font-size: 10px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .55);
+            margin-top: 4px;
+            display: block
+        }
+
+        .hscr {
+            position: absolute;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255, 255, 255, .4);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase
+        }
+
+        .hring {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, .25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(7px)
+            }
+        }
+
+        #particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden
+        }
+
+        .pt {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(250, 204, 21, .35);
+            animation: pfloat linear infinite
+        }
+
+        @keyframes pfloat {
+            0% {
+                transform: translateY(0);
+                opacity: .5
+            }
+
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0
+            }
+        }
+
+        /* FILTER BAR */
+        #fbar {
+            background: var(--y);
+            padding: 12px 0;
+            overflow: hidden
+        }
+
+        .fbi {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            align-items: center
+        }
+
+        .fbi::-webkit-scrollbar {
+            display: none
+        }
+
+        .fb {
+            background: rgba(0, 0, 0, .08);
+            color: #000;
+            border: none;
+            padding: 7px 22px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all var(--tr)
+        }
+
+        .fb.active,
+        .fb:hover {
+            background: #000;
+            color: var(--y)
+        }
+
+        /* SCROLL LIST */
+        #artlist {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 72px 24px 24px
+        }
+
+        .art-row {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 0;
+            margin-bottom: 24px;
+            border-radius: 18px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .75s ease, transform .75s ease;
+            box-shadow: var(--shl)
+        }
+
+        .art-row.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        @media(max-width:860px) {
+            .art-row {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .art-img-wrap {
+            overflow: hidden;
+            position: relative;
+            height: 320px;
+            background: #0a0a14;
+            cursor: pointer
+        }
+
+        @media(max-width:860px) {
+            .art-img-wrap {
+                height: 220px
+            }
+        }
+
+        .art-img-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform .55s cubic-bezier(.34, 1.2, .64, 1)
+        }
+
+        .art-row:hover .art-img-bg {
+            transform: scale(1.07)
+        }
+
+        .art-img-eq {
+            position: absolute;
+            bottom: 14px;
+            left: 16px;
+            font-family: 'Libre Baskerville', serif;
+            color: rgba(250, 204, 21, .75);
+            font-size: clamp(12px, 1.2vw, 17px);
+            z-index: 2;
+            pointer-events: none
+        }
+
+        .art-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, .5) 0%, transparent 55%)
+        }
+
+        .art-soon {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(0, 0, 0, .72);
+            color: var(--y);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(250, 204, 21, .25);
+            backdrop-filter: blur(6px);
+            z-index: 3
+        }
+
+        .art-body {
+            padding: 40px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(90deg, #0e1120, #12152a)
+        }
+
+        @media(max-width:860px) {
+            .art-body {
+                padding: 28px 24px
+            }
+        }
+
+        .art-num {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--y);
+            opacity: .2;
+            line-height: 1;
+            margin-bottom: -10px;
+            display: block
+        }
+
+        .art-cat {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: inline-block
+        }
+
+        .cat-f {
+            color: #60a5fa
+        }
+
+        .cat-b {
+            color: #4ade80
+        }
+
+        .cat-m {
+            color: #c084fc
+        }
+
+        .cat-i {
+            color: #fb923c
+        }
+
+        .cat-q {
+            color: #f472b6
+        }
+
+        .cat-fi {
+            color: var(--y)
+        }
+
+        .art-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+            font-weight: 900;
+            line-height: 1.12;
+            color: #f0ece4;
+            margin-bottom: 14px
+        }
+
+        .art-title em {
+            color: var(--y);
+            font-style: italic
+        }
+
+        .art-excerpt {
+            font-family: 'Libre Baskerville', serif;
+            font-size: .96rem;
+            line-height: 1.95;
+            color: rgba(200, 192, 180, .88);
+            margin-bottom: 22px
+        }
+
+        .art-meta {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 11px;
+            color: rgba(255, 255, 255, .45);
+            margin-bottom: 20px
+        }
+
+        .art-meta i {
+            color: var(--yd)
+        }
+
+        .art-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--y);
+            color: #000;
+            border: none;
+            padding: 13px 28px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all var(--tr);
+            align-self: flex-start
+        }
+
+        .art-cta:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(250, 204, 21, .4)
+        }
+
+        .art-cta i {
+            transition: transform var(--tr)
+        }
+
+        .art-cta:hover i {
+            transform: translateX(4px)
+        }
+
+        .art-cta.locked {
+            background: rgba(255, 255, 255, .08);
+            color: rgba(255, 255, 255, .35);
+            border: 1px solid rgba(255, 255, 255, .12);
+            cursor: default
+        }
+
+        .art-cta.locked:hover {
+            background: rgba(255, 255, 255, .08);
+            color: rgba(255, 255, 255, .35);
+            transform: none;
+            box-shadow: none
+        }
+
+        /* MARQUEE */
+        .mstrip {
+            background: var(--y);
+            padding: 18px 0;
+            overflow: hidden
+        }
+
+        .mtrack {
+            display: flex;
+            gap: 44px;
+            animation: mq 28s linear infinite;
+            width: max-content
+        }
+
+        @keyframes mq {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        .mi {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 26px;
+            background: rgba(0, 0, 0, .07);
+            border-radius: 14px;
+            white-space: nowrap
+        }
+
+        .mi-txt {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: #111
+        }
+
+        .mi-aut {
+            font-size: 10px;
+            font-weight: 700;
+            color: #444;
+            margin-top: 2px
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--brd);
+            background: var(--bg2)
+        }
+
+        .fi {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 28px 24px 36px
+        }
+
+        .fnav {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 20px
+        }
+
+        @media(max-width:900px) {
+            .fnav {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .fc {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding: 18px;
+            border-radius: 22px;
+            border: 1px solid var(--brd);
+            background: var(--card);
+            box-shadow: var(--sh);
+            transition: all var(--tr)
+        }
+
+        .fc:hover {
+            transform: translateY(-3px);
+            border-color: var(--y)
+        }
+
+        .fc.primary {
+            background: var(--y);
+            border-color: var(--y);
+            color: #000
+        }
+
+        .ficon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: var(--bg3);
+            font-size: 18px
+        }
+
+        .fc.primary .ficon {
+            background: rgba(255, 255, 255, .45)
+        }
+
+        .fl {
+            font-size: 11px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--t3);
+            margin-bottom: 6px
+        }
+
+        .fc.primary .fl {
+            color: rgba(0, 0, 0, .6)
+        }
+
+        .fn {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            line-height: 1.1
+        }
+
+        .credits {
+            text-align: center;
+            color: var(--t3);
+            font-size: 13px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    <nav id="topnav">
+        <div class="tnl">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Inicio</a>
+        </div>
+        <div class="tnc">Biblioteca Divulgativa · Filosofia &amp; Ciencia</div>
+        <div class="tnr">
+            <button class="ypill" onclick="document.getElementById('artlist').scrollIntoView({behavior:'smooth'})">Ver
+                coleccion</button>
+            <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <header id="hero">
+        <div id="particles"></div>
+        <div class="feq" style="left:5%;top:16%">$E=mc^2$</div>
+        <div class="feq" style="left:76%;top:12%">$i\hbar\frac{\partial}{\partial t}\Psi=\hat{H}\Psi$</div>
+        <div class="feq" style="left:8%;top:74%">$G_{\mu\nu}=\frac{8\pi G}{c^4}T_{\mu\nu}$</div>
+        <div class="feq" style="left:66%;top:76%">$\Delta S \geq 0$</div>
+        <div class="feq" style="left:40%;top:7%">$e^{i\pi}+1=0$</div>
+        <div class="feq" style="left:88%;top:48%">$F=ma$</div>
+        <div class="feq" style="left:2%;top:46%">$P(A|B)=\frac{P(B|A)P(A)}{P(B)}$</div>
+
+        <div class="hi">
+            <div class="heye"><span>NUEVO</span> Coleccion divulgativa 2025</div>
+            <h1 class="ht">Biblio<em>teca</em></h1>
+            <p class="hsub">Fisica, biologia, inteligencia artificial y matematica desde una optica filosofica y
+                didactica. El estilo de Quanta Magazine, en espanol, para vos.</p>
+            <div class="hstats">
+                <div class="hstat"><strong id="c1">0</strong><span>Publicado</span></div>
+                <div class="hstat"><strong id="c2">0</strong><span>En preparacion</span></div>
+                <div class="hstat"><strong id="c3">0</strong><span>Categorias</span></div>
+                <div class="hstat"><strong>∞</strong><span>Preguntas</span></div>
+            </div>
+        </div>
+        <div class="hscr">
+            <div class="hring"><i class="fa-solid fa-chevron-down" style="font-size:11px"></i></div>
+            <span>Explorar</span>
+        </div>
+    </header>
+
+    <div id="fbar">
+        <div class="fbi">
+            <button class="fb active" data-cat="all">Todos</button>
+            <button class="fb" data-cat="f">Fisica</button>
+            <button class="fb" data-cat="b">Biologia</button>
+            <button class="fb" data-cat="i">Inteligencia Artificial</button>
+            <button class="fb" data-cat="m">Matematica</button>
+            <button class="fb" data-cat="q">Quimica</button>
+            <button class="fb" data-cat="fi">Filosofia</button>
+        </div>
+    </div>
+
+    <div id="artlist"></div>
+
+    <div class="mstrip">
+        <div class="mtrack">
+            <div class="mi"><span>⚛️</span>
+                <div>
+                    <div class="mi-txt">"Dios no juega a los dados con el universo."</div>
+                    <div class="mi-aut">— Albert Einstein</div>
+                </div>
+            </div>
+            <div class="mi"><span>🧬</span>
+                <div>
+                    <div class="mi-txt">"Hemos descubierto el secreto de la vida."</div>
+                    <div class="mi-aut">— Francis Crick, 1953</div>
+                </div>
+            </div>
+            <div class="mi"><span>🤖</span>
+                <div>
+                    <div class="mi-txt">"La cuestion no es si las maquinas pueden pensar, sino si lo hacemos nosotros."
+                    </div>
+                    <div class="mi-aut">— B. F. Skinner</div>
+                </div>
+            </div>
+            <div class="mi"><span>🌌</span>
+                <div>
+                    <div class="mi-txt">"El espacio-tiempo le dice a la materia como moverse."</div>
+                    <div class="mi-aut">— John Wheeler</div>
+                </div>
+            </div>
+            <div class="mi"><span>🦋</span>
+                <div>
+                    <div class="mi-txt">"Una mariposa aletea en Brazil y provoca un tornado en Texas."</div>
+                    <div class="mi-aut">— Edward Lorenz</div>
+                </div>
+            </div>
+            <div class="mi"><span>⚛️</span>
+                <div>
+                    <div class="mi-txt">"Dios no juega a los dados con el universo."</div>
+                    <div class="mi-aut">— Albert Einstein</div>
+                </div>
+            </div>
+            <div class="mi"><span>🧬</span>
+                <div>
+                    <div class="mi-txt">"Hemos descubierto el secreto de la vida."</div>
+                    <div class="mi-aut">— Francis Crick, 1953</div>
+                </div>
+            </div>
+            <div class="mi"><span>🤖</span>
+                <div>
+                    <div class="mi-txt">"La cuestion no es si las maquinas pueden pensar, sino si lo hacemos nosotros."
+                    </div>
+                    <div class="mi-aut">— B. F. Skinner</div>
+                </div>
+            </div>
+            <div class="mi"><span>🌌</span>
+                <div>
+                    <div class="mi-txt">"El espacio-tiempo le dice a la materia como moverse."</div>
+                    <div class="mi-aut">— John Wheeler</div>
+                </div>
+            </div>
+            <div class="mi"><span>🦋</span>
+                <div>
+                    <div class="mi-txt">"Una mariposa aletea en Brazil y provoca un tornado en Texas."</div>
+                    <div class="mi-aut">— Edward Lorenz</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="fi">
+            <div class="fnav">
+                <a href="index.html" class="fc">
+                    <div class="ficon"><i class="fa-solid fa-arrow-left"></i></div>
+                    <div>
+                        <div class="fl">Portada</div>
+                        <div class="fn">Revista Filosofia &amp; Ciencia</div>
+                    </div>
+                </a>
+                <a href="schrodinger.html" class="fc primary">
+                    <div class="ficon"><i class="fa-solid fa-cat"></i></div>
+                    <div>
+                        <div class="fl">Leer ahora</div>
+                        <div class="fn">El Gato de Schrodinger</div>
+                    </div>
+                </a>
+                <a href="unidad2-introduccion.html" class="fc">
+                    <div class="ficon"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div>
+                        <div class="fl">Clases</div>
+                        <div class="fn">Unidad 2 · Introduccion</div>
+                    </div>
+                </a>
+            </div>
+            <div class="credits">Biblioteca Divulgativa · Filosofia e Historia de la Ciencia · 6to Año 2025</div>
+        </div>
+    </footer>
+
+    <script>
+        // DARK MODE
+        function toggleDark() { document.documentElement.classList.toggle('dark'); localStorage.setItem('t', document.documentElement.classList.contains('dark') ? 'dark' : 'light') }
+        if (localStorage.getItem('t') === 'dark') document.documentElement.classList.add('dark');
+
+        // PROGRESS
+        window.addEventListener('scroll', () => { const d = document.documentElement; document.getElementById('progress').style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100 + '%' }, { passive: true });
+
+        // ARTICLES DATA
+        const ARTS = [
+            { num: '01', cat: 'f', catLabel: 'Fisica Cuantica', catCls: 'cat-f', title: 'El gato de <em>Schrodinger</em>', excerpt: 'En 1935, Erwin Schrodinger propuso un experimento mental que aun hoy divide a fisicos y filosofos. Si la mecanica cuantica vale para los atomos, ¿por que no vale tambien para los gatos? La paradoja no es un error de la teoria. Es su exito lo que produce el escandalo conceptual.', meta: '18 min lectura · Fisica + Filosofia · Inaugural', eq: '$|\\Psi\\rangle = \\frac{1}{\\sqrt{2}}(|vivo\\rangle+|muerto\\rangle)$', bg: 'linear-gradient(135deg,rgba(7,8,22,.92),rgba(15,20,55,.88))', link: 'schrodinger.html', published: true },
+            { num: '02', cat: 'f', catLabel: 'Relatividad Especial', catCls: 'cat-f', title: 'La Relatividad <em>Especial</em>: cuando el espacio y el tiempo se doblan', excerpt: '1905, el annus mirabilis de Einstein. Un empleado de la oficina de patentes de Berna publica cuatro articulos que cambian para siempre nuestra idea del espacio, el tiempo y la masa. ¿Que significa que el tiempo transcurra mas lentamente para quien se mueve rapido?', meta: 'Proximamente · Einstein 1905 · Fisica', eq: '$E=mc^2$', bg: 'linear-gradient(135deg,#0f172a,#1e3a5f)', link: null, published: false },
+            { num: '03', cat: 'f', catLabel: 'Relatividad General', catCls: 'cat-f', title: 'La Relatividad <em>General</em>: la gravedad como geometria del cosmos', excerpt: 'La gravedad no es una fuerza que actua a distancia: es la curvatura del espacio-tiempo producida por la masa y la energia. Einstein tardo diez anos en completar su teoria. Agujeros negros, ondas gravitacionales y la expansion del universo son sus hijos predilectos.', meta: 'Proximamente · Einstein 1915 · Fisica', eq: '$G_{\\mu\\nu}=\\frac{8\\pi G}{c^4}T_{\\mu\\nu}$', bg: 'linear-gradient(135deg,#1a0a2e,#2d1457)', link: null, published: false },
+            { num: '04', cat: 'q', catLabel: 'Quimica · IA', catCls: 'cat-q', title: 'AlphaFold y el Premio <em>Nobel</em>: cuando la IA resuelve un misterio de 50 anos', excerpt: 'Durante decadas, predecir la estructura tridimensional de una proteina a partir de su secuencia de aminoacidos resistio todos los intentos. En 2020, DeepMind de Google lo resolvio con inteligencia artificial. En 2024, sus creadores recibieron el Nobel de Quimica. ¿Comprende realmente la vida una maquina?', meta: 'Proximamente · Google DeepMind · Nobel Quimica 2024', eq: 'Nobel 2024 · DeepMind', bg: 'linear-gradient(135deg,#0a2e1a,#0f4529)', link: null, published: false },
+            { num: '05', cat: 'i', catLabel: 'Inteligencia Artificial', catCls: 'cat-i', title: '¿Pueden pensar las <em>maquinas</em>? De Turing a Claude y Gemini', excerpt: 'Anthropic creo Claude; Google, Gemini. Ambas organizaciones publican investigaciones sobre emergencia cognitiva, razonamiento y capacidades imprevistas en modelos de lenguaje masivos. ¿Son inteligentes, o son espejos estadisticos extraordinariamente detallados de nuestra propia mente?', meta: 'Proximamente · Anthropic & Google · IA', eq: '$\\text{Turing Test} \\Rightarrow ?$', bg: 'linear-gradient(135deg,#2d1a00,#4a2d00)', link: null, published: false },
+            { num: '06', cat: 'i', catLabel: 'Seguridad en IA', catCls: 'cat-i', title: 'El problema del <em>alineamiento</em>: ¿como hacemos que la IA quiera lo que nosotros queremos?', excerpt: 'Anthropic investiga como garantizar que los sistemas de IA actuen de acuerdo a valores humanos. Su propuesta "Constitutional AI" y el trabajo de seguridad de Google DeepMind plantean una pregunta filosofica profunda: ¿pueden los valores codificarse en parametros matematicos?', meta: 'Proximamente · Anthropic Safety · IA', eq: '$\\text{Constitutional AI}$', bg: 'linear-gradient(135deg,#1a0a2e,#2d0e4a)', link: null, published: false },
+            { num: '07', cat: 'f', catLabel: 'Termodinamica', catCls: 'cat-f', title: 'La Entropia y la <em>flecha del tiempo</em>: ¿por que el tiempo solo va hacia adelante?', excerpt: 'Las ecuaciones fundamentales de la fisica son simetricas en el tiempo: funcionan igual hacia adelante que hacia atras. Sin embargo, el tiempo claramente solo va en una direccion. La entropia puede ser la clave: el universo siempre avanza hacia el desorden, y ese camino no tiene retorno.', meta: 'Proximamente · Termodinamica · Fisica', eq: '$\\Delta S \\geq 0$', bg: 'linear-gradient(135deg,#1a0a00,#2d1a00)', link: null, published: false },
+            { num: '08', cat: 'b', catLabel: 'Biologia Molecular', catCls: 'cat-b', title: 'El codigo genetico como <em>lenguaje</em>: informacion, vida y significado', excerpt: 'El ADN es frecuentemente descripto como el "lenguaje de la vida". Pero ¿tiene realmente una semantica, o es solo una metafora conveniente? La semiotica biologica y la filosofia de la informacion se preguntan si la vida es, en esencia, informacion que se copia a si misma indefinidamente.', meta: 'Proximamente · Biologia Molecular', eq: '$\\text{ADN} \\to \\text{ARN} \\to \\text{Proteina}$', bg: 'linear-gradient(135deg,#0a2e14,#0f3d1c)', link: null, published: false },
+            { num: '09', cat: 'b', catLabel: 'Biologia · IA', catCls: 'cat-b', title: 'La evolucion como <em>algoritmo</em>: Darwin, computacion y la logica del azar', excerpt: 'La seleccion natural es, en un sentido tecnico muy preciso, un algoritmo de busqueda sin guia explicita. Los sistemas evolutivos de IA replican ese proceso en silicio. ¿Es la vida el mejor algoritmo que la naturaleza ha encontrado, o simplemente el primero en funcionar lo suficientemente bien?', meta: 'Proximamente · Darwin · Algoritmos Evolutivos', eq: '$f(x) = \\text{select}(\\text{mutate}(x))$', bg: 'linear-gradient(135deg,#1a2e0a,#253d0f)', link: null, published: false },
+            { num: '10', cat: 'm', catLabel: 'Matematica · Fisica', catCls: 'cat-m', title: 'Caos y <em>determinismo</em>: el efecto mariposa y el fin del universo-reloj', excerpt: 'Laplace imaginaba un demonio que, conociendo la posicion de cada particula, podria predecir el futuro completo. La teoria del caos destruyo esa fantasia. Los sistemas deterministas pueden ser radicalmente impredecibles: la pregunta filosofica que queda pendiente es si eso nos hace libres.', meta: 'Proximamente · Lorenz · Poincare', eq: '$\\frac{dx}{dt}=\\sigma(y-x)$', bg: 'linear-gradient(135deg,#0a1a2e,#0f2545)', link: null, published: false },
+            { num: '11', cat: 'fi', catLabel: 'Filosofia · IA', catCls: 'cat-fi', title: 'El problema <em>dificil</em> de la consciencia: ¿que es la experiencia subjetiva?', excerpt: '¿Por que existe algo que se siente como ser vos? Chalmers llamo a esto "el problema dificil": explicar por que los procesos fisicos del cerebro producen experiencia subjetiva. Los modelos de lenguaje de Anthropic y Google reabren la pregunta desde un angulo inedito y urgente.', meta: 'Proximamente · Chalmers · Dennett · IA', eq: '$\\text{Qualia} \\neq \\text{Computation}$', bg: 'linear-gradient(135deg,#2e0a1a,#4a0f2d)', link: null, published: false }
+        ];
+
+        // RENDER ARTICLE ROWS
+        function renderArts(filter) {
+            const list = document.getElementById('artlist');
+            list.innerHTML = '';
+            const items = filter === 'all' ? ARTS : ARTS.filter(a => a.cat === filter);
+            items.forEach((a, i) => {
+                const row = document.createElement('div');
+                row.className = 'art-row';
+                row.dataset.cat = a.cat;
+                row.innerHTML = `
+      <div class="art-img-wrap">
+        <div class="art-img-bg" style="background-image:${a.bg},url('universo.jpg');background-size:cover;background-position:center"></div>
+        <div class="art-img-overlay"></div>
+        <div class="art-img-eq">${a.eq}</div>
+        ${!a.published ? '<div class="art-soon">Proximo</div>' : ''}
+      </div>
+      <div class="art-body">
+        <span class="art-num">${a.num}</span>
+        <span class="art-cat ${a.catCls}">${a.catLabel}</span>
+        <h2 class="art-title">${a.title}</h2>
+        <p class="art-excerpt">${a.excerpt}</p>
+        <div class="art-meta"><i class="fa-regular fa-clock"></i> ${a.meta}</div>
+        ${a.link
+                        ? `<a href="${a.link}" class="art-cta">Leer articulo <i class="fa-solid fa-arrow-right"></i></a>`
+                        : `<button class="art-cta locked"><i class="fa-solid fa-lock"></i> Proximamente</button>`}
+      </div>`;
+                list.appendChild(row);
+            });
+            // trigger reveal observer on new rows
+            setupReveal();
+            // re-render MathJax equations
+            if (window.MathJax) MathJax.typesetPromise && MathJax.typesetPromise([list]);
+        }
+
+        // REVEAL ON SCROLL
+        function setupReveal() {
+            const rows = Array.from(document.querySelectorAll('.art-row'));
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        const idx = rows.indexOf(e.target);
+                        setTimeout(() => e.target.classList.add('visible'), Math.max(0, idx) * 40);
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+            rows.forEach(r => obs.observe(r));
+        }
+
+        // FILTER
+        document.querySelectorAll('.fb').forEach(btn => btn.addEventListener('click', () => {
+            document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderArts(btn.dataset.cat);
+        }));
+
+        // FLOATING EQUATIONS PARALLAX
+        const hero = document.getElementById('hero');
+        const feqs = document.querySelectorAll('.feq');
+        hero.addEventListener('mousemove', e => {
+            const r = hero.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+            feqs.forEach((eq, i) => { const d = (i + 1) * 8; eq.style.transform = `translate(${x * d}px,${y * d}px) rotate(${x * (i % 3) * 1.5}deg)`; });
+        });
+        hero.addEventListener('mouseleave', () => feqs.forEach(eq => eq.style.transform = ''));
+
+        // PARTICLES
+        (() => {
+            const c = document.getElementById('particles');
+            for (let i = 0; i < 26; i++) {
+                const p = document.createElement('div'); p.className = 'pt';
+                const s = Math.random() * 4 + 2;
+                p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random() * 100}%;bottom:-10px;animation-duration:${Math.random() * 12 + 7}s;animation-delay:${Math.random() * 10}s;opacity:${Math.random() * .4 + .1}`;
+                c.appendChild(p);
+            }
+        })();
+
+        // ANIMATED COUNTERS
+        function animN(id, target) {
+            const el = document.getElementById(id); if (!el) return;
+            let v = 0; const inc = target / 60;
+            const t = setInterval(() => { v += inc; if (v >= target) { v = target; clearInterval(t); } el.textContent = Math.round(v); }, 22);
+        }
+        const cObs = new IntersectionObserver(en => { en.forEach(e => { if (e.isIntersecting) { animN('c1', 1); animN('c2', 10); animN('c3', 5); cObs.disconnect(); } }); }, { threshold: .5 });
+        cObs.observe(document.querySelector('.hstats'));
+
+        // INITIAL RENDER
+        renderArts('all');
+    </script>
+</body>
+
+</html>

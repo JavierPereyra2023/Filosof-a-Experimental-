@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La PCR: Tecnología, ADN y la Batalla contra el COVID | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .dark {
+            --bg: #111111; --bg2: #1a1a1a; --bg3: #222222;
+            --card: #1e1e1e; --text: #f0ece4; --text2: #c8c0b4;
+            --text3: #888880; --border: #333333;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg); color: var(--text);
+            transition: background 0.4s, color 0.4s;
+        }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress {
+            position: fixed; top: 0; left: 0;
+            height: 3px; width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999; transition: width 0.1s;
+        }
+
+        /* ===================== TOP NAV ===================== */
+        #topnav {
+            position: sticky; top: 0; z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+        .topnav-left { display: flex; align-items: center; gap: 20px; }
+        .back-link {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 600;
+            letter-spacing: 0.08em; color: var(--text3);
+            transition: color var(--transition);
+        }
+        .back-link:hover { color: var(--text); }
+        .nav-sep { color: var(--border); }
+        .breadcrumb {
+            font-size: 12px; color: var(--text3);
+            display: none;
+        }
+        @media(min-width:640px){ .breadcrumb { display: block; } }
+        .breadcrumb span { color: var(--yellow-dark); font-weight: 600; }
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+        @media(min-width:900px){ .topnav-center { display: block; } }
+        .topnav-right { display: flex; align-items: center; gap: 12px; }
+        .nav-btn {
+            background: none; border: 1px solid var(--border);
+            color: var(--text3); cursor: pointer;
+            padding: 6px 14px; border-radius: 999px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.08em;
+            display: flex; align-items: center; gap: 6px;
+            transition: all var(--transition);
+        }
+        .nav-btn:hover { border-color: var(--yellow); color: var(--text); }
+        .dark-toggle-nav {
+            background: none; border: 1px solid var(--border);
+            width: 36px; height: 20px; border-radius: 999px;
+            position: relative; cursor: pointer;
+            transition: all var(--transition);
+        }
+        .dark-toggle-nav::after {
+            content: ''; position: absolute;
+            left: 3px; top: 50%; transform: translateY(-50%);
+            width: 13px; height: 13px; border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+        .dark .dark-toggle-nav { border-color: var(--yellow); background: var(--yellow); }
+        .dark .dark-toggle-nav::after { left: calc(100% - 16px); background: #000; }
+
+        /* ===================== ARTICLE HERO ===================== */
+        #art-hero {
+            background:
+                linear-gradient(to left, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 32%, rgba(0,0,0,.97) 58%),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ptolemy_by_Cristofano_dell%27Altissimo.jpg/440px-Ptolemy_by_Cristofano_dell%27Altissimo.jpg') right top/auto 100% no-repeat,
+                url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.5);
+            min-height: 92vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+        .hero-breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+            text-transform: uppercase; margin-bottom: 28px;
+        }
+        .hero-badge {
+            background: var(--yellow); color: #000;
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px; font-weight: 800;
+        }
+        .hero-badge-outline {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px;
+        }
+        .hero-eyebrow {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 7vw, 88px);
+            font-weight: 900; line-height: 0.95;
+            letter-spacing: -0.03em; margin-bottom: 24px;
+        }
+        .hero-title em { font-style: italic; color: var(--yellow); }
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255,255,255,0.8);
+            max-width: 640px; line-height: 1.65;
+            margin-bottom: 48px;
+        }
+        .hero-meta {
+            display: flex; align-items: center; justify-content: center;
+            gap: 24px; flex-wrap: wrap;
+            font-size: 12px; color: rgba(255,255,255,0.55);
+            letter-spacing: 0.05em;
+        }
+        .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+        .hero-meta i { color: var(--yellow); }
+        .hero-meta-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+        .hero-scroll-cue {
+            position: absolute; bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.4); font-size: 10px;
+            letter-spacing: 0.2em; text-transform: uppercase;
+        }
+        .scroll-dot {
+            width: 28px; height: 44px; border-radius: 14px;
+            border: 2px solid rgba(255,255,255,0.25);
+            display: flex; align-items: flex-start; justify-content: center;
+            padding-top: 6px;
+        }
+        .scroll-dot::after {
+            content: '';
+            width: 4px; height: 8px; border-radius: 2px;
+            background: rgba(255,255,255,0.4);
+            animation: scrolldot 1.8s infinite;
+        }
+        @keyframes scrolldot {
+            0%,100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(8px); opacity: 0.3; }
+        }
+
+        /* ===================== ARTICLE LAYOUT ===================== */
+        .article-wrap {
+            max-width: 1280px; margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+        @media(min-width:1024px){
+            .article-wrap { grid-template-columns: 1fr 320px; gap: 64px; }
+        }
+        /* MAIN CONTENT */
+        .article-section { margin-bottom: 56px; }
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px; font-weight: 900;
+            line-height: 0.8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px; line-height: 1.85;
+            color: var(--text2); margin-bottom: 20px;
+        }
+        .article-p strong { color: var(--text); font-weight: 700; }
+        .article-p em { font-style: italic; }
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900; letter-spacing: -0.02em;
+            line-height: 1.1; color: var(--text);
+            margin-bottom: 20px;
+        }
+        .article-h2 span { color: var(--yellow-dark); font-style: italic; }
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            color: var(--text); margin: 32px 0 14px;
+        }
+        .section-label {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px; display: block;
+        }
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 5px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 120px; font-weight: 900;
+            color: var(--yellow); opacity: 0.15;
+            position: absolute; top: -20px; left: 16px;
+            line-height: 1;
+        }
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.4; color: var(--text);
+            position: relative; z-index: 1;
+        }
+        .pull-quote-author {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-top: 12px;
+        }
+        /* Image / Figure */
+        .figure {
+            margin: 36px 0;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .figure-img {
+            width: 100%; height: 320px;
+            object-fit: cover; display: block;
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .figure:hover .figure-img {
+            transform: scale(1.06);
+        }
+        .figure-img-placeholder {
+            width: 100%; height: 280px;
+            background: var(--bg3);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 12px;
+            font-size: 64px;
+        }
+        .figure-caption {
+            padding: 14px 20px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-size: 12px; color: var(--text3);
+            font-style: italic; line-height: 1.5;
+        }
+        .figure-caption strong { color: var(--text2); font-style: normal; }
+        /* Callout boxes */
+        .callout {
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+        .callout.yellow {
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+        .dark .callout.yellow {
+            background: linear-gradient(135deg, #2a2400, #1a1800);
+            border-color: #5a4a00;
+        }
+        .callout.dark-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+        .callout.red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fca5a5;
+        }
+        .dark .callout.red {
+            background: linear-gradient(135deg, #200808, #1a0606);
+            border-color: #7f1d1d;
+        }
+        .callout-tag {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        }
+        .callout.yellow .callout-tag { color: #92400e; }
+        .callout.red .callout-tag { color: #991b1b; }
+        .callout.dark-box .callout-tag { color: var(--yellow-dark); }
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 12px; color: var(--text);
+        }
+        .callout p {
+            font-size: 14px; line-height: 1.7; color: var(--text2);
+        }
+        .callout p + p { margin-top: 10px; }
+        /* Concept grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px; margin: 28px 0;
+        }
+        @media(min-width:640px){ .concept-grid { grid-template-columns: 1fr 1fr; } }
+        .concept-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px 22px;
+            border-top: 4px solid var(--yellow);
+        }
+        .concept-card.red-top { border-top-color: var(--red); }
+        .concept-name {
+            font-size: 12px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 8px;
+        }
+        .concept-name.red { color: var(--red); }
+        .concept-def {
+            font-size: 13px; line-height: 1.65; color: var(--text2);
+        }
+        /* Timeline */
+        .timeline { margin: 32px 0; }
+        .timeline-item {
+            display: flex; gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px; top: 36px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: var(--border);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800;
+            flex-shrink: 0; z-index: 1;
+        }
+        .timeline-dot.muted {
+            background: var(--bg3); color: var(--text3);
+            border: 2px solid var(--border);
+            font-size: 11px;
+        }
+        .timeline-year {
+            font-size: 11px; font-weight: 700;
+            color: var(--yellow-dark); letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+        .timeline-event { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .timeline-desc { font-size: 13px; color: var(--text3); line-height: 1.5; }
+        /* Divider */
+        .art-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 48px 0;
+        }
+
+        /* ===================== SIDEBAR ===================== */
+        .sidebar-sticky { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px; overflow: hidden;
+        }
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex; align-items: center; gap: 8px;
+        }
+        /* Table of contents */
+        .toc-list { list-style: none; padding: 12px 0; }
+        .toc-item a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px; color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .toc-item a:hover,
+        .toc-item a.active {
+            color: var(--text); background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+        .toc-num { font-size: 11px; color: var(--yellow-dark); font-weight: 700; min-width: 20px; }
+        /* Key concepts sidebar */
+        .concept-mini { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+        .concept-mini:last-child { border-bottom: none; }
+        .concept-mini-name {
+            font-size: 11px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 5px;
+        }
+        .concept-mini-def { font-size: 12px; line-height: 1.55; color: var(--text3); }
+        /* Philosopher card */
+        .philosopher-card {
+            display: flex; gap: 14px; align-items: flex-start;
+            padding: 16px 20px; border-bottom: 1px solid var(--border);
+        }
+        .philosopher-card:last-child { border-bottom: none; }
+        .philosopher-avatar {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--bg3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .philosopher-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .philosopher-dates { font-size: 11px; color: var(--yellow-dark); font-weight: 600; margin-bottom: 5px; }
+        .philosopher-bio { font-size: 12px; color: var(--text3); line-height: 1.5; }
+        /* Unit connection */
+        .unit-connection {
+            padding: 20px;
+        }
+        .unit-conn-item {
+            display: flex; gap: 12px; align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .unit-conn-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--yellow); margin-top: 5px; flex-shrink: 0;
+        }
+        .unit-conn-text { font-size: 12px; line-height: 1.5; color: var(--text2); }
+        /* Next class */
+        .next-class { padding: 20px; }
+        .next-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; }
+        .next-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
+        .btn-next {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--yellow); color: #000;
+            border: none; padding: 12px 16px;
+            border-radius: 12px; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; cursor: pointer;
+            transition: all var(--transition); width: 100%;
+        }
+        .btn-next:hover { background: var(--yellow-dark); }
+
+        /* ===================== DISCUSSION ===================== */
+        .discussion-section {
+            background: var(--bg3);
+            border-radius: 20px; padding: 40px;
+            margin: 48px 0;
+            border: 1px solid var(--border);
+        }
+        .discussion-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; font-weight: 900;
+            color: var(--text); margin-bottom: 24px;
+        }
+        .question-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .question-item {
+            display: flex; gap: 16px;
+            padding: 18px 20px;
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: border-color var(--transition);
+            cursor: pointer;
+        }
+        .question-item:hover { border-color: var(--yellow); }
+        .question-num {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; flex-shrink: 0;
+        }
+        .question-text { font-size: 14px; line-height: 1.6; color: var(--text2); padding-top: 5px; }
+
+        /* ===================== FOOTER NAV ===================== */
+        .article-footer-nav {
+            max-width: 1280px; margin: 0 auto;
+            padding: 40px 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid var(--border);
+            gap: 20px; flex-wrap: wrap;
+        }
+        .footer-nav-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 24px; border-radius: 16px;
+            background: var(--card); border: 1px solid var(--border);
+            transition: all var(--transition); cursor: pointer;
+            max-width: 300px;
+        }
+        .footer-nav-link:hover { border-color: var(--yellow); transform: translateX(4px); }
+        .footer-nav-link.prev:hover { transform: translateX(-4px); }
+        .footer-nav-direction { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+        .footer-nav-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+        .footer-nav-icon { font-size: 18px; color: var(--text3); }
+
+        /* ===================== REVEAL ===================== */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+
+
+        /* ===================== PCR STEPS ===================== */
+        .pcr-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 32px 0;
+        }
+        @media(min-width:640px){ .pcr-steps { grid-template-columns: 1fr 1fr 1fr; } }
+        .pcr-step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .pcr-step:hover {
+            border-color: var(--yellow);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .pcr-step-num {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 900;
+            margin: 0 auto 16px;
+            font-family: 'Playfair Display', serif;
+        }
+        .pcr-step-temp {
+            font-size: 28px; font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .pcr-step-temp.hot { color: #ef4444; }
+        .pcr-step-temp.warm { color: #f97316; }
+        .pcr-step-temp.mid { color: #22c55e; }
+        .pcr-step-name {
+            font-size: 13px; font-weight: 800;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 10px;
+        }
+        .pcr-step-desc {
+            font-size: 13px; line-height: 1.6;
+            color: var(--text2);
+        }
+
+        /* Blue callout for COVID */
+        .callout.blue {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 1px solid #93c5fd;
+        }
+        .dark .callout.blue {
+            background: linear-gradient(135deg, #0c1929, #0a1628);
+            border-color: #1e3a5f;
+        }
+        .callout.blue .callout-tag { color: #1e40af; }
+        .dark .callout.blue .callout-tag { color: #60a5fa; }
+
+        /* Green callout */
+        .callout.green {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #86efac;
+        }
+        .dark .callout.green {
+            background: linear-gradient(135deg, #052e16, #042f2e);
+            border-color: #166534;
+        }
+        .callout.green .callout-tag { color: #166534; }
+        .dark .callout.green .callout-tag { color: #4ade80; }
+
+        /* Cycle counter animation */
+        .cycle-demo {
+            background: #0a0a1a;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 36px 0;
+            border: 1px solid #1e1e3a;
+            text-align: center;
+        }
+        .cycle-title {
+            color: rgba(255,255,255,0.6);
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .cycle-title span { color: var(--yellow); }
+        .cycle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        @media(max-width:500px){ .cycle-grid { grid-template-columns: repeat(2, 1fr); } }
+        .cycle-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px 12px;
+            transition: all 0.3s ease;
+        }
+        .cycle-card:hover {
+            background: rgba(250,204,21,0.1);
+            transform: scale(1.05);
+        }
+        .cycle-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--yellow);
+            margin-bottom: 4px;
+        }
+        .cycle-copies {
+            font-size: 22px; font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+        }
+        .cycle-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 4px;
+        }
+        .cycle-caption {
+            font-size: 13px; color: rgba(255,255,255,0.45);
+            text-align: center; margin-top: 24px;
+            font-family: 'Libre Baskerville', serif; font-style: italic;
+            max-width: 460px; line-height: 1.6;
+            margin-left: auto; margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+    <div class="topnav-left">
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Volver
+        </a>
+        <span class="nav-sep">|</span>
+        <div class="breadcrumb">
+            <span>Unidad 2</span> · Clase 17
+        </div>
+    </div>
+    <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+    <div class="topnav-right">
+        <button class="nav-btn" onclick="window.location.href='unidad2-clase16.html'">
+            <i class="fa-solid fa-arrow-left"></i> Clase 16
+        </button>
+        <button class="nav-btn" onclick="window.print()">
+            <i class="fa-solid fa-file-pdf"></i> PDF
+        </button>
+        <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header id="art-hero" style="background:
+    linear-gradient(to left, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 32%, rgba(0,0,0,.97) 58%),
+    url('kary_Mullis.webp') right top/auto 100% no-repeat,
+    url('covid-19.jpg') center/cover no-repeat;
+    background-color: #000;">
+    <div class="hero-breadcrumb">
+        <span class="hero-badge">UNIDAD 2 · CLASE 17</span>
+        <span class="hero-badge-outline">TECNOLOGÍA Y ADN</span>
+    </div>
+    <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6° Año</p>
+    <h1 class="hero-title">
+        La <em>PCR</em>:<br>Copiar el ADN<br>para salvar<br>al mundo
+    </h1>
+    <p class="hero-subtitle">
+        Cómo una idea nacida en una autopista californiana se convirtió en la
+        herramienta que diagnosticó al mundo durante la pandemia de COVID-19.
+    </p>
+    <div class="hero-meta">
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Prof. Filosofía & Ciencia</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-calendar"></i>
+            <span>Ciclo 2025</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-clock"></i>
+            <span>60 min · Clase 17</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Mullis · PCR · COVID-19</span>
+        </div>
+    </div>
+    <div class="hero-scroll-cue">
+        <div class="scroll-dot"></div>
+        <span>Comenzar</span>
+    </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<main class="article-wrap">
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <article class="article-main">
+
+        <!-- INTRO -->
+        <div class="article-section reveal" id="sec-intro">
+            <span class="section-label">Introducción</span>
+            <h2 class="article-h2">Una <span>idea</span> en la ruta 128</h2>
+            <p class="article-p dropcap">
+                En una noche de primavera de 1983, Kary Mullis conducía por la autopista 128
+                en California cuando tuvo una idea que cambiaría la biología para siempre.
+                ¿Y si existiera una forma de <strong>copiar una molécula de ADN millones de veces</strong>
+                en pocas horas? No en un laboratorio gigante, no con equipamiento de millones
+                de dólares, sino con una máquina simple, unos pocos reactivos y ciclos de
+                calentamiento y enfriamiento. Esa idea se llamó <strong>PCR</strong>:
+                Reacción en Cadena de la Polimerasa.
+            </p>
+            <p class="article-p">
+                La PCR no descubre nada nuevo sobre el ADN. No revela su estructura ni descifra
+                sus genes. Lo que hace es algo mucho más práctico y poderoso:
+                <strong>amplifica</strong>. Toma una cantidad ínfima de ADN —una sola molécula,
+                una gota de sangre, un hisopado nasal— y la multiplica hasta tener
+                <strong>miles de millones de copias</strong> idénticas, suficientes para
+                analizarla, identificarla y diagnosticar.
+            </p>
+            <p class="article-p">
+                Décadas después, cuando un virus desconocido comenzó a propagarse desde Wuhan
+                en diciembre de 2019, la PCR se convirtió en el <strong>arma diagnóstica
+                principal</strong> contra la pandemia de COVID-19. Sin ella, no habríamos
+                podido saber quién estaba infectado, rastrear la propagación ni tomar decisiones
+                de salud pública. La PCR es el puente perfecto entre <strong>ciencia básica
+                y tecnología aplicada</strong>.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- KARY MULLIS -->
+        <div class="article-section reveal" id="sec-mullis">
+            <span class="section-label">El Inventor</span>
+            <h2 class="article-h2">Kary Mullis: el <span>genio excéntrico</span></h2>
+
+            <div class="figure reveal" style="max-width:340px;margin:0 auto;">
+                <img class="figure-img" style="height:auto;max-height:420px;object-fit:contain;background:#1a1a1a;padding:16px;"
+                     src="kary_Mullis.webp"
+                     alt="Retrato de Kary Mullis"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🧬</div>
+                <div class="figure-caption">
+                    <strong>Kary Banks Mullis (1944–2019)</strong> Bioquímico estadounidense.
+                    Inventó la técnica de PCR en 1983 mientras trabajaba en Cetus Corporation.
+                    Recibió el <strong>Premio Nobel de Química en 1993</strong>.
+                    Fue una figura controvertida, brillante en lo técnico pero polémico en sus opiniones.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Mullis no era un científico tradicional. Era surfista, escritor y un personaje
+                inclasificable. La comunidad científica dudó inicialmente de su técnica: parecía
+                <em>demasiado simple</em> para funcionar. Pero la PCR era elegante justamente
+                por su simplicidad: usaba un principio fundamental del ADN —su capacidad de
+                <strong>replicarse</strong>— y lo convertía en una herramienta práctica.
+            </p>
+
+            <div class="callout yellow reveal">
+                <div class="callout-tag">💡 Serendipia y método</div>
+                <div class="callout-title">¿Fue la PCR un descubrimiento o una invención?</div>
+                <p>La PCR es un caso fascinante para la filosofía de la ciencia: Mullis no
+                descubrió nada nuevo sobre la naturaleza. Lo que hizo fue <strong>combinar
+                conocimientos existentes</strong> (la replicación del ADN, la enzima polimerasa,
+                los efectos del calor) de una manera nueva para crear una <strong>tecnología</strong>.
+                Esto plantea preguntas filosóficas: ¿cuál es la diferencia entre
+                descubrimiento científico e invención tecnológica? ¿La PCR es ciencia o tecnología?
+                ¿O es el punto exacto donde una se convierte en la otra?</p>
+            </div>
+
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">1953</div>
+                    <div>
+                        <div class="timeline-year">1953</div>
+                        <div class="timeline-event">Watson y Crick descubren la estructura del ADN</div>
+                        <div class="timeline-desc">La doble hélice. Se comprende cómo el ADN puede copiarse a sí mismo separando sus dos cadenas.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">1983</div>
+                    <div>
+                        <div class="timeline-year">1983</div>
+                        <div class="timeline-event">Mullis concibe la idea de la PCR</div>
+                        <div class="timeline-desc">Conduciendo de noche por California, imagina un proceso cíclico para amplificar ADN. La idea parece demasiado simple.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">1986</div>
+                    <div>
+                        <div class="timeline-year">1986</div>
+                        <div class="timeline-event">Se introduce la Taq polimerasa</div>
+                        <div class="timeline-desc">La enzima termoestable de Thermus aquaticus permite automatizar el proceso. Ya no hay que agregar enzima nueva en cada ciclo.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">1993</div>
+                    <div>
+                        <div class="timeline-year">1993</div>
+                        <div class="timeline-event">Mullis recibe el Premio Nobel de Química</div>
+                        <div class="timeline-desc">"Por su invención del método de la reacción en cadena de la polimerasa (PCR)". Una de las pocas veces que el Nobel se otorga por una técnica, no por un descubrimiento.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot muted">2020</div>
+                    <div>
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-event">La PCR se convierte en el test diagnóstico del COVID-19</div>
+                        <div class="timeline-desc">Miles de millones de tests PCR se realizan en todo el mundo. La técnica de 1983 salva millones de vidas 37 años después.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- CÓMO FUNCIONA LA PCR -->
+        <div class="article-section reveal" id="sec-pcr">
+            <span class="section-label">La Técnica</span>
+            <h2 class="article-h2">¿Cómo funciona la <span>PCR</span>?</h2>
+
+            <p class="article-p">
+                La PCR explota una propiedad fundamental del ADN: cuando se calienta, las dos
+                cadenas de la doble hélice se <strong>separan</strong>. Cuando se enfría, cada
+                cadena puede servir como molde para crear una copia nueva. Repitiendo este ciclo
+                de calentar y enfriar muchas veces, cada ciclo <strong>duplica</strong> la
+                cantidad de ADN. Es crecimiento exponencial puro.
+            </p>
+
+            <div class="pcr-steps reveal">
+                <div class="pcr-step">
+                    <div class="pcr-step-num">1</div>
+                    <div class="pcr-step-temp hot">94–98 °C</div>
+                    <div class="pcr-step-name">Desnaturalización</div>
+                    <div class="pcr-step-desc">
+                        Se calienta la muestra. Las dos cadenas del ADN se <strong>separan</strong>
+                        como una cremallera que se abre. Se rompen los puentes de hidrógeno.
+                    </div>
+                </div>
+                <div class="pcr-step">
+                    <div class="pcr-step-num">2</div>
+                    <div class="pcr-step-temp warm">50–65 °C</div>
+                    <div class="pcr-step-name">Hibridación</div>
+                    <div class="pcr-step-desc">
+                        Se enfría. Los <strong>primers</strong> (cebadores) se unen a las zonas
+                        específicas del ADN que queremos copiar. Son las "señales de inicio".
+                    </div>
+                </div>
+                <div class="pcr-step">
+                    <div class="pcr-step-num">3</div>
+                    <div class="pcr-step-temp mid">72 °C</div>
+                    <div class="pcr-step-name">Extensión</div>
+                    <div class="pcr-step-desc">
+                        La enzima <strong>Taq polimerasa</strong> lee cada cadena y construye
+                        la cadena complementaria. Al final, hay <strong>dos copias</strong>
+                        donde antes había una.
+                    </div>
+                </div>
+            </div>
+
+            <div class="figure reveal">
+                <img class="figure-img" style="height:auto;max-height:520px;object-fit:contain;background:#fff;padding:16px;"
+                     src="Reacción-en-cadena-de-la-polimerasa_es_0.jpg"
+                     alt="Diagrama de la Reacción en Cadena de la Polimerasa (PCR) mostrando los ciclos de copiado del ADN"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🧬</div>
+                <div class="figure-caption">
+                    <strong>La Reacción en Cadena de la Polimerasa (PCR).</strong> Cada ciclo de tres pasos
+                    (desnaturalización → hibridación → extensión) duplica la cantidad de ADN.
+                    En 30 ciclos, una sola molécula se convierte en más de <strong>mil millones de copias</strong>.
+                </div>
+            </div>
+
+            <!-- CYCLE COUNTER -->
+            <div class="cycle-demo reveal">
+                <div class="cycle-title">
+                    <span>Crecimiento exponencial:</span> copias de ADN por ciclo de PCR
+                </div>
+                <div class="cycle-grid">
+                    <div class="cycle-card">
+                        <div class="cycle-num">Ciclo 1</div>
+                        <div class="cycle-copies">2</div>
+                        <div class="cycle-label">copias</div>
+                    </div>
+                    <div class="cycle-card">
+                        <div class="cycle-num">Ciclo 5</div>
+                        <div class="cycle-copies">32</div>
+                        <div class="cycle-label">copias</div>
+                    </div>
+                    <div class="cycle-card">
+                        <div class="cycle-num">Ciclo 10</div>
+                        <div class="cycle-copies">1.024</div>
+                        <div class="cycle-label">copias</div>
+                    </div>
+                    <div class="cycle-card">
+                        <div class="cycle-num">Ciclo 15</div>
+                        <div class="cycle-copies">32.768</div>
+                        <div class="cycle-label">copias</div>
+                    </div>
+                    <div class="cycle-card">
+                        <div class="cycle-num">Ciclo 20</div>
+                        <div class="cycle-copies">1 M</div>
+                        <div class="cycle-label">1.048.576</div>
+                    </div>
+                    <div class="cycle-card">
+                        <div class="cycle-num">Ciclo 25</div>
+                        <div class="cycle-copies">33 M</div>
+                        <div class="cycle-label">33.554.432</div>
+                    </div>
+                    <div class="cycle-card">
+                        <div class="cycle-num">Ciclo 30</div>
+                        <div class="cycle-copies">1.073 M</div>
+                        <div class="cycle-label">mil millones</div>
+                    </div>
+                    <div class="cycle-card" style="background:rgba(250,204,21,0.1);">
+                        <div class="cycle-num">Ciclo 35</div>
+                        <div class="cycle-copies" style="color:var(--yellow);">34.000 M</div>
+                        <div class="cycle-label" style="color:rgba(255,255,255,0.6);">34 mil millones</div>
+                    </div>
+                </div>
+                <p class="cycle-caption">
+                    Cada ciclo dura apenas unos minutos. En 2-3 horas, la PCR genera
+                    suficiente ADN para analizar a partir de <strong style="color:#fff">una sola molécula original</strong>.
+                    Es la fotocopiadora molecular más poderosa del mundo.
+                </p>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "Con la PCR, si puedes imaginarlo, puedes hacerlo.
+                    Puedes tomar algo aparte, poner todo junto. Puedes diseñar lo que quieras."
+                </p>
+                <p class="pull-quote-author">— Kary Mullis, entrevista (1993)</p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- COVID-19 -->
+        <div class="article-section reveal" id="sec-covid">
+            <span class="section-label">Ciencia, Tecnología y Sociedad</span>
+            <h2 class="article-h2">La PCR contra el <span>COVID-19</span></h2>
+
+            <div class="figure reveal">
+                <img class="figure-img"
+                     src="coronavirus.jpg"
+                     alt="Imagen del virus SARS-CoV-2 causante del COVID-19"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🦠</div>
+                <div class="figure-caption">
+                    <strong>SARS-CoV-2</strong> — El coronavirus causante de la pandemia de COVID-19.
+                    Imagen de microscopía electrónica coloreada. Sus proteínas "spike" (en rojo)
+                    le dan la apariencia de corona que le da nombre al virus.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Cuando en enero de 2020 científicos chinos publicaron la secuencia genética
+                del nuevo coronavirus, laboratorios de todo el mundo diseñaron en <strong>días</strong>
+                primers específicos para detectarlo mediante PCR. En cuestión de semanas,
+                el test RT-PCR (PCR con transcriptasa reversa, ya que el COVID es un virus de ARN)
+                se convirtió en el <strong>estándar de oro</strong> para el diagnóstico.
+            </p>
+
+            <div class="callout blue reveal">
+                <div class="callout-tag">🦠 ¿Cómo funciona el test PCR para COVID?</div>
+                <div class="callout-title">Del hisopado al resultado</div>
+                <p><strong>1. Muestra:</strong> Se toma un hisopado nasofaríngeo del paciente.
+                En esa muestra puede haber virus (ARN viral).</p>
+                <p><strong>2. Transcripción reversa:</strong> Como el SARS-CoV-2 tiene ARN
+                (no ADN), primero se convierte el ARN en ADN con una enzima llamada
+                transcriptasa reversa. Por eso se llama <strong>RT-PCR</strong>.</p>
+                <p><strong>3. Amplificación:</strong> Se aplica la PCR clásica para multiplicar
+                el ADN viral millones de veces.</p>
+                <p><strong>4. Detección:</strong> Si el ADN viral se amplifica (hay señal
+                fluorescente), el test es <strong>positivo</strong>. Si no se amplifica,
+                es <strong>negativo</strong> — no había virus en la muestra.</p>
+            </div>
+
+            <div class="callout dark-box reveal">
+                <div class="callout-tag">📊 La PCR en números</div>
+                <div class="callout-title">El impacto global de una técnica de laboratorio</div>
+                <p>Durante la pandemia, se realizaron más de <strong>5.000 millones de tests PCR</strong>
+                en todo el mundo. En Argentina, el sistema de diagnóstico dependió casi exclusivamente
+                de esta técnica durante 2020 y 2021. Cada test PCR positivo activaba protocolos de
+                aislamiento, rastreo de contactos y decisiones de política sanitaria.</p>
+                <p>Sin la PCR, no habría habido diagnóstico preciso. Sin diagnóstico, no habría
+                sido posible saber cuántos infectados había, ni tomar decisiones de cuarentena,
+                ni evaluar la efectividad de las vacunas. <strong>Una técnica de laboratorio
+                de 1983 determinó la política global del siglo XXI.</strong></p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- FILOSOFÍA: CIENCIA Y TECNOLOGÍA -->
+        <div class="article-section reveal" id="sec-filosofia">
+            <span class="section-label">Análisis Filosófico</span>
+            <h2 class="article-h2">¿Dónde termina la <span>ciencia</span> y empieza la <span>tecnología</span>?</h2>
+
+            <p class="article-p">
+                La historia de la PCR es el caso perfecto para discutir uno de los temas
+                centrales de nuestra materia: la relación entre <strong>ciencia básica</strong>,
+                <strong>ciencia aplicada</strong> y <strong>tecnología</strong>. ¿Son cosas
+                distintas o un continuo?
+            </p>
+
+            <div class="concept-grid reveal">
+                <div class="concept-card">
+                    <div class="concept-name">Ciencia Básica</div>
+                    <div class="concept-def">
+                        Watson y Crick descubren la estructura del ADN (1953). Kornberg descubre
+                        la ADN polimerasa (1956). Conocimiento puro, sin aplicación inmediata.
+                        <strong>Busca entender</strong>.
+                    </div>
+                </div>
+                <div class="concept-card red-top">
+                    <div class="concept-name red">Ciencia Aplicada</div>
+                    <div class="concept-def">
+                        Mullis combina esos conocimientos para diseñar un método de amplificación
+                        del ADN (1983). Usa ciencia básica con un <strong>objetivo práctico</strong>.
+                        <strong>Busca solucionar</strong>.
+                    </div>
+                </div>
+                <div class="concept-card blue-top">
+                    <div class="concept-name blue">Tecnología</div>
+                    <div class="concept-def">
+                        El termociclador (la máquina de PCR), los kits de diagnóstico, los
+                        protocolos estandarizados. Producción industrial, patentes, comercio.
+                        <strong>Busca producir</strong>.
+                    </div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-name">Impacto Social</div>
+                    <div class="concept-def">
+                        Diagnóstico de COVID, identificación forense, pruebas de paternidad,
+                        detección de transgénicos. La tecnología transforma la sociedad.
+                        <strong>Genera consecuencias</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout green reveal">
+                <div class="callout-tag">🧠 Para pensar con Kuhn y Popper</div>
+                <div class="callout-title">La PCR y los paradigmas de la filosofía de la ciencia</div>
+                <p><strong>Perspectiva de Kuhn:</strong> La PCR no representa un cambio de paradigma
+                en sí misma. Trabaja <em>dentro</em> del paradigma de la biología molecular.
+                Pero su impacto fue tan grande que transformó la <strong>práctica</strong> de la
+                biología: después de la PCR, la genética ya no fue la misma. ¿Puede una herramienta
+                técnica provocar una revolución científica?</p>
+                <p><strong>Perspectiva de Popper:</strong> La PCR reforzó enormemente la capacidad
+                de <strong>testear</strong> hipótesis genéticas. Antes, verificar si un gen estaba
+                presente requería semanas. Con PCR, horas. ¿Una tecnología que hace más fácil
+                la falsación fortalece la empresa científica?</p>
+                <p><strong>Perspectiva CTS (Ciencia-Tecnología-Sociedad):</strong> La PCR muestra
+                que la relación entre ciencia y sociedad no es unidireccional. La sociedad demanda
+                diagnósticos (COVID) → la ciencia provee la técnica (PCR) → la tecnología la
+                produce masivamente → los resultados transforman la política y la vida social.</p>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "La PCR es a la biología molecular lo que el telescopio fue a la astronomía:
+                    no cambia lo que hay afuera, pero cambia radicalmente lo que podemos ver."
+                </p>
+                <p class="pull-quote-author">— Analogía didáctica</p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- DISCUSIÓN -->
+        <div class="discussion-section reveal">
+            <h3 class="discussion-title">🤔 Para pensar y debatir</h3>
+            <ul class="question-list">
+                <li class="question-item">
+                    <div class="question-num">1</div>
+                    <p class="question-text">La PCR fue inventada en 1983 pero recién fue masivamente utilizada en 2020 con el COVID. ¿Qué nos dice esto sobre la relación entre invención tecnológica y necesidad social? ¿La tecnología espera a que la sociedad la necesite?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">2</div>
+                    <p class="question-text">Mullis recibió el Nobel por una <em>técnica</em>, no por un descubrimiento teórico. ¿Debería la ciencia premiar igual a quienes descubren conocimiento puro y a quienes inventan herramientas prácticas? ¿Por qué?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">3</div>
+                    <p class="question-text">Durante la pandemia, los resultados de los tests PCR determinaron si las personas podían trabajar, viajar o ver a sus familias. ¿Qué poder tiene una tecnología cuando se convierte en herramienta de política pública? ¿Quién debería controlar ese poder?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">4</div>
+                    <p class="question-text">Sin los descubrimientos de Watson, Crick y Kornberg sobre el ADN, la PCR no habría sido posible. ¿Puede existir tecnología sin ciencia básica previa? ¿Y puede la ciencia básica progresar sin herramientas tecnológicas?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">5</div>
+                    <p class="question-text">La PCR también se usa para pruebas de paternidad, identificación de víctimas de desastres, y resolución de crímenes. ¿Hasta qué punto una misma tecnología puede servir tanto al bien como al control social? ¿Existen límites éticos en el uso de la PCR?</p>
+                </li>
+            </ul>
+        </div>
+    </article>
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="article-sidebar">
+        <div class="sidebar-sticky">
+
+            <!-- TABLE OF CONTENTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-list"></i>
+                    Contenido de la clase
+                </div>
+                <ul class="toc-list">
+                    <li class="toc-item"><a href="#sec-intro" class="toc-link"><span class="toc-num">01</span> Una idea en la ruta</a></li>
+                    <li class="toc-item"><a href="#sec-mullis" class="toc-link"><span class="toc-num">02</span> Kary Mullis</a></li>
+                    <li class="toc-item"><a href="#sec-pcr" class="toc-link"><span class="toc-num">03</span> ¿Cómo funciona la PCR?</a></li>
+                    <li class="toc-item"><a href="#sec-covid" class="toc-link"><span class="toc-num">04</span> PCR contra el COVID-19</a></li>
+                    <li class="toc-item"><a href="#sec-filosofia" class="toc-link"><span class="toc-num">05</span> Ciencia vs. Tecnología</a></li>
+                </ul>
+            </div>
+
+            <!-- CONCEPTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-key"></i>
+                    Conceptos clave
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">PCR</div>
+                    <div class="concept-mini-def">Reacción en Cadena de la Polimerasa. Técnica que permite copiar millones de veces un fragmento específico de ADN.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Taq Polimerasa</div>
+                    <div class="concept-mini-def">Enzima termoestable aislada de la bacteria Thermus aquaticus. Soporta las altas temperaturas de la PCR sin destruirse.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Primers</div>
+                    <div class="concept-mini-def">Pequeñas secuencias de ADN sintético que marcan el inicio y el final del fragmento que se quiere amplificar.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">RT-PCR</div>
+                    <div class="concept-mini-def">Variante de la PCR que primero convierte ARN en ADN. Usada para detectar virus de ARN como el SARS-CoV-2.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Ciencia aplicada</div>
+                    <div class="concept-mini-def">Uso de conocimiento científico básico para resolver problemas prácticos. La PCR es ciencia aplicada que se convierte en tecnología.</div>
+                </div>
+            </div>
+
+            <!-- PHILOSOPHERS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Protagonistas
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🧬</div>
+                    <div>
+                        <div class="philosopher-name">Kary Mullis</div>
+                        <div class="philosopher-dates">1944 – 2019 · EE.UU.</div>
+                        <div class="philosopher-bio">Bioquímico. Inventó la PCR en 1983. Nobel de Química 1993. Revolucionó la biología molecular con una idea "demasiado simple".</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🔬</div>
+                    <div>
+                        <div class="philosopher-name">Watson & Crick</div>
+                        <div class="philosopher-dates">1953 · Cambridge</div>
+                        <div class="philosopher-bio">Descubrieron la estructura de la doble hélice del ADN. Sin ese conocimiento básico, la PCR no habría sido posible.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🦠</div>
+                    <div>
+                        <div class="philosopher-name">SARS-CoV-2</div>
+                        <div class="philosopher-dates">2019 – presente</div>
+                        <div class="philosopher-bio">El coronavirus que desató la pandemia. Su diagnóstico masivo fue posible gracias a la RT-PCR, 37 años después de su invención.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONNECTIONS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-link"></i>
+                    Conexiones con la Unidad
+                </div>
+                <div class="unit-connection">
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>CTS:</strong> La PCR es el ejemplo perfecto de la articulación entre ciencia básica, ciencia aplicada, tecnología y sociedad.</p>
+                    </div>
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Serendipia:</strong> La idea de Mullis surgió conduciendo en una autopista, no en un laboratorio.</p>
+                    </div>
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Instrumentos:</strong> Como el telescopio para Galileo, la PCR amplió radicalmente lo que la biología podía observar y estudiar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREV CLASS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-backward"></i>
+                    Clase anterior
+                </div>
+                <div class="next-class">
+                    <div class="next-label">Clase 18 · Unidad 3</div>
+                    <div class="next-title">El Inductivismo: Bacon y el Pavo de Russell</div>
+                    <button class="btn-next" onclick="window.location.href='unidad3-clase18.html'">
+                        <span>IR A CLASE 18</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </aside>
+
+</main>
+
+<!-- FOOTER NAV -->
+<nav class="article-footer-nav">
+    <a href="unidad2-clase16.html" class="footer-nav-link prev">
+        <div class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></div>
+        <div>
+            <div class="footer-nav-direction">Clase Anterior</div>
+            <div class="footer-nav-title">U2·C16 — Mendel y la Herencia</div>
+        </div>
+    </a>
+    <div style="text-align:center; font-size:12px; color:var(--text3);">
+        <div style="font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--text);">FILOSOFÍA&CIENCIA</div>
+        Unidad 2 · Clase 17
+    </div>
+    <a href="unidad3-clase18.html" class="footer-nav-link" style="text-align:right;">
+        <div style="text-align:right;">
+            <div class="footer-nav-direction">Siguiente Clase</div>
+            <div class="footer-nav-title">U3·C18 — El Inductivismo</div>
+        </div>
+        <div class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+</nav>
+
+<script>
+    // Dark mode
+    (function(){
+        const s = localStorage.getItem('theme');
+        if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){
+            document.documentElement.classList.add('dark');
+        }
+    })();
+    function toggleDark(){
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Progress bar
+    window.addEventListener('scroll', ()=>{
+        const d = document.documentElement;
+        const pct = (window.scrollY / (d.scrollHeight - d.clientHeight)) * 100;
+        document.getElementById('progress').style.width = pct + '%';
+    });
+
+    // Reveal on scroll
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // TOC Active
+    const sections = document.querySelectorAll('.article-section[id]');
+    const tocItems = document.querySelectorAll('.toc-item');
+    const tocObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                tocItems.forEach(t => t.querySelector('a').classList.remove('active'));
+                const match = [...tocItems].find(t => t.querySelector('a').getAttribute('href') === '#' + e.target.id);
+                if (match) match.querySelector('a').classList.add('active');
+            }
+        });
+    }, { threshold: 0.35 });
+    sections.forEach(s => tocObs.observe(s));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+            const el = document.querySelector(a.getAttribute('href'));
+            if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        });
+    });
+
+    console.log('%c🧬 Clase 17 — La PCR: Tecnología, ADN y COVID — cargada.', 'color:#60a5fa;font-weight:bold;font-family:monospace');
+</script>
+</body>
+</html>

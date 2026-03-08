@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ptolomeo y el Arte de Salvar las Apariencias | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .dark {
+            --bg: #111111; --bg2: #1a1a1a; --bg3: #222222;
+            --card: #1e1e1e; --text: #f0ece4; --text2: #c8c0b4;
+            --text3: #888880; --border: #333333;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg); color: var(--text);
+            transition: background 0.4s, color 0.4s;
+        }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress {
+            position: fixed; top: 0; left: 0;
+            height: 3px; width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999; transition: width 0.1s;
+        }
+
+        /* ===================== TOP NAV ===================== */
+        #topnav {
+            position: sticky; top: 0; z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+        .topnav-left { display: flex; align-items: center; gap: 20px; }
+        .back-link {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 600;
+            letter-spacing: 0.08em; color: var(--text3);
+            transition: color var(--transition);
+        }
+        .back-link:hover { color: var(--text); }
+        .nav-sep { color: var(--border); }
+        .breadcrumb {
+            font-size: 12px; color: var(--text3);
+            display: none;
+        }
+        @media(min-width:640px){ .breadcrumb { display: block; } }
+        .breadcrumb span { color: var(--yellow-dark); font-weight: 600; }
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+        @media(min-width:900px){ .topnav-center { display: block; } }
+        .topnav-right { display: flex; align-items: center; gap: 12px; }
+        .nav-btn {
+            background: none; border: 1px solid var(--border);
+            color: var(--text3); cursor: pointer;
+            padding: 6px 14px; border-radius: 999px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.08em;
+            display: flex; align-items: center; gap: 6px;
+            transition: all var(--transition);
+        }
+        .nav-btn:hover { border-color: var(--yellow); color: var(--text); }
+        .dark-toggle-nav {
+            background: none; border: 1px solid var(--border);
+            width: 36px; height: 20px; border-radius: 999px;
+            position: relative; cursor: pointer;
+            transition: all var(--transition);
+        }
+        .dark-toggle-nav::after {
+            content: ''; position: absolute;
+            left: 3px; top: 50%; transform: translateY(-50%);
+            width: 13px; height: 13px; border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+        .dark .dark-toggle-nav { border-color: var(--yellow); background: var(--yellow); }
+        .dark .dark-toggle-nav::after { left: calc(100% - 16px); background: #000; }
+
+        /* ===================== ARTICLE HERO ===================== */
+        #art-hero {
+            background:
+                linear-gradient(to left, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 32%, rgba(0,0,0,.97) 58%),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ptolemy_by_Cristofano_dell%27Altissimo.jpg/440px-Ptolemy_by_Cristofano_dell%27Altissimo.jpg') right top/auto 100% no-repeat,
+                url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.5);
+            min-height: 92vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+        .hero-breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+            text-transform: uppercase; margin-bottom: 28px;
+        }
+        .hero-badge {
+            background: var(--yellow); color: #000;
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px; font-weight: 800;
+        }
+        .hero-badge-outline {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px;
+        }
+        .hero-eyebrow {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 7vw, 88px);
+            font-weight: 900; line-height: 0.95;
+            letter-spacing: -0.03em; margin-bottom: 24px;
+        }
+        .hero-title em { font-style: italic; color: var(--yellow); }
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255,255,255,0.8);
+            max-width: 640px; line-height: 1.65;
+            margin-bottom: 48px;
+        }
+        .hero-meta {
+            display: flex; align-items: center; justify-content: center;
+            gap: 24px; flex-wrap: wrap;
+            font-size: 12px; color: rgba(255,255,255,0.55);
+            letter-spacing: 0.05em;
+        }
+        .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+        .hero-meta i { color: var(--yellow); }
+        .hero-meta-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+        .hero-scroll-cue {
+            position: absolute; bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.4); font-size: 10px;
+            letter-spacing: 0.2em; text-transform: uppercase;
+        }
+        .scroll-dot {
+            width: 28px; height: 44px; border-radius: 14px;
+            border: 2px solid rgba(255,255,255,0.25);
+            display: flex; align-items: flex-start; justify-content: center;
+            padding-top: 6px;
+        }
+        .scroll-dot::after {
+            content: '';
+            width: 4px; height: 8px; border-radius: 2px;
+            background: rgba(255,255,255,0.4);
+            animation: scrolldot 1.8s infinite;
+        }
+        @keyframes scrolldot {
+            0%,100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(8px); opacity: 0.3; }
+        }
+
+        /* ===================== ARTICLE LAYOUT ===================== */
+        .article-wrap {
+            max-width: 1280px; margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+        @media(min-width:1024px){
+            .article-wrap { grid-template-columns: 1fr 320px; gap: 64px; }
+        }
+        /* MAIN CONTENT */
+        .article-main {}
+        .article-section { margin-bottom: 56px; }
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px; font-weight: 900;
+            line-height: 0.8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px; line-height: 1.85;
+            color: var(--text2); margin-bottom: 20px;
+        }
+        .article-p strong { color: var(--text); font-weight: 700; }
+        .article-p em { font-style: italic; }
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900; letter-spacing: -0.02em;
+            line-height: 1.1; color: var(--text);
+            margin-bottom: 20px;
+        }
+        .article-h2 span { color: var(--yellow-dark); font-style: italic; }
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            color: var(--text); margin: 32px 0 14px;
+        }
+        .section-label {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px; display: block;
+        }
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 5px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 120px; font-weight: 900;
+            color: var(--yellow); opacity: 0.15;
+            position: absolute; top: -20px; left: 16px;
+            line-height: 1;
+        }
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.4; color: var(--text);
+            position: relative; z-index: 1;
+        }
+        .pull-quote-author {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-top: 12px;
+        }
+        /* Image / Figure */
+        .figure {
+            margin: 36px 0;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .figure-img {
+            width: 100%; height: 320px;
+            object-fit: cover; display: block;
+        }
+        .figure-img-placeholder {
+            width: 100%; height: 280px;
+            background: var(--bg3);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 12px;
+            font-size: 64px;
+        }
+        .figure-caption {
+            padding: 14px 20px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-size: 12px; color: var(--text3);
+            font-style: italic; line-height: 1.5;
+        }
+        .figure-caption strong { color: var(--text2); font-style: normal; }
+        /* Callout boxes */
+        .callout {
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+        .callout.yellow {
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+        .dark .callout.yellow {
+            background: linear-gradient(135deg, #2a2400, #1a1800);
+            border-color: #5a4a00;
+        }
+        .callout.dark-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+        .callout.red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fca5a5;
+        }
+        .dark .callout.red {
+            background: linear-gradient(135deg, #200808, #1a0606);
+            border-color: #7f1d1d;
+        }
+        .callout-tag {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        }
+        .callout.yellow .callout-tag { color: #92400e; }
+        .callout.red .callout-tag { color: #991b1b; }
+        .callout.dark-box .callout-tag { color: var(--yellow-dark); }
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 12px; color: var(--text);
+        }
+        .callout p {
+            font-size: 14px; line-height: 1.7; color: var(--text2);
+        }
+        .callout p + p { margin-top: 10px; }
+        /* Concept grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px; margin: 28px 0;
+        }
+        @media(min-width:640px){ .concept-grid { grid-template-columns: 1fr 1fr; } }
+        .concept-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px 22px;
+            border-top: 4px solid var(--yellow);
+        }
+        .concept-card.red-top { border-top-color: var(--red); }
+        .concept-name {
+            font-size: 12px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 8px;
+        }
+        .concept-name.red { color: var(--red); }
+        .concept-def {
+            font-size: 13px; line-height: 1.65; color: var(--text2);
+        }
+        /* Timeline */
+        .timeline { margin: 32px 0; }
+        .timeline-item {
+            display: flex; gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px; top: 36px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: var(--border);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800;
+            flex-shrink: 0; z-index: 1;
+        }
+        .timeline-dot.muted {
+            background: var(--bg3); color: var(--text3);
+            border: 2px solid var(--border);
+            font-size: 11px;
+        }
+        .timeline-year {
+            font-size: 11px; font-weight: 700;
+            color: var(--yellow-dark); letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+        .timeline-event { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .timeline-desc { font-size: 13px; color: var(--text3); line-height: 1.5; }
+        /* Divider */
+        .art-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 48px 0;
+        }
+
+        /* ===================== EPICYCLE SVG ===================== */
+        .epicycle-wrap {
+            background: #0a0a1a;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 36px 0;
+            display: flex; flex-direction: column; align-items: center;
+            border: 1px solid #1e1e3a;
+            overflow: hidden; position: relative;
+        }
+        .epicycle-title {
+            color: rgba(255,255,255,0.6);
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 28px; text-align: center;
+        }
+        .epicycle-title span { color: var(--yellow); }
+        .epicycle-svg { width: 100%; max-width: 420px; height: 420px; }
+        /* Stars background for SVG */
+        .star { fill: white; animation: twinkle var(--d, 3s) infinite var(--del, 0s); }
+        @keyframes twinkle { 0%,100%{opacity:0.8} 50%{opacity:0.2} }
+        /* Planet on deferent */
+        .deferent-planet {
+            animation: deferent-rot 12s linear infinite;
+            transform-origin: 200px 200px;
+        }
+        /* Epicycle circle rotates along with planet */
+        .epicycle-group {
+            animation: deferent-rot 12s linear infinite;
+            transform-origin: 200px 200px;
+        }
+        /* Planet on epicycle rotates in opposite direction (retrograde) */
+        .epicycle-planet-group {
+            animation: epicycle-rot 4s linear infinite;
+        }
+        @keyframes deferent-rot {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes epicycle-rot {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .epicycle-labels {
+            display: flex; gap: 28px; flex-wrap: wrap;
+            justify-content: center; margin-top: 24px;
+        }
+        .epi-label {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; color: rgba(255,255,255,0.65);
+        }
+        .epi-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .epicycle-caption {
+            font-size: 13px; color: rgba(255,255,255,0.45);
+            text-align: center; margin-top: 20px;
+            font-family: 'Libre Baskerville', serif; font-style: italic;
+            max-width: 380px; line-height: 1.6;
+        }
+
+        /* ===================== SIDEBAR ===================== */
+        .article-sidebar {}
+        .sidebar-sticky { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px; overflow: hidden;
+        }
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex; align-items: center; gap: 8px;
+        }
+        /* Table of contents */
+        .toc-list { list-style: none; padding: 12px 0; }
+        .toc-item a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px; color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .toc-item a:hover,
+        .toc-item a.active {
+            color: var(--text); background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+        .toc-num { font-size: 11px; color: var(--yellow-dark); font-weight: 700; min-width: 20px; }
+        /* Key concepts sidebar */
+        .concept-mini { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+        .concept-mini:last-child { border-bottom: none; }
+        .concept-mini-name {
+            font-size: 11px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 5px;
+        }
+        .concept-mini-def { font-size: 12px; line-height: 1.55; color: var(--text3); }
+        /* Philosopher card */
+        .philosopher-card {
+            display: flex; gap: 14px; align-items: flex-start;
+            padding: 16px 20px; border-bottom: 1px solid var(--border);
+        }
+        .philosopher-card:last-child { border-bottom: none; }
+        .philosopher-avatar {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--bg3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .philosopher-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .philosopher-dates { font-size: 11px; color: var(--yellow-dark); font-weight: 600; margin-bottom: 5px; }
+        .philosopher-bio { font-size: 12px; color: var(--text3); line-height: 1.5; }
+        /* Unit connection */
+        .unit-connection {
+            padding: 20px;
+        }
+        .unit-conn-item {
+            display: flex; gap: 12px; align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .unit-conn-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--yellow); margin-top: 5px; flex-shrink: 0;
+        }
+        .unit-conn-text { font-size: 12px; line-height: 1.5; color: var(--text2); }
+        /* Next class */
+        .next-class { padding: 20px; }
+        .next-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; }
+        .next-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
+        .btn-next {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--yellow); color: #000;
+            border: none; padding: 12px 16px;
+            border-radius: 12px; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; cursor: pointer;
+            transition: all var(--transition); width: 100%;
+        }
+        .btn-next:hover { background: var(--yellow-dark); }
+
+        /* ===================== DISCUSSION ===================== */
+        .discussion-section {
+            background: var(--bg3);
+            border-radius: 20px; padding: 40px;
+            margin: 48px 0;
+            border: 1px solid var(--border);
+        }
+        .discussion-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; font-weight: 900;
+            color: var(--text); margin-bottom: 24px;
+        }
+        .question-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .question-item {
+            display: flex; gap: 16px;
+            padding: 18px 20px;
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: border-color var(--transition);
+            cursor: pointer;
+        }
+        .question-item:hover { border-color: var(--yellow); }
+        .question-num {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; flex-shrink: 0;
+        }
+        .question-text { font-size: 14px; line-height: 1.6; color: var(--text2); padding-top: 5px; }
+
+        /* ===================== FOOTER NAV ===================== */
+        .article-footer-nav {
+            max-width: 1280px; margin: 0 auto;
+            padding: 40px 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid var(--border);
+            gap: 20px; flex-wrap: wrap;
+        }
+        .footer-nav-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 24px; border-radius: 16px;
+            background: var(--card); border: 1px solid var(--border);
+            transition: all var(--transition); cursor: pointer;
+            max-width: 300px;
+        }
+        .footer-nav-link:hover { border-color: var(--yellow); transform: translateX(4px); }
+        .footer-nav-link.prev:hover { transform: translateX(-4px); }
+        .footer-nav-direction { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+        .footer-nav-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+        .footer-nav-icon { font-size: 18px; color: var(--text3); }
+
+        /* ===================== REVEAL ===================== */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+    <div class="topnav-left">
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Volver
+        </a>
+        <span class="nav-sep">|</span>
+        <div class="breadcrumb">
+            <span>Unidad 1</span> · Clase 1 de 8
+        </div>
+    </div>
+    <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+    <div class="topnav-right">
+        <button class="nav-btn" onclick="window.location.href='unidad1-clase2.html'">
+            Clase 2 <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="nav-btn" onclick="window.print()">
+            <i class="fa-solid fa-file-pdf"></i> PDF
+        </button>
+        <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header id="art-hero">
+    <div class="hero-breadcrumb">
+        <span class="hero-badge">UNIDAD 1 · CLASE 1</span>
+        <span class="hero-badge-outline">PARADIGMAS Y TEORÍAS CIENTÍFICAS</span>
+    </div>
+    <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6° Año</p>
+    <h1 class="hero-title">
+        Ptolomeo y el Arte<br>de <em>Salvar</em><br>las Apariencias
+    </h1>
+    <p class="hero-subtitle">
+        Del cosmos perfecto de Aristóteles a los epiciclos ptolemaicos:
+        la primera gran hipótesis <em>ad hoc</em> de la historia de la ciencia.
+    </p>
+    <div class="hero-meta">
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Prof. Filosofía & Ciencia</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-calendar"></i>
+            <span>Ciclo 2025</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-clock"></i>
+            <span>60 min · Clase 1</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Kuhn · Ptolomeo · Paradigmas</span>
+        </div>
+    </div>
+    <div class="hero-scroll-cue">
+        <div class="scroll-dot"></div>
+        <span>Comenzar</span>
+    </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<main class="article-wrap">
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <article class="article-main">
+
+        <!-- INTRO -->
+        <div class="article-section reveal" id="sec-intro">
+            <span class="section-label">Introducción</span>
+            <h2 class="article-h2">El cielo que <span>nunca</span> encajaba</h2>
+            <p class="article-p dropcap">
+                Imaginate parado en medio del desierto egipcio, en la ciudad de Alejandría, hace casi dos mil años.
+                El cielo nocturno —sin contaminación lumínica, sin smog, sin pantallas— es una bóveda de millones
+                de puntos luminosos que se mueven con una regularidad casi hipnótica. Generación tras generación,
+                los astrónomos de la Antigüedad miraron esos puntos y vieron orden. Vieron <strong>perfección</strong>.
+                Vieron a los dioses.
+            </p>
+            <p class="article-p">
+                Pero había un problema. Cinco de esas "estrellas" se movían de manera extraña. A veces avanzaban,
+                a veces se detenían, a veces retrocedían. Los griegos las llamaron
+                <strong><em>planētai</em></strong> —los "errantes"—. Y explicar su movimiento
+                se convirtió en el problema astronómico más importante durante <strong>quince siglos</strong>.
+            </p>
+            <p class="article-p">
+                La solución que propuso Claudio Ptolomeo en el siglo II d.C. es, para la filosofía de la ciencia,
+                mucho más que astronomía. Es el ejemplo perfecto de cómo una teoría puede "salvarse" frente a
+                la evidencia que la contradice, y qué precio filosófico se paga por ello.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- CONTEXTO HISTÓRICO -->
+        <div class="article-section reveal" id="sec-contexto">
+            <span class="section-label">Contexto Histórico-Espacial</span>
+            <h2 class="article-h2">Alejandría: <span>el laboratorio</span> del mundo antiguo</h2>
+
+            <div class="figure reveal">
+                <img
+                    class="figure-img"
+                    src="https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=900&q=80"
+                    alt="El cielo estrellado del desierto, similar al que veían los astrónomos de Alejandría"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+                <div class="figure-img-placeholder" style="display:none;">
+                    🏛️
+                    <span style="font-size:14px; color:var(--text3); font-family:'Libre Baskerville',serif; font-style:italic;">Alejandría, siglo II d.C.</span>
+                </div>
+                <div class="figure-caption">
+                    <strong>Alejandría, Egipto — Siglo II d.C.</strong> La ciudad era el centro intelectual del mundo mediterráneo.
+                    Su famosa Biblioteca albergaba el conocimiento de Grecia, Persia, Babilonia y Egipto. Ptolomeo trabajó aquí.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Alejandría del siglo II no era solo una ciudad: era <strong>el mundo</strong>. En su Biblioteca
+                convivían rollos de Aristóteles con tablas astronómicas babilónicas, textos médicos egipcios
+                con geometría griega. Era un cruce de civilizaciones, y la astronomía era su ciencia reina.
+            </p>
+
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:12px">BC</div>
+                    <div>
+                        <div class="timeline-year">Siglo IV a.C.</div>
+                        <div class="timeline-event">Aristóteles establece el cosmos geocéntrico</div>
+                        <div class="timeline-desc">La Tierra en el centro. Los planetas en esferas cristalinas perfectas. El cielo, inmutable y eterno.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">280</div>
+                    <div>
+                        <div class="timeline-year">~280 a.C.</div>
+                        <div class="timeline-event">Aristarco propone el heliocentrismo</div>
+                        <div class="timeline-desc">La Tierra gira alrededor del Sol. Nadie le cree. La idea muere durante 1800 años.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="font-size:11px">150</div>
+                    <div>
+                        <div class="timeline-year">~150 d.C.</div>
+                        <div class="timeline-event">Ptolomeo publica el Almagesto</div>
+                        <div class="timeline-desc">El sistema geocéntrico con epiciclos. Funciona con extraordinaria precisión. Domina durante 14 siglos.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot muted">1543</div>
+                    <div>
+                        <div class="timeline-year">1543 d.C.</div>
+                        <div class="timeline-event">Copérnico publica el De Revolutionibus</div>
+                        <div class="timeline-desc">El heliocentrismo regresa. La revolución científica comienza. El paradigma ptolemaico colapsa.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- GEOCENTRISMO -->
+        <div class="article-section reveal" id="sec-geocentrismo">
+            <span class="section-label">El Modelo</span>
+            <h2 class="article-h2">El geocentrismo: mucho más que <span>astronomía</span></h2>
+
+            <div class="figure reveal" style="max-width:300px;margin:0 auto;">
+                <img class="figure-img" style="height:auto;max-height:360px;object-fit:contain;background:#1a1a1a;padding:16px;"
+                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ptolemy_by_Cristofano_dell%27Altissimo.jpg/440px-Ptolemy_by_Cristofano_dell%27Altissimo.jpg"
+                     alt="Retrato de Claudio Ptolomeo"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">⭐</div>
+                <div class="figure-caption">
+                    <strong>Claudio Ptolomeo (c. 100–170 d.C.)</strong> Astrónomo, matemático y geógrafo activo en Alejandría.
+                    Su obra <em>Almagesto</em> (del árabe <em>al-Majistī</em>) dominó la astronomía occidental durante
+                    casi <strong>1.400 años</strong>. Retrato atribuido a Cristofano dell'Altissimo, Uffizi, Florencia.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Para entender a Ptolomeo, primero hay que entender por qué el geocentrismo no era solo
+                una teoría astronómica: era una <strong>visión del mundo completa</strong>, filosófica,
+                religiosa y política.
+            </p>
+
+            <div class="callout yellow reveal">
+                <div class="callout-tag">⚡ Por qué tenía sentido</div>
+                <div class="callout-title">Tres razones por las que la Tierra debía estar en el centro</div>
+                <p><strong>1. El argumento físico (Aristóteles):</strong> Los elementos pesados caen hacia el centro del universo. La Tierra, el elemento más pesado, debe estar en el centro.</p>
+                <p><strong>2. El argumento perceptual:</strong> Si la Tierra se moviera, sentiríamos un viento constante. Las aves serían arrastradas. Las flechas caerían a kilómetros de distancia.</p>
+                <p><strong>3. El argumento de la perfección celeste:</strong> El cielo es la morada de los dioses y los seres perfectos. El círculo es la figura perfecta. Los astros, seres perfectos, deben moverse en círculos perfectos, eternamente, sin cambiar.</p>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "La Tierra permanece inmóvil en el centro del universo, así como el corazón está
+                    en el centro del ser vivo."
+                </p>
+                <p class="pull-quote-author">— Aristóteles, Sobre el Cielo (Siglo IV a.C.)</p>
+            </div>
+
+            <p class="article-p">
+                La elegancia del modelo geocéntrico era que <em>unificaba</em>. Explicaba por qué caen los
+                objetos, por qué el cielo es perfecto, por qué los humanos somos especiales. Moverlo
+                no era solo cambiar de posición en un mapa: era <strong>demoler una cosmovisión entera</strong>.
+            </p>
+
+            <div class="figure reveal">
+                <img
+                    class="figure-img"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Ptolemaic_system_%281524%29.jpg/800px-Ptolemaic_system_%281524%29.jpg"
+                    alt="Diagrama del sistema ptolemaico, 1524"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+                <div class="figure-img-placeholder" style="display:none;">
+                    🌍
+                    <span style="font-size:14px; color:var(--text3); font-family:'Libre Baskerville',serif; font-style:italic;">Sistema geocéntrico ptolemaico (diagrama)</span>
+                </div>
+                <div class="figure-caption">
+                    <strong>El sistema de Ptolomeo (diagrama de 1524).</strong>
+                    La Tierra al centro, rodeada por las esferas de la Luna, Mercurio, Venus, Sol, Marte, Júpiter,
+                    Saturno y la esfera de las estrellas fijas. Un cosmos ordenado, cerrado y perfecto.
+                </div>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- EL PROBLEMA -->
+        <div class="article-section reveal" id="sec-problema">
+            <span class="section-label">La Anomalía</span>
+            <h2 class="article-h2">Los planetas que <span>no obedecían</span></h2>
+
+            <p class="article-p">
+                Acá empiezan los problemas. Si los planetas se mueven en círculos perfectos alrededor
+                de la Tierra, deberían verse siempre del mismo tamaño y siempre moverse en la misma dirección.
+                Pero no lo hacen.
+            </p>
+
+            <div class="callout dark-box reveal">
+                <div class="callout-tag">🔴 La anomalía central</div>
+                <div class="callout-title">El Movimiento Retrógrado de los Planetas</div>
+                <p>
+                    Observá Marte durante varios meses. Primero avanza de oeste a este entre las estrellas.
+                    Luego se detiene. Luego <strong>retrocede</strong> de este a oeste. Luego se detiene de nuevo.
+                    Luego vuelve a avanzar. Este lazo en forma de "S" que dibuja el planeta se llama
+                    <strong>movimiento retrógrado</strong>, y es exactamente lo que NO debería pasar si los planetas
+                    se movieran en círculos perfectos alrededor de la Tierra.
+                </p>
+                <p style="margin-top:12px">
+                    Además, los planetas se ven más brillantes (más cerca) durante la retrogradación, lo que indica
+                    que su distancia a la Tierra <em>varía</em>. Otro golpe al modelo de esferas perfectas.
+                </p>
+            </div>
+
+            <p class="article-p">
+                Para Thomas Kuhn, este tipo de fenómeno que no encaja con el paradigma dominante
+                se llama <strong>anomalía</strong>. No toda anomalía destruye un paradigma: la ciencia normal
+                trabaja para resolverlas dentro del marco existente. Pero si las anomalías se acumulan,
+                si no hay manera de explicarlas, se entra en una fase de <strong>crisis</strong>.
+            </p>
+
+            <p class="article-p">
+                El movimiento retrógrado era conocido desde Babilonia. Los astrónomos lo registraban
+                con precisión milimétrica. Era el <em>enigma</em> central de la astronomía antigua.
+                Y Ptolomeo tenía una solución.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- EPICICLOS -->
+        <div class="article-section reveal" id="sec-epiciclos">
+            <span class="section-label">La Solución</span>
+            <h2 class="article-h2">Los epiciclos: <span>círculos sobre círculos</span></h2>
+
+            <p class="article-p">
+                La solución de Ptolomeo era brillante en su complejidad: si un solo círculo no explica
+                el movimiento, usemos <strong>varios círculos anidados</strong>. El planeta no se mueve
+                en un solo círculo alrededor de la Tierra. Se mueve en un círculo pequeño (el
+                <strong>epiciclo</strong>) cuyo centro, a su vez, se mueve en un círculo grande
+                (el <strong>deferente</strong>) alrededor de un punto cercano a la Tierra.
+            </p>
+
+            <!-- EPICYCLE ANIMATION -->
+            <div class="epicycle-wrap reveal">
+                <div class="epicycle-title">
+                    <span>Simulación interactiva:</span> El sistema de epiciclos ptolemaico
+                </div>
+                <svg class="epicycle-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Star field -->
+                    <circle class="star" cx="40" cy="30" r="1" style="--d:2.5s;--del:0.2s" opacity="0.6"/>
+                    <circle class="star" cx="370" cy="60" r="1.5" style="--d:3s;--del:0.8s" opacity="0.7"/>
+                    <circle class="star" cx="15" cy="180" r="1" style="--d:4s;--del:1.1s" opacity="0.5"/>
+                    <circle class="star" cx="385" cy="200" r="1.5" style="--d:2s;--del:0.3s" opacity="0.8"/>
+                    <circle class="star" cx="60" cy="370" r="1" style="--d:3.5s;--del:0.6s" opacity="0.6"/>
+                    <circle class="star" cx="340" cy="360" r="1" style="--d:2.8s;--del:1.4s" opacity="0.7"/>
+                    <circle class="star" cx="180" cy="15" r="1" style="--d:3.2s;--del:0.4s" opacity="0.5"/>
+                    <circle class="star" cx="220" cy="385" r="1.5" style="--d:2.3s;--del:0.9s" opacity="0.8"/>
+                    <circle class="star" cx="80" cy="80" r="1" style="--d:4s;--del:1.2s" opacity="0.4"/>
+                    <circle class="star" cx="330" cy="100" r="1" style="--d:2.7s;--del:0.1s" opacity="0.6"/>
+                    <circle class="star" cx="100" cy="310" r="1.5" style="--d:3.8s;--del:0.7s" opacity="0.5"/>
+                    <circle class="star" cx="310" cy="320" r="1" style="--d:2.4s;--del:1.0s" opacity="0.7"/>
+                    <!-- Deferente (deferent) orbit path - static reference -->
+                    <circle cx="200" cy="200" r="130" fill="none"
+                            stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4 6"/>
+                    <!-- Earth at center -->
+                    <circle cx="200" cy="200" r="12" fill="#1a6bb5"/>
+                    <circle cx="200" cy="200" r="12" fill="url(#earthGrad)"/>
+                    <text x="200" y="230" text-anchor="middle" fill="rgba(255,255,255,0.5)"
+                          font-size="10" font-family="Inter,sans-serif">TIERRA</text>
+                    <!-- Epicycle group (moves along deferent) -->
+                    <g class="epicycle-group">
+                        <!-- Deferent arm -->
+                        <line x1="200" y1="200" x2="200" y2="70"
+                              stroke="rgba(250,204,21,0.25)" stroke-width="1.5" stroke-dasharray="3 4"/>
+                        <!-- Center of epicycle on deferent -->
+                        <circle cx="200" cy="70" r="4" fill="rgba(250,204,21,0.4)"/>
+                        <!-- Epicycle circle -->
+                        <circle cx="200" cy="70" r="40" fill="none"
+                                stroke="rgba(250,204,21,0.5)" stroke-width="1.5" stroke-dasharray="3 4"/>
+                        <!-- Planet on epicycle -->
+                        <g class="epicycle-planet-group" style="transform-origin: 200px 70px;">
+                            <line x1="200" y1="70" x2="200" y2="30"
+                                  stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+                            <!-- Planet -->
+                            <circle cx="200" cy="30" r="8" fill="#ef4444"/>
+                            <circle cx="200" cy="30" r="12" fill="rgba(239,68,68,0.2)"/>
+                            <circle cx="200" cy="30" r="18" fill="rgba(239,68,68,0.07)"/>
+                        </g>
+                    </g>
+                    <!-- Labels -->
+                    <text x="72" y="198" text-anchor="middle" fill="rgba(250,204,21,0.5)"
+                          font-size="9" font-family="Inter,sans-serif">DEFERENTE</text>
+                    <!-- Gradient for Earth -->
+                    <defs>
+                        <radialGradient id="earthGrad" cx="35%" cy="35%">
+                            <stop offset="0%" stop-color="#4ade80"/>
+                            <stop offset="40%" stop-color="#1a6bb5"/>
+                            <stop offset="100%" stop-color="#0a3d6e"/>
+                        </radialGradient>
+                    </defs>
+                </svg>
+                <div class="epicycle-labels">
+                    <div class="epi-label">
+                        <div class="epi-dot" style="background:#1a6bb5; border:2px solid #4ade80;"></div>
+                        <span>Tierra (fija en el centro)</span>
+                    </div>
+                    <div class="epi-label">
+                        <div class="epi-dot" style="background:rgba(250,204,21,0.4);"></div>
+                        <span>Centro del epiciclo (sobre el deferente)</span>
+                    </div>
+                    <div class="epi-label">
+                        <div class="epi-dot" style="background:#ef4444;"></div>
+                        <span>Planeta (sobre el epiciclo)</span>
+                    </div>
+                </div>
+                <p class="epicycle-caption">
+                    Observá cómo el planeta describe una trayectoria compleja desde la Tierra.
+                    Cuando el epiciclo "va en contra" del deferente, el planeta parece retroceder:
+                    así Ptolomeo explicaba el movimiento retrógrado sin mover la Tierra.
+                </p>
+            </div>
+
+            <p class="article-p">
+                El sistema funcionaba. Con los parámetros correctos —el tamaño del epiciclo, la velocidad
+                de rotación—, Ptolomeo podía <strong>predecir con precisión</strong> la posición de los planetas.
+                No perfectamente, pero con suficiente exactitud como para ser útil en navegación y calendario.
+            </p>
+
+            <div class="callout dark-box reveal">
+                <div class="callout-tag">🔢 La complejidad que nadie menciona</div>
+                <div class="callout-title">No fueron solo epiciclos</div>
+                <p>
+                    Para que el sistema funcionara con mayor precisión, Ptolomeo necesitó agregar más mecanismos:
+                    el <strong>excéntrico</strong> (la Tierra no está exactamente en el centro del deferente, sino
+                    ligeramente desplazada) y el <strong>ecuante</strong> (un punto desde el cual el centro del
+                    epiciclo se mueve con velocidad angular constante, no desde la Tierra). Este último fue
+                    el más controversial: violaba la exigencia aristotélica de movimiento uniforme y circulación
+                    perfecta. Copérnico, curiosamente, rechazó el ecuante antes que el geocentrismo.
+                </p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- HIPÓTESIS AD HOC -->
+        <div class="article-section reveal" id="sec-adhoc">
+            <span class="section-label">Concepto Central · Filosofía de la Ciencia</span>
+            <h2 class="article-h2">¿Qué es una hipótesis <span>ad hoc</span>?</h2>
+
+            <p class="article-p">
+                Llegamos al concepto filosófico más importante de esta clase. El término latino
+                <em>ad hoc</em> significa literalmente "para esto" o "para el caso específico".
+                Una <strong>hipótesis ad hoc</strong> es una suposición añadida a una teoría
+                <em>exclusivamente</em> para que la teoría sobreviva ante una evidencia que la contradice,
+                sin que esa suposición tenga ninguna consecuencia independiente que pueda testearse.
+            </p>
+
+            <div class="concept-grid reveal">
+                <div class="concept-card">
+                    <div class="concept-name">Hipótesis ad hoc</div>
+                    <div class="concept-def">
+                        Modificación agregada a una teoría <em>únicamente</em> para hacerla compatible
+                        con una observación problemática. No genera nuevas predicciones independientes.
+                        Es el "parche" con el que la teoría sobrevive.
+                    </div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-name">¿Por qué es problemática?</div>
+                    <div class="concept-def">
+                        Para Popper, una hipótesis ad hoc hace la teoría menos falsable. Para Lakatos,
+                        si la teoría solo acumula parches sin generar predicciones nuevas, el programa
+                        de investigación se vuelve <em>degenerativo</em>: ya no avanza.
+                    </div>
+                </div>
+                <div class="concept-card red-top">
+                    <div class="concept-name red">El epiciclo como ad hoc</div>
+                    <div class="concept-def">
+                        Los epiciclos ptolemaicos son el ejemplo clásico. Fueron añadidos
+                        específicamente para resolver el movimiento retrógrado. El sistema ptolemaico
+                        terminó teniendo más de 80 círculos acumulados, cada uno un parche
+                        para una nueva anomalía.
+                    </div>
+                </div>
+                <div class="concept-card red-top">
+                    <div class="concept-name red">El límite del parche</div>
+                    <div class="concept-def">
+                        Matemáticamente, con suficientes epiciclos puedes aproximar cualquier movimiento
+                        (es una forma de serie de Fourier). Pero eso muestra el problema:
+                        si la teoría puede "ajustarse" a cualquier dato, ya no está
+                        siendo <em>testada</em>, sino manipulada.
+                    </div>
+                </div>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "Una teoría que puede explicar todo, en realidad no explica nada."
+                </p>
+                <p class="pull-quote-author">— Karl Popper (paráfrasis de su criterio de demarcación)</p>
+            </div>
+
+            <p class="article-p">
+                Aquí está la paradoja hermosa de Ptolomeo: su sistema era <strong>empíricamente exitoso</strong>
+                (predecía bien) pero <strong>filosóficamente problemático</strong> (se sostenía con parches).
+                Durante 14 siglos, esta tensión fue ignorada. La astronomía ptolemaica era la herramienta
+                correcta para navegar, para el calendario, para predecir eclipses. ¿Para qué cambiarla?
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- OBSERVACIONES Y ANOMALÍAS -->
+        <div class="article-section reveal" id="sec-anomalias">
+            <span class="section-label">Epistemología</span>
+            <h2 class="article-h2">Observaciones, anomalías <span>y enigmas</span></h2>
+
+            <p class="article-p">
+                Antes de continuar, necesitamos hacer una distinción filosófica clave: ¿qué es
+                una <strong>observación</strong> en ciencia? No es simplemente "mirar". Una observación
+                científica siempre está cargada de teoría: usamos instrumentos, seguimos protocolos,
+                interpretamos lo que vemos a través de un marco conceptual previo.
+            </p>
+
+            <div class="callout yellow reveal">
+                <div class="callout-tag">💡 Concepto de Hanson</div>
+                <div class="callout-title">La carga teórica de la observación</div>
+                <p>
+                    El filósofo N.R. Hanson señaló que dos personas con teorías distintas que miran
+                    el mismo cielo no ven lo mismo. Un astrónomo ptolemaico que ve el amanecer
+                    <em>ve al Sol moviéndose</em>. Un copernicano ve <em>la Tierra girando</em>.
+                    La misma escena, dos observaciones radicalmente distintas.
+                </p>
+                <p>
+                    Esto es lo que Hanson llamó <strong>"la carga teórica de la observación"</strong>:
+                    los hechos nunca son puros, siempre vienen empaquetados en un marco interpretativo.
+                </p>
+            </div>
+
+            <div class="concept-grid reveal">
+                <div class="concept-card">
+                    <div class="concept-name">Anomalía (Kuhn)</div>
+                    <div class="concept-def">
+                        Un fenómeno que "viola las expectativas inducidas por el paradigma".
+                        La anomalía no destruye inmediatamente el paradigma: la ciencia normal
+                        intenta resolverla con ajustes. Solo cuando las anomalías se multiplican y resisten,
+                        comienza la crisis.
+                    </div>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-name">Enigma (Kuhn)</div>
+                    <div class="concept-def">
+                        Un problema que el paradigma reconoce y admite que puede resolverse.
+                        Los enigmas son los "puzzles" normales de la ciencia. El movimiento
+                        retrógrado fue un enigma antes de convertirse en una anomalía irresoluble.
+                    </div>
+                </div>
+            </div>
+
+            <p class="article-p">
+                Ptolomeo convirtió el movimiento retrógrado —una <strong>anomalía</strong> para el
+                modelo de esferas perfectas— en un <strong>enigma</strong> resoluble con la
+                introducción de los epiciclos. Durante siglos, ese "enigma" quedó "resuelto".
+                Pero a mediados del siglo XVI, con mejores instrumentos y más observaciones,
+                las acumulaciones de anomalías empujaron al sistema ptolemaico hacia la crisis.
+                La puerta que abrió Copérnico no era nueva: estaba entreabierta desde hacía décadas.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- EL MÉTODO CIENTÍFICO -->
+        <div class="article-section reveal" id="sec-metodo">
+            <span class="section-label">Síntesis</span>
+            <h2 class="article-h2">El método científico puesto <span>a prueba</span></h2>
+
+            <p class="article-p">
+                La historia de Ptolomeo nos enseña algo que los libros de texto suelen omitir:
+                el método científico no es un algoritmo simple de "observar → formular hipótesis → verificar".
+                Es un proceso mucho más <strong>complejo, social y filosóficamente cargado</strong>.
+            </p>
+
+            <div class="callout dark-box reveal">
+                <div class="callout-tag">🧠 Para reflexionar</div>
+                <div class="callout-title">Lo que Ptolomeo nos enseña sobre la ciencia</div>
+                <p><strong>1. Una teoría puede ser predictivamente exitosa sin ser verdadera.</strong>
+                   El sistema ptolemaico predecía eclipses con precisión durante siglos. Pero la Tierra
+                   no está en el centro del universo.</p>
+                <p><strong>2. Las anomalías no destruyen teorías instantáneamente.</strong>
+                   El movimiento retrógrado era conocido desde antes de Ptolomeo. El geocentrismo
+                   sobrevivió añadiendo epiciclos, no abandonando el modelo.</p>
+                <p><strong>3. Las teorías no se reemplazan por falsación simple.</strong>
+                   El modelo ptolemaico no fue "refutado" y luego reemplazado. Fue desplazado
+                   cuando una alternativa mejor —el heliocentrismo— estuvo disponible. Las teorías
+                   mueren en competencia, no en soledad.</p>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "Una teoría científica es declarada inválida solo cuando existe
+                    una teoría alternativa disponible para reemplazarla."
+                </p>
+                <p class="pull-quote-author">— Thomas Kuhn, La Estructura de las Revoluciones Científicas (1962)</p>
+            </div>
+
+            <p class="article-p">
+                Esta es la lección más poderosa para nuestra materia: el cambio científico no es
+                lineal, acumulativo ni puramente racional. Es un proceso histórico, social y
+                filosófico. <strong>La ciencia es humana.</strong> Y entender sus límites,
+                sus parches, sus hipótesis ad hoc, es la tarea de la filosofía.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- DISCUSIÓN -->
+        <div class="discussion-section reveal">
+            <h3 class="discussion-title">🤔 Para pensar y debatir</h3>
+            <ul class="question-list">
+                <li class="question-item">
+                    <div class="question-num">1</div>
+                    <p class="question-text">El modelo ptolemaico predijo posiciones planetarias con gran precisión durante 14 siglos. ¿Puede una teoría "falsa" ser científicamente útil? ¿Qué nos dice esto sobre la relación entre verdad y utilidad en la ciencia?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">2</div>
+                    <p class="question-text">Ptolomeo agregó epiciclos para "salvar" su teoría de la evidencia en contra. ¿Podés pensar en ejemplos actuales donde una teoría o creencia se "parchea" en lugar de cuestionarse cuando aparece evidencia contraria?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">3</div>
+                    <p class="question-text">Aristarco propuso el heliocentrismo en el siglo III a.C., 1700 años antes de Copérnico. ¿Por qué una idea "correcta" puede ser ignorada durante tanto tiempo? ¿Qué factores —más allá de la evidencia— determinan qué teorías se aceptan?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">4</div>
+                    <p class="question-text">Hanson dice que la observación siempre está "cargada de teoría". ¿Qué implicaciones tiene esto para el ideal de objetividad científica? ¿Puede haber observación completamente neutral?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">5</div>
+                    <p class="question-text">¿En qué sentido el epiciclo es una "hipótesis ad hoc"? ¿Podés pensar en hipótesis ad hoc en la ciencia contemporánea? ¿Cuándo una hipótesis ad hoc es legítima y cuándo es problemática?</p>
+                </li>
+            </ul>
+        </div>
+    </article>
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="article-sidebar">
+        <div class="sidebar-sticky">
+
+            <!-- TABLE OF CONTENTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-list"></i>
+                    Contenido de la clase
+                </div>
+                <ul class="toc-list">
+                    <li class="toc-item"><a href="#sec-intro" class="toc-link"><span class="toc-num">01</span> El cielo que no encajaba</a></li>
+                    <li class="toc-item"><a href="#sec-contexto" class="toc-link"><span class="toc-num">02</span> Alejandría</a></li>
+                    <li class="toc-item"><a href="#sec-geocentrismo" class="toc-link"><span class="toc-num">03</span> El geocentrismo</a></li>
+                    <li class="toc-item"><a href="#sec-problema" class="toc-link"><span class="toc-num">04</span> La anomalía</a></li>
+                    <li class="toc-item"><a href="#sec-epiciclos" class="toc-link"><span class="toc-num">05</span> Los epiciclos</a></li>
+                    <li class="toc-item"><a href="#sec-adhoc" class="toc-link"><span class="toc-num">06</span> Hipótesis ad hoc</a></li>
+                    <li class="toc-item"><a href="#sec-anomalias" class="toc-link"><span class="toc-num">07</span> Anomalías y enigmas</a></li>
+                    <li class="toc-item"><a href="#sec-metodo" class="toc-link"><span class="toc-num">08</span> El método científico</a></li>
+                </ul>
+            </div>
+
+            <!-- CONCEPTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-key"></i>
+                    Conceptos clave
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Geocentrismo</div>
+                    <div class="concept-mini-def">Modelo que ubica a la Tierra en el centro del universo. Dominó la astronomía occidental por más de 1400 años.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Epiciclo</div>
+                    <div class="concept-mini-def">Círculo pequeño cuyo centro se mueve sobre otro círculo mayor (deferente). Ptolomeo los usó para explicar el movimiento retrógrado.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Hipótesis ad hoc</div>
+                    <div class="concept-mini-def">Suposición añadida solo para salvar una teoría de evidencia contraria. No genera predicciones independientes.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Anomalía (Kuhn)</div>
+                    <div class="concept-mini-def">Fenómeno que viola las expectativas del paradigma. Señal de una posible crisis científica.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Carga teórica</div>
+                    <div class="concept-mini-def">Las observaciones nunca son neutrales: siempre las interpretamos a través de un marco conceptual previo (Hanson).</div>
+                </div>
+            </div>
+
+            <!-- PHILOSOPHERS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Protagonistas
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🔭</div>
+                    <div>
+                        <div class="philosopher-name">Claudio Ptolomeo</div>
+                        <div class="philosopher-dates">~100 – ~170 d.C. · Alejandría</div>
+                        <div class="philosopher-bio">Matemático y astrónomo greco-egipcio. Su obra <em>Almagesto</em> sistematizó la astronomía geocéntrica con tal rigor que dominó por 14 siglos.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🌀</div>
+                    <div>
+                        <div class="philosopher-name">Aristóteles</div>
+                        <div class="philosopher-dates">384 – 322 a.C. · Grecia</div>
+                        <div class="philosopher-bio">Filósofo que estableció el cosmos geocéntrico como modelo físico. Su autoridad filosófica fue el pilar ideológico que sostuvo el geocentrismo.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">📖</div>
+                    <div>
+                        <div class="philosopher-name">Thomas Kuhn</div>
+                        <div class="philosopher-dates">1922 – 1996 · EE.UU.</div>
+                        <div class="philosopher-bio">Físico e historiador de la ciencia. Introdujo los conceptos de paradigma, anomalía y revolución científica en <em>La Estructura</em> (1962).</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONNECTIONS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-link"></i>
+                    Conexiones con la Unidad
+                </div>
+                <div class="unit-connection">
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Paradigma:</strong> El geocentrismo es el paradigma ptolemaico. La Revolución Copernicana es el caso histórico de cambio de paradigma de Kuhn.</p>
+                    </div>
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Hipótesis auxiliares:</strong> Los epiciclos son hipótesis auxiliares añadidas al núcleo geocéntrico para protegerlo de la refutación.</p>
+                    </div>
+                    <div class="unit-conn-item">
+                        <div class="unit-conn-dot"></div>
+                        <p class="unit-conn-text"><strong>Anomalías:</strong> El movimiento retrógrado es la anomalía central que desencadenó la crisis del paradigma geocéntrico.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEXT CLASS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-forward"></i>
+                    Próxima clase
+                </div>
+                <div class="next-class">
+                    <div class="next-label">Clase 2 de 8 · Unidad 1</div>
+                    <div class="next-title">Copérnico y la Revolución del Centro: el heliocentrismo y el método científico</div>
+                    <button class="btn-next" onclick="window.location.href='unidad1-clase2.html'">
+                        <span>IR A CLASE 2</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </aside>
+
+</main>
+
+<!-- FOOTER NAV -->
+<div class="article-footer-nav">
+    <div class="footer-nav-link prev" onclick="window.location.href='index.html'">
+        <span class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></span>
+        <div>
+            <div class="footer-nav-direction">Volver a</div>
+            <div class="footer-nav-title">Inicio — Todas las Unidades</div>
+        </div>
+    </div>
+    <div style="text-align:center; font-size:12px; color:var(--text3);">
+        <div style="font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--text);">FILOSOFÍA&CIENCIA</div>
+        Unidad 1 · Clase 1 de 8
+    </div>
+    <div class="footer-nav-link" onclick="window.location.href='unidad1-clase2.html'">
+        <div style="text-align:right;">
+            <div class="footer-nav-direction">Siguiente clase</div>
+            <div class="footer-nav-title">Copérnico y la Revolución del Centro</div>
+        </div>
+        <span class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></span>
+    </div>
+</div>
+
+<!-- ===================== JS ===================== -->
+<script>
+    // Dark mode
+    (function(){
+        const s = localStorage.getItem('theme');
+        if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){
+            document.documentElement.classList.add('dark');
+        }
+    })();
+    function toggleDark(){
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Progress bar
+    window.addEventListener('scroll', ()=>{
+        const d = document.documentElement;
+        const pct = (window.scrollY / (d.scrollHeight - d.clientHeight)) * 100;
+        document.getElementById('progress').style.width = pct + '%';
+    });
+
+    // Reveal on scroll
+    function checkReveal(){
+        document.querySelectorAll('.reveal').forEach(el=>{
+            if(el.getBoundingClientRect().top < window.innerHeight - 60){
+                el.classList.add('visible');
+            }
+        });
+    }
+    window.addEventListener('scroll', checkReveal, {passive:true});
+    window.addEventListener('load', checkReveal);
+
+    // Active TOC
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const sections = [...tocLinks].map(a => document.querySelector(a.getAttribute('href')));
+    function updateTOC(){
+        let current = '';
+        sections.forEach(s=>{
+            if(s && s.getBoundingClientRect().top < 120) current = '#'+s.id;
+        });
+        tocLinks.forEach(a=>{
+            a.classList.toggle('active', a.getAttribute('href')===current);
+        });
+    }
+    window.addEventListener('scroll', updateTOC, {passive:true});
+
+    // Smooth scroll for TOC
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+            const el = document.querySelector(a.getAttribute('href'));
+            if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        });
+    });
+
+    console.log('%c📚 Clase 1 — Ptolomeo y los Epiciclos — cargada.', 'color:#facc15;font-weight:bold;font-family:monospace');
+</script>
+</body>
+</html>

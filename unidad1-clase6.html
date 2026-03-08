@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuhn: Paradigmas y Revoluciones Científicas | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --blue: #2563eb;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, .6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .4s, color .4s;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width .1s;
+        }
+
+        /* TOPNAV */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background .4s, border-color .4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        /* HERO */
+        #art-hero {
+            background:
+                linear-gradient(to right, rgba(0, 0, 10, .97) 0%, rgba(0, 0, 10, .88) 35%, rgba(0, 0, 10, .55) 58%, rgba(0, 0, 10, .10) 100%),
+                url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, .95), 0 0 40px rgba(0, 0, 0, .5);
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Kuhn portrait — emerge from bookshelves */
+        .hero-portrait-img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 44%;
+            object-fit: cover;
+            object-position: top center;
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .15) 12%, rgba(0, 0, 0, .65) 32%, rgba(0, 0, 0, 1) 55%);
+            mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .15) 12%, rgba(0, 0, 0, .65) 32%, rgba(0, 0, 0, 1) 55%);
+            mix-blend-mode: luminosity;
+            filter: contrast(1.08) brightness(.88) sepia(.15);
+        }
+
+        @media(max-width:900px) {
+            .hero-portrait-img {
+                display: none;
+            }
+        }
+
+        .hero-breadcrumb,
+        .hero-eyebrow,
+        .hero-title,
+        .hero-subtitle,
+        .hero-meta,
+        .hero-scroll-cue {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-purple {
+            background: #7c3aed;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 6.5vw, 84px);
+            font-weight: 900;
+            line-height: .93;
+            letter-spacing: -.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(15px, 2.2vw, 20px);
+            color: rgba(255, 255, 255, .8);
+            max-width: 660px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .55);
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, .4);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, .25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, .4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: .3
+            }
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+            background: var(--yellow);
+            padding: 0;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 130px;
+            padding: 20px 16px;
+            text-align: center;
+            border-right: 1px solid rgba(0, 0, 0, .12);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, .65);
+            margin-top: 4px;
+        }
+
+        /* ARTICLE LAYOUT */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: .8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .art-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 56px 0;
+        }
+
+        /* KUHN BIO CARD */
+        .kuhn-bio-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 36px 0;
+            box-shadow: var(--shadow);
+        }
+
+        @media(min-width: 640px) {
+            .kuhn-bio-card {
+                flex-direction: row;
+            }
+        }
+
+        .kuhn-bio-img-wrapper {
+            flex: 0 0 42%;
+            overflow: hidden;
+        }
+
+        .kuhn-bio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .kuhn-bio-card:hover .kuhn-bio-img {
+            transform: scale(1.06);
+        }
+
+        .kuhn-bio-content {
+            padding: 36px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .kuhn-bio-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: #7c3aed;
+            margin-bottom: 12px;
+        }
+
+        .kuhn-bio-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .kuhn-bio-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+        }
+
+        /* CALLOUTS */
+        .callout {
+            background: var(--bg3);
+            border-left: 4px solid var(--yellow);
+            padding: 28px 32px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+
+        .callout-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 8px;
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .callout-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+        }
+
+        .callout.purple {
+            border-left-color: #7c3aed;
+            background: color-mix(in srgb, #7c3aed 5%, var(--bg3));
+        }
+
+        .callout.blue {
+            border-left-color: var(--blue);
+            background: color-mix(in srgb, var(--blue) 5%, var(--bg3));
+        }
+
+        .callout.dark-box {
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-left: 5px solid #7c3aed;
+            padding: 32px;
+            border-radius: 8px;
+            margin: 36px 0;
+        }
+
+        .callout.dark-box .callout-tag {
+            color: #a78bfa;
+        }
+
+        .callout.dark-box .callout-title {
+            color: #e9d5ff;
+        }
+
+        .callout.dark-box .callout-text {
+            color: #d1d5db;
+        }
+
+        .dark .callout.dark-box {
+            background: #0a0a14;
+            border-color: #4c1d95;
+        }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            padding: 40px 0;
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .pull-quote::before {
+            content: '\201C';
+            position: absolute;
+            top: -10px;
+            left: -12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 140px;
+            color: var(--yellow);
+            opacity: .2;
+            line-height: 1;
+        }
+
+        .pq-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(20px, 3vw, 30px);
+            line-height: 1.4;
+            color: var(--text);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .pq-source {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+        }
+
+        .pq-source span {
+            color: var(--yellow-dark);
+        }
+
+        /* REVOLUTION FLOW — interactive diagram */
+        .revolution-flow {
+            margin: 32px 0;
+        }
+
+        .flow-phases {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        @media(min-width:768px) {
+            .flow-phases {
+                flex-direction: row;
+            }
+        }
+
+        .flow-phase {
+            flex: 1;
+            padding: 24px 20px;
+            cursor: pointer;
+            transition: all .3s;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-phase:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .flow-phase:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        .flow-phase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--phase-color, var(--yellow));
+            transform: scaleX(0);
+            transition: transform .3s;
+        }
+
+        .flow-phase:hover::before,
+        .flow-phase.active::before {
+            transform: scaleX(1);
+        }
+
+        .flow-phase.active {
+            background: color-mix(in srgb, var(--phase-color, var(--yellow)) 8%, var(--bg2));
+            border-color: var(--phase-color, var(--yellow));
+        }
+
+        .phase-num {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--phase-color, var(--yellow));
+            margin-bottom: 8px;
+        }
+
+        .phase-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .phase-short {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        .flow-detail {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .flow-detail.open {
+            display: block;
+            animation: slideDown .3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .flow-detail h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .flow-detail p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+            margin-bottom: 10px;
+        }
+
+        .flow-detail ul {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .flow-detail li {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+            margin-bottom: 6px;
+        }
+
+        .phase-arrow {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: var(--text3);
+            font-size: 18px;
+            padding: 0 8px;
+        }
+
+        @media(min-width:768px) {
+            .phase-arrow {
+                display: flex;
+            }
+        }
+
+        /* INCOMMENSURABILITY DEMO */
+        .incomm-demo {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .incomm-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .paradigm-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .paradigm-col {
+            background: var(--bg3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .paradigm-col.ptolemaic {
+            border-top: 3px solid #6366f1;
+        }
+
+        .paradigm-col.copernican {
+            border-top: 3px solid #f59e0b;
+        }
+
+        .paradigm-col h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+
+        .paradigm-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .paradigm-item .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .dot.purple {
+            background: #6366f1;
+        }
+
+        .dot.amber {
+            background: #f59e0b;
+        }
+
+        .paradigm-item span {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.5;
+        }
+
+        .paradigm-vs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 0;
+        }
+
+        .vs-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            color: var(--text3);
+            text-transform: uppercase;
+        }
+
+        .vs-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--red);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 14px;
+        }
+
+        /* NORMAL SCIENCE TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+
+        .comparison-table th {
+            background: var(--yellow);
+            color: #000;
+            font-weight: 700;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 11px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .comparison-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text2);
+        }
+
+        .comparison-table tr:hover td {
+            background: var(--bg3);
+        }
+
+        .comparison-table .label-cell {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* ANOMALY COUNTER */
+        .anomaly-demo {
+            background: var(--bg2);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .anomaly-demo h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .anomaly-demo p {
+            font-size: 13px;
+            color: var(--text3);
+            margin-bottom: 24px;
+        }
+
+        .anomaly-bar-wrap {
+            background: var(--bg3);
+            border-radius: 999px;
+            height: 20px;
+            overflow: hidden;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .anomaly-bar {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #22c55e, #eab308, #ef4444);
+            transition: width 1s ease;
+        }
+
+        .anomaly-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--text3);
+            margin-bottom: 20px;
+        }
+
+        .anomaly-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .anomaly-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all .2s;
+        }
+
+        .anomaly-btn.add {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .anomaly-btn.add:hover {
+            background: #b91c1c;
+        }
+
+        .anomaly-btn.reset {
+            background: var(--bg3);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .anomaly-status {
+            margin-top: 16px;
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            min-height: 28px;
+        }
+
+        /* CASE STUDIES */
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        @media(min-width:640px) {
+            .case-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .case-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all .25s;
+        }
+
+        .case-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .case-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .case-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .case-card p {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        .case-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        .tag-kuhn {
+            background: color-mix(in srgb, #7c3aed 15%, var(--bg3));
+            color: #7c3aed;
+        }
+
+        .tag-hist {
+            background: color-mix(in srgb, var(--yellow) 20%, var(--bg3));
+            color: #92400e;
+        }
+
+        /* COMPARE PHILOSOPHERS */
+        .phil-compare {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        @media(min-width:640px) {
+            .phil-compare {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .phil-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phil-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--pc-color);
+        }
+
+        .phil-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .phil-dates {
+            font-size: 11px;
+            color: var(--text3);
+            margin-bottom: 10px;
+        }
+
+        .phil-claim {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .phil-badge {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 999px;
+            display: inline-block;
+        }
+
+        /* SIDEBAR */
+        #sidebar {
+            position: sticky;
+            top: 70px;
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sb-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .sb-title {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .toc-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .toc-item:last-child {
+            border-bottom: none;
+        }
+
+        .toc-item:hover {
+            color: var(--yellow-dark);
+        }
+
+        .toc-item.active {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .toc-num {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--yellow);
+            min-width: 20px;
+        }
+
+        .toc-text {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .concept-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: var(--bg3);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            margin: 4px;
+            transition: all .2s;
+        }
+
+        .concept-pill:hover {
+            background: var(--yellow);
+            color: #000;
+        }
+
+        .phil-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phil-item:last-child {
+            border-bottom: none;
+        }
+
+        .phil-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .phil-info h5 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .phil-info p {
+            font-size: 11px;
+            color: var(--text3);
+        }
+
+        .nav-class-btn {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .nav-class-btn:hover,
+        .nav-class-btn.primary:hover {
+            transform: translateX(4px);
+        }
+
+        .nav-class-btn.primary {
+            background: var(--yellow);
+            border-color: var(--yellow-dark);
+        }
+
+        .nav-class-info .nav-class-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .nav-class-btn.primary .nav-class-label {
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .nav-class-info .nav-class-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .nav-class-btn.primary .nav-class-title {
+            color: #000;
+        }
+
+        /* DISCUSSION */
+        .questions-list {
+            counter-reset: q;
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+        }
+
+        .questions-list li {
+            counter-increment: q;
+            padding: 20px 20px 20px 56px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+        }
+
+        .questions-list li::before {
+            content: counter(q);
+            position: absolute;
+            left: 16px;
+            top: 20px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* SYNTHESIS TIMELINE (revisited) */
+        .synth-timeline {
+            position: relative;
+            padding-left: 36px;
+            margin: 24px 0;
+        }
+
+        .synth-timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--yellow), #7c3aed);
+        }
+
+        .synth-item {
+            position: relative;
+            padding-bottom: 28px;
+        }
+
+        .synth-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .synth-dot {
+            position: absolute;
+            left: -29px;
+            top: 3px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--yellow);
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 0 2px var(--yellow);
+        }
+
+        .synth-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 4px;
+        }
+
+        .synth-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .synth-text {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.65;
+        }
+
+        /* FOOTER */
+        .art-footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 32px;
+        }
+
+        .art-footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        @media(min-width:640px) {
+            .footer-nav {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-nav-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all .25s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-nav-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-nav-card.primary {
+            background: var(--yellow);
+        }
+
+        .fn-icon {
+            font-size: 24px;
+        }
+
+        .fn-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-card.primary .fn-label {
+            color: rgba(0, 0, 0, .55);
+        }
+
+        .fn-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-nav-card.primary .fn-title {
+            color: #000;
+        }
+
+        .footer-credits {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .footer-credits a {
+            color: var(--yellow-dark);
+        }
+
+        /* REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <!-- ══ TOP NAV ════════════════════════════════════════════════ -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Inicio</span>
+            </a>
+            <span class="nav-sep">|</span>
+            <div class="breadcrumb">Unidad 1 · <span>Clase 6</span></div>
+        </div>
+        <div class="topnav-center">Kuhn: Paradigmas y Revoluciones Científicas</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase5.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 5
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase7.html'">
+                Clase 7 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- ══ HERO ════════════════════════════════════════════════════ -->
+    <header id="art-hero">
+        <!-- Thomas S. Kuhn — fotografía histórica -->
+        <img class="hero-portrait-img"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Thomas_Kuhn.jpg/440px-Thomas_Kuhn.jpg"
+            alt="Thomas S. Kuhn" onerror="this.style.display='none'" />
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDAD 1</span>
+            <span class="hero-badge-outline">CLASE 6</span>
+            <span class="hero-badge-purple">EPISTEMOLOGÍA</span>
+        </div>
+        <p class="hero-eyebrow">Cambridge, Massachusetts · 1962</p>
+        <h1 class="hero-title">
+            Thomas S. <em>Kuhn</em><br>
+            Paradigmas y<br>Revoluciones
+        </h1>
+        <p class="hero-subtitle">
+            La ciencia no avanza acumulando verdades. Avanza por convulsiones: períodos de <em>ciencia normal</em>
+            interrumpidos por <em>crisis</em> y <em>revoluciones</em> que cambian el mundo entero de los científicos.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item"><i class="fa-regular fa-clock"></i> 50 min lectura</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-flask"></i> Epistemología</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-book"></i> La Estructura (1962)</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-arrows-rotate"></i> Inconmensurabilidad</div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Continuar</span>
+        </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-num">1962</div>
+            <div class="stat-label">Publicación de La Estructura</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Fases de la Rev. Científica</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Paradigmas inconmensurables</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">≠</div>
+            <div class="stat-label">La ciencia ≠ acumulación</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">1 libro</div>
+            <div class="stat-label">Cambió la filosofía de la ciencia</div>
+        </div>
+    </div>
+
+    <!-- ══ ARTICLE ══════════════════════════════════════════════════ -->
+    <main>
+        <div class="article-wrap">
+            <article>
+
+                <!-- §1 INTRO -->
+                <section class="article-section reveal" id="s-intro">
+                    <span class="section-label">§ 1 — El físico que revolucionó la filosofía</span>
+                    <h2 class="article-h2">El libro que <span>cambió todo</span></h2>
+                    <p class="article-p dropcap">
+                        En 1962, Thomas Samuel Kuhn —físico de formación, filósofo e historiador por vocación— publicó
+                        <strong><em>La Estructura de las Revoluciones Científicas</em></strong>. Pocos libros en la
+                        historia del siglo XX tuvieron un impacto tan devastador sobre una disciplina: de la noche a la
+                        mañana, la imagen positivista de la ciencia como acumulación ordenada de verdades quedó
+                        destrozada.
+                    </p>
+                    <p class="article-p">
+                        La idea central de Kuhn es tan simple como perturbadora: <strong>la ciencia no crece como un
+                            árbol que añade ramas</strong>. La ciencia crece a sacudidas, a través de rupturas violentas
+                        que Kuhn llamó <em>revoluciones científicas</em>. Entre una revolución y la siguiente, los
+                        científicos trabajan dentro de un <em>paradigma</em> — un marco de suposiciones, métodos y
+                        valores compartidos que define qué cuenta como un problema, qué cuenta como una solución, y qué
+                        simplemente se ignora.
+                    </p>
+
+                    <div class="kuhn-bio-card reveal">
+                        <div class="kuhn-bio-img-wrapper">
+                            <img class="kuhn-bio-img" src="kuhn.jpg" alt="Thomas S. Kuhn">
+                        </div>
+                        <div class="kuhn-bio-content">
+                            <div class="kuhn-bio-tag">Biografía y Trayectoria</div>
+                            <h3 class="kuhn-bio-title">De la física a la filosofía</h3>
+                            <p class="kuhn-bio-text">
+                                Thomas Samuel Kuhn (1922-1996) cursó su doctorado en física teórica en la Universidad de
+                                Harvard.
+                                Sin embargo, su trayectoria académica tomó un giro inesperado al impartir un curso de
+                                historia de la ciencia
+                                para estudiantes de humanidades. Al analizar profundamente los textos de Aristóteles,
+                                descubrió que su
+                                física no era simplemente "errónea", sino que era <em>internamente coherente</em>. Esta
+                                revelación
+                                lo llevó a preguntarse cómo comunidades de científicos brillantes podían operar bajo
+                                marcos conceptuales
+                                tan distintos. Esta idea sentaría las bases para su revolucionario concepto de
+                                <strong>paradigma</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="article-p">
+                        Para entender a Kuhn, primero hay que entender lo que estaba cuestionando: <strong>la visión
+                            acumulativa de la ciencia</strong>. Según esa visión —muy extendida en el siglo XX—, la
+                        ciencia avanza agregando nuevos hechos a un cuerpo de conocimiento ya establecido. Cada
+                        generación de científicos sabe <em>más</em> que la anterior. Galileo sabe más que Aristóteles;
+                        Newton sabe más que Galileo; Einstein sabe más que Newton. El conocimiento sería como un río que
+                        siempre crece.
+                    </p>
+                    <p class="article-p">
+                        Kuhn arguye que esa imagen es una <strong>ilusión retrospectiva</strong>. Los libros de texto
+                        científicos reescriben la historia, presentando el pasado como si todo hubiera apuntado
+                        inevitablemente hacia el presente. Pero cuando uno estudia la historia real de la ciencia —sin
+                        esa teleología— la imagen es muy diferente.
+                    </p>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §2 PARADIGMA -->
+                <section class="article-section reveal" id="s-paradigma">
+                    <span class="section-label">§ 2 — El concepto central</span>
+                    <h2 class="article-h2">¿Qué es un <span>paradigma</span>?</h2>
+                    <p class="article-p">
+                        La palabra <em>paradigma</em> existía antes de Kuhn —significaba simplemente "ejemplo" o
+                        "modelo"— pero él le dio un significado completamente nuevo. Para Kuhn, un paradigma es mucho
+                        más que una teoría: es el <strong>conjunto de supuestos, métodos, valores y logros
+                            ejemplares</strong> que una comunidad científica comparte y que guía su trabajo sin que
+                        nadie los cuestione.
+                    </p>
+
+                    <div class="pull-quote">
+                        <p class="pq-text">"Los paradigmas son realizaciones científicas universalmente reconocidas que,
+                            durante cierto tiempo, proporcionan modelos de problemas y soluciones a una comunidad
+                            científica."</p>
+                        <p class="pq-source">— Thomas S. Kuhn, <span>La Estructura de las Revoluciones
+                                Científicas</span>, 1962</p>
+                    </div>
+
+                    <p class="article-p">
+                        Pensemos en la física newtoniana como paradigma. Los físicos del siglo XVIII y XIX no se
+                        preguntaban si el espacio era absoluto, si el tiempo fluía de manera uniforme, o si la gravedad
+                        actuaba a distancia de manera instantánea. <em>Esas</em> eran las suposiciones del paradigma. El
+                        trabajo real consistía en <strong>resolver puzzles dentro de ese marco</strong>: calcular
+                        órbitas, medir resistencias, diseñar máquinas. Einstein no simplemente "añadió" algo a Newton:
+                        <em>destruyó el marco conceptual entero</em>.
+                    </p>
+
+                    <div class="incomm-demo reveal">
+                        <div class="incomm-title">Un mismo fenómeno — dos paradigmas</div>
+                        <p style="text-align:center;font-size:13px;color:var(--text3);margin-bottom:20px;">El movimiento
+                            de los planetas visto desde dos marcos inconmensurables</p>
+                        <div class="paradigm-grid">
+                            <div class="paradigm-col ptolemaic">
+                                <h4 style="color:#6366f1;">Paradigma Ptolemaico</h4>
+                                <div class="paradigm-item">
+                                    <div class="dot purple"></div><span>La Tierra es el centro del universo por
+                                        naturaleza</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot purple"></div><span>Los planetas se mueven en círculos perfectos
+                                        (epiciclos)</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot purple"></div><span>La perfección celeste requiere movimiento
+                                        uniforme</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot purple"></div><span>Pregunta válida: ¿cuántos epiciclos necesita
+                                        Marte?</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot purple"></div><span>Pregunta inválida: ¿por qué la Tierra está en el
+                                        centro?</span>
+                                </div>
+                            </div>
+                            <div class="paradigm-vs">
+                                <div class="vs-icon">≠</div>
+                                <div class="vs-label">Inconmen-surables</div>
+                            </div>
+                            <div class="paradigm-col copernican">
+                                <h4 style="color:#f59e0b;">Paradigma Copernicano/Newtoniano</h4>
+                                <div class="paradigm-item">
+                                    <div class="dot amber"></div><span>El Sol es el centro del sistema solar (por
+                                        inercia + gravedad)</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot amber"></div><span>Los planetas se mueven en elipses (Kepler)</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot amber"></div><span>La fuerza gravitacional explica las
+                                        órbitas</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot amber"></div><span>Pregunta válida: ¿cuál es la masa del Sol?</span>
+                                </div>
+                                <div class="paradigm-item">
+                                    <div class="dot amber"></div><span>Pregunta inválida: ¿qué perfección garantiza el
+                                        movimiento circular?</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p
+                            style="text-align:center;font-size:13px;color:var(--text3);margin-top:20px;font-style:italic;">
+                            Los dos paradigmas no se contradicen simplemente: hablan idiomas distintos. No comparten
+                            preguntas ni criterios de éxito.</p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §3 LAS 4 FASES -->
+                <section class="article-section reveal" id="s-fases">
+                    <span class="section-label">§ 3 — La dinámica de la revolución</span>
+                    <h2 class="article-h2">Las cuatro fases de la <span>revolución científica</span></h2>
+                    <p class="article-p">
+                        Kuhn propone que toda revolución científica sigue una secuencia reconocible. No es un proceso
+                        caótico: tiene una lógica, aunque sea una lógica de ruptura. Hacé click en cada fase para
+                        explorarla.
+                    </p>
+
+                    <div class="revolution-flow reveal">
+                        <div class="flow-phases">
+                            <div class="flow-phase active" style="--phase-color:#6366f1;" onclick="showPhase(0)">
+                                <div class="phase-num">Fase 1</div>
+                                <div class="phase-name">Pre-paradigmática</div>
+                                <div class="phase-short">Caos, escuelas en pugna, sin consenso</div>
+                            </div>
+                            <div class="phase-arrow">›</div>
+                            <div class="flow-phase" style="--phase-color:#f59e0b;" onclick="showPhase(1)">
+                                <div class="phase-num">Fase 2</div>
+                                <div class="phase-name">Ciencia Normal</div>
+                                <div class="phase-short">Resolver puzzles dentro del paradigma</div>
+                            </div>
+                            <div class="phase-arrow">›</div>
+                            <div class="flow-phase" style="--phase-color:#ef4444;" onclick="showPhase(2)">
+                                <div class="phase-num">Fase 3</div>
+                                <div class="phase-name">Crisis</div>
+                                <div class="phase-short">Anomalías que el paradigma no puede absorber</div>
+                            </div>
+                            <div class="phase-arrow">›</div>
+                            <div class="flow-phase" style="--phase-color:#10b981;" onclick="showPhase(3)">
+                                <div class="phase-num">Fase 4</div>
+                                <div class="phase-name">Revolución</div>
+                                <div class="phase-short">Nuevo paradigma, nuevo mundo</div>
+                            </div>
+                        </div>
+                        <div class="flow-detail open" id="phase-detail">
+                            <h4 id="phase-detail-title">Fase 1: Pre-paradigmática</h4>
+                            <p id="phase-detail-body"></p>
+                            <ul id="phase-detail-list"></ul>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §4 CIENCIA NORMAL -->
+                <section class="article-section reveal" id="s-normal">
+                    <span class="section-label">§ 4 — La mayor parte del tiempo</span>
+                    <h2 class="article-h2">Ciencia Normal: <span>resolver puzzles</span></h2>
+                    <p class="article-p">
+                        La mayor parte de la actividad científica —lo que hacen los científicos en sus laboratorios, día
+                        a día— es lo que Kuhn llama <strong>ciencia normal</strong>. No se trata de descubrir verdades
+                        revolucionarias. Se trata de <em>resolver puzzles</em> dentro de un paradigma aceptado.
+                    </p>
+                    <p class="article-p">
+                        ¿Qué es un puzzle? Un problema cuya solución se supone alcanzable con las herramientas del
+                        paradigma. Si un científico no puede resolverlo, el problema es del científico —no del
+                        paradigma. La ciencia normal es, en cierto modo, <strong>dogmática</strong>: no cuestiona sus
+                        propios fundamentos. Eso es, dice Kuhn, lo que la hace eficiente.
+                    </p>
+
+                    <div class="callout blue">
+                        <div class="callout-tag">Paradoja de Kuhn</div>
+                        <div class="callout-title">El dogmatismo es productivo</div>
+                        <p class="callout-text">La ciencia normal exige que los científicos sean conservadores respecto
+                            al paradigma. Si cada vez que surge un dato raro se cuestionara toda la teoría, el progreso
+                            sería imposible. El dogmatismo crea el foco que permite profundizar. La apertura radical
+                            tiene su momento —la revolución— pero es la excepción, no la regla.</p>
+                    </div>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Dimensión</th>
+                                <th>Ciencia Normal</th>
+                                <th>Revolución Científica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="label-cell">Actitud ante el paradigma</td>
+                                <td>Lo acepta sin cuestionar</td>
+                                <td>Lo reemplaza completamente</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Tipo de problemas</td>
+                                <td>Puzzles con solución garantizada</td>
+                                <td>Crisis existencial del marco</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Rol de las anomalías</td>
+                                <td>Se ignoran o explican ad hoc</td>
+                                <td>Acumuladas hasta hacerse insostenibles</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Creatividad científica</td>
+                                <td>Dentro de los límites del paradigma</td>
+                                <td>Ruptura total de los límites</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Ejemplo</td>
+                                <td>Calcular la órbita de Urano (Newton)</td>
+                                <td>Einstein reemplaza a Newton</td>
+                            </tr>
+                            <tr>
+                                <td class="label-cell">Frecuencia</td>
+                                <td>La mayor parte del tiempo</td>
+                                <td>Momentos raros y convulsivos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §5 ANOMALÍAS Y CRISIS -->
+                <section class="article-section reveal" id="s-anomalias">
+                    <span class="section-label">§ 5 — Cuando el paradigma cruje</span>
+                    <h2 class="article-h2">Anomalías, Crisis y <span>Colapso</span></h2>
+                    <p class="article-p">
+                        Ningún paradigma resuelve todos sus puzzles. Siempre hay resultados que no encajan,
+                        observaciones que incomodan, experimentos que dan resultados inesperados. A estos fenómenos que
+                        el paradigma no puede acomodar Kuhn los llama <strong>anomalías</strong>.
+                    </p>
+                    <p class="article-p">
+                        Lo crucial es que <em>las anomalías por sí solas no derrocan un paradigma</em>. Durante la
+                        ciencia normal, las anomalías se ignoran, se minimizan, o se explican con hipótesis ad hoc.
+                        Recordemos la clase 1: eso es exactamente lo que hacía la astronomía ptolemaica cuando las
+                        predicciones fallaban — añadir más epiciclos. El paradigma tiene una enorme capacidad de
+                        absorber golpes.
+                    </p>
+
+                    <!-- INTERACTIVE ANOMALY DEMO -->
+                    <div class="anomaly-demo reveal">
+                        <h4>Simulador de Crisis de Paradigma</h4>
+                        <p>¿Cuántas anomalías puede tolerar un paradigma antes de entrar en crisis? Hacé click en
+                            "Añadir anomalía" y observá.</p>
+                        <div class="anomaly-bar-wrap">
+                            <div class="anomaly-bar" id="anomalyBar" style="width:5%;"></div>
+                        </div>
+                        <div class="anomaly-labels">
+                            <span>Ciencia Normal</span>
+                            <span>Tensión</span>
+                            <span>Crisis</span>
+                            <span>¡Revolución!</span>
+                        </div>
+                        <div id="anomalyText" style="font-size:14px;color:var(--text3);margin-bottom:16px;">Anomalías: 0
+                            — El paradigma está sano. Los científicos trabajan en paz.</div>
+                        <div class="anomaly-controls">
+                            <button class="anomaly-btn add" onclick="addAnomaly()">+ Añadir anomalía</button>
+                            <button class="anomaly-btn reset" onclick="resetAnomaly()">Reiniciar</button>
+                        </div>
+                        <div class="anomaly-status" id="anomalyStatus"></div>
+                    </div>
+
+                    <p class="article-p">
+                        La <strong>crisis</strong> emerge cuando las anomalías se acumulan hasta un punto en que la
+                        comunidad ya no puede ignorarlas. El paradigma empieza a parecer no un marco de trabajo sino una
+                        camisa de fuerza. Los científicos comienzan a discutir los fundamentos —algo inusual en la
+                        ciencia normal— y surgen teorías alternativas en competencia.
+                    </p>
+
+                    <div class="callout dark-box">
+                        <div class="callout-tag">El caso histórico más famoso de Kuhn</div>
+                        <div class="callout-title">Mercurio, Urano, y el paradigma newtoniano</div>
+                        <p class="callout-text">La órbita de Urano no cuadraba con las predicciones newtonianas.
+                            ¿Colapso del paradigma? No. Adams y Le Verrier supusieron que había un <em>planeta
+                                desconocido</em> perturbando la órbita — y así predijeron y descubrieron Neptuno (1846).
+                            El paradigma absorbió la anomalía creando conocimiento nuevo. Pero la órbita de Mercurio —la
+                            precesión del perihelio— no tenía solución dentro de Newton. Esa anomalía persistente esperó
+                            a Einstein.</p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §6 INCONMENSURABILIDAD -->
+                <section class="article-section reveal" id="s-incomm">
+                    <span class="section-label">§ 6 — La idea más radical</span>
+                    <h2 class="article-h2">Inconmensurabilidad: <span>mundos distintos</span></h2>
+                    <p class="article-p">
+                        El concepto más radical y polémico de Kuhn es el de <strong>inconmensurabilidad</strong>. Dos
+                        paradigmas son inconmensurables cuando no comparten una medida común: no hay un lenguaje neutral
+                        desde el cual uno pueda decir "el paradigma A describe mejor la realidad que el paradigma B".
+                    </p>
+                    <p class="article-p">
+                        Esto no significa que todos los paradigmas sean igualmente válidos —Kuhn no es un relativista
+                        ingenuo—. Significa que <strong>el cambio de paradigma no es una corrección puntual sino una
+                            transformación global de la percepción</strong>. Después de la revolución copernicana, los
+                        científicos literalmente veían un mundo diferente cuando miraban al cielo.
+                    </p>
+
+                    <div class="pull-quote">
+                        <p class="pq-text">"Los científicos que trabajan con diferentes paradigmas practican sus
+                            profesiones en mundos distintos. Los dos grupos ven cosas diferentes cuando miran desde el
+                            mismo punto en la misma dirección."</p>
+                        <p class="pq-source">— Thomas S. Kuhn, <span>La Estructura de las Revoluciones
+                                Científicas</span></p>
+                    </div>
+
+                    <p class="article-p">
+                        ¿Recuerdan la clase 3, sobre Hanson y la <em>carga teórica de la observación</em>? Kuhn
+                        radicaliza esa idea: no es solo que Brahe y Kepler "interpretan" distinto lo que ven. Es que el
+                        paradigma moldea la percepción de tal modo que dos científicos en paradigmas distintos
+                        literalmente <em>ven cosas diferentes</em>. La famosa figura del pato-conejo: no es que ves el
+                        mismo dibujo e interpretas diferente. Es que ves un pato, o ves un conejo. No ambos a la vez.
+                    </p>
+
+                    <div class="case-grid">
+                        <div class="case-card reveal">
+                            <div class="case-icon">🪶</div>
+                            <span class="case-tag tag-hist">Caso histórico</span>
+                            <h4>El flogisto y el oxígeno</h4>
+                            <p>Stahl y sus seguidores "veían" el flogisto escapar en la combustión. Lavoisier "veía" el
+                                oxígeno siendo absorbido. Con el mismo fuego y el mismo metal, veían procesos
+                                contrarios. No era solo una diferencia de interpretación: eran marcos conceptuales
+                                completamente distintos.</p>
+                        </div>
+                        <div class="case-card reveal">
+                            <div class="case-icon">⚡</div>
+                            <span class="case-tag tag-kuhn">Inconmensurabilidad</span>
+                            <h4>Electricidad antes de Franklin</h4>
+                            <p>Antes del paradigma de Franklin sobre la electricidad, no había acuerdo sobre qué era un
+                                "hecho eléctrico". Cada escuela construía su propio aparato experimental con sus propios
+                                supuestos. El paradigma crea el campo mismo donde se generan los datos.</p>
+                        </div>
+                        <div class="case-card reveal">
+                            <div class="case-icon">🌍</div>
+                            <span class="case-tag tag-hist">Caso histórico</span>
+                            <h4>La masa en Newton y en Einstein</h4>
+                            <p>La palabra "masa" aparece en ambas teorías. Pero en Newton es absoluta e invariante; en
+                                Einstein es relativa a la velocidad. No es el mismo concepto con distinto valor: son
+                                conceptos diferentes con el mismo nombre. Eso es inconmensurabilidad terminológica.</p>
+                        </div>
+                        <div class="case-card reveal">
+                            <div class="case-icon">🔭</div>
+                            <span class="case-tag tag-kuhn">Aplicación pedagógica</span>
+                            <h4>Galileo y la Luna (C4)</h4>
+                            <p>Cuando Galileo vio montañas en la Luna, los aristotélicos no simplemente "rechazaron" el
+                                dato: <em>no podían verlo como dato</em> dentro de su paradigma. La perfección esférica
+                                de los cuerpos celestes era un supuesto tan fundamental que las irregularidades eran
+                                literalmente invisibles.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §7 KUHN Y SUS CRÍTICOS -->
+                <section class="article-section reveal" id="s-criticos">
+                    <span class="section-label">§ 7 — El debate filosófico</span>
+                    <h2 class="article-h2">Kuhn frente a sus <span>críticos</span></h2>
+                    <p class="article-p">
+                        La tesis de Kuhn provocó una de las discusiones más intensas de la filosofía de la ciencia del
+                        siglo XX. Sus principales interlocutores —Popper, Lakatos, Feyerabend— respondieron con
+                        posiciones propias. Comparemos brevemente.
+                    </p>
+
+                    <div class="phil-compare">
+                        <div class="phil-card" style="--pc-color:#ef4444;">
+                            <div class="phil-name">Karl Popper</div>
+                            <div class="phil-dates">1902-1994 · Viena / Londres</div>
+                            <div class="phil-claim">"La ciencia avanza por la refutación continua de hipótesis. Los
+                                científicos deben buscar activamente falsificar sus teorías."</div>
+                            <span class="phil-badge" style="background:#fee2e2;color:#dc2626;">Falsacionismo</span>
+                            <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.5;">Cuestionó a
+                                Kuhn: si la ciencia normal es dogmática e ignora las anomalías, ¿no es simplemente
+                                dogmatismo disfrazado de ciencia?</p>
+                        </div>
+                        <div class="phil-card" style="--pc-color:#7c3aed;">
+                            <div class="phil-name">Imre Lakatos</div>
+                            <div class="phil-dates">1922-1974 · Budapest / Londres</div>
+                            <div class="phil-claim">"Los programas de investigación tienen un núcleo duro protegido por
+                                hipótesis auxiliares. La clave es si el programa es progresivo o degenerativo."</div>
+                            <span class="phil-badge" style="background:#ede9fe;color:#7c3aed;">Programas de
+                                Investigación</span>
+                            <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.5;">Intentó mediar
+                                entre Popper y Kuhn: ni pura refutación ni pura revolución irracional.</p>
+                        </div>
+                        <div class="phil-card" style="--pc-color:#f59e0b;">
+                            <div class="phil-name">Paul Feyerabend</div>
+                            <div class="phil-dates">1924-1994 · Viena / Berkeley</div>
+                            <div class="phil-claim">"No existe un método científico único. La ciencia avanzó
+                                históricamente violando todas las reglas. Todo vale."</div>
+                            <span class="phil-badge" style="background:#fef3c7;color:#92400e;">Anarquismo
+                                Epistemológico</span>
+                            <p style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.5;">Radicalizó a
+                                Kuhn: si el cambio de paradigma no es racional, entonces la ciencia no tiene privilegio
+                                epistemológico especial.</p>
+                        </div>
+                    </div>
+
+                    <div class="callout">
+                        <div class="callout-tag">Kuhn responde</div>
+                        <div class="callout-title">"No soy relativista"</div>
+                        <p class="callout-text">Kuhn rechazó la etiqueta de relativista. Para él, la elección entre
+                            paradigmas no es irracional aunque no sea puramente lógica. Los científicos consideran la
+                            precisión de las predicciones, la amplitud del alcance, la simplicidad, la fertilidad
+                            heurística. Esos valores son compartidos aunque su aplicación no produzca un algoritmo
+                            mecánico de decisión. El cambio de paradigma es como una <em>conversión</em>, no como una
+                            <em>demostración</em>.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §8 SÍNTESIS HISTÓRICA -->
+                <section class="article-section reveal" id="s-sintesis">
+                    <span class="section-label">§ 8 — El loop completo: de Ptolomeo a Kuhn</span>
+                    <h2 class="article-h2">La Revolución Científica <span>desde Kuhn</span></h2>
+                    <p class="article-p">
+                        Ahora tenemos todas las piezas. Podemos releer la historia que estudiamos en las Clases 1 a 5
+                        con los ojos de Kuhn. El resultado es iluminador: cada elemento encaja con perfecta precisión en
+                        el modelo kuhniano.
+                    </p>
+
+                    <div class="synth-timeline reveal">
+                        <div class="synth-item">
+                            <div class="synth-dot" style="background:#6366f1;box-shadow:0 0 0 2px #6366f1;"></div>
+                            <div class="synth-label">Clase 1 — Fase: Ciencia Normal</div>
+                            <div class="synth-title">Ptolomeo y el Paradigma Geocéntrico</div>
+                            <div class="synth-text">El paradigma geocéntrico es ciencia normal madura. Sus "puzzles" son
+                                calcular posiciones planetarias, predecir eclipses. Las anomalías —órbitas que no
+                                cuadran— se absorben con más epiciclos (hipótesis ad hoc). El paradigma es productivo
+                                durante <em>catorce siglos</em>.</div>
+                        </div>
+                        <div class="synth-item">
+                            <div class="synth-dot" style="background:#f59e0b;box-shadow:0 0 0 2px #f59e0b;"></div>
+                            <div class="synth-label">Clase 2 — Fase: Crisis Incipiente</div>
+                            <div class="synth-title">Copérnico y el Desafío</div>
+                            <div class="synth-text">Copérnico no opera con datos radicalmente nuevos. Opera con la misma
+                                observación disponible. Lo que hace es proponer un paradigma alternativo. El De
+                                Revolutionibus es el primer candidato serio al trono. La crisis todavía no es total —
+                                Copérnico usa epiciclos también.</div>
+                        </div>
+                        <div class="synth-item">
+                            <div class="synth-dot" style="background:#ec4899;box-shadow:0 0 0 2px #ec4899;"></div>
+                            <div class="synth-label">Clase 3 — Herramienta Conceptual</div>
+                            <div class="synth-title">Hanson: La Carga Teórica</div>
+                            <div class="synth-text">Hanson explica por qué dos científicos en paradigmas distintos
+                                literalmente <em>ven</em> cosas distintas. Esto es el fundamento psicológico-cognitivo
+                                de la inconmensurabilidad kuhniana. Brahe y Kepler mirando el mismo amanecer no ven lo
+                                mismo.</div>
+                        </div>
+                        <div class="synth-item">
+                            <div class="synth-dot" style="background:#ef4444;box-shadow:0 0 0 2px #ef4444;"></div>
+                            <div class="synth-label">Clase 4 — Fase: Crisis y Conflicto</div>
+                            <div class="synth-title">Galileo: El Telescopio como Evidencia Anómala</div>
+                            <div class="synth-text">Las lunas de Júpiter, las fases de Venus, las montañas de la Luna:
+                                son anomalías devastadoras para el paradigma ptolemaico. No simplemente "nuevos datos" —
+                                son datos que el paradigma antiguo <em>no puede generar siquiera como preguntas</em>. El
+                                conflicto con la Iglesia es también un conflicto de paradigmas: teológico vs.
+                                matemático-observacional.</div>
+                        </div>
+                        <div class="synth-item">
+                            <div class="synth-dot" style="background:#10b981;box-shadow:0 0 0 2px #10b981;"></div>
+                            <div class="synth-label">Clase 5 — Fase: Revolución</div>
+                            <div class="synth-title">Kepler + Newton: El Nuevo Paradigma</div>
+                            <div class="synth-text">La Ley de Gravitación Universal de Newton es el <em>logro
+                                    ejemplar</em> que funda el nuevo paradigma. A partir de Newton, la física se
+                                practica en un mundo radicalmente distinto: matemático, universal, mecanicista. Es
+                                ciencia normal durante dos siglos hasta que Einstein lo revoluciona de nuevo.</div>
+                        </div>
+                        <div class="synth-item">
+                            <div class="synth-dot" style="background:#7c3aed;box-shadow:0 0 0 2px #7c3aed;"></div>
+                            <div class="synth-label">Clase 6 — Meta-análisis</div>
+                            <div class="synth-title">Kuhn: La Estructura que Lo Explica Todo</div>
+                            <div class="synth-text">Kuhn escribió La Estructura usando la Revolución Copernicana como su
+                                caso central. La historia que estudiamos <em>es</em> el ejemplo paradigmático del modelo
+                                kuhniano. Ahora podemos ver la ciencia como un proceso histórico, social, y cognitivo —
+                                no como una escalera lineal hacia la Verdad.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §9 PREGUNTAS DE DEBATE -->
+                <section class="article-section reveal" id="s-debate">
+                    <span class="section-label">§ 9 — Para pensar en clase</span>
+                    <h2 class="article-h2">Preguntas de <span>debate filosófico</span></h2>
+                    <ol class="questions-list">
+                        <li>Si el cambio de paradigma es como una "conversión" y no como una demostración lógica,
+                            ¿significa eso que la ciencia no es objetiva? ¿O puede existir objetividad sin algoritmos de
+                            decisión?</li>
+                        <li>Kuhn dice que los libros de texto científicos reescriben la historia para hacerla parecer
+                            acumulativa. ¿Podés pensar en un ejemplo de tu libro de física o química donde esto ocurra?
+                        </li>
+                        <li>¿Puede ocurrir algo similar a una "revolución de paradigma" en otras áreas del conocimiento
+                            — en arte, política, moral? ¿Hay inconmensurabilidad entre generaciones?</li>
+                        <li>Popper critica a Kuhn: "La ciencia normal es solo dogmatismo disfrazado." ¿Es esa crítica
+                            justa? ¿Se puede defender el conservadurismo científico?</li>
+                        <li>Kuhn fue un físico que se volvió historiador y filósofo. ¿Cambia algo el hecho de que su
+                            teoría fuera construida por alguien con experiencia científica directa, en lugar de por un
+                            filósofo de gabinete?</li>
+                    </ol>
+                </section>
+
+            </article>
+
+            <!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
+            <aside id="sidebar">
+                <div class="sb-card">
+                    <span class="sb-title">Contenido de esta clase</span>
+                    <div class="toc-item" onclick="scrollTo('#s-intro')">
+                        <div class="toc-num">1</div>
+                        <div class="toc-text">El libro que cambió todo</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-paradigma')">
+                        <div class="toc-num">2</div>
+                        <div class="toc-text">¿Qué es un paradigma?</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-fases')">
+                        <div class="toc-num">3</div>
+                        <div class="toc-text">Las cuatro fases</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-normal')">
+                        <div class="toc-num">4</div>
+                        <div class="toc-text">Ciencia Normal</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-anomalias')">
+                        <div class="toc-num">5</div>
+                        <div class="toc-text">Anomalías y Crisis</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-incomm')">
+                        <div class="toc-num">6</div>
+                        <div class="toc-text">Inconmensurabilidad</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-criticos')">
+                        <div class="toc-num">7</div>
+                        <div class="toc-text">Kuhn y sus críticos</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-sintesis')">
+                        <div class="toc-num">8</div>
+                        <div class="toc-text">Síntesis histórica</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-debate')">
+                        <div class="toc-num">9</div>
+                        <div class="toc-text">Debate filosófico</div>
+                    </div>
+                </div>
+
+                <div class="sb-card">
+                    <span class="sb-title">Conceptos clave</span>
+                    <div style="display:flex;flex-wrap:wrap;">
+                        <span class="concept-pill">Paradigma</span>
+                        <span class="concept-pill">Ciencia Normal</span>
+                        <span class="concept-pill">Anomalía</span>
+                        <span class="concept-pill">Crisis</span>
+                        <span class="concept-pill">Revolución Científica</span>
+                        <span class="concept-pill">Inconmensurabilidad</span>
+                        <span class="concept-pill">Puzzle</span>
+                        <span class="concept-pill">Conversión</span>
+                        <span class="concept-pill">Acumulación vs Ruptura</span>
+                    </div>
+                </div>
+
+                <div class="sb-card">
+                    <span class="sb-title">Filósofos en juego</span>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#7c3aed22;">🧠</div>
+                        <div class="phil-info">
+                            <h5>Thomas S. Kuhn</h5>
+                            <p>Cincinnati, 1922 — Cambridge, 1996</p>
+                        </div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#ef444422;">⚔️</div>
+                        <div class="phil-info">
+                            <h5>Karl Popper</h5>
+                            <p>Viena, 1902 — Londres, 1994</p>
+                        </div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#8b5cf622;">🔬</div>
+                        <div class="phil-info">
+                            <h5>Imre Lakatos</h5>
+                            <p>Debrecen, 1922 — Londres, 1974</p>
+                        </div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#f59e0b22;">🎭</div>
+                        <div class="phil-info">
+                            <h5>Paul Feyerabend</h5>
+                            <p>Viena, 1924 — Zürich, 1994</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sb-card">
+                    <span class="sb-title">Navegación de clases</span>
+                    <a href="unidad1-clase5.html" style="display:block;">
+                        <div class="nav-class-btn" style="margin-bottom:12px;">
+                            <i class="fa-solid fa-arrow-left" style="color:var(--text3);"></i>
+                            <div class="nav-class-info">
+                                <div class="nav-class-label">Clase anterior</div>
+                                <div class="nav-class-title">Kepler y Newton: Gravitación Universal</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="unidad1-clase7.html" style="display:block;">
+                        <div class="nav-class-btn primary">
+                            <div class="nav-class-info">
+                                <div class="nav-class-label">Próxima clase</div>
+                                <div class="nav-class-title">Lakatos y Feyerabend: ¿Existe el Método?</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </aside>
+
+        </div><!-- /article-wrap -->
+    </main>
+
+    <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+    <footer class="art-footer">
+        <div class="art-footer-inner">
+            <div class="footer-nav">
+                <a href="unidad1-clase5.html" class="footer-nav-card">
+                    <div class="fn-icon">←</div>
+                    <div>
+                        <div class="fn-label">Clase anterior</div>
+                        <div class="fn-title">Kepler y Newton: Gravitación Universal</div>
+                    </div>
+                </a>
+                <a href="index.html" class="footer-nav-card">
+                    <div class="fn-icon">🏠</div>
+                    <div>
+                        <div class="fn-label">Volver al inicio</div>
+                        <div class="fn-title">Revista Filosofía &amp; Ciencia</div>
+                    </div>
+                </a>
+                <a href="unidad1-clase7.html" class="footer-nav-card primary">
+                    <div class="fn-icon">→</div>
+                    <div>
+                        <div class="fn-label">Próxima clase</div>
+                        <div class="fn-title">Lakatos y Feyerabend</div>
+                    </div>
+                </a>
+            </div>
+            <div class="footer-credits">
+                Filosofía e Historia de la Ciencia y la Tecnología · 6to Año ·
+                <a href="index.html">Los Polvorines, 2025</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── DARK MODE ──────────────────────────────────────────────
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+        // ── PROGRESS BAR ──────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+
+        // ── REVEAL ON SCROLL ──────────────────────────────────────
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // ── SMOOTH SCROLL TOC ──────────────────────────────────────
+        function scrollTo(id) {
+            const el = document.querySelector(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── TOC ACTIVE ─────────────────────────────────────────────
+        const sections = document.querySelectorAll('.article-section[id]');
+        const tocItems = document.querySelectorAll('.toc-item');
+        const tocObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    tocItems.forEach(t => t.classList.remove('active'));
+                    const match = [...tocItems].find(t => t.getAttribute('onclick')?.includes(e.target.id));
+                    if (match) match.classList.add('active');
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => tocObs.observe(s));
+
+        // ── REVOLUTION FLOW PHASES ─────────────────────────────────
+        const phaseData = [
+            {
+                title: "Fase 1: Pre-paradigmática — El Caos Fundador",
+                body: "Antes de que un paradigma se establezca, una disciplina atraviesa un período pre-paradigmático donde varias escuelas compiten sin que ninguna domine. No hay consenso sobre qué son los datos relevantes, qué métodos son válidos, ni qué preguntas merecen ser respondidas.",
+                items: [
+                    "Múltiples escuelas compiten sin poder refutarse mutuamente",
+                    "Cada escuela tiene sus propios supuestos fundamentales",
+                    "Los datos son escasos y su selección es disputada",
+                    "No hay 'profesionales' sino aficionados entusiastas",
+                    "Ejemplo: la óptica antes de Newton, con escuelas rivales sobre la naturaleza de la luz"
+                ]
+            },
+            {
+                title: "Fase 2: Ciencia Normal — El Trabajo Cotidiano",
+                body: "Cuando una escuela logra un 'logro ejemplar' suficientemente convincente, se convierte en el paradigma dominante. La comunidad acepta esos fundamentos y se dedica a explotar su potencial: resolver puzzles, medir con más precisión, ampliar el alcance. Esto es ciencia normal — productiva, acumulativa, pero solo dentro del paradigma.",
+                items: [
+                    "Los fundamentos no se cuestionan — son el punto de partida",
+                    "Los problemas tienen solución garantizada (en principio)",
+                    "El fracaso en resolver un puzzle se atribuye al científico, no al paradigma",
+                    "Las anomalías se minimizan o se explican con hipótesis ad hoc",
+                    "Ejemplo: la física newtoniana desde 1687 hasta finales del siglo XIX"
+                ]
+            },
+            {
+                title: "Fase 3: Crisis — El Paradigma Cruje",
+                body: "Las anomalías se acumulan hasta un punto crítico. Ya no es posible ignorarlas o explicarlas sin distorsionar enormemente el paradigma. Los científicos comienzan a perder confianza, aparecen teorías alternativas especulativas, y se debaten los fundamentos — algo inusual en la ciencia normal.",
+                items: [
+                    "Las anomalías proliferan y ya no se pueden ignorar",
+                    "Aparecen variantes especulativas del paradigma",
+                    "Los científicos empiezan a discutir los supuestos básicos",
+                    "Se generan filosofías 'de emergencia' para defender el paradigma",
+                    "Ejemplo: la física de finales del siglo XIX con el problema del éter y la radiación del cuerpo negro"
+                ]
+            },
+            {
+                title: "Fase 4: Revolución — El Mundo Cambia",
+                body: "Un nuevo candidato paradigmático emerge y, tras una lucha que no siempre es 'racional' en sentido lógico, reemplaza al anterior. Los científicos más jóvenes adoptan el nuevo paradigma; los mayores muchas veces mueren sin convertirse. El nuevo paradigma redefine los problemas, los datos y los criterios de éxito.",
+                items: [
+                    "Un nuevo paradigma ofrece respuestas donde el viejo solo daba crisis",
+                    "La conversión es más como un cambio de fe que una demostración",
+                    "La generación mayor generalmente resiste — 'la ciencia avanza funeral a funeral' (Planck)",
+                    "El nuevo paradigma reescribe la historia: el pasado se ve como 'apuntando' hacia él",
+                    "Ejemplo: la relatividad y la mecánica cuántica reemplazando la física clásica"
+                ]
+            }
+        ];
+
+        function showPhase(idx) {
+            const phases = document.querySelectorAll('.flow-phase');
+            phases.forEach((p, i) => p.classList.toggle('active', i === idx));
+            const detail = document.getElementById('phase-detail');
+            const data = phaseData[idx];
+            document.getElementById('phase-detail-title').textContent = data.title;
+            document.getElementById('phase-detail-body').textContent = data.body;
+            const ul = document.getElementById('phase-detail-list');
+            ul.innerHTML = data.items.map(i => `<li>${i}</li>`).join('');
+            detail.classList.remove('open');
+            void detail.offsetWidth; // trigger reflow for animation
+            detail.classList.add('open');
+        }
+        // Initialize with first phase
+        showPhase(0);
+
+        // ── ANOMALY DEMO ───────────────────────────────────────────
+        let anomalyCount = 0;
+        const maxAnomalies = 12;
+        const phases_a = [
+            { at: 0, text: "Anomalías: 0 — El paradigma está sano. Los científicos trabajan en paz.", status: "" },
+            { at: 2, text: "Anomalías: 2 — Ligera incomodidad. Se añaden hipótesis ad hoc para explicarlas.", status: "" },
+            { at: 4, text: "Anomalías: 4 — Tensión creciente. Los más jóvenes empiezan a murmurar.", status: "⚠️ Señales de alerta" },
+            { at: 6, text: "Anomalías: 6 — El paradigma necesita parches cada vez más complicados.", status: "⚠️⚠️ Crisis incipiente" },
+            { at: 8, text: "Anomalías: 8 — La comunidad empieza a perder confianza. Aparecen alternativas.", status: "🔴 CRISIS" },
+            { at: 10, text: "Anomalías: 10 — El paradigma cruje por todos lados. La revolución es inevitable.", status: "🔴🔴 CRISIS TOTAL" },
+            { at: 12, text: "Anomalías: 12 — ¡REVOLUCIÓN! El paradigma colapsa. Un nuevo mundo científico emerge.", status: "💥 ¡REVOLUCIÓN CIENTÍFICA!" }
+        ];
+
+        function addAnomaly() {
+            if (anomalyCount >= maxAnomalies) return;
+            anomalyCount++;
+            const pct = (anomalyCount / maxAnomalies) * 100;
+            document.getElementById('anomalyBar').style.width = pct + '%';
+
+            const phase = phases_a.reduce((acc, p) => anomalyCount >= p.at ? p : acc, phases_a[0]);
+            document.getElementById('anomalyText').textContent = `Anomalías: ${anomalyCount} — ${phase.text.split('— ')[1]}`;
+            document.getElementById('anomalyStatus').textContent = phase.status;
+            document.getElementById('anomalyStatus').style.color = anomalyCount >= 10 ? '#ef4444' : anomalyCount >= 6 ? '#f59e0b' : 'var(--text3)';
+
+            if (anomalyCount >= maxAnomalies) {
+                document.querySelector('.anomaly-btn.add').disabled = true;
+                document.querySelector('.anomaly-btn.add').style.opacity = '.5';
+            }
+        }
+
+        function resetAnomaly() {
+            anomalyCount = 0;
+            document.getElementById('anomalyBar').style.width = '5%';
+            document.getElementById('anomalyText').textContent = 'Anomalías: 0 — El paradigma está sano. Los científicos trabajan en paz.';
+            document.getElementById('anomalyStatus').textContent = '';
+            const btn = document.querySelector('.anomaly-btn.add');
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        }
+    </script>
+</body>
+
+</html>

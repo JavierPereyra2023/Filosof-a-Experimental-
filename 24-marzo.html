@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Especial: 24 de Marzo — Memoria, Verdad y Justicia</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --red: #ef4444; 
+            --red-dark: #b91c1c;
+            --bg: #111111;
+            --bg2: #1a1a1a;
+            --bg3: #222222;
+            --surface: #1e1e1e;
+            --card: #242424;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333333;
+            --yellow: #facc15;
+            --black: #000;
+            --topbar-bg: #000;
+            --header-bg: #111111;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-padding-top: 80px; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; width: 100%; object-fit: cover; }
+        
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg3); }
+        ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+        /* HEADER & TOPBAR */
+        #topbar { background: var(--topbar-bg); color: #fff; padding: 8px 0; font-size: 11px; letter-spacing: 0.1em; z-index: 100; }
+        .topbar-inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .topbar-brand { display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; transition: color var(--transition); }
+        .topbar-brand:hover { color: var(--red); }
+        .topbar-brand i { color: var(--red); }
+        .topbar-links { display: none; gap: 20px; }
+        @media (min-width: 768px) { .topbar-links { display: flex; } }
+        .topbar-links a { color: #aaa; text-transform: uppercase; transition: color var(--transition); }
+        .topbar-links a:hover { color: var(--red); }
+        .btn-subscribe-top { background: var(--red); color: #fff; border: none; padding: 6px 18px; border-radius: 999px; font-size: 10px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all var(--transition); }
+        .btn-subscribe-top:hover { background: var(--red-dark); transform: scale(1.04); }
+
+        #main-header { background: var(--header-bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 200; box-shadow: 0 4px 24px rgba(0,0,0,0.5); }
+        .header-inner { max-width: 1400px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo-wrap { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+        .logo-box { width: 54px; height: 54px; background: var(--red); display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 22px; border-radius: 4px; transition: transform var(--transition); flex-shrink: 0;}
+        .logo-wrap:hover .logo-box { transform: rotate(-3deg) scale(1.05); }
+        .logo-title { font-family: 'Playfair Display', serif; font-size: clamp(16px, 5vw, 28px); font-weight: 900; line-height: 1; color: var(--text); }
+        .logo-sub { font-size: clamp(7px, 2.2vw, 9px); letter-spacing: 0.1em; color: var(--red); text-transform: uppercase; margin-top: 4px; font-weight: 800;}
+        .red-nav { background: linear-gradient(90deg, var(--red), var(--red-dark)); padding: 10px 0; }
+        .red-nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; }
+        .red-nav-inner::-webkit-scrollbar { display: none; }
+        .red-nav a { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; white-space: nowrap; opacity: 0.8; transition: opacity var(--transition); }
+        .red-nav a:hover { opacity: 1; text-decoration: underline; }
+        .btn-back { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.1em; transition: color var(--transition); flex-shrink: 0;}
+        .btn-back:hover { color: #fff; }
+        @media (max-width: 640px) {
+            .btn-back span { display: none; }
+            .logo-box { width: 40px; height: 40px; font-size: 16px; }
+            .header-inner { padding: 12px 16px; }
+            .logo-wrap { gap: 10px; }
+        }
+
+        /* HERO ARTICLE */
+        .article-hero { position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px 24px; color: #fff; }
+        .article-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, #111 5%, rgba(17,17,17,0.8) 40%, rgba(17,17,17,0.4) 100%); z-index: 1; }
+        .hero-bg { position: absolute; inset: 0; z-index: 0; background: url('golpe_estado.png') center 20%/cover no-repeat; filter: grayscale(100%) contrast(1.2); }
+        .article-hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; width: 100%; text-align: center; }
+        .hero-label { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #ef4444; margin-bottom: 24px; background: rgba(239, 68, 68, 0.15); padding: 6px 16px; border-radius: 999px; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .article-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(40px, 7vw, 84px); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 24px; text-shadow: 0 4px 24px rgba(0,0,0,0.8); }
+        .article-hero-subtitle { font-family: 'Libre Baskerville', serif; font-size: clamp(16px, 2.5vw, 22px); color: #e0e0e0; max-width: 700px; margin: 0 auto; line-height: 1.6; font-style: italic; }
+
+        /* MAIN CONTENT GRID */
+        .article-container { max-width: 1400px; margin: 0 auto; padding: 60px 24px; display: grid; grid-template-columns: 1fr; gap: 60px; align-items: start; }
+        @media (min-width: 1024px) { .article-container { grid-template-columns: 280px 1fr; } }
+        
+        /* TOC SIDEBAR */
+        .toc-sidebar { position: sticky; top: 120px; background: var(--bg2); padding: 32px 24px; border-radius: 16px; border: 1px solid var(--border); display: none; }
+        @media (min-width: 1024px) { .toc-sidebar { display: block; } }
+        .toc-title { font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 12px; border-left: 2px solid var(--bg3); }
+        .toc-link { display: block; padding-left: 16px; font-size: 13px; color: var(--text3); transition: all var(--transition); position: relative; font-weight: 500;}
+        .toc-link::before { content: ''; position: absolute; left: -2px; top: 0; height: 100%; width: 2px; background: var(--red); transform: scaleY(0); transition: transform var(--transition); transform-origin: top; }
+        .toc-link:hover, .toc-link.active { color: var(--text); }
+        .toc-link:hover::before, .toc-link.active::before { transform: scaleY(1); }
+
+        /* BODY */
+        .article-body { max-width: 780px; margin: 0 auto;}
+        
+        .article-p { font-family: 'Libre Baskerville', serif; font-size: 18px; line-height: 1.85; color: var(--text2); margin-bottom: 28px; text-align: justify; }
+        .article-body h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 800; color: var(--text); margin: 64px 0 24px; line-height: 1.2; letter-spacing: -0.01em; scroll-margin-top: 100px; border-bottom: 1px solid var(--border); padding-bottom: 16px;}
+        .article-body h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text); margin: 40px 0 16px; }
+        
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 84px; line-height: 0.8; padding-right: 12px; padding-top: 4px; color: var(--red); font-weight: 900; }
+        
+        .figure { margin: 48px 0; border-radius: 16px; overflow: hidden; background: var(--bg2); border: 1px solid var(--border); }
+        .figure-img-wrap { overflow: hidden; }
+        .figure-img { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); filter: grayscale(100%); }
+        .figure:hover .figure-img { transform: scale(1.03); filter: grayscale(50%); }
+        .figure-caption { padding: 16px 24px; font-size: 13px; color: var(--text3); border-top: 1px solid var(--border); font-family: 'Inter', sans-serif; display: flex; align-items: flex-start; gap: 12px;}
+        .figure-caption i { color: var(--red); margin-top: 3px; font-size: 14px;}
+
+        .quote-block { margin: 48px 0; padding: 40px 48px; background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), transparent); border-left: 4px solid var(--red); border-radius: 0 16px 16px 0; }
+        .quote-block p { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 1.5; color: var(--text); font-style: italic; margin-bottom: 16px; }
+        .quote-block cite { font-size: 12px; font-weight: 700; color: var(--red); letter-spacing: 0.1em; text-transform: uppercase; font-style: normal; }
+
+        /* TIMELINE */
+        .timeline { margin: 60px 0; position: relative; padding-left: 30px;}
+        .timeline::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 2px; background: var(--border); }
+        .timeline-item { margin-bottom: 32px; position: relative; }
+        .timeline-item::before { content: ''; position: absolute; left: -35px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--red); border: 2px solid var(--bg); box-shadow: 0 0 0 4px rgba(239,68,68,0.2); transition: transform 0.3s; z-index: 2;}
+        .timeline-item:hover::before { transform: scale(1.3); }
+        .timeline-date { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: var(--text); margin-bottom: 8px;}
+        .timeline-content { font-family: 'Libre Baskerville', serif; font-size: 15px; color: var(--text2); line-height: 1.6; background: var(--bg2); padding: 16px 20px; border-radius: 12px; border: 1px solid var(--border);}
+
+        /* INFO CARD */
+        .info-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin: 40px 0; }
+        .info-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 16px;}
+        .info-card-icon { width: 40px; height: 40px; background: rgba(239,68,68,0.1); color: var(--red); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .info-card-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); }
+        .info-card-body { font-family: 'Libre Baskerville', serif; font-size: 15px; color: var(--text2); line-height: 1.7; text-align: justify; }
+
+        /* FOOTER NAV */
+        .article-footer-nav { max-width: 1400px; margin: 40px auto; padding: 40px 24px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+        .footer-nav-link { display: flex; align-items: center; gap: 12px; padding: 16px 24px; border-radius: 16px; background: var(--bg2); border: 1px solid var(--border); transition: all var(--transition); cursor: pointer; }
+        .footer-nav-link:hover { border-color: var(--red); }
+        .footer-nav-link.next:hover { transform: translateX(4px); }
+        .footer-nav-link.home:hover { border-color: var(--yellow); }
+        .footer-nav-direction { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+        .footer-nav-title { font-size: 14px; font-weight: 600; color: var(--text); }
+        .footer-nav-icon { font-size: 18px; color: var(--text3); }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div id="topbar">
+        <div class="topbar-inner">
+            <div class="topbar-left">
+                <a href="index.html" class="btn-back">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>VOLVER AL ÍNDICE</span>
+                </a>
+            </div>
+            <div class="topbar-right">
+                <button class="btn-subscribe-top" onclick="window.location.href='index.html'">
+                    <i class="fa-solid fa-home"></i>
+                    INICIO
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header id="main-header">
+        <div class="header-inner">
+            <div class="logo-wrap" onclick="window.location.href='index.html'">
+                <div class="logo-box">F&C</div>
+                <div>
+                    <div class="logo-title">FILOSOFÍA&CIENCIA</div>
+                    <div class="logo-sub">CLASE ESPECIAL • PROGRAMA 2025</div>
+                </div>
+            </div>
+            <a href="index.html" class="btn-back">
+                <i class="fa-solid fa-arrow-left" style="font-size: 16px;"></i> <span style="font-size: 10px; line-height: 1.1;">VOLVER<br>AL<br>ÍNDICE</span>
+            </a>
+        </div>
+        <div class="red-nav">
+            <div class="red-nav-inner">
+                <a href="#golpe">1. EL GOLPE</a>
+                <a href="#educacion">2. EDUCACIÓN Y CENSURA</a>
+                <a href="#verdad">3. LA BÚSQUEDA DE LA VERDAD</a>
+                <a href="#democracia">4. EL RETORNO (1983)</a>
+                <a href="#reflexion">5. REFLEXIÓN</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <article class="article-hero">
+        <div class="hero-bg"></div>
+        <div class="article-hero-content reveal">
+            <span class="hero-label">Día Nacional de la Memoria por la Verdad y la Justicia</span>
+            <h1 class="article-hero-title">A 50 años del<br>24 de Marzo</h1>
+            <p class="article-hero-subtitle">Un recorrido histórico, epistemológico y ético por la dictadura cívico-militar (1976-1983). El impacto en la educación, la supresión de la verdad y el inquebrantable reclamo de justicia en el retorno a la democracia.</p>
+        </div>
+    </article>
+
+    <div class="article-container">
+        <!-- SIDEBAR -->
+        <aside>
+            <div class="toc-sidebar">
+                <div class="toc-title">
+                    <i class="fa-solid fa-list-ul"></i> CONTENIDOS
+                </div>
+                <ul class="toc-list" id="toc">
+                    <li><a href="#golpe" class="toc-link">1. El Golpe y el Terror de Estado</a></li>
+                    <li><a href="#educacion" class="toc-link">2. La intervención en la Educación</a></li>
+                    <li><a href="#verdad" class="toc-link">3. Búsqueda de la Verdad y Genética</a></li>
+                    <li><a href="#democracia" class="toc-link">4. 1983: El Retorno a la Democracia</a></li>
+                    <li><a href="#reflexion" class="toc-link">5. Epistemología y Memoria</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN BODY -->
+        <div class="article-body">
+            
+            <section id="golpe">
+                <p class="article-p dropcap reveal">El 24 de marzo de 1976 las Fuerzas Armadas derrocaron al gobierno constitucional de Isabel Perón, instaurando una dictadura cívico-militar que se autodenominó "Proceso de Reorganización Nacional". A diferencia de interrupciones constitucionales previas, este golpe implementó un <strong>plan sistemático de terrorismo de Estado</strong> que operó desde un nivel clandestino, al margen de toda legalidad o garantía constitucional.</p>
+                
+                <p class="article-p reveal">La Junta Militar, compuesta inicialmente por Jorge Rafael Videla, Emilio Eduardo Massera y Orlando Ramón Agosti, no solo suspendió el sistema democrático, los sindicatos y los partidos políticos, sino que estableció centros clandestinos de detención, tortura y exterminio (CCDTyE) a lo largo y ancho del país.</p>
+
+                <div class="figure reveal">
+                    <div class="figure-img-wrap">
+                        <img src="dasaparecidos.jpg" alt="Montaje del Proceso de Reorganización" class="figure-img" style="aspect-ratio: 16/9;">
+                    </div>
+                    <div class="figure-caption">
+                        <i class="fa-solid fa-camera"></i>
+                        <span>El terrorismo de Estado instauró un quiebre institucional sin precedentes, basándose en la desaparición forzada de personas como método central de disciplinamiento.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="educacion">
+                <h2 class="reveal">La intervención en la Educación y las Universidades</h2>
+                
+                <p class="article-p reveal">El proyecto autoritario entendió rápidamente que para "reorganizar" la sociedad debía controlar el ámbito del conocimiento, la educación y la cultura. Se implementó un régimen de vigilancia y censura en escuelas y universidades. Los planes de estudio fueron purgados de cualquier bibliografía considerada "subversiva" (desde marxismo hasta psicología, sociología y corrientes pedagógicas modernas).</p>
+
+                <div class="info-card reveal">
+                    <div class="info-card-header">
+                        <div class="info-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h4 class="info-card-title">Impacto Académico, Censura y Fuga de Cerebros</h4>
+                    </div>
+                    <div class="info-card-body">
+                        <p style="margin-bottom: 16px;">La represión sobre la academia tuvo un antecedente funesto en <strong>La Noche de los Bastones Largos</strong> (29 de julio de 1966, bajo la dictadura de Onganía). Ese día, la policía desalojó violentamente cinco facultades de la UBA. Cientos de profesores, investigadores y científicos fueron golpeados y detenidos, marcando la primera gran "fuga de cerebros" y el fin de la autonomía universitaria lograda en 1918.</p>
+                        
+                        <div style="display: flex; gap: 16px; margin: 24px 0; flex-wrap: wrap;">
+                            <img src="bastones_1.jpg" alt="La Noche de los Bastones Largos 1" style="flex: 1 1 250px; width: 100%; border-radius: 8px; filter: grayscale(100%); object-fit: cover; max-height: 300px;">
+                            <img src="bastones_2.jpeg" alt="La Noche de los Bastones Largos 2" style="flex: 1 1 250px; width: 100%; border-radius: 8px; filter: grayscale(100%); object-fit: cover; max-height: 300px;">
+                        </div>
+
+                        <p>La dictadura iniciada en 1976 profundizó este ataque metódico: volvió a intervenir las universidades nacionales anulando su autonomía. Miles de docentes fueron cesanteados, empujados al exilio, o se convirtieron en víctimas de desaparición forzada. El movimiento estudiantil fue, trágicamente, uno de los blancos principales de la represión clandestina del terrorismo de Estado.</p>
+                    </div>
+                </div>
+
+                <p class="article-p reveal">Un hecho tristemente emblemático de esta represión sistemática fue <strong>La Noche de los Lápices</strong> en septiembre de 1976 (La Plata), donde un grupo de estudiantes secundarios que militaban y reclamaban por el boleto estudiantil fueron secuestrados y desaparecidos. Este caso ejemplifica cómo el Estado criminalizó la participación política de la juventud.</p>
+
+                <div class="figure reveal">
+                    <div class="figure-img-wrap">
+                        <img src="libros_quema.jpg" alt="Quema de libros" class="figure-img" style="aspect-ratio: 16/9; background-position: top;">
+                    </div>
+                    <div class="figure-caption">
+                        <i class="fa-solid fa-fire"></i>
+                        <span>Quema de libros en un baldío de Sarandí (1980), símbolo de la censura que buscó erradicar no solo a las personas, sino a las ideas y el pensamiento crítico.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="verdad">
+                <h2 class="reveal">Búsqueda de la Verdad y la Ciencia Genética</h2>
+
+                <p class="article-p reveal">Ante la negación sistemática del Estado ("Los desaparecidos son una incógnita", declaraba Videla), el reclamo de <strong>Madres y Abuelas de Plaza de Mayo</strong> se convirtió en el faro de resistencia y en un reclamo epistemológico de primer orden: <em>la exigencia de conocer la Verdad</em> a partir de pruebas empíricas y aparición con vida.</p>
+                
+                <div class="info-card reveal" style="display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <div class="info-card-header" style="border-bottom: none; padding-bottom: 0;">
+                            <div class="info-card-icon"><i class="fa-solid fa-hands-holding-child"></i></div>
+                            <h4 class="info-card-title">El Pañuelo Blanco</h4>
+                        </div>
+                        <div class="info-card-body" style="margin-top: 16px;">
+                            El símbolo inconfundible de las Madres de Plaza de Mayo nació de manera espontánea. Durante una peregrinación a Luján en 1977, decidieron usar <strong>un pañal de tela de sus hijos</strong> sobre la cabeza para reconocerse entre la multitud. Con el tiempo, ese pañal se estilizó hasta convertirse en el emblemático pañuelo blanco, símbolo internacional de la lucha pacífica, la vida y la memoria irrenunciable frente al terror.
+                        </div>
+                    </div>
+                    <div style="flex: 0 0 200px; max-width: 100%;">
+                        <img src="pañuelo_madre_plaza.jpg" alt="Símbolo del pañuelo blanco" style="width: 100%; border-radius: 8px; filter: grayscale(100%);">
+                    </div>
+                </div>
+
+                <p class="article-p reveal">La dictadura llevó adelante un plan sistemático de apropiación de menores (bebés nacidos en cautiverio o secuestrados con sus padres). Para recuperar a sus nietos cuya identidad había sido falsificada, las Abuelas de Plaza de Mayo acudieron a la comunidad científica internacional.</p>
+
+                <div class="quote-block reveal">
+                    <p>"¿Podemos probar mediante análisis de sangre si ese niño es el hijo de nuestro hijo desaparecido?"</p>
+                    <cite>— Pregunta impulsora de Abuelas a la ciencia mundial (1982)</cite>
+                </div>
+
+                <p class="article-p reveal">Su persistencia llevó al desarrollo pionero del <strong>"Índice de Abuelidad"</strong> por parte de genetistas (como Mary-Claire King). Esto vincula profundamente nuestra Unidad 1 (Revolución del conocimiento) y Unidad 5 (Responsabilidad del científico). La ciencia genética (ADN) se convirtió en una herramienta irrefutable contra el negacionismo de Estado, permitiendo restituir, hasta el día de hoy, la identidad de más de 130 nietos y nietas.</p>
+                
+                <div class="info-card reveal" style="border-left: 4px solid var(--yellow);">
+                    <div class="info-card-header">
+                        <div class="info-card-icon" style="background: rgba(250, 204, 21, 0.1); color: var(--yellow);"><i class="fa-solid fa-dna"></i></div>
+                        <h4 class="info-card-title">Digresión Científica: ¿Cómo funciona el Índice de Abuelidad?</h4>
+                    </div>
+                    <div class="info-card-body">
+                        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <p style="margin-bottom: 12px;">En una prueba de paternidad tradicional (como vimos en clases previas), se compara el ADN del niño directamente con el del supuesto padre o madre. Pero ante la <strong>ausencia forzada</strong> de la generación intermedia (los padres desaparecidos), la ciencia debió crear un método probabilístico nuevo para «saltar» una generación.</p>
+                                
+                                <p style="margin-bottom: 12px;">El equipo de Mary-Claire King y otros genetistas recurrieron a dos elementos clave:</p>
+                                <ul style="list-style-position: inside; margin-bottom: 16px; padding-left: 10px;">
+                                    <li style="margin-bottom: 8px;"><strong>El sistema HLA (Antígenos de los Leucocitos Humanos):</strong> Las Abuelas aportaban muestras de sangre de tíos y abuelos. Analizando la frecuencia de ciertos genes HLA en la población, los matemáticos calculaban la probabilidad estadística de que esos abuelos tuvieran un nieto/a con el perfil genético de la persona encontrada.</li>
+                                    <li><strong>El ADN Mitocondrial:</strong> A diferencia del ADN del núcleo celular (que es una mezcla de padre y madre), el ADN que está en nuestras mitocondrias <em>se hereda exclusivamente por vía materna</em> de forma casi idéntica. Si una mujer (abuela) y un joven tienen el mismo ADN mitocondrial, prueba inequívocamente el linaje materno, incluso si la madre del joven está desaparecida.</li>
+                                </ul>
+
+                                <p>Esta innovación (probabilidad estadística + genética mitocondrial) es el <em>Índice de Abuelidad</em>, garantizando resultados con una certeza mayor al 99.99% y conformando luego el primer <strong>Banco Nacional de Datos Genéticos</strong> del mundo.</p>
+                            </div>
+                            <div style="flex: 0 0 220px; max-width: 100%; display: flex; flex-direction: column; justify-content: center;">
+                                <img src="adn_mitocondrial.png" alt="Esquema de ADN Mitocondrial" style="width: 100%; border-radius: 8px; filter: grayscale(20%); box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="figure reveal">
+                    <div class="figure-img-wrap">
+                        <img src="madres_plaza.jpg" alt="Madres de Plaza de Mayo marchando" class="figure-img" style="aspect-ratio: 16/9; background-position: top;">
+                    </div>
+                    <div class="figure-caption">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Madres de Plaza de Mayo marchando alrededor de la pirámide. Su emblemático pañuelo blanco (originalmente pañales de tela) simboliza la vida frente al horror.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="democracia">
+                <h2 class="reveal">1983: El Retorno y el "Nunca Más"</h2>
+
+                <p class="article-p reveal">Tras la derrota en la Guerra de Malvinas (1982) y en un contexto de crisis económica y presión social inminente, la dictadura colapsó. El 10 de diciembre de 1983, la elección popular de <strong>Raúl Ricardo Alfonsín</strong> marcó el inicio del período democrático ininterrumpido más largo de nuestra historia, cerrando el capítulo más oscuro y abriendo el camino hacia la verdad y la justicia institucional.</p>
+                
+                <div class="figure reveal">
+                    <div class="figure-img-wrap">
+                        <img src="alfonsin.png" alt="Asunción del Presidente Raúl Alfonsín" class="figure-img" style="aspect-ratio: 16/9; background-position: top;">
+                    </div>
+                    <div class="figure-caption">
+                        <i class="fa-solid fa-landmark-dome"></i>
+                        <span>Raúl Alfonsín asumiendo la presidencia en 1983. Su gobierno impulsó el histórico Juicio a las Juntas, consolidando el Estado de derecho frente a la impunidad del pasado reciente.</span>
+                    </div>
+                </div>
+
+                <div class="timeline reveal">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Creación de la CONADEP (1983)</div>
+                        <div class="timeline-content">A cinco días de asumir, Alfonsín creó la Comisión Nacional sobre la Desaparición de Personas (presidida por el escritor Ernesto Sabato). Su misión fue recolectar denuncias, sistematizar la información y revelar el aparato clandestino. Un verdadero trabajo de recolección de evidencia empírica ante crímenes ocultos.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Informe "Nunca Más" (1984)</div>
+                        <div class="timeline-content">La CONADEP entregó su informe probando de manera fehaciente la existencia de los centros clandestinos y miles de desapariciones. La expresión "Nunca Más" se consolidó como mandato ético colectivo.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Juicio a las Juntas (1985)</div>
+                        <div class="timeline-content">
+                            <p>Hecho inédito en el mundo: tribunales civiles juzgando a militares que habían detentado el poder de facto ("Cámara Federal"). Concluyó con severas condenas, demostrando que en el estado de derecho la Justicia se impone sobre la fuerza. Las pruebas de la fiscalía liderada por Julio Strassera y Luis Moreno Ocampo fueron contundentes.</p>
+                            
+                            <div style="display: flex; gap: 12px; margin-top: 16px; overflow-x: auto; padding-bottom: 8px;">
+                                <img src="juicio1.jpg" alt="Juicio a las Juntas Militares 1985" style="height: 140px; width: auto; border-radius: 6px; flex-shrink: 0; filter: grayscale(100%);">
+                                <img src="juicio2.jpg" alt="Fiscal Julio Strassera en 1985" style="height: 140px; width: auto; border-radius: 6px; flex-shrink: 0; filter: grayscale(100%);">
+                                <img src="juicio3.jpeg" alt="Estrado de los de los jueces en 1985" style="height: 140px; width: auto; border-radius: 6px; flex-shrink: 0; filter: grayscale(100%);">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Leyes de Impunidad e Indultos (1986-1990)</div>
+                        <div class="timeline-content">Ante presiones y levantamientos militares (carapintadas), se sancionaron las leyes de <strong>Punto Final (1986)</strong> y <strong>Obediencia Debida (1987)</strong>, paralizando los juicios a mandos medios. Posteriormente, entre 1989 y 1990, el presidente Carlos Menem firmó los <strong>Indultos</strong>, liberando a los máximos responsables condenados. Esto abrió un largo período de impunidad, donde la Justicia estatal fue clausurada y el reclamo de Verdad recayó casi exclusivamente en los organismos de Derechos Humanos.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Anulación y Reapertura de Juicios (2003-Presente)</div>
+                        <div class="timeline-content">Tras años de lucha, en 2003 el Congreso Nacional anuló las leyes de impunidad, y en 2005 la Corte Suprema las declaró inconstitucionales, al igual que los indultos. Esto permitió la <strong>reapertura de los juicios por delitos de lesa humanidad</strong>. Hasta la fecha, cientos de represores han sido condenados en procesos judiciales con todas las garantías constitucionales, consolidando a la Argentina como un ejemplo mundial de Justicia transicional.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reflexion">
+                <h2 class="reveal">Epistemología y Memoria (Reflexión)</h2>
+
+                <p class="article-p reveal">Como estudiantes de filosofía de la ciencia, el análisis del terrorismo de Estado nos deja una enseñanza transversal a todo el programa: <strong>el conocimiento y la técnica nunca son neutrales.</strong> Desde los aparatos ideológicos intervenidos en escuelas hasta la medicina usada en torturas (como analizamos en la Unidad 7 con Milgram), el poder puede apropiarse de los saberes para fines exterminadores.</p>
+
+                <p class="article-p reveal" style="margin-bottom: 80px;">Pero al mismo tiempo, como demostraron las Abuelas de Plaza de Mayo impulsando la genética y el Equipo Argentino de Antropología Forense (EAAF), <strong>la ciencia también puede ser una de las herramientas más poderosas y precisas para hacer frente a la mentira institucional, reconstruir la memoria histórica y reclamar Justicia.</strong></p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="article-footer-nav reveal">
+        <div class="footer-nav-link home" onclick="window.location.href='index.html'">
+            <div class="footer-nav-icon"><i class="fa-solid fa-home" style="color:var(--yellow)"></i></div>
+            <div>
+                <div class="footer-nav-direction">VOLVER A REVISTA</div>
+                <div class="footer-nav-title">Índice Principal</div>
+            </div>
+        </div>
+        
+        <div class="footer-nav-link next" onclick="window.location.href='unidad1-clase1.html'">
+            <div>
+                <div class="footer-nav-direction" style="text-align: right;">EMPEZAR PROGRAMA</div>
+                <div class="footer-nav-title">Unidad 1: Teorías Científicas</div>
+            </div>
+            <div class="footer-nav-icon"><i class="fa-solid fa-arrow-right" style="color:var(--red)"></i></div>
+        </div>
+    </div>
+
+    <script>
+        // Reveal animations
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealOptions);
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // TOC Active State
+        const sections = document.querySelectorAll('.article-body section');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth TOC scroll
+        document.querySelectorAll('.toc-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetNode = document.querySelector(targetId);
+                const headerOffset = 100;
+                const elementPosition = targetNode.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            });
+        });
+    </script>
+</body>
+</html>

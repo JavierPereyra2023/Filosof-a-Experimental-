@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Experimento Crucial | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --blue: #2563eb;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, .6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .4s, color .4s;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width .1s;
+        }
+
+        /* TOPNAV */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background .4s, border-color .4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        /* HERO */
+        #art-hero {
+            background: linear-gradient(160deg, rgba(30, 41, 59, .75) 0%, rgba(15, 23, 42, .92) 100%), url('hero9.png') center/cover no-repeat;
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-purple {
+            background: #7c3aed;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 6.5vw, 84px);
+            font-weight: 900;
+            line-height: .93;
+            letter-spacing: -.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(15px, 2.2vw, 20px);
+            color: rgba(255, 255, 255, .8);
+            max-width: 700px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .55);
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, .4);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, .25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, .4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: .3
+            }
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0;
+            background: var(--yellow);
+            padding: 0;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 130px;
+            padding: 20px 16px;
+            text-align: center;
+            border-right: 1px solid rgba(0, 0, 0, .12);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, .65);
+            margin-top: 4px;
+        }
+
+        /* ARTICLE LAYOUT */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: .8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .art-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 56px 0;
+        }
+
+        /* CALLOUTS */
+        .callout {
+            background: var(--bg3);
+            border-left: 4px solid var(--yellow);
+            padding: 28px 32px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+
+        .callout-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 8px;
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .callout-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+        }
+
+        .callout.purple {
+            border-left-color: #7c3aed;
+            background: color-mix(in srgb, #7c3aed 5%, var(--bg3));
+        }
+
+        .callout.blue {
+            border-left-color: var(--blue);
+            background: color-mix(in srgb, var(--blue) 5%, var(--bg3));
+        }
+
+        .callout.red {
+            border-left-color: var(--red);
+            background: color-mix(in srgb, var(--red) 5%, var(--bg3));
+        }
+
+        .callout.dark-box {
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-left: 5px solid #7c3aed;
+            padding: 32px;
+            border-radius: 8px;
+            margin: 36px 0;
+        }
+
+        .callout.dark-box .callout-tag {
+            color: #a78bfa;
+        }
+
+        .callout.dark-box .callout-title {
+            color: #e9d5ff;
+        }
+
+        .callout.dark-box .callout-text {
+            color: #d1d5db;
+        }
+
+        .dark .callout.dark-box {
+            background: #0a0a14;
+            border-color: #4c1d95;
+        }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            padding: 40px 0;
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .pull-quote::before {
+            content: '\201C';
+            position: absolute;
+            top: -10px;
+            left: -12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 140px;
+            color: var(--yellow);
+            opacity: .2;
+            line-height: 1;
+        }
+
+        .pq-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(20px, 3vw, 30px);
+            line-height: 1.4;
+            color: var(--text);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .pq-source {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+        }
+
+        .pq-source span {
+            color: var(--yellow-dark);
+        }
+
+        /* DIGRESSION CARD */
+        .digression-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 40px 0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .digression-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .digression-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+        }
+
+        @media(min-width: 768px) {
+            .digression-card {
+                flex-direction: row;
+                align-items: stretch;
+            }
+        }
+
+        .digression-img-container {
+            flex: 0 0 40%;
+            overflow: hidden;
+            /* Key to the scale effect being contained */
+            position: relative;
+            min-height: 250px;
+        }
+
+        .digression-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s ease;
+        }
+
+        .digression-card:hover .digression-img {
+            transform: scale(1.08);
+            /* The requested transform scale on hover */
+        }
+
+        .digression-content {
+            padding: 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .digression-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+        }
+
+        .digression-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .digression-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        /* INTERACTIVE CONCEPT DIAGRAM */
+        .concept-diagram {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px 24px;
+            margin: 32px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .concept-diagram h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .concept-diagram p {
+            font-size: 14px;
+            color: var(--text3);
+            margin-bottom: 40px;
+        }
+
+        .triangle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        @media(min-width: 640px) {
+            .triangle-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .cts-node {
+            background: var(--bg3);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cts-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .cts-node:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .cts-node[data-id="ciencia"]:hover {
+            border-color: #3b82f6;
+        }
+
+        .cts-node[data-id="tecnologia"]:hover {
+            border-color: #eab308;
+        }
+
+        .cts-node[data-id="sociedad"]:hover {
+            border-color: #ef4444;
+        }
+
+        .cts-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .cts-label {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .cts-connectors {
+            display: none;
+        }
+
+        .diagram-info-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+            text-align: left;
+            min-height: 120px;
+            border-left: 4px solid transparent;
+            transition: all .3s;
+        }
+
+        .diagram-info-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .diagram-info-box p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        /* GRID FOR CASE STUDY */
+        .nuke-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        @media(min-width: 768px) {
+            .nuke-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .nuke-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-top: 4px solid var(--red);
+            border-radius: 8px;
+            padding: 32px;
+            transition: all .2s;
+        }
+
+        .nuke-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .nuke-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: var(--red);
+        }
+
+        .nuke-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .nuke-card p {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        /* SERENDIPITY */
+        .serendipity-box {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+            border: 1px dashed var(--yellow-dark);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 32px 0;
+            position: relative;
+        }
+
+        .dark .serendipity-box {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+        }
+
+        /* SIDEBAR */
+        #sidebar {
+            position: sticky;
+            top: 70px;
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sb-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .sb-title {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .toc-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .toc-item:last-child {
+            border-bottom: none;
+        }
+
+        .toc-item:hover {
+            color: var(--yellow-dark);
+        }
+
+        .toc-item.active {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .toc-num {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--yellow);
+            min-width: 20px;
+        }
+
+        .toc-text {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .concept-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: var(--bg3);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text2);
+            margin: 4px;
+            transition: all .2s;
+        }
+
+        .concept-pill:hover {
+            background: var(--yellow);
+            color: #000;
+        }
+
+        .nav-class-btn {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .nav-class-btn:hover,
+        .nav-class-btn.primary:hover {
+            transform: translateX(4px);
+        }
+
+        .nav-class-btn.primary {
+            background: var(--yellow);
+            border-color: var(--yellow-dark);
+        }
+
+        .nav-class-info .nav-class-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .nav-class-btn.primary .nav-class-label {
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .nav-class-info .nav-class-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .nav-class-btn.primary .nav-class-title {
+            color: #000;
+        }
+
+        /* DISCUSSION */
+        .questions-list {
+            counter-reset: q;
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+        }
+
+        .questions-list li {
+            counter-increment: q;
+            padding: 20px 20px 20px 56px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+        }
+
+        .questions-list li::before {
+            content: counter(q);
+            position: absolute;
+            left: 16px;
+            top: 20px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FOOTER */
+        .art-footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 32px;
+        }
+
+        .art-footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        @media(min-width:640px) {
+            .footer-nav {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-nav-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all .25s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-nav-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-nav-card.primary {
+            background: var(--yellow);
+        }
+
+        .fn-icon {
+            font-size: 24px;
+        }
+
+        .fn-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-card.primary .fn-label {
+            color: rgba(0, 0, 0, .55);
+        }
+
+        .fn-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-nav-card.primary .fn-title {
+            color: #000;
+        }
+
+        .footer-credits {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .footer-credits a {
+            color: var(--yellow-dark);
+        }
+
+        /* REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <!-- ══ TOP NAV ════════════════════════════════════════════════ -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Inicio</span>
+            </a>
+            <span class="nav-sep">|</span>
+            <div class="breadcrumb">Unidad 1 · <span>Clase 9</span></div>
+        </div>
+        <div class="topnav-center">El Experimento Crucial y la Dualidad de la Luz</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase8.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 8
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad2-introduccion.html'">
+                Introducción U2 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- ══ HERO ════════════════════════════════════════════════════ -->
+    <header id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDADES 2 y 3</span>
+            <span class="hero-badge-outline">CLASE 9</span>
+            <span class="hero-badge-purple">HISTORIA DE LA CIENCIA</span>
+        </div>
+        <p class="hero-eyebrow">De Newton a De Broglie · El fin de las certezas</p>
+        <h1 class="hero-title">
+            El <em>E</em>xperimento <em>C</em>rucial:<br>Ondas y Partículas
+        </h1>
+        <p class="hero-subtitle">
+            ¿Es posible que un experimento decida de una vez y para siempre qué teoría es la correcta? Exploramos el
+            debate milenario sobre la naturaleza de la luz y cómo la física cuántica demolió nuestra intuición clásica.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item"><i class="fa-regular fa-clock"></i> 45 min lectura</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-bolt"></i> Fotoeléctrico</div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-water"></i> Ondas vs Corpúsculos</div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Continuar</span>
+        </div>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-num">1672</div>
+            <div class="stat-label">Corpuscular (Newton)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">1801</div>
+            <div class="stat-label">Ondulatoria (Young)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">1905</div>
+            <div class="stat-label">Fotones (Einstein)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">1924</div>
+            <div class="stat-label">Dualidad (De Broglie)</div>
+        </div>
+    </div>
+
+    <!-- ══ ARTICLE ══════════════════════════════════════════════════ -->
+    <main>
+        <div class="article-wrap">
+            <article>
+
+                <!-- §1 EXPERIMENTO CRUCIAL -->
+                <section class="article-section reveal" id="s-crucial">
+                    <span class="section-label">§ 1 — Concepto Epistemológico</span>
+                    <h2 class="article-h2">El mito del <span>Experimento Crucial</span></h2>
+                    <p class="article-p dropcap">
+                        El término <em>experimentum crucis</em> ("experimento de la cruz" o de la encrucijada) fue
+                        acuñado originalmente por Francis Bacon en el siglo XVII y popularizado por Robert Hooke e Isaac
+                        Newton. La idea epistemológica detrás de este concepto es tentadora y elegante: cuando existen
+                        dos teorías rivales que intentan explicar un mismo fenómeno, el científico debe diseñar un único
+                        experimento que arroje resultados mutuamente excluyentes.
+                    </p>
+                    <p class="article-p">
+                        Si la Teoría A predice que ocurrirá X, y la Teoría B predice que ocurrirá Y, el experimento
+                        actúa como un juez definitivo y brutal. Si el resultado es X, la Teoría B debe ser abandonada e
+                        incinerada inmediatamente. Sin embargo, como veremos a través de la historia de la luz, la
+                        filosofía de la ciencia nos demostró que <strong>los experimentos cruciales rara vez son
+                            definitivos</strong>. Ninguna gran teoría se rinde tras perder una batalla empírica, y la
+                        naturaleza suele ser mucho más extraña que nuestras dicotomías teóricas.
+                    </p>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §2 NEWTON VS HUYGENS -->
+                <section class="article-section reveal" id="s-newton">
+                    <span class="section-label">§ 2 — La disputa en el Siglo XVII</span>
+                    <h2 class="article-h2">Partículas de Newton vs. <span>Ondas de Huygens</span></h2>
+
+                    <div class="digression-card reveal">
+                        <div class="digression-img-container">
+                            <img src="newton_prisma.png" alt="Isaac Newton experimentando con prismas y luz"
+                                class="digression-img">
+                        </div>
+                        <div class="digression-content">
+                            <div class="digression-tag">Historia de la Física</div>
+                            <h3 class="digression-title">La Era Mecanicista de la Óptica</h3>
+                            <p class="digression-text">A finales del siglo XVII, las dos mentes más brillantes de Europa
+                                chocaron sobre qué era exactamente la luz. <strong>Isaac Newton</strong>, amparado en su
+                                prestigio gravitacional, afirmaba que la luz era un torrente de pequeñísimas bolas
+                                materiales (corpúsculos) que viajaban en línea recta desde la fuente a nuestro ojo. Por
+                                otro lado, su contemporáneo holandés <strong>Christiaan Huygens</strong> argumentaba que
+                                la luz no era materia, sino que se comportaba como las ondas mecánicas en un estanque de
+                                agua, propagándose a través de un medio invisible llamado éter.</p>
+                        </div>
+                    </div>
+
+                    <p class="article-p">
+                        Dado el inmenso peso dogmático de Newton tras la publicación de los <em>Principia
+                            Mathematica</em> y su célebre tratado de <em>Óptica</em> (1704), la comunidad científica se
+                        inclinó religiosamente por la <strong>teoría corpuscular</strong>. Las "ondas" de Huygens
+                        quedaron relegadas a la oscuridad durante casi un siglo. Sin embargo, nadie había hecho el
+                        "experimento crucial" para decidir objetivamente.
+                    </p>
+
+                    <div class="callout purple">
+                        <div class="callout-tag">El quiebre del paradigma (1801)</div>
+                        <div class="callout-title">El experimento de la doble rendija de Young</div>
+                        <p class="callout-text">El físico inglés <strong>Thomas Young</strong> diseñó lo que parecía ser
+                            el experimento crucial definitivo. Hizo pasar luz a través de dos rendijas extremadamente
+                            finas. Si la luz fuera corpúsculos balísticos, se esperarían dos franjas brillantes en la
+                            pared trasera. Pero el resultado fue un patrón de franjas alternadas claras y oscuras: un
+                            patrón de <strong>interferencia</strong>. Este comportamiento solo puede nacer si la luz es
+                            una <em>onda</em>, donde crestas y valles se cancelan mutuamente (oscuridad) o se suman (luz
+                            brillante). La teoría de Newton acababa de ser falsada experimentalmente.</p>
+                    </div>
+
+                    <!-- SVG DINAMICO DE INTERFERENCIA -->
+                    <div
+                        style="background:var(--bg3); padding:40px; border-radius:12px; margin:40px 0; border:1px solid var(--border); overflow:hidden;">
+                        <h4
+                            style="font-family:'Playfair Display', serif; font-size:20px; color:var(--text); text-align:center; margin-bottom:20px;">
+                            Doble Rendija: Interferencia Ondulatoria</h4>
+                        <svg viewBox="0 0 800 400" width="100%" height="auto"
+                            style="border-radius:8px; background:#050510;">
+                            <defs>
+                                <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8" />
+                                    <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur" />
+                                        <feMergeNode in="SourceGraphic" />
+                                    </feMerge>
+                                </filter>
+                            </defs>
+
+                            <!-- Laser source -->
+                            <rect x="20" y="180" width="40" height="40" rx="4" fill="#1f2937" stroke="#4b5563" />
+                            <!-- Light beam to slit -->
+                            <path d="M 60 200 L 200 200" stroke="url(#beam)" stroke-width="20" opacity="0.5" />
+
+                            <!-- Wall with two slits -->
+                            <rect x="200" y="50" width="10" height="110" fill="#cbd5e1" />
+                            <!-- Slit 1 (y=160 to 180) -->
+                            <rect x="200" y="180" width="10" height="40" fill="#cbd5e1" />
+                            <!-- Slit 2 (y=220 to 240) -->
+                            <rect x="200" y="240" width="10" height="110" fill="#cbd5e1" />
+
+                            <!-- Expanding wave from slit 1 -->
+                            <g stroke="#3b82f6" fill="none" opacity="0.6" filter="url(#glow)">
+                                <circle cx="205" cy="170" r="30" stroke-width="2">
+                                    <animate attributeName="r" values="0;200" dur="3s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="1;0" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="205" cy="170" r="80" stroke-width="2">
+                                    <animate attributeName="r" values="80;280" dur="3s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="1;0" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="205" cy="170" r="130" stroke-width="2">
+                                    <animate attributeName="r" values="130;330" dur="3s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="1;0" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                            </g>
+
+                            <!-- Expanding wave from slit 2 -->
+                            <g stroke="#eab308" fill="none" opacity="0.6" filter="url(#glow)">
+                                <circle cx="205" cy="230" r="30" stroke-width="2">
+                                    <animate attributeName="r" values="0;200" dur="3s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="1;0" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="205" cy="230" r="80" stroke-width="2">
+                                    <animate attributeName="r" values="80;280" dur="3s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="1;0" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="205" cy="230" r="130" stroke-width="2">
+                                    <animate attributeName="r" values="130;330" dur="3s" repeatCount="indefinite" />
+                                    <animate attributeName="opacity" values="1;0" dur="3s" repeatCount="indefinite" />
+                                </circle>
+                            </g>
+
+                            <!-- Detector Screen -->
+                            <rect x="650" y="50" width="20" height="300" fill="#334155" />
+
+                            <!-- Interference Pattern on Screen -->
+                            <rect x="650" y="180" width="20" height="40" fill="#eab308" filter="url(#glow)"
+                                opacity="0.9" />
+                            <rect x="650" y="110" width="20" height="30" fill="#3b82f6" filter="url(#glow)"
+                                opacity="0.6" />
+                            <rect x="650" y="260" width="20" height="30" fill="#3b82f6" filter="url(#glow)"
+                                opacity="0.6" />
+                            <rect x="650" y="60" width="20" height="20" fill="#3b82f6" filter="url(#glow)"
+                                opacity="0.3" />
+                            <rect x="650" y="320" width="20" height="20" fill="#3b82f6" filter="url(#glow)"
+                                opacity="0.3" />
+                        </svg>
+                        <p style="font-size:13px; color:var(--text3); text-align:center; margin-top:16px;">Visualización
+                            simplificada de ondas chocando en el espacio y generando una banda central brillante en la
+                            pantalla detectora posterior.</p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §3 EINSTEIN Y EL EFECTO FOTOELÉCTRICO -->
+                <section class="article-section reveal" id="s-einstein">
+                    <span class="section-label">§ 3 — El retorno de la partícula</span>
+                    <h2 class="article-h2">Einstein y la catástrofe del <span>Efecto Fotoeléctrico</span></h2>
+                    <p class="article-p">
+                        Hacia fines del siglo XIX, la comunidad científica daba por cerrado el debate: la luz era
+                        indudablemente una onda electromagnética (confirmado por Maxwell). Sin embargo, existía un
+                        problema experimental molesto: <strong>el efecto fotoeléctrico</strong>. Cuando se ilumina una
+                        placa metálica con luz ultravioleta, el metal dispara electrones.
+                    </p>
+                    <p class="article-p">
+                        Bajo la teoría ondulatoria clásica, si uno aumentaba la <em>intensidad</em> de la luz, la "ola"
+                        debería arrancar electrones con más energía. Pero los experimentos medían otra cosa: no
+                        importaba qué tan brillante fuera la luz roja o amarilla, ningún electrón se movía. Pero con un
+                        tenue rayo de luz ultravioleta, los electrones salían disparados. La energía del electrón
+                        dependía únicamente de la <em>frecuencia</em> del color, no de la amplitud de la ola. La física
+                        clásica había entrado en crisis.
+                    </p>
+
+                    <div class="digression-card reveal">
+                        <div class="digression-img-container">
+                            <img src="einstein_portrait.png" alt="Retrato de Albert Einstein" class="digression-img">
+                        </div>
+                        <div class="digression-content">
+                            <div class="digression-tag">Biografía Breve</div>
+                            <h3 class="digression-title">Albert Einstein (1879-1955)</h3>
+                            <p class="digression-text">Físico teórico de origen alemán, considerado el científico más
+                                importante del siglo XX. Aunque es mundialmente famoso por su Teoría de la Relatividad
+                                (que reformuló la gravedad y el espaciotiempo), fue su artículo de 1905 sobre el efecto
+                                fotoeléctrico el que le valió el Premio Nobel de Física. Al postular que la luz viaja en
+                                cuantos indivisibles de energía (fotones), Einstein devolvió a la luz su naturaleza
+                                corpuscular y abrió la puerta a la mecánica cuántica.</p>
+                        </div>
+                    </div>
+
+                    <div class="callout red">
+                        <div class="callout-tag">El Año Milagroso (1905)</div>
+                        <div class="callout-title">Los Fotones y el Nobel</div>
+                        <p class="callout-text">Un joven empleado de una oficina de patentes suiza llamado
+                            <strong>Albert Einstein</strong> publicó una audaz solución matemática. Para explicar este
+                            experimento crucial, Einstein propuso que la luz, al interactuar con la materia, no se
+                            comporta como una onda continua, sino como "paquetes discretos" indivisibles de energía
+                            cuántica, que luego se bautizarían como <strong>fotones</strong>. Era el retorno triunfal,
+                            en una nueva forma, del cadáver de la teoría corpuscular de Newton. Por esta explicación que
+                            fundó la era cuántica, y no por su Teoría de la Relatividad, Einstein ganó el Premio Nobel
+                            de 1921.
+                        </p>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §4 DE BROGLIE -->
+                <section class="article-section reveal" id="s-broglie">
+                    <span class="section-label">§ 4 — Dualidad Onda-Partícula</span>
+                    <h2 class="article-h2">Louis de Broglie y el fin de <span>las intuiciones</span></h2>
+                    <p class="article-p">
+                        El debate epistemológico había llegado a un absurdo aparente: Thomas Young probó
+                        irrefutablemente que la luz es una onda, y Einstein probó irrefutablemente que la luz es un haz
+                        de partículas. Ambos "experimentos cruciales" tenían razón.
+                    </p>
+
+                    <div class="digression-card reveal">
+                        <div class="digression-img-container">
+                            <img src="de_broglie_portrait.png" alt="Retrato de Louis de Broglie" class="digression-img">
+                        </div>
+                        <div class="digression-content">
+                            <div class="digression-tag">Biografía Breve</div>
+                            <h3 class="digression-title">Louis de Broglie (1892-1987)</h3>
+                            <p class="digression-text">Físico aristócrata francés (ostentaba el título de Príncipe).
+                                Inicialmente estudió historia, pero la física teórica capturó su atención. En su
+                                revolucionaria tesis doctoral de 1924 propuso la "hipótesis de ondas de materia",
+                                dictaminando que cualquier partícula masiva en movimiento (como un electrón) tiene una
+                                onda asociada. Ganó el Premio Nobel en 1929, tras confirmarse experimentalmente su
+                                teoría. Su trabajo unificó las dualidades de la física abriendo el camino definitivo
+                                hacia la mecánica cuántica moderna.</p>
+                        </div>
+                    </div>
+
+                    <p class="article-p">
+                        El golpe de gracia al mundo clásico ocurrió en 1924, cuando el físico e historiador francés
+                        <strong>Louis de Broglie</strong>, en su tesis doctoral, empujó la simetría de la naturaleza
+                        hasta sus últimas consecuencias: si la luz (que creíamos onda) también es partícula, entonces
+                        las rocas fundamentales de la materia sólida (como los <strong>electrones</strong>, que creíamos
+                        indudablemente partículas físicas) también deben viajar comportándose como ondas inmateriales.
+                    </p>
+                    <p class="article-p">
+                        Años después, se dispararon electrones (materia elemental masiva) a través del experimento de
+                        doble rendija de Young, y se obtuvo asombrosamente un patrón de interferencia ondulatorio. Nació
+                        la mecánica cuántica moderna, destrozando la dicotomía de los entes clásicos. Filosóficamente,
+                        este caso destruyó para siempre la confianza ingenua en que un único "experimento crucial" (la
+                        doble rendija de Young) puede establecer lógicamente una única Verdad para todos los siglos,
+                        demostrando en su lugar que un mismo fenómeno subatómico contiene una dualidad incognoscible
+                        bajo nuestras categorías humanas, o como diría Bohr con su <em>Principio de
+                            Complementariedad</em>.
+                    </p>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §5 APLICACIONES CTS -->
+                <section class="article-section reveal" id="s-cts">
+                    <span class="section-label">§ 5 — Ciencia, Tecnología y Sociedad (CTS)</span>
+                    <h2 class="article-h2">Impacto Tecnológico del <span>Mundo Cuántico</span></h2>
+                    <p class="article-p">
+                        Las complejas discusiones sobre fotones abstractos y corpúsculos inmateriales podrían parecer un
+                        mero pasatiempo filosófico, pero la revolución cuántica desencadenada por Einstein y De Broglie
+                        sentó las bases invisibles de la tecnología que sostiene el mundo moderno. Sin la comprensión
+                        práctica del efecto fotoeléctrico y la dualidad onda-partícula, nuestra vida cotidiana actual no
+                        existiría de la misma manera.
+                    </p>
+
+                    <div class="grid-2" style="margin-top: 30px;">
+                        <div class="callout green" style="margin: 0;">
+                            <div class="callout-tag">Del Efecto Fotoeléctrico</div>
+                            <div class="callout-title">Paneles Solares y Sensores Digitales</div>
+                            <p class="callout-text">El hallazgo de Einstein de que los fotones pueden arrancar
+                                electrones de un material es el principio de funcionamiento de las celdas fotovoltaicas
+                                en los <strong>paneles solares</strong> (la energía del fotón de luz se convierte en un
+                                flujo de corriente). Además, todas las <strong>cámaras digitales</strong> modernas y
+                                <strong>sensores de celulares</strong> capturan la imagen bajo este mismo principio,
+                                midiendo el choque cuántico de los fotones contra sensores (chips CMOS) para registrar
+                                cada píxel digital informático.
+                            </p>
+                        </div>
+                        <div class="callout blue" style="margin: 0;">
+                            <div class="callout-tag">De la Onda de Materia</div>
+                            <div class="callout-title">Microscopios Electrónicos y Semiconductores</div>
+                            <p class="callout-text">Si los electrones se comportan como ondas con longitudes minúsculas
+                                —infinitamente más apretadas que las ondas de luz lumínica (según De Broglie)— podemos
+                                usarlos para "ver" objetos moleculares. Los <strong>microscopios electrónicos</strong>
+                                permiten resoluciones atómicas inconcebibles (vitales para el desarrollo de biología
+                                genética, vacunas o nanotecnología). Sin el dominio mecánico-cuántico a partir de estos
+                                hallazgos, no se habría desarrollado el <strong>transistor</strong> de silicio ni la era
+                                de las computadoras modernas.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="art-divider">
+
+                <!-- §6 DEBATE -->
+                <section class="article-section reveal" id="s-debate">
+                    <span class="section-label">§ 6 — Para pensar en clase</span>
+                    <h2 class="article-h2">Preguntas sobre la <span>Racionalidad Científica</span></h2>
+                    <ol class="questions-list">
+                        <li>Si un mismo experimento dictamina que algo es una onda y otro experimento que es una
+                            partícula, ¿la ciencia nos está dando una copia idéntica de la realidad en sí, o sólo nos da
+                            modelos útiles de la misma?</li>
+                        <li>¿Por qué crees que a la comunidad científica (como vemos en CTS o paradigmas de Kuhn) le
+                            tomó casi 100 años aceptar las objeciones de Young, y otro largo tiempo asimilar los fotones
+                            de Einstein?</li>
+                        <li>Considerando a Lakatos y al "Cinturón Protector": ¿cómo se protegieron los defensores de
+                            Newton frente a las evidencias ondulatorias hasta que la crisis de los paradigmas los obligó
+                            al cambio?</li>
+                    </ol>
+                </section>
+
+            </article>
+
+            <!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
+            <aside id="sidebar">
+                <div class="sb-card">
+                    <span class="sb-title">Contenido de esta clase</span>
+                    <div class="toc-item" onclick="scrollTo('#s-crucial')">
+                        <div class="toc-num">1</div>
+                        <div class="toc-text">El Experimento Crucial</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-newton')">
+                        <div class="toc-num">2</div>
+                        <div class="toc-text">Partículas vs. Ondas</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-einstein')">
+                        <div class="toc-num">3</div>
+                        <div class="toc-text">Einstein y el Efecto Fotoeléctrico</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-broglie')">
+                        <div class="toc-num">4</div>
+                        <div class="toc-text">Louis de Broglie y la Dualidad</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-cts')">
+                        <div class="toc-num">5</div>
+                        <div class="toc-text">Impacto Tecnológico y CTS</div>
+                    </div>
+                    <div class="toc-item" onclick="scrollTo('#s-debate')">
+                        <div class="toc-num">6</div>
+                        <div class="toc-text">Preguntas sobre la Racionalidad</div>
+                    </div>
+                </div>
+
+                <div class="sb-card">
+                    <span class="sb-title">Conceptos clave</span>
+                    <div style="display:flex;flex-wrap:wrap;">
+                        <span class="concept-pill">Experimento Crucial</span>
+                        <span class="concept-pill">Isaac Newton</span>
+                        <span class="concept-pill">Christiaan Huygens</span>
+                        <span class="concept-pill">Thomas Young</span>
+                        <span class="concept-pill">Albert Einstein</span>
+                        <span class="concept-pill">Louis de Broglie</span>
+                        <span class="concept-pill">Mecánica Cuántica</span>
+                        <span class="concept-pill">Celdas Solares fotovoltaicas</span>
+                        <span class="concept-pill">Microscopio Electrónico</span>
+                    </div>
+                </div>
+
+                <div class="sb-card">
+                    <span class="sb-title">Navegación de clases</span>
+                    <a href="unidad1-clase8.html" style="display:block;">
+                        <div class="nav-class-btn" style="margin-bottom:12px;">
+                            <i class="fa-solid fa-arrow-left" style="color:var(--text3);"></i>
+                            <div class="nav-class-info">
+                                <div class="nav-class-label">Clase anterior</div>
+                                <div class="nav-class-title">La Era Atómica y CTS</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="unidad2-introduccion.html" style="display:block;">
+                        <div class="nav-class-btn primary">
+                            <div class="nav-class-info">
+                                <div class="nav-class-label">Próxima clase</div>
+                                <div class="nav-class-title">Controversias: Internalismo</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </aside>
+
+        </div><!-- /article-wrap -->
+    </main>
+
+    <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+    <footer class="art-footer">
+        <div class="art-footer-inner">
+            <div class="footer-nav">
+                <a href="unidad1-clase8.html" class="footer-nav-card">
+                    <div class="fn-icon">←</div>
+                    <div>
+                        <div class="fn-label">Clase anterior</div>
+                        <div class="fn-title">La Era Atómica y CTS</div>
+                    </div>
+                </a>
+                <a href="index.html" class="footer-nav-card">
+                    <div class="fn-icon">🏠</div>
+                    <div>
+                        <div class="fn-label">Volver al inicio</div>
+                        <div class="fn-title">Revista Filosofía &amp; Ciencia</div>
+                    </div>
+                </a>
+
+                <a href="unidad2-introduccion.html" class="footer-nav-card primary">
+                    <div class="fn-icon">→</div>
+                    <div>
+                        <div class="fn-label">Próxima clase</div>
+                        <div class="fn-title">Controversias: Internalismo</div>
+                    </div>
+                </a>
+            </div>
+            <div class="footer-credits">
+                Filosofía e Historia de la Ciencia y la Tecnología · 6to Año ·
+                <a href="index.html">Los Polvorines, 2025</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── DARK MODE ──────────────────────────────────────────────
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+        // ── PROGRESS BAR ──────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+
+        // ── REVEAL ON SCROLL ──────────────────────────────────────
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // ── SMOOTH SCROLL TOC ──────────────────────────────────────
+        function scrollTo(id) {
+            const el = document.querySelector(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── TOC ACTIVE ─────────────────────────────────────────────
+        const sections = document.querySelectorAll('.article-section[id]');
+        const tocItems = document.querySelectorAll('.toc-item');
+        const tocObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    tocItems.forEach(t => t.classList.remove('active'));
+                    const match = [...tocItems].find(t => t.getAttribute('onclick')?.includes(e.target.id));
+                    if (match) match.classList.add('active');
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => tocObs.observe(s));
+
+
+    </script>
+</body>
+
+</html>

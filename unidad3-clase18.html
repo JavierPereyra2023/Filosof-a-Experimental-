@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Inductivismo: Bacon y el Pavo de Russell | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+
+
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .dark {
+            --bg: #111111; --bg2: #1a1a1a; --bg3: #222222;
+            --card: #1e1e1e; --text: #f0ece4; --text2: #c8c0b4;
+            --text3: #888880; --border: #333333;
+            --shadow: 0 4px 24px rgba(0,0,0,0.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg); color: var(--text);
+            transition: background 0.4s, color 0.4s;
+        }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress {
+            position: fixed; top: 0; left: 0;
+            height: 3px; width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999; transition: width 0.1s;
+        }
+
+        /* ===================== TOP NAV ===================== */
+        #topnav {
+            position: sticky; top: 0; z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+        .topnav-left { display: flex; align-items: center; gap: 20px; }
+        .back-link {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 600;
+            letter-spacing: 0.08em; color: var(--text3);
+            transition: color var(--transition);
+        }
+        .back-link:hover { color: var(--text); }
+        .nav-sep { color: var(--border); }
+        .breadcrumb {
+            font-size: 12px; color: var(--text3);
+            display: none;
+        }
+        @media(min-width:640px){ .breadcrumb { display: block; } }
+        .breadcrumb span { color: var(--yellow-dark); font-weight: 600; }
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+        @media(min-width:900px){ .topnav-center { display: block; } }
+        .topnav-right { display: flex; align-items: center; gap: 12px; }
+        .nav-btn {
+            background: none; border: 1px solid var(--border);
+            color: var(--text3); cursor: pointer;
+            padding: 6px 14px; border-radius: 999px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.08em;
+            display: flex; align-items: center; gap: 6px;
+            transition: all var(--transition);
+        }
+        .nav-btn:hover { border-color: var(--yellow); color: var(--text); }
+        .dark-toggle-nav {
+            background: none; border: 1px solid var(--border);
+            width: 36px; height: 20px; border-radius: 999px;
+            position: relative; cursor: pointer;
+            transition: all var(--transition);
+        }
+        .dark-toggle-nav::after {
+            content: ''; position: absolute;
+            left: 3px; top: 50%; transform: translateY(-50%);
+            width: 13px; height: 13px; border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+        .dark .dark-toggle-nav { border-color: var(--yellow); background: var(--yellow); }
+        .dark .dark-toggle-nav::after { left: calc(100% - 16px); background: #000; }
+
+        /* ===================== ARTICLE HERO ===================== */
+        #art-hero {
+            background:
+                linear-gradient(to left, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 32%, rgba(0,0,0,.97) 58%),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ptolemy_by_Cristofano_dell%27Altissimo.jpg/440px-Ptolemy_by_Cristofano_dell%27Altissimo.jpg') right top/auto 100% no-repeat,
+                url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.5);
+            min-height: 92vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+        .hero-breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+            text-transform: uppercase; margin-bottom: 28px;
+        }
+        .hero-badge {
+            background: var(--yellow); color: #000;
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px; font-weight: 800;
+        }
+        .hero-badge-outline {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 4px 14px; border-radius: 999px;
+            font-size: 10px;
+        }
+        .hero-eyebrow {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--yellow); margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 7vw, 88px);
+            font-weight: 900; line-height: 0.95;
+            letter-spacing: -0.03em; margin-bottom: 24px;
+        }
+        .hero-title em { font-style: italic; color: var(--yellow); }
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255,255,255,0.8);
+            max-width: 640px; line-height: 1.65;
+            margin-bottom: 48px;
+        }
+        .hero-meta {
+            display: flex; align-items: center; justify-content: center;
+            gap: 24px; flex-wrap: wrap;
+            font-size: 12px; color: rgba(255,255,255,0.55);
+            letter-spacing: 0.05em;
+        }
+        .hero-meta-item { display: flex; align-items: center; gap: 6px; }
+        .hero-meta i { color: var(--yellow); }
+        .hero-meta-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+        .hero-scroll-cue {
+            position: absolute; bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.4); font-size: 10px;
+            letter-spacing: 0.2em; text-transform: uppercase;
+        }
+        .scroll-dot {
+            width: 28px; height: 44px; border-radius: 14px;
+            border: 2px solid rgba(255,255,255,0.25);
+            display: flex; align-items: flex-start; justify-content: center;
+            padding-top: 6px;
+        }
+        .scroll-dot::after {
+            content: '';
+            width: 4px; height: 8px; border-radius: 2px;
+            background: rgba(255,255,255,0.4);
+            animation: scrolldot 1.8s infinite;
+        }
+        @keyframes scrolldot {
+            0%,100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(8px); opacity: 0.3; }
+        }
+
+        /* ===================== ARTICLE LAYOUT ===================== */
+        .article-wrap {
+            max-width: 1280px; margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+        @media(min-width:1024px){
+            .article-wrap { grid-template-columns: 1fr 320px; gap: 64px; }
+        }
+        /* MAIN CONTENT */
+        .article-section { margin-bottom: 56px; }
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px; font-weight: 900;
+            line-height: 0.8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px; line-height: 1.85;
+            color: var(--text2); margin-bottom: 20px;
+        }
+        .article-p strong { color: var(--text); font-weight: 700; }
+        .article-p em { font-style: italic; }
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900; letter-spacing: -0.02em;
+            line-height: 1.1; color: var(--text);
+            margin-bottom: 20px;
+        }
+        .article-h2 span { color: var(--yellow-dark); font-style: italic; }
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            color: var(--text); margin: 32px 0 14px;
+        }
+        .section-label {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px; display: block;
+        }
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 5px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 120px; font-weight: 900;
+            color: var(--yellow); opacity: 0.15;
+            position: absolute; top: -20px; left: 16px;
+            line-height: 1;
+        }
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.4; color: var(--text);
+            position: relative; z-index: 1;
+        }
+        .pull-quote-author {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-top: 12px;
+        }
+        /* Image / Figure */
+        .figure {
+            margin: 36px 0;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .figure-img {
+            width: 100%; height: 320px;
+            object-fit: cover; display: block;
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+        }
+        .figure:hover .figure-img {
+            transform: scale(1.06);
+        }
+        .figure-img-placeholder {
+            width: 100%; height: 280px;
+            background: var(--bg3);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 12px;
+            font-size: 64px;
+        }
+        .figure-caption {
+            padding: 14px 20px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-family: 'Libre Baskerville', serif;
+            font-size: 14px; color: var(--text3);
+            font-style: italic; line-height: 1.5;
+        }
+        .figure-caption strong { color: var(--text2); font-style: normal; }
+        /* Callout boxes */
+        .callout {
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+        .callout.yellow {
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+        .dark .callout.yellow {
+            background: linear-gradient(135deg, #2a2400, #1a1800);
+            border-color: #5a4a00;
+        }
+        .callout.dark-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+        .callout.red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fca5a5;
+        }
+        .dark .callout.red {
+            background: linear-gradient(135deg, #200808, #1a0606);
+            border-color: #7f1d1d;
+        }
+        .callout-tag {
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+        }
+        .callout.yellow .callout-tag { color: #92400e; }
+        .callout.red .callout-tag { color: #991b1b; }
+        .callout.dark-box .callout-tag { color: var(--yellow-dark); }
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 12px; color: var(--text);
+        }
+        .callout p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px; line-height: 1.7; color: var(--text2);
+        }
+        .callout p + p { margin-top: 10px; }
+        /* Concept grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px; margin: 28px 0;
+        }
+        @media(min-width:640px){ .concept-grid { grid-template-columns: 1fr 1fr; } }
+        .concept-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px 22px;
+            border-top: 4px solid var(--yellow);
+        }
+        .concept-card.red-top { border-top-color: var(--red); }
+        .concept-name {
+            font-size: 12px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 8px;
+        }
+        .concept-name.red { color: var(--red); }
+        .concept-def {
+            font-size: 13px; line-height: 1.65; color: var(--text2);
+        }
+        /* Timeline */
+        .timeline { margin: 32px 0; }
+        .timeline-item {
+            display: flex; gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px; top: 36px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: var(--border);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800;
+            flex-shrink: 0; z-index: 1;
+        }
+        .timeline-dot.muted {
+            background: var(--bg3); color: var(--text3);
+            border: 2px solid var(--border);
+            font-size: 11px;
+        }
+        .timeline-year {
+            font-size: 11px; font-weight: 700;
+            color: var(--yellow-dark); letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+        .timeline-event { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .timeline-desc { font-size: 13px; color: var(--text3); line-height: 1.5; }
+        /* Divider */
+        .art-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 48px 0;
+        }
+
+        /* ===================== SIDEBAR ===================== */
+        .sidebar-sticky { position: sticky; top: 72px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px; overflow: hidden;
+        }
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex; align-items: center; gap: 8px;
+        }
+        /* Table of contents */
+        .toc-list { list-style: none; padding: 12px 0; }
+        .toc-item a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px; color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .toc-item a:hover,
+        .toc-item a.active {
+            color: var(--text); background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+        .toc-num { font-size: 11px; color: var(--yellow-dark); font-weight: 700; min-width: 20px; }
+        /* Key concepts sidebar */
+        .concept-mini { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+        .concept-mini:last-child { border-bottom: none; }
+        .concept-mini-name {
+            font-size: 11px; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--yellow-dark); margin-bottom: 5px;
+        }
+        .concept-mini-def { font-size: 12px; line-height: 1.55; color: var(--text3); }
+        /* Philosopher card */
+        .philosopher-card {
+            display: flex; gap: 14px; align-items: flex-start;
+            padding: 16px 20px; border-bottom: 1px solid var(--border);
+        }
+        .philosopher-card:last-child { border-bottom: none; }
+        .philosopher-avatar {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--bg3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .philosopher-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+        .philosopher-dates { font-size: 11px; color: var(--yellow-dark); font-weight: 600; margin-bottom: 5px; }
+        .philosopher-bio { font-size: 12px; color: var(--text3); line-height: 1.5; }
+        /* Unit connection */
+        .unit-connection {
+            padding: 20px;
+        }
+        .unit-conn-item {
+            display: flex; gap: 12px; align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .unit-conn-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--yellow); margin-top: 5px; flex-shrink: 0;
+        }
+        .unit-conn-text { font-size: 12px; line-height: 1.5; color: var(--text2); }
+        /* Next class */
+        .next-class { padding: 20px; }
+        .next-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; color: var(--text3); margin-bottom: 8px; text-transform: uppercase; }
+        .next-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
+        .btn-next {
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--yellow); color: #000;
+            border: none; padding: 12px 16px;
+            border-radius: 12px; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; cursor: pointer;
+            transition: all var(--transition); width: 100%;
+        }
+        .btn-next:hover { background: var(--yellow-dark); }
+
+        /* ===================== DISCUSSION ===================== */
+        .discussion-section {
+            background: var(--bg3);
+            border-radius: 20px; padding: 40px;
+            margin: 48px 0;
+            border: 1px solid var(--border);
+        }
+        .discussion-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; font-weight: 900;
+            color: var(--text); margin-bottom: 24px;
+        }
+        .question-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .question-item {
+            display: flex; gap: 16px;
+            padding: 18px 20px;
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: border-color var(--transition);
+            cursor: pointer;
+        }
+        .question-item:hover { border-color: var(--yellow); }
+        .question-num {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--yellow); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; flex-shrink: 0;
+        }
+        .question-text { font-size: 14px; line-height: 1.6; color: var(--text2); padding-top: 5px; }
+
+        /* ===================== FOOTER NAV ===================== */
+        .article-footer-nav {
+            max-width: 1280px; margin: 0 auto;
+            padding: 40px 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid var(--border);
+            gap: 20px; flex-wrap: wrap;
+        }
+        .footer-nav-link {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 24px; border-radius: 16px;
+            background: var(--card); border: 1px solid var(--border);
+            transition: all var(--transition); cursor: pointer;
+            max-width: 300px;
+        }
+        .footer-nav-link:hover { border-color: var(--yellow); transform: translateX(4px); }
+        .footer-nav-link.prev:hover { transform: translateX(-4px); }
+        .footer-nav-direction { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+        .footer-nav-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+        .footer-nav-icon { font-size: 18px; color: var(--text3); }
+
+        /* ===================== REVEAL ===================== */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    
+
+
+        /* ===================== PCR STEPS ===================== */
+        .pcr-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 32px 0;
+        }
+        @media(min-width:640px){ .pcr-steps { grid-template-columns: 1fr 1fr 1fr; } }
+        .pcr-step {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .pcr-step:hover {
+            border-color: var(--yellow);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .pcr-step-num {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 900;
+            margin: 0 auto 16px;
+            font-family: 'Playfair Display', serif;
+        }
+        .pcr-step-temp {
+            font-size: 28px; font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .pcr-step-temp.hot { color: #ef4444; }
+        .pcr-step-temp.warm { color: #f97316; }
+        .pcr-step-temp.mid { color: #22c55e; }
+        .pcr-step-name {
+            font-size: 13px; font-weight: 800;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 10px;
+        }
+        .pcr-step-desc {
+            font-size: 13px; line-height: 1.6;
+            color: var(--text2);
+        }
+
+        /* Blue callout for COVID */
+        .callout.blue {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 1px solid #93c5fd;
+        }
+        .dark .callout.blue {
+            background: linear-gradient(135deg, #0c1929, #0a1628);
+            border-color: #1e3a5f;
+        }
+        .callout.blue .callout-tag { color: #1e40af; }
+        .dark .callout.blue .callout-tag { color: #60a5fa; }
+
+        /* Green callout */
+        .callout.green {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 1px solid #86efac;
+        }
+        .dark .callout.green {
+            background: linear-gradient(135deg, #052e16, #042f2e);
+            border-color: #166534;
+        }
+        .callout.green .callout-tag { color: #166534; }
+        .dark .callout.green .callout-tag { color: #4ade80; }
+
+        /* Cycle counter animation */
+        .cycle-demo {
+            background: #0a0a1a;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 36px 0;
+            border: 1px solid #1e1e3a;
+            text-align: center;
+        }
+        .cycle-title {
+            color: rgba(255,255,255,0.6);
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .cycle-title span { color: var(--yellow); }
+        .cycle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        @media(max-width:500px){ .cycle-grid { grid-template-columns: repeat(2, 1fr); } }
+        .cycle-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px 12px;
+            transition: all 0.3s ease;
+        }
+        .cycle-card:hover {
+            background: rgba(250,204,21,0.1);
+            transform: scale(1.05);
+        }
+        .cycle-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px; font-weight: 700;
+            color: var(--yellow);
+            margin-bottom: 4px;
+        }
+        .cycle-copies {
+            font-size: 22px; font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+        }
+        .cycle-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 4px;
+        }
+        .cycle-caption {
+            font-size: 13px; color: rgba(255,255,255,0.45);
+            text-align: center; margin-top: 24px;
+            font-family: 'Libre Baskerville', serif; font-style: italic;
+            max-width: 460px; line-height: 1.6;
+            margin-left: auto; margin-right: auto;
+        }
+    
+        /* Custom Hover for Images */
+        .figure-img, .inline-img { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+        .figure:hover .figure-img, .inline-img:hover { transform: scale(1.08); z-index: 10; position: relative; }
+
+        /* Responsive Versus Grid from Inline Styles */
+        .versus-grid {
+            display: grid;
+            grid-template-columns: 1fr 40px 1fr;
+            gap: 10px;
+            margin: 30px 0;
+            align-items: center;
+        }
+        @media(max-width:640px) {
+            .versus-grid {
+                grid-template-columns: 1fr;
+            }
+            .versus-mid {
+                margin: 10px 0;
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+    <div class="topnav-left">
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Volver
+        </a>
+        <span class="nav-sep">|</span>
+        <div class="breadcrumb">
+            <span>Unidad 3</span> · Clase 18
+        </div>
+    </div>
+    <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+    <div class="topnav-right">
+        <button class="nav-btn" onclick="window.location.href='unidad2-clase17.html'">
+            <i class="fa-solid fa-arrow-left"></i> Clase 17
+        </button>
+        <button class="nav-btn" onclick="window.print()">
+            <i class="fa-solid fa-file-pdf"></i> PDF
+        </button>
+        <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header id="art-hero" style="background:
+    linear-gradient(to left, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 32%, rgba(0,0,0,.97) 58%),
+    url('Bacon.jpg') right top/auto 100% no-repeat,
+    url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=1600&q=80') center/cover no-repeat;
+    background-color: #000;">
+    <div class="hero-breadcrumb">
+        <span class="hero-badge">UNIDAD 3 · CLASE 18</span>
+        <span class="hero-badge-outline">MÉTODOS</span>
+    </div>
+    <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6° Año</p>
+    <h1 class="hero-title">
+        El <em>Inductivismo</em>:<br>De la observación<br>a la ley general
+    </h1>
+    <p class="hero-subtitle">
+        Cómo el método de Francis Bacon transformó la ciencia a partir de la acumulación de datos, y qué problemas esconde detrás de su aparente lógica perfecta.
+    </p>
+    <div class="hero-meta">
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Prof. Filosofía & Ciencia</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-calendar"></i>
+            <span>Ciclo 2025</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-clock"></i>
+            <span>60 min · Clase 18</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Bacon · Russell · Inducción</span>
+        </div>
+    </div>
+    <div class="hero-scroll-cue">
+        <div class="scroll-dot"></div>
+        <span>Comenzar</span>
+    </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<main class="article-wrap">
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <article class="article-main">
+
+        <!-- INTRO -->
+        <div class="article-section reveal" id="sec-intro">
+            <span class="section-label">Introducción</span>
+            <h2 class="article-h2">El poder de la <span>observación</span></h2>
+            <p class="article-p dropcap">
+                Pensemos en cómo aprendemos las cosas más básicas del mundo. El fuego quema, el sol sale por el este, si suelto una manzana, cae al piso. ¿Cómo llegamos a esas conclusiones? Las descubrimos observando que sucedían una y otra vez. Jamás vimos a una manzana flotar hacia arriba, así que asumimos que la próxima vez que soltemos una manzana, también caerá.
+            </p>
+            <p class="article-p">
+                Este mecanismo tan natural e intuitivo se llama <strong>razonamiento inductivo</strong>. Consiste en partir de observaciones particulares (datos empíricos individuales) y llegar a una conclusión general que abarque todos los casos. 
+                Durante siglos, y especialmente a partir de la Revolución Científica del siglo XVII, este método se instituyó como la <strong>forma principal de construir conocimiento verdaderamente objetivo</strong> frente al saber derivado de los antiguos dogmas o la autoridad religiosa.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- BACON -->
+        <div class="article-section reveal" id="sec-bacon">
+            <span class="section-label">El Padre del Método Moderno</span>
+            <h2 class="article-h2">Francis Bacon: Contra los <span>ídolos de la mente</span></h2>
+
+            <div class="figure reveal">
+                <img class="figure-img" style="height:auto;max-height:420px;object-fit:cover;object-position:top center;border-radius:12px;"
+                     src="Bacon.jpg"
+                     alt="Retrato de Francis Bacon"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">📜</div>
+                <div class="figure-caption">
+                    <strong>Francis Bacon (1561–1626)</strong> Filósofo y estadista inglés.
+                    Sistematizó empíricamente el método científico en su obra <em>Novum Organum</em>.
+                </div>
+            </div>
+
+            <p class="article-p">
+                En el siglo XVII, el universo intelectual europeo seguía dominado por los silogismos deductivos de Aristóteles. Básicamente, se discutía desde grandes axiomas universales dados por ciertos. <strong>Francis Bacon</strong> revolucionó esta estructura. En su libro <em>Novum Organum</em> (1620), propuso un nuevo instrumento ('órgano') para el pensamiento: invertir el proceso.
+            </p>
+
+            <div class="callout dark-box reveal">
+                <div class="callout-tag">🧠 Los ídolos según Bacon</div>
+                <div class="callout-title">Limpiar la mente para ver la verdad</div>
+                <p>Bacon creía que para observar la naturaleza pura, sin prejuicios, el científico tenía que eliminar los "ídolos" de su mente:
+                </p>
+                <ul>
+                    <li style="margin-bottom:8px;"><strong>Ídolos de la tribu:</strong> Los errores intrínsecos de la naturaleza humana, como confiar demasiado en los sentidos.</li>
+                    <li style="margin-bottom:8px;"><strong>Ídolos de la caverna:</strong> Los prejuicios de cada individuo formados por su educación personal y su entorno único.</li>
+                    <li style="margin-bottom:8px;"><strong>Ídolos del foro (o mercado):</strong> Las distorsiones e imprecisiones creadas por el lenguaje común.</li>
+                    <li style="margin-bottom:8px;"><strong>Ídolos del teatro:</strong> Los dogmas falsos instaurados por sistemas filosóficos o religiones antiguas y aceptados como reales.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- CÓMO FUNCIONA LA INDUCCIÓN -->
+        <div class="article-section reveal" id="sec-metodo">
+            <span class="section-label">Estructura Lógica</span>
+            <h2 class="article-h2">¿Cómo funciona el <span>Inductivismo</span>?</h2>
+
+            <p class="article-p">
+                El argumento inductivista ingenuo o clásico sigue un proceso sistemático de acumular información:
+            </p>
+
+            <div class="pcr-steps reveal">
+                <div class="pcr-step">
+                    <div class="pcr-step-num">1</div>
+                    <div class="pcr-step-name" style="color:#ef4444;">Observación Pura</div>
+                    <div class="pcr-step-desc">
+                        Se observan hechos individuales de la naturaleza de manera objetiva y meticulosa, usando los sentidos e instrumentos (microscopios o telescopios), sin sesgos o teorías previas.
+                    </div>
+                </div>
+                <div class="pcr-step">
+                    <div class="pcr-step-num" style="background:#f97316;">2</div>
+                    <div class="pcr-step-name" style="color:#f97316;">Acumulación de Casos</div>
+                    <div class="pcr-step-desc">
+                        Se repiten las observaciones en diversas condiciones temporales y espaciales. Una sola observación no alcanza; se necesita una gran cantidad representativa de datos y ocurrencias.
+                    </div>
+                </div>
+                <div class="pcr-step">
+                    <div class="pcr-step-num" style="background:#22c55e;">3</div>
+                    <div class="pcr-step-name" style="color:#22c55e;">Generalización (Inferencia)</div>
+                    <div class="pcr-step-desc">
+                        Tras observar que en todos los casos se repite un patrón, el científico realiza un "salto lógico" (inferencia inductiva) y formula verbal o matemáticamente una <strong>Ley General</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="pull-quote reveal">
+                <p class="pull-quote-text">
+                    "Si un gran número de <em>A</em> han sido observados bajo una amplia variedad de condiciones, y si todos esos <em>A</em> observados poseen sin excepción la propiedad <em>B</em>, entonces todos los <em>A</em> tienen la propiedad <em>B</em>."
+                </p>
+                <p class="pull-quote-author">— Principio Clásico de la Inducción</p>
+            </div>
+            
+            <p class="article-p">
+                Así descubrimos verdades científicas clásicas. Por ejemplo: afirmamos que "los metales se dilatan con el calor", porque luego de calentar repetidamente cobre, plata y oro en distintas condiciones alrededor del planeta, descubrimos que absolutamente todos sufrieron dilatación térmica.
+            </p>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- EL PROBLEMA: HUME Y RUSSELL -->
+        <div class="article-section reveal" id="sec-hume">
+            <span class="section-label">La Crítica Epistemológica</span>
+            <h2 class="article-h2">El problema de la inducción y <span>el Pavo de Russell</span></h2>
+
+            <p class="article-p">
+                Pese al enorme éxito de la etapa científica moderna basada en la inducción, pronto emergió un problema muy serio en su estructura. En el siglo XVIII, el filósofo escocés empirista <strong>David Hume</strong> fue el primero en alertar que este método sufre de un problema lógico mortal: <em>ninguna cantidad finita de observaciones puede lógicamente obligarnos y autorizarnos a decretar una conclusión garantizada sobre el infinito total</em>.
+            </p>
+
+            <div class="figure reveal">
+                <img class="figure-img" style="height:auto;max-height:480px;object-fit:cover;border-radius:12px;object-position:top center;"
+                     src="david_hume.webp"
+                     alt="Retrato de David Hume"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🤔</div>
+                <div class="figure-caption">
+                    <strong>David Hume (1711–1776)</strong> Filósofo, economista e historiador escocés. Su escepticismo radical demostró lógicamente que nuestra aparente certeza sobre el futuro se basa enteramente en el irracional hábito psicológico animal de esperar que el mañana sea igual a lo que experimentamos ayer.
+                </div>
+            </div>
+
+            <div class="callout dark-box reveal" style="margin-top: 20px; margin-bottom: 30px;">
+                <div class="callout-tag">🦢 El Límite de la Evidencia</div>
+                <div class="callout-title">El caso del Cisne Negro y Karl Popper</div>
+                <p>Durante milenios, todos los cisnes observados en el Viejo Mundo eran blancos. El inductivismo más riguroso permitía establecer una ley universal intachable: <strong>"Todos los cisnes son blancos"</strong>. Las observaciones acumuladas se contaban de a millones a lo largo de los siglos, sin una sola excepción.</p>
+                <p>Sin embargo, en 1697, una expedición del navegante holandés Willem de Vlamingh llegó a Australia y descubrió a la especie <em>Cygnus atratus</em>: el <strong>cisne negro</strong>. En un instante empírico singular, millones de observaciones previas quedaron lógicamente pulverizadas.</p>
+                <p>El filósofo <strong>Karl Popper</strong> popularizó más adelante este ejemplo histórico para fundamentar su famosa teoría del <strong>Falsacionismo</strong>. Popper usó al cisne negro para demostrar que la ciencia no puede basarse en verificar cosas (ya que siempre puede aparecer una excepción mañana), sino que debe construirse proponiendo teorías audaces y buscando la forma de "falsarlas" (refutarlas) con pruebas rigurosas. Si una teoría sobrevive a esos intentos de destrucción, es fuerte, pero jamas será una verdad definitiva.</p>
+            </div>
+
+            <div class="figure reveal" style="text-align:center; background:var(--bg3);">
+                <img class="figure-img" style="width:auto;height:auto;max-width:100%;max-height:480px;object-fit:contain;border-radius:12px;margin:0 auto;"
+                     src="Popper.jpg"
+                     alt="Retrato de Karl Popper"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🦉</div>
+                <div class="figure-caption">
+                    <strong>Karl Popper (1902–1994)</strong> Filósofo austriaco-británico. Con su "Falsacionismo" propuso que la debilidad de las teorías verificables es justamente que son demasiado fáciles de verificar. Para él, una verdadera teoría científica se la juega intentando predecir algo muy específico que pueda derribarla, y el científico debe ser el primero en intentar falsar su propia teoría.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Doscientos años después de Hume, el gran matemático <strong>Bertrand Russell</strong> propuso una analogía brillante conocida como la famosa historia de <strong>"El Pavo Inductivista"</strong> para evidenciar el gran "salto al vacío" lógico.
+            </p>
+
+            <div class="figure reveal">
+                <img class="figure-img" style="height:auto;max-height:480px;object-fit:cover;border-radius:12px;"
+                     src="Russell.jpg"
+                     alt="Retrato de Bertrand Russell"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">🦃</div>
+                <div class="figure-caption">
+                    <strong>Bertrand Russell (1872–1970)</strong> Matemático, filósofo y escritor británico. Usó la sátira del pavo para criticar duramente las expectativas ciegas de los teóricos y pensadores acerca de nuestra costumbre de asumir que "el universo del mañana tiene la obligación comportarse exactamente igual al de hoy".
+                </div>
+            </div>
+
+            <div class="callout yellow reveal">
+                <div class="callout-tag">🦃 La Parábola Epistemológica</div>
+                <div class="callout-title">El Pavo Científico</div>
+                <p>Imaginemos un pavo que vive en una granja y que aprendió y aplica a la perfección el método inductivista en todo su rigor.</p>
+                <p>En su primer día de vida anotó cuidadosamente: <em>"Hoy me dieron de comer maíz a las 9 am."</em> Como buen inductivista, sabía que no debía sacar conclusiones por un solo suceso particular. Requirió tomar muchísimas más observaciones sistemáticamente. Día tras día anotaba las condiciones en su libreta: <em>"Me dieron de comer a las 9 am los días calurosos, me dieron maíz los martes fríos, me dieron maíz los días de tormenta..."</em></p>
+                <p>Jamás existió una sola excepción durante todos esos meses de la granja. Así que luego de acumular suficiente base empírica repetitiva en una gran variedad de condiciones, el 23 de Diciembre realizó la inferencia lógica final para establecer su Ley Universal Inductiva final:</p>
+                <p style="font-size:18px; text-align:center; font-family:'Playfair Display',serif; color:#000; margin: 15px 0;"><strong>"Siempre y en toda circunstancia se da de comer al pavo a las 9 am."</strong></p>
+                <p>Lamentablemente para su rígida lógica irrefutable, el 24 de diciembre a las 9 am en lugar de maíz... se presentó el granjero y le cortó el cuello.</p>
+            </div>
+
+            <p class="article-p">
+                Lo que Hume planteó teóricamente, y lo que demostró el Pavo empíricamente en carne propia, es que las justificaciones inductivistas de generalización se operan circularmente en lo que llamamos el dogma de la "homogeneidad de la naturaleza". Inducimos que las cosas seguirán comportándose así, por mera <strong>costumbre psicológica o animal</strong> de nuestra historia previa. El problema del método es que usa a la misma inducción como prueba para asegurar que la inducción funciona.
+            </p>
+
+            <div class="callout red reveal">
+                <div class="callout-tag">🔢 La Matemática y la Falsa Inducción</div>
+                <div class="callout-title">Un caso real numérico de engaño</div>
+                <p>¿Qué pasa si evaluamos la expresión matemática <strong style="font-family:monospace">n² - n + 41</strong> usando inductivismo básico, incrementando <strong style="font-family:monospace">n</strong> una a una buscando un patrón general universal?</p>
+                <p>Resultados:</p>
+                <ul style="margin:8px 0 10px 20px;">
+                    <li>n=1 → <span style="font-family:monospace">1 - 1 + 41 = 41</span> (Es Primo)</li>
+                    <li>n=2 → <span style="font-family:monospace">4 - 2 + 41 = 43</span> (Es Primo)</li>
+                    <li>n=3 → <span style="font-family:monospace">9 - 3 + 41 = 47</span> (Es Primo)</li>
+                    <li>...</li>
+                    <li>n=40 → (Es Primo)</li>
+                </ul>
+                <p>Un biólogo o físico inductivista viendo que repitió el experimento 40 veces distintas, induciría la ley matemática: "Todos los elementos naturales evaluados aquí otorgan matemáticamente un número primo".</p>
+                <p>Pero ¿qué ocurre súbitamente en el elemento 41? Reemplacemos:<br><strong style="font-family:monospace">41² - 41 + 41 = 41² (o bien 1681)</strong><br>El resultado numérico termina siendo divisible por 41 exactos y ya no es un número primo, ¡y toda la maravillosa Ley universal inductivista colapsa y se despedaza con un único y minúsculo caso negativo!</p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── NEWTON VS EINSTEIN ──────────────────────────── -->
+            <span class="section-label" id="sec-newton">El Derrumbe de los Pilares</span>
+            <h2 class="article-h2">Espacio y Tiempo: De <span>Newton a Einstein</span></h2>
+            
+            <p class="article-p">
+                El problema de la inducción no es solo una preocupación de filósofos abstractos. Ha provocado algunas de las mayores crisis en la historia de la ciencia dura. Durante más de 200 años, la física clásica se estructuró sobre las bases de <strong>Isaac Newton</strong>. Aunque suele presentarse como el triunfo del empirismo, Newton no "dedujo" ni indujo pasivamente el espacio y el tiempo absolutos a partir de miles de observaciones crudas. Para que sus leyes funcionaran, <strong>postuló una arquitectura teórica abstracta y conceptual</strong>: un espacio inmutable y un tiempo absoluto que fluía constante como un gran reloj cósmico, un escenario fijo inobservable directamente.
+            </p>
+
+            <div class="figure reveal" style="text-align:center; background:var(--bg3);">
+                <img class="figure-img" style="width:auto;height:auto;max-width:100%;max-height:480px;object-fit:contain;border-radius:12px;margin:0 auto;"
+                     src="principia.jpg"
+                     alt="Portada de los Philosophiæ Naturalis Principia Mathematica"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">📖</div>
+                <div class="figure-caption">
+                    <strong>Philosophiæ Naturalis Principia Mathematica (1687)</strong> de Isaac Newton. La obra intelectual más influyente de la historia, en la que se formuló la ley de la gravitación universal y las leyes del movimiento basándose en evidencia inductiva empírica absoluta.
+                </div>
+            </div>
+
+            <p class="article-p">
+                Generaciones enteras de científicos recolectaron millones de datos empíricos. Cada bala de cañón, cada péndulo, cada planeta observado en el cielo parecía "verificar" inductivamente que la Ley de Newton era la verdad final del universo. Parecía la victoria suprema del método inductivo.
+            </p>
+
+            <div class="versus-grid reveal">
+                <div class="versus-col left" style="background:var(--bg3);padding:24px;border-radius:12px;text-align:center;border:1px solid var(--border);">
+                    <div style="font-size:32px;margin-bottom:12px;">🍎</div>
+                    <h4 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:8px;">Física de Newton</h4>
+                    <p style="font-family:'Libre Baskerville',serif;font-size:14px;color:var(--text2);line-height:1.6;">Millones de observaciones terrestres confirmaron abrumadoramente sus predicciones. Supuso un tiempo y una masa absolutos, constantes para cualquier observador sin importar su velocidad.</p>
+                </div>
+                <div class="versus-mid" style="text-align:center;font-weight:900;color:var(--yellow);font-size:18px;">VS</div>
+                <div class="versus-col right" style="background:var(--bg3);padding:24px;border-radius:12px;text-align:center;border:1px solid var(--border);">
+                    <div style="font-size:32px;margin-bottom:12px;">🚀</div>
+                    <h4 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:8px;">Relatividad de Einstein</h4>
+                    <p style="font-family:'Libre Baskerville',serif;font-size:14px;color:var(--text2);line-height:1.6;">Una anomalía al medir la luz obligó a replantear todo. En altas velocidades, el tiempo se ralentiza y el espacio se contrae. Newton estaba equivocado a nivel cósmico.</p>
+                </div>
+            </div>
+
+            <p class="article-p">
+                A principios del siglo XX, <strong>Albert Einstein</strong> propuso su Teoría de la Relatividad. Einstein demostró que el éxito de Newton dependía de observar siempre desde nuestro "nicho" a velocidades lentas. Al acercarnos a la velocidad de la luz, el tiempo es relativo (se dilata) y el espacio se curva. 
+            </p>
+            <p class="article-p">
+                A pesar de estar apoyada por el mayor éxito empírico jamás visto, la teoría de Newton falló en su pretensión de validez universal absoluta. Einstein reformuló los límites de aplicación del modelo, dejando a la mecánica newtoniana como una <strong>excelente y precisa aproximación</strong> bajo ciertos regímenes cotidianos (bajas velocidades y gravedades normales), en lugar de considerarla una falsedad total. Sin embargo, para la epistemología de Popper, este episodio fue la mejor prueba: ninguna teoría científica puede coronarse como verdad definitiva y sagrada. (Aunque, como advierte la tesis de <strong>Duhem-Quine</strong>, el falsacionismo en la práctica nunca es tan automático ni binario: los científicos siempre pueden introducir hipótesis ad hoc u observar distintos regímenes sin tener que descartar la totalidad de su teoría ante una primera anomalía).
+            </p>
+
+            <div class="figure reveal">
+                <img class="figure-img" style="height:auto;max-height:480px;object-fit:cover;border-radius:12px;object-position:top center;"
+                     src="einstein_rik.png"
+                     alt="Einstein frente a una pizarra"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <div class="figure-img-placeholder" style="display:none;">👨‍🔬</div>
+                <div class="figure-caption">
+                    <strong>Albert Einstein</strong> cambió por completo el paradigma newtoniano. La ciencia, dice Popper, avanza cuando propone audaces teorías (como la curvatura del espacio-tiempo) que se exponen valientemente a la falsación, no cuando busca infinitas confirmaciones seguras.
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── BIOLOGÍA EVOLUTIVA ──────────────────────────── -->
+            <span class="section-label" id="sec-biologia">Psicología Evolutiva</span>
+            <h2 class="article-h2">Si sabemos que falla, <span>¿por qué somos inductivistas?</span></h2>
+
+            <p class="article-p">
+                Llegados a este punto, la pregunta es obligada: si la inducción tiene fallas lógicas tan graves (como lo demostraron Hume, Russell, Popper o el propio colapso de Newton), <strong>¿por qué la mente humana está estructurada biológicamente para razonar de manera inductiva por defecto?</strong>
+            </p>
+
+            <div class="callout green reveal">
+                <div class="callout-tag">🧬 Instinto de Supervivencia</div>
+                <div class="callout-title">El cerebro como máquina predictiva de patrones</div>
+                <p>La respuesta moderna radica en la biología y la evolución de nuestra especie en la sabana africana. La inducción probabilística puede carecer de validez lógica absoluta para desentrañar los secretos matemáticos del cosmos cósmico, pero <strong>biológicamente es una herramienta vital de supervivencia rápida y económica en la naturaleza.</strong></p>
+                <p>Imagina a tu antepasado <em>Homo sapiens</em> hace miles de años. Escucha un ruido crujiente entre los frondosos matorrales amarillos frente a él.</p>
+                <ul style="margin:16px 0 16px 20px;">
+                    <li><strong>Ancestro Inductivista:</strong> Recuerda inductivamente (por experiencias pasadas) que "cada vez que se mueve un arbusto amarillo y hace ese ruido, es un león". Realiza rápidamente el salto no garantizado. <strong>Huye inmediatamente y sobrevive.</strong></li>
+                    <li><strong>Ancestro Lógico-Deductivo Estricto:</strong> Se detiene y argumenta como Hume: "Que haya habido leones escondidos en el pasado no garantiza matemáticamente ni lógicamente que esta vez lo sea. Debo acumular evidencia empírica incontrovertible antes de correr." <strong>Es devorado.</strong></li>
+                </ul>
+                <p>Nuestros cerebros no evolucionaron para procesar deducciones científicas frías o lidiar con rigor infinito. Evolucionaron, como el Pavo de Russell, buscando frenéticamente detectar <strong>patrones útiles e inmediatos</strong> que tuvieran el mayor porcentaje de éxito local para perpetuar y transmitir nuestros genes, incluso si lógicamente no están justificados bajo un escrutinio cósmico total.</p>
+            </div>
+            
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- ── CONCLUSIONES ──────────────────────────── -->
+        <div class="article-section reveal" id="sec-conclusiones">
+            <span class="section-label">Síntesis Final</span>
+            <h2 class="article-h2">Conclusiones: <span>Lógica vs. Biología</span></h2>
+            
+            <p class="article-p">
+                El recorrido por el inductivismo nos deja una profunda lección sobre la naturaleza del conocimiento humano y científico. Hemos visto cómo la ambición moderna de <strong>Francis Bacon</strong> por construir una ciencia puramente empírica chocó de frente con la fría e ineludible guillotina lógica de <strong>David Hume</strong> y matemática de <strong>Bertrand Russell</strong>.
+            </p>
+            
+            <p class="article-p">
+                Casos históricos como el <strong>Cisne Negro australiano</strong> y el colapso de la majestuosa <strong>física de Newton ante Einstein</strong> demuestran, tal como argumentaría <strong>Karl Popper</strong>, que la ciencia no avanza atesorando confirmaciones repetitivas, sino exponiéndose a ser destruida y sobreviviendo a las refutaciones. Todas las teorías, por más exitosas que parezcan bajo la inducción, son siempre provisionales.
+            </p>
+
+            <div class="callout dark-box reveal" style="border-left: 4px solid var(--yellow);">
+                <div class="callout-tag">🧠 Reflexión Abierta</div>
+                <div class="callout-title">El equilibrio del pensar humano</div>
+                <p style="font-family:'Libre Baskerville',serif;font-size:15px;line-height:1.7;color:var(--text2);">
+                    La paradoja final es que, aunque el inductivismo es defectuoso como método para descubrir la verdad absoluta del universo, es espectacularmente eficiente como herramienta evolutiva biológica para mantenernos vivos. Somos, por herencia de la sabana, máquinas inductivas de reconocimiento de patrones. El desafío de la ciencia rigurosa es lograr ese equilibrio: usar nuestra intuición inductiva natural para generar hipótesis brillantes, pero someterlas luego al fuego despiadado de la falsación lógica para no terminar, ciegamente confiados, como el Pavo de Russell.
+                </p>
+            </div>
+        </div>
+
+        <hr class="art-divider">
+
+        <!-- DISCUSIÓN -->
+        <div class="discussion-section reveal">
+            <h3 class="discussion-title">🤔 Para pensar y debatir</h3>
+            <ul class="question-list">
+                <li class="question-item">
+                    <div class="question-num">1</div>
+                    <p class="question-text">Pensemos en los "Ídolos" de Bacon: ¿Es posible limpiar y purificar a la mente humana para que alcance una "observación absolutamente pura" despojada completamente de sus propios sesgos e hipótesis?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">2</div>
+                    <p class="question-text">Aún con su debilidad a que "falle el evento de un día para otro", ¿Por qué seguimos confiando en las generalizaciones inductivas todo el tiempo en nuestra sociedad?</p>
+                </li>
+                <li class="question-item">
+                    <div class="question-num">3</div>
+                    <p class="question-text">El famoso caso del Cisne Negro: los europeos deducían inductivamente que todos los cisnes eran blancos hasta el siglo 17 porque jamás vieron uno de otro color. Hasta que cruzaron a Australia y hallaron la mutación genética. ¿Creen que los paradigmas cambian a raíz de encontrar excepciones?</p>
+                </li>
+            </ul>
+        </div>
+    </article>
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="article-sidebar">
+        <div class="sidebar-sticky">
+
+            <!-- TABLE OF CONTENTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-list"></i>
+                    Contenido de la clase
+                </div>
+                <ul class="toc-list">
+                    <li class="toc-item"><a href="#sec-intro" class="toc-link"><span class="toc-num">01</span> Observación</a></li>
+                    <li class="toc-item"><a href="#sec-bacon" class="toc-link"><span class="toc-num">02</span> Francis Bacon</a></li>
+                    <li class="toc-item"><a href="#sec-metodo" class="toc-link"><span class="toc-num">03</span> Estructura lógica</a></li>
+                    <li class="toc-item"><a href="#sec-hume" class="toc-link"><span class="toc-num">04</span> Crítica Lógica</a></li>
+                    <li class="toc-item"><a href="#sec-newton" class="toc-link"><span class="toc-num">05</span> Newton vs Einstein</a></li>
+                    <li class="toc-item"><a href="#sec-biologia" class="toc-link"><span class="toc-num">06</span> Psicología Evolutiva</a></li>
+                    <li class="toc-item"><a href="#sec-conclusiones" class="toc-link"><span class="toc-num">07</span> Conclusiones</a></li>
+                </ul>
+            </div>
+
+            <!-- CONCEPTS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-key"></i>
+                    Conceptos clave
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Inductivismo</div>
+                    <div class="concept-mini-def">Método de inferencia desde una sumatoria de hechos o características particulares para justificar afirmaciones universales verdaderas.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Empirismo</div>
+                    <div class="concept-mini-def">Corriente filosófica y marco natural de la ciencia que determina a la observación a los sentidos y la experimentación material como el centro del progreso para hallar conocimiento.</div>
+                </div>
+                <div class="concept-mini">
+                    <div class="concept-mini-name">Inferencia Circular</div>
+                    <div class="concept-mini-def">Error en el que las conclusiones que intentamos avalar se dan basándonos en la misma exactitud del postulado inicial buscando justificar una causa dentro del mismo patrón.</div>
+                </div>
+            </div>
+
+            <!-- PHILOSOPHERS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Protagonistas
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">📜</div>
+                    <div>
+                        <div class="philosopher-name">Francis Bacon</div>
+                        <div class="philosopher-dates">1561 – 1626 · Inglaterra</div>
+                        <div class="philosopher-bio">Propuso reorganizar radicalmente nuestra estructura mediante el empirismo y "purgar" al razonamiento de todos los «idolos o falsas creencias» instaurados por viejos engaños.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar" style="padding:0;overflow:hidden;"><img src="david_hume.webp" class="inline-img" style="width:100%;height:100%;object-fit:cover;" alt="David Hume" onerror="this.style.display='none';this.parentElement.innerText='🤔';"></div>
+                    <div>
+                        <div class="philosopher-name">David Hume</div>
+                        <div class="philosopher-dates">1711 – 1776 · Escocia</div>
+                        <div class="philosopher-bio">Sostuvo que todo concepto inductivo que hacemos sobre el futuro asumiendo lo idéntico al pasado, recae enteramente al concepto animal primitivo humano de repetir un 'hábito'.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar">🦃</div>
+                    <div>
+                        <div class="philosopher-name">Bertrand Russell</div>
+                        <div class="philosopher-dates">1872 – 1970 · Inglaterra</div>
+                        <div class="philosopher-bio">Inminente premio Nobel inglés de literatura y matemática que diseñó el caso del pavo creyente de la ciencia al que en víspera de navidad, en vez de trigo se topa al final con su sentencia universal empírica.</div>
+                    </div>
+                </div>
+                <div class="philosopher-card">
+                    <div class="philosopher-avatar" style="padding:0;overflow:hidden;"><img src="Popper.jpg" class="inline-img" style="width:100%;height:100%;object-fit:cover;" alt="Karl Popper" onerror="this.style.display='none';this.parentElement.innerText='🦢';"></div>
+                    <div>
+                        <div class="philosopher-name">Karl Popper</div>
+                        <div class="philosopher-dates">1902 – 1994 · Austria / Reino Unido</div>
+                        <div class="philosopher-bio">Fundador del Falsacionismo. Demostró mediante el "Cisne Negro" que la ciencia no puede probar que sus teorías sean definitivamente verdaderas, sino que avanza intentando refutarlas.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREV CLASS -->
+            <div class="sidebar-card">
+                <div class="sidebar-card-header">
+                    <i class="fa-solid fa-backward"></i>
+                    Clase anterior
+                </div>
+                <div class="next-class">
+                    <div class="next-label">Clase 17 · Unidad 2</div>
+                    <div class="next-title">La PCR: Copiar el ADN para salvar al mundo</div>
+                    <button class="btn-next" onclick="window.location.href='unidad2-clase17.html'" style="background:var(--bg3);color:var(--text);">
+                        <span>IR A CLASE 17</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </aside>
+
+</main>
+
+<!-- FOOTER NAV -->
+<nav class="article-footer-nav" style="border-top:1px solid var(--border); padding: 40px 24px; max-width:1280px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+    <a href="unidad2-clase17.html" class="footer-nav-link prev" style="display:flex; align-items:center; gap:12px; padding:16px 24px; border-radius:16px; border:1px solid var(--border); background:var(--card); transition:all 0.3s; cursor:pointer; max-width:300px;">
+        <div class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></div>
+        <div>
+            <div class="footer-nav-direction" style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--text3); margin-bottom:4px;">Clase Anterior</div>
+            <div class="footer-nav-title" style="font-size:14px; font-weight:600; color:var(--text);">U2·C17 — PCR y la Revolución Genética</div>
+        </div>
+    </a>
+    <div style="text-align:center; font-size:12px; color:var(--text3);">
+        <div style="font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--text);">FILOSOFÍA&CIENCIA</div>
+        Unidad 3 · Clase 18
+    </div>
+    <div class="footer-nav-link disabled" style="opacity:.6;cursor:not-allowed; display:flex; align-items:center; gap:12px; padding:16px 24px; border-radius:16px; border:1px solid var(--border); background:var(--card); max-width:300px; justify-content:flex-end;">
+        <div style="text-align:right;">
+            <div class="footer-nav-direction" style="font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--text3); margin-bottom:4px;">Siguiente Clase</div>
+            <div class="footer-nav-title" style="font-size:14px; font-weight:600; color:var(--text);">Próximamente</div>
+        </div>
+        <div class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></div>
+    </div>
+</nav>
+
+
+
+<script>
+    // Dark mode
+    (function(){
+        const s = localStorage.getItem('theme');
+        if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){
+            document.documentElement.classList.add('dark');
+        }
+    })();
+    function toggleDark(){
+        document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Progress bar
+    window.addEventListener('scroll', ()=>{
+        const d = document.documentElement;
+        const pct = (window.scrollY / (d.scrollHeight - d.clientHeight)) * 100;
+        document.getElementById('progress').style.width = pct + '%';
+    });
+
+    // Reveal on scroll
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // TOC Active
+    const sections = document.querySelectorAll('.article-section[id], .section-label[id]');
+    const tocItems = document.querySelectorAll('.toc-item');
+    const tocObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                tocItems.forEach(t => t.querySelector('a').classList.remove('active'));
+                const match = [...tocItems].find(t => t.querySelector('a').getAttribute('href') === '#' + e.target.id);
+                if (match) match.querySelector('a').classList.add('active');
+            }
+        });
+    }, { threshold: 0.35 });
+    sections.forEach(s => tocObs.observe(s));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', e=>{
+            const el = document.querySelector(a.getAttribute('href'));
+            if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+        });
+    });
+
+    console.log('%c📜 Clase 18 — El Inductivismo: Bacon y el Pavo de Russell — cargada.', 'color:#eab308;font-weight:bold;font-family:monospace');
+</script>
+</body>
+</html>

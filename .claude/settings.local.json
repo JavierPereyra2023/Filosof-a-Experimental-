@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /d/filosofia_experimental/unidad1-clase*.html)",
+      "Bash(wc -l D:/filosofia_experimental/unidad1-clase*.html)",
+      "Bash(grep -n \"<[/\\\\\\\\]\" \"D:/filosofia_experimental/unidad1-clase\"*.html)",
+      "Bash(grep -E 'src=\"\"https://upload.wikimedia.org' \"D:/filosofia_experimental/unidad1-clase\"*.html)",
+      "Bash(done)",
+      "Bash(node -c \"D:/filosofia_experimental/unidad1-clase4.html\")",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:en.wikipedia.org)"
+    ]
+  }
+}

@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controversias: Internalismo, Externalismo y Duhem-Quine | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, .6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .4s, color .4s;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width .1s;
+        }
+
+        /* TOPNAV */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background .4s, border-color .4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .nav-btn.disabled {
+            opacity: .38;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        /* HERO */
+        #art-hero {
+            background:
+                linear-gradient(to right, rgba(0, 0, 0, .97) 0%, rgba(0, 0, 0, .88) 40%, rgba(0, 0, 0, .5) 62%, rgba(0, 0, 0, .1) 100%),
+                url('https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, .95), 0 0 40px rgba(0, 0, 0, .5);
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Pasteur portrait — split con laboratorio */
+        .hero-portrait-img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 46%;
+            object-fit: cover;
+            object-position: top center;
+            pointer-events: none;
+            z-index: 1;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .35) 16%, rgba(0, 0, 0, .82) 34%, black 52%);
+            mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .35) 16%, rgba(0, 0, 0, .82) 34%, black 52%);
+            filter: brightness(.82) contrast(1.12) saturate(.7);
+        }
+
+        @media(max-width:900px) {
+            .hero-portrait-img {
+                display: none;
+            }
+        }
+
+        .hero-breadcrumb,
+        .hero-eyebrow,
+        .hero-title,
+        .hero-subtitle,
+        .hero-meta,
+        .hero-scroll-cue {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-blue {
+            background: #1d4ed8;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 6vw, 80px);
+            font-weight: 900;
+            line-height: .93;
+            letter-spacing: -.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(15px, 2.3vw, 20px);
+            color: rgba(255, 255, 255, .8);
+            max-width: 640px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .55);
+            letter-spacing: .05em;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, .4);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, .25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, .4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: .3
+            }
+        }
+
+        /* ARTICLE LAYOUT */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: .8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 900;
+            letter-spacing: -.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 700;
+            color: var(--text);
+            margin: 32px 0 12px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .art-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 48px 0;
+        }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            border-left: 4px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 32px 0;
+            background: var(--bg3);
+            border-radius: 0 16px 16px 0;
+        }
+
+        .pull-quote p {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 2.5vw, 22px);
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.55;
+            margin-bottom: 10px;
+        }
+
+        .pull-quote cite {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text3);
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 28px 0;
+        }
+
+        .highlight-box .hb-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 8px;
+        }
+
+        .highlight-box h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* STATS STRIP */
+        .stats-strip {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 28px 0;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 22px;
+            flex: 1;
+            min-width: 110px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--yellow-dark);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text3);
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        /* VERSUS GRID */
+        .versus-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            margin: 28px 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card);
+        }
+
+        .versus-col {
+            padding: 24px 20px;
+        }
+
+        .versus-col.left {
+            background: linear-gradient(135deg, rgba(37, 99, 235, .06), transparent);
+        }
+
+        .versus-col.right {
+            background: linear-gradient(135deg, transparent, rgba(220, 38, 38, .06));
+        }
+
+        .versus-mid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 14px;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+
+        .versus-mid span {
+            font-weight: 900;
+            font-size: 13px;
+            color: var(--text3);
+            writing-mode: vertical-lr;
+            letter-spacing: .12em;
+        }
+
+        .versus-col h4 {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .versus-col.left h4 {
+            color: #2563eb;
+        }
+
+        .versus-col.right h4 {
+            color: var(--red);
+        }
+
+        .versus-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .versus-col li {
+            font-size: 13px;
+            color: var(--text2);
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, .05);
+            line-height: 1.5;
+        }
+
+        .versus-col li:last-child {
+            border-bottom: none;
+        }
+
+        .versus-col.left li::before {
+            content: '→ ';
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .versus-col.right li::before {
+            content: '→ ';
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        @media(max-width:640px) {
+            .versus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .versus-mid {
+                writing-mode: horizontal-tb;
+                padding: 8px;
+                border: none;
+                border-top: 1px solid var(--border);
+                border-bottom: 1px solid var(--border);
+            }
+        }
+
+        /* EXPERIMENT CARD */
+        .experiment-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 28px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .experiment-card-header {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .experiment-card-icon {
+            font-size: 2rem;
+        }
+
+        .experiment-card-header h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .experiment-card-header p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .6);
+            margin: 0;
+        }
+
+        .experiment-card-body {
+            padding: 24px;
+        }
+
+        .exp-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .exp-step {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .exp-step-num {
+            background: var(--yellow);
+            color: #000;
+            font-weight: 900;
+            font-size: 11px;
+            min-width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .exp-step-text {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.65;
+        }
+
+        .exp-step-text strong {
+            color: var(--text);
+        }
+
+        /* DUHEM-QUINE WEB */
+        .dq-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            margin: 28px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .dq-box-title {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 4px;
+        }
+
+        .dq-box-sub {
+            font-size: 13px;
+            color: var(--text3);
+            margin-bottom: 16px;
+        }
+
+        .dq-hint {
+            font-size: 12px;
+            color: var(--text3);
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        #dq-svg-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        #dq-svg-wrap svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .web-node-group {
+            cursor: pointer;
+            transition: opacity .25s;
+        }
+
+        .web-node-group .node-circle {
+            transition: filter .25s;
+        }
+
+        .web-node-group:hover .node-circle {
+            filter: brightness(1.25);
+        }
+
+        .web-node-group.eliminated .node-circle {
+            opacity: .2;
+        }
+
+        .web-node-group.eliminated .node-label {
+            opacity: .2;
+        }
+
+        .node-core .node-circle {
+            fill: #1d4ed8;
+            stroke: #93c5fd;
+            stroke-width: 2;
+        }
+
+        .node-core .node-label {
+            fill: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            text-anchor: middle;
+        }
+
+        .node-aux .node-circle {
+            fill: #374151;
+            stroke: #6b7280;
+            stroke-width: 1.5;
+        }
+
+        .node-aux .node-label {
+            fill: #d1d5db;
+            font-size: 9px;
+            text-anchor: middle;
+        }
+
+        .web-link {
+            stroke: #4b5563;
+            stroke-width: 1.5;
+            stroke-dasharray: 5, 4;
+            opacity: .55;
+        }
+
+        .dark .node-aux .node-circle {
+            fill: #1f2937;
+            stroke: #4b5563;
+        }
+
+        .dark .node-aux .node-label {
+            fill: #9ca3af;
+        }
+
+        .dark .web-link {
+            stroke: #374151;
+        }
+
+        #dq-result {
+            background: linear-gradient(135deg, rgba(250, 204, 21, .1), rgba(250, 204, 21, .03));
+            border: 1px solid rgba(250, 204, 21, .35);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.7;
+            display: none;
+            margin-top: 8px;
+        }
+
+        .dq-reset {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 5px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text3);
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all var(--transition);
+        }
+
+        .dq-reset:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        /* FLASK COMPARISON */
+        .flask-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 28px 0;
+        }
+
+        @media(max-width:560px) {
+            .flask-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .flask-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .flask-card.contaminated {
+            border-top: 4px solid var(--red);
+        }
+
+        .flask-card.sterile {
+            border-top: 4px solid #16a34a;
+        }
+
+        .flask-card-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .flask-card.contaminated .flask-card-label {
+            color: var(--red);
+        }
+
+        .flask-card.sterile .flask-card-label {
+            color: #16a34a;
+        }
+
+        .flask-card p {
+            font-size: 13px;
+            color: var(--text3);
+            line-height: 1.55;
+            margin-top: 10px;
+        }
+
+        .flask-card strong {
+            color: var(--text);
+        }
+
+        /* TIMELINE */
+        .timeline {
+            margin: 28px 0;
+            padding-left: 24px;
+            border-left: 2px solid var(--yellow);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--yellow);
+            border: 2px solid var(--bg);
+        }
+
+        .tl-year {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .1em;
+            color: var(--yellow-dark);
+            margin-bottom: 4px;
+        }
+
+        .tl-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .tl-text {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.65;
+        }
+
+        /* QUESTION LIST */
+        .question-list {
+            list-style: none;
+            counter-reset: q;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .question-list li {
+            counter-increment: q;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 18px;
+            transition: all var(--transition);
+        }
+
+        .question-list li:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow);
+        }
+
+        .question-list li::before {
+            content: counter(q, 'decimal-leading-zero');
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--yellow-dark);
+            line-height: 1.1;
+            flex-shrink: 0;
+            width: 2.5rem;
+        }
+
+        .question-list li span {
+            font-size: 14px;
+            color: var(--text2);
+            line-height: 1.65;
+            flex: 1;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media(min-width:1024px) {
+            .sidebar {
+                position: sticky;
+                top: 72px;
+                align-self: start;
+                max-height: calc(100vh - 100px);
+                overflow-y: auto;
+            }
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px;
+            color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item a:hover,
+        .toc-item.active a {
+            color: var(--text);
+            background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+
+        .toc-item.active a {
+            font-weight: 600;
+        }
+
+        .toc-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 11px;
+            font-weight: 900;
+            color: var(--yellow-dark);
+            min-width: 22px;
+        }
+
+        .concept-pills {
+            padding: 14px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .pill {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text2);
+        }
+
+        .person-list {
+            padding: 4px 0;
+        }
+
+        .person-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .person-item:last-child {
+            border-bottom: none;
+        }
+
+        .person-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 14px;
+            flex-shrink: 0;
+            color: #000;
+        }
+
+        .person-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .person-role {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.4;
+        }
+
+        .nav-class-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 18px;
+            transition: all var(--transition);
+        }
+
+        .nav-class-btn:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-class-btn.primary {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .nav-class-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 3px;
+        }
+
+        .nav-class-btn.primary .nav-class-label {
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .nav-class-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .nav-class-btn.primary .nav-class-title {
+            color: #000;
+        }
+
+        .sb-nav-pad {
+            padding: 14px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* FOOTER */
+        .art-footer {
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            padding: 40px 24px;
+        }
+
+        .art-footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        @media(min-width:640px) {
+            .footer-nav {
+                flex-direction: row;
+                gap: 24px;
+            }
+        }
+
+        .footer-nav-card {
+            flex: 1;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all var(--transition);
+        }
+
+        .footer-nav-card:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-nav-card.primary {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .footer-nav-card.disabled {
+            opacity: .4;
+            pointer-events: none;
+            border-style: dashed;
+        }
+
+        .fn-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .footer-nav-card.primary .fn-icon {
+            background: rgba(0, 0, 0, .1);
+        }
+
+        .fn-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-card.primary .fn-label,
+        .footer-nav-card.primary .fn-title {
+            color: #000;
+        }
+
+        .fn-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-credits {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .footer-credits a {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <!-- ══ TOPNAV ════════════════════════════════════════════════ -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>REVISTA</span>
+            </a>
+            <span class="nav-sep">·</span>
+            <div class="breadcrumb">
+                <span>Unidad 2</span> — Controversias — Introducción
+            </div>
+        </div>
+        <div class="topnav-center">Internalismo, Externalismo y la Tesis Duhem-Quine</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase9.html'">
+                <i class="fa-solid fa-arrow-left"></i> U1·C9
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase10.html'">
+                Clase 10 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="dark-toggle-nav" id="darkToggle" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- ══ HERO ══════════════════════════════════════════════════ -->
+    <header id="art-hero">
+        <!-- Louis Pasteur — Albert Edelfelt, 1885 -->
+        <img class="hero-portrait-img"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Albert_Edelfelt_-_Louis_Pasteur_-_1885.jpg/440px-Albert_Edelfelt_-_Louis_Pasteur_-_1885.jpg"
+            alt="Louis Pasteur — pintura de Albert Edelfelt (1885)" onerror="this.style.display='none'" />
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDAD 2 · INTRODUCCIÓN</span>
+            <span class="hero-badge-blue">CONTROVERSIAS CIENTÍFICAS</span>
+            <span class="hero-badge-outline">DUHEM · QUINE · PASTEUR</span>
+        </div>
+        <p class="hero-eyebrow">¿Qué resuelve una controversia científica?</p>
+        <h1 class="hero-title">Internalismo,<br><em>Externalismo</em><br>y Duhem-Quine</h1>
+        <p class="hero-subtitle">
+            Por qué ningún experimento refuta definitivamente una teoría.
+            El caso Pasteur vs. Pouchet y la red de hipótesis que siempre puede salvarnos.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item"><i class="fa-solid fa-flask"></i> <span>Pierre Duhem · 1906</span></div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-book"></i> <span>W. V. O. Quine · 1951</span></div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-regular fa-clock"></i> <span>Lectura: 30 min</span></div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-microscope"></i> <span>Pasteur vs. Pouchet · 1859</span>
+            </div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Desplazá</span>
+        </div>
+    </header>
+
+    <!-- ══ ARTICLE ════════════════════════════════════════════════ -->
+    <main class="article-wrap">
+        <article>
+
+            <!-- ── 1. INTRO ─────────────────────────────────────────── -->
+            <div class="article-section" id="sec-intro">
+                <span class="section-label">Del paradigma a la controversia</span>
+                <h2 class="article-h2">Cuando dos teorías <span>se disputan el mundo</span></h2>
+
+                <p class="article-p dropcap">
+                    En la Unidad 1 reconstruimos la Revolución Científica: Copérnico, Galileo, Kepler, Newton,
+                    y finalmente Kuhn, quien nos mostró que el cambio científico no es solo acumulación de datos
+                    sino <strong>ruptura de paradigmas</strong>. Pero la historia de la ciencia está llena de algo
+                    más cotidiano que las grandes revoluciones: las <strong>controversias</strong>.
+                </p>
+                <p class="article-p">
+                    Una controversia científica ocurre cuando dos teorías rivales se disputan la explicación de los
+                    mismos fenómenos durante años —o décadas— y la comunidad no logra ponerse de acuerdo sobre cuál
+                    tiene razón. Estudiar cómo se resuelven —o no se resuelven— estas disputas nos dice mucho sobre
+                    qué es realmente la ciencia.
+                </p>
+                <p class="article-p">
+                    Esta clase introduce dos grandes preguntas filosóficas: <strong>¿Qué factores deciden una
+                        controversia?</strong> Y: <strong>¿puede un experimento refutar definitivamente una
+                        teoría?</strong>
+                    Las respuestas son más complejas —y más filosóficamente interesantes— de lo que parece a primera
+                    vista.
+                </p>
+
+                <div class="stats-strip reveal">
+                    <div class="stat-card">
+                        <div class="stat-num">1906</div>
+                        <div class="stat-label">Duhem publica<br><em>La Théorie Physique</em></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">1951</div>
+                        <div class="stat-label">Quine: «Dos dogmas<br>del empirismo»</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">1859</div>
+                        <div class="stat-label">Comienza el debate<br>Pasteur vs. Pouchet</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">∞</div>
+                        <div class="stat-label">Hipótesis auxiliares<br>disponibles siempre</div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 2. INTERNALISMO / EXTERNALISMO ──────────────────── -->
+            <div class="article-section" id="sec-debate">
+                <span class="section-label">El gran debate filosófico</span>
+                <h2 class="article-h2">¿Razones internas o<br><span>factores externos?</span></h2>
+
+                <p class="article-p">
+                    Cuando preguntamos por qué una teoría científica triunfó sobre otra, los filósofos se dividen
+                    en dos grandes campos. Para los <strong>internalistas</strong>, la respuesta está en la propia
+                    ciencia: una teoría gana porque tiene más evidencia, mayor coherencia lógica, más poder predictivo.
+                    Para los <strong>externalistas</strong>, hay que mirar más allá: las relaciones de poder, el
+                    financiamiento, la ideología política y religiosa, el prestigio institucional.
+                </p>
+
+                <div class="versus-grid reveal">
+                    <div class="versus-col left">
+                        <h4>Internalismo</h4>
+                        <ul>
+                            <li>La ciencia es una actividad autónoma</li>
+                            <li>Las controversias se resuelven por evidencia y lógica</li>
+                            <li>El contexto social es irrelevante para la validez</li>
+                            <li>Hay un método científico universal</li>
+                            <li>Representantes: Popper, Lakatos</li>
+                        </ul>
+                    </div>
+                    <div class="versus-mid"><span>VS</span></div>
+                    <div class="versus-col right">
+                        <h4>Externalismo</h4>
+                        <ul>
+                            <li>La ciencia es una práctica social e histórica</li>
+                            <li>El poder, la política y la ideología influyen</li>
+                            <li>El científico no es neutral ni desinteresado</li>
+                            <li>El contexto penetra el contenido de las teorías</li>
+                            <li>Representantes: Merton, Bloor, Latour</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="article-p">
+                    Esta tensión no es académica. Tiene consecuencias prácticas enormes: ¿puede la industria
+                    farmacéutica afectar qué resultados se publican? ¿Influyó la Iglesia en la condena de Galileo
+                    por razones <em>internas</em> (sus argumentos eran incorrectos) o <em>externas</em> (amenazaba
+                    el poder institucional)? El caso Galileo, que vimos en la clase 4, era exactamente esto.
+                </p>
+
+                <h3 class="article-h3">El Programa Fuerte de David Bloor</h3>
+                <p class="article-p">
+                    El sociólogo David Bloor (1976) propuso que la sociología del conocimiento debe ser
+                    <strong>simétrica</strong>: debe explicar tanto las creencias consideradas verdaderas como las
+                    consideradas falsas usando los mismos tipos de causas sociales. No hay razón para reservar la
+                    "racionalidad" solo como explicación de las creencias correctas y recurrir a factores sociales
+                    solo para las erróneas. Esta posición, llamada <em>Programa Fuerte</em>, es radical pero poderosa:
+                    nos obliga a mirar la ciencia como una actividad humana completa, sin privilegios epistemológicos
+                    injustificados.
+                </p>
+
+                <div class="pull-quote">
+                    <p>«El conocimiento científico es un producto social en el mismo sentido que lo es cualquier
+                        otro tipo de conocimiento. Sus orígenes están en la comunidad, y por ende en la cultura.»</p>
+                    <cite>— David Bloor, <em>Knowledge and Social Imagery</em>, 1976</cite>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 3. EXPERIMENTUM CRUCIS ───────────────────────────── -->
+            <div class="article-section" id="sec-experimento">
+                <span class="section-label">Metodología científica</span>
+                <h2 class="article-h2">El experimento crucial:<br><span>¿existe realmente?</span></h2>
+
+                <p class="article-p">
+                    La tradición empirista propone que una controversia científica puede resolverse mediante un
+                    <em>experimentum crucis</em> —un experimento decisivo que favorece a una teoría y refuta
+                    definitivamente a la otra. La idea viene de Francis Bacon y fue popularizada por Newton.
+                    Es una imagen atractiva: la naturaleza como árbitro supremo, imparcial y objetivo.
+                </p>
+
+                <div class="experiment-card reveal">
+                    <div class="experiment-card-header">
+                        <div class="experiment-card-icon">⚗️</div>
+                        <div>
+                            <h4>La lógica del Experimentum Crucis</h4>
+                            <p>Estructura ideal del experimento decisivo</p>
+                        </div>
+                    </div>
+                    <div class="experiment-card-body">
+                        <div class="exp-steps">
+                            <div class="exp-step">
+                                <div class="exp-step-num">1</div>
+                                <div class="exp-step-text"><strong>Dos teorías rivales (T1 y T2)</strong> hacen
+                                    predicciones contradictorias sobre el mismo fenómeno observable.</div>
+                            </div>
+                            <div class="exp-step">
+                                <div class="exp-step-num">2</div>
+                                <div class="exp-step-text"><strong>Se diseña un experimento</strong> cuyo resultado solo
+                                    puede ser compatible con una de las dos teorías.</div>
+                            </div>
+                            <div class="exp-step">
+                                <div class="exp-step-num">3</div>
+                                <div class="exp-step-text"><strong>Se realiza el experimento</strong> en condiciones
+                                    controladas y se registra el resultado.</div>
+                            </div>
+                            <div class="exp-step">
+                                <div class="exp-step-num">4</div>
+                                <div class="exp-step-text"><strong>La teoría refutada queda descartada</strong>
+                                    definitivamente; la otra resulta confirmada.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="article-p">
+                    Esta imagen es atractiva pero engañosa. Hay dos problemas fundamentales. <strong>Primero:</strong>
+                    en la práctica, los experimentos nunca producen resultados tan limpios. Los instrumentos tienen
+                    errores, las condiciones ideales son inalcanzables, los datos requieren interpretación.
+                    <strong>Segundo —y más profundo—:</strong> la tesis Duhem-Quine demuestra que ningún experimento
+                    puede refutar una teoría de forma aislada. Siempre existe un escudo de hipótesis auxiliares
+                    que puede absorber el golpe.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 4. DUHEM-QUINE ───────────────────────────────────── -->
+            <div class="article-section" id="sec-duhem-quine">
+                <span class="section-label">Tesis filosófica central</span>
+                <h2 class="article-h2">La red de hipótesis:<br><span>Duhem y Quine</span></h2>
+
+                <p class="article-p">
+                    Pierre Duhem (físico y filósofo, Francia, 1861-1916) llegó a una conclusión fundamental al
+                    estudiar la metodología de la física teórica: las teorías no enfrentan la evidencia
+                    <strong>de forma aislada</strong>, sino siempre en <strong>conjuntos</strong>. Cuando un
+                    experimento produce un resultado anómalo, lo que queda en cuestión no es solo la teoría
+                    central, sino también el conjunto de <em>hipótesis auxiliares</em> que se usaron para
+                    derivar la predicción: la calibración de los instrumentos, las condiciones del entorno,
+                    las leyes secundarias aplicadas, el modelo matemático utilizado.
+                </p>
+                <p class="article-p">
+                    William Van Orman Quine (filósofo norteamericano, 1908-2000) extendió esta tesis más allá
+                    de la física, en su famoso artículo <em>"Dos dogmas del empirismo"</em> (1951): todo nuestro
+                    conocimiento enfrenta el tribunal de la experiencia no como enunciados individuales sino
+                    como un <strong>cuerpo colectivo</strong>. No hay "hechos puros" separables de teorías.
+                    Cualquier enunciado puede mantenerse como verdadero si hacemos suficientes ajustes en
+                    otros enunciados del sistema.
+                </p>
+
+                <div class="dq-box reveal">
+                    <div class="dq-box-title">Diagrama interactivo — Tesis Duhem-Quine</div>
+                    <div class="dq-box-sub">Ante un resultado experimental anómalo, ¿qué hipótesis eliminamos?</div>
+                    <div class="dq-hint">👆 Hacé clic en un nodo para ver qué ocurre al rechazarlo</div>
+                    <div id="dq-svg-wrap">
+                        <svg viewBox="0 0 420 300" width="420" height="300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Links -->
+                            <line class="web-link" x1="210" y1="150" x2="210" y2="50" />
+                            <line class="web-link" x1="210" y1="150" x2="88" y2="100" />
+                            <line class="web-link" x1="210" y1="150" x2="332" y2="100" />
+                            <line class="web-link" x1="210" y1="150" x2="88" y2="222" />
+                            <line class="web-link" x1="210" y1="150" x2="332" y2="222" />
+                            <line class="web-link" x1="210" y1="50" x2="88" y2="100" opacity=".28" />
+                            <line class="web-link" x1="210" y1="50" x2="332" y2="100" opacity=".28" />
+                            <line class="web-link" x1="88" y1="100" x2="88" y2="222" opacity=".28" />
+                            <line class="web-link" x1="332" y1="100" x2="332" y2="222" opacity=".28" />
+                            <line class="web-link" x1="88" y1="222" x2="332" y2="222" opacity=".28" />
+                            <!-- Core -->
+                            <g class="web-node-group node-core" id="node-core" onclick="dqSelect('core')">
+                                <circle class="node-circle" cx="210" cy="150" r="42" />
+                                <text class="node-label" x="210" y="144" dy=".35em">Teoría</text>
+                                <text class="node-label" x="210" y="157" dy=".35em">Central (T)</text>
+                                <text x="210" y="170" dy=".35em" fill="#93c5fd" font-size="8" text-anchor="middle">ej:
+                                    Gravitación</text>
+                            </g>
+                            <!-- H1 top -->
+                            <g class="web-node-group node-aux" id="node-h1" onclick="dqSelect('h1')">
+                                <circle class="node-circle" cx="210" cy="50" r="33" />
+                                <text class="node-label" x="210" y="44" dy=".35em">H1: Instrumentos</text>
+                                <text class="node-label" x="210" y="56" dy=".35em">calibrados</text>
+                            </g>
+                            <!-- H2 upper left -->
+                            <g class="web-node-group node-aux" id="node-h2" onclick="dqSelect('h2')">
+                                <circle class="node-circle" cx="88" cy="100" r="33" />
+                                <text class="node-label" x="88" y="94" dy=".35em">H2: Sin</text>
+                                <text class="node-label" x="88" y="106" dy=".35em">interferencias</text>
+                            </g>
+                            <!-- H3 upper right -->
+                            <g class="web-node-group node-aux" id="node-h3" onclick="dqSelect('h3')">
+                                <circle class="node-circle" cx="332" cy="100" r="33" />
+                                <text class="node-label" x="332" y="94" dy=".35em">H3: No hay</text>
+                                <text class="node-label" x="332" y="106" dy=".35em">perturbadores</text>
+                            </g>
+                            <!-- H4 lower left -->
+                            <g class="web-node-group node-aux" id="node-h4" onclick="dqSelect('h4')">
+                                <circle class="node-circle" cx="88" cy="222" r="33" />
+                                <text class="node-label" x="88" y="216" dy=".35em">H4: Cond.</text>
+                                <text class="node-label" x="88" y="228" dy=".35em">iniciales OK</text>
+                            </g>
+                            <!-- H5 lower right -->
+                            <g class="web-node-group node-aux" id="node-h5" onclick="dqSelect('h5')">
+                                <circle class="node-circle" cx="332" cy="222" r="33" />
+                                <text class="node-label" x="332" y="216" dy=".35em">H5: Modelo</text>
+                                <text class="node-label" x="332" y="228" dy=".35em">matemático OK</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div id="dq-result"></div>
+                    <button class="dq-reset" onclick="dqReset()">↺ Reiniciar</button>
+                </div>
+
+                <div class="highlight-box reveal">
+                    <div class="hb-tag">Tres consecuencias filosóficas</div>
+                    <h4>Lo que Duhem-Quine cambia para siempre</h4>
+                    <p><strong>① No existe la refutación definitiva:</strong> Un resultado anómalo nunca apunta
+                        directamente a la teoría central. <strong>② Las teorías tienen inmunidad provisional:</strong>
+                        Una comunidad puede —racionalmente— sostener su teoría frente a evidencia adversa ajustando
+                        hipótesis auxiliares. <strong>③ El holismo epistémico:</strong> El conocimiento enfrenta la
+                        experiencia como bloque, no enunciado por enunciado.</p>
+                </div>
+
+                <div class="pull-quote">
+                    <p>«Nuestros enunciados sobre el mundo externo se someten como cuerpo al tribunal de la
+                        experiencia sensible, no individualmente.»</p>
+                    <cite>— W. V. O. Quine, <em>Dos dogmas del empirismo</em>, 1951</cite>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 5. PASTEUR VS POUCHET ────────────────────────────── -->
+            <div class="article-section" id="sec-pasteur">
+                <span class="section-label">Caso de estudio histórico</span>
+                <h2 class="article-h2">Pasteur vs. Pouchet:<br><span>¿el experimento decidió?</span></h2>
+
+                <p class="article-p">
+                    El debate entre Louis Pasteur y Félix Archimède Pouchet sobre la <strong>generación
+                        espontánea</strong> es uno de los casos más ricos de la historia de la ciencia para
+                    estudiar cómo se resuelven —o no— las controversias con experimentos. Durante años,
+                    ambos científicos realizaron experimentos rigurosos. Ambos podían presentar evidencia.
+                    Y sin embargo el caso terminó de una forma que no fue puramente experimental.
+                </p>
+
+                <div class="timeline reveal">
+                    <div class="timeline-item">
+                        <div class="tl-year">1858</div>
+                        <div class="tl-title">Pouchet anuncia la generación espontánea demostrada</div>
+                        <div class="tl-text">El naturalista Félix Pouchet reporta que caldos en frascos sellados, usando
+                            oxígeno artificial, producen microorganismos. Concluye: la vida surge espontáneamente de la
+                            materia.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">1859</div>
+                        <div class="tl-title">La Academia Francesa lanza el Prix Alhumbert</div>
+                        <div class="tl-text">Para resolver la controversia, la Academia de Ciencias de París ofrece un
+                            premio al experimento más convincente. Pasteur decide participar.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">1859–1861</div>
+                        <div class="tl-title">Pasteur diseña el frasco cuello de cisne</div>
+                        <div class="tl-text">Crea frascos con cuello elongado en forma de S: el caldo puede oxigenarse
+                            pero los gérmenes quedan atrapados en la curva. Los caldos permanecen estériles. Gana el
+                            premio de la Academia en 1862.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">1863</div>
+                        <div class="tl-title">Pouchet replica con resultados contradictorios</div>
+                        <div class="tl-text">Repite experimentos similares en los Pirineos usando nieve de glaciar y
+                            reporta generación espontánea. La comisión de la Academia falla a favor de Pasteur, pero
+                            Pouchet retira su candidatura sospechando parcialidad.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">Hoy</div>
+                        <div class="tl-title">El veredicto histórico revisado</div>
+                        <div class="tl-text">Los historiadores John Farley y Gerald Geison mostraron que factores
+                            externos —acceso institucional, relaciones con la Academia, creencias religiosas de ambos
+                            bandos— influyeron profundamente en cómo se evaluaron los experimentos.</div>
+                    </div>
+                </div>
+
+                <h3 class="article-h3">El frasco cuello de cisne: el diseño más famoso</h3>
+                <p class="article-p">
+                    El experimento del frasco cuello de cisne es un diseño elegante que ilustra la tesis
+                    Duhem-Quine en acción: su resultado depende de qué hipótesis auxiliares se acepten.
+                </p>
+
+                <div class="flask-grid reveal">
+                    <div class="flask-card contaminated">
+                        <div class="flask-card-label">Frasco cuello recto</div>
+                        <svg viewBox="0 0 130 190" width="130" height="190" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="33" y="96" width="64" height="72" rx="8" fill="none" stroke="#6b7280"
+                                stroke-width="2" />
+                            <rect x="52" y="42" width="26" height="55" rx="3" fill="none" stroke="#6b7280"
+                                stroke-width="2" />
+                            <line x1="46" y1="42" x2="84" y2="42" stroke="#6b7280" stroke-width="2" />
+                            <rect x="35" y="136" width="60" height="30" rx="6" fill="rgba(134,239,172,.22)" />
+                            <line x1="35" y1="136" x2="95" y2="136" stroke="rgba(134,239,172,.6)" stroke-width="1.5" />
+                            <circle cx="52" cy="150" r="5" fill="rgba(220,38,38,.7)" />
+                            <circle cx="67" cy="158" r="4" fill="rgba(220,38,38,.7)" />
+                            <circle cx="80" cy="147" r="5" fill="rgba(220,38,38,.7)" />
+                            <circle cx="59" cy="163" r="3.5" fill="rgba(220,38,38,.6)" />
+                            <circle cx="73" cy="148" r="3.5" fill="rgba(220,38,38,.6)" />
+                            <circle cx="61" cy="62" r="3" fill="rgba(220,38,38,.5)" />
+                            <circle cx="69" cy="75" r="2.5" fill="rgba(220,38,38,.5)" />
+                            <path d="M65 26 L65 40" stroke="rgba(220,38,38,.7)" stroke-width="1.5"
+                                marker-end="url(#ar)" />
+                            <defs>
+                                <marker id="ar" markerWidth="5" markerHeight="5" refX="2.5" refY="2.5" orient="auto">
+                                    <path d="M0,0 L5,2.5 L0,5 Z" fill="rgba(220,38,38,.7)" />
+                                </marker>
+                            </defs>
+                            <text x="65" y="20" text-anchor="middle" fill="rgba(220,38,38,.8)" font-size="8"
+                                font-weight="600">Gérmenes</text>
+                        </svg>
+                        <p>El aire entra directamente. Los gérmenes caen al caldo.<br><strong>Resultado:
+                                contaminado.</strong></p>
+                    </div>
+                    <div class="flask-card sterile">
+                        <div class="flask-card-label">Frasco cuello de cisne</div>
+                        <svg viewBox="0 0 130 190" width="130" height="190" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="33" y="116" width="64" height="62" rx="8" fill="none" stroke="#6b7280"
+                                stroke-width="2" />
+                            <path d="M56 116 C56 96,74 96,74 76 C74 56,50 50,50 34" fill="none" stroke="#6b7280"
+                                stroke-width="2.5" />
+                            <line x1="43" y1="34" x2="57" y2="34" stroke="#6b7280" stroke-width="2" />
+                            <rect x="35" y="152" width="60" height="24" rx="6" fill="rgba(186,230,253,.22)" />
+                            <line x1="35" y1="152" x2="95" y2="152" stroke="rgba(186,230,253,.6)" stroke-width="1.5" />
+                            <text x="65" y="170" text-anchor="middle" fill="rgba(22,163,74,.75)" font-size="8"
+                                font-weight="600">Estéril ✓</text>
+                            <circle cx="73" cy="79" r="3" fill="rgba(220,38,38,.5)" />
+                            <circle cx="67" cy="72" r="2.5" fill="rgba(220,38,38,.5)" />
+                            <text x="50" y="22" text-anchor="middle" fill="rgba(107,114,128,.6)"
+                                font-size="7">Gérmenes</text>
+                            <text x="50" y="30" text-anchor="middle" fill="rgba(107,114,128,.6)"
+                                font-size="7">atrapados</text>
+                        </svg>
+                        <p>Los gérmenes quedan en la curva. El caldo se oxigena.<br><strong>Resultado: estéril.</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="highlight-box reveal">
+                    <div class="hb-tag">La lectura filosófica del caso</div>
+                    <h4>Pasteur tenía razón — pero no solo por los experimentos</h4>
+                    <p>Los experimentos de Pouchet eran técnicamente correctos: él usaba <em>infusión de heno</em> que
+                        contiene esporas termorresistentes que sobreviven a la esterilización estándar. Ninguno lo sabía
+                        en ese momento. Ambos podían —aplicando la lógica Duhem-Quine— atribuir los resultados adversos
+                        a hipótesis auxiliares. El acceso de Pasteur a la Academia y su red institucional también
+                        inclinaron la balanza. Internalismo y externalismo coexistieron en el mismo caso.</p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 6. SÍNTESIS ──────────────────────────────────────── -->
+            <div class="article-section" id="sec-sintesis">
+                <span class="section-label">Cierre de la clase</span>
+                <h2 class="article-h2">Síntesis: qué aprendimos<br><span>sobre las controversias</span></h2>
+
+                <p class="article-p">
+                    Las controversias científicas no se resuelven de forma simple. Un experimento puede ser
+                    necesario pero nunca suficiente para zanjar un debate: la tesis Duhem-Quine garantiza que
+                    siempre existe la posibilidad de ajustar hipótesis auxiliares en lugar de abandonar la teoría
+                    central.
+                </p>
+                <p class="article-p">
+                    Los factores internalistas (evidencia, coherencia, poder predictivo) y los externalistas
+                    (poder institucional, ideología, financiamiento) se mezclan en la historia real de la ciencia.
+                    El caso Pasteur/Pouchet lo muestra con claridad: quien "ganó" fue quien tenía razón sobre la
+                    teoría, pero también quien tenía mejores contactos en la Academia.
+                </p>
+                <p class="article-p">
+                    En la próxima clase estudiaremos cómo Imre Lakatos intentó encontrar un camino intermedio:
+                    los <strong>programas de investigación</strong>, que dan a las teorías un núcleo firme protegido
+                    por un cinturón de hipótesis auxiliares —exactamente lo que Duhem y Quine describieron— pero con
+                    criterios de racionalidad para saber cuándo un programa científico es progresivo y cuándo es
+                    degenerativo.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 7. PREGUNTAS ─────────────────────────────────────── -->
+            <div class="article-section" id="sec-preguntas">
+                <span class="section-label">Reflexión y evaluación</span>
+                <h2 class="article-h2">Preguntas para <span>pensar</span></h2>
+                <ol class="question-list">
+                    <li><span>¿Qué diferencia al internalismo del externalismo? Dé un ejemplo concreto de un factor
+                            externo que podría influir en la aceptación de una teoría científica hoy.</span></li>
+                    <li><span>Explique la tesis Duhem-Quine con sus propias palabras. ¿Por qué hace difícil hablar de
+                            "refutación definitiva" en ciencia?</span></li>
+                    <li><span>En el diagrama interactivo de Duhem-Quine, ¿qué pasaría si eliminamos el nodo de la
+                            "Teoría Central"? ¿Es eso más o menos racional que eliminar una hipótesis auxiliar?</span>
+                    </li>
+                    <li><span>Recordando el caso Galileo (Unidad 1): ¿hubo allí factores internalistas y externalistas
+                            mezclados? ¿Cuáles? ¿Cómo se compara con Pasteur vs. Pouchet?</span></li>
+                    <li><span>¿Puede la ciencia ser completamente objetiva si los científicos son seres humanos con
+                            intereses, contextos y marcos teóricos previos? Defienda su posición con un
+                            argumento.</span></li>
+                </ol>
+            </div>
+
+        </article>
+
+        <!-- ══ SIDEBAR ════════════════════════════════════════════ -->
+        <aside class="sidebar">
+
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-list"></i> Contenido de la clase</div>
+                <ul class="toc-list">
+                    <li class="toc-item" id="toc-intro"><a href="#sec-intro"><span class="toc-num">01</span>Del
+                            paradigma a la controversia</a></li>
+                    <li class="toc-item" id="toc-debate"><a href="#sec-debate"><span
+                                class="toc-num">02</span>Internalismo vs. Externalismo</a></li>
+                    <li class="toc-item" id="toc-experimento"><a href="#sec-experimento"><span
+                                class="toc-num">03</span>Experimento crucial</a></li>
+                    <li class="toc-item" id="toc-dq"><a href="#sec-duhem-quine"><span class="toc-num">04</span>Tesis
+                            Duhem-Quine</a></li>
+                    <li class="toc-item" id="toc-pasteur"><a href="#sec-pasteur"><span class="toc-num">05</span>Pasteur
+                            vs. Pouchet</a></li>
+                    <li class="toc-item" id="toc-sint"><a href="#sec-sintesis"><span
+                                class="toc-num">06</span>Síntesis</a></li>
+                    <li class="toc-item" id="toc-preg"><a href="#sec-preguntas"><span
+                                class="toc-num">07</span>Preguntas</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-key"></i> Conceptos clave</div>
+                <div class="concept-pills">
+                    <span class="pill">Internalismo</span>
+                    <span class="pill">Externalismo</span>
+                    <span class="pill">Experimentum crucis</span>
+                    <span class="pill">Tesis Duhem-Quine</span>
+                    <span class="pill">Holismo epistémico</span>
+                    <span class="pill">Hipótesis auxiliar</span>
+                    <span class="pill">Generación espontánea</span>
+                    <span class="pill">Programa Fuerte</span>
+                    <span class="pill">Simetría epistémica</span>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-user-graduate"></i> Protagonistas</div>
+                <div class="person-list">
+                    <div class="person-item">
+                        <div class="person-avatar" style="background:#facc15;">P</div>
+                        <div>
+                            <div class="person-name">Louis Pasteur</div>
+                            <div class="person-role">Químico francés (1822–1895). Demostró que los gérmenes provienen
+                                del aire. Fundó la microbiología moderna y la pasteurización.</div>
+                        </div>
+                    </div>
+                    <div class="person-item">
+                        <div class="person-avatar" style="background:#dc2626;color:#fff;">P</div>
+                        <div>
+                            <div class="person-name">Félix Pouchet</div>
+                            <div class="person-role">Naturalista francés (1800–1872). Defensor de la generación
+                                espontánea. Sus experimentos eran rigurosos pero con material problemático.</div>
+                        </div>
+                    </div>
+                    <div class="person-item">
+                        <div class="person-avatar" style="background:#2563eb;color:#fff;">D</div>
+                        <div>
+                            <div class="person-name">Pierre Duhem</div>
+                            <div class="person-role">Físico y filósofo francés (1861–1916). Formuló el holismo teórico:
+                                ninguna hipótesis se prueba o refuta en aislamiento.</div>
+                        </div>
+                    </div>
+                    <div class="person-item">
+                        <div class="person-avatar" style="background:#7c3aed;color:#fff;">Q</div>
+                        <div>
+                            <div class="person-name">W. V. O. Quine</div>
+                            <div class="person-role">Filósofo norteamericano (1908–2000). Extendió el holismo de Duhem a
+                                todo el conocimiento en "Dos dogmas del empirismo" (1951).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-link"></i> Conexiones en la unidad</div>
+                <div class="sb-nav-pad">
+                    <a href="unidad1-clase9.html">
+                        <div class="nav-class-btn">
+                            <i class="fa-solid fa-arrow-left" style="color:var(--text3)"></i>
+                            <div>
+                                <div class="nav-class-label">Clase anterior · U1·C9</div>
+                                <div class="nav-class-title">El Experimento Crucial</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="unidad2-clase10.html" style="display:block;">
+                        <div class="nav-class-btn primary">
+                            <div>
+                                <div class="nav-class-label">Próxima clase</div>
+                                <div class="nav-class-title">Ciencias Formales: Lógica</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- ══ FOOTER ══════════════════════════════════════════════ -->
+    <footer class="art-footer">
+        <div class="art-footer-inner">
+            <div class="footer-nav">
+                <a href="unidad1-clase9.html" class="footer-nav-card">
+                    <div class="fn-icon">←</div>
+                    <div>
+                        <div class="fn-label">Clase anterior</div>
+                        <div class="fn-title">U1·C9 — El Experimento Crucial</div>
+                    </div>
+                </a>
+                <a href="index.html" class="footer-nav-card">
+                    <div class="fn-icon">🏠</div>
+                    <div>
+                        <div class="fn-label">Volver al inicio</div>
+                        <div class="fn-title">Revista Filosofía & Ciencia</div>
+                    </div>
+                </a>
+                <a href="unidad2-clase10.html" class="footer-nav-card primary">
+                    <div class="fn-icon">→</div>
+                    <div>
+                        <div class="fn-label">Próxima clase</div>
+                        <div class="fn-title">Ciencias Formales: Lógica</div>
+                    </div>
+                </a>
+            </div>
+            <div class="footer-credits">
+                Filosofía e Historia de la Ciencia y la Tecnología · 6.º Año · Los Polvorines, Buenos Aires ·
+                <a href="index.html">Filosofía&Ciencia 2025</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ══ JAVASCRIPT ═══════════════════════════════════════════ -->
+    <script>
+        /* ── Dark mode ── */
+        (function () {
+            const d = localStorage.getItem('darkMode');
+            if (d === 'true') document.documentElement.classList.add('dark');
+        })();
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+            const t = document.getElementById('darkToggle');
+            if (t) t.setAttribute('aria-pressed', document.documentElement.classList.contains('dark'));
+        }
+
+        /* ── Progress bar ── */
+        window.addEventListener('scroll', () => {
+            const el = document.documentElement;
+            const s = el.scrollTop || document.body.scrollTop;
+            const h = el.scrollHeight - el.clientHeight;
+            document.getElementById('progress').style.width = (s / h * 100) + '%';
+        }, { passive: true });
+
+        /* ── TOC active ── */
+        (function () {
+            const secs = [
+                { id: 'sec-intro', toc: 'toc-intro' }, { id: 'sec-debate', toc: 'toc-debate' },
+                { id: 'sec-experimento', toc: 'toc-experimento' }, { id: 'sec-duhem-quine', toc: 'toc-dq' },
+                { id: 'sec-pasteur', toc: 'toc-pasteur' }, { id: 'sec-sintesis', toc: 'toc-sint' },
+                { id: 'sec-preguntas', toc: 'toc-preg' }
+            ];
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        document.querySelectorAll('.toc-item').forEach(t => t.classList.remove('active'));
+                        const found = secs.find(s => s.id === e.target.id);
+                        if (found) { const el = document.getElementById(found.toc); if (el) el.classList.add('active'); }
+                    }
+                });
+            }, { rootMargin: '-20% 0px -70% 0px' });
+            secs.forEach(s => { const el = document.getElementById(s.id); if (el) obs.observe(el); });
+        })();
+
+        /* ── Reveal on scroll ── */
+        (function () {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: .12 });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        })();
+
+        /* ── Duhem-Quine interactive ── */
+        const dqText = {
+            core: '⚠️ Eliminaste la TEORÍA CENTRAL. Esto es posible lógicamente, pero la comunidad científica lo hará solo como último recurso. Si rechazamos la teoría de gravitación, tendríamos que repensar toda la física. Es posible según la lógica Duhem-Quine, pero irracionalmente costoso.',
+            h1: '✓ Eliminaste H1 — "Los instrumentos estaban bien calibrados". Si el telescopio o microscopio tenía un error de calibración, el resultado anómalo no dice nada sobre la teoría central. Esta es una hipótesis auxiliar razonable para ajustar.',
+            h2: '✓ Eliminaste H2 — "No había interferencias externas". Quizás había corrientes de aire, contaminación o vibración. El resultado puede deberse al entorno, no a la falsedad de la teoría central.',
+            h3: '✓ Eliminaste H3 — "No había factores perturbadores". En astronomía: quizás hay un planeta desconocido. En biología: quizás había esporas termorresistentes en el heno (como era el caso de Pouchet). La teoría central sigue intacta.',
+            h4: '✓ Eliminaste H4 — "Las condiciones iniciales estaban correctamente medidas". Si los datos de partida tenían errores, el resultado puede ser irrelevante para evaluar la teoría central.',
+            h5: '✓ Eliminaste H5 — "El modelo matemático/conceptual era correcto". Si la derivación que conecta teoría con predicción tenía un error, el experimento no refuta la teoría sino la derivación.'
+        };
+        function dqSelect(id) {
+            document.querySelectorAll('.web-node-group').forEach(g => g.classList.remove('eliminated'));
+            document.getElementById('node-' + id).classList.add('eliminated');
+            const r = document.getElementById('dq-result');
+            r.textContent = dqText[id] || ''; r.style.display = 'block';
+        }
+        function dqReset() {
+            document.querySelectorAll('.web-node-group').forEach(g => g.classList.remove('eliminated'));
+            const r = document.getElementById('dq-result'); r.style.display = 'none'; r.textContent = '';
+        }
+    </script>
+
+</body>
+
+</html>

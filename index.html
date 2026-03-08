@@ -1,0 +1,3486 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FILOSOFÍA&CIENCIA | Programa 2025 — 6to Año</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ===================== CSS VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --surface: #ffffff;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --border2: #c8bfb0;
+            --black: #111111;
+            --topbar-bg: #111111;
+            --header-bg: #ffffff;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111111;
+            --bg2: #1a1a1a;
+            --bg3: #222222;
+            --surface: #1e1e1e;
+            --card: #242424;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333333;
+            --border2: #444444;
+            --black: #f0ece4;
+            --topbar-bg: #000000;
+            --header-bg: #111111;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ===================== BASE ===================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.4s, color 0.4s;
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .baskerville {
+            font-family: 'Libre Baskerville', Georgia, serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* ===================== SCROLLBAR ===================== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+            border-radius: 3px;
+        }
+
+        /* ===================== TOP BAR ===================== */
+        #topbar {
+            background: var(--topbar-bg);
+            color: #fff;
+            padding: 8px 0;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            position: relative;
+            z-index: 100;
+            transition: background 0.4s;
+        }
+
+        .topbar-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .topbar-brand:hover {
+            color: var(--yellow);
+        }
+
+        .topbar-brand i {
+            color: var(--yellow);
+            font-size: 14px;
+        }
+
+        .topbar-links {
+            display: none;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .topbar-links {
+                display: flex;
+            }
+        }
+
+        .topbar-links a {
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 10px;
+            transition: color var(--transition);
+        }
+
+        .topbar-links a:hover {
+            color: var(--yellow);
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-subscribe-top {
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .btn-subscribe-top:hover {
+            background: var(--yellow-dark);
+            transform: scale(1.04);
+        }
+
+        .topbar-divider {
+            width: 1px;
+            height: 18px;
+            background: #333;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+            transition: color var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-icon:hover {
+            color: var(--yellow);
+        }
+
+        /* ===================== DARK MODE TOGGLE ===================== */
+        .dark-toggle {
+            background: none;
+            border: 1px solid #333;
+            color: #aaa;
+            cursor: pointer;
+            width: 32px;
+            height: 18px;
+            border-radius: 999px;
+            position: relative;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .dark-toggle::after {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #555;
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle::after {
+            left: calc(100% - 14px);
+            background: #000;
+        }
+
+        /* ===================== HEADER ===================== */
+        #main-header {
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+        }
+
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+        }
+
+        .logo-box {
+            width: 54px;
+            height: 54px;
+            background: var(--yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 22px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            transition: transform var(--transition);
+        }
+
+        .logo-wrap:hover .logo-box {
+            transform: rotate(-3deg) scale(1.05);
+        }
+
+        .logo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            color: var(--text);
+        }
+
+        .logo-sub {
+            font-size: 9px;
+            letter-spacing: 0.22em;
+            color: var(--text3);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .header-nav {
+            display: none;
+            gap: 28px;
+            align-items: center;
+        }
+
+        @media (min-width: 900px) {
+            .header-nav {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text2);
+            transition: all var(--transition);
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--yellow);
+            transition: width var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.red {
+            color: #dc2626;
+        }
+
+        .nav-link.red::after {
+            background: #dc2626;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-pdf {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            padding: 10px 22px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        @media (min-width: 768px) {
+            .btn-pdf {
+                display: flex;
+            }
+        }
+
+        .btn-pdf:hover {
+            background: var(--yellow);
+            color: #000;
+        }
+
+        .btn-mobile-menu {
+            display: flex;
+            background: none;
+            border: none;
+            color: var(--text2);
+            cursor: pointer;
+            font-size: 22px;
+            padding: 4px;
+        }
+
+        @media (min-width: 900px) {
+            .btn-mobile-menu {
+                display: none;
+            }
+        }
+
+        /* YELLOW NAV BAR */
+        .yellow-nav {
+            background: linear-gradient(90deg, var(--yellow), #eab308);
+            padding: 10px 0;
+        }
+
+        .yellow-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 28px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .yellow-nav-inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .yellow-nav a {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #000;
+            white-space: nowrap;
+            opacity: 0.8;
+            transition: opacity var(--transition);
+        }
+
+        .yellow-nav a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* ===================== HERO ===================== */
+        #hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.75)),
+                url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 8px 20px;
+            border-radius: 999px;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-badge-pill {
+            background: var(--yellow);
+            color: #000;
+            padding: 3px 12px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 10px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 8vw, 90px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+
+        .hero-title span {
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 560px;
+            line-height: 1.6;
+            margin-bottom: 44px;
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all var(--transition);
+        }
+
+        .btn-primary:hover {
+            background: var(--yellow-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(250, 204, 21, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 18px 40px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .hero-scroll-arrow {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(6px);
+            }
+        }
+
+        .hero-card {
+            position: absolute;
+            right: 48px;
+            bottom: 48px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            color: #111;
+            padding: 20px;
+            border-radius: 20px;
+            max-width: 200px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        @media (min-width: 1200px) {
+            .hero-card {
+                display: block;
+            }
+        }
+
+        .hero-card-tag {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--yellow-dark);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .hero-card-quote {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .hero-card-author {
+            font-size: 10px;
+            font-weight: 700;
+            margin-top: 10px;
+            color: #111;
+        }
+
+        /* ===================== BANNER ===================== */
+        .banner-blue {
+            background: #1d4ed8;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        .banner-blue-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .banner-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .banner-pill {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .banner-text-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .banner-text-sub {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .btn-banner {
+            background: #fff;
+            color: #1d4ed8;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .btn-banner:hover {
+            background: var(--yellow);
+            color: #000;
+        }
+
+        /* ===================== SECTIONS COMMON ===================== */
+        .section-wrap {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 56px;
+            gap: 20px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .section-title span {
+            font-style: italic;
+        }
+
+        .see-all {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text3);
+            white-space: nowrap;
+            transition: color var(--transition);
+        }
+
+        .see-all:hover {
+            color: var(--text);
+        }
+
+        .see-all-line {
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--text3);
+            transition: width var(--transition);
+        }
+
+        .see-all:hover .see-all-line {
+            width: 48px;
+            background: var(--text);
+        }
+
+        /* ===================== UNIDADES GRID ===================== */
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .units-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .units-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .unit-card {
+            background: var(--card);
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--yellow);
+        }
+
+        .unit-card-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--yellow), #eab308);
+        }
+
+        .unit-card-body {
+            padding: 28px;
+        }
+
+        .unit-card-num {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 11px;
+            color: var(--yellow-dark);
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .unit-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .unit-card-desc {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text3);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .unit-card-footer {
+            padding: 16px 28px 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .unit-tag {
+            display: inline-block;
+            background: var(--bg3);
+            color: var(--text3);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            padding: 5px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+        }
+
+        .unit-card-arrow {
+            margin-left: auto;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: all var(--transition);
+        }
+
+        .unit-card:hover .unit-card-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===================== DESTACADO / FEATURE ===================== */
+        #destacado {
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        @media (min-width: 900px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .feature-img {
+            height: 350px;
+            background: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80') center/cover no-repeat;
+        }
+
+        @media (min-width: 900px) {
+            .feature-img {
+                height: auto;
+                min-height: 400px;
+            }
+        }
+
+        .feature-content {
+            padding: 56px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-eyebrow {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(26px, 4vw, 40px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .feature-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+            margin-bottom: 32px;
+        }
+
+        .btn-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: all var(--transition);
+        }
+
+        .btn-read-more:hover {
+            background: var(--yellow);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* ===================== MEMORIA SECTION ===================== */
+        #memoria {
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        .dark #memoria {
+            background: #000;
+        }
+
+        .memoria-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .memoria-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 56px;
+            align-items: start;
+        }
+
+        @media (min-width: 900px) {
+            .memoria-grid {
+                grid-template-columns: 5fr 7fr;
+            }
+        }
+
+        .memoria-sticky {
+            position: sticky;
+            top: 100px;
+        }
+
+        .memoria-badge {
+            display: inline-block;
+            background: var(--red);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 5px 16px;
+            border-radius: 999px;
+            margin-bottom: 28px;
+        }
+
+        .memoria-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 7vw, 72px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .memoria-title .red {
+            color: #ef4444;
+        }
+
+        .memoria-desc {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.7;
+            color: #aaa;
+            margin-bottom: 36px;
+            max-width: 380px;
+        }
+
+        .btn-red {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .btn-red:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .memoria-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .memoria-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid #2a2a2a;
+            transition: border-color var(--transition);
+        }
+
+        .memoria-card:hover {
+            border-color: #ef4444;
+        }
+
+        .memoria-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .memoria-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .memoria-card-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #ef4444;
+        }
+
+        .memoria-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 2px;
+        }
+
+        .memoria-card-text {
+            font-size: 14px;
+            line-height: 1.65;
+            color: #888;
+        }
+
+        .memoria-quote {
+            background: linear-gradient(135deg, #1a0000, #2a0808);
+            border-radius: 20px;
+            padding: 32px;
+            border-left: 4px solid #ef4444;
+            margin-top: 20px;
+        }
+
+        .memoria-quote blockquote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 20px;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .memoria-quote cite {
+            font-size: 12px;
+            color: #ef4444;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        /* ===================== EJES TRANSVERSALES ===================== */
+        #ejes {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+        }
+
+        .ejes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .ejes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .ejes-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .eje-card {
+            background: var(--bg3);
+            border-radius: 20px;
+            padding: 36px 28px;
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+            text-align: center;
+        }
+
+        .eje-card:hover {
+            border-color: var(--yellow);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .eje-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--yellow), #eab308);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 24px;
+        }
+
+        .eje-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .eje-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text3);
+        }
+
+        /* ===================== CASOS DE ESTUDIO ===================== */
+        #casos {
+            background: var(--bg);
+        }
+
+        .casos-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .caso-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 28px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .caso-item:hover {
+            border-color: var(--yellow);
+            transform: translateX(6px);
+            box-shadow: var(--shadow);
+        }
+
+        .caso-num {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--yellow-dark);
+            opacity: 0.4;
+            width: 48px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .caso-content {}
+
+        .caso-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .caso-sub {
+            font-size: 13px;
+            color: var(--text3);
+        }
+
+        .caso-tag {
+            background: var(--bg3);
+            color: var(--text3);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ===================== FILÓSOFOS / QUOTES STRIP ===================== */
+        .quotes-strip {
+            background: var(--yellow);
+            padding: 56px 0;
+            overflow: hidden;
+        }
+
+        .quotes-track {
+            display: flex;
+            gap: 48px;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .quote-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 32px;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            white-space: nowrap;
+            min-width: 360px;
+        }
+
+        .quote-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: #000;
+            flex-shrink: 0;
+        }
+
+        .quote-text {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 14px;
+            color: #111;
+        }
+
+        .quote-author {
+            font-size: 11px;
+            font-weight: 700;
+            color: #333;
+            margin-top: 4px;
+            letter-spacing: 0.08em;
+        }
+
+        /* ===================== FOOTER ===================== */
+        #footer {
+            background: #0d0d0d;
+            color: #fff;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 72px 24px 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+            margin-bottom: 56px;
+        }
+
+        @media (min-width: 640px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 5fr 3fr 4fr;
+            }
+        }
+
+        .footer-brand {}
+
+        .footer-logo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #888;
+            max-width: 340px;
+            margin-bottom: 32px;
+        }
+
+        .btn-subscribe-footer {
+            width: 100%;
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 18px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all var(--transition);
+        }
+
+        .btn-subscribe-footer:hover {
+            background: var(--yellow-dark);
+            transform: scale(1.02);
+        }
+
+        .footer-col-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .footer-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer-list li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #777;
+        }
+
+        .footer-list li span {
+            color: var(--yellow);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .footer-meta {
+            color: #444;
+            font-size: 12px;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid #1e1e1e;
+            margin-bottom: 32px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-copy {
+            font-size: 12px;
+            color: #555;
+        }
+
+        .footer-copy span {
+            color: #888;
+        }
+
+        /* ===================== MODALS ===================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--card);
+            border-radius: 24px;
+            max-width: 640px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.85) translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 28px 32px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.25;
+        }
+
+        .modal-close {
+            background: var(--bg3);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text3);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .modal-body {
+            padding: 32px;
+            overflow-y: auto;
+            flex: 1;
+            color: var(--text2);
+            line-height: 1.75;
+            font-size: 15px;
+        }
+
+        .modal-body strong {
+            color: var(--text);
+        }
+
+        .modal-body em {
+            font-style: italic;
+        }
+
+        .modal-body p+p {
+            margin-top: 16px;
+        }
+
+        .modal-body .caso-highlight {
+            background: var(--bg3);
+            border-left: 4px solid var(--yellow);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 20px;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        .modal-footer {
+            padding: 20px 32px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-modal-close {
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all var(--transition);
+        }
+
+        .btn-modal-close:hover {
+            background: var(--yellow-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(250, 204, 21, 0.35);
+        }
+
+        /* SUBSCRIBE MODAL */
+        .subscribe-box {
+            background: var(--card);
+            border-radius: 28px;
+            max-width: 440px;
+            width: 100%;
+            padding: 44px;
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .subscribe-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .subscribe-sub {
+            font-size: 14px;
+            color: var(--text3);
+            margin-bottom: 32px;
+        }
+
+        .subscribe-input {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            font-size: 16px;
+            padding: 12px 0;
+            outline: none;
+            margin-bottom: 20px;
+            transition: border-color var(--transition);
+        }
+
+        .subscribe-input:focus {
+            border-color: var(--yellow);
+        }
+
+        .subscribe-input::placeholder {
+            color: var(--text3);
+        }
+
+        .btn-subscribe-submit {
+            width: 100%;
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .btn-subscribe-submit:hover {
+            background: var(--yellow-dark);
+            transform: scale(1.02);
+        }
+
+        .subscribe-dismiss {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text3);
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .subscribe-dismiss:hover {
+            color: var(--text);
+        }
+
+        /* ===================== MOBILE MENU ===================== */
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--header-bg);
+            z-index: 9999;
+            padding: 80px 32px 40px;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+        }
+
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--bg3);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav-list {
+            list-style: none;
+        }
+
+        .mobile-nav-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 22px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+            transition: color var(--transition);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--yellow-dark);
+        }
+
+        .mobile-nav-link.red {
+            color: #dc2626;
+        }
+
+        /* ===================== SEARCH BAR ===================== */
+        #search-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--header-bg);
+            z-index: 10000;
+            padding: 20px 24px;
+            border-bottom: 2px solid var(--yellow);
+            transform: translateY(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #search-bar.open {
+            transform: translateY(0);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 20px;
+            color: var(--text);
+            outline: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .search-input::placeholder {
+            color: var(--text3);
+        }
+
+        .search-close {
+            background: none;
+            border: none;
+            color: var(--text3);
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* ===================== BACK TO TOP ===================== */
+        #back-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            z-index: 500;
+            box-shadow: 0 4px 20px rgba(250, 204, 21, 0.4);
+        }
+
+        #back-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #back-top:hover {
+            background: var(--yellow-dark);
+            transform: translateY(-4px);
+        }
+
+        /* ===================== REVEAL ANIMATIONS ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ===================== UTILITIES ===================== */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        .text-yellow {
+            color: var(--yellow-dark);
+        }
+
+        .text-red {
+            color: #dc2626;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        /* ===================== MODAL TABS ===================== */
+        .modal-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 0 32px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg3);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 14px 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -1px;
+            transition: all var(--transition);
+        }
+
+        .tab-btn.active {
+            color: var(--text);
+            border-bottom-color: var(--yellow);
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* ===================== CLASES SECTION ===================== */
+        #clases {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+        }
+
+        .clases-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .acord-item {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: border-color var(--transition);
+        }
+
+        .acord-item.open {
+            border-color: var(--yellow);
+        }
+
+        .acord-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 28px;
+            cursor: pointer;
+            background: var(--card);
+            user-select: none;
+            transition: background var(--transition);
+        }
+
+        .acord-header:hover {
+            background: var(--bg3);
+        }
+
+        .acord-num {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--yellow-dark);
+            opacity: 0.5;
+            width: 44px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        .acord-title-wrap {
+            flex: 1;
+        }
+
+        .acord-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .acord-sub {
+            font-size: 12px;
+            color: var(--text3);
+            margin-top: 2px;
+        }
+
+        .acord-badge {
+            font-size: 10px;
+            font-weight: 700;
+            background: var(--bg3);
+            color: var(--text3);
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .acord-arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text3);
+            font-size: 13px;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .acord-item.open .acord-arrow {
+            background: var(--yellow);
+            color: #000;
+            border-color: var(--yellow);
+            transform: rotate(180deg);
+        }
+
+        .acord-body {
+            display: none;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+        }
+
+        .acord-item.open .acord-body {
+            display: block;
+        }
+
+        .clase-list {
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .clase-list-item {
+            display: grid;
+            grid-template-columns: 52px 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 14px 28px;
+            border-bottom: 1px solid var(--border);
+            transition: background var(--transition);
+        }
+
+        .clase-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .clase-list-item:hover {
+            background: var(--bg2);
+        }
+
+        .clase-num-badge {
+            background: var(--yellow);
+            color: #000;
+            font-size: 11px;
+            font-weight: 800;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .clase-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+
+        .clase-item-desc {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.4;
+        }
+
+        .clase-act-tag {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text3);
+            background: var(--bg2);
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        /* ===================== HISTORIAS EXTERNAS ===================== */
+        #historias {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .hist-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .hist-filter {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text3);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .hist-filter.active,
+        .hist-filter:hover {
+            background: var(--yellow);
+            color: #000;
+            border-color: var(--yellow);
+        }
+
+        .hist-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .hist-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hist-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .hist-card {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .hist-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--yellow);
+        }
+
+        .hist-card.hidden-card {
+            display: none;
+        }
+
+        .hist-card-img {
+            height: 180px;
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hist-card-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+        }
+
+        .hist-card-body {
+            padding: 24px;
+        }
+
+        .hist-card-cat {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .hist-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .hist-card-excerpt {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text3);
+        }
+
+        .hist-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .hist-card-meta {
+            font-size: 11px;
+            color: var(--text3);
+        }
+
+        .hist-card-read {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--yellow-dark);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* category color accents */
+        .cat-fisica {
+            color: #3b82f6;
+        }
+
+        .cat-biologia {
+            color: #22c55e;
+        }
+
+        .cat-matematica {
+            color: #a855f7;
+        }
+
+        .cat-ia {
+            color: #f97316;
+        }
+
+        .cat-sociales {
+            color: #ec4899;
+        }
+
+        /* ===================== ESI SECTION ===================== */
+        #esi {
+            background: linear-gradient(135deg, #1e0a2e 0%, #2d0e47 50%, #1a0a38 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #esi::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .esi-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+        }
+
+        .esi-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .esi-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 24px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .esi-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e879f9;
+        }
+
+        .esi-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 68px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .esi-title span {
+            color: #e879f9;
+            font-style: italic;
+        }
+
+        .esi-sub {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .esi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .esi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .esi-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .esi-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 28px;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .esi-card:hover {
+            background: rgba(232, 121, 249, 0.15);
+            border-color: #e879f9;
+            transform: translateY(-6px);
+        }
+
+        .esi-card-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .esi-card-tag {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #e879f9;
+            margin-bottom: 10px;
+        }
+
+        .esi-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.25;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .esi-card-excerpt {
+            font-size: 13px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .esi-card-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #e879f9;
+        }
+
+        /* ===================== ARTICLE MODAL ===================== */
+        .article-modal-box {
+            background: var(--card);
+            border-radius: 24px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .article-modal-hero {
+            font-size: 72px;
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 140px;
+        }
+
+        .article-modal-body {
+            padding: 32px;
+            overflow-y: auto;
+            flex: 1;
+            color: var(--text2);
+            line-height: 1.8;
+            font-size: 15px;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        .article-modal-body h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .article-modal-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 19px;
+            color: var(--text);
+            margin: 24px 0 10px;
+        }
+
+        .article-modal-body p {
+            margin-bottom: 16px;
+        }
+
+        .article-modal-body strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-modal-body .art-highlight {
+            background: var(--bg3);
+            border-left: 4px solid var(--yellow);
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .article-modal-body .art-highlight.purple {
+            border-left-color: #e879f9;
+        }
+
+        .article-modal-body .art-highlight.red {
+            border-left-color: #dc2626;
+        }
+
+        .art-meta {
+            padding: 14px 32px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PROGRESS BAR -->
+    <div id="progress-bar"></div>
+
+    <!-- SEARCH BAR -->
+    <div id="search-bar">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--yellow-dark); font-size: 20px;"></i>
+        <input id="search-input" class="search-input" type="text"
+            placeholder="Buscar: Popper, Kuhn, Milgram, 24 de Marzo..." autocomplete="off">
+        <button class="search-close" onclick="closeSearch()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- TOP BAR -->
+    <div id="topbar">
+        <div class="topbar-inner">
+            <div class="topbar-left">
+                <div class="topbar-brand" onclick="scrollToTop()">
+                    <i class="fa-solid fa-book"></i>
+                    <span>FILOSOFÍA&CIENCIA</span>
+                </div>
+                <div class="topbar-links">
+                    <a href="#unidades">PROGRAMA</a>
+                    <a href="24-marzo.html">MEMORIA Y VERDAD</a>
+                    <a href="#ejes">EPISTEMOLOGÍA</a>
+                    <a href="#footer">PORTAL DOCENTE</a>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <button class="btn-subscribe-top" onclick="openSubscribe()">
+                    <i class="fa-solid fa-envelope"></i>
+                    SUSCRIBIRME
+                </button>
+                <div class="topbar-divider"></div>
+                <button class="btn-icon" onclick="openSearch()" title="Buscar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="dark-toggle" onclick="toggleDark()" title="Modo oscuro" id="dark-btn"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header id="main-header">
+        <div class="header-inner">
+            <div class="header-top">
+                <div class="logo-wrap" onclick="scrollToTop()">
+                    <div class="logo-box">F&C</div>
+                    <div>
+                        <div class="logo-title">FILOSOFÍA&CIENCIA</div>
+                        <div class="logo-sub">EDICIÓN ESPECIAL 2025</div>
+                    </div>
+                </div>
+                <nav class="header-nav">
+                    <a href="#unidades" class="nav-link">UNIDADES</a>
+                    <a href="#casos" class="nav-link">CASOS</a>
+                    <a href="#ejes" class="nav-link">EJES</a>
+                    <a href="24-marzo.html" class="nav-link red">24 DE MARZO</a>
+                    <a href="#footer" class="nav-link">REVISTA</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn-pdf" onclick="window.print()">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        DESCARGAR PDF
+                    </button>
+                    <button class="btn-mobile-menu" onclick="openMenu()" aria-label="Menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- YELLOW NAV -->
+        <div class="yellow-nav">
+            <div class="yellow-nav-inner">
+                <a href="#unidades">COLECCIONES • UNIDADES</a>
+                <a href="#casos">DOSIERES • CASOS</a>
+                <a href="#">ENTREVISTAS</a>
+                <a href="#">FILÓSOF@S</a>
+                <a href="24-marzo.html">MEMORIA 24M</a>
+                <a href="#">ACTUALIDAD CTS</a>
+                <a href="#">PODCAST</a>
+                <a href="biblioteca.html">BIBLIOTECA</a>
+                <a href="#">ARCHIVOS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <nav id="mobile-menu" aria-hidden="true">
+        <button class="mobile-menu-close" onclick="closeMenu()"><i class="fa-solid fa-xmark"></i></button>
+        <ul class="mobile-nav-list">
+            <li class="mobile-nav-item"><a href="#unidades" class="mobile-nav-link" onclick="closeMenu()">Unidades
+                    Temáticas</a></li>
+            <li class="mobile-nav-item"><a href="#casos" class="mobile-nav-link" onclick="closeMenu()">Casos de
+                    Estudio</a></li>
+            <li class="mobile-nav-item"><a href="#ejes" class="mobile-nav-link" onclick="closeMenu()">Ejes
+                    Transversales</a></li>
+            <li class="mobile-nav-item"><a href="24-marzo.html" class="mobile-nav-link red" onclick="closeMenu()">24 de Marzo
+                    • Memoria</a></li>
+            <li class="mobile-nav-item"><a href="#footer" class="mobile-nav-link" onclick="closeMenu()">Revista</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-badge">
+            <span class="hero-badge-pill">NUEVO 2025</span>
+            <span>PLANIFICACIÓN DOCENTE • 6° AÑO • LOS POLVORINES</span>
+        </div>
+        <h2 class="hero-title">
+            FILOSOFÍA <span>&</span> HISTORIA<br>DE LA <span>CIENCIA</span>
+        </h2>
+        <p class="hero-subtitle">
+            Un recorrido crítico por el pensamiento científico.<br>
+            De Kuhn a Popper, de la Revolución Copernicana a la Energía Nuclear.
+        </p>
+        <div class="hero-buttons">
+            <button class="btn-primary" onclick="scrollTo('unidades')">
+                EXPLORAR EL PROGRAMA
+                <i class="fa-solid fa-arrow-down"></i>
+            </button>
+            <button class="btn-secondary" onclick="openSubscribe()">
+                SUSCRIBIRSE AL CURSO
+            </button>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="hero-scroll-arrow"><i class="fa-solid fa-chevron-down" style="font-size:14px"></i></div>
+            <span>DESLIZÁ PARA DESCUBRIR</span>
+        </div>
+
+        <div class="hero-card">
+            <div class="hero-card-tag">Thomas Kuhn • 1962</div>
+            <p class="hero-card-quote">"La transición de un paradigma en crisis a uno nuevo... está lejos de ser un
+                proceso acumulativo."</p>
+            <p class="hero-card-author">— La Estructura de las Revoluciones Científicas</p>
+        </div>
+    </section>
+
+    <!-- BLUE BANNER -->
+    <div class="banner-blue">
+        <div class="banner-blue-inner">
+            <div class="banner-left">
+                <span class="banner-pill">NÚMERO ESPECIAL</span>
+                <div>
+                    <div class="banner-text-sub">Revista FILOSOFÍA&CIENCIA</div>
+                    <div class="banner-text-main">2025</div>
+                </div>
+            </div>
+            <button class="btn-banner" onclick="window.print()">
+                <i class="fa-solid fa-file-pdf"></i>
+                DESCARGAR PROGRAMA COMPLETO
+            </button>
+        </div>
+    </div>
+
+    <!-- UNIDADES SECTION -->
+    <section id="unidades" style="background: var(--bg);">
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div>
+                    <span class="section-label">COLECCIÓN 2025</span>
+                    <h2 class="section-title">Las 7 <span>Unidades</span> Temáticas</h2>
+                </div>
+                <a href="#" class="see-all">VER TODO <span class="see-all-line"></span></a>
+            </div>
+            <div class="units-grid">
+                <div class="unit-card reveal reveal-delay-1" onclick="openUnit(1)">
+                    <div class="unit-card-bar"></div>
+                    <div class="unit-card-body">
+                        <div class="unit-card-num">UNIDAD 01</div>
+                        <h3 class="unit-card-title">Teorías Científicas: La Estructura del Saber</h3>
+                        <p class="unit-card-desc">Análisis de enunciados observacionales, hipótesis ad hoc y el concepto
+                            de paradigma de Thomas Kuhn. La ciencia como estructura dinámica y revisable.</p>
+                    </div>
+                    <div class="unit-card-footer">
+                        <span class="unit-tag">Revolución Copernicana</span>
+                        <span class="unit-tag" style="background:rgba(34,197,94,.13);color:#15803d;border-color:rgba(34,197,94,.35);font-weight:700;letter-spacing:.02em;">✅ 6 clases</span>
+                        <div class="unit-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="unit-card reveal reveal-delay-2" onclick="openUnit(2)">
+                    <div class="unit-card-bar"></div>
+                    <div class="unit-card-body">
+                        <div class="unit-card-num">UNIDAD 02</div>
+                        <h3 class="unit-card-title">Controversias: El Motor del Cambio</h3>
+                        <p class="unit-card-desc">Internalismo vs Externalismo. El peso de los factores políticos,
+                            económicos y religiosos en el progreso científico. El debate Pasteur vs. Pouchet.</p>
+                    </div>
+                    <div class="unit-card-footer">
+                        <span class="unit-tag">Pasteur vs. Pouchet</span>
+                        <span class="unit-tag" style="background:rgba(250,204,21,.13);color:#92400e;border-color:rgba(250,204,21,.45);font-weight:700;letter-spacing:.02em;">⭐ 1 clase</span>
+                        <div class="unit-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="unit-card reveal reveal-delay-3" onclick="openUnit(3)">
+                    <div class="unit-card-bar"></div>
+                    <div class="unit-card-body">
+                        <div class="unit-card-num">UNIDAD 03</div>
+                        <h3 class="unit-card-title">Métodos: De la Inducción al Falsacionismo</h3>
+                        <p class="unit-card-desc">Karl Popper y el método hipotético-deductivo. La ciencia como proceso
+                            de conjeturas y refutaciones. El problema de la inducción.</p>
+                    </div>
+                    <div class="unit-card-footer">
+                        <span class="unit-tag">Genética de Mendel</span>
+                        <div class="unit-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="unit-card reveal reveal-delay-1" onclick="openUnit(4)">
+                    <div class="unit-card-bar"></div>
+                    <div class="unit-card-body">
+                        <div class="unit-card-num">UNIDAD 04</div>
+                        <h3 class="unit-card-title">Sucesión y Cambio de Teorías</h3>
+                        <p class="unit-card-desc">Inconmensurabilidad, programas de investigación de Lakatos y
+                            tradiciones de Laudan. Evolucionismo: de Lamarck a Darwin.</p>
+                    </div>
+                    <div class="unit-card-footer">
+                        <span class="unit-tag">Evolucionismo</span>
+                        <div class="unit-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="unit-card reveal reveal-delay-2" onclick="openUnit(5)">
+                    <div class="unit-card-bar"></div>
+                    <div class="unit-card-body">
+                        <div class="unit-card-num">UNIDAD 05</div>
+                        <h3 class="unit-card-title">Ciencia, Tecnología y Sociedad (CTS)</h3>
+                        <p class="unit-card-desc">Serendipia, papel de los instrumentos y responsabilidad científica.
+                            Del átomo a la bomba: la energía nuclear como dilema ético.</p>
+                    </div>
+                    <div class="unit-card-footer">
+                        <span class="unit-tag">Energía Nuclear</span>
+                        <div class="unit-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="unit-card reveal reveal-delay-3" onclick="openUnit(6)">
+                    <div class="unit-card-bar"></div>
+                    <div class="unit-card-body">
+                        <div class="unit-card-num">UNIDAD 06</div>
+                        <h3 class="unit-card-title">Ciencias Formales: Lógica y Sistemas</h3>
+                        <p class="unit-card-desc">Sistemas axiomáticos: consistencia, completitud e independencia.
+                            Lógica booleana y tablas de verdad. Geometrías no euclidianas.</p>
+                    </div>
+                    <div class="unit-card-footer">
+                        <span class="unit-tag">Geometrías no Euclidianas</span>
+                        <div class="unit-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+
+                <div class="unit-card reveal reveal-delay-1" onclick="openUnit(7)" style="border-color: var(--border);">
+                    <div class="unit-card-bar" style="background: linear-gradient(90deg, #dc2626, #991b1b);"></div>
+                    <div class="unit-card-body">
+                        <div class="unit-card-num" style="color: #dc2626;">UNIDAD 07</div>
+                        <h3 class="unit-card-title">Ciencias Sociales: Sujeto, Objeto y Ética</h3>
+                        <p class="unit-card-desc">Positivismo vs Hermenéutica. Neutralidad valorativa y sesgos del
+                            investigador. El experimento de Milgram y los límites éticos de la ciencia.</p>
+                    </div>
+                    <div class="unit-card-footer">
+                        <span class="unit-tag" style="color:#dc2626; border-color:#dc2626;">Experimento de
+                            Milgram</span>
+                        <div class="unit-card-arrow" style="background:#dc2626;"><i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURE / DESTACADO -->
+    <section id="destacado">
+        <div class="feature-grid">
+            <div class="feature-img"></div>
+            <div class="feature-content reveal">
+                <div class="feature-eyebrow">DOSIER ESPECIAL • HISTORIA DE LA CIENCIA</div>
+                <h3 class="feature-title">¿Por qué la ciencia<br>no es una línea recta?</h3>
+                <p class="feature-text">
+                    La imagen popular de la ciencia como un avance continuo y acumulativo es, según Kuhn, un mito
+                    pedagógico.
+                    La historia real muestra crisis, rupturas y revoluciones que transforman radicalmente no solo las
+                    teorías,
+                    sino la mirada del mundo de quienes las practican.
+                </p>
+                <p class="feature-text" style="margin-top:-16px">
+                    En este dosier recorremos los momentos de <em>ciencia extraordinaria</em> que sacudieron los
+                    fundamentos
+                    del saber: la física newtoniana, la biología darwiniana, la relatividad einsteiniania.
+                </p>
+                <button class="btn-read-more" onclick="openUnit(1)">
+                    LEER DOSIER <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEMORIA, VERDAD Y JUSTICIA -->
+    <section id="memoria">
+        <div class="memoria-inner">
+            <div class="memoria-grid">
+                <!-- LEFT: STICKY -->
+                <div class="memoria-sticky reveal">
+                    <span class="memoria-badge">ESPECIAL ARGENTINA</span>
+                    <h2 class="memoria-title">
+                        MEMORIA,<br>VERDAD<br>Y JUSTICIA<br>
+                        <span class="red">24 DE MARZO</span>
+                    </h2>
+                    <p class="memoria-desc">
+                        Porque la filosofía no es solo historia de la ciencia:
+                        es también herramienta para no repetir los horrores del pasado.
+                    </p>
+                    <button class="btn-red" onclick="window.location.href='24-marzo.html'">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        LEER DOSSIER 24M
+                    </button>
+                </div>
+
+                <!-- RIGHT: CARDS -->
+                <div class="memoria-cards">
+                    <div class="memoria-card reveal reveal-delay-1">
+                        <div class="memoria-card-header">
+                            <div class="memoria-icon">🧠</div>
+                            <div>
+                                <div class="memoria-card-label">VÍNCULO CON EL PROGRAMA</div>
+                                <div class="memoria-card-title">Obediencia, autoridad y ética científica</div>
+                            </div>
+                        </div>
+                        <p class="memoria-card-text">El Experimento de Milgram (Unidad 7) nos invita a reflexionar sobre
+                            la obediencia ciega a la autoridad. ¿Cómo los mecanismos psicológicos que estudió Milgram en
+                            1961 se reproducen en las estructuras de poder de las dictaduras? La ciencia social deviene
+                            herramienta crítica fundamental.</p>
+                    </div>
+
+                    <div class="memoria-card reveal reveal-delay-2">
+                        <div class="memoria-card-header">
+                            <div class="memoria-icon">⚛️</div>
+                            <div>
+                                <div class="memoria-card-label">CTS Y RESPONSABILIDAD</div>
+                                <div class="memoria-card-title">El científico ante el poder político</div>
+                            </div>
+                        </div>
+                        <p class="memoria-card-text">La Unidad 5 aborda la responsabilidad del científico. La dictadura
+                            usó métodos de ingeniería en contextos de tortura y desaparición. El saber técnico y
+                            científico no es neutral: puede ponerse al servicio de la violación de derechos humanos o de
+                            su denuncia.</p>
+                    </div>
+
+                    <div class="memoria-card reveal reveal-delay-3">
+                        <div class="memoria-card-header">
+                            <div class="memoria-icon">⚖️</div>
+                            <div>
+                                <div class="memoria-card-label">HERMENÉUTICA CRÍTICA</div>
+                                <div class="memoria-card-title">Construir conocimiento cuando el poder borra la verdad
+                                </div>
+                            </div>
+                        </div>
+                        <p class="memoria-card-text">¿Cómo reconstruimos el conocimiento histórico cuando el poder
+                            intentó borrar sistemáticamente los rastros de sus crímenes? Un ejercicio de hermenéutica
+                            crítica (Unidad 7) aplicado a los testimonios, los juicios y los archivos de la memoria.</p>
+                    </div>
+
+                    <div class="memoria-card reveal">
+                        <div class="memoria-card-header">
+                            <div class="memoria-icon">🕯️</div>
+                            <div>
+                                <div class="memoria-card-label">DÍA NACIONAL DE LA MEMORIA</div>
+                                <div class="memoria-card-title">24 de Marzo — Por la Verdad y la Justicia</div>
+                            </div>
+                        </div>
+                        <p class="memoria-card-text">En 1976, un golpe de Estado instauró la dictadura más sangrienta de
+                            la historia argentina. 30.000 personas fueron detenidas-desaparecidas. "Nunca más" no es
+                            solo un eslogan: es una exigencia epistemológica y ética que atraviesa toda la ciencia
+                            social.</p>
+                    </div>
+
+                    <div class="memoria-quote reveal">
+                        <blockquote>
+                            "La ciencia puede ser usada para liberar o para oprimir.
+                            La diferencia la hace la consciencia ética del científico."
+                        </blockquote>
+                        <cite>— PROGRAMA FILOSÍA&CIENCIA 2025 • UNIDAD 5 & 7</cite>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTES STRIP (MARQUEE) -->
+    <div class="quotes-strip">
+        <div class="quotes-track" id="quotes-track">
+            <div class="quote-item">
+                <div class="quote-avatar">K</div>
+                <div>
+                    <p class="quote-text">"Los paradigmas ganan su estatus porque tienen más éxito que sus
+                        competidores."</p>
+                    <p class="quote-author">THOMAS KUHN</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">P</div>
+                <div>
+                    <p class="quote-text">"Una teoría que no puede ser refutada por ningún evento concebible es
+                        no-científica."</p>
+                    <p class="quote-author">KARL POPPER</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">L</div>
+                <div>
+                    <p class="quote-text">"La ciencia crece por la eliminación sucesiva de errores en programas de
+                        investigación."</p>
+                    <p class="quote-author">IMRE LAKATOS</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">D</div>
+                <div>
+                    <p class="quote-text">"No es el más fuerte quien sobrevive, sino el que mejor se adapta al cambio."
+                    </p>
+                    <p class="quote-author">CHARLES DARWIN</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">M</div>
+                <div>
+                    <p class="quote-text">"El peligro real no es que los computadores piensen como personas, sino al
+                        revés."</p>
+                    <p class="quote-author">STANLEY MILGRAM</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">F</div>
+                <div>
+                    <p class="quote-text">"La historia de la ciencia es también la historia de sus errores y sus
+                        revoluciones."</p>
+                    <p class="quote-author">PAUL FEYERABEND</p>
+                </div>
+            </div>
+            <!-- DUPLICATE FOR INFINITE LOOP -->
+            <div class="quote-item">
+                <div class="quote-avatar">K</div>
+                <div>
+                    <p class="quote-text">"Los paradigmas ganan su estatus porque tienen más éxito que sus
+                        competidores."</p>
+                    <p class="quote-author">THOMAS KUHN</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">P</div>
+                <div>
+                    <p class="quote-text">"Una teoría que no puede ser refutada por ningún evento concebible es
+                        no-científica."</p>
+                    <p class="quote-author">KARL POPPER</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">L</div>
+                <div>
+                    <p class="quote-text">"La ciencia crece por la eliminación sucesiva de errores en programas de
+                        investigación."</p>
+                    <p class="quote-author">IMRE LAKATOS</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">D</div>
+                <div>
+                    <p class="quote-text">"No es el más fuerte quien sobrevive, sino el que mejor se adapta al cambio."
+                    </p>
+                    <p class="quote-author">CHARLES DARWIN</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">M</div>
+                <div>
+                    <p class="quote-text">"El peligro real no es que los computadores piensen como personas, sino al
+                        revés."</p>
+                    <p class="quote-author">STANLEY MILGRAM</p>
+                </div>
+            </div>
+            <div class="quote-item">
+                <div class="quote-avatar">F</div>
+                <div>
+                    <p class="quote-text">"La historia de la ciencia es también la historia de sus errores y sus
+                        revoluciones."</p>
+                    <p class="quote-author">PAUL FEYERABEND</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CASOS DE ESTUDIO -->
+    <section id="casos">
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div>
+                    <span class="section-label">DOSIERES • 7 CASOS</span>
+                    <h2 class="section-title">Los Casos de <span>Estudio</span></h2>
+                </div>
+            </div>
+            <div class="casos-list">
+                <div class="caso-item reveal" onclick="openUnit(1)">
+                    <span class="caso-num">01</span>
+                    <div class="caso-content">
+                        <div class="caso-title">La Revolución Copernicana</div>
+                        <div class="caso-sub">Del geocentrismo al heliocentrismo — Crisis de autoridad e identidad
+                            cósmica</div>
+                    </div>
+                    <span class="caso-tag">UNIDAD 1 • PARADIGMAS</span>
+                </div>
+                <div class="caso-item reveal" onclick="openUnit(2)">
+                    <span class="caso-num">02</span>
+                    <div class="caso-content">
+                        <div class="caso-title">Pasteur vs. Pouchet</div>
+                        <div class="caso-sub">Generación espontánea — Ciencia, política y experimento crucial</div>
+                    </div>
+                    <span class="caso-tag">UNIDAD 2 • CONTROVERSIAS</span>
+                </div>
+                <div class="caso-item reveal" onclick="openUnit(3)">
+                    <span class="caso-num">03</span>
+                    <div class="caso-content">
+                        <div class="caso-title">Genética de Mendel</div>
+                        <div class="caso-sub">Las leyes de la herencia — Modelos matemáticos y experimentación
+                            controlada</div>
+                    </div>
+                    <span class="caso-tag">UNIDAD 3 • FALSACIONISMO</span>
+                </div>
+                <div class="caso-item reveal" onclick="openUnit(4)">
+                    <span class="caso-num">04</span>
+                    <div class="caso-content">
+                        <div class="caso-title">Evolucionismo: de Lamarck a Darwin</div>
+                        <div class="caso-sub">Cambio de teorías — Resistencias ideológicas y selección natural</div>
+                    </div>
+                    <span class="caso-tag">UNIDAD 4 • LAKATOS</span>
+                </div>
+                <div class="caso-item reveal" onclick="openUnit(5)">
+                    <span class="caso-num">05</span>
+                    <div class="caso-content">
+                        <div class="caso-title">Energía Nuclear</div>
+                        <div class="caso-sub">Del átomo a la bomba — Responsabilidad científica y ética tecnológica
+                        </div>
+                    </div>
+                    <span class="caso-tag">UNIDAD 5 • CTS</span>
+                </div>
+                <div class="caso-item reveal" onclick="openUnit(6)">
+                    <span class="caso-num">06</span>
+                    <div class="caso-content">
+                        <div class="caso-title">Geometrías no Euclidianas</div>
+                        <div class="caso-sub">El quinto postulado — Axiomas, espacio y verdad matemática</div>
+                    </div>
+                    <span class="caso-tag">UNIDAD 6 • LÓGICA</span>
+                </div>
+                <div class="caso-item reveal" onclick="openUnit(7)" style="border-color: var(--red, #dc2626);">
+                    <span class="caso-num" style="color:#dc2626; opacity:0.7;">07</span>
+                    <div class="caso-content">
+                        <div class="caso-title" style="color:#dc2626;">Experimento de Milgram</div>
+                        <div class="caso-sub">Obediencia a la autoridad — Ética y los límites de la experimentación
+                        </div>
+                    </div>
+                    <span class="caso-tag" style="color:#dc2626; border-color:#dc2626;">UNIDAD 7 • ÉTICA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EJES TRANSVERSALES -->
+    <section id="ejes">
+        <div class="section-wrap">
+            <div class="section-header reveal">
+                <div>
+                    <span class="section-label">EJES QUE ATRAVIESAN TODO EL AÑO</span>
+                    <h2 class="section-title">Ejes <span>Transversales</span></h2>
+                </div>
+            </div>
+            <div class="ejes-grid">
+                <div class="eje-card reveal reveal-delay-1">
+                    <div class="eje-icon">📐</div>
+                    <h3 class="eje-title">Epistemología y Demarcación</h3>
+                    <p class="eje-text">¿Qué separa la ciencia de la pseudociencia? Se trabaja constantemente en definir
+                        los criterios de rigor bajo los cuales se valida el conocimiento contemporáneo. Popper, Kuhn y
+                        Lakatos en diálogo permanente.</p>
+                </div>
+                <div class="eje-card reveal reveal-delay-2">
+                    <div class="eje-icon">📖</div>
+                    <h3 class="eje-title">Historia Crítica de la Ciencia</h3>
+                    <p class="eje-text">No una línea recta de éxitos, sino un campo de batalla lleno de errores,
+                        retrocesos y revoluciones que transforman la cultura humana. La historia como fuente de
+                        pensamiento crítico sobre el presente.</p>
+                </div>
+                <div class="eje-card reveal reveal-delay-3">
+                    <div class="eje-icon">⚖️</div>
+                    <h3 class="eje-title">Lógica, Ética y Poder</h3>
+                    <p class="eje-text">El análisis de la estructura formal del pensamiento se complementa con una
+                        reflexión sobre el poder que otorga el saber tecnológico y la necesidad de una ética global para
+                        regularlo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo-title">FILOSOFÍA<br>&CIENCIA</div>
+                    <p class="footer-desc">Revista digital para estudiantes y docentes que creen que la filosofía sigue
+                        siendo el mejor antídoto contra el dogmatismo científico. Ciclo 2025 — 6to Año.</p>
+                    <button class="btn-subscribe-footer" onclick="openSubscribe()">
+                        SUSCRIBIRSE GRATIS
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div>
+                    <h4 class="footer-col-title">En esta edición</h4>
+                    <ul class="footer-list">
+                        <li><span>•</span> La Revolución Copernicana como crisis de autoridad</li>
+                        <li><span>•</span> Pasteur y el peso de la política en la ciencia</li>
+                        <li><span>•</span> Milgram y los límites éticos de la experimentación</li>
+                        <li><span>•</span> Energía Nuclear y responsabilidad científica</li>
+                        <li><span>•</span> Memoria, Verdad y Justicia — 24 de Marzo</li>
+                    </ul>
+                </div>
+
+                <div style="border-left: 1px solid #222; padding-left: 40px;">
+                    <h4 class="footer-col-title">Información</h4>
+                    <div class="footer-meta" style="line-height: 2; color: #555;">
+                        <p>Planificación Docente 2025</p>
+                        <p>Ciclo Lectivo Completo</p>
+                        <p style="margin-top:16px; color: #777;">Los Polvorines, Buenos Aires</p>
+                        <p>6to Año — Filosofía e Historia</p>
+                        <p>de la Ciencia y la Tecnología</p>
+                        <p style="margin-top:16px; color: #444;">© 2025 Javier Pereyra</p>
+                        <p style="color:#333; font-size:11px;">Inspirado en FILOSOFÍA&CO</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <p class="footer-copy">© 2025 <span>FILOSOFÍA&CIENCIA</span> — Todos los derechos reservados</p>
+                <div style="display:flex; gap:20px;">
+                    <button class="btn-icon" style="color:#555;" onclick="openSearch()"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
+                    <button class="dark-toggle" onclick="toggleDark()" title="Modo oscuro"></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button id="back-top" onclick="scrollToTop()" title="Volver arriba">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- ===================== MODALS ===================== -->
+
+    <!-- UNIT MODAL -->
+    <div id="unit-modal" class="modal-overlay" onclick="closeUnitOnBg(event)">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Unidad</h3>
+                <button class="modal-close" onclick="closeUnit()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer" style="justify-content: space-between; align-items: center;">
+                <span style="font-size:12px; color:var(--text3); font-style:italic;">Vista previa — usá × para
+                    cerrar</span>
+                <button class="btn-modal-close" id="btn-enter-unit" onclick="enterUnit()">
+                    <span id="btn-enter-text">ENTRAR A LA UNIDAD</span>
+                    <i id="btn-enter-icon" class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBSCRIBE MODAL -->
+    <div id="subscribe-modal" class="modal-overlay" onclick="closeSubscribeOnBg(event)">
+        <div class="subscribe-box">
+            <h3 class="subscribe-title">¡Suscribite!</h3>
+            <p class="subscribe-sub">Recibí actualizaciones del programa y materiales exclusivos.</p>
+            <input type="text" id="sub-name" class="subscribe-input" placeholder="Tu nombre">
+            <input type="email" id="sub-email" class="subscribe-input" placeholder="tu@email.com">
+            <button class="btn-subscribe-submit" onclick="doSubscribe()">SUSCRIBIRME GRATIS</button>
+            <span class="subscribe-dismiss" onclick="closeSubscribe()">Cerrar sin suscribirme</span>
+        </div>
+    </div>
+
+    <!-- ===================== JAVASCRIPT ===================== -->
+    <script>
+        // ===================== UNIT DATA =====================
+        const UNITS = {
+            1: {
+                title: "Unidad 1 — Teorías Científicas: La Estructura del Saber",
+                body: `
+            <p><strong>Contenidos centrales:</strong> Análisis de la naturaleza de las teorías científicas. Distinción entre enunciados observacionales y teóricos. El papel de las hipótesis auxiliares y las hipótesis <em>ad hoc</em>. El concepto de paradigma de Thomas Kuhn y el ciclo de la "ciencia normal".</p>
+            <p>Se trabaja la idea de que ninguna observación es completamente neutral: todo hecho científico está "cargado de teoría". Los enunciados de observación siempre presuponemos un marco conceptual.</p>
+            <div class="caso-highlight">
+                <strong>📌 Caso de Estudio: La Revolución Copernicana</strong><br><br>
+                Se analiza el paso del geocentrismo al heliocentrismo, no solo como un cambio de cálculo astronómico, sino como una transformación radical en la posición del hombre en el cosmos y una crisis de autoridad para la Iglesia y la academia antigua. Un ejemplo paradigmático de cambio de paradigma en el sentido kuhniano.
+            </div>
+        `
+            },
+            2: {
+                title: "Unidad 2 — Controversias: El Motor del Cambio Científico",
+                body: `
+            <p><strong>Contenidos centrales:</strong> El debate entre el <strong>internalismo</strong> (el progreso científico impulsado por la lógica y la evidencia) y el <strong>externalismo</strong> (la influencia de factores políticos, económicos y religiosos en la ciencia). La noción de "experimento crucial" y sus limitaciones.</p>
+            <p>¿Puede un solo experimento decidir definitivamente entre dos teorías? La tesis de Duhem-Quine sostiene que no: siempre es posible salvar una teoría modificando hipótesis auxiliares.</p>
+            <div class="caso-highlight">
+                <strong>📌 Caso de Estudio: Pasteur vs. Pouchet</strong><br><br>
+                La disputa sobre la generación espontánea de la vida. Se estudia cómo factores extra-científicos (el contexto político y religioso de la Francia del Segundo Imperio) influyeron en la aceptación de la biogénesis de Pasteur sobre las ideas de Pouchet. ¿La "mejor ciencia" siempre gana?
+            </div>
+        `
+            },
+            3: {
+                title: "Unidad 3 — Métodos: De la Inducción al Falsacionismo",
+                body: `
+            <p><strong>Contenidos centrales:</strong> Crítica al método inductivo (el problema de la generalización: ¿cuántos cuervos negros hacen falta para afirmar que "todos los cuervos son negros"?). El método hipotético-deductivo y el <strong>falsacionismo de Karl Popper</strong>. La ciencia como un proceso de conjeturas y refutaciones. La explicación científica mediante leyes generales.</p>
+            <p>Para Popper, el criterio de demarcación no es la verificabilidad (positivismo lógico) sino la <em>falsabilidad</em>: una afirmación es científica si puede ser, en principio, refutada.</p>
+            <div class="caso-highlight">
+                <strong>📌 Caso de Estudio: Genética de Mendel</strong><br><br>
+                El uso de modelos matemáticos y experimentación controlada con guisantes para descubrir las leyes de la herencia. Mendel formuló hipótesis cuantitativas y las sometió a prueba empírica: un ejemplo de metodología rigurosa que marcó el inicio de la genética moderna.
+            </div>
+        `
+            },
+            4: {
+                title: "Unidad 4 — Sucesión y Cambio de Teorías",
+                body: `
+            <p><strong>Contenidos centrales:</strong> ¿Cómo progresa la ciencia? El concepto de <strong>inconmensurabilidad</strong> (la imposibilidad de comparar paradigmas distintos desde un punto de vista neutral). Los <strong>programas de investigación de Imre Lakatos</strong> (núcleo firme y cinturón protector de hipótesis auxiliares) y las tradiciones de investigación de Larry Laudan.</p>
+            <p>Lakatos intenta superar tanto el falsacionismo ingenuo de Popper como el relativismo que podría derivarse de Kuhn, proponiendo una visión más racional del cambio científico.</p>
+            <div class="caso-highlight">
+                <strong>📌 Caso de Estudio: Evolucionismo</strong><br><br>
+                La transición del fijismo (especies inmutables, creación divina) al transformismo de Lamarck y, finalmente, a la selección natural de Darwin. Se analizan las resistencias ideológicas, religiosas y científicas a la idea de evolución, y cómo la teoría fue ganando aceptación progresivamente.
+            </div>
+        `
+            },
+            5: {
+                title: "Unidad 5 — Articulación: Ciencia, Tecnología y Sociedad (CTS)",
+                body: `
+            <p><strong>Contenidos centrales:</strong> Diferencias conceptuales entre ciencia básica (búsqueda de conocimiento puro), ciencia aplicada y tecnología. El fenómeno de la <strong>serendipia</strong> (descubrimientos accidentales: la penicilina, los rayos X, el teflón). El papel de los instrumentos (telescopios, microscopios) en la expansión del horizonte teórico.</p>
+            <p>La tecnología no es simplemente "ciencia aplicada": tiene su propia lógica, valores y efectos sobre la sociedad. El enfoque CTS busca analizar las interacciones complejas entre estos tres ámbitos.</p>
+            <div class="caso-highlight">
+                <strong>📌 Caso de Estudio: Energía Nuclear</strong><br><br>
+                El camino desde la física teórica atómica (Einstein, Curie, Fermi) hasta la creación de reactores y armamento nuclear. El Proyecto Manhattan plantea el dilema de la <strong>responsabilidad del científico</strong> sobre las aplicaciones de su obra. ¿Puede el conocimiento ser éticamente neutral?
+            </div>
+        `
+            },
+            6: {
+                title: "Unidad 6 — Ciencias Formales: Lógica y Sistemas",
+                body: `
+            <p><strong>Contenidos centrales:</strong> La naturaleza de los entes ideales (números, formas, proposiciones). <strong>Sistemas axiomáticos</strong>: consistencia (no hay contradicciones internas), completitud (todo lo verdadero es demostrable) e independencia (ningún axioma es consecuencia de los demás). Introducción a la lógica booleana y el uso de tablas de verdad para evaluar la validez de los razonamientos.</p>
+            <p>Los teoremas de incompletitud de Gödel (1931) mostraron que en todo sistema formal suficientemente potente hay verdades que no pueden ser demostradas dentro del sistema. Un resultado revolucionario que sacudió los fundamentos de la matemática.</p>
+            <div class="caso-highlight">
+                <strong>📌 Caso de Estudio: Geometrías no Euclidianas</strong><br><br>
+                Cómo el cuestionamiento del quinto postulado de Euclides (el postulado de las paralelas) llevó, en el siglo XIX, a la creación de nuevas geometrías coherentes (Gauss, Bolyai, Lobachevski, Riemann). Esto rompió con la idea de que la matemática euclidiana era una verdad evidente y única sobre el espacio físico.
+            </div>
+        `
+            },
+            7: {
+                title: "Unidad 7 — Ciencias Sociales: Sujeto, Objeto y Ética",
+                body: `
+            <p><strong>Contenidos centrales:</strong> El debate sobre el estatus científico de las humanidades y ciencias sociales. <strong>Positivismo</strong> (monismo metodológico: las ciencias sociales deben imitar a las ciencias naturales) vs. <strong>Historicismo/Hermenéutica</strong> (los fenómenos sociales requieren comprensión interpretativa, no solo explicación causal). La neutralidad valorativa y los sesgos del investigador.</p>
+            <p>¿Puede un científico social ser completamente neutral? ¿O siempre sus valores, su clase social, su género, su cultura influyen en lo que investiga y cómo lo interpreta?</p>
+            <div class="caso-highlight" style="border-left-color: #dc2626;">
+                <strong>🔴 Caso de Estudio: Experimento de Milgram (1961)</strong><br><br>
+                Un análisis sobre la obediencia a la autoridad. Participantes comunes infligieron (aparentemente) descargas eléctricas a otras personas por órdenes de un experimentador con bata blanca. Los resultados fueron perturbadores: el 65% llegó al nivel máximo de descarga. ¿Qué dice esto sobre la naturaleza humana, la autoridad y la responsabilidad individual?<br><br>
+                <strong>Conexión con el 24 de Marzo:</strong> Los mecanismos psicológicos descritos por Milgram ayudan a comprender cómo personas "normales" pueden participar en estructuras de violencia institucionalizada.
+            </div>
+        `
+            }
+        };
+
+        // ===================== UNIT MODAL =====================
+        function openUnit(n) {
+            const u = UNITS[n];
+            if (!u) return;
+            currentUnit = n;
+            document.getElementById('modal-title').textContent = u.title;
+            document.getElementById('modal-body').innerHTML = u.body;
+            document.getElementById('unit-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            // Update ENTRAR button based on publication status
+            const isPublished = !!UNIT_PAGES[n];
+            const btn = document.getElementById('btn-enter-unit');
+            document.getElementById('btn-enter-text').textContent = isPublished ? 'ENTRAR A LA UNIDAD' : 'PRÓXIMAMENTE';
+            document.getElementById('btn-enter-icon').className = isPublished ? 'fa-solid fa-arrow-right' : 'fa-solid fa-hourglass-half';
+            btn.style.opacity = isPublished ? '1' : '.5';
+            btn.style.cursor = isPublished ? 'pointer' : 'default';
+            btn.disabled = !isPublished;
+        }
+        // Tracks which unit is currently open
+        let currentUnit = null;
+
+        function closeUnit() {
+            document.getElementById('unit-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function closeUnitOnBg(e) {
+            if (e.target === document.getElementById('unit-modal')) closeUnit();
+        }
+        // Map of unit → first class page (grows as classes are published)
+        const UNIT_PAGES = {
+            1: 'unidad1-clase1.html',
+            2: 'unidad2-introduccion.html',
+            3: 'unidad3-introduccion.html'
+            // Más unidades se irán publicando durante el año
+        };
+
+        function enterUnit() {
+            const page = UNIT_PAGES[currentUnit];
+            if (page) {
+                closeUnit();
+                window.location.href = page;
+            } else {
+                // Unit not yet published: scroll to clases accordion
+                closeUnit();
+                const clasesSec = document.getElementById('clases');
+                if (clasesSec) {
+                    clasesSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (currentUnit !== null) {
+                        setTimeout(() => {
+                            const acordItem = document.querySelector(`.acord-item[data-unit="${currentUnit}"]`);
+                            if (acordItem && !acordItem.classList.contains('open')) {
+                                acordItem.querySelector('.acord-header').click();
+                            }
+                        }, 700);
+                    }
+                }
+            }
+        }
+
+        // ===================== SUBSCRIBE MODAL =====================
+        function openSubscribe() {
+            document.getElementById('subscribe-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSubscribe() {
+            document.getElementById('subscribe-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function closeSubscribeOnBg(e) {
+            if (e.target === document.getElementById('subscribe-modal')) closeSubscribe();
+        }
+        function doSubscribe() {
+            const name = document.getElementById('sub-name').value.trim() || 'Docente';
+            const email = document.getElementById('sub-email').value.trim();
+            if (!email) { alert('Por favor ingresá tu email.'); return; }
+            closeSubscribe();
+            setTimeout(() => {
+                alert(`¡Gracias ${name}! 🎉\nTe enviaremos el programa completo y materiales exclusivos a ${email}.`);
+            }, 300);
+        }
+
+        // ===================== DARK MODE =====================
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        // Apply saved theme
+        (function () {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+
+        // ===================== MOBILE MENU =====================
+        function openMenu() {
+            document.getElementById('mobile-menu').classList.add('open');
+            document.getElementById('mobile-menu').setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            document.getElementById('mobile-menu').classList.remove('open');
+            document.getElementById('mobile-menu').setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        // ===================== SEARCH =====================
+        function openSearch() {
+            document.getElementById('search-bar').classList.add('open');
+            setTimeout(() => document.getElementById('search-input').focus(), 100);
+        }
+        function closeSearch() {
+            document.getElementById('search-bar').classList.remove('open');
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('search-input');
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    const term = input.value.trim();
+                    if (term) {
+                        closeSearch();
+                        // Simple search: scroll to related section
+                        const lower = term.toLowerCase();
+                        if (lower.includes('kuhn') || lower.includes('paradigma') || lower.includes('copérnico')) {
+                            scrollTo('unidades'); openUnit(1);
+                        } else if (lower.includes('popper') || lower.includes('falsa')) {
+                            scrollTo('unidades'); openUnit(3);
+                        } else if (lower.includes('milgram') || lower.includes('ética') || lower.includes('obediencia')) {
+                            scrollTo('unidades'); openUnit(7);
+                        } else if (lower.includes('marzo') || lower.includes('memoria') || lower.includes('dictadura')) {
+                            scrollTo('memoria');
+                        } else if (lower.includes('darwin') || lower.includes('evoluc')) {
+                            openUnit(4);
+                        } else if (lower.includes('nuclear') || lower.includes('cts') || lower.includes('tecnol')) {
+                            openUnit(5);
+                        } else {
+                            alert('Buscando: "' + term + '".\nConsultá las unidades 1-7 y la sección Memoria 24M.');
+                        }
+                    }
+                }
+            });
+        });
+
+        // ===================== SCROLL UTILITIES =====================
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollTo(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ===================== PROGRESS BAR =====================
+        window.addEventListener('scroll', function () {
+            const scrollTop = window.scrollY;
+            const docH = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+            document.getElementById('progress-bar').style.width = pct + '%';
+
+            // Back to top
+            const btn = document.getElementById('back-top');
+            if (scrollTop > 400) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+
+        // ===================== REVEAL ON SCROLL =====================
+        function checkReveals() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', checkReveals, { passive: true });
+        window.addEventListener('load', checkReveals);
+
+        // ===================== KEYBOARD =====================
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeUnit();
+                closeSubscribe();
+                closeMenu();
+                closeSearch();
+            }
+        });
+
+        // ===================== SMOOTH SCROLL for anchor links =====================
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function (e) {
+                const id = this.getAttribute('href').slice(1);
+                const el = document.getElementById(id);
+                if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        console.log('%c✅ FILOSOFÍA&CIENCIA 2025 — Cargado correctamente', 'color:#facc15; font-weight:bold; font-family:monospace; font-size:14px');
+    </script>
+
+</body>
+
+</html>
+

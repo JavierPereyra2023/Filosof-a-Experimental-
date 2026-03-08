@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasteur vs. Pouchet: La Generación Espontánea | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111111;
+            --bg2: #1a1a1a;
+            --bg3: #222222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.4s, color 0.4s;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* ===================== TOP NAV ===================== */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        #art-hero {
+            background:
+                linear-gradient(135deg, rgba(8, 14, 25, 0.95) 0%, rgba(15, 23, 42, 0.8) 100%),
+                url('rosalind.webp') top/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, .95), 0 0 40px rgba(0, 0, 0, .5);
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 7vw, 88px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 640px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 0.05em;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: 0.3;
+            }
+        }
+
+        /* ===================== ARTICLE LAYOUT ===================== */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        /* MAIN CONTENT */
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: 0.8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 32px 0 14px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 5px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+            font-weight: 900;
+            color: var(--yellow);
+            opacity: 0.15;
+            position: absolute;
+            top: -20px;
+            left: 16px;
+            line-height: 1;
+        }
+
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.4;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .pull-quote-author {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-top: 12px;
+        }
+
+        /* Image / Figure */
+        .figure {
+            margin: 36px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .figure-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .figure-img-placeholder {
+            width: 100%;
+            height: 280px;
+            background: var(--bg3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 64px;
+        }
+
+        .figure-caption {
+            padding: 14px 20px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text3);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .figure-caption strong {
+            color: var(--text2);
+            font-style: normal;
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+
+        .callout.yellow {
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+
+        .dark .callout.yellow {
+            background: linear-gradient(135deg, #2a2400, #1a1800);
+            border-color: #5a4a00;
+        }
+
+        .callout.dark-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+
+        .callout.red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fca5a5;
+        }
+
+        .dark .callout.red {
+            background: linear-gradient(135deg, #200808, #1a0606);
+            border-color: #7f1d1d;
+        }
+
+        .callout-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout.yellow .callout-tag {
+            color: #92400e;
+        }
+
+        .callout.red .callout-tag {
+            color: #991b1b;
+        }
+
+        .callout.dark-box .callout-tag {
+            color: var(--yellow-dark);
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .callout p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        .callout p+p {
+            margin-top: 10px;
+        }
+
+        /* Concept grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        @media(min-width:640px) {
+            .concept-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .concept-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 22px;
+            border-top: 4px solid var(--yellow);
+        }
+
+        .concept-card.red-top {
+            border-top-color: var(--red);
+        }
+
+        .concept-card.blue-top {
+            border-top-color: #2563eb;
+        }
+
+        .concept-name {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .concept-name.red {
+            color: var(--red);
+        }
+
+        .concept-name.blue {
+            color: #2563eb;
+        }
+
+        .concept-def {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text2);
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 32px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 36px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: var(--border);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-dot.muted {
+            background: var(--bg3);
+            color: var(--text3);
+            border: 2px solid var(--border);
+            font-size: 11px;
+        }
+
+        .timeline-year {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--yellow-dark);
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .timeline-event {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        /* Divider */
+        .art-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 48px 0;
+        }
+
+        /* ===================== SIDEBAR ===================== */
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 72px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Table of contents */
+        .toc-list {
+            list-style: none;
+            padding: 12px 0;
+        }
+
+        .toc-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px;
+            color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item a:hover,
+        .toc-item a.active {
+            color: var(--text);
+            background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+
+        .toc-num {
+            font-size: 11px;
+            color: var(--yellow-dark);
+            font-weight: 700;
+            min-width: 20px;
+        }
+
+        /* Key concepts sidebar */
+        .concept-mini {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .concept-mini:last-child {
+            border-bottom: none;
+        }
+
+        .concept-mini-name {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 5px;
+        }
+
+        .concept-mini-def {
+            font-size: 12px;
+            line-height: 1.55;
+            color: var(--text3);
+        }
+
+        /* Philosopher card */
+        .philosopher-card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .philosopher-card:last-child {
+            border-bottom: none;
+        }
+
+        .philosopher-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg3);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .philosopher-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .philosopher-dates {
+            font-size: 11px;
+            color: var(--yellow-dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .philosopher-bio {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        /* Unit connection */
+        .unit-connection {
+            padding: 20px;
+        }
+
+        .unit-conn-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .unit-conn-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--yellow);
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .unit-conn-text {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--text2);
+        }
+
+        /* Next class */
+        .next-class {
+            padding: 20px;
+        }
+
+        .next-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--text3);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .next-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .btn-next {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all var(--transition);
+            width: 100%;
+        }
+
+        .btn-next:hover {
+            background: var(--yellow-dark);
+        }
+
+        .btn-next.disabled {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text3);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* ===================== FOOTER NAV ===================== */
+        .article-footer-nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+            cursor: pointer;
+            max-width: 300px;
+        }
+
+        .footer-nav-link:hover {
+            border-color: var(--yellow);
+            transform: translateX(4px);
+        }
+
+        .footer-nav-link.prev:hover {
+            transform: translateX(-4px);
+        }
+
+        .footer-nav-link.primary {
+            background: var(--yellow);
+            border-color: var(--yellow-dark);
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .footer-nav-link.primary:hover {
+            background: var(--yellow-dark);
+        }
+
+        .footer-nav-link.primary .footer-nav-direction {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .footer-nav-link.primary .footer-nav-title,
+        .footer-nav-link.primary .footer-nav-icon {
+            color: #000;
+        }
+
+        /* Hover image scale */
+        .img-hover-scale {
+            transition: transform 0.65s cubic-bezier(0.25, 1.0, 0.5, 1.0);
+        }
+
+        .img-hover-container {
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin: 36px 0;
+            cursor: pointer;
+        }
+
+        .img-hover-container:hover .img-hover-scale {
+            transform: scale(1.05);
+        }
+
+        .footer-nav-direction {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .footer-nav-icon {
+            font-size: 18px;
+            color: var(--text3);
+        }
+
+        /* ===================== REVEAL ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    <!-- TOP NAV -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Volver
+            </a>
+            <span class="nav-sep">|</span>
+            <div class="breadcrumb">
+                <span>Unidad 2</span> · Clase 13
+            </div>
+        </div>
+        <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase12.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 12
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase14.html'">
+                Clase 14 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="nav-btn" onclick="window.print()">
+                <i class="fa-solid fa-file-pdf"></i> PDF
+            </button>
+            <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDAD 2 · CLASE 13</span>
+            <span class="hero-badge-outline">CONTROVERSIAS CIENTÍFICAS</span>
+        </div>
+        <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6° Año</p>
+        <h1 class="hero-title">
+            El Secreto de la Vida:<br>Descubriendo<br>el <em>ADN</em>
+        </h1>
+        <p class="hero-subtitle">
+            Rosalind Franklin, Watson, Crick y uno de los mayores hitos epistemológicos y sociales de la biología del
+            siglo XX.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-dna"></i>
+                <span>Biología y Epistemología</span>
+            </div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Inglaterra, 1953</span>
+            </div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-clock"></i>
+                <span>60 min · Clase 13</span>
+            </div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Comenzar</span>
+        </div>
+    </header>
+
+    <!-- ARTICLE BODY -->
+    <main class="article-wrap">
+
+        <!-- ===================== MAIN CONTENT ===================== -->
+        <article class="article-main">
+
+            <!-- CONTEXTO HISTÓRICO -->
+            <div class="article-section reveal" id="sec-contexto">
+                <span class="section-label">1. Contexto Espacio-temporal</span>
+                <h2 class="article-h2">La carrera por la <span>Estructura de la Vida</span></h2>
+                <p class="article-p dropcap">
+                    Inglaterra, a principios de la década de 1950. Tras la Segunda Guerra Mundial, la investigación
+                    científica estaba en plena ebullición. Mientras los físicos habían descifrado los misterios del
+                    átomo, los biólogos se enfrentaban a un enigma aún más profundo: ¿Cómo se transmite la información
+                    hereditaria de generación en generación?
+                </p>
+                <p class="article-p">
+                    Ya se sabía que el <strong>ADN (ácido desoxirribonucleico)</strong> era el material genético
+                    responsable de la herencia, gracias a los trabajos de Avery, MacLeod y McCarty años atrás. Sin
+                    embargo, su estructura tridimensional exacta seguía siendo un misterio absoluto.
+                </p>
+                <p class="article-p">
+                    Comprender la arquitectura estructural del ADN no era un mero capricho estético; era la llave
+                    maestra para entender el mecanismo funcional de la vida. Como se sospechaba en aquella época, la
+                    forma de la molécula debía forzosamente revelar cómo lograba copiarse a sí misma para transmitir la
+                    herencia. La carrera por descubrirla estaba liderada por los mejores laboratorios del mundo,
+                    principalmente el célebre Linus Pauling en California, el King's College en Londres y el Laboratorio
+                    Cavendish en Cambridge. Se trataba tanto de una búsqueda genuina del conocimiento puro, como de una
+                    encarnizada competencia impulsada por egos y anhelos de Premios Nobel.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ACTORES PRINCIPALES -->
+            <div class="article-section reveal" id="sec-actores">
+                <span class="section-label">2. Actores Principales</span>
+                <h2 class="article-h2">Modelos teóricos vs. <span>Datos empíricos</span></h2>
+
+                <div class="concept-grid">
+                    <div class="concept-card blue-top">
+                        <div class="concept-name blue">Rosalind Franklin (1920-1958)</div>
+                        <div class="concept-def">
+                            Brillante química y experta mundial en cristalografía de rayos X trabajando en el King's
+                            College de Londres. Encarna el asidero epistemológico estrictamente empírico: se negaba
+                            rotundamente a construir "modelos especulativos" sin antes contar con datos y mediciones
+                            matemáticas irrefutables derivados de sus minuciosas fotografías de difracción. Su rigor era
+                            total.
+                        </div>
+                    </div>
+                    <div class="concept-card red-top">
+                        <div class="concept-name red">Watson (1928-) y Crick (1916-2004)</div>
+                        <div class="concept-def">
+                            Joven biólogo estadounidense (Watson) y físico brillante (Crick) del laboratorio Cavendish
+                            en Cambridge. Representaban la vertiente opuesta: la formulación de hipótesis audaces
+                            mediante la construcción lúdica de modelos físicos (placas de metal y alambres),
+                            "adivinando" la estructura antes de tener todos los datos empíricos necesarios, apoyándose
+                            fuertemente en intuición y leyes de la química.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ANOMALÍAS Y ENIGMAS -->
+            <div class="article-section reveal" id="sec-anomalias">
+                <span class="section-label">3. Anomalías y Enigmas</span>
+                <h2 class="article-h2">El rompecabezas de las <span>cuatro bases</span></h2>
+                <p class="article-p">
+                    Había varias piezas de evidencia dispersas y aparentemente desconectadas. Ya se sabía que el ADN
+                    contenía cuatro bases nitrogenadas: Adenina, Timina, Citosina y Guanina, junto a fosfatos y
+                    azúcares. La anomalía residía en cómo ensamblar matemáticamente estos componentes geométricos sin
+                    violar las leyes de los enlaces moleculares.
+                </p>
+                <p class="article-p">
+                    Además de la estructura atómica restrictiva, estaba el descubrimiento de Erwin Chargaff (1950): la
+                    cantidad de Adenina siempre igualaba a la de Timina, y la de Citosina a la de Guanina (las célebres
+                    Reglas de Chargaff). Este dogma cuantitativo ocultaba una verdad arquitectónica inmensa, que la
+                    ciencia intentaba desesperadamente cristalizar visualmente.
+                </p>
+
+                <div class="callout dark-box">
+                    <div class="callout-tag">🔬 El Enigma de la Estructura</div>
+                    <div class="callout-title">¿El agua por fuera o por dentro?</div>
+                    <p>
+                        El prestigioso Linus Pauling había publicado un modelo precipitado postulando una "triple
+                        hélice" para el ADN, con los fosfatos amontonados hacia adentro y las bases nitrogenadas hacia
+                        afuera. Franklin, sabiendo empíricamente que la molécula era altamente hidrófila (absorbe enorme
+                        cantidad de agua), argumentó contundentemente que los fosfatos atraen el líquido y, por tanto,
+                        debían encontrarse de forma obligatoria expuestos en la envoltura exterior de la molécula,
+                        blindando e invisibilizando a las bases nitrogenadas en el esqueleto central.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- HIPÓTESIS -->
+            <div class="article-section reveal" id="sec-hipotesis">
+                <span class="section-label">4. Hipótesis Constrictivas</span>
+                <h2 class="article-h2">Dialéctica entre <span>Teoría y Evidencia</span></h2>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <div class="concept-name">El Inductivismo Estricto (Franklin)</div>
+                        <div class="concept-def">
+                            La posición de Rosalind Franklin apelaba a un inductivismo riguroso y profesional: solo a
+                            partir de la recolección exhaustiva de datos experimentales (fotografías de difracción de
+                            altísima nitidez) se puede construir lícitamente el modelo final. Elaborar maquetas antes de
+                            medir con precisión milimétrica era, para su escuela científica, pseudociencia especulativa
+                            y profundamente sesgada.
+                        </div>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-name">El Enfoque Hipotético-Deductivo (Watson/Crick)</div>
+                        <div class="concept-def">
+                            Sostenían que construir modelos <em>a priori</em> estimulaba la imaginación para deducir
+                            implicaciones geométricas que luego pudieran encajar (o no). Armaban estructuras físicas
+                            encajando piezas de lata y cartón que debían cumplir preceptos estéticos y estereoquímicos
+                            en tiempo real. Si el modelo no cerraba con el poco conocimiento preexistente reportado por
+                            otros, colapsaban y se armaba algo desde cero.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- EVIDENCIA EXPERIMENTAL -->
+            <div class="article-section reveal" id="sec-evidencia">
+                <span class="section-label">5. Evidencia Experimental</span>
+                <h2 class="article-h2">La <span>Fotografía 51</span> de Rosalind Franklin</h2>
+
+                <p class="article-p">
+                    En mayo de 1952, tras cientos de horas de exposición geométrica con rayos X, Rosalind Franklin y su
+                    estudiante Raymond Gosling obtuvieron un patrón de difracción de una fibra extremadamente fina de
+                    ADN (Forma B). A esta imagen de nitidez inaudita se la conoció luego como la <strong>Fotografía
+                        51</strong>.
+                </p>
+
+                <div class="img-hover-container reveal" style="max-width: 600px; margin: 36px auto;">
+                    <img src="51.jpg" alt="Fotografía 51 de difracción de rayos X del ADN" class="img-hover-scale"
+                        style="width:100%; height:auto; display:block; border-radius:16px;">
+                </div>
+
+                <p class="article-p">
+                    Acorde a su filosofía inductivista, Franklin se negó rigurosamente a publicar un modelo teórico
+                    audaz basado en esa única foto hasta haber completado los engorrosos cálculos analíticos
+                    correspondientes para estar completamente segura; su ética matemática detestaba la especulación
+                    irresponsable.
+                </p>
+
+                <h3 class="article-h3">El asalto teórico de Watson y Crick (1953)</h3>
+                <p class="article-p">
+                    A espaldas de Franklin, su colega Maurice Wilkins le mostró furtivamente la Fotografía 51 a James
+                    Watson. Al ver la simétrica cruz negra formada por las manchas concéntricas de difracción, el
+                    entrenamiento geométrico interpretativo de Watson hizo <em>click</em> de inmediato: empíricamente,
+                    el patrón dictaba <em>una hélice inequívoca</em>.
+                </p>
+
+                <div class="img-hover-container reveal" style="max-width: 600px; margin: 36px auto;">
+                    <img src="watson-crick.webp" alt="Watson y Crick con su modelo físico de ADN"
+                        class="img-hover-scale" style="width:100%; height:auto; display:block; border-radius:16px;">
+                </div>
+
+                <p class="article-p">
+                    Impulsados enérgicamente por esta revelación robada del cajón investigativo de Franklin, Watson y
+                    Crick volvieron frenéticos a sus placas de metal. Esta vez colocaron los fosfatos hacia afuera del
+                    esqueleto (como había deducido Franklin empíricamente tiempo atrás) y enlazaron las bases
+                    simétricamente usando las reglas de Chargaff adentro de la estructura protectora (A coincide unida
+                    maravillosamente con T, y C con G). Todo el intrincado caos genético finalmente se ordenó en una
+                    maravillosa estructura química de <strong>doble hélice</strong> estéticamente impecable,
+                    publicándolo en la prestigiosa revista <em>Nature</em> en 1953 y modificando la biología.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- CONCLUSIONES -->
+            <div class="article-section reveal" id="sec-conclusiones">
+                <span class="section-label">6. Conclusiones y Legado</span>
+                <h2 class="article-h2">Decodificando <span>el mérito en la ciencia</span></h2>
+                <p class="article-p">
+                    En 1962 (nueve años luego del hallazgo molecular), James Watson, Francis Crick y Maurice Wilkins
+                    compartieron el aclamado Premio Nobel de Fisiología. Rosalind Franklin, cuyo asidero empírico fue el
+                    insumo primario irreemplazable pero que estuvo ausente en tan monumental reconocimiento histórico,
+                    había fallecido fatalmente por un grave cáncer de ovario en 1958, a la truncada edad de 37 años.
+                    Aunque las reglas suecas imposibilitan los galardones póstumos, mientras ella aún laboraba
+                    activamente, su contribución indispensable fue duramente marginada, invisibilizada y socavada por
+                    los protagonistas de la trama.
+                </p>
+                <div class="callout yellow reveal">
+                    <div class="callout-tag">⚖️ Epistemología Crítica y Sociología Científica</div>
+                    <div class="callout-title">El poder invisibilizador sociotécnico</div>
+                    <p>
+                        El drama de la doble hélice ejemplifica magistralmente cómo la "victoria teórica hipotecaria"
+                        consigue tragar comúnmente en la historia el enorme crédito primigenio del minucioso, lento y
+                        sucio trabajo del banco experimental que posibilitó la deducción; manifestando también de forma
+                        indeleble de qué manera los abrumadores prejuicios patriarcales permean hasta lo más profundo
+                        del objetivismo científico decidiendo externamente a la racionalidad la autoría intelectual
+                        final de las ideas.
+                    </p>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- ===================== SIDEBAR ===================== -->
+        <aside class="article-sidebar">
+            <div class="sidebar-sticky">
+
+                <!-- TOC -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-list-ul"></i> Contenidos
+                    </div>
+                    <ul class="toc-list">
+                        <li class="toc-item"><a href="#sec-contexto"><span class="toc-num">01</span> Contexto
+                                Histórico</a></li>
+                        <li class="toc-item"><a href="#sec-actores"><span class="toc-num">02</span> Principales
+                                Actores</a></li>
+                        <li class="toc-item"><a href="#sec-anomalias"><span class="toc-num">03</span> Enigmas y
+                                Anomalías</a></li>
+                        <li class="toc-item"><a href="#sec-hipotesis"><span class="toc-num">04</span> Hipótesis</a></li>
+                        <li class="toc-item"><a href="#sec-evidencia"><span class="toc-num">05</span> Evidencia
+                                Experimental</a></li>
+                        <li class="toc-item"><a href="#sec-conclusiones"><span class="toc-num">06</span>
+                                Conclusiones</a></li>
+                    </ul>
+                </div>
+
+                <!-- KEY CONCEPTS -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-key"></i> Conceptos Clave
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Difracción de Rayos X</div>
+                        <div class="concept-mini-def">Técnica empírica que dispara rayos sobre las fibras cristalizadas
+                            para revelar estructuras ocultas según de qué manera logran rebotar o desviarse de los
+                            átomos.</div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Fotografía Empírica</div>
+                        <div class="concept-mini-def">Registro físico inductivista que ancla y ata directamente todo
+                            vuelo de la imaginación teórica especulativa indómita a los rigurosos dictados del mundo
+                            visible comprobado por aparatos.</div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Externalismo Científico</div>
+                        <div class="concept-mini-def">Dimensión de análisis epistemológico sobre cómo poderosos factores
+                            ideológicos, políticos y de género en el laboratorio predeterminan finalmente qué y cómo es
+                            que se concibe a un genio acreedor de fama.</div>
+                    </div>
+                </div>
+
+                <!-- PHILOSOPHER -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-camera"></i> La Evidencia Clave
+                    </div>
+                    <div class="philosopher-card">
+                        <div class="philosopher-avatar">51</div>
+                        <div>
+                            <div class="philosopher-name">Fotografía 51</div>
+                            <div class="philosopher-dates">El secreto robado</div>
+                            <div class="philosopher-bio">
+                                El patrón sombreado oscuro en forma de cruz visualizado magistralmente en la instantánea
+                                demostró incuestionablemente que la intrincada estructura atómica era una hélice regular
+                                matemática. Obtenida arduamente en el año 1952.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- ===================== FOOTER NAV ===================== -->
+    <nav class="article-footer-nav">
+        <a href="unidad2-clase11.html" class="footer-nav-link prev">
+            <div class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></div>
+            <div>
+                <div class="footer-nav-direction">Clase Anterior</div>
+                <div class="footer-nav-title">U2·C12 — L. Pasteur vs. Pouchet</div>
+            </div>
+        </a>
+        <a href="unidad2-clase14.html" class="footer-nav-link primary">
+            <div style="text-align:right;">
+                <div class="footer-nav-direction">Próxima Clase</div>
+                <div class="footer-nav-title">U2·C14 — Griffith y el ADN</div>
+            </div>
+            <div class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+    </nav>
+
+    <script>
+        // ── DARK MODE ──
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // ── PROGRESS BAR ──
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+
+        // ── REVEAL ON SCROLL ──
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // ── SMOOTH SCROLL TOC ──
+        function scrollTo(id) {
+            const el = document.querySelector(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── TOC ACTIVE ──
+        const sections = document.querySelectorAll('.article-section[id]');
+        const tocItems = document.querySelectorAll('.toc-item');
+        const tocObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    tocItems.forEach(t => t.querySelector('a').classList.remove('active'));
+                    const match = [...tocItems].find(t => t.querySelector('a').getAttribute('href') === '#' + e.target.id);
+                    if (match) match.querySelector('a').classList.add('active');
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => tocObs.observe(s));
+    </script>
+</body>
+
+</html>

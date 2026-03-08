@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasteur vs. Pouchet: La Generación Espontánea | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111111;
+            --bg2: #1a1a1a;
+            --bg3: #222222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.4s, color 0.4s;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* ===================== TOP NAV ===================== */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        #art-hero {
+            background:
+                linear-gradient(to right, rgba(8, 14, 25, 0.9) 0%, rgba(8, 14, 25, 0.6) 50%, rgba(8, 14, 25, 0.9) 100%),
+                url('adn.jpg') left center / 50% 100% no-repeat,
+                url('Griffith.jpg') right center / 50% 100% no-repeat;
+            background-color: #000;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, .95), 0 0 40px rgba(0, 0, 0, .5);
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 7vw, 88px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 640px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 0.05em;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: 0.3;
+            }
+        }
+
+        /* ===================== ARTICLE LAYOUT ===================== */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        /* MAIN CONTENT */
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: 0.8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 32px 0 14px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 5px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+            font-weight: 900;
+            color: var(--yellow);
+            opacity: 0.15;
+            position: absolute;
+            top: -20px;
+            left: 16px;
+            line-height: 1;
+        }
+
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.4;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .pull-quote-author {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-top: 12px;
+        }
+
+        /* Image / Figure */
+        .figure {
+            margin: 36px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .figure-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .figure-img-placeholder {
+            width: 100%;
+            height: 280px;
+            background: var(--bg3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 64px;
+        }
+
+        .figure-caption {
+            padding: 14px 20px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text3);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .figure-caption strong {
+            color: var(--text2);
+            font-style: normal;
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+
+        .callout.yellow {
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+
+        .dark .callout.yellow {
+            background: linear-gradient(135deg, #2a2400, #1a1800);
+            border-color: #5a4a00;
+        }
+
+        .callout.dark-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+
+        .callout.red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fca5a5;
+        }
+
+        .dark .callout.red {
+            background: linear-gradient(135deg, #200808, #1a0606);
+            border-color: #7f1d1d;
+        }
+
+        .callout-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout.yellow .callout-tag {
+            color: #92400e;
+        }
+
+        .callout.red .callout-tag {
+            color: #991b1b;
+        }
+
+        .callout.dark-box .callout-tag {
+            color: var(--yellow-dark);
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .callout p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        .callout p+p {
+            margin-top: 10px;
+        }
+
+        /* Concept grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        @media(min-width:640px) {
+            .concept-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .concept-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 22px;
+            border-top: 4px solid var(--yellow);
+        }
+
+        .concept-card.red-top {
+            border-top-color: var(--red);
+        }
+
+        .concept-card.blue-top {
+            border-top-color: #2563eb;
+        }
+
+        .concept-name {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .concept-name.red {
+            color: var(--red);
+        }
+
+        .concept-name.blue {
+            color: #2563eb;
+        }
+
+        .concept-def {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text2);
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 32px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 36px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: var(--border);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-dot.muted {
+            background: var(--bg3);
+            color: var(--text3);
+            border: 2px solid var(--border);
+            font-size: 11px;
+        }
+
+        .timeline-year {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--yellow-dark);
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .timeline-event {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        /* Divider */
+        .art-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 48px 0;
+        }
+
+        /* ===================== SIDEBAR ===================== */
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 72px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Table of contents */
+        .toc-list {
+            list-style: none;
+            padding: 12px 0;
+        }
+
+        .toc-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px;
+            color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item a:hover,
+        .toc-item a.active {
+            color: var(--text);
+            background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+
+        .toc-num {
+            font-size: 11px;
+            color: var(--yellow-dark);
+            font-weight: 700;
+            min-width: 20px;
+        }
+
+        /* Key concepts sidebar */
+        .concept-mini {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .concept-mini:last-child {
+            border-bottom: none;
+        }
+
+        .concept-mini-name {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 5px;
+        }
+
+        .concept-mini-def {
+            font-size: 12px;
+            line-height: 1.55;
+            color: var(--text3);
+        }
+
+        /* Philosopher card */
+        .philosopher-card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .philosopher-card:last-child {
+            border-bottom: none;
+        }
+
+        .philosopher-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg3);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .philosopher-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .philosopher-dates {
+            font-size: 11px;
+            color: var(--yellow-dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .philosopher-bio {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        /* Unit connection */
+        .unit-connection {
+            padding: 20px;
+        }
+
+        .unit-conn-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .unit-conn-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--yellow);
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .unit-conn-text {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--text2);
+        }
+
+        /* Next class */
+        .next-class {
+            padding: 20px;
+        }
+
+        .next-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--text3);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .next-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .btn-next {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all var(--transition);
+            width: 100%;
+        }
+
+        .btn-next:hover {
+            background: var(--yellow-dark);
+        }
+
+        .btn-next.disabled {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text3);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* ===================== FOOTER NAV ===================== */
+        .article-footer-nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+            cursor: pointer;
+            max-width: 300px;
+        }
+
+        .footer-nav-link:hover {
+            border-color: var(--yellow);
+            transform: translateX(4px);
+        }
+
+        .footer-nav-link.prev:hover {
+            transform: translateX(-4px);
+        }
+
+        .footer-nav-link.primary {
+            background: var(--yellow);
+            border-color: var(--yellow-dark);
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .footer-nav-link.primary:hover {
+            background: var(--yellow-dark);
+        }
+
+        .footer-nav-link.primary .footer-nav-direction {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .footer-nav-link.primary .footer-nav-title,
+        .footer-nav-link.primary .footer-nav-icon {
+            color: #000;
+        }
+
+        /* Hover image scale */
+        .img-hover-scale {
+            transition: transform 0.65s cubic-bezier(0.25, 1.0, 0.5, 1.0);
+        }
+
+        .img-hover-container {
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin: 36px 0;
+            cursor: pointer;
+        }
+
+        .img-hover-container:hover .img-hover-scale {
+            transform: scale(1.05);
+        }
+
+        .footer-nav-direction {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .footer-nav-icon {
+            font-size: 18px;
+            color: var(--text3);
+        }
+
+        /* ===================== REVEAL ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    <!-- TOP NAV -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Volver
+            </a>
+            <span class="nav-sep">|</span>
+            <div class="breadcrumb">
+                <span>Unidad 2</span> · Clase 14
+            </div>
+        </div>
+        <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase13.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 13
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase15.html'">
+                Clase 15 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="nav-btn" onclick="window.print()">
+                <i class="fa-solid fa-file-pdf"></i> PDF
+            </button>
+            <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDAD 2 · CLASE 14</span>
+            <span class="hero-badge-outline">CONTROVERSIAS CIENTÍFICAS</span>
+        </div>
+        <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6° Año</p>
+        <h1 class="hero-title">
+            El Experimento de Griffith:<br>El Principio<br><em>Transformante</em>
+        </h1>
+        <p class="hero-subtitle">
+            Buscando una vacuna contra la neumonía en 1928, la biología presenció lo imposible: bacterias muertas
+            resucitando las capacidades asesinas de bacterias vivas.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-vial-virus"></i>
+                <span>Microbiología y Epistemología</span>
+            </div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Inglaterra, 1928</span>
+            </div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-clock"></i>
+                <span>60 min · Clase 14</span>
+            </div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Comenzar</span>
+        </div>
+    </header>
+
+    <!-- ARTICLE BODY -->
+    <main class="article-wrap">
+
+        <!-- ===================== MAIN CONTENT ===================== -->
+        <article class="article-main">
+
+            <!-- CONTEXTO HISTÓRICO -->
+            <div class="article-section reveal" id="sec-contexto">
+                <span class="section-label">1. Contexto Espacio-temporal</span>
+                <h2 class="article-h2">La búsqueda del <span>Material Genético</span></h2>
+                <p class="article-p dropcap">
+                    Poco después de la Primera Guerra Mundial y de los letales azotes globales de la pandemia de Gripe
+                    Española, los gobiernos mundiales estaban abocados desesperadamente a lograr avances en
+                    microbiología y vacunación. El bacteriólogo británico Frederick Griffith trabajaba en Londres
+                    estudiando la <em>Streptococcus pneumoniae</em> (el neumococo), una temible bacteria que causaba
+                    brotes mortales de neumonía.
+                </p>
+                <p class="article-p">
+                    En 1928, el concepto de "gen" ya existía gracias a Mendel y Morgan, y se sabía que los cromosomas
+                    estaban hechos estructuralmente tanto de proteínas complejas como de ADN. Sin embargo, la inmensa
+                    mayoría de la comunidad científica apostaba ciegamente a que <strong>las proteínas</strong> eran las
+                    únicas moléculas lo suficientemente variadas e inteligentes como para contener las complejísimas
+                    "instrucciones matemáticas" de la vida. El ADN se consideraba entonces como una molécula monótona y
+                    estructuralmente estúpida, una mera armazón aburrida.
+                </p>
+                <p class="article-p">
+                    En este contexto, Griffith no buscaba descubrir la composición del genoma humano. Él quería crear
+                    una vacuna utilizando distintas cepas de neumococo. Como ocurre frecuentemente en la filosofía de la
+                    ciencia orientada por el marco de Serendipia, buscaba un resultado pragmático (una vacuna para la
+                    clínica) pero tropezó sin querer con <strong>la llave maestra biológica del siglo XX</strong>.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ACTORES PRINCIPALES -->
+            <div class="article-section reveal" id="sec-actores">
+                <span class="section-label">2. Actores Principales y Materiales</span>
+                <h2 class="article-h2">El dogma de las <span>Proteínas</span> y las Cepas</h2>
+
+                <p class="article-p dropcap">
+                    Para entender el impacto de Griffith, debemos comprender el <strong>paradigma rival o
+                        dominante</strong> de su época. Hasta mediados del siglo XX, la comunidad científica creía
+                    fervientemente que las responsables de la herencia genética eran las <strong>proteínas</strong>. Su
+                    argumento era cuantitativo y lógico: las proteínas son sumamente complejas, formadas por 20
+                    aminoácidos diferentes (un alfabeto inmenso). El ADN, por el contrario, solo tenía 4 bases (un
+                    alfabeto diminuto) y se lo consideraba una molécula demasiado monótona, aburrida y estructuralmente
+                    "tonta" como para justificar la inmensa diversidad de la vida.
+                </p>
+
+                <p class="article-p">
+                    Ignorante de este inminente debate molecular, Frederick Griffith utilizó un modelo biológico
+                    compuesto por ratones de laboratorio y dos variantes (cepas) perfectamente diferenciables de la
+                    bacteria del neumococo:
+                </p>
+
+                <div class="concept-grid">
+                    <div class="concept-card blue-top">
+                        <div class="concept-name blue">Cepa R (Rugosa - Inofensiva)</div>
+                        <div class="concept-def">
+                            Las colonias bacterianas R (por <em>Rough</em>, rugoso en inglés) carecían de una cápsula
+                            protectora de polisacáridos. Al inyectarlas, el sistema inmunitario del ratón las
+                            identificaba y las devoraba fácilmente mediante fagocitosis. <strong>Los ratones
+                                vivían</strong>.
+                        </div>
+                    </div>
+                    <div class="concept-card red-top">
+                        <div class="concept-name red">Cepa S (Lisa - Letal)</div>
+                        <div class="concept-def">
+                            Las bacterias S (por <em>Smooth</em>, liso en inglés) sí poseían una gruesa cápsula
+                            protectora ("un campo de fuerza" de azúcares) que las recubría. Al inyectarlas, las defensas
+                            del ratón resbalaban contra la cápsula letal y no podían destruirlas. <strong>Los ratones
+                                morían de neumonía</strong>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ANOMALÍAS Y ENIGMAS -->
+            <div class="article-section reveal" id="sec-anomalias">
+                <span class="section-label">3. Anomalías y Enigmas</span>
+                <h2 class="article-h2">Resurrección <span>microbiológica</span></h2>
+                <p class="article-p">
+                    Como experimentador prudente, Griffith introdujo una nueva variable en el sistema. Tomó bacterias
+                    letales de la Cepa S y procedió a hervirlas aplicando intenso calor. Como era matemáticamente
+                    esperable biológicamente, el calor las carbonizó destruyéndolas por completo. Al inyectar estos
+                    "cadáveres bacterianos S", confirmando la racionalidad, <strong>los ratones vivieron sanos</strong>
+                    sin problema alguno.
+                </p>
+                <p class="article-p">
+                    La gran anomalía devastadora, que quebró las barreras de la racionalidad de la época, surgió en el
+                    cuarto tubo de ensayo experimental: cuando decidió combinar las bacterias de Cepa R vivas (que son
+                    inofensivas) inyectándolas simultáneamente con el caldo de bacterias S muertas por calor (que al
+                    estar muertas, también eran inofensivas).
+                </p>
+
+                <div class="callout dark-box">
+                    <div class="callout-tag">🔬 El Enigma de la Época</div>
+                    <div class="callout-title">El choque letal entre lo vivo y lo inerte</div>
+                    <p>
+                        A pesar del silogismo lógico aparente (inofensivo + inofensivo = inofensivo), al aplicar la
+                        mezcla letal el ratón <strong>enfermó brutalmente y murió de neumonía</strong> en poco tiempo.
+                        Pero la verdadera crisis ocurrió en la autopsia del roedor: de su sangre purulenta, Griffith
+                        aisló y encontró millones de bacterias de Cepa S relucientes, enteramente vivas y letales,
+                        construyendo su mortífera cápsula protectora con fluidez. ¿Cómo era posible si él las había
+                        calcinado?
+                    </p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- HIPÓTESIS -->
+            <div class="article-section reveal" id="sec-hipotesis">
+                <span class="section-label">4. Hipótesis Constrictivas</span>
+                <h2 class="article-h2">El Principio <span>Transformante</span></h2>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <div class="concept-name">La Hipótesis de Griffith</div>
+                        <div class="concept-def">
+                            Desesperado por darle sentido racional a la innegable letalidad de los ratones post-mortem,
+                            Griffith estipuló lúcidamente que las bacterias S (Lisa), aunque murieran físicamente
+                            calcinadas, liberaban a su entorno una misteriosa "sustancia química de la herencia" que las
+                            bacterias R vivas absorbían del caldo como verdaderas esponjas,
+                            <strong>transformándose</strong> y reescribiendo su propia identidad para volverse
+                            mortíferas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- EVIDENCIA EXPERIMENTAL -->
+            <div class="article-section reveal" id="sec-evidencia">
+                <span class="section-label">5. Evidencia Experimental</span>
+                <h2 class="article-h2">Las <span>cuatro fases</span> del Ensayo</h2>
+
+                <p class="article-p">
+                    El experimento clásico constó rigurosamente de 4 fases o inyecciones metódicas y observacionales en
+                    ratones, constituyendo un hito epistemológico donde cada variable aislada jugaba a favor y en contra
+                    de demostrar el fenómeno.
+                </p>
+
+                <div class="img-hover-container reveal">
+                    <img src="experimento_griffith.jpg" alt="Esquema del Experimento de Griffith con ratones"
+                        class="img-hover-scale" style="width:100%; height:auto; display:block; border-radius:16px;">
+                </div>
+
+                <p class="article-p">
+                    El "Principio Transformante" era innegable. Había algo, una molécula precisa y material en la
+                    naturaleza, que sobrevivía al holocausto del intenso fuego y que la bacteria viva recolectaba de los
+                    escombros de las bacterias muertas como en un <em>lego de legados</em>.
+                </p>
+
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- CONCLUSIONES -->
+            <div class="article-section reveal" id="sec-conclusiones">
+                <span class="section-label">6. Conclusiones y Legado</span>
+                <h2 class="article-h2">El colapso del <span>paradigma proteico</span></h2>
+                <p class="article-p">
+                    Trágicamente para él, Griffith no vivió lo suficiente para saber cuál era exactamente esa molécula
+                    misteriosa; murió en 1941 durante un bombardeo aéreo en Londres. Su experimento, sin embargo,
+                    estableció la anomalía fundamental paradigmática. Había plantado la duda razonable.
+                </p>
+                <p class="article-p">
+                    Este experimento biológico forzó al establishment académico a abandonar sus preconcepciones
+                    dogmáticas. Dieciséis años después (en 1944 gracias al colosal experimento de Avery, MacLeod y
+                    McCarty que aisló puramente el principio de Griffith), se logró admitir lo inimaginable: las
+                    proteínas no importan como plano estructural. <strong>El <em>Factor Transformante</em> inerte
+                        biológico que reescribía a la Cepa R letal, recaía única y exclusivamente en el aburrido
+                        ADN.</strong> El paradigma científico colapsó y renació, dando paso oficial a la Genética
+                    Molecular Moderna que culminaría con Rosalind Franklin y Watson-Crick.
+                </p>
+                <div class="callout yellow reveal">
+                    <div class="callout-tag">⚖️ Epistemología Crítica: La Serendipia</div>
+                    <div class="callout-title">Buscar la plata y encontrar el oro</div>
+                    <p>
+                        El experimento de Griffith es un ejemplo dorado de <strong>serendipia</strong> de descubrimiento
+                        de primer orden. Buscando en estricto rigor biomédico una simple vacuna para la neumonía humana
+                        de calle, construyó inadvertidamente el peldaño basal lógico más fuerte de toda la historia de
+                        la naciente genética molecular, encendiendo el motor del quiebre paradigmático para encontrar la
+                        posterior Doble Hélice en 1953.
+                    </p>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- ===================== SIDEBAR ===================== -->
+        <aside class="article-sidebar">
+            <div class="sidebar-sticky">
+
+                <!-- TOC -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-list-ul"></i> Contenidos
+                    </div>
+                    <ul class="toc-list">
+                        <li class="toc-item"><a href="#sec-contexto"><span class="toc-num">01</span> Contexto
+                                Histórico</a></li>
+                        <li class="toc-item"><a href="#sec-actores"><span class="toc-num">02</span> Principales
+                                Actores</a></li>
+                        <li class="toc-item"><a href="#sec-anomalias"><span class="toc-num">03</span> Enigmas y
+                                Anomalías</a></li>
+                        <li class="toc-item"><a href="#sec-hipotesis"><span class="toc-num">04</span> Hipótesis</a></li>
+                        <li class="toc-item"><a href="#sec-evidencia"><span class="toc-num">05</span> Evidencia
+                                Experimental</a></li>
+                        <li class="toc-item"><a href="#sec-conclusiones"><span class="toc-num">06</span>
+                                Conclusiones</a></li>
+                    </ul>
+                </div>
+
+                <!-- KEY CONCEPTS -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-key"></i> Conceptos Clave
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Transformación Bacteriana</div>
+                        <div class="concept-mini-def">Mecanismo biológico donde una bacteria adopta e integra
+                            activamiento fragmentos de herencia libre abandonados en su ambiente.</div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Serendipia Epistémica</div>
+                        <div class="concept-mini-def">Descubrimiento asombrosamente afortunado e inesperado que se
+                            produce cuando se está investigando lícitamente otra cosa completamente distinta.</div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Cepa Lisa y Rugosa</div>
+                        <div class="concept-mini-def">Aparato experimental bimembre que diferenciaba mortalmente
+                            neumococos blindados por azúcar (lisos) de bacterias fácilmente digeribles inofensivas
+                            (rugosas).</div>
+                    </div>
+                </div>
+
+                <!-- PHILOSOPHER -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-vial"></i> El Experimento Clave
+                    </div>
+                    <div class="philosopher-card">
+                        <div class="philosopher-avatar">G</div>
+                        <div>
+                            <div class="philosopher-name">La Inyección Mixta</div>
+                            <div class="philosopher-dates">El tubo IV</div>
+                            <div class="philosopher-bio">
+                                El momento cúspide en 1928 al combinar cepas R inofensivas vivas con restos S
+                                calcinados. Al autopsiar a los roedores colapsados, encontró asombrosamente bacterias
+                                vivas letales que habían revivido genéticamente.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- ===================== FOOTER NAV ===================== -->
+    <nav class="article-footer-nav">
+        <a href="unidad2-clase13.html" class="footer-nav-link prev">
+            <div class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></div>
+            <div>
+                <div class="footer-nav-direction">Clase Anterior</div>
+                <div class="footer-nav-title">U2·C13 — El ADN</div>
+            </div>
+        </a>
+        <a href="unidad2-clase15.html" class="footer-nav-link primary">
+            <div style="text-align:right;">
+                <div class="footer-nav-direction">Siguiente Clase</div>
+                <div class="footer-nav-title">U2·C15 — Meselson-Stahl</div>
+            </div>
+            <div class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+    </nav>
+
+    <script>
+        // ── DARK MODE ──
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // ── PROGRESS BAR ──
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+
+        // ── REVEAL ON SCROLL ──
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // ── SMOOTH SCROLL TOC ──
+        function scrollTo(id) {
+            const el = document.querySelector(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── TOC ACTIVE ──
+        const sections = document.querySelectorAll('.article-section[id]');
+        const tocItems = document.querySelectorAll('.toc-item');
+        const tocObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    tocItems.forEach(t => t.querySelector('a').classList.remove('active'));
+                    const match = [...tocItems].find(t => t.querySelector('a').getAttribute('href') === '#' + e.target.id);
+                    if (match) match.querySelector('a').classList.add('active');
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => tocObs.observe(s));
+    </script>
+</body>
+
+</html>

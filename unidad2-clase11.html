@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lógica y Tablas de Verdad | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --blue: #2563eb;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, .6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .4s, color .4s;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        /* TOPNAV */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background .4s, border-color .4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        /* HERO */
+        #art-hero {
+            background: linear-gradient(160deg, rgba(15, 23, 42, .85) 0%, rgba(5, 10, 24, .96) 100%);
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-purple {
+            background: #7c3aed;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 6.5vw, 84px);
+            font-weight: 900;
+            line-height: .93;
+            letter-spacing: -.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(15px, 2.2vw, 20px);
+            color: rgba(255, 255, 255, .8);
+            max-width: 700px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        /* ARTICLE LAYOUT */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: .8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .art-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 56px 0;
+        }
+
+        /* TABLES */
+        .tt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: var(--bg2);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .tt-table th {
+            background: var(--bg3);
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 16px;
+            border-bottom: 2px solid var(--border);
+            color: var(--text);
+        }
+
+        .tt-table td {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text2);
+        }
+
+        .tt-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tt-true {
+            color: #16a34a !important;
+            font-weight: 800;
+        }
+
+        .tt-false {
+            color: #dc2626 !important;
+            font-weight: 800;
+        }
+
+        .dark .tt-true {
+            color: #22c55e !important;
+        }
+
+        .dark .tt-false {
+            color: #ef4444 !important;
+        }
+
+        /* CALLOUTS */
+        .callout {
+            background: var(--bg3);
+            border-left: 4px solid var(--yellow);
+            padding: 28px 32px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        /* SIDEBAR */
+        #sidebar {
+            position: sticky;
+            top: 70px;
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sb-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .sb-title {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .toc-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .toc-item:last-child {
+            border-bottom: none;
+        }
+
+        .toc-item:hover {
+            color: var(--yellow-dark);
+        }
+
+        .nav-class-btn {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .nav-class-btn:hover,
+        .nav-class-btn.primary:hover {
+            transform: translateX(4px);
+        }
+
+        .nav-class-btn.primary {
+            background: var(--yellow);
+            border-color: var(--yellow-dark);
+        }
+
+        .nav-class-info .nav-class-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .nav-class-btn.primary .nav-class-label {
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .nav-class-info .nav-class-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .nav-class-btn.primary .nav-class-title {
+            color: #000;
+        }
+
+        /* FOOTER */
+        .art-footer {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 32px;
+        }
+
+        .art-footer-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-nav {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        @media(min-width:640px) {
+            .footer-nav {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .footer-nav-card {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all .25s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-nav-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-nav-card.primary {
+            background: var(--yellow);
+        }
+
+        .fn-icon {
+            font-size: 24px;
+        }
+
+        .fn-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-card.primary .fn-label {
+            color: rgba(0, 0, 0, .55);
+        }
+
+        .fn-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-nav-card.primary .fn-title {
+            color: #000;
+        }
+
+        .footer-credits {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .footer-credits a {
+            color: var(--yellow-dark);
+        }
+
+        /* REVEAL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progress"></div>
+
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Inicio</span>
+            </a>
+            <span class="nav-sep">|</span>
+            <div class="breadcrumb">Unidad 2 · <span>Clase 11</span></div>
+        </div>
+        <div class="topnav-center">Lógica Proposicional y Tablas de Verdad</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase10.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 10
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase12.html'">
+                Clase 12 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <header id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDAD 2</span>
+            <span class="hero-badge-outline">CLASE 11</span>
+            <span class="hero-badge-purple">CIENCIAS FORMALES</span>
+        </div>
+        <p class="hero-eyebrow">Construyendo el Mundo Lingüístico</p>
+        <h1 class="hero-title">
+            Tablas de <em>V</em>erdad y<br>Conectores Lógicos
+        </h1>
+        <p class="hero-subtitle">
+            Cómo la filosofía deforma el lenguaje natural en esquemas exactos para ayudarnos a deducir cómo funciona en
+            el fondo la realidad (y cómo programar circuitos).
+        </p>
+    </header>
+
+    <main class="article-wrap">
+        <div class="article-content">
+
+            <section class="article-section" id="s-prop">
+                <span class="section-label">§ 1 — El Lenguaje Formalizado</span>
+                <h2 class="article-h2">Las <span>Proposiciones</span> y lo Real</h2>
+                <p class="article-p dropcap">
+                    Para entender cómo la lógica nos ayuda a teorizar sobre el mundo cotidiano, primero debemos aislar
+                    lo que decimos diariamente. En lógica clásica solo nos interesan las frases que pueden ser o
+                    puramente <strong>Verdaderas (V)</strong> o puramente <strong>Falsas (F)</strong>. A estas frases
+                    las llamamos "proposiciones".
+                </p>
+                <p class="article-p">
+                    No nos sirve una exclamación poética ("¡Qué lindo día!") ni una pregunta ("¿Lloverá mañana?"),
+                    porque esas frases no describen un hecho comprobable en la realidad. La lógica necesita oraciones
+                    como <strong>"Está lloviendo"</strong> (a la que llamaremos <em>p</em>) o <strong>"Yo uso
+                        paraguas"</strong> (a la que llamaremos <em>q</em>).
+                </p>
+                <p class="article-p">
+                    Pero el mundo rara vez es un solo hecho aislado. Normalmente en nuestra vida cotidiana las
+                    situaciones se conectan ("Si está lloviendo, entonces uso paraguas"). ¿Cómo representamos esas
+                    conexiones rigurosamente para no cometer falacias o errores de pensamiento? Ahí entran los
+                    <strong>conectores lógicos</strong>.
+                </p>
+            </section>
+
+            <hr class="art-divider">
+
+            <section class="article-section" id="s-conectores">
+                <span class="section-label">§ 2 — Herramientas de Inferencia</span>
+                <h2 class="article-h2">Los <span>Conectores Lógicos</span></h2>
+
+                <p class="article-p">
+                    Vamos a revisar los cinco conectores fundamentales, utilizando nuestras dos proposiciones sencillas
+                    del mundo real (<strong>p:</strong> Está lloviendo, <strong>q:</strong> Llevo paraguas).
+                </p>
+
+                <!-- Negación -->
+                <div class="callout" style="border-left-color: #dc2626;">
+                    <div class="callout-title" style="color: #dc2626;"><i class="fa-solid fa-ban"></i> Negación ( ¬ )
+                    </div>
+                    <p class="article-p" style="margin-bottom:0;">
+                        <strong>Símbolo:</strong> ¬p <br>
+                        <strong>Ejemplo cotidiano:</strong> "No está lloviendo." <br>
+                        <strong>¿Para qué sirve?</strong> Para contradecir frontalmente una hipótesis y analizar el caso
+                        opuesto. Simplemente invierte la verdad de lo que planteamos. Si es verdad que llueve, la
+                        negación es falsa, y viceversa.
+                    </p>
+                </div>
+
+                <table class="tt-table">
+                    <tr>
+                        <th>p</th>
+                        <th>¬p</th>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                </table>
+
+                <!-- Conjunción -->
+                <div class="callout" style="border-left-color: #2563eb;">
+                    <div class="callout-title" style="color: #2563eb;"><i class="fa-solid fa-link"></i> Conjunción ( ∧ )
+                    </div>
+                    <p class="article-p" style="margin-bottom:0;">
+                        <strong>Símbolo:</strong> p ∧ q <br>
+                        <strong>Se lee:</strong> "p Y q" <br>
+                        <strong>Ejemplo cotidiano:</strong> "Está lloviendo Y llevo paraguas." <br>
+                        <strong>¿Para qué sirve?</strong> Nos dice que para que una teoría o descripción combinada sea
+                        cierta, <em>ambas</em> partes deben ser ciertas simultáneamente. Si está lloviendo pero me
+                        olvidé el paraguas, toda la frase general "Llueve y tengo paraguas" es mentira.
+                    </p>
+                </div>
+
+                <table class="tt-table">
+                    <tr>
+                        <th>p</th>
+                        <th>q</th>
+                        <th>p ∧ q</th>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                </table>
+
+                <!-- Disyunción -->
+                <div class="callout" style="border-left-color: #facc15;">
+                    <div class="callout-title" style="color: var(--yellow-dark);"><i
+                            class="fa-solid fa-code-branch"></i> Disyunción ( ∨ )</div>
+                    <p class="article-p" style="margin-bottom:0;">
+                        <strong>Símbolo:</strong> p ∨ q <br>
+                        <strong>Se lee:</strong> "p O q" <br>
+                        <strong>Ejemplo cotidiano:</strong> "Está lloviendo O llevo paraguas." <br>
+                        <strong>¿Para qué sirve?</strong> Nos ayuda a catalogar opciones. Las teorías pueden bifurcarse.
+                        Solo es falsa si ambas cosas son rotundamente falsas a la vez (por ejemplo, si salió el sol y
+                        encima ando sin paraguas).
+                    </p>
+                </div>
+
+                <table class="tt-table">
+                    <tr>
+                        <th>p</th>
+                        <th>q</th>
+                        <th>p ∨ q</th>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                </table>
+
+                <!-- Implicación -->
+                <div class="callout" style="border-left-color: #ec4899;">
+                    <div class="callout-title" style="color: #ec4899;"><i class="fa-solid fa-arrow-right"></i>
+                        Implicación Condicional ( → )</div>
+                    <p class="article-p" style="margin-bottom:0;">
+                        <strong>Símbolo:</strong> p → q <br>
+                        <strong>Se lee:</strong> "Si p, entonces q" <br>
+                        <strong>Ejemplo cotidiano:</strong> "Si está lloviendo, entonces llevo paraguas." <br>
+                        <strong>¿Para qué sirve?</strong> Es la piedra angular de la ciencia empírica y del método
+                        científico (causa-efecto). Solo es mentira en un caso: si la causa se cumple (llueve) y el
+                        efecto no (salgo sin paraguas). Curiosamente, si la causa es falsa (hay sol total), la frase en
+                        general sigue siendo "lógicamente válida" (puedo llevar paraguas por si acaso, o no llevarlo, no
+                        estoy rompiendo la promesa inicial porque la promesa solo aplicaba *si* llovía).
+                    </p>
+                </div>
+
+                <table class="tt-table">
+                    <tr>
+                        <th>p</th>
+                        <th>q</th>
+                        <th>p → q</th>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                </table>
+
+                <!-- Doble Implicación -->
+                <div class="callout" style="border-left-color: #8b5cf6;">
+                    <div class="callout-title" style="color: #8b5cf6;"><i class="fa-solid fa-arrows-left-right"></i>
+                        Doble Implicación ( ↔ )</div>
+                    <p class="article-p" style="margin-bottom:0;">
+                        <strong>Símbolo:</strong> p ↔ q <br>
+                        <strong>Se lee:</strong> "p si y solo si q" <br>
+                        <strong>Ejemplo cotidiano:</strong> "Llevo paraguas si y solo si está lloviendo." <br>
+                        <strong>¿Para qué sirve?</strong> Es una conexión rígida y exacta, excelente para leyes
+                        universales que funcionan en ambas direcciones. Son como sinónimos prácticos. Solo es verdad si
+                        ambas ocurren (las dos V) o si ninguna ocurre (las dos F).
+                    </p>
+                </div>
+
+                <table class="tt-table">
+                    <tr>
+                        <th>p</th>
+                        <th>q</th>
+                        <th>p ↔ q</th>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-true">V</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                        <td class="tt-false">F</td>
+                    </tr>
+                    <tr>
+                        <td class="tt-false">F</td>
+                        <td class="tt-false">F</td>
+                        <td class="tt-true">V</td>
+                    </tr>
+                </table>
+
+            </section>
+
+            <hr class="art-divider">
+
+            <section class="article-section" id="s-morgan">
+                <span class="section-label">§ 3 — Leyes Lógicas de Equivalencia</span>
+                <h2 class="article-h2">Las <span>Leyes de De Morgan</span></h2>
+                <p class="article-p">
+                    Augustus De Morgan fue un matemático que descubrió que podemos "transformar" lógicamente
+                    conjunciones (Y) en disyunciones (O) si jugamos de manera correcta con la negación. A primera vista
+                    parece confuso, pero en la práctica humana tiene muchísimo sentido analítico. Nos ayuda enormemente
+                    a decodificar oraciones complejas que parecen ocultar engaños argumentativos.
+                </p>
+
+                <h3 class="article-h2" style="font-size: 22px; margin-top:32px;">1. Primera Ley: La negación de una
+                    Conjunción</h3>
+                <p class="article-p"
+                    style="font-family:'Courier New', monospace; font-weight:600; color:var(--yellow-dark);">¬(p ∧ q) ↔
+                    (¬p ∨ ¬q)</p>
+                <p class="article-p">
+                    <em>"No es cierto que (llueve y hago calor)."</em><br>
+                    Si alguien afirma eso y le aplicamos De Morgan, lógicamente equivale a decir:
+                    <em>"O no llueve, o no hace calor"</em>. Si algo falla conjuntamente, quiere decir que por lo menos
+                    uno de los dos componentes está fallando.
+                </p>
+
+                <h3 class="article-h2" style="font-size: 22px; margin-top:32px;">2. Segunda Ley: La negación de una
+                    Disyunción</h3>
+                <p class="article-p"
+                    style="font-family:'Courier New', monospace; font-weight:600; color:var(--yellow-dark);">¬(p ∨ q) ↔
+                    (¬p ∧ ¬q)</p>
+                <p class="article-p">
+                    <em>"No es el caso que (llueva o nieva)."</em><br>
+                    Si no pasa ni una ni tampoco la otra, entonces la transformación mediante De Morgan revela una
+                    conjunción rotunda y negativa: <em>"Ni llueve Y además ni nieva"</em>. Corta todas las opciones al
+                    mismo tiempo.
+                </p>
+
+            </section>
+
+            <br><br>
+            <div class="nav-class-btn primary" onclick="window.location.href='unidad2-clase12.html'"
+                style="cursor:pointer;" title="Próxima Clase">
+                <div class="nav-class-info">
+                    <div class="nav-class-label">Próxima clase</div>
+                    <div class="nav-class-title">Controversias: Pasteur vs. Pouchet</div>
+                </div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+
+        </div>
+
+        <aside id="sidebar">
+            <div class="sb-card">
+                <span class="sb-title">Índice de la Clase 11</span>
+                <div class="toc-item" onclick="document.getElementById('s-prop').scrollIntoView();">
+                    <div class="toc-num">1</div>
+                    <div class="toc-text">Proposiciones</div>
+                </div>
+                <div class="toc-item" onclick="document.getElementById('s-conectores').scrollIntoView();">
+                    <div class="toc-num">2</div>
+                    <div class="toc-text">Conectores (Y, O, Si...entonces)</div>
+                </div>
+                <div class="toc-item" onclick="document.getElementById('s-morgan').scrollIntoView();">
+                    <div class="toc-num">3</div>
+                    <div class="toc-text">Leyes de De Morgan</div>
+                </div>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+    <footer class="art-footer">
+        <div class="art-footer-inner">
+            <div class="footer-nav">
+                <a href="unidad2-clase10.html" class="footer-nav-card">
+                    <div class="fn-icon">←</div>
+                    <div>
+                        <div class="fn-label">Clase anterior</div>
+                        <div class="fn-title">Lógica y Sistemas</div>
+                    </div>
+                </a>
+                <a href="index.html" class="footer-nav-card">
+                    <div class="fn-icon">🏠</div>
+                    <div>
+                        <div class="fn-label">Volver al inicio</div>
+                        <div class="fn-title">Revista Filosofía &amp; Ciencia</div>
+                    </div>
+                </a>
+
+                <a href="unidad2-clase12.html" class="footer-nav-card primary">
+                    <div class="fn-icon">→</div>
+                    <div>
+                        <div class="fn-label">Próxima clase</div>
+                        <div class="fn-title">U2·C12 — Pasteur vs. Pouchet</div>
+                    </div>
+                </a>
+            </div>
+            <div class="footer-credits">
+                Filosofía e Historia de la Ciencia y la Tecnología · 6to Año ·
+                <a href="index.html">Los Polvorines, 2025</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── DARK MODE ──────────────────────────────────────────────
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+        // ── PROGRESS BAR ──────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+
+        // ── REVEAL ON SCROLL ──────────────────────────────────────
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // ── SMOOTH SCROLL TOC ──────────────────────────────────────
+        function scrollTo(id) {
+            const el = document.querySelector(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── TOC ACTIVE ─────────────────────────────────────────────
+        const sections = document.querySelectorAll('.article-section[id]');
+        const tocItems = document.querySelectorAll('.toc-item');
+        const tocObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    tocItems.forEach(t => t.classList.remove('active'));
+                    const match = [...tocItems].find(t => t.getAttribute('onclick')?.includes(e.target.id));
+                    if (match) match.classList.add('active');
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => tocObs.observe(s));
+    </script>
+</body>
+
+</html>

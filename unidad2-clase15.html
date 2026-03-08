@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasteur vs. Pouchet: La Generación Espontánea | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ===================== VARIABLES ===================== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111111;
+            --bg2: #1a1a1a;
+            --bg3: #222222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.4s, color 0.4s;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        /* ===================== PROGRESS BAR ===================== */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+
+        /* ===================== TOP NAV ===================== */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background 0.4s, border-color 0.4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        #art-hero {
+            background:
+                linear-gradient(135deg, rgba(8, 14, 25, 0.95) 0%, rgba(15, 23, 42, 0.8) 100%),
+                url('meselson stahl.jpg') center/cover no-repeat;
+            background-color: #000;
+            text-shadow: 0 2px 24px rgba(0, 0, 0, .95), 0 0 40px rgba(0, 0, 0, .5);
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 7vw, 88px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 640px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 0.05em;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: 0.3;
+            }
+        }
+
+        /* ===================== ARTICLE LAYOUT ===================== */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        /* MAIN CONTENT */
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        /* Dropcap */
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: 0.8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .article-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin: 32px 0 14px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            border-left: 5px solid var(--yellow);
+            padding: 20px 28px;
+            margin: 36px 0;
+            position: relative;
+        }
+
+        .pull-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+            font-weight: 900;
+            color: var(--yellow);
+            opacity: 0.15;
+            position: absolute;
+            top: -20px;
+            left: 16px;
+            line-height: 1;
+        }
+
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(18px, 3vw, 26px);
+            line-height: 1.4;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+        }
+
+        .pull-quote-author {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-top: 12px;
+        }
+
+        /* Image / Figure */
+        .figure {
+            margin: 36px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .figure-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .figure-img-placeholder {
+            width: 100%;
+            height: 280px;
+            background: var(--bg3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 64px;
+        }
+
+        .figure-caption {
+            padding: 14px 20px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text3);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .figure-caption strong {
+            color: var(--text2);
+            font-style: normal;
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 32px 0;
+        }
+
+        .callout.yellow {
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border: 1px solid #fde68a;
+        }
+
+        .dark .callout.yellow {
+            background: linear-gradient(135deg, #2a2400, #1a1800);
+            border-color: #5a4a00;
+        }
+
+        .callout.dark-box {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+
+        .callout.red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 1px solid #fca5a5;
+        }
+
+        .dark .callout.red {
+            background: linear-gradient(135deg, #200808, #1a0606);
+            border-color: #7f1d1d;
+        }
+
+        .callout-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .callout.yellow .callout-tag {
+            color: #92400e;
+        }
+
+        .callout.red .callout-tag {
+            color: #991b1b;
+        }
+
+        .callout.dark-box .callout-tag {
+            color: var(--yellow-dark);
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .callout p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        .callout p+p {
+            margin-top: 10px;
+        }
+
+        /* Concept grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin: 28px 0;
+        }
+
+        @media(min-width:640px) {
+            .concept-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .concept-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px 22px;
+            border-top: 4px solid var(--yellow);
+        }
+
+        .concept-card.red-top {
+            border-top-color: var(--red);
+        }
+
+        .concept-card.blue-top {
+            border-top-color: #2563eb;
+        }
+
+        .concept-name {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .concept-name.red {
+            color: var(--red);
+        }
+
+        .concept-name.blue {
+            color: #2563eb;
+        }
+
+        .concept-def {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text2);
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 32px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            padding-bottom: 28px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 36px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: var(--border);
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-dot.muted {
+            background: var(--bg3);
+            color: var(--text3);
+            border: 2px solid var(--border);
+            font-size: 11px;
+        }
+
+        .timeline-year {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--yellow-dark);
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .timeline-event {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        /* Divider */
+        .art-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 48px 0;
+        }
+
+        /* ===================== SIDEBAR ===================== */
+
+        .sidebar-sticky {
+            position: sticky;
+            top: 72px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .sidebar-card-header {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 20px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Table of contents */
+        .toc-list {
+            list-style: none;
+            padding: 12px 0;
+        }
+
+        .toc-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            font-size: 13px;
+            color: var(--text3);
+            transition: all var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item a:hover,
+        .toc-item a.active {
+            color: var(--text);
+            background: var(--bg3);
+            border-left-color: var(--yellow);
+        }
+
+        .toc-num {
+            font-size: 11px;
+            color: var(--yellow-dark);
+            font-weight: 700;
+            min-width: 20px;
+        }
+
+        /* Key concepts sidebar */
+        .concept-mini {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .concept-mini:last-child {
+            border-bottom: none;
+        }
+
+        .concept-mini-name {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 5px;
+        }
+
+        .concept-mini-def {
+            font-size: 12px;
+            line-height: 1.55;
+            color: var(--text3);
+        }
+
+        /* Philosopher card */
+        .philosopher-card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .philosopher-card:last-child {
+            border-bottom: none;
+        }
+
+        .philosopher-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg3);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+
+        .philosopher-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .philosopher-dates {
+            font-size: 11px;
+            color: var(--yellow-dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .philosopher-bio {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        /* Unit connection */
+        .unit-connection {
+            padding: 20px;
+        }
+
+        .unit-conn-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .unit-conn-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--yellow);
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .unit-conn-text {
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--text2);
+        }
+
+        /* Next class */
+        .next-class {
+            padding: 20px;
+        }
+
+        .next-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--text3);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .next-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .btn-next {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--yellow);
+            color: #000;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all var(--transition);
+            width: 100%;
+        }
+
+        .btn-next:hover {
+            background: var(--yellow-dark);
+        }
+
+        .btn-next.disabled {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text3);
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* ===================== FOOTER NAV ===================== */
+        .article-footer-nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-radius: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+            cursor: pointer;
+            max-width: 300px;
+        }
+
+        .footer-nav-link:hover {
+            border-color: var(--yellow);
+            transform: translateX(4px);
+        }
+
+        .footer-nav-link.prev:hover {
+            transform: translateX(-4px);
+        }
+
+        .footer-nav-link.primary {
+            background: var(--yellow);
+            border-color: var(--yellow-dark);
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .footer-nav-link.primary:hover {
+            background: var(--yellow-dark);
+        }
+
+        .footer-nav-link.primary .footer-nav-direction {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .footer-nav-link.primary .footer-nav-title,
+        .footer-nav-link.primary .footer-nav-icon {
+            color: #000;
+        }
+
+        /* Hover image scale */
+        .img-hover-scale {
+            transition: transform 0.65s cubic-bezier(0.25, 1.0, 0.5, 1.0);
+        }
+
+        .img-hover-container {
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin: 36px 0;
+            cursor: pointer;
+        }
+
+        .img-hover-container:hover .img-hover-scale {
+            transform: scale(1.05);
+        }
+
+        .footer-nav-direction {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+        }
+
+        .footer-nav-icon {
+            font-size: 18px;
+            color: var(--text3);
+        }
+
+        /* ===================== REVEAL ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    <!-- TOP NAV -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Volver
+            </a>
+            <span class="nav-sep">|</span>
+            <div class="breadcrumb">
+                <span>Unidad 2</span> · Clase 15
+            </div>
+        </div>
+        <div class="topnav-center">FILOSOFÍA&CIENCIA · 2025</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad2-clase14.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 14
+            </button>
+            <button class="nav-btn" onclick="window.print()">
+                <i class="fa-solid fa-file-pdf"></i> PDF
+            </button>
+            <button class="dark-toggle-nav" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">UNIDAD 2 · CLASE 15</span>
+            <span class="hero-badge-outline">CONTROVERSIAS CIENTÍFICAS</span>
+        </div>
+        <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6° Año</p>
+        <h1 class="hero-title">
+            Meselson y Stahl:<br>El Experimento<br><em>Más Bello</em>
+        </h1>
+        <p class="hero-subtitle">
+            Cómo la ultracentrifugación y los isótopos de nitrógeno confirmaron en 1958 el mecanismo exacto de la
+            replicación del ADN, resolviendo la última pieza del rompecabezas.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-dna"></i>
+                <span>Biología Molecular y Método</span>
+            </div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-calendar"></i>
+                <span>EE.UU., 1958</span>
+            </div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item">
+                <i class="fa-solid fa-clock"></i>
+                <span>60 min · Clase 15</span>
+            </div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Comenzar</span>
+        </div>
+    </header>
+
+    <!-- ARTICLE BODY -->
+    <main class="article-wrap">
+
+        <!-- ===================== MAIN CONTENT ===================== -->
+        <article class="article-main">
+
+            <!-- CONTEXTO HISTÓRICO -->
+            <div class="article-section reveal" id="sec-contexto">
+                <span class="section-label">1. Contexto Espacio-temporal</span>
+                <h2 class="article-h2">Un debate <span>obstinado</span></h2>
+                <p class="article-p dropcap">
+                    A pesar de que los experimentos previos (como el de Griffith) sugerían fuertemente la existencia de
+                    un "principio transformante", hacia la década de 1950 una enorme fracción de la comunidad científica
+                    aún se negaba a aceptar que el ADN fuera el portador de la herencia genética. Para la mayoría, aquel
+                    misterioso ADN seguía siendo un andamio estructural aburrido, mientras que las majestuosas
+                    <strong>proteínas</strong>, llenas de variedades químicas, eran las verdaderas divinidades de la
+                    información biológica.
+                </p>
+                <p class="article-p">
+                    Para quebrar por completo esta obcecada convicción conservadora, se iba a requerir de un experimento
+                    definitivo, uno con un diseño tan aséptico y brutal que el paradigma de las proteínas no pudiera
+                    refugiarse jamás en interpretaciones dudosas.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- HERSHEY-CHASE EXPERIMENT -->
+            <div class="article-section reveal" id="sec-fagos">
+                <span class="section-label">2. El Veredicto (1952)</span>
+                <h2 class="article-h2">Hershey, Chase y los <span>Bacteriófagos</span></h2>
+                <p class="article-p">
+                    En 1952, Alfred Hershey y Martha Chase utilizaron como modelo al <strong>Bacteriófago T2</strong>,
+                    un virus que infecta bacterias compuesto exclusivamente de una cápside exterior de proteínas y un
+                    núcleo interior puro de ADN. El misterio central era simple: al aterrizar sobre una bacteria, ¿qué
+                    sustancia biológica le inyectaba el virus para "secuestrar" su maquinaria?
+                </p>
+
+                <div class="callout dark-box">
+                    <div class="callout-tag">☢️ El Diseño Experimental</div>
+                    <div class="callout-title">Los isótopos y la batidora Waring</div>
+                    <p>
+                        Para resolverlo, marcaron las proteínas virales con <strong>Azufre Radiactivo (S-35)</strong> y
+                        el ADN viral con <strong>Fósforo Radiactivo (P-32)</strong>. Dejaron que ambos virus atacaran
+                        bacterias y, mediante una licuadora de cocina convencional, batieron fuertemente la mezcla para
+                        desprender las carcasas virales vacías del exterior bacteriano para luego centrifugar todo.
+                    </p>
+                </div>
+
+                <div class="img-hover-container reveal">
+                    <img src="virus-hershey.jpg" alt="Infografía del Experimento Hershey-Chase (1952)"
+                        class="img-hover-scale" style="width:100%; height:auto; display:block; border-radius:16px;">
+                </div>
+
+                <p class="article-p">
+                    <strong>La caída del dogma:</strong> La radiactividad hallada adentro de las bacterias infectadas
+                    (sedimentadas en el fondo) provino <strong>exclusivamente del fósforo (ADN)</strong>. Las proteínas
+                    se habían quedado afuera como envases vacíos inútiles. El ADN fue coronado definitivamente como la
+                    molécula indiscutible de la herencia universal.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- EL NUEVO ENIGMA -->
+            <div class="article-section reveal" id="sec-nuevo-enigma">
+                <span class="section-label">3. El Enigma Siguiente</span>
+                <h2 class="article-h2">Tras la gloria de <span>1953</span></h2>
+                <p class="article-p">
+                    Habiendo establecido el reinado del ADN, y tras el descubrimiento de su majestuosa doble hélice por
+                    Watson y Crick en 1953, nació otro misterio biológico igual de inmenso. Sabiendo ahora *cómo* era la
+                    molécula, la ciencia se obsesionó con responder una pregunta urgente: ¿<strong>De qué manera
+                        exacta</strong> la célula logra copiar esta inmensa biblioteca cada vez que se divide, de forma
+                    tan ridículamente exacta que la vida pueda prosperar?
+                </p>
+                <p class="article-p">
+                    Watson y Crick postularon intuitivamente que, al ser dos hebras complementarias (A-T, C-G),
+                    seguramente cada una servía de "molde" para construir a la otra. Sin embargo, esto seguía siendo una
+                    bella especulación teórica. Hacía falta empíria dura para comprobar tal mecanismo de copiado.
+                </p>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ACTORES PRINCIPALES -->
+            <div class="article-section reveal" id="sec-actores">
+                <span class="section-label">4. Hipótesis en Conflicto</span>
+                <h2 class="article-h2">El choque de los <span>tres modelos</span></h2>
+
+                <p class="article-p dropcap">
+                    En aquellos años cincuenta, tres hipótesis rivales batallaban furiosamente para convertirse en el
+                    nuevo paradigma oficial acerca de <strong>cómo</strong> la hélice lograba autorreplicarse.
+                </p>
+
+                <div class="concept-grid">
+                    <div class="concept-card blue-top">
+                        <div class="concept-name blue">Modelo Semiconservativo</div>
+                        <div class="concept-def">
+                            La teoría hipotetizada por Watson y Crick. Establecía que la doble hélice matriz "se abría
+                            como un cierre", y a cada una de esas dos hebras viejas solitarias y separadas se le pegaban
+                            nucleótidos nuevos para formar su nueva pareja (completamente nueva). Al final, quedaban dos
+                            dobles hélices hijas, cada una conformada por una hebra <strong>completamente vieja</strong>
+                            entrelazada con una hebra <strong>completamente nueva</strong>.
+                        </div>
+                    </div>
+                    <div class="concept-card red-top">
+                        <div class="concept-name red">Modelo Conservativo</div>
+                        <div class="concept-def">
+                            Creía que deshacer la enmarañada estructura de la hélice para copiarla requeriría demasiada
+                            energía celular. Proponía que se lograba copiar el ADN "desde afuera", de alguna manera
+                            misteriosa manteniendo intacta e ilesa la molécula madre original de un lado, mientras que
+                            del otro lado salía expulsada una molécula hija donde <strong>las dos hebras eran fotocopias
+                                completamente nuevas</strong> y sin mezclar.
+                        </div>
+                    </div>
+                    <div class="concept-card" style="border-top-color: #8b5cf6">
+                        <div class="concept-name" style="color: #8b5cf6">Modelo Dispersivo</div>
+                        <div class="concept-def">
+                            Postulaba un caos molecular pragmático: si el ADN es tan largo e intrincado se cortaría
+                            físicamente en pedacitos manejables durante la copia, se copiaría la información y luego,
+                            como un "Frankenstein", la célula uniría los bloques otra vez sin ningún patrón lógico fijo.
+                            Todas las hebras resultantes serían literalmente pedazos entreverados parcheados con parches
+                            viejos y nuevos diseminados ("un mosaico disperso").
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ANOMALÍAS Y ENIGMAS -->
+            <div class="article-section reveal" id="sec-anomalias">
+                <span class="section-label">5. Meselson-Stahl (1958)</span>
+                <h2 class="article-h2">Pesando lo <span>invisible</span></h2>
+                <p class="article-p">
+                    Para 1958, el físico Franklin Stahl y el genetista Matthew Meselson se conocieron casualmente
+                    compartiendo un par de tragos en un laboratorio veraniego de Massachusetts. Allí urdieron uno de los
+                    acertijos y planteos de diseño experimental más brillantes de la historia. ¿El desafío? Encontrar
+                    empíricamente una forma visual y tangible de distinguir al ojo humano "hebras viejas" de nacientes
+                    "hebras nuevas", ya que biológicamente ambas son transparentes y matemáticamente idénticas.
+                </p>
+
+                <div class="callout dark-box">
+                    <div class="callout-tag">🔬 El Enigma de la Época</div>
+                    <div class="callout-title">El truco de los Isótopos Pesados de Nitrógeno</div>
+                    <p>
+                        Para resolverlo idearon una estrategia maestra y física infalible: usar el propio "peso atómico"
+                        de la materia. Sabiendo lógicamente que el ADN se alimenta de Nitrógeno para fabricar sus
+                        hélices moleculares, cultivaron a las bacterias primero en un jugo nutritivo muy raro con
+                        <strong>Nitrógeno-15</strong> (isotópicamente "pesado"). Naturalmente, las bacterias fabricaron
+                        su ADN completamente denso y macizo. Acto seguido las cambiaron drásticamente a un jugo normal
+                        de <strong>Nitrógeno-14</strong> (sustancialmente "liviano"), por lo que las bacterias, de allí
+                        en más, usarían irremediablemente nitrógeno liviano para cualquier estructura clonada que
+                        construyeran a futuro.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- HIPÓTESIS Y ESTRATEGIAS -->
+            <div class="article-section reveal" id="sec-hipotesis">
+                <span class="section-label">6. Metodología Constrictiva</span>
+                <h2 class="article-h2">La Ultracentrifugación <span>Analítica</span></h2>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <div class="concept-name">La centrífuga giratoria</div>
+                        <div class="concept-def">
+                            Para medir ese peso, no podían utilizar una simple balanza comercial. Meselson y Stahl
+                            pusieron los jugos genéticos de las bacterias cosechadas en pequeños tubitos, agregando una
+                            solución pastosa y espesa de Cloruro de Cesio y lo instalaron en una turbina
+                            (ultracentrífuga analítica) que giraba violentamente a 45.000 revoluciones por minuto
+                            durante largos e intensos días y noches. La altísima gravedad colosal forzaría forzosamente
+                            al ADN pesado a hundirse dramáticamente en el fondo del tubito (como una piedra en un vaso
+                            de miel) mientras el ADN livianito moderno iba a quedar siempre flotando plácidamente muy
+                            arriba en la superficie.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- EVIDENCIA EXPERIMENTAL -->
+            <div class="article-section reveal" id="sec-evidencia">
+                <span class="section-label">7. Evidencia Experimental</span>
+                <h2 class="article-h2">Aniquilando modelos <span>en tiempo récord</span></h2>
+
+                <p class="article-p">
+                    Al sacar los cultivos bacterianos después de transcurrir exclusivamente y puntualmente su primera
+                    copia de división (Generación I), iluminaron el tubo plástico liso bajo cámaras ultravioletas,
+                    midiendo exactamente dónde reposaba la famosa banda molecular flotando suspendida.
+                </p>
+
+                <div class="img-hover-container reveal">
+                    <img src="experimento-meselson.jpg" alt="Infografía del Experimento Meselson-Stahl 1958"
+                        class="img-hover-scale" style="width:100%; height:auto; display:block; border-radius:16px;">
+                </div>
+
+                <p class="article-p">
+                    Sorprendentemente, la banda luminosa del ADN no estaba fuertemente hundida y pegada abajo en el
+                    fondo pesado, pero absurdamente tampoco estaba flotando liviana arriba. Sorprendiendo empíricamente
+                    a los modelos predilectos de aquella era, apareció estacionaria, paralizada mágicamente fluyendo
+                    <strong>exactamente estancada por su peso en el medio del tubo</strong> (mitad pesada N-15, y
+                    absurdamente mitad
+                    liviana N-14).
+                </p>
+                <p class="article-p">
+                    Tan sólo este dato físico devastó, calcinó por completo y liquidó velozmente al Modelo Conservativo:
+                    si el dogma conservador tradicional hubiera tenido la verdad matemática de su lado, en primer lugar
+                    debería asomar sin dudas una marca anclada brutalmente al fondo pesado y violentamente otra marca
+                    liviana arriba, sin ningún "híbrido raro de pesos" navegando en la zona del medio y confundiendo
+                    existosamente a la comunidad investigadora mundial.
+                </p>
+
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- CONCLUSIONES -->
+            <div class="article-section reveal" id="sec-conclusiones">
+                <span class="section-label">8. Conclusiones y Legado</span>
+                <h2 class="article-h2">El Experimento <span>Más Bello</span> de la Biología</h2>
+                <p class="article-p">
+                    Sabiendo en el acto que tenían el mundo bajo sus palmas sudorosas, dejaron transcurrir una segunda
+                    tanda celular de copia exacta y obtuvieron el sagrado grial: dos radiantes líneas bien separadas
+                    aparecieron, una liviana empujada inminentemente hacia arriba y una firme flotante flotante justo al
+                    centro exacto del tubo intermedio. Evidencia brutal que asesinó también tajantemente a las
+                    pretensiones dispersivas caóticas, las cuales auguraban mezcolanzas indefinidas.
+                </p>
+                <div class="callout yellow reveal">
+                    <div class="callout-tag">⚖️ Epistemología Crítica: La Elegancia</div>
+                    <div class="callout-title">La belleza del diseño contundente</div>
+                    <p>
+                        A este trascendental ensayo biológico se lo cataloga oficialmente hasta el cansancio como "El
+                        experimento más bello de la biología" (o *The Most Beautiful Experiment*), simplemente por la
+                        envidiable brutalidad de su nitidez lógica silogística. Un ensayo que con un mínimo aparato
+                        conceptual lógico irrebatible derribaba y cercenaba definitivamente dos colosales paradigmas que
+                        competían para la existencia celular teórica de forma apabullante. El hallazgo no es una
+                        cuestión meramente semántica o caprichosamente estética; que el modelo sea
+                        <strong>semiconservativo</strong> es el pilar central innegociable ineludible de cualquier
+                        existencia evolutiva moderna, de cada curación de la piel desgarrada tras heridas menores, de
+                        cada inmenso embarazo embrionario asediado sin errores genéticos en la historia de la vida de
+                        este asfixiado planeta biológico.
+                    </p>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- ===================== SIDEBAR ===================== -->
+        <aside class="article-sidebar">
+            <div class="sidebar-sticky">
+
+                <!-- TOC -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-list-ul"></i> Contenidos
+                    </div>
+                    <ul class="toc-list">
+                        <li class="toc-item"><a href="#sec-contexto"><span class="toc-num">01</span> Contexto
+                                Histórico</a></li>
+                        <li class="toc-item"><a href="#sec-fagos"><span class="toc-num">02</span> Hershey y Chase
+                                (1952)</a></li>
+                        <li class="toc-item"><a href="#sec-nuevo-enigma"><span class="toc-num">03</span> El enigma de
+                                1953</a></li>
+                        <li class="toc-item"><a href="#sec-actores"><span class="toc-num">04</span> Choque de
+                                Modelos</a></li>
+                        <li class="toc-item"><a href="#sec-anomalias"><span class="toc-num">05</span> Marcadores
+                                Isótópicos</a></li>
+                        <li class="toc-item"><a href="#sec-hipotesis"><span class="toc-num">06</span>
+                                Ultracentrifugación</a></li>
+                        <li class="toc-item"><a href="#sec-evidencia"><span class="toc-num">07</span> Evidencia
+                                Física</a></li>
+                        <li class="toc-item"><a href="#sec-conclusiones"><span class="toc-num">08</span>
+                                El experimento más bello</a></li>
+                    </ul>
+                </div>
+
+                <!-- KEY CONCEPTS -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-key"></i> Conceptos Clave
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Bacteriófago</div>
+                        <div class="concept-mini-def">Del griego "devorador de bacterias". Espectrales virus maquinarias
+                            ensamblados por una carcasa protectora proteínica y un hilo de ácido nucleico compactado
+                            inmensamente adentro.</div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Trazador Radiactivo</div>
+                        <div class="concept-mini-def">Isótopos inestables biológicamente puros (S-35 y P-32) que emiten
+                            un fulgor constante químico medible, sirviendo como una precisa linterna a nano-escala.
+                        </div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Semiconservativo</div>
+                        <div class="concept-mini-def">El modelo empíricamente probado en donde cada hebra nueva contiene
+                            una de las cadenas exactas idénticas originales "viejas" usadas religiosamente en formato de
+                            único molde y otra enteramente armada de nucleótidos sueltos frescos ambientales.</div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Ultracentrifugación Analítica</div>
+                        <div class="concept-mini-def">Brillante método instrumental sofisticado extremo de alta rotación
+                            violenta usado para clasificar y separar diminutas moléculas abstractas no palpables
+                            engañosamente estupefacientes basándose fuertemente en su densidad gravimétrica relativa.
+                        </div>
+                    </div>
+                    <div class="concept-mini">
+                        <div class="concept-mini-name">Nitrógeno Pesado (N15)</div>
+                        <div class="concept-mini-def">Un isótopo muy raro artificial utilizado astutamente como
+                            gigantesca y precisa "etiqueta radioactiva molecular abstracta" para lograr "iluminar"
+                            visualmente sin márgenes la estructura atómica antigua en contraposición con su competidor
+                            nuevo en las bandas.</div>
+                    </div>
+                </div>
+
+                <!-- PHILOSOPHER -->
+                <div class="sidebar-card">
+                    <div class="sidebar-card-header">
+                        <i class="fa-solid fa-atom"></i> La Evidencia Clave
+                    </div>
+                    <div class="philosopher-card">
+                        <div class="philosopher-avatar">MS</div>
+                        <div>
+                            <div class="philosopher-name">Meselson-Stahl</div>
+                            <div class="philosopher-dates">La Fotografía Intermedia</div>
+                            <div class="philosopher-bio">
+                                El momento histórico en donde la primera turbina detuvo su enorme inercia y la cámara
+                                láser demostró, aniquilando al modelo conservativo de cuajo, que los nucleótidos
+                                formaban en el tubo híbridos de masa media "estancados a mitad de la carrera sin
+                                ahogarse ni subir enteramente".
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- ===================== FOOTER NAV ===================== -->
+    <nav class="article-footer-nav">
+        <a href="unidad2-clase14.html" class="footer-nav-link prev">
+            <div class="footer-nav-icon"><i class="fa-solid fa-arrow-left"></i></div>
+            <div>
+                <div class="footer-nav-direction">Clase Anterior</div>
+                <div class="footer-nav-title">U2·C14 — Griffith</div>
+            </div>
+        </a>
+        <a href="unidad2-clase16.html" class="footer-nav-link">
+            <div style="text-align:right;">
+                <div class="footer-nav-direction">Siguiente Clase</div>
+                <div class="footer-nav-title">U2·C16 — Mendel y la Herencia</div>
+            </div>
+            <div class="footer-nav-icon"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+    </nav>
+
+    <script>
+        // ── DARK MODE ──
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // ── PROGRESS BAR ──
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+            document.getElementById('progress').style.width = pct + '%';
+        });
+
+        // ── REVEAL ON SCROLL ──
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+        // ── SMOOTH SCROLL TOC ──
+        function scrollTo(id) {
+            const el = document.querySelector(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ── TOC ACTIVE ──
+        const sections = document.querySelectorAll('.article-section[id]');
+        const tocItems = document.querySelectorAll('.toc-item');
+        const tocObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    tocItems.forEach(t => t.querySelector('a').classList.remove('active'));
+                    const match = [...tocItems].find(t => t.querySelector('a').getAttribute('href') === '#' + e.target.id);
+                    if (match) match.querySelector('a').classList.add('active');
+                }
+            });
+        }, { threshold: 0.35 });
+        sections.forEach(s => tocObs.observe(s));
+    </script>
+</body>
+
+</html>

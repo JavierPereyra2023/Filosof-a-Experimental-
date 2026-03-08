@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kepler y Newton: Las Leyes del Cosmos | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, .6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background .4s, color .4s;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+        }
+
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--yellow), #f97316);
+            z-index: 9999;
+            transition: width .1s;
+        }
+
+        /* TOPNAV */
+        #topnav {
+            position: sticky;
+            top: 0;
+            z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background .4s, border-color .4s;
+        }
+
+        .topnav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--text3);
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        .nav-sep {
+            color: var(--border);
+        }
+
+        .breadcrumb {
+            font-size: 12px;
+            color: var(--text3);
+            display: none;
+        }
+
+        @media(min-width:640px) {
+            .breadcrumb {
+                display: block;
+            }
+        }
+
+        .breadcrumb span {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+
+        .topnav-center {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text2);
+            display: none;
+        }
+
+        @media(min-width:900px) {
+            .topnav-center {
+                display: block;
+            }
+        }
+
+        .topnav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text3);
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--yellow);
+            color: var(--text);
+        }
+
+        .dark-toggle-nav {
+            background: none;
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 20px;
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .dark-toggle-nav::after {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .dark .dark-toggle-nav {
+            border-color: var(--yellow);
+            background: var(--yellow);
+        }
+
+        .dark .dark-toggle-nav::after {
+            left: calc(100% - 16px);
+            background: #000;
+        }
+
+        /* HERO */
+        #art-hero {
+            background: linear-gradient(to left, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 32%, rgba(0,0,0,.97) 58%), url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Portrait_of_Sir_Isaac_Newton%2C_1689.jpg/440px-Portrait_of_Sir_Isaac_Newton%2C_1689.jpg') right top/auto 100% no-repeat, url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.5);
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 80px 24px 60px;
+            position: relative;
+        }
+
+        .hero-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hero-badge {
+            background: var(--yellow);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .hero-badge-outline {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .3);
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 6.5vw, 84px);
+            font-weight: 900;
+            line-height: .93;
+            letter-spacing: -.03em;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--yellow);
+        }
+
+        .hero-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(15px, 2.2vw, 20px);
+            color: rgba(255, 255, 255, .8);
+            max-width: 660px;
+            line-height: 1.65;
+            margin-bottom: 48px;
+        }
+
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .55);
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta i {
+            color: var(--yellow);
+        }
+
+        .hero-meta-sep {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .3);
+        }
+
+        .hero-scroll-cue {
+            position: absolute;
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, .4);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-dot {
+            width: 28px;
+            height: 44px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, .25);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 6px;
+        }
+
+        .scroll-dot::after {
+            content: '';
+            width: 4px;
+            height: 8px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, .4);
+            animation: scrolldot 1.8s infinite;
+        }
+
+        @keyframes scrolldot {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 1
+            }
+
+            50% {
+                transform: translateY(8px);
+                opacity: .3
+            }
+        }
+
+        /* ARTICLE LAYOUT */
+        .article-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        @media(min-width:1024px) {
+            .article-wrap {
+                grid-template-columns: 1fr 320px;
+                gap: 64px;
+            }
+        }
+
+        .article-section {
+            margin-bottom: 56px;
+        }
+
+        .dropcap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 82px;
+            font-weight: 900;
+            line-height: .8;
+            margin: 8px 16px -4px 0;
+            color: var(--yellow-dark);
+        }
+
+        .article-p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .article-p strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .article-p em {
+            font-style: italic;
+        }
+
+        .article-h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 38px);
+            font-weight: 900;
+            letter-spacing: -.02em;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .article-h2 span {
+            color: var(--yellow-dark);
+            font-style: italic;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .art-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 56px 0;
+        }
+
+        /* CALLOUTS */
+        .callout {
+            background: var(--bg3);
+            border-left: 4px solid var(--yellow);
+            padding: 28px 32px;
+            border-radius: 0 12px 12px 0;
+            margin: 32px 0;
+        }
+
+        .callout-tag {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 8px;
+        }
+
+        .callout-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .callout p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text2);
+            margin-bottom: 12px;
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        .callout.blue-box {
+            border-left-color: #2563eb;
+            background: color-mix(in srgb, #2563eb 6%, var(--bg3));
+        }
+
+        .callout.green-box {
+            border-left-color: #16a34a;
+            background: color-mix(in srgb, #16a34a 6%, var(--bg3));
+        }
+
+        .callout.violet-box {
+            border-left-color: #7c3aed;
+            background: color-mix(in srgb, #7c3aed 6%, var(--bg3));
+        }
+
+        /* PULL QUOTE */
+        .pull-quote {
+            border-top: 3px solid var(--yellow);
+            border-bottom: 1px solid var(--border);
+            padding: 40px 0;
+            margin: 48px 0;
+            text-align: center;
+        }
+
+        .pull-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(19px, 3vw, 28px);
+            font-style: italic;
+            line-height: 1.45;
+            color: var(--text);
+            max-width: 680px;
+            margin: 0 auto 20px;
+        }
+
+        .pull-quote-author {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text3);
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight-box {
+            background: var(--yellow);
+            color: #000;
+            padding: 32px;
+            border-radius: 16px;
+            margin: 40px 0;
+        }
+
+        .highlight-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .highlight-box p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* STATS STRIP */
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--bg2);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--yellow-dark);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-top: 6px;
+        }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* LAW CARDS */
+        .law-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin: 36px 0;
+        }
+
+        @media(min-width:640px) {
+            .law-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .law-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .law-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--yellow);
+        }
+
+        .law-card-head {
+            background: #050a18;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .law-card-head svg {
+            width: 100%;
+            max-width: 180px;
+            height: 140px;
+        }
+
+        .law-card-body {
+            padding: 20px;
+        }
+
+        .law-num {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--yellow-dark);
+            margin-bottom: 6px;
+        }
+
+        .law-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .law-text {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text2);
+            margin-bottom: 12px;
+        }
+
+        .law-formula {
+            font-family: monospace;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            text-align: center;
+        }
+
+        /* NEWTON LAW CARDS */
+        .newton-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .newton-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all var(--transition);
+        }
+
+        .newton-card:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .newton-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            font-weight: 900;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+
+        .newton-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .newton-card p {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text2);
+            margin-bottom: 10px;
+        }
+
+        .newton-formula {
+            font-family: monospace;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--yellow-dark);
+        }
+
+        /* ORBITAL ANIMATION */
+        .orbit-wrap {
+            background: #050a18;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 40px 0;
+            padding: 24px;
+        }
+
+        .orbit-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .orbit-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .orbit-header p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .orbit-canvas-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .orbit-canvas-wrap canvas {
+            border-radius: 12px;
+        }
+
+        .orbit-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .orbit-leg-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .6);
+        }
+
+        .orbit-leg-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .orbit-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .orbit-btn {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: rgba(255, 255, 255, .7);
+            padding: 7px 18px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .orbit-btn:hover,
+        .orbit-btn.active {
+            background: var(--yellow);
+            color: #000;
+            border-color: var(--yellow);
+        }
+
+        /* COMPARE TABLE */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+            font-size: 14px;
+        }
+
+        .compare-table th {
+            background: var(--bg3);
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--text3);
+            border-bottom: 2px solid var(--border);
+        }
+
+        .compare-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text2);
+            line-height: 1.6;
+            vertical-align: top;
+        }
+
+        .compare-table tr:hover td {
+            background: var(--bg3);
+        }
+
+        .compare-table td:first-child {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* STEP PROCESS */
+        .step-list {
+            margin: 32px 0;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 28px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--yellow);
+            color: #000;
+            font-weight: 900;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .step-body h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .step-body p {
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--text2);
+        }
+
+        /* DISCUSSION */
+        .discussion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .discussion-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all var(--transition);
+        }
+
+        .discussion-card:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .disc-num {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            color: var(--yellow-dark);
+            margin-bottom: 10px;
+        }
+
+        .discussion-card p {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text2);
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .sidebar-widget {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-widget h3 {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        @media(min-width:1024px) {
+            .sidebar {
+                position: sticky;
+                top: 72px;
+                align-self: start;
+                max-height: calc(100vh - 100px);
+                overflow-y: auto;
+            }
+        }
+
+        @media(min-width:1024px) {
+            .sidebar::-webkit-scrollbar {
+                width: 3px;
+            }
+
+            .sidebar::-webkit-scrollbar-thumb {
+                background: var(--border);
+            }
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 13px;
+            color: var(--text3);
+            transition: all var(--transition);
+        }
+
+        .toc-item a:hover,
+        .toc-item.active a {
+            color: var(--text);
+        }
+
+        .toc-item.active a {
+            font-weight: 600;
+        }
+
+        .toc-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--border);
+            flex-shrink: 0;
+            transition: all var(--transition);
+        }
+
+        .toc-item.active .toc-dot {
+            background: var(--yellow);
+            transform: scale(1.4);
+        }
+
+        .concept-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .concept-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .c-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .concept-item h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+
+        .concept-item p {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.5;
+        }
+
+        .phil-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .phil-card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .phil-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .phil-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+
+        .phil-card p {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.55;
+        }
+
+        .phil-dates {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            color: var(--yellow-dark);
+            margin-bottom: 4px;
+        }
+
+        .nav-class-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg3);
+            transition: all var(--transition);
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .nav-class-btn:hover {
+            border-color: var(--yellow);
+            background: var(--bg2);
+        }
+
+        .nav-class-btn.primary {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .nav-class-btn.primary:hover {
+            background: var(--yellow-dark);
+        }
+
+        .nav-class-btn i {
+            font-size: 14px;
+            color: var(--text3);
+        }
+
+        .nav-class-btn.primary i {
+            color: #000;
+        }
+
+        .nav-class-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .nav-class-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 3px;
+        }
+
+        .nav-class-btn.primary .nav-class-label {
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .nav-class-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .nav-class-btn.primary .nav-class-title {
+            color: #000;
+        }
+
+        /* FOOTER */
+        .art-footer {
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            padding: 40px 24px;
+        }
+
+        .art-footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        @media(min-width:640px) {
+            .footer-nav {
+                flex-direction: row;
+                gap: 24px;
+            }
+        }
+
+        .footer-nav-card {
+            flex: 1;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all var(--transition);
+        }
+
+        .footer-nav-card:hover {
+            border-color: var(--yellow);
+            box-shadow: var(--shadow);
+        }
+
+        .footer-nav-card.primary {
+            background: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .fn-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .footer-nav-card.primary .fn-icon {
+            background: rgba(0, 0, 0, .1);
+        }
+
+        .fn-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--text3);
+            margin-bottom: 4px;
+        }
+
+        .footer-nav-card.primary .fn-label {
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .fn-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .footer-nav-card.primary .fn-title {
+            color: #000;
+        }
+
+        .footer-credits {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text3);
+        }
+
+        .footer-credits a {
+            color: var(--yellow-dark);
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress"></div>
+
+    <!-- ══ TOPNAV ════════════════════════════════════════════════ -->
+    <nav id="topnav">
+        <div class="topnav-left">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i><span>REVISTA</span></a>
+            <span class="nav-sep">·</span>
+            <div class="breadcrumb"><span>Unidad 1</span> — Teorías Científicas — Clase 5</div>
+        </div>
+        <div class="topnav-center">Kepler y Newton: Las Leyes del Cosmos</div>
+        <div class="topnav-right">
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase4.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 4
+            </button>
+            <button class="nav-btn" onclick="window.location.href='unidad1-clase6.html'">
+                Clase 6 <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="dark-toggle-nav" id="darkToggle" onclick="toggleDark()" title="Modo oscuro"></button>
+        </div>
+    </nav>
+
+    <!-- ══ HERO ══════════════════════════════════════════════════ -->
+    <section id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">CLASE 5 · UNIDAD 1</span>
+            <span class="hero-badge-outline">LA SÍNTESIS NEWTONIANA</span>
+            <span class="hero-badge-outline">1609 — 1687</span>
+        </div>
+        <p class="hero-eyebrow">La Revolución Científica se Completa</p>
+        <h1 class="hero-title">Kepler &amp; <em>Newton</em></h1>
+        <p class="hero-subtitle">
+            Kepler descubrió las leyes de las órbitas con datos de Brahe y fe en el heliocentrismo.
+            Newton las explicó con una sola ecuación que gobierna desde la manzana hasta los planetas.
+            El universo se convirtió en una máquina de relojería con leyes matemáticas universales.
+        </p>
+        <div class="hero-meta">
+            <div class="hero-meta-item"><i class="fa-solid fa-circle-dot"></i><span>Kepler: 1571 — 1630</span></div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-apple-whole"></i><span>Newton: 1643 — 1727</span></div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-clock"></i><span>Lectura: 22 min</span></div>
+            <div class="hero-meta-sep"></div>
+            <div class="hero-meta-item"><i class="fa-solid fa-infinity"></i><span>F = Gm₁m₂/r²</span></div>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div><span>Desplazá</span>
+        </div>
+    </section>
+
+    <!-- ══ ARTICLE ════════════════════════════════════════════════ -->
+    <main class="article-wrap">
+        <article>
+
+            <!-- ── 1. INTRO ──────────────────────────────────────────── -->
+            <div class="article-section" id="sec-intro">
+                <span class="section-label">El cierre de una revolución</span>
+                <h2 class="article-h2">De Copérnico a Newton: <span>80 años que cambiaron el cosmos</span></h2>
+
+                <p class="article-p dropcap">
+                    En 1543, Copérnico propuso que la Tierra orbitaba el Sol. No tenía pruebas directas.
+                    En 1609, Galileo mostró con el telescopio que el modelo geocéntrico era insostenible.
+                    Pero aún faltaba lo fundamental: <strong>¿por qué</strong> los planetas orbitan el Sol?
+                    ¿Con qué forma? ¿A qué velocidades? ¿Qué fuerza los mantiene en su camino?
+                </p>
+                <p class="article-p">
+                    Dos figuras completaron la Revolución Científica que Copérnico había iniciado y Galileo había
+                    impulsado. <strong>Johannes Kepler</strong> (1571-1630), matemático alemán profundamente
+                    religioso, descubrió las tres leyes del movimiento planetario usando los datos de Tycho Brahe.
+                    <strong>Isaac Newton</strong> (1643-1727), físico inglés, las explicó todas con una sola
+                    ley de gravitación universal y construyó la mecánica clásica que dominaría la física hasta Einstein.
+                </p>
+
+                <div class="stats-strip reveal">
+                    <div class="stat-card">
+                        <div class="stat-num">1609</div>
+                        <div class="stat-label">Astronomia Nova — Kepler</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">3</div>
+                        <div class="stat-label">Leyes de Kepler</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">1687</div>
+                        <div class="stat-label">Principia — Newton</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">1</div>
+                        <div class="stat-label">Ley que lo unifica todo</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">200</div>
+                        <div class="stat-label">Años de física newtoniana sin rival</div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 2. KEPLER ─────────────────────────────────────────── -->
+            <div class="article-section reveal" id="sec-kepler">
+                <span class="section-label">El astrónomo de los datos de Brahe</span>
+                <h2 class="article-h2">Johannes Kepler: <span>fe, mística y matemáticas</span></h2>
+
+                <p class="article-p">
+                    Kepler es un personaje fascinante y contradictorio. Era un místico que creía que el
+                    universo era una expresión matemática de la mente de Dios. Era, al mismo tiempo,
+                    uno de los científicos más rigurosos de su era. Su madre fue procesada por brujería.
+                    Él mismo combinó astrología —de la que vivía— con astronomía revolucionaria.
+                </p>
+                <p class="article-p">
+                    Cuando Tycho Brahe murió en 1601, Kepler heredó sus décadas de datos observacionales
+                    —los más precisos del mundo— y se propuso un objetivo: demostrar que el heliocentrismo
+                    era correcto. Lo que encontró superó toda expectativa. Los datos de Brahe sobre Marte
+                    no encajaban en ninguna órbita circular, ni ptolemaica ni copernicana. La diferencia
+                    era de <strong>8 minutos de arco</strong>. En ese momento crucial, Kepler hizo lo que
+                    distingue al gran científico del defensor de una teoría:
+                </p>
+
+                <div class="highlight-box reveal">
+                    <h3>La decisión de Kepler</h3>
+                    <p>En lugar de ignorar los 8 minutos de arco como "error de medición", Kepler confió en
+                        los datos de Brahe. Si había una discrepancia de 8 minutos, había que encontrar la razón.
+                        La razón resultó ser que los planetas no orbitan en círculos sino en <strong>elipses</strong>.
+                        Esta decisión epistemológica —confiar en los datos sobre la teoría cuando se contradicen—
+                        es uno de los momentos fundacionales del método científico moderno.</p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 3. TRES LEYES DE KEPLER ───────────────────────────── -->
+            <div class="article-section reveal" id="sec-leyes-kepler">
+                <span class="section-label">Las tres leyes del movimiento planetario</span>
+                <h2 class="article-h2">Las leyes de Kepler: <span>geometría del cosmos</span></h2>
+
+                <p class="article-p">
+                    Entre 1609 y 1619, Kepler publicó sus tres leyes. Son empíricas —las derivó de los datos,
+                    no de una teoría causal— pero tienen una precisión matemática extraordinaria. Newton
+                    demostraría después que se deducen de la ley de gravitación universal.
+                </p>
+
+                <div class="law-grid reveal">
+
+                    <!-- LEY 1 -->
+                    <div class="law-card">
+                        <div class="law-card-head">
+                            <!-- Ellipse orbit SVG -->
+                            <svg viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="180" height="140" fill="#050a18" />
+                                <!-- Stars -->
+                                <circle cx="10" cy="10" r="1" fill="white" opacity=".5" />
+                                <circle cx="170" cy="20" r="1.2" fill="white" opacity=".4" />
+                                <circle cx="20" cy="130" r="1" fill="white" opacity=".5" />
+                                <circle cx="160" cy="120" r="1" fill="white" opacity=".3" />
+                                <!-- Ellipse orbit path -->
+                                <ellipse cx="80" cy="70" rx="65" ry="45" fill="none" stroke="rgba(74,222,128,.4)"
+                                    stroke-width="1.5" stroke-dasharray="4 4" />
+                                <!-- Sun at focus 1 (not center) -->
+                                <circle cx="106" cy="70" r="10" fill="#fbbf24" opacity=".9" />
+                                <circle cx="106" cy="70" r="14" fill="rgba(251,191,36,.2)" />
+                                <text x="106" y="88" text-anchor="middle" fill="rgba(251,191,36,.6)" font-size="8"
+                                    font-family="Inter,sans-serif" font-weight="700">FOCO</text>
+                                <!-- Empty focus -->
+                                <circle cx="54" cy="70" r="3" fill="none" stroke="rgba(255,255,255,.25)"
+                                    stroke-width="1" stroke-dasharray="2 2" />
+                                <text x="54" y="86" text-anchor="middle" fill="rgba(255,255,255,.25)" font-size="7"
+                                    font-family="Inter,sans-serif">foco vacío</text>
+                                <!-- Planet on ellipse (perihelion) -->
+                                <circle cx="145" cy="70" r="7" fill="#60a5fa" />
+                                <circle cx="145" cy="70" r="10" fill="rgba(96,165,250,.2)" />
+                                <!-- Line from sun to planet -->
+                                <line x1="106" y1="70" x2="145" y2="70" stroke="rgba(251,191,36,.3)" stroke-width="1" />
+                                <!-- Center mark -->
+                                <circle cx="80" cy="70" r="2" fill="rgba(255,255,255,.2)" />
+                                <line x1="75" y1="70" x2="85" y2="70" stroke="rgba(255,255,255,.2)" stroke-width="1" />
+                                <line x1="80" y1="65" x2="80" y2="75" stroke="rgba(255,255,255,.2)" stroke-width="1" />
+                                <!-- Labels -->
+                                <text x="90" y="14" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="8"
+                                    font-family="Inter,sans-serif">ÓRBITA ELÍPTICA</text>
+                            </svg>
+                        </div>
+                        <div class="law-card-body">
+                            <div class="law-num">PRIMERA LEY · 1609</div>
+                            <div class="law-title">Ley de las Órbitas</div>
+                            <div class="law-text">Los planetas orbitan el Sol en trayectorias
+                                <strong>elípticas</strong>, con el Sol en uno de los dos focos de la elipse —no en el
+                                centro.</div>
+                            <div class="law-formula">Órbita = ELIPSE, Sol = FOCO</div>
+                        </div>
+                    </div>
+
+                    <!-- LEY 2 -->
+                    <div class="law-card">
+                        <div class="law-card-head">
+                            <svg viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="180" height="140" fill="#050a18" />
+                                <circle cx="15" cy="15" r="1" fill="white" opacity=".4" />
+                                <circle cx="165" cy="15" r="1.2" fill="white" opacity=".3" />
+                                <!-- Orbit -->
+                                <ellipse cx="80" cy="72" rx="65" ry="44" fill="none" stroke="rgba(74,222,128,.3)"
+                                    stroke-width="1" stroke-dasharray="3 5" />
+                                <!-- Sun -->
+                                <circle cx="106" cy="72" r="10" fill="#fbbf24" opacity=".9" />
+                                <!-- SECTOR 1: near perihelion (large area, short arc, fast) -->
+                                <path d="M106,72 L138,60 Q145,72 138,84 Z" fill="rgba(250,204,21,.2)"
+                                    stroke="rgba(250,204,21,.5)" stroke-width="1.2" />
+                                <text x="148" y="74" text-anchor="middle" fill="rgba(250,204,21,.8)" font-size="8"
+                                    font-family="Inter,sans-serif" font-weight="700">RÁPIDO</text>
+                                <!-- SECTOR 2: near aphelion (same area, long arc, slow) -->
+                                <path d="M106,72 L38,48 Q16,72 38,95 Z" fill="rgba(96,165,250,.2)"
+                                    stroke="rgba(96,165,250,.5)" stroke-width="1.2" />
+                                <text x="22" y="74" text-anchor="middle" fill="rgba(96,165,250,.8)" font-size="8"
+                                    font-family="Inter,sans-serif" font-weight="700">LENTO</text>
+                                <!-- Equal area label -->
+                                <text x="90" y="128" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="8"
+                                    font-family="Inter,sans-serif">ÁREAS IGUALES · TIEMPOS IGUALES</text>
+                            </svg>
+                        </div>
+                        <div class="law-card-body">
+                            <div class="law-num">SEGUNDA LEY · 1609</div>
+                            <div class="law-title">Ley de las Áreas</div>
+                            <div class="law-text">La línea Sol-planeta barre <strong>áreas iguales en tiempos
+                                    iguales</strong>. Consecuencia: el planeta va más rápido cerca del Sol (perihelio) y
+                                más lento lejos (afelio).</div>
+                            <div class="law-formula">A₁/t₁ = A₂/t₂ = constante</div>
+                        </div>
+                    </div>
+
+                    <!-- LEY 3 -->
+                    <div class="law-card">
+                        <div class="law-card-head">
+                            <svg viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="180" height="140" fill="#050a18" />
+                                <!-- Sun -->
+                                <circle cx="90" cy="72" r="10" fill="#fbbf24" opacity=".9" />
+                                <!-- Mercury (tiny orbit, fast) -->
+                                <ellipse cx="90" cy="72" rx="22" ry="16" fill="none" stroke="rgba(200,200,200,.4)"
+                                    stroke-width="1" />
+                                <circle cx="112" cy="72" r="4" fill="#aaa" />
+                                <text x="118" y="68" fill="rgba(200,200,200,.6)" font-size="7"
+                                    font-family="Inter,sans-serif">T=88d</text>
+                                <!-- Earth (medium orbit) -->
+                                <ellipse cx="90" cy="72" rx="42" ry="30" fill="none" stroke="rgba(74,222,128,.4)"
+                                    stroke-width="1" />
+                                <circle cx="132" cy="72" r="5" fill="#1a6bb5" />
+                                <text x="138" y="68" fill="rgba(74,222,128,.6)" font-size="7"
+                                    font-family="Inter,sans-serif">T=365d</text>
+                                <!-- Mars (larger orbit, slow) -->
+                                <ellipse cx="90" cy="72" rx="64" ry="45" fill="none" stroke="rgba(248,113,113,.3)"
+                                    stroke-width="1" />
+                                <circle cx="154" cy="72" r="5" fill="#ef4444" />
+                                <text x="156" y="64" fill="rgba(248,113,113,.6)" font-size="7"
+                                    font-family="Inter,sans-serif">T=687d</text>
+                                <text x="90" y="128" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="8"
+                                    font-family="Inter,sans-serif">T² PROPORCIONAL A a³</text>
+                            </svg>
+                        </div>
+                        <div class="law-card-body">
+                            <div class="law-num">TERCERA LEY · 1619</div>
+                            <div class="law-title">Ley de los Períodos</div>
+                            <div class="law-text">El cuadrado del período orbital es proporcional al cubo del semieje
+                                mayor. Los planetas más lejanos tardan <strong>exponencialmente más</strong> en
+                                completar su vuelta.</div>
+                            <div class="law-formula">T² = k · a³</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="callout violet-box reveal">
+                    <div class="callout-tag">🔭 Lo que Kepler no sabía</div>
+                    <div class="callout-title">Las leyes sin explicación causal</div>
+                    <p>Kepler describió perfectamente <em>cómo</em> se mueven los planetas, pero no sabía
+                        <em>por qué</em>. Intuía que el Sol ejercía algún tipo de "fuerza" —habló de una
+                        "anima motrix" solar— pero no pudo formalizarlo. Esa sería la gran tarea de Newton,
+                        80 años después.
+                    </p>
+                    <p>Filosóficamente, esto ilustra una distinción crucial: <strong>descripción vs.
+                            explicación</strong>.
+                        Las leyes de Kepler son una descripción matemáticamente precisa. La ley de Newton es
+                        la explicación causal que las produce. Ambas son necesarias; ninguna es suficiente sola.</p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 4. ANIMACIÓN ORBITAL ──────────────────────────────── -->
+            <div class="article-section reveal" id="sec-animacion">
+                <span class="section-label">Visualización interactiva</span>
+                <h2 class="article-h2">Las tres leyes de Kepler <span>en movimiento</span></h2>
+
+                <p class="article-p">
+                    La simulación muestra las órbitas elípticas de los planetas interiores.
+                    Observá cómo la velocidad cambia a lo largo de la órbita (2ª ley),
+                    y cómo los planetas más lejanos completan sus ciclos más lentamente (3ª ley).
+                    Podés alternar entre mostrar las áreas barridas y solo las órbitas.
+                </p>
+
+                <div class="orbit-wrap reveal">
+                    <div class="orbit-header">
+                        <h3>Simulación: Leyes de Kepler</h3>
+                        <p>Sistema Solar interior — Órbitas a escala relativa</p>
+                    </div>
+                    <div class="orbit-canvas-wrap">
+                        <canvas id="keplerCanvas" width="480" height="480"></canvas>
+                    </div>
+                    <div class="orbit-legend">
+                        <div class="orbit-leg-item">
+                            <div class="orbit-leg-dot" style="background:#fbbf24;"></div><span>Sol</span>
+                        </div>
+                        <div class="orbit-leg-item">
+                            <div class="orbit-leg-dot" style="background:#aaaaaa;"></div><span>Mercurio T=88d</span>
+                        </div>
+                        <div class="orbit-leg-item">
+                            <div class="orbit-leg-dot" style="background:#f0d060;"></div><span>Venus T=225d</span>
+                        </div>
+                        <div class="orbit-leg-item">
+                            <div class="orbit-leg-dot" style="background:#1a6bb5;"></div><span>Tierra T=365d</span>
+                        </div>
+                        <div class="orbit-leg-item">
+                            <div class="orbit-leg-dot" style="background:#ef4444;"></div><span>Marte T=687d</span>
+                        </div>
+                    </div>
+                    <div class="orbit-controls">
+                        <button class="orbit-btn active" id="btn-areas" onclick="toggleAreas()">Mostrar áreas</button>
+                        <button class="orbit-btn" id="btn-speed" onclick="toggleSpeed()">Velocidad real</button>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 5. NEWTON ─────────────────────────────────────────── -->
+            <div class="article-section reveal" id="sec-newton">
+                <span class="section-label">La síntesis newtoniana</span>
+                <h2 class="article-h2">Isaac Newton: <span>la manzana y el universo</span></h2>
+
+                <p class="article-p">
+                    Isaac Newton nació en 1643, el mismo año que murió Galileo.
+                    Esta coincidencia, señalada por muchos historiadores de la ciencia, parece un
+                    relevo simbólico: el padre de la física experimental pasa la posta al creador de
+                    la física teórica matemática. Newton estudió en Cambridge, donde leyó a Galileo,
+                    Kepler y Descartes. En 1665-1666, cuando la peste bubónica cerró la universidad,
+                    Newton se retiró a su casa en Woolsthorpe y, según su propio relato, <em>en esos
+                        dos años concibió las ideas fundamentales del cálculo infinitesimal, la óptica
+                        y la gravitación.</em>
+                </p>
+
+                <div class="pull-quote reveal">
+                    <p class="pull-quote-text">
+                        "Si he visto más lejos, es porque estaba sobre los hombros de gigantes."
+                    </p>
+                    <p class="pull-quote-author">— Isaac Newton, carta a Robert Hooke, 1675</p>
+                </div>
+
+                <p class="article-p">
+                    La pregunta que guió a Newton fue simple y devastadora: ¿la misma fuerza que hace caer
+                    la manzana al suelo es la misma que mantiene a la Luna en su órbita? Si la gravedad
+                    terrestre se extiende hasta la Luna, ¿podría ser una fuerza universal que actúa entre
+                    todos los cuerpos del universo?
+                </p>
+
+                <div class="callout green-box reveal">
+                    <div class="callout-tag">🍎 El experimento mental de Newton</div>
+                    <div class="callout-title">De la manzana a la Luna: la fuerza universal</div>
+                    <p>Si la gravedad actúa a la distancia de un árbol, ¿actúa también a la distancia de una montaña?
+                        ¿A la distancia de la Luna? Newton calculó: la aceleración de la Luna en su órbita es
+                        exactamente la que esperaría si la fuerza de la manzana cayera como 1/r² con la distancia.
+                        La gravedad del jardín y la órbita de la Luna eran el <strong>mismo fenómeno</strong>.</p>
+                    <p>Esto es unificación teórica: dos fenómenos aparentemente distintos (caída libre,
+                        movimiento orbital) explicados por un único principio. Es el ideal más ambicioso de la física.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 6. LEYES DE NEWTON ────────────────────────────────── -->
+            <div class="article-section reveal" id="sec-leyes-newton">
+                <span class="section-label">Los Principia Mathematica, 1687</span>
+                <h2 class="article-h2">Las cuatro leyes de Newton: <span>el universo como máquina</span></h2>
+
+                <div class="newton-grid reveal">
+                    <div class="newton-card">
+                        <div class="newton-num">I</div>
+                        <h4>Ley de Inercia</h4>
+                        <p>Todo cuerpo permanece en reposo o en movimiento rectilíneo uniforme a menos que
+                            una fuerza neta actúe sobre él.</p>
+                        <div class="newton-formula">ΣF = 0 → a = 0</div>
+                        <p style="font-size:12px;color:var(--text3);margin-top:10px;">
+                            Galileo la había intuido. Newton la formalizó. Destruye la idea aristotélica de que
+                            el movimiento requiere un "motor" continuo.
+                        </p>
+                    </div>
+                    <div class="newton-card">
+                        <div class="newton-num">II</div>
+                        <h4>Ley de Fuerza y Aceleración</h4>
+                        <p>La aceleración de un cuerpo es proporcional a la fuerza neta aplicada e inversamente
+                            proporcional a su masa.</p>
+                        <div class="newton-formula">F = m · a</div>
+                        <p style="font-size:12px;color:var(--text3);margin-top:10px;">
+                            La ecuación más productiva de la historia de la física. Con ella se puede predecir
+                            el movimiento de cualquier cuerpo bajo fuerzas conocidas.
+                        </p>
+                    </div>
+                    <div class="newton-card">
+                        <div class="newton-num">III</div>
+                        <h4>Acción y Reacción</h4>
+                        <p>Para cada acción hay una reacción igual y opuesta. Las fuerzas siempre aparecen en pares.</p>
+                        <div class="newton-formula">F₁₂ = −F₂₁</div>
+                        <p style="font-size:12px;color:var(--text3);margin-top:10px;">
+                            La Tierra no solo atrae a la Luna: la Luna atrae a la Tierra con la misma fuerza.
+                            Principio de las mareas.
+                        </p>
+                    </div>
+                    <div class="newton-card" style="border-color:var(--yellow-dark);">
+                        <div class="newton-num" style="background:#050a18;color:var(--yellow);">G</div>
+                        <h4>Ley de Gravitación Universal</h4>
+                        <p>Todo par de cuerpos con masa se atrae con una fuerza proporcional al producto
+                            de sus masas e inversamente proporcional al cuadrado de la distancia.</p>
+                        <div class="newton-formula">F = G · m₁m₂ / r²</div>
+                        <p style="font-size:12px;color:var(--text3);margin-top:10px;">
+                            Con esta ley se deducen matemáticamente las tres leyes de Kepler.
+                            El programa de investigación de Kepler queda explicado y completado.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 7. SÍNTESIS: REVOLUCIÓN CIENTÍFICA ────────────────── -->
+            <div class="article-section reveal" id="sec-revolucion">
+                <span class="section-label">Síntesis histórico-filosófica</span>
+                <h2 class="article-h2">La Revolución Científica completa: <span>cinco etapas</span></h2>
+
+                <div class="step-list">
+                    <div class="step-item reveal">
+                        <div class="step-num">1</div>
+                        <div class="step-body">
+                            <h4>Ptolomeo (Clase 1): El paradigma geocéntrico y la estrategia ad hoc</h4>
+                            <p>Un sistema que funciona mediante ajustes continuos —epiciclos, ecuantes, deferentes.
+                                Preciso pero ontológicamente falso. Ejemplo de paradigma en estado de "ciencia normal".
+                            </p>
+                        </div>
+                    </div>
+                    <div class="step-item reveal">
+                        <div class="step-num">2</div>
+                        <div class="step-body">
+                            <h4>Copérnico (Clase 2): La hipótesis radical, sin prueba directa</h4>
+                            <p>El Sol al centro. La Tierra en movimiento. La revolución comienza como reinterpretación
+                                matemática de los mismos datos. Copernico apostó por la elegancia sobre la convención.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="step-item reveal">
+                        <div class="step-num">3</div>
+                        <div class="step-body">
+                            <h4>Galileo (Clase 4): La evidencia empírica directa y la nueva física</h4>
+                            <p>El telescopio confirma el heliocentrismo. Los experimentos de caída libre inauguran
+                                la física experimental. La naturaleza habla el lenguaje de las matemáticas.</p>
+                        </div>
+                    </div>
+                    <div class="step-item reveal">
+                        <div class="step-num">4</div>
+                        <div class="step-body">
+                            <h4>Kepler: Las leyes empíricas del movimiento planetario</h4>
+                            <p>Confiando en los datos de Brahe sobre las elipses, Kepler describe con precisión
+                                matemática el <em>cómo</em> del movimiento planetario. Falta el <em>por qué</em>.</p>
+                        </div>
+                    </div>
+                    <div class="step-item reveal">
+                        <div class="step-num">5</div>
+                        <div class="step-body">
+                            <h4>Newton: La explicación causal universal</h4>
+                            <p>La gravitación universal como fuerza que explica todo: caída libre, órbitas planetarias,
+                                mareas, cometas. Las leyes de Kepler se deducen matemáticamente de F = Gm₁m₂/r².
+                                El universo es una máquina de relojería gobernada por leyes matemáticas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="compare-table reveal">
+                    <thead>
+                        <tr>
+                            <th>Científico</th>
+                            <th>Período</th>
+                            <th>Contribución central</th>
+                            <th>Método</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ptolomeo</td>
+                            <td>~150 d.C.</td>
+                            <td>Sistema geocéntrico completo</td>
+                            <td>Ajuste matemático de observaciones</td>
+                        </tr>
+                        <tr>
+                            <td>Copérnico</td>
+                            <td>1543</td>
+                            <td>Hipótesis heliocéntrica</td>
+                            <td>Reinterpretación teórica</td>
+                        </tr>
+                        <tr>
+                            <td>Galileo</td>
+                            <td>1609-1632</td>
+                            <td>Evidencia telescópica + física</td>
+                            <td>Experimento + matematización</td>
+                        </tr>
+                        <tr>
+                            <td>Kepler</td>
+                            <td>1609-1619</td>
+                            <td>3 leyes del movimiento planetario</td>
+                            <td>Análisis cuantitativo de datos</td>
+                        </tr>
+                        <tr>
+                            <td>Newton</td>
+                            <td>1687</td>
+                            <td>Gravitación universal + mecánica</td>
+                            <td>Teoría matemática deductiva</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 8. CONSECUENCIAS FILOSÓFICAS ─────────────────────── -->
+            <div class="article-section reveal" id="sec-filosofico">
+                <span class="section-label">Impacto en la filosofía de la ciencia</span>
+                <h2 class="article-h2">El universo-reloj: <span>consecuencias filosóficas del mecanicismo</span></h2>
+
+                <p class="article-p">
+                    La síntesis newtoniana no solo fue un avance científico. Produjo una cosmovisión radicalmente
+                    nueva que transformó la filosofía, la religión, la política y el arte del siglo XVIII:
+                    el <strong>mecanicismo</strong>. Si el universo funciona como un reloj —gobernado por leyes
+                    matemáticas precisas y eternas— entonces en principio todo puede ser predicho y calculado.
+                </p>
+
+                <div class="concept-grid reveal"
+                    style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:32px 0;">
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;">
+                        <div style="font-size:28px;margin-bottom:12px;">⚙️</div>
+                        <h4
+                            style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">
+                            Determinismo</h4>
+                        <p style="font-size:13px;color:var(--text3);line-height:1.6;">Si conocemos la posición y
+                            velocidad de cada partícula, podemos predecir el futuro (Laplace). El universo es un reloj
+                            que Dios puso en marcha.</p>
+                    </div>
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;">
+                        <div style="font-size:28px;margin-bottom:12px;">📐</div>
+                        <h4
+                            style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">
+                            Matematización total</h4>
+                        <p style="font-size:13px;color:var(--text3);line-height:1.6;">La naturaleza es en esencia
+                            matemática. Lo que no es matematizable no es científico. La cualidad se reduce a cantidad.
+                        </p>
+                    </div>
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;">
+                        <div style="font-size:28px;margin-bottom:12px;">🌐</div>
+                        <h4
+                            style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">
+                            Universalismo</h4>
+                        <p style="font-size:13px;color:var(--text3);line-height:1.6;">Las mismas leyes rigen en la
+                            Tierra y en los cielos. No hay distinción entre el mundo sublunar y supralunar aristotélico.
+                            La física es una.</p>
+                    </div>
+                    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;">
+                        <div style="font-size:28px;margin-bottom:12px;">🕰️</div>
+                        <h4
+                            style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;">
+                            Espacio y tiempo absolutos</h4>
+                        <p style="font-size:13px;color:var(--text3);line-height:1.6;">Para Newton, el espacio y el
+                            tiempo son absolutos y eternos —el "sensorium Dei". Einstein (1905) demostraría que son
+                            relativos. El siguiente gran quiebre de paradigma.</p>
+                    </div>
+                </div>
+
+                <div class="callout blue-box reveal">
+                    <div class="callout-tag">🔮 El límite del paradigma newtoniano</div>
+                    <div class="callout-title">200 años de dominio... y las grietas</div>
+                    <p>La mecánica newtoniana dominó la física durante más de dos siglos. En ese tiempo, su éxito
+                        fue espectacular: se predijo la existencia del planeta Neptuno <em>antes</em> de verlo,
+                        basándose solo en las anomalías de la órbita de Urano. El método científico en su máxima
+                        expresión.</p>
+                    <p>Pero hacia fines del siglo XIX aparecieron problemas que Newton no podía resolver:
+                        la velocidad de la luz, el efecto fotoeléctrico, el calor de los cuerpos negros.
+                        En 1905, Einstein publicó la Teoría Especial de la Relatividad, y en 1915, la Relatividad
+                        General.
+                        El paradigma newtoniano no fue refutado —sigue siendo útil para la mayoría de las aplicaciones—
+                        sino <strong>relativizado</strong>: es una aproximación excelente a velocidades bajas
+                        y masas normales. Kuhn llamaría a esto "sustitución de paradigma" por uno más amplio.</p>
+                </div>
+            </div>
+
+            <hr class="art-divider">
+
+            <!-- ── 9. PREGUNTAS ──────────────────────────────────────── -->
+            <div class="article-section reveal" id="sec-preguntas">
+                <span class="section-label">Para pensar y debatir</span>
+                <h2 class="article-h2">Preguntas de <span>reflexión filosófica</span></h2>
+
+                <div class="discussion-grid">
+                    <div class="discussion-card">
+                        <div class="disc-num">PREGUNTA 01</div>
+                        <p>Kepler confió en los datos de Brahe sobre los 8 minutos de arco y descartó la hipótesis de la
+                            órbita circular. ¿Siempre es correcto "confiar en los datos"? ¿Puede haber situaciones en
+                            que ignorar una pequeña discrepancia sea científicamente justificado?</p>
+                    </div>
+                    <div class="discussion-card">
+                        <div class="disc-num">PREGUNTA 02</div>
+                        <p>Newton unificó la física terrestre y celeste bajo una sola ley. ¿Es la "unificación" una
+                            virtud inherente de las teorías científicas, o es solo una preferencia estética de los
+                            científicos? ¿Debería la ciencia buscar siempre una "teoría del todo"?</p>
+                    </div>
+                    <div class="discussion-card">
+                        <div class="disc-num">PREGUNTA 03</div>
+                        <p>El determinismo laplaciano afirma que si conocieras la posición y velocidad de todas las
+                            partículas del universo en un momento, podrías predecir el futuro completo. ¿Qué
+                            consecuencias tiene esto para el libre albedrío? ¿Y qué problemas tiene como posición
+                            filosófica?</p>
+                    </div>
+                    <div class="discussion-card">
+                        <div class="disc-num">PREGUNTA 04</div>
+                        <p>La mecánica de Newton fue el paradigma dominante durante 200 años. Luego vino Einstein y lo
+                            relativizó —no lo refutó, sino que mostró sus límites. ¿Eso significa que Newton "estaba
+                            equivocado"? ¿Puede estar equivocada una teoría que funciona perfectamente para millones de
+                            aplicaciones?</p>
+                    </div>
+                    <div class="discussion-card">
+                        <div class="disc-num">PREGUNTA 05</div>
+                        <p>Newton dijo "No fingo hipótesis" (Hypotheses non fingo): él derivaba las leyes de las
+                            observaciones, sin especular sobre causas no observables. ¿Es posible hacer ciencia sin
+                            hipótesis especulativas? ¿O es esto una descripción idealizada del método newtoniano?</p>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- ══ SIDEBAR ════════════════════════════════════════════════ -->
+        <aside class="sidebar">
+            <!-- TOC -->
+            <div class="sidebar-widget">
+                <h3>Contenido de esta clase</h3>
+                <ul class="toc-list">
+                    <li class="toc-item" id="toc-intro"><a href="#sec-intro"><span class="toc-dot"></span>80 años que
+                            cambiaron el cosmos</a></li>
+                    <li class="toc-item" id="toc-kepler"><a href="#sec-kepler"><span class="toc-dot"></span>Johannes
+                            Kepler</a></li>
+                    <li class="toc-item" id="toc-leyes-kepler"><a href="#sec-leyes-kepler"><span
+                                class="toc-dot"></span>Las 3 leyes de Kepler</a></li>
+                    <li class="toc-item" id="toc-animacion"><a href="#sec-animacion"><span
+                                class="toc-dot"></span>Simulación orbital</a></li>
+                    <li class="toc-item" id="toc-newton"><a href="#sec-newton"><span class="toc-dot"></span>Isaac
+                            Newton</a></li>
+                    <li class="toc-item" id="toc-leyes-newton"><a href="#sec-leyes-newton"><span
+                                class="toc-dot"></span>Las 4 leyes de Newton</a></li>
+                    <li class="toc-item" id="toc-revolucion"><a href="#sec-revolucion"><span class="toc-dot"></span>La
+                            Revolución completa</a></li>
+                    <li class="toc-item" id="toc-filosofico"><a href="#sec-filosofico"><span
+                                class="toc-dot"></span>Consecuencias filosóficas</a></li>
+                    <li class="toc-item" id="toc-preguntas"><a href="#sec-preguntas"><span
+                                class="toc-dot"></span>Preguntas de reflexión</a></li>
+                </ul>
+            </div>
+
+            <!-- CONCEPTS -->
+            <div class="sidebar-widget">
+                <h3>Conceptos clave</h3>
+                <div class="concept-list">
+                    <div class="concept-item">
+                        <div class="c-icon" style="background:color-mix(in srgb,var(--yellow) 20%,var(--bg3));">🔵</div>
+                        <div>
+                            <h4>Órbita elíptica</h4>
+                            <p>1ª ley de Kepler. El Sol en el foco, no en el centro. Fin del círculo perfecto
+                                aristotélico.</p>
+                        </div>
+                    </div>
+                    <div class="concept-item">
+                        <div class="c-icon" style="background:color-mix(in srgb,#3b82f6 20%,var(--bg3));">📐</div>
+                        <div>
+                            <h4>Ley de áreas</h4>
+                            <p>2ª ley de Kepler. Velocidad mayor en el perihelio. La velocidad no es uniforme — nueva
+                                ruptura con los griegos.</p>
+                        </div>
+                    </div>
+                    <div class="concept-item">
+                        <div class="c-icon" style="background:color-mix(in srgb,#7c3aed 20%,var(--bg3));">📏</div>
+                        <div>
+                            <h4>T² = k·a³</h4>
+                            <p>3ª ley de Kepler. Relación matemática entre período orbital y distancia al Sol. Universal
+                                para todos los planetas.</p>
+                        </div>
+                    </div>
+                    <div class="concept-item">
+                        <div class="c-icon" style="background:color-mix(in srgb,#dc2626 20%,var(--bg3));">🌍</div>
+                        <div>
+                            <h4>Gravitación universal</h4>
+                            <p>Newton. F = Gm₁m₂/r². Unifica caída libre y órbitas. El mismo fenómeno a todas las
+                                escalas.</p>
+                        </div>
+                    </div>
+                    <div class="concept-item">
+                        <div class="c-icon" style="background:color-mix(in srgb,#16a34a 20%,var(--bg3));">⚙️</div>
+                        <div>
+                            <h4>Determinismo</h4>
+                            <p>El universo como máquina de relojería. Posiciones + velocidades iniciales → futuro
+                                completo predecible (Laplace).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHILOSOPHERS -->
+            <div class="sidebar-widget">
+                <h3>Protagonistas</h3>
+                <div class="phil-list">
+                    <div class="phil-card">
+                        <div class="phil-avatar" style="background:color-mix(in srgb,#3b82f6 20%,var(--bg3));">🪐</div>
+                        <div>
+                            <div class="phil-dates">1571 — 1630 · Württemberg / Praga</div>
+                            <h4>Johannes Kepler</h4>
+                            <p>Matemático y astrónomo. Descubrió las 3 leyes con los datos de Brahe. Místico y empirista
+                                en la misma persona.</p>
+                        </div>
+                    </div>
+                    <div class="phil-card">
+                        <div class="phil-avatar" style="background:color-mix(in srgb,#facc15 20%,var(--bg3));">🍎</div>
+                        <div>
+                            <div class="phil-dates">1643 — 1727 · Woolsthorpe / Cambridge</div>
+                            <h4>Isaac Newton</h4>
+                            <p>Físico, matemático y alquimista. <em>Principia Mathematica</em> (1687). Gravitación
+                                universal, cálculo, óptica.</p>
+                        </div>
+                    </div>
+                    <div class="phil-card">
+                        <div class="phil-avatar" style="background:color-mix(in srgb,#dc2626 20%,var(--bg3));">🔭</div>
+                        <div>
+                            <div class="phil-dates">1546 — 1601 · Dinamarca / Praga</div>
+                            <h4>Tycho Brahe</h4>
+                            <p>Sus datos de décadas hicieron posible las leyes de Kepler. El mejor observador de su era.
+                                Sin telescopio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT CONNECTIONS -->
+            <div class="sidebar-widget">
+                <h3>La Revolución completada</h3>
+                <div style="font-size:13px;line-height:1.65;color:var(--text2);">
+                    <p style="margin-bottom:8px;"><strong style="color:var(--text);">C1 — Ptolomeo:</strong> El
+                        paradigma a reemplazar. Epiciclos = hipótesis ad hoc ante la crisis.</p>
+                    <p style="margin-bottom:8px;"><strong style="color:var(--text);">C2 — Copérnico:</strong> La
+                        hipótesis alternativa. Sin prueba directa, pero más simple.</p>
+                    <p style="margin-bottom:8px;"><strong style="color:var(--text);">C3 — Hanson:</strong> ¿Veían lo
+                        mismo Brahe y Kepler? La carga teórica de los 8 minutos de arco.</p>
+                    <p style="margin-bottom:8px;"><strong style="color:var(--text);">C4 — Galileo:</strong> Evidencia
+                        empírica directa. Física experimental.</p>
+                    <p><strong style="color:var(--text);">C5 — Kepler+Newton:</strong> El cierre. Descripción +
+                        explicación causal. El universo como ley.</p>
+                </div>
+            </div>
+
+            <!-- NAV BUTTONS -->
+            <div class="sidebar-widget" style="border:none;background:none;padding:0;box-shadow:none;">
+                <a href="unidad1-clase4.html" style="display:block;margin-bottom:12px;">
+                    <div class="nav-class-btn">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <div class="nav-class-info">
+                            <div class="nav-class-label">Clase anterior</div>
+                            <div class="nav-class-title">Galileo: El Telescopio y el Juicio</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="unidad1-clase6.html" style="display:block;">
+                    <div class="nav-class-btn primary">
+                        <div class="nav-class-info">
+                            <div class="nav-class-label">Próxima clase</div>
+                            <div class="nav-class-title">Kuhn: Paradigmas y Revoluciones Científicas</div>
+                        </div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </aside>
+    </main>
+
+    <!-- ══ FOOTER ════════════════════════════════════════════════ -->
+    <footer class="art-footer">
+        <div class="art-footer-inner">
+            <div class="footer-nav">
+                <a href="unidad1-clase4.html" class="footer-nav-card">
+                    <div class="fn-icon">←</div>
+                    <div>
+                        <div class="fn-label">Clase anterior</div>
+                        <div class="fn-title">Galileo: El Telescopio y el Juicio</div>
+                    </div>
+                </a>
+                <a href="index.html" class="footer-nav-card">
+                    <div class="fn-icon">🏠</div>
+                    <div>
+                        <div class="fn-label">Volver al inicio</div>
+                        <div class="fn-title">Revista Filosofía &amp; Ciencia</div>
+                    </div>
+                </a>
+                <a href="unidad1-clase6.html" class="footer-nav-card primary">
+                    <div class="fn-icon">→</div>
+                    <div>
+                        <div class="fn-label">Próxima clase</div>
+                        <div class="fn-title">Kuhn: Paradigmas y Revoluciones</div>
+                    </div>
+                </a>
+            </div>
+            <div class="footer-credits">
+                Filosofía e Historia de la Ciencia y la Tecnología · 6to Año ·
+                <a href="index.html">Los Polvorines, 2025</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── DARK MODE ────────────────────────────────────────────────
+        function toggleDark() {
+            const h = document.documentElement;
+            h.classList.toggle('dark');
+            localStorage.setItem('darkMode', h.classList.contains('dark'));
+        }
+        (function () {
+            const s = localStorage.getItem('darkMode');
+            const p = window.matchMedia('(prefers-color-scheme:dark)').matches;
+            if (s === 'true' || (s === null && p)) document.documentElement.classList.add('dark');
+        })();
+
+        // ── PROGRESS BAR ─────────────────────────────────────────────
+        window.addEventListener('scroll', () => {
+            const b = document.getElementById('progress'), d = document.documentElement;
+            b.style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+        });
+
+        // ── REVEAL ON SCROLL ─────────────────────────────────────────
+        const reveals = document.querySelectorAll('.reveal');
+        new IntersectionObserver((e) => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }),
+            { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }).observe
+            ; reveals.forEach(r => new IntersectionObserver((e) => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }),
+                { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }).observe(r));
+
+        // ── ACTIVE TOC ───────────────────────────────────────────────
+        const secs = [
+            { id: 'sec-intro', toc: 'toc-intro' }, { id: 'sec-kepler', toc: 'toc-kepler' },
+            { id: 'sec-leyes-kepler', toc: 'toc-leyes-kepler' }, { id: 'sec-animacion', toc: 'toc-animacion' },
+            { id: 'sec-newton', toc: 'toc-newton' }, { id: 'sec-leyes-newton', toc: 'toc-leyes-newton' },
+            { id: 'sec-revolucion', toc: 'toc-revolucion' }, { id: 'sec-filosofico', toc: 'toc-filosofico' },
+            { id: 'sec-preguntas', toc: 'toc-preguntas' },
+        ];
+        const tocObs = new IntersectionObserver((e) => e.forEach(x => {
+            const p = secs.find(s => s.id === x.target.id);
+            if (p) document.getElementById(p.toc)?.classList.toggle('active', x.isIntersecting);
+        }), { rootMargin: '-20% 0px -60% 0px' });
+        secs.forEach(s => { const el = document.getElementById(s.id); if (el) tocObs.observe(el); });
+
+        // ── KEPLER ORBITAL SIMULATION ────────────────────────────────
+        const canvas = document.getElementById('keplerCanvas');
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width, H = canvas.height;
+        const CX = W / 2, CY = H / 2;
+
+        // Planet data: [semi-major, eccentricity, orbital-period-relative, color, radius, name]
+        const planets = [
+            { a: 52, e: 0.206, T: 0.241, color: '#aaaaaa', r: 4, name: 'Mercurio' },
+            { a: 82, e: 0.007, T: 0.615, color: '#f0d060', r: 6, name: 'Venus' },
+            { a: 120, e: 0.017, T: 1.000, color: '#1a6bb5', r: 7, name: 'Tierra' },
+            { a: 170, e: 0.093, T: 1.881, color: '#ef4444', r: 6, name: 'Marte' },
+        ];
+
+        let showAreas = true;
+        let fastSpeed = false;
+        let time = 0;
+        let animId = null;
+
+        function calcPos(planet, t) {
+            // Simplified: use eccentric anomaly approximation
+            const M = (2 * Math.PI * t / planet.T) % (2 * Math.PI);
+            // Eccentric anomaly (Newton's iteration, 1 step)
+            let E = M;
+            for (let i = 0; i < 5; i++) E = M + planet.e * Math.sin(E);
+            const cosE = Math.cos(E), sinE = Math.sin(E);
+            // Position in orbit plane
+            const x = planet.a * (cosE - planet.e);
+            const y = planet.a * Math.sqrt(1 - planet.e * planet.e) * sinE;
+            return { x, y };
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            // Background
+            ctx.fillStyle = '#050a18';
+            ctx.fillRect(0, 0, W, H);
+            // Stars
+            const stars = [[30, 40], [200, 60], [450, 80], [50, 420], [420, 380], [100, 200], [380, 150], [240, 480], [480, 300], [10, 300]];
+            stars.forEach(([sx, sy]) => {
+                ctx.beginPath();
+                ctx.arc(sx, sy, 1, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,0.4)';
+                ctx.fill();
+            });
+
+            // Draw orbit ellipses
+            planets.forEach(p => {
+                const b = p.a * Math.sqrt(1 - p.e * p.e);
+                const focusX = p.a * p.e; // focus offset from center of ellipse
+                ctx.save();
+                ctx.translate(CX - focusX, CY);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, p.a, b, 0, 0, Math.PI * 2);
+                ctx.strokeStyle = p.color + '44';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 6]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.restore();
+            });
+
+            // Sun at true center (focus)
+            ctx.beginPath();
+            ctx.arc(CX, CY, 16, 0, Math.PI * 2);
+            const sunG = ctx.createRadialGradient(CX - 3, CY - 3, 2, CX, CY, 16);
+            sunG.addColorStop(0, '#fff7aa');
+            sunG.addColorStop(0.4, '#fbbf24');
+            sunG.addColorStop(1, '#f97316');
+            ctx.fillStyle = sunG;
+            ctx.fill();
+
+            // Draw planets + areas
+            planets.forEach(p => {
+                const pos = calcPos(p, time);
+                const px = CX + pos.x;
+                const py = CY + pos.y;
+                const focusX = p.a * p.e;
+                const fpx = CX; // Sun is at CX,CY which is the focus
+
+                // Area sector (swept)
+                if (showAreas) {
+                    const steps = 30;
+                    const dT = p.T * 0.08; // show ~8% of orbit as swept area
+                    ctx.beginPath();
+                    ctx.moveTo(fpx, CY);
+                    for (let i = 0; i <= steps; i++) {
+                        const tp = time - dT + (i / steps) * dT;
+                        const pp = calcPos(p, tp);
+                        ctx.lineTo(CX + pp.x, CY + pp.y);
+                    }
+                    ctx.closePath();
+                    ctx.fillStyle = p.color + '22';
+                    ctx.fill();
+                    ctx.strokeStyle = p.color + '55';
+                    ctx.lineWidth = 0.8;
+                    ctx.stroke();
+                }
+
+                // Line from sun to planet
+                ctx.beginPath();
+                ctx.moveTo(CX, CY);
+                ctx.lineTo(px, py);
+                ctx.strokeStyle = p.color + '30';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Planet
+                ctx.beginPath();
+                ctx.arc(px, py, p.r, 0, Math.PI * 2);
+                const g = ctx.createRadialGradient(px - p.r * .3, py - p.r * .3, 1, px, py, p.r);
+                g.addColorStop(0, '#ffffff55');
+                g.addColorStop(1, p.color);
+                ctx.fillStyle = g;
+                ctx.fill();
+
+                // Glow
+                ctx.beginPath();
+                ctx.arc(px, py, p.r + 4, 0, Math.PI * 2);
+                ctx.fillStyle = p.color + '22';
+                ctx.fill();
+            });
+
+            const speed = fastSpeed ? 0.006 : 0.002;
+            time += speed;
+            animId = requestAnimationFrame(draw);
+        }
+
+        function toggleAreas() {
+            showAreas = !showAreas;
+            const btn = document.getElementById('btn-areas');
+            btn.classList.toggle('active', showAreas);
+            btn.textContent = showAreas ? 'Mostrar áreas' : 'Ocultar áreas';
+        }
+        function toggleSpeed() {
+            fastSpeed = !fastSpeed;
+            const btn = document.getElementById('btn-speed');
+            btn.classList.toggle('active', fastSpeed);
+            btn.textContent = fastSpeed ? 'Velocidad real' : 'Velocidad x3';
+        }
+
+        draw();
+    </script>
+</body>
+
+</html>
