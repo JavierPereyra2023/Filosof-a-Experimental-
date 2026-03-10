@@ -278,6 +278,44 @@
         .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
         .cfn-credits a{color:rgba(250,204,21,.32);text-decoration:none;transition:color .2s}
         .cfn-credits a:hover{color:#facc15}
+
+        /* === ARGUMENTO VÁLIDO / INVÁLIDO — componente lluvia === */
+        .arg-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+        @media(max-width:640px){.arg-compare{grid-template-columns:1fr}}
+        .arg-card{border-radius:14px;overflow:hidden;border:2px solid}
+        .arg-card.valid{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.04)}
+        .arg-card.invalid{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.04)}
+        .dark .arg-card.valid{background:rgba(34,197,94,.06)}
+        .dark .arg-card.invalid{background:rgba(239,68,68,.06)}
+        .arg-header{padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(0,0,0,.07)}
+        .dark .arg-header{border-color:rgba(255,255,255,.07)}
+        .arg-card.valid .arg-header{background:rgba(34,197,94,.1)}
+        .arg-card.invalid .arg-header{background:rgba(239,68,68,.1)}
+        .arg-verdict{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+        .arg-card.valid .arg-verdict{background:#22c55e;color:#fff}
+        .arg-card.invalid .arg-verdict{background:#ef4444;color:#fff}
+        .arg-name{font-size:13px;font-weight:700;color:var(--t)}
+        .arg-body{padding:18px}
+        .arg-premise{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+        .arg-tag{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-top:2px;flex-shrink:0;white-space:nowrap}
+        .valid .arg-tag{background:rgba(34,197,94,.15);color:#16a34a}
+        .dark .valid .arg-tag{color:#4ade80}
+        .invalid .arg-tag{background:rgba(239,68,68,.12);color:#dc2626}
+        .dark .invalid .arg-tag{color:#f87171}
+        .arg-text{font-size:14px;line-height:1.5;color:var(--t)}
+        .arg-sep{height:1px;background:var(--brd);margin:10px 0}
+        .arg-conclusion{display:flex;gap:10px;align-items:center}
+        .arg-conc-tag{font-size:9px;font-weight:800;letter-spacing:.1em;padding:4px 10px;border-radius:6px;flex-shrink:0}
+        .valid .arg-conc-tag{background:#22c55e;color:#fff}
+        .invalid .arg-conc-tag{background:#ef4444;color:#fff}
+        .arg-conc-text{font-size:14.5px;font-weight:700;color:var(--t)}
+        .arg-conc-text em{font-style:normal;font-weight:900}
+        .arg-why{margin-top:12px;padding:12px 14px;border-radius:10px;font-size:12.5px;line-height:1.6;color:var(--t2)}
+        .valid .arg-why{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2)}
+        .invalid .arg-why{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18)}
+        .arg-icon{font-size:22px;line-height:1}
+        /* Weather pill decorativa */
+        .weather-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.25);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600;color:var(--t2);margin-bottom:14px}
         </style>
 </head>
 <body>
@@ -293,7 +331,7 @@
         <div class="tnr">
             <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
             <a href="index.html" class="nav-pill back"><i class="fa-solid fa-home"></i> Inicio</a>
-            <a href="#" class="nav-pill next">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="unidad3-clase20.html" class="nav-pill next">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </nav>
 
@@ -520,7 +558,40 @@
                     <cite>— Karl Popper, Conjeturas y Refutaciones (1963)</cite>
                 </div>
 
-                <h3 class="reveal">El Modus Tollens como motor de la ciencia</h3>
+                <h3 class="reveal">El Modus Ponens en el Método Hipotético-Deductivo</h3>
+
+                <p class="article-p reveal">El MHD usa el <strong>modus ponens</strong> ("si P entonces Q; P; luego Q") para deducir consecuencias a partir de una hipótesis. Es lógicamente válido: si la hipótesis es verdadera y se cumple la condición, la consecuencia es inevitable.</p>
+
+                <div class="logic-box reveal">
+                    <h4>Estructura lógica del MHD (Modus Ponens)</h4>
+                    <div class="logic-line"><span class="logic-tag p">Premisa 1</span> Si la hipótesis H es verdadera, entonces debería observarse O.</div>
+                    <div class="logic-line"><span class="logic-tag c">Premisa 2</span> La hipótesis H es verdadera. <span style="opacity:.55;font-size:.9em">(asumimos H para deducir)</span></div>
+                    <div class="logic-separator">──────────────────────────────────</div>
+                    <div class="logic-conclusion">∴ Se observa O. <span style="font-size:.9em;opacity:.7">(predicción que luego salimos a comprobar)</span></div>
+                </div>
+
+                <div class="logic-box reveal" style="margin-top:16px;border-color:rgba(96,165,250,.3)">
+                    <h4 style="color:#60a5fa"><i class="fa-solid fa-cloud-rain" style="margin-right:6px"></i>Modus Ponens — Ejemplo concreto</h4>
+                    <div class="logic-line">
+                        <span class="logic-tag p">Premisa 1</span>
+                        <span><strong>Si llueve, entonces hay nubes.</strong> <span style="opacity:.55;font-size:.9em">(relación necesaria)</span></span>
+                    </div>
+                    <div class="logic-line">
+                        <span class="logic-tag c">Premisa 2</span>
+                        <span><strong>Llueve.</strong> <span style="opacity:.55;font-size:.9em">(condición que se cumple)</span></span>
+                    </div>
+                    <div class="logic-separator">──────────────────────────────────</div>
+                    <div class="logic-conclusion">∴ <strong>Hay nubes.</strong> <span style="color:#4ade80;font-size:.9em">✓ Conclusión necesariamente verdadera</span></div>
+                    <p style="margin-top:14px;font-size:13px;color:var(--t2);line-height:1.6;border-top:1px solid rgba(255,255,255,.07);padding-top:12px">
+                        <i class="fa-solid fa-flask" style="color:#60a5fa;margin-right:4px"></i>
+                        <strong>Versión científica:</strong> Si la relatividad general de Einstein es correcta, entonces la luz debe curvarse al pasar cerca del Sol. Eddington salió a observar durante el eclipse de 1919 — y efectivamente la luz se curvó 1.75 segundos de arco, exactamente lo predicho. El modus ponens funcionó: la consecuencia se verificó.
+                        <br><br>
+                        <i class="fa-solid fa-triangle-exclamation" style="color:#fbbf24;margin-right:4px"></i>
+                        <strong>El límite crucial:</strong> que la consecuencia se verifique <em>no prueba</em> que la hipótesis sea verdadera — solo que sobrevivió este intento. Siempre puede haber otra hipótesis diferente que prediga el mismo resultado. Por eso Popper va un paso más: el verdadero test no es confirmar, sino intentar <em>refutar</em>.
+                    </p>
+                </div>
+
+                <h3 class="reveal" style="margin-top:40px">El Modus Tollens como motor de la ciencia</h3>
 
                 <p class="article-p reveal">La clave lógica del falsacionismo es el <strong>modus tollens</strong> ("si P entonces Q; no Q; luego no P"). Es la única inferencia deductiva válida que conecta teoría y experiencia en forma concluyente:</p>
 
@@ -530,6 +601,103 @@
                     <div class="logic-line"><span class="logic-tag c">Premisa 2</span> Pero <em>no</em> se observa O. (La observación contradice la predicción)</div>
                     <div class="logic-separator">──────────────────────────────────</div>
                     <div class="logic-conclusion">∴ La hipótesis H es <strong>falsa</strong>. (Debe ser abandonada o revisada)</div>
+                </div>
+
+                <!-- EJEMPLO MODUS TOLLENS -->
+                <div class="logic-box reveal" style="margin-top:16px;border-color:rgba(250,204,21,.25)">
+                    <h4 style="color:var(--yd)"><i class="fa-solid fa-cloud-sun-rain" style="margin-right:6px"></i>Modus Tollens — Ejemplo concreto</h4>
+                    <div class="logic-line">
+                        <span class="logic-tag p">Premisa 1</span>
+                        <span><strong>Si llueve, entonces hay nubes.</strong> <span style="opacity:.55;font-size:.9em">(La lluvia implica nubes — siempre)</span></span>
+                    </div>
+                    <div class="logic-line">
+                        <span class="logic-tag c">Premisa 2</span>
+                        <span><strong>No hay nubes.</strong> <span style="opacity:.55;font-size:.9em">(Observación: cielo completamente despejado)</span></span>
+                    </div>
+                    <div class="logic-separator">──────────────────────────────────</div>
+                    <div class="logic-conclusion">∴ <strong>No llueve.</strong> <span style="color:#4ade80;font-size:.9em">✓ Conclusión necesariamente verdadera</span></div>
+                    <p style="margin-top:14px;font-size:13px;color:var(--t2);line-height:1.6;border-top:1px solid rgba(255,255,255,.07);padding-top:12px">
+                        <i class="fa-solid fa-flask" style="color:var(--yd);margin-right:4px"></i>
+                        <strong>Versión científica:</strong> Si el geocentrismo fuera verdadero, Venus no debería mostrar fases completas (como la Luna). Galileo apuntó su telescopio en 1610 y observó que Venus <em>sí</em> tiene fases completas. Conclusión inevitable: el modelo geocéntrico es <strong>falso</strong>. Una sola observación contradictoria derrumbó siglos de paradigma.
+                    </p>
+                </div>
+
+                <!-- EJEMPLOS CONCRETOS: argumentos válido vs. inválido -->
+                <h3 class="reveal" style="margin-top:40px">Un ejemplo cotidiano: lluvia y nubes</h3>
+
+                <p class="article-p reveal">Antes de seguir con Popper, un ejemplo de la vida diaria muestra por qué no todo argumento que <em>parece</em> lógico es realmente válido. Compará estas dos formas de razonar:</p>
+
+                <div class="arg-compare reveal">
+
+                    <!-- VÁLIDO: Modus Ponens -->
+                    <div class="arg-card valid">
+                        <div class="arg-header">
+                            <span class="arg-icon">✅</span>
+                            <span class="arg-name">Argumento válido</span>
+                            <span class="arg-verdict">Modus Ponens</span>
+                        </div>
+                        <div class="arg-body">
+                            <div class="weather-pill">
+                                <i class="fa-solid fa-cloud-rain"></i> Escenario: lluvia y nubes
+                            </div>
+                            <div class="arg-premise">
+                                <span class="arg-tag">Premisa 1</span>
+                                <span class="arg-text"><strong>Si llueve, entonces hay nubes.</strong></span>
+                            </div>
+                            <div class="arg-premise">
+                                <span class="arg-tag">Premisa 2</span>
+                                <span class="arg-text"><strong>Llueve.</strong></span>
+                            </div>
+                            <div class="arg-sep"></div>
+                            <div class="arg-conclusion">
+                                <span class="arg-conc-tag">∴</span>
+                                <span class="arg-conc-text"><em>Hay nubes.</em> ✓</span>
+                            </div>
+                            <div class="arg-why">
+                                <strong>¿Por qué es válido?</strong> Si la primera premisa es verdadera y la segunda también, la conclusión es <em>necesariamente</em> verdadera. No puede llover sin que haya nubes.
+                                <br><br>
+                                <strong>En ciencia:</strong> de una hipótesis (llueve) se deduce una consecuencia observable (hay nubes). Si la hipótesis es correcta, la consecuencia se cumple.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INVÁLIDO: Afirmación del consecuente -->
+                    <div class="arg-card invalid">
+                        <div class="arg-header">
+                            <span class="arg-icon">❌</span>
+                            <span class="arg-name">Argumento inválido</span>
+                            <span class="arg-verdict">Falacia</span>
+                        </div>
+                        <div class="arg-body">
+                            <div class="weather-pill">
+                                <i class="fa-solid fa-cloud"></i> Escenario: nubes sin lluvia
+                            </div>
+                            <div class="arg-premise">
+                                <span class="arg-tag">Premisa 1</span>
+                                <span class="arg-text"><strong>Si llueve, entonces hay nubes.</strong></span>
+                            </div>
+                            <div class="arg-premise">
+                                <span class="arg-tag">Premisa 2</span>
+                                <span class="arg-text"><strong>Hay nubes.</strong></span>
+                            </div>
+                            <div class="arg-sep"></div>
+                            <div class="arg-conclusion">
+                                <span class="arg-conc-tag">∴</span>
+                                <span class="arg-conc-text"><em>¿Llueve?</em> ✗</span>
+                            </div>
+                            <div class="arg-why">
+                                <strong>¿Por qué es inválido?</strong> Puede haber nubes sin que llueva — un día nublado sin lluvia lo demuestra. La conclusión no se sigue necesariamente de las premisas.
+                                <br><br>
+                                <strong>En ciencia:</strong> observar la consecuencia predicha (nubes) <em>no prueba</em> que la hipótesis sea verdadera (lluvia). Hay otras causas posibles. Por eso confirmar no es suficiente: ¡hay que intentar refutar!
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="callout callout-y reveal">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <p><strong>La clave de Popper:</strong> la ciencia no puede probar teorías por acumulación de casos donde "las nubes aparecen cuando llueve". Siempre existe el riesgo de la <em>afirmación del consecuente</em> — confundir que la consecuencia se cumple con que la hipótesis es verdadera. El único movimiento lógicamente válido es el <strong>modus tollens</strong>: si <em>no</em> hay nubes, entonces <em>definitivamente</em> no llueve. Una sola refutación vale más que mil confirmaciones.</p>
                 </div>
 
                 <div class="versus-wrap reveal">
@@ -725,14 +893,14 @@
                 <i class="fa-solid fa-house cfn-home-icon"></i>
                 <span class="cfn-home-label">Inicio</span>
             </a>
-            <div class="cfn-card cfn-next cfn-disabled">
+            <a href="unidad3-clase20.html" class="cfn-card cfn-next">
                 <div class="cfn-body">
-                    <span class="cfn-badge">PRÓXIMAMENTE</span>
+                    <span class="cfn-badge">U3 · C-20</span>
                     <span class="cfn-dir">Clase siguiente</span>
-                    <span class="cfn-title">En preparación</span>
+                    <span class="cfn-title">Lakatos y Feyerabend</span>
                 </div>
                 <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-            </div>
+            </a>
             </div>
             <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2026</a></p>
         </div>

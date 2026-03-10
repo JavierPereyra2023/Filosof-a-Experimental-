@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 4 — Teorías, Observación y Progreso | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --yellow: #facc15;
+            --yellow-dark: #eab308;
+            --red: #dc2626;
+            --bg: #f9f7f4;
+            --bg2: #ffffff;
+            --bg3: #f1ede6;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text2: #3d3d3d;
+            --text3: #6b6b6b;
+            --border: #e0d9d0;
+            --shadow: 0 4px 24px rgba(0,0,0,.08);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,.15);
+            --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .dark {
+            --bg: #111;
+            --bg2: #1a1a1a;
+            --bg3: #222;
+            --card: #1e1e1e;
+            --text: #f0ece4;
+            --text2: #c8c0b4;
+            --text3: #888880;
+            --border: #333;
+            --shadow: 0 4px 24px rgba(0,0,0,.4);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,.6);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-padding-top: 72px; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; transition: background .4s, color .4s; }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--yellow); }
+
+        /* ===== PROGRESS BAR ===== */
+        #prog { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--yellow), #f97316); z-index: 9999; transition: width .1s; pointer-events: none; }
+
+        /* ===== TOPNAV ===== */
+        #topnav {
+            position: sticky; top: 0; z-index: 500;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 56px;
+            box-shadow: var(--shadow);
+            transition: background .4s, border-color .4s;
+        }
+        .tnl, .tnr { display: flex; align-items: center; gap: 12px; }
+        .tnc { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--text2); }
+        @media(max-width:760px){ .tnc { display: none; } }
+        .nav-sep { color: var(--border); font-size: 18px; }
+        .nav-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 14px; border-radius: 999px;
+            font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+            transition: all var(--transition); border: none; cursor: pointer;
+        }
+        .nav-pill.back { background: var(--bg3); color: var(--text3); }
+        .nav-pill.back:hover { background: var(--border); color: var(--text); }
+        .nav-pill.next { background: var(--yellow); color: #000; }
+        .nav-pill.next:hover { background: var(--yellow-dark); }
+        .nav-pill.next.disabled { opacity: .35; pointer-events: none; }
+        .dtoggle { background: none; border: 1px solid var(--border); width: 36px; height: 20px; border-radius: 999px; position: relative; cursor: pointer; transition: all var(--transition); }
+        .dtoggle::after { content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; border-radius: 50%; background: var(--text3); transition: all var(--transition); }
+        .dark .dtoggle { border-color: var(--yellow); background: var(--yellow); }
+        .dark .dtoggle::after { left: calc(100% - 16px); background: #000; }
+        .u4-badge { font-size: 9px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--yellow-dark); background: rgba(234,179,8,.12); border: 1px solid rgba(234,179,8,.28); padding: 3px 12px; border-radius: 999px; }
+
+        /* ===== HERO ===== */
+        #art-hero {
+            background:
+                linear-gradient(to right, rgba(0,0,0,.96) 0%, rgba(0,0,0,.88) 40%, rgba(0,0,0,.55) 64%, rgba(0,0,0,.2) 100%),
+                url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&q=80') center/cover no-repeat;
+            text-shadow: 0 2px 24px rgba(0,0,0,.95), 0 0 40px rgba(0,0,0,.5);
+            min-height: 92vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; color: #fff;
+            padding: 80px 24px 60px;
+            position: relative; overflow: hidden;
+        }
+        .hero-breadcrumb {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+            margin-bottom: 28px; flex-wrap: wrap; justify-content: center;
+            position: relative; z-index: 2;
+        }
+        .hero-badge { background: var(--yellow); color: #000; padding: 4px 14px; border-radius: 999px; font-size: 10px; font-weight: 800; }
+        .hero-badge-outline { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.3); padding: 4px 14px; border-radius: 999px; font-size: 10px; }
+        .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--yellow); margin-bottom: 20px; position: relative; z-index: 2; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(32px,6vw,80px); font-weight: 900; line-height: .93; letter-spacing: -.03em; margin-bottom: 24px; position: relative; z-index: 2; }
+        .hero-title em { font-style: italic; color: var(--yellow); }
+        .hero-subtitle { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: clamp(15px,2.3vw,20px); color: rgba(255,255,255,.8); max-width: 640px; line-height: 1.65; margin-bottom: 40px; position: relative; z-index: 2; }
+        .hero-meta { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; font-size: 12px; color: rgba(255,255,255,.55); letter-spacing: .05em; margin-bottom: 28px; position: relative; z-index: 2; }
+        .hero-meta i { color: var(--yellow); }
+        .hero-meta-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.3); }
+        .hero-topics-strip { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2; }
+        .hero-topic-chip { font-size: 9.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; background: rgba(250,204,21,.1); border: 1px solid rgba(250,204,21,.28); color: rgba(250,204,21,.92); }
+        .hero-scroll-cue {
+            position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: rgba(255,255,255,.4); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; z-index: 2;
+        }
+        .scroll-dot { width: 28px; height: 44px; border-radius: 14px; border: 2px solid rgba(255,255,255,.25); display: flex; align-items: flex-start; justify-content: center; padding-top: 6px; }
+        .scroll-dot::after { content: ''; width: 4px; height: 8px; border-radius: 2px; background: rgba(255,255,255,.4); animation: scrolldot 1.8s infinite; }
+        @keyframes scrolldot { 0%, 100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(8px); opacity: .3; } }
+
+        /* ===== ARTICLE LAYOUT ===== */
+        .article-wrap { max-width: 1280px; margin: 0 auto; padding: 64px 24px 80px; display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
+        @media(min-width:1100px) { .article-wrap { grid-template-columns: 1fr 300px; gap: 56px; } }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar { position: sticky; top: 76px; }
+        @media(max-width:1099px) { .sidebar { display: none; } }
+        .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: var(--shadow); }
+        .sidebar-card-header { background: var(--bg3); padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+        .sidebar-card-header span { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow-dark); }
+        .sidebar-card-header i { color: var(--yellow-dark); font-size: 12px; }
+        .sidebar-card-body { padding: 16px 20px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+        .toc-link { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: var(--text3); transition: all var(--transition); font-weight: 500; border-left: 3px solid transparent; }
+        .toc-link:hover, .toc-link.active { background: rgba(250,204,21,.08); color: var(--text); border-left-color: var(--yellow); padding-left: 7px; }
+        .toc-num { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--yellow-dark); opacity: .75; width: 22px; flex-shrink: 0; }
+        .concept-tag { display: inline-block; background: var(--bg3); border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; font-size: 11px; color: var(--text3); margin: 3px 2px; transition: all var(--transition); cursor: default; }
+        .concept-tag:hover { border-color: var(--yellow); color: var(--text); }
+        .phil-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .phil-item:last-child { border-bottom: none; }
+        .phil-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 13px; color: #fff; flex-shrink: 0; }
+        .phil-name { font-weight: 700; font-size: 13px; color: var(--text); }
+        .phil-role { font-size: 11px; color: var(--text3); line-height: 1.35; }
+
+        /* ===== ARTICLE BODY ===== */
+        .article-body h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.7rem,3.5vw,2.4rem); font-weight: 900; color: var(--text);
+            margin: 72px 0 24px; line-height: 1.15; letter-spacing: -.02em;
+            border-bottom: 2px solid var(--yellow); padding-bottom: 14px;
+            scroll-margin-top: 80px;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+        .article-body h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--text); margin: 40px 0 14px; }
+        .article-p { font-family: 'Libre Baskerville', serif; font-size: 17px; line-height: 1.9; color: var(--text2); margin-bottom: 24px; }
+        .article-p strong { color: var(--text); }
+        .article-p em { font-style: italic; }
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 82px; font-weight: 900; line-height: .8; margin: 8px 16px -4px 0; color: var(--yellow-dark); }
+        .art-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+        /* ===== PULL QUOTE ===== */
+        .pull-quote { border-left: 4px solid var(--yellow); padding: 20px 28px; margin: 32px 0; background: var(--bg3); border-radius: 0 16px 16px 0; }
+        .pull-quote p { font-family: 'Playfair Display', serif; font-size: clamp(18px,2.5vw,22px); font-style: italic; color: var(--text); line-height: 1.55; margin-bottom: 10px; }
+        .pull-quote cite { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); font-style: normal; }
+
+        /* ===== CALLOUTS ===== */
+        .callout { display: flex; gap: 16px; padding: 20px 24px; border-radius: 14px; margin: 28px 0; border: 1px solid; }
+        .callout i { font-size: 17px; margin-top: 3px; flex-shrink: 0; }
+        .callout p { font-size: 14.5px; line-height: 1.75; flex: 1; color: var(--text2); }
+        .callout p strong { color: var(--text); }
+        .callout-g { background: rgba(250,204,21,.05); border-color: rgba(234,179,8,.2); }
+        .callout-g i { color: var(--yellow-dark); }
+        .callout-y { background: rgba(249,115,22,.05); border-color: rgba(249,115,22,.2); }
+        .callout-y i { color: #f97316; }
+        .callout-p { background: rgba(168,85,247,.05); border-color: rgba(168,85,247,.2); }
+        .callout-p i { color: #a855f7; }
+        .callout-b { background: rgba(59,130,246,.05); border-color: rgba(59,130,246,.2); }
+        .callout-b i { color: #3b82f6; }
+
+        /* ===== REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* ===== UNIT INTRO BANNER ===== */
+        .unit-intro-banner { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 32px 36px; margin: 36px 0; }
+        .unit-intro-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 900; color: var(--text); margin-bottom: 18px; }
+        .unit-intro-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .unit-intro-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text2); line-height: 1.65; font-family: 'Libre Baskerville', serif; }
+        .unit-intro-list li::before { content: '→'; color: var(--yellow-dark); font-weight: 900; flex-shrink: 0; margin-top: 2px; font-family: 'Inter', sans-serif; }
+
+        /* ===== TOPIC GRID ===== */
+        .topic-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin: 36px 0; }
+        @media(max-width:640px) { .topic-grid { grid-template-columns: 1fr; } }
+        .topic-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 26px 24px 22px; position: relative; overflow: hidden; transition: all .35s cubic-bezier(.34,1.1,.64,1); cursor: default; box-shadow: var(--shadow); }
+        .topic-card:hover { transform: translateY(-6px); border-color: rgba(234,179,8,.45); box-shadow: 0 18px 50px rgba(234,179,8,.14); }
+        .topic-card.full { grid-column: 1 / -1; }
+        .topic-num { position: absolute; top: 18px; right: 20px; font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: rgba(234,179,8,.07); line-height: 1; transition: color .3s; }
+        .topic-card:hover .topic-num { color: rgba(234,179,8,.15); }
+        .topic-icon { width: 46px; height: 46px; border-radius: 13px; background: rgba(250,204,21,.1); border: 1px solid rgba(250,204,21,.28); display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--yellow-dark); margin-bottom: 16px; transition: all .3s ease; position: relative; z-index: 1; }
+        .topic-card:hover .topic-icon { background: rgba(250,204,21,.2); transform: scale(1.08); }
+        .topic-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 900; color: var(--text); margin-bottom: 10px; line-height: 1.3; position: relative; z-index: 1; }
+        .topic-desc { font-size: 13.5px; line-height: 1.72; color: var(--text2); margin-bottom: 14px; position: relative; z-index: 1; }
+        .topic-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; background: rgba(250,204,21,.08); color: var(--yellow-dark); border: 1px solid rgba(250,204,21,.22); position: relative; z-index: 1; }
+        .topic-pill.highlight { background: rgba(234,179,8,.12); color: #92400e; border-color: rgba(234,179,8,.28); }
+
+        /* ===== HILO CONDUCTOR ===== */
+        .hilo-wrap { margin: 40px 0; }
+        .hilo-layer-label { font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--yellow-dark); opacity: .75; text-align: center; margin-bottom: 14px; }
+        .hilo-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .hilo-node { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 120px; }
+        .hilo-circle { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 2px solid; transition: all .3s ease; cursor: default; }
+        .hilo-circle:hover { transform: scale(1.1); }
+        .hilo-label { font-size: 10.5px; font-weight: 700; text-align: center; color: var(--text2); line-height: 1.35; }
+        .hilo-arrow { font-size: 20px; color: rgba(234,179,8,.4); flex-shrink: 0; }
+        .hilo-sep { display: flex; justify-content: center; margin: 14px 0; }
+        .hilo-bottom { display: flex; justify-content: center; margin-top: 14px; }
+        .hilo-core { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; padding: 22px 40px; border-radius: 22px; background: rgba(250,204,21,.06); border: 2px solid rgba(234,179,8,.32); text-align: center; }
+        .hilo-core-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 900; color: var(--yellow-dark); }
+        .hilo-core-sub { font-size: 11px; color: var(--text3); letter-spacing: .06em; }
+
+        /* ===== PHIL MINI GRID ===== */
+        .phil-mini-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 16px; margin: 32px 0; }
+        .phil-mini { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px 20px; text-align: center; transition: all .3s ease; box-shadow: var(--shadow); }
+        .phil-mini:hover { transform: translateY(-4px); border-color: rgba(234,179,8,.38); box-shadow: 0 14px 40px rgba(234,179,8,.12); }
+        .phil-mini-av { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 900; color: #fff; margin: 0 auto 14px; }
+        .phil-mini-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 900; color: var(--text); margin-bottom: 4px; }
+        .phil-mini-dates { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; }
+        .phil-mini-desc { font-size: 12.5px; line-height: 1.6; color: var(--text2); margin-bottom: 14px; }
+        .phil-mini-tag { display: inline-block; font-size: 9.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; }
+
+        /* ===== BIG QUESTION ===== */
+        .big-question { background: var(--bg3); border: 1px solid var(--border); border-radius: 24px; padding: 56px 44px; text-align: center; margin: 52px 0; position: relative; overflow: hidden; }
+        .big-question::before { content: '"'; position: absolute; top: -20px; left: 20px; font-family: 'Playfair Display', serif; font-size: 200px; font-weight: 900; color: rgba(234,179,8,.07); line-height: 1; pointer-events: none; }
+        .bq-label { font-size: 10px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--yellow-dark); margin-bottom: 24px; position: relative; }
+        .bq-text { font-family: 'Playfair Display', serif; font-size: clamp(1.25rem,2.8vw,1.75rem); font-weight: 900; color: var(--text); line-height: 1.45; margin-bottom: 20px; position: relative; }
+        .bq-text em { color: var(--yellow-dark); font-style: normal; }
+        .bq-sub { font-family: 'Libre Baskerville', serif; font-size: 15px; font-style: italic; color: var(--text2); line-height: 1.75; max-width: 540px; margin: 0 auto; position: relative; }
+
+        /* ===== FOOTER NAV ===== */
+        .cfn-wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px 80px; }
+        .cfn-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: stretch; }
+        @media(max-width:640px) { .cfn-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+        .cfn-card { display: flex; align-items: center; gap: 14px; padding: 20px 22px; border-radius: 14px; border: 1px solid var(--border); background: var(--card); text-decoration: none; color: inherit; transition: all .25s cubic-bezier(.4,0,.2,1); box-shadow: var(--shadow); }
+        .cfn-card:hover { border-color: rgba(234,179,8,.45); background: rgba(250,204,21,.04); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(234,179,8,.12); }
+        .cfn-card.cfn-next { background: rgba(250,204,21,.05); border-color: rgba(234,179,8,.28); justify-content: flex-end; text-align: right; }
+        .cfn-card.cfn-next:hover { background: rgba(250,204,21,.1); border-color: rgba(234,179,8,.55); }
+        .cfn-card.cfn-home { flex-direction: column; justify-content: center; align-items: center; gap: 6px; padding: 14px 8px; }
+        .cfn-card.cfn-home:hover { background: rgba(250,204,21,.06); border-color: rgba(234,179,8,.4); }
+        .cfn-disabled { opacity: .3; pointer-events: none; cursor: default; }
+        .cfn-arrow { font-size: 18px; color: var(--yellow-dark); transition: transform .25s ease; }
+        .cfn-card.cfn-prev:hover .cfn-arrow { transform: translateX(-5px); }
+        .cfn-card.cfn-next:hover .cfn-arrow { transform: translateX(5px); }
+        .cfn-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+        .cfn-badge { font-size: 8.5px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--yellow-dark); opacity: .7; }
+        .cfn-dir { font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--text3); }
+        .cfn-title { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.35; margin-top: 2px; }
+        .cfn-card.cfn-next .cfn-title { color: var(--yellow-dark); }
+        .cfn-home-icon { font-size: 20px; color: rgba(234,179,8,.5); transition: color .25s; }
+        .cfn-card.cfn-home:hover .cfn-home-icon { color: var(--yellow-dark); }
+        .cfn-home-label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
+        @media(max-width:640px) { .cfn-card.cfn-home { display: none; } }
+    </style>
+</head>
+<body>
+    <div id="prog"></div>
+
+    <!-- ═══ TOPNAV ═══ -->
+    <nav id="topnav">
+        <div class="tnl">
+            <a href="index.html" style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--yellow);letter-spacing:.04em">F&amp;C</a>
+            <span class="nav-sep">|</span>
+            <span class="u4-badge">UNIDAD 4</span>
+            <span class="tnc">Teorías, Observación y Progreso Científico</span>
+        </div>
+        <div class="tnr">
+            <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
+            <a href="index.html" class="nav-pill back"><i class="fa-solid fa-house fa-sm"></i> Inicio</a>
+            <a href="unidad4-clase1.html" class="nav-pill next">Primera clase <i class="fa-solid fa-arrow-right fa-sm"></i></a>
+        </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section id="art-hero">
+        <div class="hero-breadcrumb">
+            <span class="hero-badge">FILOSOFÍA &amp; CIENCIA</span>
+            <span class="hero-badge-outline">UNIDAD 4</span>
+            <span class="hero-badge-outline">INTRODUCCIÓN</span>
+        </div>
+        <p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · Los Polvorines · Ciclo 2026</p>
+        <h1 class="hero-title">
+            Teorías,<br>
+            <em>Observación</em><br>
+            y Progreso
+        </h1>
+        <p class="hero-subtitle">Las unidades anteriores mostraron <em>cómo</em> funciona la ciencia. Esta unidad pregunta algo más difícil: ¿qué le pasa al conocimiento científico a lo largo del tiempo? ¿Evolucionan las teorías, o se reemplazan radicalmente?</p>
+        <div class="hero-meta">
+            <span><i class="fa-solid fa-layer-group"></i> 7 temas centrales</span>
+            <span class="hero-meta-sep"></span>
+            <span><i class="fa-solid fa-user-graduate"></i> 6 filósofos protagonistas</span>
+            <span class="hero-meta-sep"></span>
+            <span><i class="fa-solid fa-calendar-days"></i> Ciclo 2026</span>
+        </div>
+        <div class="hero-topics-strip">
+            <span class="hero-topic-chip">Sucesión de teorías</span>
+            <span class="hero-topic-chip">Comunidad científica</span>
+            <span class="hero-topic-chip">Inconmensurabilidad</span>
+            <span class="hero-topic-chip">Carga teórica</span>
+            <span class="hero-topic-chip">Subdeterminación</span>
+            <span class="hero-topic-chip">Progreso científico</span>
+            <span class="hero-topic-chip">Teorías auxiliares</span>
+        </div>
+        <div class="hero-scroll-cue">
+            <div class="scroll-dot"></div>
+            <span>Deslizá para explorar</span>
+        </div>
+    </section>
+
+    <!-- ═══ LAYOUT ═══ -->
+    <div class="article-wrap">
+
+        <!-- ARTICLE (comes first in HTML for reading order) -->
+        <main class="article-body">
+
+            <!-- ── SECCIÓN 1: INTRODUCCIÓN ── -->
+            <section id="intro">
+                <h2>1. ¿Qué vas a encontrar en esta unidad?</h2>
+
+                <p class="article-p reveal dropcap">Las unidades anteriores construyeron un arco completo: viste el nacimiento de la ciencia moderna con Copérnico, Galileo y Newton; estudiaste cómo debería funcionar el método científico según Popper; y finalmente viste cómo los científicos reales se desvían de ese modelo ideal, con Kuhn, Lakatos y Feyerabend. La Unidad 4 no repite esa historia. En cambio, profundiza en algo que quedó pendiente: <em>¿qué pasa con el conocimiento científico a lo largo del tiempo?</em></p>
+
+                <p class="article-p reveal">Cuando Einstein reformuló la física de Newton en 1905, ¿qué ocurrió exactamente con el conocimiento previo? ¿"Mejoró"? ¿Lo refutó? ¿O creó algo tan diferente que Newton y Einstein directamente no hablan del mismo mundo? Y si hay continuidad entre teorías sucesivas, ¿dónde está esa continuidad: en los resultados, en los conceptos, en los problemas resueltos? Estas preguntas —que parecen abstractas— tienen consecuencias muy concretas para entender qué tipo de conocimiento produce la ciencia.</p>
+
+                <div class="unit-intro-banner reveal">
+                    <h3><i class="fa-solid fa-map" style="color:var(--yellow-dark);margin-right:10px"></i>Mapa de la unidad: vas a estudiar…</h3>
+                    <ul class="unit-intro-list">
+                        <li>Cómo <strong>evolucionan las teorías</strong> sobre un mismo dominio y si hay continuidad entre ellas</li>
+                        <li>El papel de la <strong>comunidad científica</strong> y el consenso en la validación del conocimiento</li>
+                        <li>La <strong>inconmensurabilidad</strong> de Kuhn: ¿pueden compararse paradigmas rivales con la misma vara?</li>
+                        <li>Por qué toda observación está <strong>cargada de teoría</strong> y qué implica eso para la objetividad científica</li>
+                        <li>La <strong>subdeterminación</strong> de Duhem y Quine: los datos nunca prueban una única teoría posible</li>
+                        <li>Las grandes perspectivas sobre el <strong>progreso científico</strong>: ¿avanza? ¿hacia dónde? ¿es posible medirlo?</li>
+                        <li>Cómo las <strong>teorías auxiliares actúan como instrumentos de medida</strong> y nunca son neutrales</li>
+                    </ul>
+                </div>
+
+                <p class="article-p reveal">Esta unidad es, en cierto modo, la culminación del programa. Vas a usar todo lo que aprendiste —paradigmas, falsacionismo, programas de investigación— para responder la pregunta más profunda de todas: <strong>¿qué clase de conocimiento produce la ciencia y hacia dónde va?</strong></p>
+
+                <div class="callout callout-g reveal">
+                    <i class="fa-solid fa-compass"></i>
+                    <p><strong>Esta página es un mapa, no una clase.</strong> Acá encontrás una visión general de los 7 temas, sus conexiones y los filósofos que los desarrollaron. Cada tema tendrá su propia clase detallada. Podés volver acá cuando quieras reorientarte en el recorrido de la unidad.</p>
+                </div>
+            </section>
+
+            <!-- ── SECCIÓN 2: LOS 7 TEMAS ── -->
+            <section id="temas">
+                <h2>2. Los 7 grandes temas</h2>
+
+                <p class="article-p reveal">Cada tema es una lente diferente para mirar el mismo problema central: la relación entre las teorías científicas, la observación y el tiempo. Acá tenés un mapa de lo que viene en las próximas clases:</p>
+
+                <div class="topic-grid reveal">
+
+                    <!-- T1 -->
+                    <div class="topic-card">
+                        <span class="topic-num">01</span>
+                        <div class="topic-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <div class="topic-title">Sucesión de teorías</div>
+                        <p class="topic-desc">¿Cómo reemplaza una teoría científica a otra sobre el mismo dominio? De Aristóteles a Einstein, el problema no es solo "¿cuál es mejor?" sino ¿qué significa que sean sobre <em>lo mismo</em>? ¿Hay continuidad o ruptura?</p>
+                        <span class="topic-pill"><i class="fa-solid fa-clock fa-xs"></i> Tema 1</span>
+                    </div>
+
+                    <!-- T2 -->
+                    <div class="topic-card">
+                        <span class="topic-num">02</span>
+                        <div class="topic-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="topic-title">Comunidad científica y consenso</div>
+                        <p class="topic-desc">La ciencia no la hace un genio solitario: es una institución colectiva con normas, jerarquías y debates. ¿Cómo se forma el consenso? ¿Tiene siempre razón la mayoría? ¿Qué papel juega la negociación?</p>
+                        <span class="topic-pill"><i class="fa-solid fa-clock fa-xs"></i> Tema 2</span>
+                    </div>
+
+                    <!-- T3 -->
+                    <div class="topic-card">
+                        <span class="topic-num">03</span>
+                        <div class="topic-icon"><i class="fa-solid fa-arrows-left-right-to-line"></i></div>
+                        <div class="topic-title">Inconmensurabilidad y continuidad</div>
+                        <p class="topic-desc">Kuhn argumentó que los paradigmas rivales son inconmensurables: no hay una vara común para compararlos. ¿Eso significa que la ciencia no progresa? ¿O hay formas de continuidad que Kuhn pasó por alto?</p>
+                        <span class="topic-pill"><i class="fa-solid fa-clock fa-xs"></i> Tema 3</span>
+                    </div>
+
+                    <!-- T4 -->
+                    <div class="topic-card">
+                        <span class="topic-num">04</span>
+                        <div class="topic-icon"><i class="fa-solid fa-eye"></i></div>
+                        <div class="topic-title">La carga teórica de la observación</div>
+                        <p class="topic-desc">Ningún dato es neutral. Todo lo que un científico "ve" ya está filtrado por las teorías que porta. Hanson lo demostró con la astronomía: Tycho y Kepler miraban el mismo sol y veían cosas diferentes.</p>
+                        <span class="topic-pill"><i class="fa-solid fa-clock fa-xs"></i> Tema 4</span>
+                    </div>
+
+                    <!-- T5 -->
+                    <div class="topic-card">
+                        <span class="topic-num">05</span>
+                        <div class="topic-icon"><i class="fa-solid fa-code-branch"></i></div>
+                        <div class="topic-title">Subdeterminación de la teoría</div>
+                        <p class="topic-desc">Los mismos datos pueden ser explicados por teorías rivales. Duhem y Quine demostraron que ningún experimento refuta una hipótesis aislada: siempre se puede salvar una teoría ajustando los supuestos auxiliares.</p>
+                        <span class="topic-pill"><i class="fa-solid fa-clock fa-xs"></i> Tema 5</span>
+                    </div>
+
+                    <!-- T6 -->
+                    <div class="topic-card">
+                        <span class="topic-num">06</span>
+                        <div class="topic-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="topic-title">El progreso en ciencia</div>
+                        <p class="topic-desc">¿Avanza la ciencia hacia la verdad, o simplemente cambia? Kuhn, Lakatos, Feyerabend y Laudan tienen respuestas radicalmente distintas. ¿Es posible medir el progreso sin apelar a "acercarse a la realidad"?</p>
+                        <span class="topic-pill"><i class="fa-solid fa-clock fa-xs"></i> Tema 6</span>
+                    </div>
+
+                    <!-- T7 full width -->
+                    <div class="topic-card full">
+                        <span class="topic-num">07</span>
+                        <div class="topic-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+                        <div class="topic-title">Las teorías auxiliares como instrumentos de medida</div>
+                        <p class="topic-desc">Toda medición supone una teoría. El termómetro asume una teoría de la temperatura; el telescopio asume una teoría de la óptica; el acelerador de partículas asume la teoría cuántica de campos. Duhem mostró que nunca ponemos a prueba una hipótesis sola: siempre va acompañada de sus teorías auxiliares. Esto tiene consecuencias profundas: la "objetividad" de los datos siempre depende de supuestos teóricos que rara vez se cuestionan.</p>
+                        <span class="topic-pill" style="margin-right:8px"><i class="fa-solid fa-clock fa-xs"></i> Tema 7</span>
+                        <span class="topic-pill highlight"><i class="fa-solid fa-star fa-xs"></i> Tema de cierre</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ── SECCIÓN 3: HILO CONDUCTOR ── -->
+            <section id="hilo">
+                <h2>3. El hilo conductor de la unidad</h2>
+
+                <p class="article-p reveal">Los 7 temas no son islas independientes: forman un argumento. El hilo que los une es la pregunta por la <strong>racionalidad del cambio científico</strong>. Para verlo claramente, conviene pensar en tres capas que se apoyan entre sí:</p>
+
+                <div class="hilo-wrap reveal">
+
+                    <!-- CAPA 1 -->
+                    <div class="hilo-layer-label" style="margin-top:8px">CAPA 1 · El suelo de la ciencia: observación y datos</div>
+                    <div class="hilo-row">
+                        <div class="hilo-node">
+                            <div class="hilo-circle" style="background:rgba(14,165,233,.1);border-color:rgba(14,165,233,.3);color:#0ea5e9"><i class="fa-solid fa-eye"></i></div>
+                            <div class="hilo-label">Carga teórica de la observación</div>
+                        </div>
+                        <span class="hilo-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                        <div class="hilo-node">
+                            <div class="hilo-circle" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#ef4444"><i class="fa-solid fa-code-branch"></i></div>
+                            <div class="hilo-label">Subdeterminación por los datos</div>
+                        </div>
+                        <span class="hilo-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                        <div class="hilo-node">
+                            <div class="hilo-circle" style="background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.3);color:#a855f7"><i class="fa-solid fa-ruler-combined"></i></div>
+                            <div class="hilo-label">Teorías auxiliares</div>
+                        </div>
+                    </div>
+
+                    <div class="hilo-sep"><i class="fa-solid fa-arrow-down" style="font-size:22px;color:rgba(234,179,8,.4)"></i></div>
+
+                    <!-- CAPA 2 -->
+                    <div class="hilo-layer-label">CAPA 2 · El debate: cambio y comparación</div>
+                    <div class="hilo-row">
+                        <div class="hilo-node">
+                            <div class="hilo-circle" style="background:rgba(250,204,21,.1);border-color:rgba(250,204,21,.38);color:#92400e"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                            <div class="hilo-label">Sucesión de teorías</div>
+                        </div>
+                        <span class="hilo-arrow"><i class="fa-solid fa-arrows-left-right"></i></span>
+                        <div class="hilo-node">
+                            <div class="hilo-circle" style="background:rgba(234,179,8,.1);border-color:rgba(234,179,8,.35);color:var(--yellow-dark)"><i class="fa-solid fa-arrows-left-right-to-line"></i></div>
+                            <div class="hilo-label">Inconmensurabilidad y continuidad</div>
+                        </div>
+                        <span class="hilo-arrow"><i class="fa-solid fa-arrows-left-right"></i></span>
+                        <div class="hilo-node">
+                            <div class="hilo-circle" style="background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.35);color:#f97316"><i class="fa-solid fa-users"></i></div>
+                            <div class="hilo-label">Comunidad científica y consenso</div>
+                        </div>
+                    </div>
+
+                    <div class="hilo-sep"><i class="fa-solid fa-arrow-down" style="font-size:22px;color:rgba(234,179,8,.4)"></i></div>
+
+                    <!-- CAPA 3 -->
+                    <div class="hilo-layer-label">CAPA 3 · La pregunta de fondo</div>
+                    <div class="hilo-bottom">
+                        <div class="hilo-core">
+                            <div class="hilo-core-title"><i class="fa-solid fa-chart-line" style="margin-right:8px"></i>¿Progresa la ciencia?</div>
+                            <div class="hilo-core-sub">Kuhn · Lakatos · Feyerabend · Laudan</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="callout callout-g reveal">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <p><strong>El argumento de la unidad en una oración:</strong> Si toda observación está cargada de teoría (capa 1), y si los datos nunca determinan una sola teoría posible (subdeterminación), entonces la elección entre teorías rivales no puede ser puramente "objetiva". Esto lleva a preguntar: ¿qué hace que una teoría sea <em>mejor</em> que otra? Y si hay una teoría mejor, ¿en qué sentido eso es "progreso"?</p>
+                </div>
+
+                <p class="article-p reveal">La capa 1 muestra que la "objetividad" de los datos es más compleja de lo que parece. La capa 2 muestra que el cambio de teorías involucra tensiones que no se resuelven solo con más datos. Y la capa 3 es la pregunta que todas esas tensiones hacen inevitable: ¿de qué hablamos cuando decimos que la ciencia avanza?</p>
+            </section>
+
+            <!-- ── SECCIÓN 4: FILÓSOFOS ── -->
+            <section id="filosofos">
+                <h2>4. Los filósofos que vas a encontrar</h2>
+
+                <p class="article-p reveal">Esta unidad convoca a pensadores que ya conocés (Kuhn, Lakatos, Hanson) y a otros nuevos que aparecen por primera vez en el programa. Cada uno tiene un aporte distinto y muchas veces opuesto al de los demás:</p>
+
+                <div class="phil-mini-grid reveal">
+
+                    <div class="phil-mini">
+                        <div class="phil-mini-av" style="background:#a855f7">K</div>
+                        <div class="phil-mini-name">Thomas Kuhn</div>
+                        <div class="phil-mini-dates">1922 · 1996</div>
+                        <div class="phil-mini-desc">Los paradigmas rivales son <em>inconmensurables</em>: no hay una medida neutral que permita compararlos. El progreso científico es un cambio de gestalt, no una acumulación.</div>
+                        <span class="phil-mini-tag" style="background:rgba(168,85,247,.1);color:#a855f7;border:1px solid rgba(168,85,247,.2)">Inconmensurabilidad</span>
+                    </div>
+
+                    <div class="phil-mini">
+                        <div class="phil-mini-av" style="background:#2563eb">D</div>
+                        <div class="phil-mini-name">Pierre Duhem</div>
+                        <div class="phil-mini-dates">1861 · 1916</div>
+                        <div class="phil-mini-desc">Nunca ponemos a prueba una hipótesis sola: siempre va acompañada de sus teorías auxiliares. La refutación nunca es definitiva porque podemos modificar las auxiliares.</div>
+                        <span class="phil-mini-tag" style="background:rgba(37,99,235,.1);color:#2563eb;border:1px solid rgba(37,99,235,.2)">Holismo · Duhem-Quine</span>
+                    </div>
+
+                    <div class="phil-mini">
+                        <div class="phil-mini-av" style="background:#b45309">Q</div>
+                        <div class="phil-mini-name">Willard Quine</div>
+                        <div class="phil-mini-dates">1908 · 2000</div>
+                        <div class="phil-mini-desc">Extendió el holismo de Duhem al lenguaje completo: no hay enunciados que puedan aislarse para ser refutados. Todo el sistema de creencias enfrenta la experiencia como una unidad.</div>
+                        <span class="phil-mini-tag" style="background:rgba(180,83,9,.1);color:#b45309;border:1px solid rgba(180,83,9,.2)">Holismo semántico</span>
+                    </div>
+
+                    <div class="phil-mini">
+                        <div class="phil-mini-av" style="background:#ca8a04">La</div>
+                        <div class="phil-mini-name">Larry Laudan</div>
+                        <div class="phil-mini-dates">1941 · presente</div>
+                        <div class="phil-mini-desc">El progreso científico no es acercarse a la verdad (realismo) sino resolver problemas. La ciencia avanza, pero no necesariamente "hacia la realidad": puede mejorar su capacidad resolutiva.</div>
+                        <span class="phil-mini-tag" style="background:rgba(202,138,4,.1);color:#92400e;border:1px solid rgba(202,138,4,.2)">Progreso sin verdad</span>
+                    </div>
+
+                    <div class="phil-mini">
+                        <div class="phil-mini-av" style="background:#0ea5e9">Ha</div>
+                        <div class="phil-mini-name">N. R. Hanson</div>
+                        <div class="phil-mini-dates">1924 · 1967</div>
+                        <div class="phil-mini-desc">La observación es siempre interpretación. Dos científicos con teorías distintas que miran el mismo fenómeno "ven" cosas diferentes: la carga teórica es constitutiva del acto de observar.</div>
+                        <span class="phil-mini-tag" style="background:rgba(14,165,233,.1);color:#0ea5e9;border:1px solid rgba(14,165,233,.2)">Carga teórica</span>
+                    </div>
+
+                    <div class="phil-mini">
+                        <div class="phil-mini-av" style="background:#16a34a">L</div>
+                        <div class="phil-mini-name">Imre Lakatos</div>
+                        <div class="phil-mini-dates">1922 · 1974</div>
+                        <div class="phil-mini-desc">Los programas de investigación progresivos predicen hechos nuevos; los degenerativos solo explican anomalías ya conocidas. Esta es la base racional para comparar y elegir entre teorías.</div>
+                        <span class="phil-mini-tag" style="background:rgba(22,163,74,.1);color:#16a34a;border:1px solid rgba(22,163,74,.2)">Progreso racional</span>
+                    </div>
+
+                </div>
+
+                <div class="callout callout-y reveal">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p><strong>Ojo:</strong> Estos filósofos no se "complementan": muchas veces se contradicen. Duhem socava el falsacionismo de Popper. Kuhn hace tambalear el racionalismo de Lakatos. Y Laudan critica tanto a Kuhn como a Lakatos. Parte del trabajo de esta unidad es entender <em>exactamente</em> dónde están los desacuerdos y por qué importan.</p>
+                </div>
+            </section>
+
+            <!-- ── SECCIÓN 5: LA PREGUNTA CENTRAL ── -->
+            <section id="pregunta">
+                <h2>5. La pregunta que guía toda la unidad</h2>
+
+                <p class="article-p reveal">Todas las discusiones de esta unidad orbitan alrededor de una pregunta que parece simple pero resulta extraordinariamente difícil de responder:</p>
+
+                <div class="big-question reveal">
+                    <div class="bq-label"><i class="fa-solid fa-circle-question" style="margin-right:6px"></i>La pregunta central de la Unidad 4</div>
+                    <div class="bq-text">
+                        Cuando una teoría científica reemplaza a otra,<br>
+                        ¿sabemos algo que <em>antes no sabíamos</em>,<br>
+                        o simplemente sabemos <em>cosas distintas</em>?
+                    </div>
+                    <div class="bq-sub">Si la respuesta es "sabemos más", ¿cómo lo demostramos si las teorías usan conceptos distintos, miden con instrumentos distintos y no pueden compararse directamente? Si la respuesta es "sabemos cosas distintas", ¿tiene sentido hablar de progreso?</div>
+                </div>
+
+                <p class="article-p reveal">Esta pregunta no tiene una respuesta definitiva. El objetivo de la unidad no es llegar a una conclusión "correcta", sino que puedas <strong>argumentar a favor de alguna posición con herramientas filosóficas sólidas</strong>. Eso ya es hacer filosofía de la ciencia.</p>
+
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <p><strong>Para pensar antes de empezar:</strong> ¿Creés que la física de Einstein es "mejor" que la de Newton? ¿En qué sentido? ¿Qué tendría que ser verdad para que esa afirmación tenga sentido filosófico? Anotá tu respuesta. Al final de la unidad vas a volver a ella con herramientas nuevas.</p>
+                </div>
+
+                <div class="pull-quote reveal">
+                    <p>"La física de Newton no fue refutada; fue reemplazada por algo que nos permite hacer más cosas. Pero eso no significa que nos acercamos a <em>cómo son las cosas en realidad</em>."</p>
+                    <cite>— Larry Laudan, El Progreso y sus Problemas (1977)</cite>
+                </div>
+
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-flag-checkered"></i>
+                    <p><strong>Al terminar esta unidad</strong> deberías poder tomar posición en el debate sobre el progreso científico, reconocer el problema de la inconmensurabilidad y la carga teórica en ejemplos concretos, y entender por qué la subdeterminación hace que el método científico sea más complejo de lo que parece.</p>
+                </div>
+            </section>
+
+        </main><!-- /article-body -->
+
+        <!-- SIDEBAR (right column on desktop) -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-list-ul"></i><span>En esta página</span></div>
+                <div class="sidebar-card-body">
+                    <ul class="toc-list" id="toc">
+                        <li><a href="#intro" class="toc-link"><span class="toc-num">01</span>¿Qué es esta unidad?</a></li>
+                        <li><a href="#temas" class="toc-link"><span class="toc-num">02</span>Los 7 grandes temas</a></li>
+                        <li><a href="#hilo" class="toc-link"><span class="toc-num">03</span>El hilo conductor</a></li>
+                        <li><a href="#filosofos" class="toc-link"><span class="toc-num">04</span>Filósofos de la unidad</a></li>
+                        <li><a href="#pregunta" class="toc-link"><span class="toc-num">05</span>La pregunta central</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-tags"></i><span>Conceptos clave</span></div>
+                <div class="sidebar-card-body">
+                    <span class="concept-tag">Inconmensurabilidad</span>
+                    <span class="concept-tag">Subdeterminación</span>
+                    <span class="concept-tag">Carga teórica</span>
+                    <span class="concept-tag">Progreso científico</span>
+                    <span class="concept-tag">Consenso</span>
+                    <span class="concept-tag">Teorías auxiliares</span>
+                    <span class="concept-tag">Holismo</span>
+                    <span class="concept-tag">Comunidad científica</span>
+                    <span class="concept-tag">Sucesión de teorías</span>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-user-graduate"></i><span>Filósofos protagonistas</span></div>
+                <div class="sidebar-card-body">
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#a855f7">K</div>
+                        <div><div class="phil-name">Thomas Kuhn</div><div class="phil-role">Inconmensurabilidad entre paradigmas</div></div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#2563eb">D</div>
+                        <div><div class="phil-name">Pierre Duhem</div><div class="phil-role">Holismo y teorías auxiliares</div></div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#b45309">Q</div>
+                        <div><div class="phil-name">Willard Quine</div><div class="phil-role">Holismo semántico</div></div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#ca8a04">La</div>
+                        <div><div class="phil-name">Larry Laudan</div><div class="phil-role">Progreso sin verdad</div></div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#0ea5e9">Ha</div>
+                        <div><div class="phil-name">N. R. Hanson</div><div class="phil-role">Carga teórica de la observación</div></div>
+                    </div>
+                    <div class="phil-item">
+                        <div class="phil-avatar" style="background:#16a34a">L</div>
+                        <div><div class="phil-name">Imre Lakatos</div><div class="phil-role">Programas progresivos/degenerativos</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-clock"></i><span>Próxima clase</span></div>
+                <div class="sidebar-card-body">
+                    <p style="font-size:13px;color:var(--text3);line-height:1.65;">Las clases de esta unidad están en preparación. Volvé pronto para acceder al contenido completo.</p>
+                </div>
+            </div>
+        </aside>
+
+    </div><!-- /article-wrap -->
+
+    <!-- ═══ FOOTER NAV ═══ -->
+    <div class="cfn-wrap">
+        <div class="cfn-grid">
+            <a href="unidad3-clase20.html" class="cfn-card cfn-prev">
+                <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                <div class="cfn-body">
+                    <span class="cfn-badge">U3 · CIERRE</span>
+                    <span class="cfn-dir">Unidad anterior</span>
+                    <span class="cfn-title">Lakatos y Feyerabend</span>
+                </div>
+            </a>
+            <a href="index.html" class="cfn-card cfn-home">
+                <i class="fa-solid fa-house cfn-home-icon"></i>
+                <span class="cfn-home-label">Inicio</span>
+            </a>
+            <a href="unidad4-clase1.html" class="cfn-card cfn-next">
+                <div class="cfn-body">
+                    <span class="cfn-badge">U4 · C-1</span>
+                    <span class="cfn-dir">Primera clase</span>
+                    <span class="cfn-title">Ciencia y Serendipia</span>
+                </div>
+                <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+    /* ─── Dark mode ─── */
+    (function(){
+        const saved = localStorage.getItem('darkMode');
+        const prefersDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+        if(saved === 'true' || (!saved && prefersDark)){
+            document.documentElement.classList.add('dark');
+        }
+    })();
+    function toggleDark(){
+        const on = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('darkMode', on);
+    }
+
+    /* ─── Progress bar ─── */
+    window.addEventListener('scroll', () => {
+        const s = document.documentElement;
+        const pct = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+        document.getElementById('prog').style.width = pct + '%';
+    });
+
+    /* ─── TOC active section ─── */
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const secIds = ['intro','temas','hilo','filosofos','pregunta'];
+    const secObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if(e.isIntersecting){
+                tocLinks.forEach(l => l.classList.remove('active'));
+                const a = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+                if(a) a.classList.add('active');
+            }
+        });
+    }, { rootMargin: '-18% 0px -60% 0px' });
+    secIds.forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+
+    /* ─── Reveal on scroll ─── */
+    const revObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+        });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+    </script>
+</body>
+</html>

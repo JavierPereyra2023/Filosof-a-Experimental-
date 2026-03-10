@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 1 — Unificación, Serendipia y Big Science | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        /* ===== VARIABLES ===== */
+        :root {
+            --y: #facc15; --yd: #eab308;
+            --bg: #f9f7f4; --bg2: #fff; --bg3: #f1ede6;
+            --card: #fff; --t: #1a1a1a; --t2: #3d3d3d; --t3: #6b6b6b;
+            --brd: #e0d9d0; --sh: 0 4px 24px rgba(0,0,0,.08);
+            --shl: 0 20px 60px rgba(0,0,0,.15);
+            --tr: .3s cubic-bezier(.4,0,.2,1);
+            --acc: #0ea5e9; /* azul accent para Unidad 4 */
+        }
+        .dark {
+            --bg: #111; --bg2: #1a1a1a; --bg3: #222; --card: #1e1e1e;
+            --t: #f0ece4; --t2: #c8c0b4; --t3: #888880;
+            --brd: #333; --sh: 0 4px 24px rgba(0,0,0,.4);
+            --shl: 0 20px 60px rgba(0,0,0,.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-padding-top: 72px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); overflow-x: hidden; transition: background .4s, color .4s; }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--y); }
+
+        /* ===== PROGRESS ===== */
+        #prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--y), var(--acc)); z-index: 9999; transition: width .1s; pointer-events: none; }
+
+        /* ===== TOPNAV ===== */
+        #topnav { position: sticky; top: 0; z-index: 500; background: var(--bg2); border-bottom: 3px solid var(--y); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: var(--sh); }
+        .tnl, .tnr { display: flex; align-items: center; gap: 12px; }
+        .tnc { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--t2); }
+        @media(max-width:760px){.tnc{display:none}}
+        .nav-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: all var(--tr); border: none; cursor: pointer; }
+        .nav-pill.back { background: var(--bg3); color: var(--t3); }
+        .nav-pill.back:hover { background: var(--brd); color: var(--t); }
+        .nav-pill.next { background: var(--y); color: #000; }
+        .nav-pill.next:hover { background: var(--yd); }
+        .nav-pill.disabled { opacity: .4; pointer-events: none; }
+        .dtoggle { background: none; border: 1px solid var(--brd); width: 36px; height: 20px; border-radius: 999px; position: relative; cursor: pointer; }
+        .dtoggle::after { content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; border-radius: 50%; background: var(--t3); transition: all var(--tr); }
+        .dark .dtoggle { border-color: var(--y); background: var(--y); }
+        .dark .dtoggle::after { left: calc(100% - 16px); background: #000; }
+
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 88vh;
+            background: linear-gradient(160deg, #050a14 0%, #081122 40%, #01060e 100%), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80') center/cover no-repeat;
+            background-blend-mode: overlay;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            position: relative; overflow: hidden; color: #fff;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #01060e 10%, rgba(1,6,14,.7) 55%, transparent 100%); z-index: 1; }
+        .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 0 24px 72px; width: 100%; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(14,165,233,.15); border: 1px solid rgba(14,165,233,.35); padding: 7px 20px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #7dd3fc; margin-bottom: 28px; }
+        .hero-eyebrow span { background: var(--acc); color: #fff; padding: 2px 10px; border-radius: 999px; }
+        .hero-unit { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: .95; letter-spacing: -.03em; margin-bottom: 24px; }
+        .hero-title .y { color: var(--y); font-style: italic; }
+        .hero-sub { font-family: 'Libre Baskerville', serif; font-size: clamp(1rem, 1.8vw, 1.15rem); line-height: 1.8; color: rgba(255,255,255,.65); max-width: 700px; margin-bottom: 40px; }
+        .hero-meta { display: flex; gap: 28px; flex-wrap: wrap; font-size: 11px; color: rgba(255,255,255,.4); letter-spacing: .12em; text-transform: uppercase; }
+        .hero-meta i { color: var(--y); margin-right: 5px; }
+
+        /* ===== LAYOUT ===== */
+        .article-wrap { max-width: 1400px; margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr; gap: 56px; align-items: start; }
+        @media(min-width:1100px){ .article-wrap { grid-template-columns: 260px 1fr; } }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar { position: sticky; top: 76px; display: none; }
+        @media(min-width:1100px){ .sidebar { display: block; } }
+        .sidebar-card { background: var(--card); border: 1px solid var(--brd); border-radius: 16px; padding: 0; overflow: hidden; margin-bottom: 20px; box-shadow: var(--sh); }
+        .sidebar-card-header { background: var(--y); padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+        .sidebar-card-header span { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #000; }
+        .sidebar-card-body { padding: 16px 20px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+        .toc-link { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: var(--t3); transition: all var(--tr); font-weight: 500; }
+        .toc-link:hover, .toc-link.active { background: rgba(250,204,21,.1); color: var(--t); border-left: 3px solid var(--y); padding-left: 7px; }
+        .toc-num { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--y); opacity: .7; width: 22px; flex-shrink: 0; }
+        .concept-tag { display: inline-block; background: var(--bg3); border: 1px solid var(--brd); border-radius: 999px; padding: 4px 12px; font-size: 11px; color: var(--t3); margin: 3px 2px; transition: all var(--tr); cursor: default; }
+
+        /* ===== ARTICLE BODY ===== */
+        .article-body { max-width: 800px; }
+        .article-body h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--t); margin: 72px 0 24px; line-height: 1.15; letter-spacing: -.02em; border-bottom: 2px solid var(--y); padding-bottom: 14px; scroll-margin-top: 80px; }
+        .article-body h2:first-of-type { margin-top: 0; }
+        .article-body h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--t); margin: 40px 0 14px; }
+        .article-p { font-family: 'Libre Baskerville', serif; font-size: 17.5px; line-height: 1.9; color: var(--t2); margin-bottom: 26px; }
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 80px; line-height: .8; padding-right: 10px; padding-top: 6px; color: var(--y); font-weight: 900; }
+        .pull-quote { margin: 48px 0; padding: 36px 44px; border-left: 4px solid var(--y); background: linear-gradient(90deg, rgba(250,204,21,.06), transparent); border-radius: 0 16px 16px 0; }
+        .pull-quote p { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-style: italic; line-height: 1.45; color: var(--t); margin-bottom: 12px; }
+        .pull-quote cite { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t3); font-style: normal; }
+        .pull-quote.acc { border-left-color: var(--acc); background: linear-gradient(90deg, rgba(14,165,233,.07), transparent); }
+        @media(max-width:640px) { .pull-quote { padding: 24px 20px; margin: 32px 0; } }
+
+        /* ===== CALLOUT ===== */
+        .callout { margin: 32px 0; padding: 24px 28px; border-radius: 14px; display: flex; gap: 18px; align-items: flex-start; }
+        @media(max-width:640px) { .callout { padding: 18px 20px; gap: 14px; margin: 24px 0; } }
+        .callout-y { background: rgba(250,204,21,.07); border: 1px solid rgba(250,204,21,.25); }
+        .callout-b { background: rgba(14,165,233,.07); border: 1px solid rgba(14,165,233,.25); }
+        .callout-g { background: rgba(34,197,94,.07); border: 1px solid rgba(34,197,94,.2); }
+        .callout-p { background: rgba(168,85,247,.07); border: 1px solid rgba(168,85,247,.25); }
+        .callout i { font-size: 20px; margin-top: 2px; flex-shrink: 0; }
+        .callout-y i { color: var(--yd); }
+        .callout-b i { color: var(--acc); }
+        .callout-g i { color: #4ade80; }
+        .callout-p i { color: #c084fc; }
+        .callout p, .callout div { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.8; color: var(--t2); }
+        .callout strong { color: var(--t); }
+
+        /* ===== CARDS GRID ===== */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 36px 0; }
+        .std-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--brd); background: var(--card); box-shadow: var(--sh); transition: all var(--tr); padding: 24px; }
+        .std-card:hover { transform: translateY(-4px); box-shadow: var(--shl); border-color: var(--acc); }
+        .std-card-icon { font-size: 30px; margin-bottom: 12px; color: var(--acc); }
+        .std-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--t); margin-bottom: 12px; }
+        .std-card-desc { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--t2); line-height: 1.65; }
+
+        /* ===== REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal img { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal img:hover { transform: scale(1.03); }
+
+        /* FOOTER NAV */
+        .class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:56px 24px 40px;margin-top:0;position:relative}
+        .class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+        .class-footer-nav-inner{max-width:980px;margin:0 auto}
+        .cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px}
+        .cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+        .cfn-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;align-items:stretch;margin-bottom:28px}
+        @media(max-width:600px){.cfn-grid{grid-template-columns:1fr 1fr;gap:8px} .cfn-card.cfn-home{display:none}}
+        .cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);text-decoration:none;color:inherit;transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+        .cfn-card.cfn-next{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.2);justify-content:flex-end;text-align:right}
+        .cfn-card.cfn-next:hover{background:rgba(250,204,21,.13);border-color:rgba(250,204,21,.55);box-shadow:0 12px 40px rgba(250,204,21,.15)}
+        .cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 8px}
+        .cfn-card.cfn-home:hover{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.35)}
+        .cfn-card.cfn-disabled{opacity:.32;pointer-events:none;cursor:default}
+        .cfn-arrow{font-size:16px;color:rgba(255,255,255,.2);flex-shrink:0;transition:transform .25s,color .25s}
+        .cfn-card:hover .cfn-arrow{color:#facc15}
+        .cfn-card.cfn-prev:hover .cfn-arrow{transform:translateX(-5px)}
+        .cfn-card.cfn-next:hover .cfn-arrow{transform:translateX(5px)}
+        .cfn-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+        .cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.5)}
+        .cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+        .cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+        .cfn-card.cfn-next .cfn-title{color:#facc15}
+        .cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4);transition:color .25s}
+        .cfn-card.cfn-home:hover .cfn-home-icon{color:#facc15}
+        .cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+        .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+        .cfn-credits a{color:rgba(250,204,21,.32);text-decoration:none;transition:color .2s}
+        .cfn-credits a:hover{color:#facc15}
+
+    </style>
+</head>
+<body>
+    <div id="prog"></div>
+
+    <!-- TOPNAV -->
+    <nav id="topnav">
+        <div class="tnl">
+            <button class="nav-pill back" onclick="window.location.href='unidad4-introduccion.html'">
+                <i class="fa-solid fa-arrow-left"></i> Introducción U4
+            </button>
+        </div>
+        <div class="tnc">FILOSOFÍA&CIENCIA · 2026</div>
+        <div class="tnr">
+            <a href="index.html" style="font-size:13px;color:var(--t3);font-weight:600;">Inicio</a>
+            <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
+            <a href="#" class="nav-pill next disabled">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow">
+                <span>Clase 1</span>
+                Unidad 4 · Continuidad y Progreso
+            </div>
+            <div class="hero-unit">FILOSOFÍA E HISTORIA DE LA CIENCIA · 6TO AÑO · 2026</div>
+            <h1 class="hero-title">
+                Unificación, <span class="y">Serendipia</span><br>
+                y <em>Big Science</em>
+            </h1>
+            <p class="hero-sub">De la aparente inutilidad de la revolución copernicana a los multimillonarios aceleradores de partículas: cómo avanza la ciencia, sus cruces imprevistos y el valor a largo plazo de los descubrimientos más abstractos.</p>
+            <div class="hero-meta">
+                <span><i class="fa-solid fa-calendar"></i>Ciclo 2026</span>
+                <span><i class="fa-solid fa-book-open"></i>Unidad 4 · Clase 1</span>
+                <span><i class="fa-solid fa-flask"></i>Descubrimientos cruzados</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ARTICLE -->
+    <div class="article-wrap">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-list fa-sm"></i><span>Contenidos</span></div>
+                <div class="sidebar-card-body">
+                    <ul class="toc-list" id="toc">
+                        <li><a href="#unificacion" class="toc-link"><span class="toc-num">01</span>Articulación teórica</a></li>
+                        <li><a href="#serendipia" class="toc-link"><span class="toc-num">02</span>La fuerza del azar</a></li>
+                        <li><a href="#big-science" class="toc-link"><span class="toc-num">03</span>La era de la Big Science</a></li>
+                        <li><a href="#espejo" class="toc-link"><span class="toc-num">04</span>El espejo de Copérnico</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-key fa-sm"></i><span>Conceptos clave</span></div>
+                <div class="sidebar-card-body">
+                    <span class="concept-tag">Serendipia</span>
+                    <span class="concept-tag">Big Science</span>
+                    <span class="concept-tag">Unificación disciplinar</span>
+                    <span class="concept-tag">Aceleradores de partículas</span>
+                    <span class="concept-tag">Revolución Copernicana</span>
+                    <span class="concept-tag">Inutilidad práctica</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ARTICLE BODY -->
+        <article class="article-body">
+
+            <!-- SECTION 1: Unificación -->
+            <section id="unificacion">
+                <h2>1. Articulación y unificación teórica</h2>
+
+                <p class="article-p dropcap reveal">La ciencia suele presentarse en la educación escolar en cajas estancadas: Física, Química, Biología. Sin embargo, los grandes saltos en la comprensión de la naturaleza ocurrieron exactamente cuando distintos problemas encontraron puentes y lograron <strong>teorías unificadas</strong> o articuladas. La historia del progreso en las ciencias fuertes es una historia de integración de leyes que antaño parecían describir fenómenos totalmente disímiles y sin conexión.</p>
+
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-link"></i>
+                    <div>
+                        <strong>El gran ejemplo: Electricidad y Magnetismo</strong>
+                        <p style="margin-top:6px">En el siglo XVIII existían leyes separadas para cómo se atraían los metales (magnetismo) y cómo interactuaba la carga frotada en un pedazo de ámbar (electricidad). Fueron Michael Faraday y James Clerk Maxwell quienes construyeron la unificación hacia el <strong>Electromagnetismo</strong> en la segunda mitad del siglo XIX, al demostrar que la corriente generaba magnetismo y el magnetismo en movimiento generaba corriente, sintetizándolo en grandes ecuaciones combinadas. Al unificar esto, revelaron una sorpresa aún más masiva: la luz misma era una onda electromagnética.</p>
+                    </div>
+                </div>
+
+                <p class="article-p reveal">No podemos separar áreas tajantemente: la biología molecular nace articulada con la química, que a su vez requiere de la física atómica para su explicación fundamental. Por tanto, las revoluciones científicas a veces provienen, no de desechar una teoría para abrazar otra completamente nueva sobre el mismo fenómeno, sino de <em>ensamblar teorías superpuestas</em> hasta crear marcos globales de explicación general de alta capacidad teórica, reducciones de nivel y cruces de campo continuo.</p>
+            </section>
+
+            <!-- SECTION 2: Serendipia -->
+            <section id="serendipia">
+                <h2>2. Descubrimientos al azar (Serendipia)</h2>
+
+                <p class="article-p reveal">Solemos imaginar al Método Científico como un robot impecable: un paso detrás del otro hasta llegar a la verdad, movilizado por hipótesis precisas dirigidas específicamente a resolver un único y claro problema. Pero la realidad práctica es mucho más rica y caótica. Un porcentaje asombrosamente alto de los hallazgos más transformadores de la civilización provino por completa <strong>suerte, accidente o "serendipia"</strong> (el hallazgo afortunado mientras se buscaba otra cosa).</p>
+
+                <div class="pull-quote acc reveal">
+                    <p>"En el campo de la observación, el azar solo favorece a la mente preparada."</p>
+                    <cite>— Louis Pasteur</cite>
+                </div>
+
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-microscope"></i></div>
+                        <h4 class="std-card-title">Penicilina (Fleming, 1928)</h4>
+                        <p class="std-card-desc">Alexander Fleming trabajaba con bacterias. Se fue de vacaciones dejando una placa de Petri expuesta, la cual, por puro accidente, fue contaminada por un hongo del aire. En lugar de tirarla, descubrió que alrededor del hongo no crecían bacterias. <em>Hallelujah</em>. El primer antibiótico había aparecido.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-bone"></i></div>
+                        <h4 class="std-card-title">Rayos X (Roentgen, 1895)</h4>
+                        <p class="std-card-desc">Wilhelm Röntgen estaba experimentando sin un fin exacto con los caprichosos "rayos catódicos" cuando notó que una pantalla a metros de distancia resplandecía místicamente. Pronto, y tras interponer la mano de su esposa, el esqueleto quedó proyectado misteriosamente.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+                        <h4 class="std-card-title">Radiación de Microondas (1964)</h4>
+                        <p class="std-card-desc">Penzias y Wilson solo querían calibrar una antena de radio enorme con un ruido de estática persistente y molesto sin saber su razón. Pasaron meses limpiando excremento de palomas sin éxito, hasta que notaron que era ¡el eco del mismísimo Big Bang que inundaba su equipo!</p>
+                    </div>
+                </div>
+
+                <p class="article-p reveal">La filosofía formal intenta imponer normas a lo que deberíamos hacer luego de observar o cómo verificar un enunciado, pero los destellos de genialidad empíricos en los laboratorios reales muestran que la creatividad, lo fortuito y una <strong>"mente abierta" no institucionalizada rígidamente</strong> es fundamental para el progreso.</p>
+            </section>
+
+            <!-- SECTION 3: Big Science -->
+            <section id="big-science">
+                <h2>3. La Gran Ciencia y la Inutilidad Práctica</h2>
+
+                <p class="article-p reveal">Con el correr del siglo XX y XXI, la articulación teórica de la que hablábamos se transformó en problemas de escalas inimaginables. Ya no hablábamos del laboratorio suelto de Fleming. El avance hacia las fronteras abstractas del descubrimiento atómico y galáctico exigió delinear proyectos masivos: aceleradores de partículas de miles de millones de euros cruzando países (como el LHC en el CERN) o telescopios de proporciones industriales disparados al espacio profundo (James Webb). Así comienza la era de <strong>Big Science</strong>.</p>
+
+                <figure class="reveal" style="margin: 32px 0;">
+                    <img src="acelerador-lhc.jpg" alt="Acelerador de partículas LHC en el CERN" style="width: 100%; max-width: 600px; aspect-ratio: 12/7; height: auto; object-fit: cover; border-radius: 16px; box-shadow: var(--sh); display: block; margin: 0 auto;">
+                    <figcaption style="font-size: 11px; color: var(--t3); text-align: center; margin-top: 12px; font-style: italic;">El Gran Colisionador de Hadrones (LHC) en el CERN, un ejemplo monumental de Big Science.</figcaption>
+                </figure>
+
+                <div class="callout callout-y reveal">
+                    <i class="fa-solid fa-comments-dollar"></i>
+                    <div>
+                        <strong>La queja popular y del inversor estatal</strong>
+                        <p style="margin-top:6px"><em>"¿Para qué necesitamos destinar 10 billones de dólares en descubrir si el Bosón de Higgs existe o no, o cómo era el universo primitivo en sus milisegundos de formación? Eso no cura el cáncer ni elimina el hambre, ni frena la pobreza ni provee electricidad más barata en las redes urbanas. Es un lujo académico abstracto inútil."</em></p>
+                    </div>
+                </div>
+
+                <p class="article-p reveal">La cosmología teórica y la física de partículas pura parecen totalmente alejadas del progreso general pragmático que requiere el humano de a pie, casi como entes platónicos intocables. Así nos topamos con un debate ético y epistémico mayúsculo sobre qué tipos de teorías deben o merecen ser financiables, si solo la "ciencia aplicada" merecería crédito estatal o si investigar al puro saber mismo es el propósito del desarrollo de una nación tecnológica.</p>
+
+                <figure class="reveal" style="margin: 32px 0;">
+                    <img src="JWST-1.jpg" alt="Telescopio Espacial James Webb (JWST)" style="width: 100%; max-width: 600px; aspect-ratio: 12/7; height: auto; object-fit: cover; border-radius: 16px; box-shadow: var(--sh); display: block; margin: 0 auto;">
+                    <figcaption style="font-size: 11px; color: var(--t3); text-align: center; margin-top: 12px; font-style: italic;">El Telescopio Espacial James Webb, una maravilla de la ingeniería diseñada para capturar la luz primigenia del universo temprano.</figcaption>
+                </figure>
+                
+                <p class="article-p reveal">El <strong>Telescopio Espacial James Webb (JWST)</strong> es uno de los mayores estandartes contemporáneos de esta misma cruzada científica. Con un costo que excedió los 10.000 millones de dólares y décadas de desarrollo coordinado entre miles de científicos, ingenieros y múltiples agencias espaciales internacionales, su propósito principal inicial no es mejorar la industria manufacturera o farmacéutica terrestre. Su revolucionaria estructura espejada y su capacidad de ver en el infrarrojo tienen un objetivo mucho más lejano y fundamental: mirar hacia atrás en el tiempo para capturar la tenue luz estirada de las primeras galaxias formadas tras el Big Bang, y analizar simultáneamente atmósferas de exoplanetas lejanos buscando biomarcadores. Como el LHC, el James Webb empuja el límite absoluto de nuestra ingeniería humana para un fin casi exclusivamente epistémico: expandir el mapa del conocimiento sobre nuestra propia existencia y nuestro lugar en el cosmos.</p>
+
+            </section>
+
+            <!-- SECTION 4: Copérnico -->
+            <section id="espejo">
+                <h2>4. El espejo de Copérnico</h2>
+
+                <p class="article-p reveal">Para comprender esta "aparente inutilidad", es importante dar una mirada hacia el espejo retrovisor a toda nuestra unidad número uno. Pensemos en el contexto histórico en el siglo XVI con Nicolás Copérnico proponiendo el paradigma Heliocéntrico.</p>
+
+                <p class="article-p reveal">Para un carpintero, orfebre o sastre europeo promedio en pleno 1543, ¿qué utilidad "práctica" tenía que la Tierra girara en lugar del Sol? La respuesta inmediata y simple era: <strong>Estrictamente ninguna.</strong> Su recolección en los campos, su cosecha temporal climática y sus intercambios mercantiles seguían basándose en lo sensorial y mundano tradicional.</p>
+
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-moon"></i>
+                    <div>
+                        <strong>Las semillas de las revoluciones silenciosas a largo plazo</strong>
+                        <p style="margin-top:6px">Pese a su nula utilidad material y pragmática inicial, la propuesta copernicana forzó la reformulación completa posterior por la "articulación con la física": no se podía justificar un cielo que daba vueltas a la Tierra en el vacío si esta no nos llevaba por los aires con enorme fuerza. Consecuentemente Galileo tuvo que revisar la teoría de la inercia, y pronto Newton debió inventar matemática monumental para darle sentido universal. De esa "abstracta queja sin importancia pragmática" para sus coetáneos terminó destilando toda la mecánica clásica de la Revolución industrial y la física del mundo actual en una reacción en cadena epistémica incalculable.</p>
+                    </div>
+                </div>
+
+                <p class="article-p reveal">El progreso científico jamás viaja en líneas de retorno previsibles a su sociedad y nunca debe pensarse desde la visión miope utilitarista de cinco a diez años en el futuro. Quienes desarrollaron los satélites "aparentemente abstractos empujando la nueva frontera bélica-cosmológica" para explorar órbitas terminaron indirectamente armando la ingeniería del GPS en cada celular del planeta. Así que el estudio sobre la cosmología y las partículas subatómicas de la <em>Big Science</em> del siglo XXI es nuestra propia "Revolución Copernicana actual". <strong>Su aparente inutilidad transitoria de hoy es la siembra oculta de las revoluciones e increíbles unificaciones y articulaciones del mañana</strong>.</p>
+            </section>
+
+        </article>
+    </div>
+
+    <!-- FOOTER NAV -->
+    <nav class="class-footer-nav">
+        <div class="class-footer-nav-inner">
+            <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+            <div class="cfn-grid">
+                <a href="unidad4-introduccion.html" class="cfn-card cfn-prev">
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · INTRO</span>
+                        <span class="cfn-dir">Clase anterior</span>
+                        <span class="cfn-title">Introducción y Temas</span>
+                    </div>
+                </a>
+                <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+                    <i class="fa-solid fa-house cfn-home-icon"></i>
+                    <span class="cfn-home-label">Inicio</span>
+                </a>
+                <div class="cfn-card cfn-next cfn-disabled">
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-2</span>
+                        <span class="cfn-dir">Próxima clase</span>
+                        <span class="cfn-title">Próximamente</span>
+                    </div>
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </div>
+            <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2026</a></p>
+        </div>
+    </nav>
+
+    <script>
+        // DARK MODE
+        function toggleDark(){ document.documentElement.classList.toggle('dark'); localStorage.setItem('t', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        if(localStorage.getItem('t')==='dark') document.documentElement.classList.add('dark');
+
+        // PROGRESS BAR
+        window.addEventListener('scroll',()=>{ const d=document.documentElement; document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100+'%'; },{passive:true});
+
+        // TOC OBSERVER
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const secIds = ['unificacion','serendipia','big-science','espejo'];
+        const secObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){
+                    tocLinks.forEach(l => l.classList.remove('active'));
+                    const a = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+                    if(a) a.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-18% 0px -60% 0px' });
+        secIds.forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+
+        // REVEAL
+        const revObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+    </script>
+</body>
+</html>
