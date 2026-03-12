@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clase 1 — Unificación, Serendipia y Big Science | FILOSOFÍA&CIENCIA</title>
+    <title>Clase 21 — Unificación, Serendipia y Big Science | FILOSOFÍA&CIENCIA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -161,6 +161,37 @@
         .cfn-credits a{color:rgba(250,204,21,.32);text-decoration:none;transition:color .2s}
         .cfn-credits a:hover{color:#facc15}
 
+    
+        /* ===== MOBILE ===== */
+        @media(max-width:760px){
+            #topnav { height: auto; min-height: 56px; padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+            .tnl, .tnr { width: 100%; flex-wrap: wrap; }
+            .tnr { justify-content: space-between; gap: 8px; }
+            .nav-pill { padding: 6px 10px; font-size: 10px; letter-spacing: .05em; }
+            .hero-inner { padding: 0 18px 48px; }
+            .hero-eyebrow { margin-bottom: 20px; padding: 6px 14px; letter-spacing: .14em; }
+            .hero-title { font-size: clamp(2.15rem, 12vw, 3.4rem); line-height: 1; }
+            .hero-sub { font-size: .95rem; line-height: 1.7; margin-bottom: 28px; }
+            .hero-meta { gap: 12px 16px; font-size: 10px; }
+            .article-wrap { padding: 40px 16px; gap: 40px; }
+            .article-body { max-width: 100%; }
+            .article-body h2 { margin: 56px 0 18px; padding-bottom: 10px; }
+            .article-p { font-size: 16px; line-height: 1.8; }
+            .dropcap::first-letter { font-size: 62px; padding-right: 8px; }
+            .pull-quote { padding: 24px 18px; margin: 28px 0; }
+            .callout { flex-direction: column; padding: 18px 20px; gap: 12px; margin: 24px 0; }
+            .card-grid { grid-template-columns: 1fr; gap: 14px; margin: 28px 0; }
+            .std-card { padding: 20px; }
+            .class-footer-nav { padding: 44px 16px 32px; }
+            .cfn-card { padding: 16px; }
+            .cfn-title { font-size: 12px; }
+        }
+        @media(max-width:480px){
+            .tnr { justify-content: flex-start; }
+            .hero-meta span { width: 100%; }
+            .pull-quote { padding: 20px 16px; }
+            .callout { padding: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -177,7 +208,7 @@
         <div class="tnr">
             <a href="index.html" style="font-size:13px;color:var(--t3);font-weight:600;">Inicio</a>
             <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
-            <a href="#" class="nav-pill next disabled">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="unidad4-clase22.html" class="nav-pill next">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </nav>
 
@@ -186,7 +217,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-inner">
             <div class="hero-eyebrow">
-                <span>Clase 1</span>
+                <span>Clase 21</span>
                 Unidad 4 · Continuidad y Progreso
             </div>
             <div class="hero-unit">FILOSOFÍA E HISTORIA DE LA CIENCIA · 6TO AÑO · 2026</div>
@@ -197,7 +228,7 @@
             <p class="hero-sub">De la aparente inutilidad de la revolución copernicana a los multimillonarios aceleradores de partículas: cómo avanza la ciencia, sus cruces imprevistos y el valor a largo plazo de los descubrimientos más abstractos.</p>
             <div class="hero-meta">
                 <span><i class="fa-solid fa-calendar"></i>Ciclo 2026</span>
-                <span><i class="fa-solid fa-book-open"></i>Unidad 4 · Clase 1</span>
+                <span><i class="fa-solid fa-book-open"></i>Unidad 4 · Clase 21</span>
                 <span><i class="fa-solid fa-flask"></i>Descubrimientos cruzados</span>
             </div>
         </div>
@@ -250,6 +281,17 @@
                 </div>
 
                 <p class="article-p reveal">No podemos separar áreas tajantemente: la biología molecular nace articulada con la química, que a su vez requiere de la física atómica para su explicación fundamental. Por tanto, las revoluciones científicas a veces provienen, no de desechar una teoría para abrazar otra completamente nueva sobre el mismo fenómeno, sino de <em>ensamblar teorías superpuestas</em> hasta crear marcos globales de explicación general de alta capacidad teórica, reducciones de nivel y cruces de campo continuo.</p>
+
+                <h3>Maxwell y la gran síntesis clásica</h3>
+                <p class="article-p reveal">El ejemplo canónico de unificación teórica moderna es obra de <strong>James Clerk Maxwell</strong> (Edimburgo, 1831 — Cambridge, 1879). Matemático prodigio, Maxwell recogió décadas de trabajo experimental de su predecesor <strong>Michael Faraday</strong> —autodidacta de origen humilde que descubrió la inducción electromagnética en el Royal Institution de Londres en 1831— y los formalizó en cuatro ecuaciones publicadas en 1865. Sus ecuaciones demostraron que electricidad, magnetismo y luz eran tres manifestaciones de un único campo. Su predicción de la existencia de ondas electromagnéticas de distintas frecuencias fue confirmada por Heinrich Hertz en 1887, ocho años después de la muerte de Maxwell. Esas ondas son hoy la radio, la televisión, el wifi y toda comunicación inalámbrica. Einstein dijo de él que fue el trabajo más profundo en física desde Newton.</p>
+
+                <div class="callout callout-g reveal">
+                    <i class="fa-solid fa-atom"></i>
+                    <div>
+                        <strong>La unificación electrodébil — Premio Nobel 1979</strong>
+                        <p style="margin-top:6px">Un siglo después de Maxwell, <strong>Sheldon Glashow</strong> y <strong>Steven Weinberg</strong> (ex compañeros de escuela secundaria en el Bronx, Nueva York) y <strong>Abdus Salam</strong> (Jhang, Pakistán — primer científico pakistaní en ganar el Nobel, trabajando en el Imperial College de Londres) unificaron la fuerza electromagnética con la fuerza nuclear débil —responsable del decaimiento radioactivo— en una sola descripción matemática. Sus trabajos independientes convergieron en la misma teoría, compartiéndoles el Nobel de Física de 1979. El <strong>Modelo Estándar</strong> de la física de partículas suma además la fuerza nuclear fuerte. La única no integrada aún: la gravedad. La llamada "Teoría de Todo" sigue siendo la gran frontera abierta del siglo XXI.</p>
+                    </div>
+                </div>
             </section>
 
             <!-- SECTION 2: Serendipia -->
@@ -278,6 +320,16 @@
                         <div class="std-card-icon"><i class="fa-solid fa-satellite-dish"></i></div>
                         <h4 class="std-card-title">Radiación de Microondas (1964)</h4>
                         <p class="std-card-desc">Penzias y Wilson solo querían calibrar una antena de radio enorme con un ruido de estática persistente y molesto sin saber su razón. Pasaron meses limpiando excremento de palomas sin éxito, hasta que notaron que era ¡el eco del mismísimo Big Bang que inundaba su equipo!</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-radiation"></i></div>
+                        <h4 class="std-card-title">Radiactividad (Becquerel, 1896)</h4>
+                        <p class="std-card-desc">Henri Becquerel investigaba en París la fluorescencia de sales de uranio con luz solar. Un día nublado, guardó las muestras sobre una placa fotográfica envuelta en papel negro. Al revelarla días después —sin haberla expuesto al sol—, encontró una imagen igual de nítida: el uranio emitía radiación por sí mismo, sin necesidad de ninguna fuente de energía externa. Marie Curie, que estudiaría este fenómeno en profundidad junto a Pierre, acuñó el término "radiactividad" en 1898 y ganó dos Premios Nobel por explicar lo que Becquerel encontró por accidente.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-fire"></i></div>
+                        <h4 class="std-card-title">Vulcanización del caucho (Goodyear, 1839)</h4>
+                        <p class="std-card-desc">Charles Goodyear llevaba años obsesionado con estabilizar el caucho natural, que se derretía en verano y se quebraba en invierno, arruinándolo para cualquier uso práctico. La solución llegó cuando derramó accidentalmente una mezcla de caucho y azufre sobre la estufa caliente de su cocina en Woburn, Massachusetts. El material resultante era elástico, resistente y estable a temperaturas extremas. Goodyear patentó el proceso en 1844 y transformó para siempre la industria del transporte —aunque nunca llegó a ser rico: murió en 1860 con deudas de 200.000 dólares.</p>
                     </div>
                 </div>
 
@@ -310,6 +362,14 @@
                     <figcaption style="font-size: 11px; color: var(--t3); text-align: center; margin-top: 12px; font-style: italic;">El Telescopio Espacial James Webb, una maravilla de la ingeniería diseñada para capturar la luz primigenia del universo temprano.</figcaption>
                 </figure>
                 
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <div>
+                        <strong>Vannevar Bush y "Science: The Endless Frontier" (Washington, 1945)</strong>
+                        <p style="margin-top:6px">Vannevar Bush (Everett, Massachusetts, 1890–Belmont, 1974) era director de la Oficina de Investigación y Desarrollo Científico de los EE.UU. cuando el presidente Roosevelt le pidió, en 1944, que elaborara un plan para la posguerra. Su informe, <em>Science: The Endless Frontier</em> (1945), es el documento fundacional de la política científica moderna. Bush argumentó que el Estado debía financiar masivamente la <em>investigación básica</em> —sin exigir aplicaciones inmediatas— porque a largo plazo genera el conocimiento que luego nutre la tecnología aplicada, la medicina y la defensa nacional. La metáfora era territorial: la frontera científica era inagotable, y explorar sin destino práctico fijo era precisamente la condición del avance futuro. Este informe creó la National Science Foundation (NSF) en 1950 y definió el modelo de financiamiento estatal de la investigación que siguieron Europa y el resto del mundo. La tesis de fondo es la misma que encontramos en el "espejo de Copérnico": <em>la inutilidad práctica inmediata de la investigación básica es exactamente lo que garantiza su utilidad transformadora a largo plazo</em>.</p>
+                    </div>
+                </div>
+
                 <p class="article-p reveal">El <strong>Telescopio Espacial James Webb (JWST)</strong> es uno de los mayores estandartes contemporáneos de esta misma cruzada científica. Con un costo que excedió los 10.000 millones de dólares y décadas de desarrollo coordinado entre miles de científicos, ingenieros y múltiples agencias espaciales internacionales, su propósito principal inicial no es mejorar la industria manufacturera o farmacéutica terrestre. Su revolucionaria estructura espejada y su capacidad de ver en el infrarrojo tienen un objetivo mucho más lejano y fundamental: mirar hacia atrás en el tiempo para capturar la tenue luz estirada de las primeras galaxias formadas tras el Big Bang, y analizar simultáneamente atmósferas de exoplanetas lejanos buscando biomarcadores. Como el LHC, el James Webb empuja el límite absoluto de nuestra ingeniería humana para un fin casi exclusivamente epistémico: expandir el mapa del conocimiento sobre nuestra propia existencia y nuestro lugar en el cosmos.</p>
 
             </section>
@@ -353,14 +413,14 @@
                     <i class="fa-solid fa-house cfn-home-icon"></i>
                     <span class="cfn-home-label">Inicio</span>
                 </a>
-                <div class="cfn-card cfn-next cfn-disabled">
+                <a href="unidad4-clase22.html" class="cfn-card cfn-next">
                     <div class="cfn-body">
-                        <span class="cfn-badge">U4 · C-2</span>
+                        <span class="cfn-badge">U4 · C-22</span>
                         <span class="cfn-dir">Próxima clase</span>
-                        <span class="cfn-title">Próximamente</span>
+                        <span class="cfn-title">Sucesión de teorías sobre la diversidad</span>
                     </div>
                     <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                </div>
+                </a>
             </div>
             <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2026</a></p>
         </div>

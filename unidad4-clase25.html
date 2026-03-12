@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 25 — Duhem-Quine, controversias y experimentos cruciales | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['\\(','\\)']],
+                displayMath: [['\\[','\\]']],
+                tags: 'none'
+            },
+            options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+        :root {
+            --y: #facc15; --yd: #eab308;
+            --bg: #f9f7f4; --bg2: #fff; --bg3: #f1ede6;
+            --card: #fff; --t: #1a1a1a; --t2: #3d3d3d; --t3: #6b6b6b;
+            --brd: #e0d9d0; --sh: 0 4px 24px rgba(0,0,0,.08);
+            --shl: 0 20px 60px rgba(0,0,0,.15);
+            --tr: .3s cubic-bezier(.4,0,.2,1);
+            --acc: #f97316;
+        }
+        .dark {
+            --bg: #111; --bg2: #1a1a1a; --bg3: #222; --card: #1e1e1e;
+            --t: #f0ece4; --t2: #c8c0b4; --t3: #888880;
+            --brd: #333; --sh: 0 4px 24px rgba(0,0,0,.4);
+            --shl: 0 20px 60px rgba(0,0,0,.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-padding-top: 72px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); overflow-x: hidden; transition: background .4s, color .4s; }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--y); }
+        #prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--y), var(--acc)); z-index: 9999; transition: width .1s; pointer-events: none; }
+        #topnav { position: sticky; top: 0; z-index: 500; background: var(--bg2); border-bottom: 3px solid var(--y); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: var(--sh); }
+        .tnl, .tnr { display: flex; align-items: center; gap: 12px; }
+        .tnc { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--t2); }
+        @media(max-width:760px){.tnc{display:none}}
+        .nav-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: all var(--tr); border: none; cursor: pointer; }
+        .nav-pill.back { background: var(--bg3); color: var(--t3); }
+        .nav-pill.back:hover { background: var(--brd); color: var(--t); }
+        .nav-pill.next { background: var(--y); color: #000; }
+        .nav-pill.next:hover { background: var(--yd); }
+        .nav-pill.disabled { opacity: .4; pointer-events: none; }
+        .dtoggle { background: none; border: 1px solid var(--brd); width: 36px; height: 20px; border-radius: 999px; position: relative; cursor: pointer; }
+        .dtoggle::after { content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; border-radius: 50%; background: var(--t3); transition: all var(--tr); }
+        .dark .dtoggle { border-color: var(--y); background: var(--y); }
+        .dark .dtoggle::after { left: calc(100% - 16px); background: #000; }
+        #hero {
+            min-height: 88vh;
+            background: linear-gradient(160deg, #1c1206 0%, #2d1809 42%, #120903 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            position: relative; overflow: hidden; color: #fff;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(249,115,22,.2), transparent 36%), linear-gradient(to top, #120903 8%, rgba(18,9,3,.72) 52%, transparent 100%); z-index: 1; }
+        .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 0 24px 72px; width: 100%; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(249,115,22,.14); border: 1px solid rgba(249,115,22,.34); padding: 7px 20px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #fed7aa; margin-bottom: 28px; }
+        .hero-eyebrow span { background: var(--acc); color: #fff; padding: 2px 10px; border-radius: 999px; }
+        .hero-unit { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: .95; letter-spacing: -.03em; margin-bottom: 24px; }
+        .hero-title .y { color: var(--y); font-style: italic; }
+        .hero-sub { font-family: 'Libre Baskerville', serif; font-size: clamp(1rem, 1.8vw, 1.15rem); line-height: 1.8; color: rgba(255,255,255,.7); max-width: 760px; margin-bottom: 40px; }
+        .hero-meta { display: flex; gap: 28px; flex-wrap: wrap; font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: .12em; text-transform: uppercase; }
+        .hero-meta i { color: var(--y); margin-right: 5px; }
+        .article-wrap { max-width: 1400px; margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr; gap: 56px; align-items: start; }
+        @media(min-width:1100px){ .article-wrap { grid-template-columns: 260px 1fr; } }
+        .sidebar { position: sticky; top: 76px; display: none; }
+        @media(min-width:1100px){ .sidebar { display: block; } }
+        .sidebar-card { background: var(--card); border: 1px solid var(--brd); border-radius: 16px; padding: 0; overflow: hidden; margin-bottom: 20px; box-shadow: var(--sh); }
+        .sidebar-card-header { background: var(--y); padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+        .sidebar-card-header span { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #000; }
+        .sidebar-card-body { padding: 16px 20px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+        .toc-link { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: var(--t3); transition: all var(--tr); font-weight: 500; }
+        .toc-link:hover, .toc-link.active { background: rgba(250,204,21,.1); color: var(--t); border-left: 3px solid var(--y); padding-left: 7px; }
+        .toc-num { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--y); opacity: .7; width: 22px; flex-shrink: 0; }
+        .concept-tag { display: inline-block; background: var(--bg3); border: 1px solid var(--brd); border-radius: 999px; padding: 4px 12px; font-size: 11px; color: var(--t3); margin: 3px 2px; }
+        .article-body { max-width: 800px; }
+        .article-body h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--t); margin: 72px 0 24px; line-height: 1.15; letter-spacing: -.02em; border-bottom: 2px solid var(--y); padding-bottom: 14px; scroll-margin-top: 80px; }
+        .article-body h2:first-of-type { margin-top: 0; }
+        .article-p { font-family: 'Libre Baskerville', serif; font-size: 17.5px; line-height: 1.9; color: var(--t2); margin-bottom: 26px; }
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 80px; line-height: .8; padding-right: 10px; padding-top: 6px; color: var(--y); font-weight: 900; }
+        .pull-quote { margin: 48px 0; padding: 36px 44px; border-left: 4px solid var(--y); background: linear-gradient(90deg, rgba(250,204,21,.06), transparent); border-radius: 0 16px 16px 0; }
+        .pull-quote p { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-style: italic; line-height: 1.45; color: var(--t); margin-bottom: 12px; }
+        .pull-quote cite { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t3); font-style: normal; }
+        .pull-quote.acc { border-left-color: var(--acc); background: linear-gradient(90deg, rgba(249,115,22,.08), transparent); }
+        /* MathJax display equations */
+        mjx-container[display="true"] { margin: 18px auto !important; text-align: center; overflow-x: auto; }
+        mjx-container { color: var(--t); }
+        .callout { margin: 32px 0; padding: 24px 28px; border-radius: 14px; display: flex; gap: 18px; align-items: flex-start; }
+        .callout-y { background: rgba(250,204,21,.07); border: 1px solid rgba(250,204,21,.25); }
+        .callout-b { background: rgba(59,130,246,.07); border: 1px solid rgba(59,130,246,.22); }
+        .callout-g { background: rgba(34,197,94,.07); border: 1px solid rgba(34,197,94,.2); }
+        .callout-p { background: rgba(249,115,22,.07); border: 1px solid rgba(249,115,22,.22); }
+        .callout i { font-size: 20px; margin-top: 2px; flex-shrink: 0; }
+        .callout-y i { color: var(--yd); }
+        .callout-b i { color: #3b82f6; }
+        .callout-g i { color: #4ade80; }
+        .callout-p i { color: var(--acc); }
+        .callout p, .callout div { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.8; color: var(--t2); }
+        .callout strong { color: var(--t); }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 36px 0; }
+        .std-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--brd); background: var(--card); box-shadow: var(--sh); transition: all var(--tr); padding: 24px; }
+        .std-card:hover { transform: translateY(-4px); box-shadow: var(--shl); border-color: var(--acc); }
+        .std-card-icon { font-size: 30px; margin-bottom: 12px; color: var(--acc); }
+        .std-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--t); margin-bottom: 12px; }
+        .std-card-desc { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--t2); line-height: 1.65; }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        .class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:56px 24px 40px;position:relative}
+        .class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+        .class-footer-nav-inner{max-width:980px;margin:0 auto}
+        .cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px}
+        .cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+        .cfn-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;align-items:stretch;margin-bottom:28px}
+        @media(max-width:600px){.cfn-grid{grid-template-columns:1fr 1fr;gap:8px} .cfn-card.cfn-home{display:none}}
+        .cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);color:inherit;transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+        .cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 8px}
+        .cfn-card.cfn-disabled{opacity:.32;pointer-events:none;cursor:default}
+        .cfn-arrow{font-size:16px;color:rgba(255,255,255,.2);flex-shrink:0;transition:transform .25s,color .25s}
+        .cfn-card:hover .cfn-arrow{color:#facc15}
+        .cfn-card.cfn-prev:hover .cfn-arrow{transform:translateX(-5px)}
+        .cfn-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+        .cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.5)}
+        .cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+        .cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+        .cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4)}
+        .cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+        .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+        .cfn-credits a{color:rgba(250,204,21,.32)}
+    
+        /* ===== MOBILE ===== */
+        @media(max-width:760px){
+            #topnav { height: auto; min-height: 56px; padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+            .tnl, .tnr { width: 100%; flex-wrap: wrap; }
+            .tnr { justify-content: space-between; gap: 8px; }
+            .nav-pill { padding: 6px 10px; font-size: 10px; letter-spacing: .05em; }
+            .hero-inner { padding: 0 18px 48px; }
+            .hero-eyebrow { margin-bottom: 20px; padding: 6px 14px; letter-spacing: .14em; }
+            .hero-title { font-size: clamp(2.15rem, 12vw, 3.4rem); line-height: 1; }
+            .hero-sub { font-size: .95rem; line-height: 1.7; margin-bottom: 28px; }
+            .hero-meta { gap: 12px 16px; font-size: 10px; }
+            .article-wrap { padding: 40px 16px; gap: 40px; }
+            .article-body { max-width: 100%; }
+            .article-body h2 { margin: 56px 0 18px; padding-bottom: 10px; }
+            .article-p { font-size: 16px; line-height: 1.8; }
+            .dropcap::first-letter { font-size: 62px; padding-right: 8px; }
+            .pull-quote { padding: 24px 18px; margin: 28px 0; }
+            .callout { flex-direction: column; padding: 18px 20px; gap: 12px; margin: 24px 0; }
+            .card-grid { grid-template-columns: 1fr; gap: 14px; margin: 28px 0; }
+            .std-card { padding: 20px; }
+            .article-body .reveal[style*="display:flex"] { flex-direction: column !important; gap: 16px !important; }
+            .article-body figure[style*="width:160px"], .article-body figure[style*="width:260px"] { width: 100% !important; max-width: 260px; margin: 0 auto; }
+            .article-body figure[style*="max-width:240px"], .article-body figure[style*="max-width:400px"] { max-width: 100% !important; }
+            .article-body div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+            mjx-container[display="true"] { padding-bottom: 4px; }
+            .class-footer-nav { padding: 44px 16px 32px; }
+            .cfn-card { padding: 16px; }
+            .cfn-title { font-size: 12px; }
+        }
+        @media(max-width:480px){
+            .tnr { justify-content: flex-start; }
+            .hero-meta span { width: 100%; }
+            .pull-quote { padding: 20px 16px; }
+            .callout { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="prog"></div>
+    <nav id="topnav">
+        <div class="tnl">
+            <button class="nav-pill back" onclick="window.location.href='unidad4-clase24.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 24
+            </button>
+        </div>
+        <div class="tnc">FILOSOFÍA&CIENCIA · 2026</div>
+        <div class="tnr">
+            <a href="index.html" style="font-size:13px;color:var(--t3);font-weight:600;">Inicio</a>
+            <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
+            <a href="#" class="nav-pill next disabled">Fin de bloque <i class="fa-solid fa-check"></i></a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow">
+                <span>Clase 25</span>
+                Unidad 4 · Duhem-Quine y controversias
+            </div>
+            <div class="hero-unit">FILOSOFÍA E HISTORIA DE LA CIENCIA · 6TO AÑO · 2026</div>
+            <h1 class="hero-title">
+                Curvas, <span class="y">controversias</span><br>
+                y experimentos cruciales
+            </h1>
+            <p class="hero-sub">Cómo la tesis de Duhem-Quine transforma la idea de prueba científica: una serie finita de datos admite múltiples ajustes, la simplicidad es un criterio metateórico y las controversias científicas aparecen como parte normal de la práctica, no como una anomalía.</p>
+            <div class="hero-meta">
+                <span><i class="fa-solid fa-calendar"></i>Ciclo 2026</span>
+                <span><i class="fa-solid fa-book-open"></i>Unidad 4 · Clase 25</span>
+                <span><i class="fa-solid fa-chart-simple"></i>Duhem-Quine</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="article-wrap">
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-list fa-sm"></i><span>Contenidos</span></div>
+                <div class="sidebar-card-body">
+                    <ul class="toc-list" id="toc">
+                        <li><a href="#duhem" class="toc-link"><span class="toc-num">01</span>La tesis de Duhem-Quine</a></li>
+                        <li><a href="#curvas" class="toc-link"><span class="toc-num">02</span>Infinitas curvas para pocos puntos</a></li>
+                        <li><a href="#controversias" class="toc-link"><span class="toc-num">03</span>Controversias y consenso</a></li>
+                        <li><a href="#cruciales" class="toc-link"><span class="toc-num">04</span>El problema de los experimentos cruciales</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-key fa-sm"></i><span>Conceptos clave</span></div>
+                <div class="sidebar-card-body">
+                    <span class="concept-tag">Duhem-Quine</span>
+                    <span class="concept-tag">Holismo</span>
+                    <span class="concept-tag">Simplicidad</span>
+                    <span class="concept-tag">Controversia</span>
+                    <span class="concept-tag">Consenso</span>
+                    <span class="concept-tag">Experimento crucial</span>
+                </div>
+            </div>
+        </aside>
+
+        <article class="article-body">
+            <section id="duhem">
+                <h2>1. La tesis de Duhem-Quine: ninguna hipótesis va sola</h2>
+                <p class="article-p dropcap reveal">La tesis de <strong>Duhem-Quine</strong> sostiene que una teoría nunca se confronta aisladamente con la experiencia. Cada predicción depende de una red completa de supuestos: hipótesis centrales, teorías auxiliares, instrumentos, condiciones iniciales, modelos matemáticos y criterios de lectura de resultados. Cuando aparece una dificultad empírica, no sabemos automáticamente qué parte exacta de esa red falló.</p>
+                <p class="article-p reveal">Esto modifica de raíz la imagen ingenua del método científico. Ya no podemos pensar la prueba como un duelo limpio entre una proposición y un hecho puro. Lo que se pone a prueba es siempre un conjunto articulado. Por eso la refutación nunca es tan directa como sugerían los modelos más simples del falsacionismo.</p>
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <div>
+                        <strong>Consecuencia filosófica</strong>
+                        <p style="margin-top:6px">Si una predicción falla, podemos revisar la teoría principal, pero también una hipótesis auxiliar, una condición experimental, una calibración o una suposición matemática. La evidencia no decide sola dónde recae la culpa.</p>
+                    </div>
+                </div>
+
+                <h3>Lavoisier y Priestley: el holismo en la revolución química</h3>
+                <p class="article-p reveal">El caso más ilustrativo del holismo es la <strong>revolución química del siglo XVIII</strong>. <strong>Joseph Priestley</strong> (Leeds, 1733 — Pennsylvania, 1804) aisló en 1774 un gas que permitía que las velas ardieran más intensamente y que los ratones vivieran más tiempo bajo una campana. Lo llamó "aire desflogistizado", porque en el marco de su teoría —la del <strong>flogisto</strong>, una sustancia hipotética que los cuerpos liberaban al quemar— ese gas era simplemente aquel que aún no estaba saturado de flogisto.</p>
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-flask-vial"></i>
+                    <div>
+                        <div style="font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#3b82f6;margin-bottom:6px;">PARIS · 1743–1794 | LEEDS · 1733–1804</div>
+                        <strong>Lavoisier vs. Priestley: dos lenguajes para el mismo gas</strong>
+                        <p style="margin-top:8px"><strong>Antoine Lavoisier</strong> recibió el mismo gas de Priestley durante una visita en París en 1774, lo analizó cuantitativamente con balanza de precisión y lo llamó "oxígeno": el componente del aire que se combina con los metales al oxidarse y con el combustible al quemarse. Para Lavoisier, no existía el flogisto; la combustión era combinación con oxígeno, no liberación de una sustancia. La misma sustancia —el mismo gas— recibió dos nombres en dos marcos teóricos incompatibles. Priestley, hasta el final de su vida, mantuvo el lenguaje del flogisto y nunca aceptó la nueva química de Lavoisier, aunque usó sus experimentos. La tesis de Duhem-Quine ilumina por qué: refutar la teoría del flogisto no era un acto simple —requería revisar todo el sistema de hipótesis, lenguaje y experimentos que la sostenían. Lavoisier fue guillotinado en 1794 durante el Terror. El juez dijo: "La República no necesita sabios."</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="curvas">
+                <h2>2. Una serie finita de puntos admite infinitas curvas</h2>
+                <p class="article-p reveal">El programa sugiere un ejemplo muy potente: una serie finita de puntos en un plano puede ajustarse con una infinidad de curvas. Incluso si los puntos parecen “alineados”, siempre es posible trazar otras funciones que también pasen por ellos. Elegir la recta no es una obligación impuesta por los datos mismos, sino una decisión apoyada en <strong>criterios metateóricos</strong> como la simplicidad, la elegancia o la fecundidad del modelo.</p>
+                <div class="pull-quote acc reveal">
+                    <p>Los datos restringen, pero no determinan por completo la teoría. Entre varias reconstrucciones posibles, la ciencia selecciona también según criterios de segundo orden.</p>
+                    <cite>— Lectura metateórica de Duhem-Quine</cite>
+                </div>
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4 class="std-card-title">Lo que hacen los datos</h4>
+                        <p class="std-card-desc">Los puntos observados limitan qué teorías son compatibles. No cualquier explicación sirve: debe poder reconstruir de algún modo el comportamiento registrado.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <h4 class="std-card-title">Lo que hacen los criterios</h4>
+                        <p class="std-card-desc">Entre teorías compatibles, solemos preferir las más simples, generales o manejables. Esos criterios no vienen dados por el experimento mismo, sino por decisiones metodológicas y tradiciones científicas.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h4 class="std-card-title">La simplicidad</h4>
+                        <p class="std-card-desc">La simplicidad no garantiza verdad, pero funciona como un principio ordenador. La ciencia la usa porque permite comparar, calcular y extender teorías de modo más fértil.</p>
+                    </div>
+                </div>
+                <p class=”article-p reveal”>Por eso la elección entre teorías rivales nunca es puramente mecánica. Incluso en ciencias muy formalizadas, la práctica científica incluye elecciones interpretativas y valoraciones metodológicas que no pueden reducirse a “leer los datos”.</p>
+
+            </section>
+
+            <section id="controversias">
+                <h2>3. Las controversias son parte normal de la ciencia</h2>
+                <p class="article-p reveal">Si una misma evidencia puede sostener más de una interpretación razonable, entonces las <strong>controversias científicas</strong> dejan de ser un accidente vergonzoso. Se vuelven un rasgo esperable de la práctica científica. Las controversias aparecen porque diferentes grupos ponderan de modo distinto la evidencia, la simplicidad, la coherencia con teorías previas, la fecundidad o la estabilidad instrumental.</p>
+                <p class="article-p reveal">En ese contexto, el <strong>consenso</strong> no es un reflejo automático de los hechos, sino una construcción histórica. La comunidad científica estabiliza acuerdos a través de publicaciones, discusiones, formación de especialistas, estandarización de instrumentos y resolución gradual de desacuerdos. Eso no vuelve arbitraria a la ciencia, pero sí la vuelve más humana e institucional de lo que suele mostrar el relato escolar.</p>
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-comments"></i>
+                    <div>
+                        <strong>Controversia no significa irracionalidad</strong>
+                        <p style="margin-top:6px">Que existan disputas no implica que “todo da igual”. Implica que la racionalidad científica opera en un terreno más complejo: compara teorías, calibra evidencias y negocia criterios dentro de comunidades concretas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cruciales">
+                <h2>4. El problema de los “experimentos cruciales”</h2>
+                <p class="article-p reveal">Un <strong>experimento crucial</strong> sería, idealmente, aquel que decide de una vez por todas entre dos teorías rivales. Pero si toda colección de datos admite más de una interpretación posible, entonces desde un punto de vista estricto ese ideal se vuelve problemático. El agregado de datos no necesariamente clausura una controversia, porque siempre puede reabrirse la discusión sobre auxiliares, supuestos de fondo o modos de lectura.</p>
+                <div class="callout callout-y reveal">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Lo que sí pueden hacer los experimentos</strong>
+                        <p style="margin-top:6px">No suelen “matar” instantáneamente una teoría rival, pero sí pueden inclinar progresivamente la balanza: hacer más costosa una defensa, volver más fértil una alternativa o modificar el consenso de la comunidad científica.</p>
+                    </div>
+                </div>
+                <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; font-size:1.3rem; border-left:4px solid var(--acc); padding-left:14px;">El experimento Michelson-Morley (1887): cuando un experimento "falla" y cambia la física</h3>
+
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-wind"></i>
+                    <div>
+                        <strong>Cleveland, Ohio, julio de 1887</strong>
+                        <p style="margin-top:6px">Albert Abraham Michelson (Strzelno, Polonia, 1852–Pasadena, 1931) y Edward Williams Morley (Newark, Nueva Jersey, 1838–West Hartford, 1923) trabajaban en el Case Western Reserve University de Cleveland. Su objetivo era medir el <em>éter luminífero</em>: el supuesto medio invisible e inmóvil a través del cual se propagaban las ondas de luz, análogo al agua para las olas sonoras. La física clásica del siglo XIX lo daba por descontado; si existía, la Tierra en su traslación orbital debía generar un "viento del éter" detectable. Michelson había diseñado un interferómetro de precisión extraordinaria, capaz de detectar diferencias de velocidad de la luz en distintas direcciones con una sensibilidad de un centésimo de la longitud de onda. El experimento fue realizado con meticulosidad sobre una losa de piedra flotando en mercurio para eliminar vibraciones. El resultado fue <strong>nulo</strong>: no había diferencia detectable en la velocidad de la luz en ninguna dirección.</p>
+                        <p style="margin-top:8px">Según la lógica popperiana, este experimento refutaba la teoría del éter. Pero la comunidad científica no abandonó el éter inmediatamente: durante dos décadas, físicos como Hendrik Lorentz (Arnhem, 1853–Haarlem, 1928) y George FitzGerald propusieron hipótesis auxiliares —la "contracción de Lorentz"— para salvar la teoría. Fue recién en 1905 cuando Albert Einstein reformuló el problema entero con la Relatividad Especial, haciendo el éter sencillamente superfluo: no era necesario asumir ningún medio, porque la velocidad de la luz era constante para todo observador. El experimento Michelson-Morley, lejos de "matar" instantáneamente una teoría, operó durante décadas como una anomalía incómoda —exactamente el tipo de situación que Kuhn describía como precursora de una revolución paradigmática.</p>
+                    </div>
+                </div>
+
+                <!-- PORTRAITS ROW: Michelson + Morley -->
+                <div class="reveal" style="display:flex; gap:20px; flex-wrap:wrap; margin:32px 0; justify-content:center;">
+                    <figure style="flex:1; min-width:180px; max-width:240px; text-align:center;">
+                        <img src="michelson.png" alt="Albert Michelson" style="width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:12px; box-shadow:var(--sh); filter:grayscale(20%);">
+                        <figcaption style="font-size:11px; color:var(--t3); margin-top:8px; font-style:italic;">Albert A. Michelson<br>Strzelno, 1852 — Pasadena, 1931<br><span style="font-style:normal; color:var(--acc); font-weight:600;">Primer Nobel de Física norteamericano (1907)</span></figcaption>
+                    </figure>
+                    <figure style="flex:1; min-width:180px; max-width:400px; text-align:center;">
+                        <img src="experimento_michelson.jpg" alt="Interferómetro de Michelson-Morley" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; box-shadow:var(--sh);">
+                        <figcaption style="font-size:11px; color:var(--t3); margin-top:8px; font-style:italic;">El interferómetro de Michelson sobre losa de mármol flotando en mercurio — Case Western Reserve University, Cleveland, 1887</figcaption>
+                    </figure>
+                </div>
+
+                <!-- LORENTZ BLOCK -->
+                <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; font-size:1.3rem; border-left:4px solid #a78bfa; padding-left:14px;">Lorentz: la hipótesis auxiliar que salvó el éter</h3>
+
+                <div class="reveal" style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; margin:24px 0;">
+                    <figure style="flex:0 0 auto; width:160px; text-align:center;">
+                        <img src="Hendrik_Antoon_Lorentz.jpg" alt="Hendrik Lorentz" style="width:160px; aspect-ratio:3/4; object-fit:cover; border-radius:12px; box-shadow:var(--sh); filter:grayscale(15%);">
+                        <figcaption style="font-size:11px; color:var(--t3); margin-top:8px; font-style:italic;">Hendrik A. Lorentz<br>Arnhem, 1853 — Haarlem, 1928</figcaption>
+                    </figure>
+                    <div style="flex:1; min-width:220px;">
+                        <p style="font-size:15px; line-height:1.75; color:var(--t2);">Físico holandés, Premio Nobel 1902, director del laboratorio de Leiden. Ante el resultado nulo de Michelson-Morley, Lorentz no abandonó el éter: propuso que los cuerpos materiales en movimiento a través del éter se <em>contraen</em> físicamente en la dirección del movimiento, exactamente lo suficiente para cancelar cualquier diferencia detectable en la velocidad de la luz. Era una hipótesis auxiliar <em>ad hoc</em>: diseñada específicamente para proteger el núcleo duro de la teoría.</p>
+                        <p style="font-size:15px; line-height:1.75; color:var(--t2); margin-top:10px;">En 1904 Lorentz formalizó esto con un conjunto de <strong>transformaciones de coordenadas</strong> que relacionaban el espacio y el tiempo de un observador en reposo respecto del éter con otro en movimiento:</p>
+                    </div>
+                </div>
+
+                <div class="reveal" style="background:var(--bg3); border:1px solid var(--brd); border-radius:16px; padding:28px 32px; margin:24px 0; overflow-x:auto;">
+                    <p style="font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#a78bfa; margin-bottom:18px;"><i class="fa-solid fa-square-root-variable"></i> &nbsp;Transformaciones de Lorentz (1904)</p>
+                    <p style="font-size:13px; color:var(--t3); margin-bottom:16px;">Para un sistema \(S'\) moviéndose a velocidad \(v\) respecto del éter a lo largo del eje \(x\):</p>
+
+                    \[x' = \gamma\,(x - vt)\]
+                    \[t' = \gamma\!\left(t - \frac{vx}{c^2}\right)\]
+                    \[y' = y \qquad z' = z\]
+
+                    <p style="font-size:13px; color:var(--t3); margin-top:18px; margin-bottom:12px;">donde el <strong>factor de Lorentz</strong> \(\gamma\) es:</p>
+
+                    \[\gamma = \frac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}\]
+
+                    <p style="font-size:13px; color:var(--t3); margin-top:18px; line-height:1.6;"><strong>Interpretación de Lorentz:</strong> \(x'\) y \(t'\) son coordenadas <em>matemáticas</em> convenientes pero no reales. El espacio y el tiempo "verdaderos" siguen siendo los del sistema en reposo absoluto respecto del éter. La contracción es un efecto físico real causado por el movimiento a través del medio.</p>
+                </div>
+
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>El costo filosófico: una hipótesis auxiliar sin poder predictivo independiente</strong>
+                        <p style="margin-top:6px">La contracción de Lorentz no predecía ningún fenómeno nuevo ni observable más allá de los que ya explicaba. Solo servía para <em>neutralizar</em> la anomalía del experimento Michelson-Morley. Lakatos la llamaría una maniobra "degenerativa": protege el núcleo pero no amplía el horizonte explicativo del programa.</p>
+                    </div>
+                </div>
+
+                <!-- EINSTEIN BLOCK -->
+                <h3 class="reveal" style="margin-top:48px; font-family:'Playfair Display',serif; font-size:1.3rem; border-left:4px solid var(--acc); padding-left:14px;">Einstein: las mismas ecuaciones, otra física</h3>
+
+                <div class="reveal" style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; margin:24px 0;">
+                    <figure style="flex:0 0 auto; width:260px; text-align:center;">
+                        <img src="Einstein_en_Lorentz.jpg" alt="Einstein y Lorentz" style="width:260px; aspect-ratio:3/4; object-fit:cover; object-position:center 15%; border-radius:12px; box-shadow:var(--sh); filter:grayscale(15%);">
+                        <figcaption style="font-size:11px; color:var(--t3); margin-top:8px; font-style:italic;">Albert Einstein y Hendrik Lorentz<br><span style="font-style:normal;">Las mismas ecuaciones, dos físicas incompatibles</span></figcaption>
+                    </figure>
+                    <div style="flex:1; min-width:220px;">
+                        <p style="font-size:15px; line-height:1.75; color:var(--t2);">En 1905, trabajando como examinador de patentes en Berna, Albert Einstein publicó su artículo <em>"Zur Elektrodynamik bewegter Körper"</em> ("Sobre la electrodinámica de los cuerpos en movimiento"). Tenía 26 años. No partió del problema del éter ni de intentar explicar el experimento Michelson-Morley: partió de dos postulados simples y radicales.</p>
+                    </div>
+                </div>
+
+                <div class="reveal" style="background:var(--bg3); border:1px solid var(--brd); border-radius:16px; padding:28px 32px; margin:24px 0; overflow-x:auto;">
+                    <p style="font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--acc); margin-bottom:18px;"><i class="fa-solid fa-atom"></i> &nbsp;Relatividad Especial — Los dos postulados (Einstein, 1905)</p>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+                        <div style="background:var(--bg2); border-radius:10px; padding:16px;">
+                            <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--acc); margin-bottom:8px;">Postulado I — Principio de relatividad</p>
+                            <p style="font-size:13.5px; line-height:1.65; color:var(--t2);">Las leyes de la física son las mismas en todos los sistemas de referencia en movimiento uniforme (inerciales). No existe un sistema "en reposo absoluto".</p>
+                        </div>
+                        <div style="background:var(--bg2); border-radius:10px; padding:16px;">
+                            <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--acc); margin-bottom:8px;">Postulado II — Constancia de la velocidad de la luz</p>
+                            <p style="font-size:13.5px; line-height:1.65; color:var(--t2);">La velocidad de la luz \(c\) en el vacío es la misma para todos los observadores inerciales, independientemente del movimiento de la fuente o del observador.</p>
+                        </div>
+                    </div>
+
+                    <p style="font-size:13px; color:var(--t3); margin-bottom:16px;">De estos dos postulados, Einstein <em>derivó</em> las mismas ecuaciones que Lorentz había propuesto como hipótesis auxiliar:</p>
+
+                    \[x' = \gamma\,(x - vt)\]
+                    \[t' = \gamma\!\left(t - \frac{vx}{c^2}\right)\]
+                    \[\gamma = \frac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}\]
+
+                    <div style="background:rgba(250,204,21,.08); border-left:4px solid var(--y); border-radius:0 8px 8px 0; padding:14px 18px; margin-top:20px;">
+                        <p style="font-size:13px; color:var(--t2); line-height:1.7;"><strong>Interpretación de Einstein:</strong> \(x'\) y \(t'\) <em>son</em> las coordenadas reales del sistema \(S'\). No hay éter, no hay espacio absoluto, no hay tiempo absoluto. El tiempo y el espacio son relativos al observador. La dilatación temporal y la contracción de longitud no son efectos físicos "causados" por algo: son consecuencias geométricas de la estructura del espacio-tiempo. Dos eventos simultáneos para un observador pueden no serlo para otro en movimiento relativo.</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-y reveal">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div>
+                        <strong>La lección filosófica — Duhem-Quine en estado puro</strong>
+                        <p style="margin-top:6px">Las ecuaciones son matemáticamente idénticas. Lorentz las propuso para <em>salvar el éter</em> frente a una anomalía. Einstein las <em>derivó</em> eliminando el éter por completo. El mismo formalismo matemático sostuvo durante años dos marcos teóricos incompatibles. Esto ilustra con precisión quirúrgica la tesis de Duhem-Quine: los datos y las ecuaciones no determinan por sí solos cuál es la teoría correcta. La decisión involucra principios, interpretaciones ontológicas y criterios que van más allá de la matemática.</p>
+                    </div>
+                </div>
+
+                <p class="article-p reveal">La enseñanza filosófica de este punto es fuerte. La ciencia no progresa por golpes definitivos e instantáneos, sino por procesos de comparación, ajuste, discusión y reconstrucción de marcos teóricos. Precisamente ahí se ve la fuerza de la nueva filosofía de la ciencia: no idealiza la práctica científica, pero tampoco la reduce a irracionalidad. La muestra como una empresa crítica, histórica y colectiva.</p>
+                <div class="pull-quote reveal">
+                    <p>La gran lección de esta unidad es que el cambio científico no se entiende solo mirando teorías o solo mirando datos, sino examinando la relación compleja entre marcos conceptuales, observación, comunidad y criterios de evaluación.</p>
+                    <cite>— Cierre de la Unidad 4</cite>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <nav class="class-footer-nav">
+        <div class="class-footer-nav-inner">
+            <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+            <div class="cfn-grid">
+                <a href="unidad4-clase24.html" class="cfn-card cfn-prev">
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-24</span>
+                        <span class="cfn-dir">Clase anterior</span>
+                        <span class="cfn-title">Carga teórica, subdeterminación y progreso</span>
+                    </div>
+                </a>
+                <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+                    <i class="fa-solid fa-house cfn-home-icon"></i>
+                    <span class="cfn-home-label">Inicio</span>
+                </a>
+                <div class="cfn-card cfn-disabled">
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · CIERRE</span>
+                        <span class="cfn-dir">Fin de este bloque</span>
+                        <span class="cfn-title">Unidad 4 completada hasta aquí</span>
+                    </div>
+                    <span class="cfn-arrow"><i class="fa-solid fa-check"></i></span>
+                </div>
+            </div>
+            <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2026</a></p>
+        </div>
+    </nav>
+
+    <script>
+        function toggleDark(){ document.documentElement.classList.toggle('dark'); localStorage.setItem('t', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        if(localStorage.getItem('t')==='dark') document.documentElement.classList.add('dark');
+        window.addEventListener('scroll',()=>{ const d=document.documentElement; document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100+'%'; },{passive:true});
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const secIds = ['duhem','curvas','controversias','cruciales'];
+        const secObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){
+                    tocLinks.forEach(l => l.classList.remove('active'));
+                    const a = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+                    if(a) a.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-18% 0px -60% 0px' });
+        secIds.forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+        const revObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+    </script>
+</body>
+</html>

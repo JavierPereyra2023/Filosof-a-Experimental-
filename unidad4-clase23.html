@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 23 — Comunidad científica, consenso e inconmensurabilidad | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --y: #facc15; --yd: #eab308;
+            --bg: #f9f7f4; --bg2: #fff; --bg3: #f1ede6;
+            --card: #fff; --t: #1a1a1a; --t2: #3d3d3d; --t3: #6b6b6b;
+            --brd: #e0d9d0; --sh: 0 4px 24px rgba(0,0,0,.08);
+            --shl: 0 20px 60px rgba(0,0,0,.15);
+            --tr: .3s cubic-bezier(.4,0,.2,1);
+            --acc: #8b5cf6;
+        }
+        .dark {
+            --bg: #111; --bg2: #1a1a1a; --bg3: #222; --card: #1e1e1e;
+            --t: #f0ece4; --t2: #c8c0b4; --t3: #888880;
+            --brd: #333; --sh: 0 4px 24px rgba(0,0,0,.4);
+            --shl: 0 20px 60px rgba(0,0,0,.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-padding-top: 72px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); overflow-x: hidden; transition: background .4s, color .4s; }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--y); }
+        #prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--y), var(--acc)); z-index: 9999; transition: width .1s; pointer-events: none; }
+        #topnav { position: sticky; top: 0; z-index: 500; background: var(--bg2); border-bottom: 3px solid var(--y); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: var(--sh); }
+        .tnl, .tnr { display: flex; align-items: center; gap: 12px; }
+        .tnc { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--t2); }
+        @media(max-width:760px){.tnc{display:none}}
+        .nav-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: all var(--tr); border: none; cursor: pointer; }
+        .nav-pill.back { background: var(--bg3); color: var(--t3); }
+        .nav-pill.back:hover { background: var(--brd); color: var(--t); }
+        .nav-pill.next { background: var(--y); color: #000; }
+        .nav-pill.next:hover { background: var(--yd); }
+        .dtoggle { background: none; border: 1px solid var(--brd); width: 36px; height: 20px; border-radius: 999px; position: relative; cursor: pointer; }
+        .dtoggle::after { content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; border-radius: 50%; background: var(--t3); transition: all var(--tr); }
+        .dark .dtoggle { border-color: var(--y); background: var(--y); }
+        .dark .dtoggle::after { left: calc(100% - 16px); background: #000; }
+        #hero {
+            min-height: 88vh;
+            background: linear-gradient(160deg, #120b1f 0%, #1b1230 40%, #0a0712 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            position: relative; overflow: hidden; color: #fff;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(139,92,246,.22), transparent 35%), linear-gradient(to top, #0a0712 8%, rgba(10,7,18,.72) 52%, transparent 100%); z-index: 1; }
+        .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 0 24px 72px; width: 100%; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(139,92,246,.14); border: 1px solid rgba(139,92,246,.34); padding: 7px 20px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #ddd6fe; margin-bottom: 28px; }
+        .hero-eyebrow span { background: var(--acc); color: #fff; padding: 2px 10px; border-radius: 999px; }
+        .hero-unit { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: .95; letter-spacing: -.03em; margin-bottom: 24px; }
+        .hero-title .y { color: var(--y); font-style: italic; }
+        .hero-sub { font-family: 'Libre Baskerville', serif; font-size: clamp(1rem, 1.8vw, 1.15rem); line-height: 1.8; color: rgba(255,255,255,.7); max-width: 760px; margin-bottom: 40px; }
+        .hero-meta { display: flex; gap: 28px; flex-wrap: wrap; font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: .12em; text-transform: uppercase; }
+        .hero-meta i { color: var(--y); margin-right: 5px; }
+        .article-wrap { max-width: 1400px; margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr; gap: 56px; align-items: start; }
+        @media(min-width:1100px){ .article-wrap { grid-template-columns: 260px 1fr; } }
+        .sidebar { position: sticky; top: 76px; display: none; }
+        @media(min-width:1100px){ .sidebar { display: block; } }
+        .sidebar-card { background: var(--card); border: 1px solid var(--brd); border-radius: 16px; padding: 0; overflow: hidden; margin-bottom: 20px; box-shadow: var(--sh); }
+        .sidebar-card-header { background: var(--y); padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+        .sidebar-card-header span { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #000; }
+        .sidebar-card-body { padding: 16px 20px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+        .toc-link { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: var(--t3); transition: all var(--tr); font-weight: 500; }
+        .toc-link:hover, .toc-link.active { background: rgba(250,204,21,.1); color: var(--t); border-left: 3px solid var(--y); padding-left: 7px; }
+        .toc-num { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--y); opacity: .7; width: 22px; flex-shrink: 0; }
+        .concept-tag { display: inline-block; background: var(--bg3); border: 1px solid var(--brd); border-radius: 999px; padding: 4px 12px; font-size: 11px; color: var(--t3); margin: 3px 2px; }
+        .article-body { max-width: 800px; }
+        .article-body h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--t); margin: 72px 0 24px; line-height: 1.15; letter-spacing: -.02em; border-bottom: 2px solid var(--y); padding-bottom: 14px; scroll-margin-top: 80px; }
+        .article-body h2:first-of-type { margin-top: 0; }
+        .article-p { font-family: 'Libre Baskerville', serif; font-size: 17.5px; line-height: 1.9; color: var(--t2); margin-bottom: 26px; }
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 80px; line-height: .8; padding-right: 10px; padding-top: 6px; color: var(--y); font-weight: 900; }
+        .pull-quote { margin: 48px 0; padding: 36px 44px; border-left: 4px solid var(--y); background: linear-gradient(90deg, rgba(250,204,21,.06), transparent); border-radius: 0 16px 16px 0; }
+        .pull-quote p { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-style: italic; line-height: 1.45; color: var(--t); margin-bottom: 12px; }
+        .pull-quote cite { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t3); font-style: normal; }
+        .pull-quote.acc { border-left-color: var(--acc); background: linear-gradient(90deg, rgba(139,92,246,.08), transparent); }
+        .callout { margin: 32px 0; padding: 24px 28px; border-radius: 14px; display: flex; gap: 18px; align-items: flex-start; }
+        .callout-y { background: rgba(250,204,21,.07); border: 1px solid rgba(250,204,21,.25); }
+        .callout-b { background: rgba(59,130,246,.07); border: 1px solid rgba(59,130,246,.22); }
+        .callout-g { background: rgba(34,197,94,.07); border: 1px solid rgba(34,197,94,.2); }
+        .callout-p { background: rgba(139,92,246,.07); border: 1px solid rgba(139,92,246,.25); }
+        .callout i { font-size: 20px; margin-top: 2px; flex-shrink: 0; }
+        .callout-y i { color: var(--yd); }
+        .callout-b i { color: #3b82f6; }
+        .callout-g i { color: #4ade80; }
+        .callout-p i { color: var(--acc); }
+        .callout p, .callout div { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.8; color: var(--t2); }
+        .callout strong { color: var(--t); }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 36px 0; }
+        .std-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--brd); background: var(--card); box-shadow: var(--sh); transition: all var(--tr); padding: 24px; }
+        .std-card:hover { transform: translateY(-4px); box-shadow: var(--shl); border-color: var(--acc); }
+        .std-card-icon { font-size: 30px; margin-bottom: 12px; color: var(--acc); }
+        .std-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--t); margin-bottom: 12px; }
+        .std-card-desc { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--t2); line-height: 1.65; }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        .class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:56px 24px 40px;position:relative}
+        .class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+        .class-footer-nav-inner{max-width:980px;margin:0 auto}
+        .cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px}
+        .cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+        .cfn-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;align-items:stretch;margin-bottom:28px}
+        @media(max-width:600px){.cfn-grid{grid-template-columns:1fr 1fr;gap:8px} .cfn-card.cfn-home{display:none}}
+        .cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);color:inherit;transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+        .cfn-card.cfn-next{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.2);justify-content:flex-end;text-align:right}
+        .cfn-card.cfn-next:hover{background:rgba(250,204,21,.13);border-color:rgba(250,204,21,.55);box-shadow:0 12px 40px rgba(250,204,21,.15)}
+        .cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 8px}
+        .cfn-arrow{font-size:16px;color:rgba(255,255,255,.2);flex-shrink:0;transition:transform .25s,color .25s}
+        .cfn-card:hover .cfn-arrow{color:#facc15}
+        .cfn-card.cfn-prev:hover .cfn-arrow{transform:translateX(-5px)}
+        .cfn-card.cfn-next:hover .cfn-arrow{transform:translateX(5px)}
+        .cfn-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+        .cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.5)}
+        .cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+        .cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+        .cfn-card.cfn-next .cfn-title{color:#facc15}
+        .cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4)}
+        .cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+        .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+        .cfn-credits a{color:rgba(250,204,21,.32)}
+    
+        /* ===== MOBILE ===== */
+        @media(max-width:760px){
+            #topnav { height: auto; min-height: 56px; padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+            .tnl, .tnr { width: 100%; flex-wrap: wrap; }
+            .tnr { justify-content: space-between; gap: 8px; }
+            .nav-pill { padding: 6px 10px; font-size: 10px; letter-spacing: .05em; }
+            .hero-inner { padding: 0 18px 48px; }
+            .hero-eyebrow { margin-bottom: 20px; padding: 6px 14px; letter-spacing: .14em; }
+            .hero-title { font-size: clamp(2.15rem, 12vw, 3.4rem); line-height: 1; }
+            .hero-sub { font-size: .95rem; line-height: 1.7; margin-bottom: 28px; }
+            .hero-meta { gap: 12px 16px; font-size: 10px; }
+            .article-wrap { padding: 40px 16px; gap: 40px; }
+            .article-body { max-width: 100%; }
+            .article-body h2 { margin: 56px 0 18px; padding-bottom: 10px; }
+            .article-p { font-size: 16px; line-height: 1.8; }
+            .dropcap::first-letter { font-size: 62px; padding-right: 8px; }
+            .pull-quote { padding: 24px 18px; margin: 28px 0; }
+            .callout { flex-direction: column; padding: 18px 20px; gap: 12px; margin: 24px 0; }
+            .card-grid { grid-template-columns: 1fr; gap: 14px; margin: 28px 0; }
+            .std-card { padding: 20px; }
+            .class-footer-nav { padding: 44px 16px 32px; }
+            .cfn-card { padding: 16px; }
+            .cfn-title { font-size: 12px; }
+        }
+        @media(max-width:480px){
+            .tnr { justify-content: flex-start; }
+            .hero-meta span { width: 100%; }
+            .pull-quote { padding: 20px 16px; }
+            .callout { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="prog"></div>
+    <nav id="topnav">
+        <div class="tnl">
+            <button class="nav-pill back" onclick="window.location.href='unidad4-clase22.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 22
+            </button>
+        </div>
+        <div class="tnc">FILOSOFÍA&CIENCIA · 2026</div>
+        <div class="tnr">
+            <a href="index.html" style="font-size:13px;color:var(--t3);font-weight:600;">Inicio</a>
+            <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
+            <a href="unidad4-clase24.html" class="nav-pill next">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow">
+                <span>Clase 23</span>
+                Unidad 4 · Comunidad y comparación
+            </div>
+            <div class="hero-unit">FILOSOFÍA E HISTORIA DE LA CIENCIA · 6TO AÑO · 2026</div>
+            <h1 class="hero-title">
+                Consenso, <span class="y">controversia</span><br>
+                e inconmensurabilidad
+            </h1>
+            <p class="hero-sub">Cómo interviene la comunidad científica en la aceptación de teorías, por qué el consenso no es un simple voto y qué significa decir que dos paradigmas rivales no pueden compararse con una medida neutral.</p>
+            <div class="hero-meta">
+                <span><i class="fa-solid fa-calendar"></i>Ciclo 2026</span>
+                <span><i class="fa-solid fa-book-open"></i>Unidad 4 · Clase 23</span>
+                <span><i class="fa-solid fa-users"></i>Debate y validación</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="article-wrap">
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-list fa-sm"></i><span>Contenidos</span></div>
+                <div class="sidebar-card-body">
+                    <ul class="toc-list" id="toc">
+                        <li><a href="#comunidad" class="toc-link"><span class="toc-num">01</span>Comunidad científica y consenso</a></li>
+                        <li><a href="#inconmensurabilidad" class="toc-link"><span class="toc-num">02</span>El problema de la inconmensurabilidad</a></li>
+                        <li><a href="#continuidad" class="toc-link"><span class="toc-num">03</span>Continuidad en conceptos y resultados</a></li>
+                        <li><a href="#controversias" class="toc-link"><span class="toc-num">04</span>Controversias y cierre provisional</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-key fa-sm"></i><span>Conceptos clave</span></div>
+                <div class="sidebar-card-body">
+                    <span class="concept-tag">Comunidad científica</span>
+                    <span class="concept-tag">Consenso</span>
+                    <span class="concept-tag">Paradigma</span>
+                    <span class="concept-tag">Inconmensurabilidad</span>
+                    <span class="concept-tag">Continuidad</span>
+                    <span class="concept-tag">Controversia</span>
+                </div>
+            </div>
+        </aside>
+
+        <article class="article-body">
+            <section id="comunidad">
+                <h2>1. La ciencia es una práctica colectiva</h2>
+                <p class="article-p dropcap reveal">La imagen del científico aislado que descubre la verdad en soledad oculta un dato básico: la ciencia funciona como <strong>comunidad</strong>. Publicar, discutir, corregir, replicar, formar discípulos, evaluar revistas y sostener instituciones son actividades tan decisivas como observar o experimentar. Por eso el conocimiento científico nunca se valida fuera de prácticas colectivas.</p>
+                <p class="article-p reveal">Hablar de <strong>consenso</strong> no significa reducir la verdad a una encuesta. Significa reconocer que la aceptación de una teoría depende de una red de criterios compartidos: qué cuenta como evidencia confiable, qué problemas se consideran relevantes, qué métodos son legítimos y qué resultados merecen atención. El consenso, entonces, no es meramente psicológico: es también institucional y normativo.</p>
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-people-group"></i>
+                    <div>
+                        <strong>Consenso no equivale a unanimidad</strong>
+                        <p style="margin-top:6px">Una teoría puede volverse dominante aunque siga habiendo objeciones, zonas grises o explicaciones rivales. La aceptación científica suele ser gradual, conflictiva y revisable. Justamente por eso conviene pensar el consenso como una construcción histórica.</p>
+                    </div>
+                </div>
+
+                <h3>Las normas de Merton: ¿cómo funciona la comunidad?</h3>
+                <p class="article-p reveal">El sociólogo <strong>Robert K. Merton</strong> (Philadelphia, 1910 — Nueva York, 2003) propuso en 1942 que la práctica científica no es solo un método sino una institución social con normas implícitas que la comunidad internaliza. Las llamó el <strong>ethos científico</strong> y las describió con el acrónimo CUDOS:</p>
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-globe"></i></div>
+                        <h4 class="std-card-title">Comunalismo</h4>
+                        <p class="std-card-desc">El conocimiento científico es un bien común. Los resultados deben publicarse y compartirse con la comunidad. La propiedad intelectual se limita al reconocimiento del nombre del descubridor, no a la exclusividad del conocimiento.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <h4 class="std-card-title">Universalismo</h4>
+                        <p class="std-card-desc">Las afirmaciones científicas se evalúan por criterios universales —evidencia, coherencia, reproducibilidad— y no por la raza, género, nacionalidad o cargo del investigador. En teoría, la verdad no tiene patria.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-hand-paper"></i></div>
+                        <h4 class="std-card-title">Desinterés</h4>
+                        <p class="std-card-desc">El científico debe actuar por el avance del conocimiento, no por beneficio personal o ideológico. La norma no describe siempre la realidad, pero funciona como ideal regulatorio que la comunidad invoca para criticar desviaciones.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <h4 class="std-card-title">Escepticismo organizado</h4>
+                        <p class="std-card-desc">Todo resultado debe ser examinado críticamente antes de aceptarse. La revisión por pares (peer review), la replicación de experimentos y la discusión pública son mecanismos institucionales de ese escepticismo colectivo.</p>
+                    </div>
+                </div>
+                <p class="article-p reveal">La crítica a Merton señala que sus normas describen un ideal más que una práctica real. La historia muestra fraudes, plagios, prioridades disputadas y sesgos institucionales. Pero incluso quien critica esas desviaciones usa el ethos mertoniano como parámetro. Las normas funcionan al menos como horizonte de referencia.</p>
+            </section>
+
+            <section id="inconmensurabilidad">
+                <h2>2. ¿Qué significa que dos teorías sean inconmensurables?</h2>
+                <p class="article-p reveal">Kuhn propuso que, en ciertos momentos de cambio profundo, los paradigmas rivales son <strong>inconmensurables</strong>. Esto no quiere decir que sean incomparables en sentido absoluto, sino que no existe una medida totalmente neutral y externa a ambos paradigmas para decidir entre ellos. Cada uno organiza la experiencia con conceptos, problemas ejemplares y estándares propios.</p>
+                <div class="pull-quote acc reveal">
+                    <p>Cuando cambia un paradigma, no solo cambian las respuestas: cambia también qué cuenta como problema, qué observación importa y qué lenguaje parece natural.</p>
+                    <cite>— Lectura kuhniana del cambio científico</cite>
+                </div>
+                <p class="article-p reveal">En el caso de la diversidad biológica, esto se ve con claridad. El fijismo y el evolucionismo no solo dan soluciones distintas; también dibujan de otro modo la realidad. La noción de especie, la importancia de la historia, el lugar de la variación y el tipo de explicación buscada se transforman de manera profunda. Por eso no basta con poner ambos marcos uno al lado del otro y sumar “pruebas” como si todo tuviera el mismo significado.</p>
+            </section>
+
+            <section id="continuidad">
+                <h2>3. Pero también hay continuidad</h2>
+                <p class="article-p reveal">La tesis de la inconmensurabilidad no obliga a pensar una ruptura total. Muchos autores insistieron en que entre teorías sucesivas también hay <strong>continuidades parciales</strong>. Puede persistir el dominio de fenómenos, cierta terminología, algunas técnicas de observación o incluso resultados empíricos que siguen siendo utilizables aunque cambie su interpretación teórica.</p>
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-book"></i></div>
+                        <h4 class="std-card-title">Continuidad conceptual parcial</h4>
+                        <p class="std-card-desc">Un mismo término puede mantenerse, pero su sentido puede desplazarse. “Especie” no desaparece entre Cuvier y Darwin, aunque el papel filosófico y biológico de la categoría cambie radicalmente.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                        <h4 class="std-card-title">Continuidad en resultados</h4>
+                        <p class="std-card-desc">Una teoría nueva puede conservar observaciones, clasificaciones o regularidades establecidas por otra, aun si les da un nuevo lugar dentro del marco explicativo general.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+                        <h4 class="std-card-title">Continuidad en problemas</h4>
+                        <p class="std-card-desc">Las grandes preguntas pueden permanecer: de dónde viene la diversidad, cómo explicar semejanzas, qué significa adaptación. Lo que cambia es la manera de formularlas y resolverlas.</p>
+                    </div>
+                </div>
+                <p class="article-p reveal">Por eso la cuestión filosófica importante no es elegir entre “todo cambia” o “nada cambia”. Lo decisivo es identificar <em>dónde</em> hay continuidad y <em>dónde</em> hay ruptura. Esa operación analítica es la que permite discutir si la ciencia progresa o simplemente reorganiza sus marcos de comprensión.</p>
+            </section>
+
+            <section id="controversias">
+                <h2>4. La controversia es normal, no una falla</h2>
+                <p class="article-p reveal">Si la comparación entre teorías no es automática y si el consenso se construye, entonces las <strong>controversias científicas</strong> no son accidentes marginales: forman parte habitual de la práctica científica. En una controversia no solo chocan datos y argumentos; también se enfrentan criterios de relevancia, expectativas metodológicas, intereses institucionales y estilos de investigación.</p>
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-comments"></i>
+                    <div>
+                        <strong>Una idea clave para la unidad</strong>
+                        <p style="margin-top:6px">El consenso no “cae” sobre la comunidad desde afuera. Se produce en debates, publicaciones, formación académica, selección de problemas y estabilización de instrumentos. Por eso una teoría se acepta dentro de una trama social e histórica concreta.</p>
+                    </div>
+                </div>
+                <p class="article-p reveal">Este punto enlaza directamente con lo que sigue. Si toda observación está cargada de teoría y si los datos no determinan por sí solos una única teoría posible, entonces la puesta a prueba de las teorías se vuelve mucho más compleja de lo que imaginaba la versión escolar del método científico. Ahí entra la clase 24.</p>
+
+                <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; font-size:1.3rem; border-left:4px solid var(--acc); padding-left:14px;">Tres controversias que sacudieron la ciencia</h3>
+
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-globe"></i>
+                    <div>
+                        <strong>Alfred Wegener y la deriva continental (1912–1960)</strong>
+                        <p style="margin-top:6px">En 1912, el meteorólogo alemán Alfred Wegener (Berlín, 1880–Groenlandia, 1930) presentó ante la Sociedad Geológica Alemana en Frankfurt una propuesta escandalosa: los continentes se habían separado lentamente a partir de un supercontinente único, la <em>Pangea</em>. Su evidencia era sólida —la forma complementaria de las costas africana y americana, fósiles idénticos a ambos lados del Atlántico, capas geológicas que "encajaban" como piezas de rompecabezas. Sin embargo, la comunidad geológica la rechazó durante cuarenta años. El motivo: Wegener no podía explicar <em>el mecanismo</em> que movía los continentes. Los geólogos dominantes, formados en la idea de continentes fijos, no concebían que el fondo oceánico pudiera "arrastrarse". Recién en la década de 1950–1960, cuando la evidencia del esparcimiento del fondo oceánico acumuló datos irresistibles, la tectónica de placas se convirtió en consenso. Wegener no vivió para verlo: murió en una expedición polar en 1930.</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-dna"></i>
+                    <div>
+                        <strong>Watson, Crick y Rosalind Franklin: la estructura del ADN (1953)</strong>
+                        <p style="margin-top:6px">En el Cavendish Laboratory de Cambridge, James Watson (Chicago, 1928) y Francis Crick (Northampton, 1916–San Diego, 2004) trabajaban con modelos físicos construidos con varillas metálicas intentando descifrar la estructura del ADN. En el King's College de Londres, Rosalind Franklin (1920–1958) usaba una técnica radicalmente distinta —la cristalografía de rayos X— para fotografiar la molécula directamente. Su Fotografía 51, tomada en mayo de 1952, era la imagen más nítida obtenida hasta entonces y mostraba claramente la forma helicoidal. Sin el conocimiento de Franklin, Maurice Wilkins mostró esa fotografía a Watson, quien reconoció de inmediato su significado. Meses después, en abril de 1953, Watson y Crick publicaron en <em>Nature</em> el modelo de la doble hélice. Ganaron el Nobel en 1962 junto a Wilkins; Franklin, muerta en 1958 de cáncer de ovario a los 37 años, no fue incluida. La controversia sobre el crédito científico, el género y la propiedad del conocimiento científico sigue activa hoy.</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-y reveal">
+                    <i class="fa-solid fa-temperature-high"></i>
+                    <div>
+                        <strong>El consenso climático contemporáneo: una controversia en cámara lenta</strong>
+                        <p style="margin-top:6px">Desde la década de 1990, el Panel Intergubernamental sobre Cambio Climático (IPCC) ha acumulado consenso sobre el calentamiento antropogénico. El proceso ilustra exactamente lo que Kuhn y Merton describían: no fue un experimento único ni un decreto. Fue la convergencia de miles de estudios independientes —registros de temperatura, núcleos de hielo ártico, modelos climáticos, satelites— producidos en diferentes países y disciplinas, evaluados en revisión por pares, debatidos en decenas de conferencias. El 97% de los investigadores climáticos activos acepta el diagnóstico central. La <em>controversia</em> persistente no está dentro de la comunidad científica —donde hay acuerdo robusto— sino en la esfera pública y política, donde intereses económicos y disputas sobre políticas de mitigación crean la apariencia de un debate técnico que ya no existe como tal. Esta asimetría entre consenso científico y debate político es en sí misma un fenómeno filosófico de primer orden.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <nav class="class-footer-nav">
+        <div class="class-footer-nav-inner">
+            <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+            <div class="cfn-grid">
+                <a href="unidad4-clase22.html" class="cfn-card cfn-prev">
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-22</span>
+                        <span class="cfn-dir">Clase anterior</span>
+                        <span class="cfn-title">Sucesión de teorías sobre la diversidad</span>
+                    </div>
+                </a>
+                <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+                    <i class="fa-solid fa-house cfn-home-icon"></i>
+                    <span class="cfn-home-label">Inicio</span>
+                </a>
+                <a href="unidad4-clase24.html" class="cfn-card cfn-next">
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-24</span>
+                        <span class="cfn-dir">Próxima clase</span>
+                        <span class="cfn-title">Observación, subdeterminación y progreso</span>
+                    </div>
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+            </div>
+            <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2026</a></p>
+        </div>
+    </nav>
+
+    <script>
+        function toggleDark(){ document.documentElement.classList.toggle('dark'); localStorage.setItem('t', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        if(localStorage.getItem('t')==='dark') document.documentElement.classList.add('dark');
+        window.addEventListener('scroll',()=>{ const d=document.documentElement; document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100+'%'; },{passive:true});
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const secIds = ['comunidad','inconmensurabilidad','continuidad','controversias'];
+        const secObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){
+                    tocLinks.forEach(l => l.classList.remove('active'));
+                    const a = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+                    if(a) a.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-18% 0px -60% 0px' });
+        secIds.forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+        const revObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+    </script>
+</body>
+</html>

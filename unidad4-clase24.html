@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 24 — Carga teórica, subdeterminación y progreso | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --y: #facc15; --yd: #eab308;
+            --bg: #f9f7f4; --bg2: #fff; --bg3: #f1ede6;
+            --card: #fff; --t: #1a1a1a; --t2: #3d3d3d; --t3: #6b6b6b;
+            --brd: #e0d9d0; --sh: 0 4px 24px rgba(0,0,0,.08);
+            --shl: 0 20px 60px rgba(0,0,0,.15);
+            --tr: .3s cubic-bezier(.4,0,.2,1);
+            --acc: #ef4444;
+        }
+        .dark {
+            --bg: #111; --bg2: #1a1a1a; --bg3: #222; --card: #1e1e1e;
+            --t: #f0ece4; --t2: #c8c0b4; --t3: #888880;
+            --brd: #333; --sh: 0 4px 24px rgba(0,0,0,.4);
+            --shl: 0 20px 60px rgba(0,0,0,.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-padding-top: 72px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); overflow-x: hidden; transition: background .4s, color .4s; }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--y); }
+        #prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--y), var(--acc)); z-index: 9999; transition: width .1s; pointer-events: none; }
+        #topnav { position: sticky; top: 0; z-index: 500; background: var(--bg2); border-bottom: 3px solid var(--y); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: var(--sh); }
+        .tnl, .tnr { display: flex; align-items: center; gap: 12px; }
+        .tnc { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--t2); }
+        @media(max-width:760px){.tnc{display:none}}
+        .nav-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: all var(--tr); border: none; cursor: pointer; }
+        .nav-pill.back { background: var(--bg3); color: var(--t3); }
+        .nav-pill.back:hover { background: var(--brd); color: var(--t); }
+        .nav-pill.next { background: var(--y); color: #000; }
+        .nav-pill.next:hover { background: var(--yd); }
+        .nav-pill.disabled { opacity: .4; pointer-events: none; }
+        .dtoggle { background: none; border: 1px solid var(--brd); width: 36px; height: 20px; border-radius: 999px; position: relative; cursor: pointer; }
+        .dtoggle::after { content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; border-radius: 50%; background: var(--t3); transition: all var(--tr); }
+        .dark .dtoggle { border-color: var(--y); background: var(--y); }
+        .dark .dtoggle::after { left: calc(100% - 16px); background: #000; }
+        #hero {
+            min-height: 88vh;
+            background: linear-gradient(160deg, #1a0a0a 0%, #290d10 42%, #120406 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            position: relative; overflow: hidden; color: #fff;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(239,68,68,.18), transparent 35%), linear-gradient(to top, #120406 8%, rgba(18,4,6,.72) 52%, transparent 100%); z-index: 1; }
+        .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 0 24px 72px; width: 100%; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(239,68,68,.14); border: 1px solid rgba(239,68,68,.34); padding: 7px 20px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #fecaca; margin-bottom: 28px; }
+        .hero-eyebrow span { background: var(--acc); color: #fff; padding: 2px 10px; border-radius: 999px; }
+        .hero-unit { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: .95; letter-spacing: -.03em; margin-bottom: 24px; }
+        .hero-title .y { color: var(--y); font-style: italic; }
+        .hero-sub { font-family: 'Libre Baskerville', serif; font-size: clamp(1rem, 1.8vw, 1.15rem); line-height: 1.8; color: rgba(255,255,255,.7); max-width: 760px; margin-bottom: 40px; }
+        .hero-meta { display: flex; gap: 28px; flex-wrap: wrap; font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: .12em; text-transform: uppercase; }
+        .hero-meta i { color: var(--y); margin-right: 5px; }
+        .article-wrap { max-width: 1400px; margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr; gap: 56px; align-items: start; }
+        @media(min-width:1100px){ .article-wrap { grid-template-columns: 260px 1fr; } }
+        .sidebar { position: sticky; top: 76px; display: none; }
+        @media(min-width:1100px){ .sidebar { display: block; } }
+        .sidebar-card { background: var(--card); border: 1px solid var(--brd); border-radius: 16px; padding: 0; overflow: hidden; margin-bottom: 20px; box-shadow: var(--sh); }
+        .sidebar-card-header { background: var(--y); padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+        .sidebar-card-header span { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #000; }
+        .sidebar-card-body { padding: 16px 20px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+        .toc-link { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: var(--t3); transition: all var(--tr); font-weight: 500; }
+        .toc-link:hover, .toc-link.active { background: rgba(250,204,21,.1); color: var(--t); border-left: 3px solid var(--y); padding-left: 7px; }
+        .toc-num { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--y); opacity: .7; width: 22px; flex-shrink: 0; }
+        .concept-tag { display: inline-block; background: var(--bg3); border: 1px solid var(--brd); border-radius: 999px; padding: 4px 12px; font-size: 11px; color: var(--t3); margin: 3px 2px; }
+        .article-body { max-width: 800px; }
+        .article-body h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--t); margin: 72px 0 24px; line-height: 1.15; letter-spacing: -.02em; border-bottom: 2px solid var(--y); padding-bottom: 14px; scroll-margin-top: 80px; }
+        .article-body h2:first-of-type { margin-top: 0; }
+        .article-p { font-family: 'Libre Baskerville', serif; font-size: 17.5px; line-height: 1.9; color: var(--t2); margin-bottom: 26px; }
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 80px; line-height: .8; padding-right: 10px; padding-top: 6px; color: var(--y); font-weight: 900; }
+        .pull-quote { margin: 48px 0; padding: 36px 44px; border-left: 4px solid var(--y); background: linear-gradient(90deg, rgba(250,204,21,.06), transparent); border-radius: 0 16px 16px 0; }
+        .pull-quote p { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-style: italic; line-height: 1.45; color: var(--t); margin-bottom: 12px; }
+        .pull-quote cite { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t3); font-style: normal; }
+        .pull-quote.acc { border-left-color: var(--acc); background: linear-gradient(90deg, rgba(239,68,68,.08), transparent); }
+        .callout { margin: 32px 0; padding: 24px 28px; border-radius: 14px; display: flex; gap: 18px; align-items: flex-start; }
+        .callout-y { background: rgba(250,204,21,.07); border: 1px solid rgba(250,204,21,.25); }
+        .callout-b { background: rgba(59,130,246,.07); border: 1px solid rgba(59,130,246,.22); }
+        .callout-g { background: rgba(34,197,94,.07); border: 1px solid rgba(34,197,94,.2); }
+        .callout-p { background: rgba(239,68,68,.07); border: 1px solid rgba(239,68,68,.22); }
+        .callout i { font-size: 20px; margin-top: 2px; flex-shrink: 0; }
+        .callout-y i { color: var(--yd); }
+        .callout-b i { color: #3b82f6; }
+        .callout-g i { color: #4ade80; }
+        .callout-p i { color: var(--acc); }
+        .callout p, .callout div { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.8; color: var(--t2); }
+        .callout strong { color: var(--t); }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 36px 0; }
+        .std-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--brd); background: var(--card); box-shadow: var(--sh); transition: all var(--tr); padding: 24px; }
+        .std-card:hover { transform: translateY(-4px); box-shadow: var(--shl); border-color: var(--acc); }
+        .std-card-icon { font-size: 30px; margin-bottom: 12px; color: var(--acc); }
+        .std-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--t); margin-bottom: 12px; }
+        .std-card-desc { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--t2); line-height: 1.65; }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        .class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:56px 24px 40px;position:relative}
+        .class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+        .class-footer-nav-inner{max-width:980px;margin:0 auto}
+        .cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px}
+        .cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+        .cfn-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;align-items:stretch;margin-bottom:28px}
+        @media(max-width:600px){.cfn-grid{grid-template-columns:1fr 1fr;gap:8px} .cfn-card.cfn-home{display:none}}
+        .cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);color:inherit;transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+        .cfn-card.cfn-next{background:rgba(255,255,255,.025)}
+        .cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 8px}
+        .cfn-card.cfn-disabled{opacity:.32;pointer-events:none;cursor:default}
+        .cfn-arrow{font-size:16px;color:rgba(255,255,255,.2);flex-shrink:0;transition:transform .25s,color .25s}
+        .cfn-card:hover .cfn-arrow{color:#facc15}
+        .cfn-card.cfn-prev:hover .cfn-arrow{transform:translateX(-5px)}
+        .cfn-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+        .cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.5)}
+        .cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+        .cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+        .cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4)}
+        .cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+        .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+        .cfn-credits a{color:rgba(250,204,21,.32)}
+    
+        /* ===== MOBILE ===== */
+        @media(max-width:760px){
+            #topnav { height: auto; min-height: 56px; padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+            .tnl, .tnr { width: 100%; flex-wrap: wrap; }
+            .tnr { justify-content: space-between; gap: 8px; }
+            .nav-pill { padding: 6px 10px; font-size: 10px; letter-spacing: .05em; }
+            .hero-inner { padding: 0 18px 48px; }
+            .hero-eyebrow { margin-bottom: 20px; padding: 6px 14px; letter-spacing: .14em; }
+            .hero-title { font-size: clamp(2.15rem, 12vw, 3.4rem); line-height: 1; }
+            .hero-sub { font-size: .95rem; line-height: 1.7; margin-bottom: 28px; }
+            .hero-meta { gap: 12px 16px; font-size: 10px; }
+            .article-wrap { padding: 40px 16px; gap: 40px; }
+            .article-body { max-width: 100%; }
+            .article-body h2 { margin: 56px 0 18px; padding-bottom: 10px; }
+            .article-p { font-size: 16px; line-height: 1.8; }
+            .dropcap::first-letter { font-size: 62px; padding-right: 8px; }
+            .pull-quote { padding: 24px 18px; margin: 28px 0; }
+            .callout { flex-direction: column; padding: 18px 20px; gap: 12px; margin: 24px 0; }
+            .card-grid { grid-template-columns: 1fr; gap: 14px; margin: 28px 0; }
+            .std-card { padding: 20px; }
+            .class-footer-nav { padding: 44px 16px 32px; }
+            .cfn-card { padding: 16px; }
+            .cfn-title { font-size: 12px; }
+        }
+        @media(max-width:480px){
+            .tnr { justify-content: flex-start; }
+            .hero-meta span { width: 100%; }
+            .pull-quote { padding: 20px 16px; }
+            .callout { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="prog"></div>
+    <nav id="topnav">
+        <div class="tnl">
+            <button class="nav-pill back" onclick="window.location.href='unidad4-clase23.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 23
+            </button>
+        </div>
+        <div class="tnc">FILOSOFÍA&CIENCIA · 2026</div>
+        <div class="tnr">
+            <a href="index.html" style="font-size:13px;color:var(--t3);font-weight:600;">Inicio</a>
+            <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
+            <a href="unidad4-clase25.html" class="nav-pill next">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow">
+                <span>Clase 24</span>
+                Unidad 4 · Observación y prueba
+            </div>
+            <div class="hero-unit">FILOSOFÍA E HISTORIA DE LA CIENCIA · 6TO AÑO · 2026</div>
+            <h1 class="hero-title">
+                Datos, <span class="y">teoría</span><br>
+                y progreso científico
+            </h1>
+            <p class="hero-sub">Por qué no existe observación completamente neutral, qué significa que los datos subdeterminen las teorías y cómo cambian las discusiones sobre el progreso científico cuando entran Hanson, Kuhn, Lakatos, Feyerabend y Laudan.</p>
+            <div class="hero-meta">
+                <span><i class="fa-solid fa-calendar"></i>Ciclo 2026</span>
+                <span><i class="fa-solid fa-book-open"></i>Unidad 4 · Clase 24</span>
+                <span><i class="fa-solid fa-eye"></i>Observación y evaluación</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="article-wrap">
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-list fa-sm"></i><span>Contenidos</span></div>
+                <div class="sidebar-card-body">
+                    <ul class="toc-list" id="toc">
+                        <li><a href="#carga" class="toc-link"><span class="toc-num">01</span>Carga teórica de la observación</a></li>
+                        <li><a href="#subdeterminacion" class="toc-link"><span class="toc-num">02</span>Subdeterminación y puesta a prueba</a></li>
+                        <li><a href="#auxiliares" class="toc-link"><span class="toc-num">03</span>Teorías auxiliares e instrumentos</a></li>
+                        <li><a href="#progreso" class="toc-link"><span class="toc-num">04</span>Discusiones sobre el progreso</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-key fa-sm"></i><span>Conceptos clave</span></div>
+                <div class="sidebar-card-body">
+                    <span class="concept-tag">Carga teórica</span>
+                    <span class="concept-tag">Hanson</span>
+                    <span class="concept-tag">Subdeterminación</span>
+                    <span class="concept-tag">Duhem-Quine</span>
+                    <span class="concept-tag">Teorías auxiliares</span>
+                    <span class="concept-tag">Progreso científico</span>
+                </div>
+            </div>
+        </aside>
+
+        <article class="article-body">
+            <section id="carga">
+                <h2>1. Toda observación llega cargada de teoría</h2>
+                <p class=”article-p dropcap reveal”>La nueva filosofía de la ciencia cuestionó una idea clásica: que primero observamos datos puros y recién después construimos teorías para explicarlos. Autores como Hanson mostraron que eso no ocurre así. <strong>Observar</strong> no es recibir pasivamente impresiones; es mirar desde un entrenamiento, una historia, una cultura y un vocabulario teórico determinados.</p>
+
+                <div class=”callout callout-y reveal”>
+                    <i class=”fa-solid fa-person-chalkboard”></i>
+                    <div>
+                        <div style=”font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--yd);margin-bottom:6px;”>OHIO / CAMBRIDGE · 1924–1967</div>
+                        <strong>Norwood Russell Hanson — Patterns of Discovery (1958)</strong>
+                        <p style=”margin-top:8px”>Hanson nació en Wilmington, Ohio. Fue piloto de caza en la Segunda Guerra Mundial, estudió filosofía en Oxford y Cambridge, y publicó en 1958 la obra que lo haría central para la filosofía de la ciencia: <em>Patterns of Discovery</em>. Su argumento central: la observación científica no es pasiva ni neutral, sino que está estructurada por lo que el observador ya sabe. Usó el famoso dibujo del pato-conejo de Wittgenstein (que ya trabajamos en la Clase 3 de la Unidad 1): ¿se ve un pato o un conejo? Lo que se ve depende del entrenamiento perceptual y los marcos conceptuales previos. Aplicado a la astronomía: Tycho Brahe y Kepler miran el mismo amanecer; uno ve “el sol que sube”, el otro “la Tierra que gira”. Misma imagen en la retina, diferentes objetos percibidos. Hanson murió a los 42 años en un accidente de aviación.</p>
+                    </div>
+                </div>
+
+                <p class=”article-p reveal”>Esto vale tanto para el uso de instrumentos como para la observación cotidiana del científico. Un microscopio no entrega “hechos desnudos”: presupone una teoría óptica, protocolos de preparación y criterios para distinguir señal de ruido. Del mismo modo, dos investigadores pueden mirar el mismo fenómeno y ver cosas distintas porque están formados por tradiciones diferentes.</p>
+
+                <div class=”callout callout-b reveal”>
+                    <i class=”fa-solid fa-eye”></i>
+                    <div>
+                        <strong>La carga teórica no destruye la objetividad</strong>
+                        <p style=”margin-top:6px”>Lo que destruye es la ilusión de neutralidad absoluta. La objetividad científica pasa a entenderse como un logro crítico y colectivo, no como una transparencia inmediata entre el ojo y la realidad.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="subdeterminacion">
+                <h2>2. Los datos no eligen por sí solos una teoría</h2>
+                <p class="article-p reveal">Si la observación ya está interpretada, entonces los datos no hablan con voz propia. De ahí surge el problema de la <strong>subdeterminación</strong>: un mismo conjunto de datos puede ser compatible con más de una teoría rival. Eso no significa que todas valgan lo mismo, pero sí que la evidencia empírica, por sí sola, raramente decide de forma automática.</p>
+                <div class="pull-quote acc reveal">
+                    <p>La puesta a prueba de una teoría nunca es el choque limpio entre una hipótesis aislada y “los hechos”.</p>
+                    <cite>— Tesis holista de la nueva filosofía de la ciencia</cite>
+                </div>
+                <p class="article-p reveal">Por eso la evaluación de teorías incluye criterios adicionales: coherencia con otros saberes, fecundidad para abrir problemas, simplicidad, capacidad de articular fenómenos y rendimiento comparativo frente a rivales. La próxima clase 25 profundizará este punto con la tesis de Duhem-Quine, las controversias y el debate sobre los llamados “experimentos cruciales”.</p>
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-flask-vial"></i>
+                    <div>
+                        <strong>Clave metodológica</strong>
+                        <p style="margin-top:6px">Poner a prueba una teoría es poner a prueba un conjunto: hipótesis principales, supuestos de fondo, condiciones iniciales, modelos matemáticos y criterios de medición. Cuando algo falla, no siempre sabemos inmediatamente qué parte del conjunto es la responsable.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="auxiliares">
+                <h2>3. Las teorías auxiliares funcionan como instrumentos de medida</h2>
+                <p class="article-p reveal">Pierre Duhem insistió en que las <strong>teorías auxiliares</strong> no son adornos externos. Cumplen un papel operativo: permiten construir aparatos, interpretar registros y traducir fenómenos en mediciones. En ese sentido, actúan como verdaderos instrumentos de medida. El dato empírico siempre llega mediado por una red teórica que lo hace visible y cuantificable.</p>
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-temperature-half"></i></div>
+                        <h4 class="std-card-title">Temperatura</h4>
+                        <p class="std-card-desc">Un termómetro no “lee” la temperatura sin más: funciona porque asumimos una teoría del calor, de la dilatación y de la escala empleada. La medición depende de esa red de supuestos.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-telescope"></i></div>
+                        <h4 class="std-card-title">Observación astronómica</h4>
+                        <p class="std-card-desc">Ver una estrella o una línea espectral supone óptica, calibración, modelos de error y criterios de identificación. El instrumento material y el marco teórico trabajan juntos.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <h4 class="std-card-title">Big Science</h4>
+                        <p class="std-card-desc">En aceleradores, telescopios o secuenciadores, el dato aparece tras complejos procesos de filtrado, inferencia y modelado. La observación contemporánea es intensamente teórica.</p>
+                    </div>
+                </div>
+                <p class="article-p reveal">Entender esto cambia el sentido de la palabra “prueba”. La ciencia no compara teorías con un mundo mudo y transparente, sino con fenómenos ya mediados por técnicas, modelos y aparatos que a su vez dependen de teorías previas.</p>
+            </section>
+
+            <section id="progreso">
+                <h2>4. ¿Entonces progresa la ciencia?</h2>
+                <p class="article-p reveal">Las respuestas dentro de la nueva filosofía de la ciencia son muy distintas. Kuhn enfatiza los cambios de paradigma y vuelve problemático hablar de acumulación lineal. Lakatos intenta rescatar un criterio racional distinguiendo programas progresivos y degenerativos. Feyerabend sospecha de los intentos de fijar un método universal. Laudan propone medir el progreso por la <strong>capacidad de resolver problemas</strong>, no por una supuesta cercanía directa a la verdad.</p>
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+                        <h4 class="std-card-title">Kuhn</h4>
+                        <p class="std-card-desc">El cambio científico es discontinuo y altera el propio marco de comparación. El progreso existe, pero no como simple acumulación lineal de verdades.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4 class="std-card-title">Lakatos</h4>
+                        <p class="std-card-desc">Hay progreso cuando un programa anticipa hechos nuevos y amplía su poder explicativo; hay degeneración cuando solo reacciona para protegerse.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h4 class="std-card-title">Laudan y Feyerabend</h4>
+                        <p class="std-card-desc">Laudan redefine el progreso como resolución de problemas; Feyerabend recuerda que la creatividad científica muchas veces rompe las reglas que después se presentan como necesarias.</p>
+                    </div>
+                </div>
+                <h3 class="reveal" style="margin-top:40px; font-family:'Playfair Display',serif; font-size:1.3rem; border-left:4px solid var(--acc); padding-left:14px;">El caso Neptuno: un programa progresivo en acción</h3>
+
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-circle-dot"></i>
+                    <div style="width:100%">
+                        <div style="font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#3b82f6;margin-bottom:6px;">DEBRECEN, 1922 · BERLÍN, 23 SEP 1846</div>
+                        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--t);line-height:1.3;margin-bottom:10px;">Lakatos y la predicción de Neptuno (1846)</div>
+                        <p style="font-family:'Libre Baskerville',serif;font-size:15.5px;line-height:1.85;color:var(--t2);margin-top:0">Para Imre Lakatos (Debrecen, Hungría, 1922 — Londres, 1974), el ejemplo más deslumbrante de un <em>programa de investigación progresivo</em> es el descubrimiento de Neptuno. El núcleo duro del programa newtoniano —la mecánica celestial— predecía con precisión las órbitas de todos los planetas conocidos. Pero en la primera mitad del siglo XIX, Urano mostraba pequeñas desviaciones inexplicables. En lugar de abandonar la física newtoniana (es decir, en lugar de tomar esas anomalías como refutación del núcleo), los astrónomos ajustaron el cinturón de hipótesis auxiliares: postularon que <em>debía existir un planeta aún no observado</em> perturbando la órbita de Urano. El matemático francés Urbain Le Verrier (Saint-Lô, 1811–París, 1877) calculó en 1846 con lápiz y papel exactamente dónde debía estar ese planeta. Le escribió al astrónomo alemán Johann Galle en Berlín, indicándole el punto exacto del cielo. Esa misma noche del 23 de septiembre de 1846, Galle apuntó el telescopio del Observatorio de Berlín al lugar señalado y encontró Neptuno a menos de un grado de donde Le Verrier predijo. Para Lakatos, esto es la marca distintiva de un programa progresivo: <strong style="color:var(--t)">anticipa hechos nuevos y desconocidos en lugar de limitarse a explicar anomalías pasadas</strong>. Contrasta esto con el programa del flogisto, que solo podía "sobrevivir" fabricando ad hoc explicaciones para cada experimento adverso.</p>
+                    </div>
+                </div>
+
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                    <div style="width:100%">
+                        <div style="font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:6px;">VIENA, 1924 · GÉNOVA, 1994</div>
+                        <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--t);font-style:italic;line-height:1.3;margin-bottom:10px;">Paul Feyerabend: "Todo vale" — y por qué lo decía</div>
+                        <p style="font-family:'Libre Baskerville',serif;font-size:15.5px;line-height:1.85;color:var(--t2);margin-top:0">Paul Karl Feyerabend nació en Viena en 1924. Estudió teatro, canto y física; fue alumno de Popper en Londres y colega de Lakatos en la London School of Economics. Su obra mayor, <em>Contra el método</em> (1975, Londres), argumenta que ninguna regla metodológica —ni la falsación popperiana, ni el núcleo duro de Lakatos— captura realmente cómo avanza la ciencia. Cuando estudió el caso de Galileo en detalle, mostró que Galileo violó sistemáticamente las normas metodológicas de su época: usó argumentos circulares, apeló a intuiciones contrarias a la evidencia disponible, y propagandizó su posición con retórica antes que con evidencia concluyente. Sin embargo, Galileo tenía razón y la metodología ortodoxa estaba equivocada. La conclusión de Feyerabend no era que la ciencia es irracional, sino que la creatividad científica no puede encarcelarse en un método fijo. Su "anarquismo epistemológico" no afirma que todas las teorías sean igualmente válidas, sino que la historia muestra que los científicos que transformaron el conocimiento a menudo lo hicieron <em>rompiendo las reglas</em>. Murió en Génova en 1994.</p>
+                    </div>
+                </div>
+
+                <p class="article-p reveal">La conclusión provisional de esta clase es doble. Primero: no hay observación sin teoría. Segundo: no hay evaluación de teorías sin decisiones metodológicas y marcos comparativos. Precisamente por eso el progreso científico sigue siendo un problema filosófico abierto y no un hecho obvio.</p>
+            </section>
+        </article>
+    </div>
+
+    <nav class="class-footer-nav">
+        <div class="class-footer-nav-inner">
+            <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+            <div class="cfn-grid">
+                <a href="unidad4-clase23.html" class="cfn-card cfn-prev">
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-23</span>
+                        <span class="cfn-dir">Clase anterior</span>
+                        <span class="cfn-title">Consenso e inconmensurabilidad</span>
+                    </div>
+                </a>
+                <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+                    <i class="fa-solid fa-house cfn-home-icon"></i>
+                    <span class="cfn-home-label">Inicio</span>
+                </a>
+                <a href="unidad4-clase25.html" class="cfn-card">
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-25</span>
+                        <span class="cfn-dir">Próxima clase</span>
+                        <span class="cfn-title">Duhem-Quine y experimentos cruciales</span>
+                    </div>
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+            </div>
+            <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2026</a></p>
+        </div>
+    </nav>
+
+    <script>
+        function toggleDark(){ document.documentElement.classList.toggle('dark'); localStorage.setItem('t', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        if(localStorage.getItem('t')==='dark') document.documentElement.classList.add('dark');
+        window.addEventListener('scroll',()=>{ const d=document.documentElement; document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100+'%'; },{passive:true});
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const secIds = ['carga','subdeterminacion','auxiliares','progreso'];
+        const secObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){
+                    tocLinks.forEach(l => l.classList.remove('active'));
+                    const a = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+                    if(a) a.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-18% 0px -60% 0px' });
+        secIds.forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+        const revObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+    </script>
+</body>
+</html>

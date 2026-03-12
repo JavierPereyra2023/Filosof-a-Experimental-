@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 22 — Sucesión de teorías sobre la diversidad | FILOSOFÍA&CIENCIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --y: #facc15; --yd: #eab308;
+            --bg: #f9f7f4; --bg2: #fff; --bg3: #f1ede6;
+            --card: #fff; --t: #1a1a1a; --t2: #3d3d3d; --t3: #6b6b6b;
+            --brd: #e0d9d0; --sh: 0 4px 24px rgba(0,0,0,.08);
+            --shl: 0 20px 60px rgba(0,0,0,.15);
+            --tr: .3s cubic-bezier(.4,0,.2,1);
+            --acc: #14b8a6;
+        }
+        .dark {
+            --bg: #111; --bg2: #1a1a1a; --bg3: #222; --card: #1e1e1e;
+            --t: #f0ece4; --t2: #c8c0b4; --t3: #888880;
+            --brd: #333; --sh: 0 4px 24px rgba(0,0,0,.4);
+            --shl: 0 20px 60px rgba(0,0,0,.6);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-padding-top: 72px; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); overflow-x: hidden; transition: background .4s, color .4s; }
+        a { color: inherit; text-decoration: none; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: var(--y); }
+        #prog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--y), var(--acc)); z-index: 9999; transition: width .1s; pointer-events: none; }
+        #topnav { position: sticky; top: 0; z-index: 500; background: var(--bg2); border-bottom: 3px solid var(--y); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: var(--sh); }
+        .tnl, .tnr { display: flex; align-items: center; gap: 12px; }
+        .tnc { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; color: var(--t2); }
+        @media(max-width:760px){.tnc{display:none}}
+        .nav-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: all var(--tr); border: none; cursor: pointer; }
+        .nav-pill.back { background: var(--bg3); color: var(--t3); }
+        .nav-pill.back:hover { background: var(--brd); color: var(--t); }
+        .nav-pill.next { background: var(--y); color: #000; }
+        .nav-pill.next:hover { background: var(--yd); }
+        .dtoggle { background: none; border: 1px solid var(--brd); width: 36px; height: 20px; border-radius: 999px; position: relative; cursor: pointer; }
+        .dtoggle::after { content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%); width: 13px; height: 13px; border-radius: 50%; background: var(--t3); transition: all var(--tr); }
+        .dark .dtoggle { border-color: var(--y); background: var(--y); }
+        .dark .dtoggle::after { left: calc(100% - 16px); background: #000; }
+        #hero {
+            min-height: 88vh;
+            background: linear-gradient(160deg, #071411 0%, #0a201b 42%, #04100d 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            position: relative; overflow: hidden; color: #fff;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(20,184,166,.22), transparent 34%), linear-gradient(to top, #04100d 8%, rgba(4,16,13,.72) 52%, transparent 100%); z-index: 1; }
+        .hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 0 24px 72px; width: 100%; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(20,184,166,.14); border: 1px solid rgba(20,184,166,.34); padding: 7px 20px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #99f6e4; margin-bottom: 28px; }
+        .hero-eyebrow span { background: var(--acc); color: #fff; padding: 2px 10px; border-radius: 999px; }
+        .hero-unit { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: .95; letter-spacing: -.03em; margin-bottom: 24px; }
+        .hero-title .y { color: var(--y); font-style: italic; }
+        .hero-sub { font-family: 'Libre Baskerville', serif; font-size: clamp(1rem, 1.8vw, 1.15rem); line-height: 1.8; color: rgba(255,255,255,.7); max-width: 760px; margin-bottom: 40px; }
+        .hero-meta { display: flex; gap: 28px; flex-wrap: wrap; font-size: 11px; color: rgba(255,255,255,.45); letter-spacing: .12em; text-transform: uppercase; }
+        .hero-meta i { color: var(--y); margin-right: 5px; }
+        .article-wrap { max-width: 1400px; margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr; gap: 56px; align-items: start; }
+        @media(min-width:1100px){ .article-wrap { grid-template-columns: 260px 1fr; } }
+        .sidebar { position: sticky; top: 76px; display: none; }
+        @media(min-width:1100px){ .sidebar { display: block; } }
+        .sidebar-card { background: var(--card); border: 1px solid var(--brd); border-radius: 16px; padding: 0; overflow: hidden; margin-bottom: 20px; box-shadow: var(--sh); }
+        .sidebar-card-header { background: var(--y); padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+        .sidebar-card-header span { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #000; }
+        .sidebar-card-body { padding: 16px 20px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+        .toc-link { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; font-size: 12.5px; color: var(--t3); transition: all var(--tr); font-weight: 500; }
+        .toc-link:hover, .toc-link.active { background: rgba(250,204,21,.1); color: var(--t); border-left: 3px solid var(--y); padding-left: 7px; }
+        .toc-num { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--y); opacity: .7; width: 22px; flex-shrink: 0; }
+        .concept-tag { display: inline-block; background: var(--bg3); border: 1px solid var(--brd); border-radius: 999px; padding: 4px 12px; font-size: 11px; color: var(--t3); margin: 3px 2px; }
+        .article-body { max-width: 800px; }
+        .article-body h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--t); margin: 72px 0 24px; line-height: 1.15; letter-spacing: -.02em; border-bottom: 2px solid var(--y); padding-bottom: 14px; scroll-margin-top: 80px; }
+        .article-body h2:first-of-type { margin-top: 0; }
+        .article-body h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--t); margin: 40px 0 14px; }
+        .article-p { font-family: 'Libre Baskerville', serif; font-size: 17.5px; line-height: 1.9; color: var(--t2); margin-bottom: 26px; }
+        .dropcap::first-letter { float: left; font-family: 'Playfair Display', serif; font-size: 80px; line-height: .8; padding-right: 10px; padding-top: 6px; color: var(--y); font-weight: 900; }
+        .pull-quote { margin: 48px 0; padding: 36px 44px; border-left: 4px solid var(--y); background: linear-gradient(90deg, rgba(250,204,21,.06), transparent); border-radius: 0 16px 16px 0; }
+        .pull-quote p { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-style: italic; line-height: 1.45; color: var(--t); margin-bottom: 12px; }
+        .pull-quote cite { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t3); font-style: normal; }
+        .pull-quote.acc { border-left-color: var(--acc); background: linear-gradient(90deg, rgba(20,184,166,.08), transparent); }
+        .callout { margin: 32px 0; padding: 24px 28px; border-radius: 14px; display: flex; gap: 18px; align-items: flex-start; }
+        .callout-y { background: rgba(250,204,21,.07); border: 1px solid rgba(250,204,21,.25); }
+        .callout-b { background: rgba(20,184,166,.07); border: 1px solid rgba(20,184,166,.25); }
+        .callout-g { background: rgba(34,197,94,.07); border: 1px solid rgba(34,197,94,.2); }
+        .callout-p { background: rgba(168,85,247,.07); border: 1px solid rgba(168,85,247,.25); }
+        .callout i { font-size: 20px; margin-top: 2px; flex-shrink: 0; }
+        .callout-y i { color: var(--yd); }
+        .callout-b i { color: var(--acc); }
+        .callout-g i { color: #4ade80; }
+        .callout-p i { color: #c084fc; }
+        .callout p, .callout div { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.8; color: var(--t2); }
+        .callout strong { color: var(--t); }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 36px 0; }
+        .std-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--brd); background: var(--card); box-shadow: var(--sh); transition: all var(--tr); padding: 24px; }
+        .std-card:hover { transform: translateY(-4px); box-shadow: var(--shl); border-color: var(--acc); }
+        .std-card-icon { font-size: 30px; margin-bottom: 12px; color: var(--acc); }
+        .std-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--t); margin-bottom: 12px; }
+        .std-card-desc { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--t2); line-height: 1.65; }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        .class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:56px 24px 40px;position:relative}
+        .class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+        .class-footer-nav-inner{max-width:980px;margin:0 auto}
+        .cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:32px;display:flex;align-items:center;justify-content:center;gap:12px}
+        .cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+        .cfn-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:10px;align-items:stretch;margin-bottom:28px}
+        @media(max-width:600px){.cfn-grid{grid-template-columns:1fr 1fr;gap:8px} .cfn-card.cfn-home{display:none}}
+        .cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);color:inherit;transition:all .25s cubic-bezier(.4,0,.2,1)}
+        .cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+        .cfn-card.cfn-next{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.2);justify-content:flex-end;text-align:right}
+        .cfn-card.cfn-next:hover{background:rgba(250,204,21,.13);border-color:rgba(250,204,21,.55);box-shadow:0 12px 40px rgba(250,204,21,.15)}
+        .cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 8px}
+        .cfn-arrow{font-size:16px;color:rgba(255,255,255,.2);flex-shrink:0;transition:transform .25s,color .25s}
+        .cfn-card:hover .cfn-arrow{color:#facc15}
+        .cfn-card.cfn-prev:hover .cfn-arrow{transform:translateX(-5px)}
+        .cfn-card.cfn-next:hover .cfn-arrow{transform:translateX(5px)}
+        .cfn-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+        .cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.5)}
+        .cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+        .cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+        .cfn-card.cfn-next .cfn-title{color:#facc15}
+        .cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4)}
+        .cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+        .cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+        .cfn-credits a{color:rgba(250,204,21,.32)}
+    
+        /* ===== MOBILE ===== */
+        @media(max-width:760px){
+            #topnav { height: auto; min-height: 56px; padding: 10px 14px; gap: 10px; flex-wrap: wrap; }
+            .tnl, .tnr { width: 100%; flex-wrap: wrap; }
+            .tnr { justify-content: space-between; gap: 8px; }
+            .nav-pill { padding: 6px 10px; font-size: 10px; letter-spacing: .05em; }
+            .hero-inner { padding: 0 18px 48px; }
+            .hero-eyebrow { margin-bottom: 20px; padding: 6px 14px; letter-spacing: .14em; }
+            .hero-title { font-size: clamp(2.15rem, 12vw, 3.4rem); line-height: 1; }
+            .hero-sub { font-size: .95rem; line-height: 1.7; margin-bottom: 28px; }
+            .hero-meta { gap: 12px 16px; font-size: 10px; }
+            .article-wrap { padding: 40px 16px; gap: 40px; }
+            .article-body { max-width: 100%; }
+            .article-body h2 { margin: 56px 0 18px; padding-bottom: 10px; }
+            .article-p { font-size: 16px; line-height: 1.8; }
+            .dropcap::first-letter { font-size: 62px; padding-right: 8px; }
+            .pull-quote { padding: 24px 18px; margin: 28px 0; }
+            .callout { flex-direction: column; padding: 18px 20px; gap: 12px; margin: 24px 0; }
+            .card-grid { grid-template-columns: 1fr; gap: 14px; margin: 28px 0; }
+            .std-card { padding: 20px; }
+            .class-footer-nav { padding: 44px 16px 32px; }
+            .cfn-card { padding: 16px; }
+            .cfn-title { font-size: 12px; }
+        }
+        @media(max-width:480px){
+            .tnr { justify-content: flex-start; }
+            .hero-meta span { width: 100%; }
+            .pull-quote { padding: 20px 16px; }
+            .callout { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="prog"></div>
+    <nav id="topnav">
+        <div class="tnl">
+            <button class="nav-pill back" onclick="window.location.href='unidad4-clase21.html'">
+                <i class="fa-solid fa-arrow-left"></i> Clase 21
+            </button>
+        </div>
+        <div class="tnc">FILOSOFÍA&CIENCIA · 2026</div>
+        <div class="tnr">
+            <a href="index.html" style="font-size:13px;color:var(--t3);font-weight:600;">Inicio</a>
+            <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
+            <a href="unidad4-clase23.html" class="nav-pill next">Próxima clase <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+            <div class="hero-eyebrow">
+                <span>Clase 22</span>
+                Unidad 4 · Sucesión de teorías
+            </div>
+            <div class="hero-unit">FILOSOFÍA E HISTORIA DE LA CIENCIA · 6TO AÑO · 2026</div>
+            <h1 class="hero-title">
+                Diversidad biológica,<br>
+                <span class="y">ruptura</span> y continuidad
+            </h1>
+            <p class="hero-sub">Del fijismo al evolucionismo: cómo cambian las teorías sobre un mismo ámbito, qué permanece entre ellas y por qué no alcanza con decir que una es simple “antecesora” de otra.</p>
+            <div class="hero-meta">
+                <span><i class="fa-solid fa-calendar"></i>Ciclo 2026</span>
+                <span><i class="fa-solid fa-book-open"></i>Unidad 4 · Clase 22</span>
+                <span><i class="fa-solid fa-dna"></i>Diversidad de especies</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="article-wrap">
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-list fa-sm"></i><span>Contenidos</span></div>
+                <div class="sidebar-card-body">
+                    <ul class="toc-list" id="toc">
+                        <li><a href=”#sucesion” class=”toc-link”><span class=”toc-num”>01</span>El problema filosófico</a></li>
+                        <li><a href=”#diversidad” class=”toc-link”><span class=”toc-num”>02</span>Fijismo, transformismo y evolucionismo</a></li>
+                        <li><a href=”#perfiles-bio” class=”toc-link”><span class=”toc-num”>03</span>Los protagonistas: Cuvier, Lamarck, Darwin</a></li>
+                        <li><a href=”#antecesor” class=”toc-link”><span class=”toc-num”>04</span>La crítica al “antecesor”</a></li>
+                        <li><a href=”#marcos” class=”toc-link”><span class=”toc-num”>05</span>De la historia a Kuhn y Lakatos</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <div class="sidebar-card-header"><i class="fa-solid fa-key fa-sm"></i><span>Conceptos clave</span></div>
+                <div class="sidebar-card-body">
+                    <span class="concept-tag">Sucesión de teorías</span>
+                    <span class="concept-tag">Fijismo</span>
+                    <span class="concept-tag">Transformismo</span>
+                    <span class="concept-tag">Evolucionismo</span>
+                    <span class="concept-tag">Cuvier</span>
+                    <span class="concept-tag">Lamarck</span>
+                    <span class="concept-tag">Darwin-Wallace</span>
+                </div>
+            </div>
+        </aside>
+
+        <article class="article-body">
+            <section id="sucesion">
+                <h2>1. La sucesión de teorías no es una fila ordenada</h2>
+                <p class="article-p dropcap reveal">Una teoría científica no reemplaza a otra como si cambiáramos una lamparita quemada por una nueva. Cuando hablamos de <strong>sucesión de teorías</strong>, el problema filosófico es más delicado: teorías diferentes intentan explicar un mismo dominio, pero muchas veces lo recortan de modos distintos, usan conceptos no equivalentes y proponen criterios diferentes para decidir qué cuenta como una buena explicación.</p>
+                <p class="article-p reveal">Eso obliga a distinguir entre dos preguntas. La primera es histórica: <em>¿qué teorías aparecieron en determinada secuencia?</em> La segunda es filosófica: <em>¿qué relación guardan entre sí?</em> Puede haber continuidad en algunos resultados y ruptura en los conceptos básicos. También puede haber herencia parcial: una teoría posterior conserva problemas, vocabulario o evidencias de una anterior, pero reorganiza por completo su sentido.</p>
+                <div class="callout callout-b reveal">
+                    <i class="fa-solid fa-arrows-left-right"></i>
+                    <div>
+                        <strong>La pregunta de fondo</strong>
+                        <p style="margin-top:6px">Cuando dos teorías hablan “de lo mismo”, ¿hablan realmente del mismo objeto? En biología, “especie”, “adaptación” o “diversidad” no significan exactamente lo mismo en Cuvier, Lamarck y Darwin. Por eso la comparación entre teorías no puede reducirse a una lista de aciertos y errores.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="diversidad">
+                <h2>2. El caso de la diversidad biológica</h2>
+                <p class="article-p reveal">El programa propone abordar esta problemática con un caso preciso: la secuencia de teorías biológicas acerca de la diversidad de las especies. Esa secuencia es especialmente fértil porque muestra al mismo tiempo <strong>continuidades históricas</strong> y <strong>rupturas conceptuales</strong>. Las tres estaciones principales suelen nombrarse como fijismo, transformismo y evolucionismo.</p>
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-monument"></i></div>
+                        <h4 class="std-card-title">Fijismo · Cuvier</h4>
+                        <p class="std-card-desc">Las especies son tipos relativamente estables. La diversidad se explica por un orden dado y por eventos como catástrofes y reemplazos faunísticos, no por transformación continua de unas especies en otras. El eje está en la clasificación y la anatomía comparada.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <h4 class="std-card-title">Transformismo · Lamarck</h4>
+                        <p class="std-card-desc">Las especies no son fijas: se transforman históricamente. Lamarck introduce una temporalidad fuerte en la naturaleza y vuelve pensable el cambio de los seres vivos, aunque lo explique con mecanismos distintos a los de Darwin.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-tree"></i></div>
+                        <h4 class="std-card-title">Evolucionismo · Darwin-Wallace</h4>
+                        <p class="std-card-desc">La diversidad se explica por descendencia con modificación y selección natural. El foco se desplaza desde tipos fijos a poblaciones históricas, variación heredable, lucha por la existencia y ramificación de linajes.</p>
+                    </div>
+                </div>
+                <p class="article-p reveal">Agrupar estas teorías bajo el problema de la diversidad es pertinente porque todas intentan responder por qué hay tantas formas de vida y cómo explicar sus semejanzas y diferencias. Pero agruparlas no significa volverlas equivalentes. Cada una selecciona evidencias, ordena los fenómenos y define de otro modo aquello que cuenta como explicación aceptable.</p>
+                <div class="pull-quote acc reveal">
+                    <p>La historia de la biología no muestra una marcha lineal hacia una única idea correcta, sino una reconfiguración de preguntas, conceptos y estándares de prueba.</p>
+                    <cite>— Unidad 4 · clave de lectura</cite>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Perfiles biográficos -->
+            <section id="perfiles-bio">
+                <h2>3. Los protagonistas en su contexto</h2>
+                <p class="article-p reveal">Hablar de "fijismo", "transformismo" y "evolucionismo" como conceptos abstractos sin anclarlos en personas reales, lugares concretos y fechas precisas es una forma de desvitalizar la historia de la ciencia. Cada uno de estos paradigmas tuvo un protagonista situado: con un instituto, un país, un debate institucional, adversarios y contexto político.</p>
+
+                <!-- Cuvier -->
+                <div class="callout callout-y reveal" style="margin-bottom:40px;">
+                    <i class="fa-solid fa-monument" style="margin-top:4px;"></i>
+                    <div>
+                        <div style="font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--yd);margin-bottom:6px;">MONTBÉLIARD / PARIS · 1769–1832</div>
+                        <strong>Georges Cuvier — El padre del fijismo</strong>
+                        <p style="margin-top:8px">Nacido en Montbéliard (entonces Württemberg, hoy Francia), Cuvier llegó a París en 1795 y se instaló en el Muséum National d'Histoire Naturelle, donde desarrolló toda su carrera. Fue el fundador de la anatomía comparada y la paleontología científica. Su gran argumentación: los fósiles no eran ancestros de las especies actuales, sino víctimas de catástrofes geológicas sucesivas (inundaciones, erupciones) que extinguían faunas enteras y permitían el repoblamiento desde otras regiones. No era ni creacionismo ingenuo ni evolucionismo: era <em>catastrofismo</em>. Cuvier fue el científico más influyente de su época en Francia —era barón del Imperio y Par de Francia— lo que le daba enorme peso institucional para zanjar controversias.</p>
+                    </div>
+                </div>
+
+                <!-- Gran debate de 1830 -->
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-fire" style="margin-top:4px;"></i>
+                    <div>
+                        <strong>El gran debate de 1830: Cuvier vs. Geoffroy Saint-Hilaire</strong>
+                        <p style="margin-top:8px"><strong>Étienne Geoffroy Saint-Hilaire</strong>, colega de Cuvier en el mismo museo, sostenía una "unidad de plan" orgánica: todos los animales seguían el mismo plan estructural y la naturaleza era un todo continuo susceptible de transformarse. El debate llegó a su punto álgido en febrero de 1830 en la <em>Académie des Sciences de Paris</em>, en sesiones públicas que llenaron el auditorio. Dos visiones incompatibles del mundo natural chocaron en vivo. Johann Wolfgang Goethe, desde Weimar con 80 años, siguió el asunto con mayor entusiasmo que los propios debates políticos de la Revolución de Julio. Cuvier ganó ese debate por puntos —su evidencia fósil era más precisa—, pero la pregunta que Geoffroy abría no desapareció: la de la unidad y la transformación.</p>
+                    </div>
+                </div>
+
+                <!-- Lamarck -->
+                <div class="callout callout-b reveal" style="margin-top:40px;margin-bottom:40px;">
+                    <i class="fa-solid fa-seedling" style="margin-top:4px;"></i>
+                    <div>
+                        <div style="font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--acc);margin-bottom:6px;">PICARDIE / PARIS · 1744–1829</div>
+                        <strong>Jean-Baptiste Lamarck — El primer evolucionista</strong>
+                        <p style="margin-top:8px">Lamarck nació en Bazentin-le-Petit, Picardía, en una familia de bajo rango noble. Sirvió en el ejército y luego se volcó a la botánica. Entró al Muséum d'Histoire Naturelle como responsable de los "insectos, gusanos y animales microscópicos" —los organismos más humildes, síntoma de su escaso prestigio inicial. Su obra <em>Philosophie Zoologique</em> (1809) introdujo la primera teoría sistemática de la transformación de las especies basada en dos principios: (1) el <em>uso y desuso</em>: los órganos que más se usan se desarrollan, los que no se usan se atrofian; (2) la <em>herencia de caracteres adquiridos</em>: esos cambios pasan a los hijos. Su ejemplo más famoso: la jirafa que estira el cuello para alcanzar hojas más altas, y ese cuello más largo se transmite a su descendencia. Murió ciego y en pobreza; su teoría fue ridiculizada por Cuvier, quien pronunció su elogio fúnebre con ironía velada. La rehabilitación de Lamarck llegaría mucho después.</p>
+                    </div>
+                </div>
+
+                <!-- Darwin -->
+                <div class="callout callout-g reveal" style="margin-bottom:40px;">
+                    <i class="fa-solid fa-tree" style="margin-top:4px;"></i>
+                    <div>
+                        <div style="font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#4ade80;margin-bottom:6px;">SHREWSBURY / EDIMBURGO / CAMBRIDGE / BEAGLE · 1809–1882</div>
+                        <strong>Charles Darwin y Alfred Russel Wallace — La selección natural</strong>
+                        <p style="margin-top:8px">Darwin nació en Shrewsbury, hijo de un médico adinerado. Estudió medicina en Edimburgo (la abandonó con horror) y luego teología en Cambridge. En 1831, con 22 años, embarcó en el HMS Beagle como naturalista en un viaje de cinco años por el Atlántico, Sudamérica y el Pacífico. Las islas Galápagos —visitadas en 1835— fueron un laboratorio inesperado: distintas especies de pinzones en cada isla, adaptadas a recursos locales distintos. Darwin regresó en 1836 con miles de especímenes y una pregunta que no sabía cómo responder. En 1838, leyendo el ensayo de Malthus sobre la población y la escasez, todo se articuló: si nacen más organismos de los que pueden sobrevivir, y existen variaciones heredables entre ellos, los más aptos a su entorno dejan más descendencia. A eso llamó <em>selección natural</em>. Guardó su teoría durante 20 años por miedo a la controversia. En 1858, <strong>Alfred Russel Wallace</strong> (Usk, Gales) le envió desde Malasia un manuscrito con exactamente la misma idea, lo que obligó a una presentación conjunta ante la Linnean Society. En 1859 Darwin publicó <em>El origen de las especies</em>.</p>
+                    </div>
+                </div>
+
+                <!-- Debate Oxford 1860 -->
+                <div class="pull-quote reveal" style="border-left-color: #4ade80; background: linear-gradient(90deg, rgba(74,222,128,.07), transparent);">
+                    <p>"¿Prefiere usted descender de un mono por parte de su abuelo o de su abuela?"</p>
+                    <cite>— Obispo Samuel Wilberforce, dirigiéndose a Thomas Henry Huxley, Oxford, 30 de junio de 1860</cite>
+                </div>
+                <div class="callout callout-g reveal">
+                    <i class="fa-solid fa-podium" style="margin-top:4px;"></i>
+                    <div>
+                        <strong>El debate de Oxford (1860): Huxley vs. Wilberforce</strong>
+                        <p style="margin-top:8px">Apenas un año después de publicado <em>El origen de las especies</em>, la British Association for the Advancement of Science se reunió en Oxford. El obispo Samuel Wilberforce —conocido como "Soapy Sam" por su facilidad de palabra— atacó el darwinismo con la burla sobre los antepasados simiescos. El naturalista <strong>Thomas Henry Huxley</strong>, apodado "el bulldog de Darwin", respondió que prefería descender de un mono a descender de un hombre que usa su talento para ridiculizar lo que no comprende. El auditorio estaba dividido; una dama se desmayó. El incidente quedó en la memoria colectiva como el momento en que el darwinismo dejó de ser solo una propuesta científica para convertirse en una batalla cultural sobre el lugar del ser humano en la naturaleza.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="antecesor">
+                <h2>3. ¿Lamarck es “antecesor” de Darwin?</h2>
+                <p class="article-p reveal">Decir que Lamarck fue un “antecesor” de Darwin puede servir como orientación rápida, pero filosóficamente es una noción peligrosa. Sugiere que Darwin ya estaba contenido, aunque de forma incompleta, en Lamarck. Eso borra diferencias decisivas y hace parecer que la historia solo consistiera en ir corrigiendo errores menores hasta llegar a la formulación final.</p>
+                <div class="callout callout-p reveal">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>Recuperar críticamente la noción de antecesor</strong>
+                        <p style="margin-top:6px">Lamarck prepara condiciones para pensar el cambio biológico, pero no por eso “anuncia” la selección natural. Lo más interesante no es forzar la continuidad, sino precisar qué problemas, imágenes y preguntas pasan de una teoría a otra y cuáles cambian por completo.</p>
+                    </div>
+                </div>
+                <p class="article-p reveal">Esta mirada crítica permite trabajar mejor con la noción de continuidad. A veces la continuidad está en el problema general que persiste. Otras veces se encuentra en ciertos resultados observacionales o en métodos compartidos. Pero continuidad no equivale a identidad, y ruptura no equivale a incomunicación absoluta. En historia de la ciencia, ambos polos suelen convivir.</p>
+            </section>
+
+            <section id="marcos">
+                <h2>4. De este caso a los marcos de Kuhn y Lakatos</h2>
+                <p class="article-p reveal">El estudio de esta secuencia biológica prepara el terreno para introducir dos herramientas filosóficas centrales. La primera es el <strong>paradigma kuhniano</strong>: una matriz compartida de problemas, valores, ejemplos y formas de ver el mundo. La segunda es el <strong>programa de investigación lakatosiano</strong>, con su núcleo firme y su cinturón protector de hipótesis auxiliares.</p>
+                <div class="card-grid reveal">
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-glasses"></i></div>
+                        <h4 class="std-card-title">Lectura kuhniana</h4>
+                        <p class="std-card-desc">Sirve para pensar hasta qué punto una teoría nueva modifica el modo mismo de describir la naturaleza. La comparación entre fijismo, transformismo y evolucionismo permite preguntar si estamos ante paradigmas distintos y qué tan traducibles son entre sí.</p>
+                    </div>
+                    <div class="std-card">
+                        <div class="std-card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <h4 class="std-card-title">Lectura lakatosiana</h4>
+                        <p class="std-card-desc">Permite mirar series de teorías no como piezas aisladas, sino como desarrollos históricos relativamente organizados. La pregunta pasa a ser si un programa amplía su poder explicativo y predictivo o si solo se defiende de las dificultades.</p>
+                    </div>
+                </div>
+                <p class="article-p reveal">En síntesis, el caso de la diversidad de especies no es solo un contenido de biología. Es un laboratorio filosófico ideal para analizar cómo se suceden las teorías, cuánto conservan, cuánto rompen y qué criterios usamos para decir que hubo cambio, continuidad o progreso.</p>
+                <div class="callout callout-g reveal">
+                    <i class="fa-solid fa-forward"></i>
+                    <div>
+                        <strong>Puente con la clase 23</strong>
+                        <p style="margin-top:6px">Una vez que vemos que las teorías no se comparan tan fácilmente, aparece otra pregunta: ¿quién decide cuál se acepta? La próxima clase entra en la comunidad científica, el consenso y el problema de la inconmensurabilidad.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    <nav class="class-footer-nav">
+        <div class="class-footer-nav-inner">
+            <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+            <div class="cfn-grid">
+                <a href="unidad4-clase21.html" class="cfn-card cfn-prev">
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-21</span>
+                        <span class="cfn-dir">Clase anterior</span>
+                        <span class="cfn-title">Unificación, Serendipia y Big Science</span>
+                    </div>
+                </a>
+                <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+                    <i class="fa-solid fa-house cfn-home-icon"></i>
+                    <span class="cfn-home-label">Inicio</span>
+                </a>
+                <a href="unidad4-clase23.html" class="cfn-card cfn-next">
+                    <div class="cfn-body">
+                        <span class="cfn-badge">U4 · C-23</span>
+                        <span class="cfn-dir">Próxima clase</span>
+                        <span class="cfn-title">Consenso e inconmensurabilidad</span>
+                    </div>
+                    <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                </a>
+            </div>
+            <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · <a href="index.html">Los Polvorines, 2026</a></p>
+        </div>
+    </nav>
+
+    <script>
+        function toggleDark(){ document.documentElement.classList.toggle('dark'); localStorage.setItem('t', document.documentElement.classList.contains('dark') ? 'dark' : 'light'); }
+        if(localStorage.getItem('t')==='dark') document.documentElement.classList.add('dark');
+        window.addEventListener('scroll',()=>{ const d=document.documentElement; document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100+'%'; },{passive:true});
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const secIds = ['sucesion','diversidad','perfiles-bio','antecesor','marcos'];
+        const secObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){
+                    tocLinks.forEach(l => l.classList.remove('active'));
+                    const a = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+                    if(a) a.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-18% 0px -60% 0px' });
+        secIds.forEach(id => { const el = document.getElementById(id); if(el) secObs.observe(el); });
+        const revObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+    </script>
+</body>
+</html>

@@ -16,7 +16,12 @@
       "Bash(__NEW_LINE_0732789400082b22__ echo \"\")",
       "Bash(python3 _fix_footer_nav.py)",
       "Bash(python D:/filosofia_experimental/_fix_footer_nav.py)",
-      "Bash(grep -r \"2025\" D:/filosofia_experimental/*.html)"
+      "Bash(grep -r \"2025\" D:/filosofia_experimental/*.html)",
+      "Bash(ls D:/filosofia_experimental/*.jpg D:/filosofia_experimental/*.png D:/filosofia_experimental/*.jpeg D:/filosofia_experimental/*.webp)",
+      "Bash(ls -lt D:/filosofia_experimental/*.jpg D:/filosofia_experimental/*.png D:/filosofia_experimental/*.jpeg D:/filosofia_experimental/*.webp)",
+      "Bash(grep -i -E \"\\\\.\\(jpg|png|jpeg|webp\\)$\")",
+      "Bash(sort -k9)",
+      "Bash(sort -k6,7)"
     ]
   }
 }
