@@ -21,7 +21,14 @@
       "Bash(ls -lt D:/filosofia_experimental/*.jpg D:/filosofia_experimental/*.png D:/filosofia_experimental/*.jpeg D:/filosofia_experimental/*.webp)",
       "Bash(grep -i -E \"\\\\.\\(jpg|png|jpeg|webp\\)$\")",
       "Bash(sort -k9)",
-      "Bash(sort -k6,7)"
+      "Bash(sort -k6,7)",
+      "Bash(python3 -:*)",
+      "Bash(python fix_accents.py)",
+      "Bash(python fix_accents2.py)",
+      "Bash(uniq -c done)",
+      "Bash(python fix_responsive.py)",
+      "Bash(python -c \":*)",
+      "Bash(del D:/filosofia_experimental/fix_responsive.py)"
     ]
   }
 }

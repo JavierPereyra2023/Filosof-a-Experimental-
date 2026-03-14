@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unidad 5 - Articulacion, Instrumentos y Sociedad | FILOSOFIA&CIENCIA</title>
+    <title>Unidad 5 - Articulación, Instrumentos y Sociedad | FILOSOFÍA&CIENCIA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -264,6 +264,11 @@
 
         /* ===== TOPIC GRID ===== */
         .topic-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin: 36px 0; }
+        @media(max-width:860px) and (min-width:641px) {
+            .pull-quote {
+                padding: 16px 20px 16px 22px;
+            }
+        }
         @media(max-width:640px) { .topic-grid { grid-template-columns: 1fr; } }
         .topic-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 26px 24px 22px; position: relative; overflow: hidden; transition: all .35s cubic-bezier(.34,1.1,.64,1); cursor: default; box-shadow: var(--shadow); }
         .topic-card:hover { transform: translateY(-6px); border-color: rgba(234,179,8,.45); box-shadow: 0 18px 50px rgba(234,179,8,.14); }
@@ -344,8 +349,7 @@
                 width: 100%;
                 justify-content: space-between;
             }
-            .nav-sep,
-            .nav-pill.next {
+            .nav-sep {
                 display: none;
             }
             #art-hero {
@@ -424,6 +428,19 @@
             .cfn-grid {
                 grid-template-columns: 1fr;
             }
+            .pull-quote {
+                padding: 16px 14px 16px 16px;
+                margin: 24px 0;
+            }
+            .hilo-row {
+                gap: 6px;
+            }
+            .hilo-node {
+                width: 90px;
+            }
+            .hilo-core {
+                padding: 18px 22px;
+            }
             .cfn-card.cfn-home {
                 display: none;
             }
@@ -460,58 +477,58 @@
             <a href="index.html" style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--yellow);letter-spacing:.04em">F&amp;C</a>
             <span class="nav-sep">|</span>
             <span class="u4-badge">UNIDAD 5</span>
-            <span class="tnc">Articulacion entre ciencia, tecnologia y sociedad</span>
+            <span class="tnc">Articulación entre ciencia, tecnología y sociedad</span>
         </div>
         <div class="tnr">
             <button class="dtoggle" onclick="toggleDark()" title="Modo oscuro"></button>
             <a href="index.html" class="nav-pill back"><i class="fa-solid fa-house fa-sm"></i> Inicio</a>
-            <span class="nav-pill next disabled">Clases proximamente <i class="fa-solid fa-hourglass-half fa-sm"></i></span>
+            <a href="unidad5-clase26.html" class="nav-pill next">Clase 26 <i class="fa-solid fa-arrow-right fa-sm"></i></a>
         </div>
     </nav>
 
     <section id="art-hero">
         <div class="hero-breadcrumb">
-            <span class="hero-badge">FILOSOFIA &amp; CIENCIA</span>
+            <span class="hero-badge">FILOSOFÍA &amp; CIENCIA</span>
             <span class="hero-badge-outline">UNIDAD 5</span>
             <span class="hero-badge-outline">INTRODUCCION</span>
         </div>
-        <p class="hero-eyebrow">Filosofia e Historia de la Ciencia y la Tecnologia · 6to Ano · Los Polvorines · Ciclo 2026</p>
+<p class="hero-eyebrow">Filosofía e Historia de la Ciencia y la Tecnología · 6to Año · Los Polvorines · Ciclo 2026</p>
         <h1 class="hero-title">
             Ciencia,<br>
             <em>instrumentos</em><br>
             y sociedad
         </h1>
-        <p class="hero-subtitle">En esta unidad vamos a mirar la ciencia en movimiento: como articulacion entre teorias y disciplinas, como practica experimental atravesada por instrumentos cada vez mas sensibles, y como actividad vinculada con desarrollos tecnologicos y demandas sociales concretas.</p>
+        <p class="hero-subtitle">En esta unidad vamos a mirar la ciencia en movimiento: como articulación entre teorías y disciplinas, como práctica experimental atravesada por instrumentos cada vez más sensibles, y como actividad vinculada con desarrollos tecnologicos y demandas sociales concretas.</p>
         <div class="hero-meta">
-            <span><i class="fa-solid fa-layer-group"></i> 5 clases de recorrido</span>
+            <span><i class="fa-solid fa-layer-group"></i> 6 clases de recorrido</span>
             <span class="hero-meta-sep"></span>
-            <span><i class="fa-solid fa-microscope"></i> precision y sensibilidad</span>
+            <span><i class="fa-solid fa-microscope"></i> precisión y sensibilidad</span>
             <span class="hero-meta-sep"></span>
             <span><i class="fa-solid fa-calendar-days"></i> Ciclo 2026</span>
         </div>
         <div class="hero-summary">
             <div class="hero-summary-card">
-                <div class="hero-summary-label"><i class="fa-solid fa-diagram-project"></i> Articulacion</div>
-                <div class="hero-summary-value">Teorias que se cruzan</div>
-                <div class="hero-summary-text">La unidad trabaja los puentes entre disciplinas, practicas e instrumentos en lugar de pensar la ciencia como compartimentos separados.</div>
+                <div class="hero-summary-label"><i class="fa-solid fa-diagram-project"></i> Articulación</div>
+                <div class="hero-summary-value">Teorías que se cruzan</div>
+                <div class="hero-summary-text">La unidad trabaja los puentes entre disciplinas, prácticas e instrumentos en lugar de pensar la ciencia como compartimentos separados.</div>
             </div>
             <div class="hero-summary-card">
-                <div class="hero-summary-label"><i class="fa-solid fa-compass-drafting"></i> Precision</div>
+                <div class="hero-summary-label"><i class="fa-solid fa-compass-drafting"></i> Precisión</div>
                 <div class="hero-summary-value">Instrumentos que redefinen la evidencia</div>
-                <div class="hero-summary-text">Una mejora tecnica no suma solo datos: cambia que cuenta como anomalia, corroboracion y refutacion dentro de una investigacion.</div>
+                <div class="hero-summary-text">Una mejora técnica no suma solo datos: cambia que cuenta como anomalía, corroboración y refutación dentro de una investigación.</div>
             </div>
             <div class="hero-summary-card">
                 <div class="hero-summary-label"><i class="fa-solid fa-people-arrows"></i> Sociedad</div>
                 <div class="hero-summary-value">Ciencia situada</div>
-                <div class="hero-summary-text">Cada clase conecta conocimiento, tecnologia y demandas sociales para discutir responsabilidad, usos y efectos del trabajo cientifico.</div>
+                <div class="hero-summary-text">Cada clase conecta conocimiento, tecnología y demandas sociales para discutir responsabilidad, usos y efectos del trabajo científico.</div>
             </div>
         </div>
         <div class="hero-topics-strip">
-            <span class="hero-topic-chip">Articulacion disciplinar</span>
+            <span class="hero-topic-chip">Articulación disciplinar</span>
             <span class="hero-topic-chip">Serendipia</span>
             <span class="hero-topic-chip">Instrumentos</span>
-            <span class="hero-topic-chip">Ciencia teorica y experimental</span>
-            <span class="hero-topic-chip">Ciencia basica y aplicada</span>
+            <span class="hero-topic-chip">Ciencia teórica y experimental</span>
+            <span class="hero-topic-chip">Ciencia básica y aplicada</span>
             <span class="hero-topic-chip">CTS</span>
         </div>
         <div class="hero-scroll-cue">
@@ -530,24 +547,25 @@
             <section id="intro">
                 <h2>1. Que vas a trabajar en esta unidad</h2>
 
-                <p class="article-p reveal dropcap">La Unidad 5 cambia el foco: ya no se pregunta solamente por el metodo o por el progreso de las teorias, sino por la <strong>red de relaciones</strong> que hace posible la produccion de conocimiento. Vamos a pensar la ciencia como una practica en la que se articulan disciplinas diferentes, instrumentos cada vez mas precisos, decisiones teoricas, necesidades tecnicas e intereses sociales.</p>
+                <p class="article-p reveal dropcap">La Unidad 5 cambia el foco: ya no se pregunta solamente por el metodo o por el progreso de las teorías, sino por la <strong>red de relaciones</strong> que hace posible la producción de conocimiento. Vamos a pensar la ciencia como una práctica en la que se articulan disciplinas diferentes, instrumentos cada vez más precisos, decisiones teóricas, necesidades técnicas e intereses sociales.</p>
 
-                <p class="article-p reveal">Eso significa que una anomalia, una corroboracion o una refutacion no pueden entenderse igual cuando los instrumentos mejoran su sensibilidad y permiten detectar fenomenos antes invisibles. Tambien significa que las fronteras entre ciencia teorica, experimental, basica y aplicada no son fijas: se discuten, se mezclan y se reorganizan historicamente.</p>
+                <p class="article-p reveal">Eso significa que una anomalía, una corroboración o una refutación no pueden entenderse igual cuando los instrumentos mejoran su sensibilidad y permiten detectar fenómenos antes invisibles. También significa que las fronteras entre ciencia teórica, experimental, básica y aplicada no son fijas: se discuten, se mezclan y se reorganizan históricamente.</p>
 
                 <div class="unit-intro-banner reveal">
                     <h3><i class="fa-solid fa-map" style="color:var(--yellow-dark);margin-right:10px"></i>Mapa general de la unidad</h3>
                     <ul class="unit-intro-list">
-                        <li>Como se produce la <strong>articulacion y unificacion</strong> entre teorias, practicas y disciplinas.</li>
-                        <li>Que lugar ocupan los <strong>descubrimientos al azar</strong> o serendipia en la historia de la ciencia.</li>
-                        <li>Por que la <strong>sensibilidad de los instrumentos</strong> modifica lo que puede observarse, medirse y discutirse.</li>
-                        <li>Como cambian las nociones de <strong>anomalia, corroboracion y refutacion</strong> cuando importan la precision y la sensibilidad.</li>
-                        <li>De que manera interactuan la <strong>ciencia teorica, experimental, basica y aplicada</strong> con el desarrollo tecnologico y las demandas sociales.</li>
+                        <li>Como las <strong>cosmologías actuales</strong> obligan a pensar la articulación entre disciplinas y escalas de investigación.</li>
+                        <li>Por que la <strong>Big Science</strong> reabre el debate sobre utilidad, financiamiento y valor social de la ciencia básica.</li>
+                        <li>Que lugar ocupan los <strong>descubrimientos al azar</strong> o serendipia en la construccion de teorías vigentes como la del Big Bang.</li>
+                        <li>Por que la <strong>sensibilidad de los instrumentos</strong> modifica lo que puede observarse, medirse y discutir como evidencia.</li>
+                        <li>Como los <strong>aceleradores de partículas y detectores</strong> muestran la carga teórica involucrada en la producción de datos.</li>
+                        <li>De que manera los debates sobre <strong>origen, futuro del universo y materia oscura</strong> reabren el problema de la subdeterminación.</li>
                     </ul>
                 </div>
 
                 <div class="callout callout-g reveal">
                     <i class="fa-solid fa-compass"></i>
-                    <p><strong>Esta pagina funciona como mapa de entrada.</strong> Resume el contenido general de cada clase de la unidad para que tengas una vision de conjunto antes de empezar el recorrido detallado.</p>
+                    <p><strong>Esta página funciona como mapa de entrada.</strong> Resume el contenido general de cada clase de la unidad para que tengas una vision de conjunto antes de empezar el recorrido detallado.</p>
                 </div>
             </section>
 
@@ -555,47 +573,55 @@
             <section id="temas">
                 <h2>2. Contenidos generales de cada clase</h2>
 
-                <p class="article-p reveal">Las proximas clases van a desplegar el problema CTS desde distintos angulos. Cada una toma una pregunta central y la conecta con ejemplos historicos, practicas experimentales y debates filosoficos.</p>
+                <p class="article-p reveal">Las proximas clases van a desplegar el problema CTS desde distintos angulos. La secuencia queda organizada en seis clases para darle espacio propio a los núcleos más fuertes del diseño curricular y no mezclar debates que conviene trabajar por separado.</p>
 
                 <div class="topic-grid reveal">
                     <div class="topic-card">
                         <span class="topic-num">01</span>
                         <div class="topic-icon"><i class="fa-solid fa-link"></i></div>
-                        <div class="topic-title">Articulacion y unificacion entre teorias y disciplinas</div>
-                        <p class="topic-desc">Vamos a estudiar como la ciencia se construye enlazando saberes distintos: fisica con quimica, biologia con tecnologia, teoria con practica. La unidad parte de la idea de que el conocimiento no avanza en compartimentos aislados, sino en conexiones, prestamos y reorganizaciones.</p>
-                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 1</span>
+                        <div class="topic-title">Cosmologías actuales y unificación del conocimiento</div>
+                        <p class="topic-desc">La apertura de la unidad pone el foco en las cosmologías contemporáneas para mostrar que hoy los grandes problemas no caben dentro de una sola disciplina. Fenómenos estelares, física de partículas, matemáticas e ingeniería aparecen articulados en una misma red de investigación.</p>
+                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 26</span>
                     </div>
 
                     <div class="topic-card">
                         <span class="topic-num">02</span>
-                        <div class="topic-icon"><i class="fa-solid fa-dice"></i></div>
-                        <div class="topic-title">Serendipia y descubrimientos al azar</div>
-                        <p class="topic-desc">No todo descubrimiento surge de un plan lineal. Vamos a analizar el papel del azar, la sorpresa y la preparacion previa del investigador para entender por que algunos hallazgos accidentales se transforman en conocimiento relevante y otros no.</p>
-                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 2</span>
+                        <div class="topic-icon"><i class="fa-solid fa-building-columns"></i></div>
+                        <div class="topic-title">Big Science y el espejo histórico de Copernico</div>
+                        <p class="topic-desc">Esta clase separa el problema político y economico de la gran ciencia: las enormes inversiones en telescopios, agencias espaciales y aceleradores. Se lo compara con la aparente inutilidad práctica de la revolucion copernicana para discutir por que la ciencia básica suele justificarse a largo plazo.</p>
+                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 27</span>
                     </div>
 
                     <div class="topic-card">
                         <span class="topic-num">03</span>
-                        <div class="topic-icon"><i class="fa-solid fa-microscope"></i></div>
-                        <div class="topic-title">Sensibilidad de los instrumentos y nuevas anomalias</div>
-                        <p class="topic-desc">La precision instrumental cambia el paisaje empirico. Cuando los instrumentos detectan diferencias minimas, cambian tambien las nociones de anomalia, corroboracion y refutacion. Un dato deja de ser solo "a favor" o "en contra" y pasa a depender del margen de error y de la capacidad de medicion.</p>
-                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 3</span>
+                        <div class="topic-icon"><i class="fa-solid fa-dice"></i></div>
+                        <div class="topic-title">Serendipia, Big Bang y descubrimientos inesperados</div>
+                        <p class="topic-desc">Acá el eje es la contingencia: como aparecen datos inesperados y por que no cualquier accidente se vuelve un descubrimiento. El caso de Penzias y Wilson, junto con ejemplos como Fleming, permite pensar el papel filosófico de la sorpresa en la historia de la ciencia.</p>
+                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 28</span>
                     </div>
 
                     <div class="topic-card">
                         <span class="topic-num">04</span>
-                        <div class="topic-icon"><i class="fa-solid fa-flask-vial"></i></div>
-                        <div class="topic-title">Ciencia teorica, experimental, basica y aplicada</div>
-                        <p class="topic-desc">Vamos a distinguir estas categorias, pero tambien a criticarlas. La clase mostrara que no funcionan como cajas cerradas: la ciencia teorica necesita montajes experimentales, la aplicada redefine problemas basicos, y la tecnologia no aparece solo al final sino durante todo el proceso.</p>
-                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 4</span>
+                        <div class="topic-icon"><i class="fa-solid fa-microscope"></i></div>
+<div class="topic-title">Sensibilidad, señal-ruido e instrumentos de detección</div>
+<p class="topic-desc">En lugar de hablar solo de precisión, esta clase introduce la sensibilidad como capacidad para rescatar señales muy debiles o procesos extremadamente breves. Radio-observatorios, detectores y aceleradores muestran como cambia la relación entre evidencia, ruido y medición.</p>
+                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 29</span>
+                    </div>
+
+                    <div class="topic-card">
+                        <span class="topic-num">05</span>
+                        <div class="topic-icon"><i class="fa-solid fa-atom"></i></div>
+                        <div class="topic-title">Aceleradores, carga teórica y aplicaciones técnicas</div>
+                        <p class="topic-desc">Los aceleradores de partículas y los detectores subatómicos permiten mostrar cuanta teoría entra ya en el momento mismo de obtener datos. La clase enlaza ciencia teórica, experimental, básica y aplicada, y abre el puente con usos como la medicina nuclear.</p>
+                        <span class="topic-pill"><i class="fa-solid fa-book-open fa-xs"></i> Clase 30</span>
                     </div>
 
                     <div class="topic-card full">
-                        <span class="topic-num">05</span>
+                        <span class="topic-num">06</span>
                         <div class="topic-icon"><i class="fa-solid fa-gears"></i></div>
-                        <div class="topic-title">Interacciones entre ciencia, tecnologia y demandas sociales</div>
-                        <p class="topic-desc">La unidad cierra mirando la trama completa: como se relacionan los desarrollos tecnologicos con las prioridades sociales, la financiacion, los usos politicos del conocimiento y la responsabilidad del trabajo cientifico. La pregunta de fondo es si puede pensarse la ciencia como una actividad neutral cuando interviene de manera directa en la vida colectiva.</p>
-                        <span class="topic-pill" style="margin-right:8px"><i class="fa-solid fa-book-open fa-xs"></i> Clase 5</span>
+                        <div class="topic-title">Origen y futuro del universo: subdeterminación y materia oscura</div>
+                        <p class="topic-desc">La unidad cierra con los debates de mayor circulacion pública: modelos sobre el origen y destino del universo, discusiones sobre materia oscura y limites de la evidencia disponible. El cierre recupera la pregunta por la objetividad, la controversia y la responsabilidad social del conocimiento.</p>
+                        <span class="topic-pill" style="margin-right:8px"><i class="fa-solid fa-book-open fa-xs"></i> Clase 31</span>
                         <span class="topic-pill highlight"><i class="fa-solid fa-star fa-xs"></i> Cierre de unidad</span>
                     </div>
                 </div>
@@ -605,14 +631,14 @@
             <section id="hilo">
                 <h2>3. El hilo conductor</h2>
 
-                <p class="article-p reveal">Estas clases forman un argumento comun: <strong>la ciencia no puede explicarse solo por ideas ni solo por hechos</strong>. Hace falta pensar juntas las teorias, los instrumentos y las condiciones sociales que vuelven posible una investigacion.</p>
+                <p class="article-p reveal">Estas clases forman un argumento común: <strong>la ciencia no puede explicarse solo por ideas ni solo por hechos</strong>. Hace falta pensar juntas las teorías, los instrumentos y las condiciones sociales que vuelven posible una investigación.</p>
 
                 <div class="hilo-wrap reveal">
-                    <div class="hilo-layer-label" style="margin-top:8px">CAPA 1 · Produccion del conocimiento</div>
+                    <div class="hilo-layer-label" style="margin-top:8px">CAPA 1 · Producción del conocimiento</div>
                     <div class="hilo-row">
                         <div class="hilo-node">
                             <div class="hilo-circle" style="background:rgba(14,165,233,.1);border-color:rgba(14,165,233,.3);color:#0ea5e9"><i class="fa-solid fa-puzzle-piece"></i></div>
-                            <div class="hilo-label">Articulacion entre disciplinas</div>
+                            <div class="hilo-label">Cosmologías y articulación disciplinar</div>
                         </div>
                         <span class="hilo-arrow"><i class="fa-solid fa-arrow-right"></i></span>
                         <div class="hilo-node">
@@ -622,27 +648,27 @@
                         <span class="hilo-arrow"><i class="fa-solid fa-arrow-right"></i></span>
                         <div class="hilo-node">
                             <div class="hilo-circle" style="background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.3);color:#a855f7"><i class="fa-solid fa-microscope"></i></div>
-                            <div class="hilo-label">Instrumentos y sensibilidad</div>
+                            <div class="hilo-label">Sensibilidad e instrumentos</div>
                         </div>
                     </div>
 
                     <div class="hilo-sep"><i class="fa-solid fa-arrow-down" style="font-size:22px;color:rgba(234,179,8,.4)"></i></div>
 
-                    <div class="hilo-layer-label">CAPA 2 · Revision de categorias clasicas</div>
+                    <div class="hilo-layer-label">CAPA 2 · Revisión de categorias clasicas</div>
                     <div class="hilo-row">
                         <div class="hilo-node">
                             <div class="hilo-circle" style="background:rgba(250,204,21,.1);border-color:rgba(250,204,21,.38);color:#92400e"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                            <div class="hilo-label">Anomalia y precision</div>
+                            <div class="hilo-label">Anomalía y precisión</div>
                         </div>
                         <span class="hilo-arrow"><i class="fa-solid fa-arrows-left-right"></i></span>
                         <div class="hilo-node">
                             <div class="hilo-circle" style="background:rgba(234,179,8,.1);border-color:rgba(234,179,8,.35);color:var(--yellow-dark)"><i class="fa-solid fa-vial-circle-check"></i></div>
-                            <div class="hilo-label">Corroboracion y refutacion</div>
+                            <div class="hilo-label">Corroboración y refutación</div>
                         </div>
                         <span class="hilo-arrow"><i class="fa-solid fa-arrows-left-right"></i></span>
                         <div class="hilo-node">
                             <div class="hilo-circle" style="background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.35);color:#f97316"><i class="fa-solid fa-code-compare"></i></div>
-                            <div class="hilo-label">Basica, aplicada, teorica y experimental</div>
+                            <div class="hilo-label">Datos, detectores y carga teórica</div>
                         </div>
                     </div>
 
@@ -651,15 +677,15 @@
                     <div class="hilo-layer-label">CAPA 3 · Pregunta de fondo</div>
                     <div class="hilo-bottom">
                         <div class="hilo-core">
-                            <div class="hilo-core-title"><i class="fa-solid fa-people-group" style="margin-right:8px"></i>CTS y responsabilidad</div>
-                            <div class="hilo-core-sub">Conocimiento, tecnologia, intereses y sociedad</div>
+                            <div class="hilo-core-title"><i class="fa-solid fa-people-group" style="margin-right:8px"></i>CTS, controversia y responsabilidad</div>
+                            <div class="hilo-core-sub">Conocimiento, grandes inversiones, tecnología y sociedad</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="callout callout-y reveal">
                     <i class="fa-solid fa-lightbulb"></i>
-                    <p><strong>Idea fuerza de la unidad:</strong> mejorar la precision de los instrumentos no solo agrega datos; transforma los criterios con los que decidimos que cuenta como evidencia, que consideramos una anomalia y como se articulan la investigacion cientifica, la innovacion tecnica y las necesidades sociales.</p>
+                    <p><strong>Idea fuerza de la unidad:</strong> mejorar la precisión de los instrumentos no solo agrega datos; transforma los criterios con los que decidimos que cuenta como evidencia, que consideramos una anomalía y como se articulan la investigación científica, la innovación técnica y las necesidades sociales.</p>
                 </div>
             </section>
 
@@ -667,30 +693,30 @@
             <section id="filosofos">
                 <h2>4. Autores y debates que van a aparecer</h2>
 
-                <p class="article-p reveal">La unidad dialoga con autores de tradiciones distintas porque el problema CTS no pertenece a una sola corriente. Algunos ayudan a pensar el papel de la experimentacion, otros la racionalidad cientifica, y otros la dimension social y politica del conocimiento.</p>
+                <p class="article-p reveal">La unidad dialoga con autores de tradiciones distintas porque el problema CTS no pertenece a una sola corriente. Algunos ayudan a pensar el papel de la experimentación, otros la racionalidad científica, y otros la dimensión social y política del conocimiento.</p>
 
                 <div class="phil-mini-grid reveal">
                     <div class="phil-mini">
                         <div class="phil-mini-av" style="background:#a855f7">P</div>
                         <div class="phil-mini-name">Karl Popper</div>
                         <div class="phil-mini-dates">1902 - 1994</div>
-                        <div class="phil-mini-desc">Su lenguaje de corroboracion y refutacion sirve como punto de partida para discutir por que esos conceptos cambian cuando importan la precision experimental y la sensibilidad de los instrumentos.</div>
-                        <span class="phil-mini-tag" style="background:rgba(168,85,247,.1);color:#a855f7;border:1px solid rgba(168,85,247,.2)">Refutacion</span>
+                        <div class="phil-mini-desc">Su lenguaje de corroboración y refutación sirve como punto de partida para discutir por que esos conceptos cambian cuando importan la precisión experimental y la sensibilidad de los instrumentos.</div>
+                        <span class="phil-mini-tag" style="background:rgba(168,85,247,.1);color:#a855f7;border:1px solid rgba(168,85,247,.2)">Refutación</span>
                     </div>
 
                     <div class="phil-mini">
                         <div class="phil-mini-av" style="background:#2563eb">K</div>
                         <div class="phil-mini-name">Thomas Kuhn</div>
                         <div class="phil-mini-dates">1922 - 1996</div>
-                        <div class="phil-mini-desc">Permite pensar como las anomalias no son datos brutos sino problemas definidos desde un marco teorico y una practica cientifica concreta.</div>
-                        <span class="phil-mini-tag" style="background:rgba(37,99,235,.1);color:#2563eb;border:1px solid rgba(37,99,235,.2)">Anomalias</span>
+<div class="phil-mini-desc">Permite pensar como las anomalías no son datos brutos sino problemas definidos desde un marco teórico y una práctica científica concreta.</div>
+<span class="phil-mini-tag" style="background:rgba(37,99,235,.1);color:#2563eb;border:1px solid rgba(37,99,235,.2)">Anomalías</span>
                     </div>
 
                     <div class="phil-mini">
                         <div class="phil-mini-av" style="background:#b45309">D</div>
                         <div class="phil-mini-name">Pierre Duhem</div>
                         <div class="phil-mini-dates">1861 - 1916</div>
-                        <div class="phil-mini-desc">Ayuda a ver que un experimento nunca pone a prueba una hipotesis aislada: tambien involucra supuestos instrumentales, teorias auxiliares y decisiones de interpretacion.</div>
+                        <div class="phil-mini-desc">Ayuda a ver que un experimento nunca pone a prueba una hipótesis aislada: también involucra supuestos instrumentales, teorías auxiliares y decisiones de interpretación.</div>
                         <span class="phil-mini-tag" style="background:rgba(180,83,9,.1);color:#b45309;border:1px solid rgba(180,83,9,.2)">Holismo experimental</span>
                     </div>
 
@@ -698,8 +724,8 @@
                         <div class="phil-mini-av" style="background:#ca8a04">H</div>
                         <div class="phil-mini-name">Ian Hacking</div>
                         <div class="phil-mini-dates">1936 - 2023</div>
-                        <div class="phil-mini-desc">Su filosofia destaca que los instrumentos no solo representan el mundo: tambien permiten intervenir en el. Por eso la ciencia experimental tiene una logica propia.</div>
-                        <span class="phil-mini-tag" style="background:rgba(202,138,4,.1);color:#92400e;border:1px solid rgba(202,138,4,.2)">Experimentacion</span>
+                        <div class="phil-mini-desc">Su filosofía destaca que los instrumentos no solo representan el mundo: también permiten intervenir en el. Por eso la ciencia experimental tiene una lógica propia.</div>
+                        <span class="phil-mini-tag" style="background:rgba(202,138,4,.1);color:#92400e;border:1px solid rgba(202,138,4,.2)">Experimentación</span>
                     </div>
 
                     <div class="phil-mini">
@@ -714,14 +740,14 @@
                         <div class="phil-mini-av" style="background:#16a34a">B</div>
                         <div class="phil-mini-name">Francis Bacon</div>
                         <div class="phil-mini-dates">1561 - 1626</div>
-                        <div class="phil-mini-desc">Aparece como antecedente para pensar la articulacion entre conocimiento, tecnica y utilidad social, una tension que vuelve con fuerza en toda la unidad.</div>
+                        <div class="phil-mini-desc">Aparece como antecedente para pensar la articulación entre conocimiento, técnica y utilidad social, una tensión que vuelve con fuerza en toda la unidad.</div>
                         <span class="phil-mini-tag" style="background:rgba(22,163,74,.1);color:#16a34a;border:1px solid rgba(22,163,74,.2)">Saber y poder</span>
                     </div>
                 </div>
 
                 <div class="callout callout-b reveal">
                     <i class="fa-solid fa-circle-info"></i>
-                    <p><strong>No vas a ver estos autores como una lista cerrada.</strong> Funcionan como entradas para discutir problemas: que cuenta como evidencia, como se conectan los laboratorios con la sociedad y hasta donde llega la responsabilidad del trabajo cientifico.</p>
+                    <p><strong>No vas a ver estos autores como una lista cerrada.</strong> Funcionan como entradas para discutir problemas: que cuenta como evidencia, como se conectan los laboratorios con la sociedad y hasta donde llega la responsabilidad del trabajo científico.</p>
                 </div>
             </section>
 
@@ -734,11 +760,11 @@
                 <div class="big-question reveal">
                     <div class="bq-label"><i class="fa-solid fa-circle-question" style="margin-right:6px"></i>Pregunta central de la Unidad 5</div>
                     <div class="bq-text">
-                        Si la ciencia depende de teorias, instrumentos,<br>
-                        practicas y demandas sociales,<br>
+                        Si la ciencia depende de teorías, instrumentos,<br>
+                        prácticas y demandas sociales,<br>
                         <em>como pensamos su objetividad y su responsabilidad?</em>
                     </div>
-                    <div class="bq-sub">La unidad no responde reduciendo la ciencia a tecnica ni a ideologia. Propone pensar sus articulaciones reales: como los instrumentos redefinen la evidencia, como la experimentacion reorganiza las teorias y como los desarrollos tecnologicos se insertan en conflictos y necesidades colectivas.</div>
+                    <div class="bq-sub">La unidad no responde reduciendo la ciencia a técnica ni a ideologia. Propone pensar sus articulaciones reales: como los instrumentos redefinen la evidencia, como la experimentación reorganiza las teorías y como los desarrollos tecnologicos se insertan en conflictos y necesidades colectivas.</div>
                 </div>
 
                 <div class="pull-quote reveal">
@@ -748,7 +774,7 @@
 
                 <div class="callout callout-g reveal">
                     <i class="fa-solid fa-pen-to-square"></i>
-                    <p><strong>Para arrancar:</strong> pensa un ejemplo en el que una mejora tecnica haya cambiado no solo los resultados, sino tambien la manera de definir un problema cientifico. Ese tipo de casos va a atravesar toda la unidad.</p>
+                    <p><strong>Para arrancar:</strong> pensa un ejemplo en el que una mejora técnica haya cambiado no solo los resultados, sino también la manera de definir un problema científico. Ese tipo de casos va a atravesar toda la unidad.</p>
                 </div>
             </section>
 
@@ -757,7 +783,7 @@
         <!-- SIDEBAR (right column on desktop) -->
         <aside class="sidebar">
             <div class="sidebar-card">
-                <div class="sidebar-card-header"><i class="fa-solid fa-list-ul"></i><span>En esta pagina</span></div>
+                <div class="sidebar-card-header"><i class="fa-solid fa-list-ul"></i><span>En esta página</span></div>
                 <div class="sidebar-card-body">
                     <ul class="toc-list" id="toc">
                         <li><a href="#intro" class="toc-link"><span class="toc-num">01</span>Que vas a trabajar</a></li>
@@ -772,15 +798,18 @@
             <div class="sidebar-card">
                 <div class="sidebar-card-header"><i class="fa-solid fa-tags"></i><span>Conceptos clave</span></div>
                 <div class="sidebar-card-body">
-                    <span class="concept-tag">Articulacion</span>
+                    <span class="concept-tag">Cosmología actual</span>
+                    <span class="concept-tag">Articulación</span>
+                    <span class="concept-tag">Big Science</span>
                     <span class="concept-tag">Serendipia</span>
                     <span class="concept-tag">Sensibilidad instrumental</span>
-                    <span class="concept-tag">Precision</span>
-                    <span class="concept-tag">Anomalia</span>
-                    <span class="concept-tag">Corroboracion</span>
-                    <span class="concept-tag">Refutacion</span>
-                    <span class="concept-tag">Ciencia basica</span>
+<span class="concept-tag">Señal-ruido</span>
+                    <span class="concept-tag">Aceleradores</span>
+                    <span class="concept-tag">Carga teórica</span>
+                    <span class="concept-tag">Ciencia básica</span>
                     <span class="concept-tag">Ciencia aplicada</span>
+                    <span class="concept-tag">Subdeterminación</span>
+                    <span class="concept-tag">Materia oscura</span>
                     <span class="concept-tag">CTS</span>
                 </div>
             </div>
@@ -790,11 +819,11 @@
                 <div class="sidebar-card-body">
                     <div class="phil-item">
                         <div class="phil-avatar" style="background:#a855f7">P</div>
-                        <div><div class="phil-name">Karl Popper</div><div class="phil-role">Corroboracion y refutacion</div></div>
+                        <div><div class="phil-name">Karl Popper</div><div class="phil-role">Corroboración y refutación</div></div>
                     </div>
                     <div class="phil-item">
                         <div class="phil-avatar" style="background:#2563eb">K</div>
-                        <div><div class="phil-name">Thomas Kuhn</div><div class="phil-role">Anomalias y cambio cientifico</div></div>
+<div><div class="phil-name">Thomas Kuhn</div><div class="phil-role">Anomalías y cambio científico</div></div>
                     </div>
                     <div class="phil-item">
                         <div class="phil-avatar" style="background:#b45309">D</div>
@@ -802,7 +831,7 @@
                     </div>
                     <div class="phil-item">
                         <div class="phil-avatar" style="background:#ca8a04">H</div>
-                        <div><div class="phil-name">Ian Hacking</div><div class="phil-role">Instrumentos e intervencion</div></div>
+                        <div><div class="phil-name">Ian Hacking</div><div class="phil-role">Instrumentos e intervención</div></div>
                     </div>
                     <div class="phil-item">
                         <div class="phil-avatar" style="background:#0ea5e9">L</div>
@@ -810,7 +839,7 @@
                     </div>
                     <div class="phil-item">
                         <div class="phil-avatar" style="background:#16a34a">B</div>
-                        <div><div class="phil-name">Francis Bacon</div><div class="phil-role">Saber tecnico y utilidad</div></div>
+                        <div><div class="phil-name">Francis Bacon</div><div class="phil-role">Saber técnico y utilidad</div></div>
                     </div>
                 </div>
             </div>
@@ -818,13 +847,14 @@
             <div class="sidebar-card">
                 <div class="sidebar-card-header"><i class="fa-solid fa-clock"></i><span>Recorrido disponible</span></div>
                 <div class="sidebar-card-body">
-                    <p style="font-size:13px;color:var(--text3);line-height:1.65;margin-bottom:12px;">La introduccion ya esta publicada. Las clases de la Unidad 5 se iran sumando en este mismo recorrido.</p>
+                    <p style="font-size:13px;color:var(--text3);line-height:1.65;margin-bottom:12px;">La introduccion ya esta publicada y el recorrido de la unidad queda organizado en seis clases encadenadas, desde las cosmologías actuales hasta la materia oscura.</p>
                     <ul class="toc-list">
-                        <li><span class="toc-link"><span class="toc-num">01</span>Articulacion y unificacion</span></li>
-                        <li><span class="toc-link"><span class="toc-num">02</span>Serendipia</span></li>
-                        <li><span class="toc-link"><span class="toc-num">03</span>Sensibilidad y precision</span></li>
-                        <li><span class="toc-link"><span class="toc-num">04</span>Teorica, experimental, basica y aplicada</span></li>
-                        <li><span class="toc-link"><span class="toc-num">05</span>Ciencia, tecnologia y sociedad</span></li>
+                        <li><a href="unidad5-clase26.html" class="toc-link"><span class="toc-num">26</span>Cosmologías y unificación</a></li>
+                        <li><a href="unidad5-clase27.html" class="toc-link"><span class="toc-num">27</span>Big Science y Copernico</a></li>
+                        <li><a href="unidad5-clase28.html" class="toc-link"><span class="toc-num">28</span>Serendipia y Big Bang</a></li>
+                        <li><a href="unidad5-clase29.html" class="toc-link"><span class="toc-num">29</span>Sensibilidad e instrumentos</a></li>
+                        <li><a href="unidad5-clase30.html" class="toc-link"><span class="toc-num">30</span>Aceleradores y datos</a></li>
+                        <li><a href="unidad5-clase31.html" class="toc-link"><span class="toc-num">31</span>Subdeterminación y materia oscura</a></li>
                     </ul>
                 </div>
             </div>
@@ -840,21 +870,21 @@
                 <div class="cfn-body">
                     <span class="cfn-badge">U4 · INTRO</span>
                     <span class="cfn-dir">Unidad anterior</span>
-                    <span class="cfn-title">Teorias, observacion y progreso</span>
+                    <span class="cfn-title">Teorías, observación y progreso</span>
                 </div>
             </a>
             <a href="index.html" class="cfn-card cfn-home">
                 <i class="fa-solid fa-house cfn-home-icon"></i>
                 <span class="cfn-home-label">Inicio</span>
             </a>
-            <div class="cfn-card cfn-next disabled">
+            <a href="unidad5-clase26.html" class="cfn-card cfn-next">
                 <div class="cfn-body">
-                    <span class="cfn-badge">U5 · PROX</span>
+                    <span class="cfn-badge">U5 · C-26</span>
                     <span class="cfn-dir">Primera clase</span>
-                    <span class="cfn-title">Se publica en este recorrido</span>
+                    <span class="cfn-title">Cosmologías actuales y unificación</span>
                 </div>
-                <span class="cfn-arrow"><i class="fa-solid fa-hourglass-half"></i></span>
-            </div>
+                <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
         </div>
     </div>
 
