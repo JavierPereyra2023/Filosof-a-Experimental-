@@ -31,7 +31,19 @@
       "Bash(del D:/filosofia_experimental/fix_responsive.py)",
       "Bash(__NEW_LINE_0b21e522700c0ef1__ done:*)",
       "Bash(head -5 grep -n \"Clase 33\\\\|disabled\" D:/filosofia_experimental/unidad6-clase32.html)",
-      "Bash(wc -l D:/filosofia_experimental/unidad6-*.html)"
+      "Bash(wc -l D:/filosofia_experimental/unidad6-*.html)",
+      "Bash(ls D:/filosofia_experimental/*.html)",
+      "Bash(node -e \":*)",
+      "Bash(// These should be caught by the above regex already, let's check:*)",
+      "Read(//d/tmp/**)",
+      "Bash(node -e:*)",
+      "Bash(node fix_encoding.js \"D:/filosofia_experimental/index.html\")",
+      "Bash(node C:/Users/javie/AppData/Local/Temp/fix_encoding.js \"D:/filosofia_experimental/index.html\")",
+      "Bash(node D:/filosofia_experimental/fix_encoding.js \"D:/filosofia_experimental/index.html\")",
+      "Bash(node D:/filosofia_experimental/check_tildes.js \"D:/filosofia_experimental/unidad6-introduccion.html\" \"D:/filosofia_experimental/unidad6-clase32.html\" \"D:/filosofia_experimental/unidad6-clase33.html\")",
+      "Bash(node D:/filosofia_experimental/check_tildes.js \"D:/filosofia_experimental/unidad6-clase34.html\" \"D:/filosofia_experimental/unidad6-clase35.html\" \"D:/filosofia_experimental/unidad6-clase36.html\" \"D:/filosofia_experimental/unidad6-clase37.html\")",
+      "Bash(node D:/filosofia_experimental/check_tildes2.js \"D:/filosofia_experimental/index.html.fixed\" \"D:/filosofia_experimental/unidad6-introduccion.html\" \"D:/filosofia_experimental/unidad6-clase32.html\" \"D:/filosofia_experimental/unidad6-clase33.html\" \"D:/filosofia_experimental/unidad6-clase34.html\" \"D:/filosofia_experimental/unidad6-clase35.html\" \"D:/filosofia_experimental/unidad6-clase36.html\" \"D:/filosofia_experimental/unidad6-clase37.html\")",
+      "Bash(node D:/filosofia_experimental/check_tildes3.js \"D:/filosofia_experimental/index.html.fixed\" \"D:/filosofia_experimental/unidad6-introduccion.html\" \"D:/filosofia_experimental/unidad6-clase32.html\" \"D:/filosofia_experimental/unidad6-clase33.html\" \"D:/filosofia_experimental/unidad6-clase34.html\" \"D:/filosofia_experimental/unidad6-clase35.html\" \"D:/filosofia_experimental/unidad6-clase36.html\" \"D:/filosofia_experimental/unidad6-clase37.html\")"
     ]
   }
 }
