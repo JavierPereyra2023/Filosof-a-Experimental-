@@ -489,6 +489,38 @@ a{color:inherit;text-decoration:none}
   .pyth-panel{padding:18px}
   .biblioteca-section{padding:22px}
 }
+
+/* ── Footer navegación (cfn) ── */
+.class-footer-nav{background:linear-gradient(160deg,#07080f 0%,#0d1020 60%,#07080f 100%);border-top:2px solid rgba(250,204,21,.18);padding:52px 24px 38px;position:relative}
+.class-footer-nav::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:#facc15;border-radius:0 0 4px 4px}
+.class-footer-nav-inner{max-width:1000px;margin:0 auto}
+.cfn-eyebrow{text-align:center;font-size:9px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(250,204,21,.38);margin-bottom:30px;display:flex;align-items:center;justify-content:center;gap:12px}
+.cfn-eyebrow::before,.cfn-eyebrow::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+.cfn-grid{display:grid;grid-template-columns:1fr 68px 1fr;gap:10px;align-items:stretch;margin-bottom:24px}
+.cfn-card{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);text-decoration:none;color:inherit;transition:all .25s}
+.cfn-card:hover{border-color:rgba(250,204,21,.4);background:rgba(250,204,21,.06);transform:translateY(-3px);box-shadow:0 12px 40px rgba(250,204,21,.1)}
+.cfn-card.cfn-next{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.2);justify-content:flex-end;text-align:right}
+.cfn-card.cfn-next:hover{background:rgba(250,204,21,.13);border-color:rgba(250,204,21,.55);box-shadow:0 12px 40px rgba(250,204,21,.15)}
+.cfn-card.cfn-home{flex-direction:column;justify-content:center;align-items:center;gap:6px;background:rgba(255,255,255,.015);padding:14px 6px}
+.cfn-card.cfn-home:hover{background:rgba(250,204,21,.06);border-color:rgba(250,204,21,.35)}
+.cfn-arrow{font-size:16px;color:rgba(255,255,255,.35);flex-shrink:0;transition:color .2s}
+.cfn-card:hover .cfn-arrow{color:rgba(250,204,21,.7)}
+.cfn-card.cfn-next .cfn-arrow{color:rgba(250,204,21,.55)}
+.cfn-body{display:flex;flex-direction:column;gap:1px}
+.cfn-badge{font-size:8.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,204,21,.55)}
+.cfn-dir{font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.cfn-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.78);line-height:1.35;margin-top:2px}
+.cfn-card.cfn-next .cfn-title{color:#facc15}
+.cfn-home-icon{font-size:18px;color:rgba(250,204,21,.4);transition:color .25s}
+.cfn-card.cfn-home:hover .cfn-home-icon{color:#facc15}
+.cfn-home-label{font-size:8px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+.cfn-credits{text-align:center;font-size:10.5px;color:rgba(255,255,255,.16);padding-top:4px}
+.cfn-credits a{color:rgba(250,204,21,.32);text-decoration:none;transition:color .2s}
+.cfn-credits a:hover{color:#facc15}
+@media(max-width:600px){
+  .cfn-grid{grid-template-columns:1fr;gap:8px}
+  .cfn-card.cfn-home{flex-direction:row;padding:14px 20px;justify-content:flex-start;gap:12px}
+}
 </style>
 </head>
 <body>
@@ -1126,5 +1158,34 @@ function showPythTab(mode){
   });
 }
 </script>
+
+<nav class="class-footer-nav">
+  <div class="class-footer-nav-inner">
+    <p class="cfn-eyebrow">CONTINUAR NAVEGANDO</p>
+    <div class="cfn-grid">
+      <a href="unidad6-clase32.html" class="cfn-card cfn-prev">
+        <span class="cfn-arrow"><i class="fa-solid fa-arrow-left"></i></span>
+        <div class="cfn-body">
+          <span class="cfn-badge">U6 · C-32</span>
+          <span class="cfn-dir">Clase anterior</span>
+          <span class="cfn-title">Clasificación de las ciencias</span>
+        </div>
+      </a>
+      <a href="index.html" class="cfn-card cfn-home" title="Inicio">
+        <i class="fa-solid fa-house cfn-home-icon"></i>
+        <span class="cfn-home-label">Inicio</span>
+      </a>
+      <a href="unidad6-clase34.html" class="cfn-card cfn-next">
+        <div class="cfn-body">
+          <span class="cfn-badge">U6 · C-34</span>
+          <span class="cfn-dir">Clase siguiente</span>
+          <span class="cfn-title">Sistemas axiomáticos: los ladrillos del razonamiento</span>
+        </div>
+        <span class="cfn-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+    <p class="cfn-credits">Filosofía e Historia de la Ciencia y la Tecnología &middot; 6to Año &middot; <a href="index.html">Los Polvorines, 2026</a></p>
+  </div>
+</nav>
 </body>
 </html>

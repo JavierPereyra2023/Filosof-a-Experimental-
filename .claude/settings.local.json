@@ -43,7 +43,9 @@
       "Bash(node D:/filosofia_experimental/check_tildes.js \"D:/filosofia_experimental/unidad6-introduccion.html\" \"D:/filosofia_experimental/unidad6-clase32.html\" \"D:/filosofia_experimental/unidad6-clase33.html\")",
       "Bash(node D:/filosofia_experimental/check_tildes.js \"D:/filosofia_experimental/unidad6-clase34.html\" \"D:/filosofia_experimental/unidad6-clase35.html\" \"D:/filosofia_experimental/unidad6-clase36.html\" \"D:/filosofia_experimental/unidad6-clase37.html\")",
       "Bash(node D:/filosofia_experimental/check_tildes2.js \"D:/filosofia_experimental/index.html.fixed\" \"D:/filosofia_experimental/unidad6-introduccion.html\" \"D:/filosofia_experimental/unidad6-clase32.html\" \"D:/filosofia_experimental/unidad6-clase33.html\" \"D:/filosofia_experimental/unidad6-clase34.html\" \"D:/filosofia_experimental/unidad6-clase35.html\" \"D:/filosofia_experimental/unidad6-clase36.html\" \"D:/filosofia_experimental/unidad6-clase37.html\")",
-      "Bash(node D:/filosofia_experimental/check_tildes3.js \"D:/filosofia_experimental/index.html.fixed\" \"D:/filosofia_experimental/unidad6-introduccion.html\" \"D:/filosofia_experimental/unidad6-clase32.html\" \"D:/filosofia_experimental/unidad6-clase33.html\" \"D:/filosofia_experimental/unidad6-clase34.html\" \"D:/filosofia_experimental/unidad6-clase35.html\" \"D:/filosofia_experimental/unidad6-clase36.html\" \"D:/filosofia_experimental/unidad6-clase37.html\")"
+      "Bash(node D:/filosofia_experimental/check_tildes3.js \"D:/filosofia_experimental/index.html.fixed\" \"D:/filosofia_experimental/unidad6-introduccion.html\" \"D:/filosofia_experimental/unidad6-clase32.html\" \"D:/filosofia_experimental/unidad6-clase33.html\" \"D:/filosofia_experimental/unidad6-clase34.html\" \"D:/filosofia_experimental/unidad6-clase35.html\" \"D:/filosofia_experimental/unidad6-clase36.html\" \"D:/filosofia_experimental/unidad6-clase37.html\")",
+      "Bash(__NEW_LINE_437bdee1f2779107__ done:*)",
+      "Bash(python add_footer_u6.py)"
     ]
   }
 }
