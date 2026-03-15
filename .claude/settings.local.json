@@ -28,7 +28,10 @@
       "Bash(uniq -c done)",
       "Bash(python fix_responsive.py)",
       "Bash(python -c \":*)",
-      "Bash(del D:/filosofia_experimental/fix_responsive.py)"
+      "Bash(del D:/filosofia_experimental/fix_responsive.py)",
+      "Bash(__NEW_LINE_0b21e522700c0ef1__ done:*)",
+      "Bash(head -5 grep -n \"Clase 33\\\\|disabled\" D:/filosofia_experimental/unidad6-clase32.html)",
+      "Bash(wc -l D:/filosofia_experimental/unidad6-*.html)"
     ]
   }
 }

@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La geometría como caso bisagra: del terreno al teorema | FILOSOFÍA & CIENCIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+/* ── Variables ── */
+:root{
+  --yellow:#facc15;--yellow-dark:#eab308;--yellow-bg:rgba(250,204,21,.09);
+  --accent:#a855f7;--accent-bg:rgba(168,85,247,.09);--accent-dark:#9333ea;
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.09);
+  --green:#22c55e;--green-bg:rgba(34,197,94,.09);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.09);
+  --orange:#f97316;--orange-bg:rgba(249,115,22,.09);
+  --teal:#14b8a6;--teal-bg:rgba(20,184,166,.09);
+  --bg:#f9f7f4;--bg2:#ffffff;--bg3:#f1ede6;
+  --card:#ffffff;--text:#1a1a1a;--text2:#3d3d3d;--text3:#6b6b6b;
+  --border:#e0d9d0;--shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.15);
+  --radius:20px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.dark{
+  --bg:#111;--bg2:#1a1a1a;--bg3:#222;--card:#1e1e1e;
+  --text:#f0ece4;--text2:#c8c0b4;--text3:#888880;
+  --border:#333;--shadow:0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.6);
+}
+
+/* ── Reset ── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background .4s,color .4s;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--accent)}
+
+/* ── Progress bar ── */
+#prog{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--yellow),var(--accent));z-index:9999;transition:width .1s}
+
+/* ── Top nav ── */
+#topnav{
+  position:sticky;top:0;z-index:50;height:56px;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 28px;background:var(--bg2);
+  border-bottom:1px solid var(--border);box-shadow:var(--shadow);
+}
+.tnl,.tnr{display:flex;align-items:center;gap:12px}
+.tnc{font:700 13px 'Playfair Display',serif;color:var(--text2);display:none}
+.nav-sep{color:var(--border);font-size:18px;font-weight:300}
+.u6-badge{
+  font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-bg);
+  border:1px solid rgba(168,85,247,.3);padding:3px 12px;border-radius:999px;
+  white-space:nowrap;
+}
+.nav-logo{font:900 16px 'Playfair Display',serif;letter-spacing:-.02em}
+.nav-logo span{color:var(--accent)}
+.nav-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;border-radius:999px;
+  font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  transition:all .2s;cursor:pointer;white-space:nowrap;
+}
+.nav-pill.back{background:var(--bg3);color:var(--text3)}
+.nav-pill.back:hover{background:var(--border);color:var(--text)}
+.nav-pill.next{background:var(--yellow);color:#000}
+.nav-pill.next:hover{background:var(--yellow-dark)}
+.nav-pill.disabled{opacity:.35;pointer-events:none;cursor:default}
+.dtoggle{
+  width:38px;height:20px;border:1px solid var(--border);border-radius:999px;
+  background:transparent;position:relative;cursor:pointer;transition:.3s;flex-shrink:0;
+}
+.dtoggle:after{
+  content:'';position:absolute;left:3px;top:50%;
+  width:13px;height:13px;border-radius:50%;
+  background:var(--text3);transform:translateY(-50%);transition:.3s;
+}
+.dark .dtoggle{background:var(--yellow);border-color:var(--yellow)}
+.dark .dtoggle:after{left:21px;background:#000}
+
+/* ── Hero ── */
+#art-hero{
+  min-height:88vh;padding:96px 24px 88px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#fff;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 25%,rgba(168,85,247,.28) 0,transparent 40%),
+    radial-gradient(circle at 82% 18%,rgba(250,204,21,.22) 0,transparent 32%),
+    radial-gradient(circle at 55% 80%,rgba(59,130,246,.14) 0,transparent 30%),
+    linear-gradient(150deg,#0a0a0f 0%,#0f0b1a 40%,#0d1117 100%);
+}
+#art-hero:before{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.float-sym{
+  position:absolute;font-family:'Libre Baskerville',serif;
+  color:rgba(168,85,247,.15);font-weight:400;
+  animation:floatSym 15s ease-in-out infinite;
+  user-select:none;pointer-events:none;
+}
+.float-sym:nth-child(1){font-size:88px;left:6%;top:14%;animation-duration:16s}
+.float-sym:nth-child(2){font-size:64px;right:8%;top:18%;color:rgba(250,204,21,.14);animation-duration:13s;animation-delay:-3s}
+.float-sym:nth-child(3){font-size:72px;left:14%;bottom:24%;color:rgba(59,130,246,.13);animation-duration:17s;animation-delay:-6s}
+.float-sym:nth-child(4){font-size:50px;right:14%;bottom:20%;animation-duration:14s;animation-delay:-9s}
+.float-sym:nth-child(5){font-size:40px;left:40%;top:8%;color:rgba(250,204,21,.1);animation-duration:18s;animation-delay:-4s}
+.float-sym:nth-child(6){font-size:56px;right:30%;bottom:26%;color:rgba(59,130,246,.1);animation-duration:12s;animation-delay:-7s}
+@keyframes floatSym{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  33%{transform:translateY(-16px) rotate(4deg)}
+  66%{transform:translateY(9px) rotate(-3deg)}
+}
+.hero-inner{position:relative;z-index:2;max-width:980px}
+.hero-breadcrumb{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.hero-badge{
+  padding:4px 14px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+}
+.hero-badge.fill{background:var(--accent);color:#fff}
+.hero-badge.outline{border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.eyebrow{margin-bottom:18px;font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.hero-title{font:900 clamp(36px,6.5vw,78px)/.9 'Playfair Display',serif;letter-spacing:-.03em;margin-bottom:22px}
+.hero-title em{color:var(--yellow);font-style:italic}
+.hero-subtitle{
+  max-width:700px;margin:0 auto 32px;
+  font:italic clamp(15px,2vw,19px)/1.75 'Libre Baskerville',serif;
+  color:rgba(255,255,255,.78);
+}
+.hero-meta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:26px;font-size:12px;color:rgba(255,255,255,.65)}
+.hero-meta i{color:var(--yellow)}
+.hero-topics{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.hero-topics span{
+  padding:6px 14px;border-radius:999px;
+  border:1px solid rgba(168,85,247,.35);background:rgba(168,85,247,.1);
+  color:rgba(200,150,255,.9);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.hero-scroll{
+  margin-top:44px;display:inline-flex;align-items:center;gap:10px;
+  padding:12px 24px;border-radius:999px;
+  background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.35);
+  color:rgba(255,255,255,.8);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .25s;
+}
+.hero-scroll:hover{background:rgba(168,85,247,.3);color:#fff}
+
+/* ── Layout ── */
+.article-wrap{
+  max-width:1240px;margin:0 auto;
+  padding:72px 28px 92px;
+  display:grid;grid-template-columns:260px 1fr;gap:56px;
+  align-items:start;
+}
+.article-body{min-width:0}
+.sidebar{position:sticky;top:72px;align-self:start;order:-1}
+
+/* ── Sidebar cards ── */
+.sidebar-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:20px;box-shadow:var(--shadow);
+  margin-bottom:20px;
+}
+.sidebar-card-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+  font:800 10px 'Inter',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);
+}
+.sidebar-card-header i{
+  width:24px;height:24px;border-radius:8px;
+  background:var(--yellow);color:#000;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:10px;
+  font-size:12px;font-weight:500;color:var(--text3);
+  transition:all .2s;border-left:2px solid transparent;
+}
+.toc-item a:hover{background:var(--bg3);color:var(--text);border-left-color:var(--accent)}
+.toc-item a.active{background:var(--accent-bg);color:var(--accent);border-left-color:var(--accent);font-weight:700}
+.toc-num{
+  font:800 10px 'Inter',sans-serif;letter-spacing:.06em;
+  color:var(--accent);background:var(--accent-bg);
+  min-width:22px;height:22px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.toc-item a.active .toc-num{background:var(--accent);color:#fff}
+.concept-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.concept-list li{font-size:13px;line-height:1.65;color:var(--text2);padding-left:14px;position:relative}
+.concept-list li:before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.concept-list li strong{color:var(--text);font-weight:700}
+.author-list{display:flex;flex-direction:column;gap:10px}
+.author-card{display:flex;align-items:center;gap:10px}
+.author-icon{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font:700 14px 'Playfair Display',serif;color:#fff;
+  background:var(--accent);
+}
+.author-info{flex:1;min-width:0}
+.author-name{font-size:13px;font-weight:700;color:var(--text)}
+.author-role{font-size:11px;color:var(--text3)}
+.next-class-card{
+  background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(250,204,21,.08));
+  border:1px solid rgba(168,85,247,.25);border-radius:14px;padding:18px;
+}
+.next-class-card .nc-label{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.next-class-card .nc-title{font:700 14px 'Playfair Display',serif;color:var(--text);margin-bottom:12px;line-height:1.4}
+.nc-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--accent);color:#fff;transition:all .2s;
+}
+.nc-btn:hover{background:var(--accent-dark)}
+.nc-btn.disabled{opacity:.35;pointer-events:none;background:var(--bg3);color:var(--text3)}
+
+/* ── Article sections ── */
+.article-body section+section{margin-top:80px}
+.article-body h2{
+  margin:0 0 28px;padding-bottom:14px;
+  border-bottom:2px solid var(--yellow);
+  font:900 clamp(1.7rem,3.5vw,2.4rem)/1.15 'Playfair Display',serif;
+}
+.article-p{margin-bottom:26px;font:17px/1.92 'Libre Baskerville',serif;color:var(--text2)}
+.article-p strong{color:var(--text)}
+.dropcap::first-letter{
+  float:left;margin:6px 16px -4px 0;
+  font:900 88px/.78 'Playfair Display',serif;
+  color:var(--accent);line-height:.78;
+}
+
+/* ── Pull quote ── */
+.pull-quote{
+  margin:36px 0;padding:32px 40px 32px 44px;
+  border-left:5px solid var(--accent);border-radius:0 20px 20px 0;
+  background:var(--accent-bg);position:relative;overflow:hidden;
+}
+.pull-quote:before{
+  content:'\201C';position:absolute;top:-10px;left:14px;
+  font:900 100px 'Playfair Display',serif;color:var(--accent);opacity:.18;
+}
+.pull-quote blockquote{font:italic clamp(18px,2.5vw,23px)/1.5 'Playfair Display',serif;color:var(--text)}
+.pull-quote cite{display:block;margin-top:14px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+/* ── Callout ── */
+.callout{
+  margin:28px 0;padding:20px 24px;border-radius:16px;
+  border:1px solid rgba(234,179,8,.25);border-left:4px solid var(--yellow-dark);
+  background:var(--yellow-bg);display:flex;gap:18px;align-items:flex-start;
+}
+.callout.accent{border-left-color:var(--accent);background:var(--accent-bg);border-color:rgba(168,85,247,.2)}
+.callout.blue{border-left-color:var(--blue);background:var(--blue-bg);border-color:rgba(59,130,246,.2)}
+.callout.red{border-left-color:var(--red);background:var(--red-bg);border-color:rgba(239,68,68,.2)}
+.callout-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.callout p{font-size:14.5px;line-height:1.82;color:var(--text2)}
+.callout p strong{color:var(--text)}
+
+/* ── Reveal ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── Table ── */
+.table-wrap{margin:28px 0;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table thead th{
+  padding:12px 20px;text-align:left;
+  font:800 10px 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+}
+.comp-table thead th:first-child{background:var(--text3);width:140px}
+.comp-table thead th:nth-child(2){background:var(--orange)}
+.comp-table thead th:nth-child(3){background:var(--accent)}
+.comp-table tbody tr:nth-child(even){background:var(--bg3)}
+.comp-table tbody td{
+  padding:13px 20px;font-size:13.5px;line-height:1.65;
+  color:var(--text2);border-bottom:1px solid var(--border);
+}
+.comp-table tbody td:first-child{font-weight:700;color:var(--text);font-size:12px}
+.comp-table tbody tr:last-child td{border-bottom:none}
+
+/* ── Postulados grid ── */
+.postulados-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:28px 0}
+.postulado-card{
+  background:var(--card);border:2px solid var(--border);border-radius:16px;
+  padding:18px 14px;text-align:center;transition:all .3s;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.postulado-card:hover{border-color:var(--accent);box-shadow:0 6px 28px rgba(168,85,247,.18);transform:translateY(-4px)}
+.postulado-card.special{border-color:rgba(239,68,68,.4);background:var(--red-bg)}
+.postulado-card.special:hover{border-color:var(--red);box-shadow:0 6px 28px rgba(239,68,68,.2)}
+.post-num{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font:900 15px 'Playfair Display',serif;color:#fff;
+  background:var(--accent);flex-shrink:0;
+}
+.postulado-card.special .post-num{background:var(--red)}
+.post-text{font-size:12px;line-height:1.65;color:var(--text2);flex:1}
+.postulado-card.special .post-text{color:var(--text)}
+.post-label{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.postulado-card.special .post-label{color:var(--red)}
+
+/* ── Dos columnas ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:28px 0;align-items:start}
+.two-col-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:22px;box-shadow:var(--shadow);
+}
+.two-col-card h4{
+  font:700 16px 'Playfair Display',serif;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.two-col-card p{font-size:13.5px;line-height:1.78;color:var(--text2)}
+.col-badge{
+  padding:3px 10px;border-radius:999px;
+  font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+}
+.col-badge.formal{background:var(--accent-bg);color:var(--accent)}
+.col-badge.factica{background:var(--orange-bg);color:var(--orange)}
+
+/* ── SVG Pitagoras container ── */
+.pyth-demo-wrap{
+  margin:32px 0;border-radius:20px;
+  background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.pyth-tabs{
+  display:flex;border-bottom:1px solid var(--border);
+}
+.pyth-tab{
+  flex:1;padding:14px 18px;cursor:pointer;
+  font:700 12px 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text3);transition:all .25s;text-align:center;
+  border-bottom:3px solid transparent;
+}
+.pyth-tab:hover{color:var(--text);background:var(--bg3)}
+.pyth-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
+.pyth-panel{display:none;padding:32px}
+.pyth-panel.active{display:block}
+.pyth-explain{
+  margin-top:24px;padding:16px 20px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent-bg),var(--yellow-bg));
+  border:1px solid rgba(168,85,247,.2);
+  font-size:13.5px;line-height:1.8;color:var(--text2);
+}
+.pyth-explain strong{color:var(--text)}
+
+/* ── SVG visual ── */
+.pyth-svg-area{display:flex;justify-content:center;align-items:center;min-height:260px;position:relative}
+.pyth-svg-area svg{max-width:100%}
+
+/* ── Verification table ── */
+.verif-table{width:100%;border-collapse:collapse;font-size:13px}
+.verif-table thead tr{background:linear-gradient(90deg,var(--orange),var(--accent))}
+.verif-table thead th{color:#fff;padding:10px 14px;text-align:left;font:700 11px 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.verif-table tbody tr:nth-child(even){background:var(--bg3)}
+.verif-table tbody td{padding:10px 14px;color:var(--text2);border-bottom:1px solid var(--border)}
+.verif-table tbody tr:last-child td{border-bottom:none}
+.diff-chip{
+  display:inline-block;padding:2px 8px;border-radius:999px;
+  font-size:10px;font-weight:800;
+}
+.diff-chip.small{background:var(--green-bg);color:var(--green)}
+.diff-chip.medium{background:var(--yellow-bg);color:#92400e}
+.diff-chip.none{background:var(--blue-bg);color:var(--blue)}
+
+/* ── Biblioteca section ── */
+.biblioteca-section{
+  margin:40px 0;padding:36px;border-radius:20px;
+  background:linear-gradient(135deg,#0f0b1a 0%,#0d1117 100%);
+  border:2px solid rgba(168,85,247,.4);
+  position:relative;overflow:hidden;
+  color:#f0ece4;
+}
+.biblioteca-section:before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 10% 20%,rgba(168,85,247,.15) 0,transparent 40%),
+    radial-gradient(circle at 85% 80%,rgba(250,204,21,.1) 0,transparent 35%);
+  pointer-events:none;
+}
+.bib-inner{position:relative;z-index:1}
+.bib-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.bib-icon{
+  width:52px;height:52px;border-radius:14px;flex-shrink:0;
+  background:rgba(168,85,247,.2);border:1px solid rgba(168,85,247,.4);
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.bib-eyebrow{font-size:9px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.bib-title{font:700 20px 'Playfair Display',serif;color:#f0ece4}
+.bib-body{font:15px/1.85 'Libre Baskerville',serif;color:rgba(240,236,228,.82);margin-bottom:18px}
+.bib-quote{
+  border-left:4px solid var(--yellow);padding:16px 20px;
+  background:rgba(250,204,21,.07);border-radius:0 12px 12px 0;
+  margin:20px 0;
+  font:italic 15px/1.6 'Libre Baskerville',serif;color:rgba(240,236,228,.9);
+}
+.bib-quote cite{display:block;margin-top:8px;font:800 10px 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);font-style:normal}
+.bib-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:999px;
+  font:800 11px 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  transition:all .25s;
+}
+.bib-btn:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(168,85,247,.35)}
+.minkowski-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 14px;border-radius:999px;
+  background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.3);
+  font:700 12px 'Inter',sans-serif;color:var(--yellow);
+  margin-right:8px;margin-bottom:6px;
+}
+
+/* ── Synthesis ── */
+.synthesis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
+.syn-card{
+  padding:20px;border-radius:16px;
+  background:var(--bg3);border:1px solid var(--border);
+}
+.syn-num{
+  font:900 36px 'Playfair Display',serif;
+  color:rgba(168,85,247,.2);margin-bottom:4px;line-height:1;
+}
+.syn-card h4{font:700 14px 'Playfair Display',serif;margin-bottom:8px;color:var(--text)}
+.syn-card p{font-size:13px;line-height:1.72;color:var(--text2)}
+
+/* ── Questions ── */
+.question-list{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+.question-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 18px;border-radius:14px;
+  background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);
+}
+.q-num{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--yellow);color:#000;
+  display:flex;align-items:center;justify-content:center;
+  font:800 12px 'Inter',sans-serif;
+}
+.question-item p{font-size:14px;line-height:1.72;color:var(--text2)}
+
+/* ── Nav bottom ── */
+.nav-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-top:16px;flex-wrap:wrap;
+}
+.nav-bottom-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:999px;
+  font:800 11px 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;
+  transition:all .2s;
+}
+.nav-bottom-btn.back{background:var(--bg3);color:var(--text2)}
+.nav-bottom-btn.back:hover{background:var(--border);color:var(--text)}
+.nav-bottom-btn.next{background:var(--yellow);color:#000}
+.nav-bottom-btn.next:hover{background:var(--yellow-dark)}
+.nav-bottom-btn.disabled{opacity:.35;pointer-events:none;background:var(--bg3);color:var(--text3)}
+
+/* ── Responsive ── */
+@media(min-width:1100px){
+  .tnc{display:block}
+}
+@media(min-width:761px) and (max-width:1099px){
+  .article-wrap{grid-template-columns:1fr;gap:40px}
+  .sidebar{position:static;order:0}
+  .postulados-grid{grid-template-columns:repeat(3,1fr)}
+  .synthesis-grid{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .article-wrap{grid-template-columns:1fr;padding:40px 18px 60px;gap:32px}
+  .sidebar{position:static;order:0}
+  #topnav{padding:0 14px}
+  .tnl,.tnr{gap:8px}
+  .nav-pill{padding:6px 10px;font-size:10px}
+  .postulados-grid{grid-template-columns:repeat(2,1fr)}
+  .synthesis-grid{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+  .pyth-panel{padding:18px}
+  .biblioteca-section{padding:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="prog"></div>
+
+<!-- Top nav -->
+<nav id="topnav">
+  <div class="tnl">
+    <a href="index.html" class="nav-logo">F<span>&</span>C</a>
+    <span class="nav-sep">|</span>
+    <span class="u6-badge">U6 · C33</span>
+    <span class="nav-sep">|</span>
+    <span class="tnc">La geometría como caso bisagra</span>
+  </div>
+  <div class="tnr">
+    <button class="dtoggle" onclick="toggleDark()" aria-label="Modo oscuro"></button>
+    <a href="unidad6-clase32.html" class="nav-pill back"><i class="fa-solid fa-arrow-left"></i> Clase 32</a>
+    <a href="unidad6-clase34.html" class="nav-pill next"><i class="fa-solid fa-arrow-right"></i> Clase 34</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="art-hero">
+  <span class="float-sym">△</span>
+  <span class="float-sym">∥</span>
+  <span class="float-sym">⊥</span>
+  <span class="float-sym">π</span>
+  <span class="float-sym">√</span>
+  <span class="float-sym">∠</span>
+
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <span class="hero-badge fill">Unidad 6</span>
+      <span class="hero-badge outline">Clase 33</span>
+      <span class="hero-badge outline">Filosofía de la Ciencia</span>
+    </div>
+    <p class="eyebrow">Euclides · Pitágoras · Aristóteles · Minkowski</p>
+    <h1 class="hero-title">La geometría como<br><em>caso bisagra:</em><br>del terreno al teorema</h1>
+    <p class="hero-subtitle">La geometría existe dos veces: como ciencia formal (Euclides) y como ciencia fáctica (física del espacio). Entender la diferencia cambia cómo pensamos el conocimiento.</p>
+    <div class="hero-meta">
+      <span><i class="fa-solid fa-book-open"></i> Unidad 6 — Lógica y Sistemas</span>
+      <span><i class="fa-regular fa-clock"></i> Clase 33</span>
+      <span><i class="fa-solid fa-location-dot"></i> Los Polvorines, Buenos Aires</span>
+    </div>
+    <div class="hero-topics">
+      <span>Geometría formal</span>
+      <span>Geometría física</span>
+      <span>Método deductivo</span>
+      <span>Axioma y postulado</span>
+      <span>Pitágoras</span>
+      <span>Espacio-tiempo</span>
+    </div>
+    <a href="#intro" class="hero-scroll"><i class="fa-solid fa-chevron-down"></i> Comenzar lectura</a>
+  </div>
+</section>
+
+<!-- Article -->
+<div class="article-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-list"></i>
+        Contenidos
+      </div>
+      <ul class="toc-list" id="toc">
+        <li class="toc-item"><a href="#intro"><span class="toc-num">01</span> ¿Por qué la geometría?</a></li>
+        <li class="toc-item"><a href="#egipto"><span class="toc-num">02</span> El origen fáctico</a></li>
+        <li class="toc-item"><a href="#euclides"><span class="toc-num">03</span> Euclides y los Elementos</a></li>
+        <li class="toc-item"><a href="#formal-vs-factica"><span class="toc-num">04</span> Formal vs. física</a></li>
+        <li class="toc-item"><a href="#deductivo"><span class="toc-num">05</span> El método deductivo</a></li>
+        <li class="toc-item"><a href="#pitagoras-demo"><span class="toc-num">06</span> Actividad: demo vs. verif.</a></li>
+        <li class="toc-item"><a href="#nexo-biblioteca"><span class="toc-num">07</span> Minkowski y Einstein</a></li>
+        <li class="toc-item"><a href="#sintesis"><span class="toc-num">08</span> Síntesis</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-key"></i>
+        Conceptos clave
+      </div>
+      <ul class="concept-list">
+        <li><strong>Geometría formal:</strong> estudia entes abstractos, se valida por demostración</li>
+        <li><strong>Geometría física:</strong> estudia el espacio real, se valida por medición</li>
+        <li><strong>Axioma / postulado:</strong> enunciado que se toma como punto de partida sin demostrar</li>
+        <li><strong>Teorema:</strong> enunciado derivado lógicamente de los axiomas</li>
+        <li><strong>Demostración:</strong> cadena lógica que prueba un teorema a priori</li>
+        <li><strong>Verificación empírica:</strong> comprobación por medición, siempre con margen de error</li>
+        <li><strong>Silogismo:</strong> forma del razonamiento deductivo en Aristóteles</li>
+        <li><strong>Deducción:</strong> de lo general a lo particular con certeza lógica</li>
+        <li><strong>Tales:</strong> teorema sobre proporcionalidad</li>
+        <li><strong>Pitágoras:</strong> a² + b² = c² en triángulos rectángulos</li>
+        <li><strong>Euclidiano:</strong> geometría basada en los 5 postulados de Euclides</li>
+        <li><strong>Espacio-tiempo:</strong> unión de espacio y tiempo en Minkowski / Einstein</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-user"></i>
+        Protagonistas
+      </div>
+      <div class="author-list">
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--accent)">E</div>
+          <div class="author-info">
+            <div class="author-name">Euclides</div>
+            <div class="author-role">~325–265 a.C. — Geometría axiomática</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--blue)">A</div>
+          <div class="author-info">
+            <div class="author-name">Aristóteles</div>
+            <div class="author-role">384–322 a.C. — Silogismo y método deductivo</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--yellow);color:#000">P</div>
+          <div class="author-info">
+            <div class="author-name">Pitágoras</div>
+            <div class="author-role">~570–495 a.C. — Teorema + demostración</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--teal)">M</div>
+          <div class="author-info">
+            <div class="author-name">Hermann Minkowski</div>
+            <div class="author-role">1864–1909 — Geometría 4D (nexo)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-class-card">
+      <div class="nc-label">Próxima clase</div>
+      <div class="nc-title">Clase 34 — Las geometrías no euclidianas: cuando cambiar un axioma cambia el universo</div>
+      <a href="unidad6-clase34.html" class="nc-btn"><i class="fa-solid fa-arrow-right"></i> Clase 34</a>
+    </div>
+  </aside>
+
+  <!-- Article body -->
+  <main class="article-body">
+
+    <!-- 1. Intro -->
+    <section id="intro" class="reveal">
+      <h2><i class="fa-solid fa-compass-drafting" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>¿Por qué la geometría?</h2>
+      <p class="article-p dropcap">En la clase anterior estudiamos la distinción entre ciencias formales y ciencias fácticas. Hay un caso que merece atención especial, porque aparece en <em>ambos lados</em> de esa división al mismo tiempo: la geometría. No es una sola disciplina con un solo método, sino una palabra que esconde dos tipos de conocimiento radicalmente distintos.</p>
+      <p class="article-p">La geometría existe como ciencia formal cuando Euclides demuestra que la suma de los ángulos interiores de un triángulo es exactamente 180°, partiendo de cinco postulados y sin medir nada. Y existe como ciencia fáctica cuando un agrimensor mide una parcela de tierra, o cuando Einstein descubre que el espacio físico tiene curvatura y no obedece a Euclides. No son la misma cosa: usan métodos distintos y validan sus enunciados de manera diferente.</p>
+      <p class="article-p">La geometría es, entonces, un <strong>caso bisagra</strong>: nos permite ver con claridad la distinción entre lo formal y lo fáctico porque un mismo conjunto de figuras y relaciones puede ser abordado desde ambas perspectivas. Entender esto es entender algo profundo sobre cómo funciona el conocimiento científico.</p>
+
+      <div class="pull-quote">
+        <blockquote>"La geometría es una palabra con dos significados: uno para el matemático y otro para el agrimensor."</blockquote>
+        <cite>Paráfrasis introductoria</cite>
+      </div>
+
+      <p class="article-p">En esta clase vamos a recorrer ese doble camino: el origen práctico de la geometría en el antiguo Egipto, su transformación en ciencia formal con Euclides, la distinción entre demostrar y medir aplicada al teorema de Pitágoras, y un corolario extraordinario: cómo una geometría formal desarrollada sin pensar en aplicaciones físicas resultó ser exactamente el lenguaje que necesitaba la física más moderna.</p>
+    </section>
+
+    <!-- 2. Egipto -->
+    <section id="egipto" class="reveal">
+      <h2><i class="fa-solid fa-wheat-awn" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>El origen fáctico: medir la tierra</h2>
+      <p class="article-p">La geometría no nació en la mente de un filósofo contemplando formas abstractas. Nació en el barro del delta del Nilo, de una necesidad práctica urgente. El Nilo inundaba los campos agrícolas anualmente, borrando los límites de las parcelas. Cada año, al retirarse las aguas, los agrimensores debían reconstruir las demarcaciones del terreno. De esa necesidad surgió la geometría.</p>
+      <p class="article-p">La palabra misma lo confirma: <em>geometría</em> viene del griego <strong>geo</strong> (tierra) y <strong>metría</strong> (medición). Literalmente: <em>medición de la tierra</em>. No es una metáfora — era una descripción de oficio.</p>
+      <p class="article-p">El <strong>Papiro de Ahmes</strong> (hacia 1650 a.C.), también llamado Papiro de Rhind, contiene fórmulas empíricas para calcular áreas de distintas figuras. Por ejemplo, para el área de un círculo de diámetro d, los egipcios usaban:</p>
+
+      <div class="callout" style="justify-content:center;flex-direction:column;align-items:flex-start">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span class="callout-icon">📐</span>
+          <p style="font:700 18px 'Libre Baskerville',serif;color:var(--text)">A = (8d/9)² ≈ 3.16 × (d/2)²</p>
+        </div>
+        <p style="margin-top:8px;font-size:13.5px;line-height:1.78;color:var(--text2)">Esta fórmula egipcia usa un valor implícito de π ≈ 3.16 — cercano pero no exacto. Funcionaba bien para las necesidades prácticas de los agrimensores, pero no era exacta.</p>
+      </div>
+
+      <div class="callout" style="margin-top:8px">
+        <span class="callout-icon">💡</span>
+        <p><strong>Clave epistemológica:</strong> en la ciencia fáctica, la <em>aproximación útil</em> tiene valor. Los egipcios no necesitaban π exacto — necesitaban poder recalcular parcelas. En la ciencia formal, en cambio, la exactitud es obligatoria: un teorema que es "casi verdadero" no es un teorema.</p>
+      </div>
+
+      <!-- Tabla Egipto vs Grecia -->
+      <div class="table-wrap reveal">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Dimensión</th>
+              <th><i class="fa-solid fa-wheat-awn" style="margin-right:6px"></i>Egipto (~3000 a.C.)</th>
+              <th><i class="fa-solid fa-infinity" style="margin-right:6px"></i>Grecia (~300 a.C.)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Origen</td>
+              <td>Necesidad práctica: reparcelar campos tras inundaciones del Nilo</td>
+              <td>Reflexión filosófica: ¿qué son las figuras geométricas en sí mismas?</td>
+            </tr>
+            <tr>
+              <td>Método</td>
+              <td>Empírico: fórmulas derivadas de observación y prueba y error</td>
+              <td>Deductivo: demostración a partir de postulados</td>
+            </tr>
+            <tr>
+              <td>Validación</td>
+              <td>Funciona en la práctica: si la parcela tiene el tamaño correcto, la fórmula es buena</td>
+              <td>Coherencia lógica: si se sigue de los axiomas, es verdadero</td>
+            </tr>
+            <tr>
+              <td>Exactitud</td>
+              <td>Aproximada: π ≈ 3.16, suficiente para usos agrarios</td>
+              <td>Exacta: π es un número preciso aunque inexpresable como fracción</td>
+            </tr>
+            <tr>
+              <td>Tipo de ciencia</td>
+              <td>Fáctica (orientada a hechos del mundo real)</td>
+              <td>Formal (orientada a relaciones entre entes abstractos)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="article-p">Esta transición del método empírico al método deductivo es una de las transformaciones más significativas en la historia del pensamiento. No fue un paso pequeño: fue una revolución en cómo se concibe el conocimiento.</p>
+    </section>
+
+    <!-- 3. Euclides -->
+    <section id="euclides" class="reveal">
+      <h2><i class="fa-solid fa-building-columns" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Euclides y los Elementos: el modelo deductivo</h2>
+      <p class="article-p">Hacia el año 300 a.C., en Alejandría, Euclides realizó una hazaña intelectual sin precedentes: organizó todo el conocimiento geométrico disponible en los <em>Elementos</em>, una obra en trece libros con aproximadamente 465 proposiciones. Pero lo notable no fue la cantidad de conocimiento reunido, sino <strong>cómo lo organizó</strong>.</p>
+      <p class="article-p">La estructura de los Elementos es la siguiente: Euclides parte de un conjunto mínimo de puntos de partida — definiciones, nociones comunes y postulados — y a partir de ellos <em>demuestra</em> todo lo demás. No hay ni una sola proposición en los trece libros que no se derive lógicamente de esos puntos de partida. Esto es el método deductivo en su forma más pura.</p>
+
+      <p class="article-p" style="margin-bottom:12px"><strong>Los cinco postulados de Euclides:</strong></p>
+      <div class="postulados-grid reveal">
+        <div class="postulado-card">
+          <div class="post-num">1</div>
+          <p class="post-text">Entre dos puntos dados se puede trazar una recta</p>
+          <span class="post-label">Postulado 1</span>
+        </div>
+        <div class="postulado-card">
+          <div class="post-num">2</div>
+          <p class="post-text">Una recta puede extenderse indefinidamente en línea recta</p>
+          <span class="post-label">Postulado 2</span>
+        </div>
+        <div class="postulado-card">
+          <div class="post-num">3</div>
+          <p class="post-text">Con un centro dado y un radio dado se puede trazar una circunferencia</p>
+          <span class="post-label">Postulado 3</span>
+        </div>
+        <div class="postulado-card">
+          <div class="post-num">4</div>
+          <p class="post-text">Todos los ángulos rectos son iguales entre sí</p>
+          <span class="post-label">Postulado 4</span>
+        </div>
+        <div class="postulado-card special">
+          <div class="post-num">5</div>
+          <p class="post-text">Por un punto exterior a una recta pasa una, y solo una, recta paralela a ella</p>
+          <span class="post-label">Postulado 5 — el problemático</span>
+        </div>
+      </div>
+
+      <div class="callout accent reveal">
+        <span class="callout-icon">🔍</span>
+        <p>El quinto postulado tiene una formulación notablemente más compleja y menos "evidente" que los cuatro anteriores. Esto fue sospechoso durante más de dos mil años: si realmente es tan obvio como un axioma debe ser, ¿por qué cuesta tanto enunciarlo? ¿No se podría <em>demostrar</em> a partir de los otros cuatro? Éste fue uno de los grandes problemas de la matemática hasta el siglo XIX. Lo exploraremos en las clases 34 y 35.</p>
+      </div>
+
+      <p class="article-p">Los <em>Elementos</em> de Euclides se convirtieron en el libro más leído después de la Biblia durante siglos. Durante dos milenios fue el ideal del conocimiento: así es como debería organizarse cualquier ciencia digna de ese nombre. Empezar por verdades autoevidentes e irrefutables, y derivar todo lo demás mediante razonamiento puro.</p>
+    </section>
+
+    <!-- 4. Formal vs Fáctica -->
+    <section id="formal-vs-factica" class="reveal">
+      <h2><i class="fa-solid fa-scale-balanced" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Geometría formal vs. geometría física</h2>
+      <p class="article-p">La geometría de Euclides estudia entes abstractos: puntos sin dimensión, rectas sin grosor, círculos perfectos. Ninguno de esos objetos existe en el mundo físico — son idealizaciones. Un punto geométrico no ocupa espacio. Una recta euclídiana no tiene ancho. Un círculo perfecto no puede fabricarse con ningún material.</p>
+      <p class="article-p">La geometría física, en cambio, estudia el espacio real y usa medición. Sus objetos son concretos: terrenos, trayectorias, estructuras, el propio espacio del universo. Sus enunciados se verifican midiendo, y toda medición tiene un margen de error instrumental.</p>
+      <p class="article-p">Esta distinción se vuelve perfectamente nítida cuando miramos el <strong>teorema de Pitágoras</strong>:</p>
+
+      <div class="two-col reveal">
+        <div class="two-col-card">
+          <h4><span class="col-badge formal">Geometría Formal</span></h4>
+          <p>El teorema <em>a² + b² = c²</em> se demuestra a partir de los postulados euclidianos mediante una cadena lógica. La demostración es <strong>necesariamente verdadera</strong> en cualquier sistema euclidiano. No necesita medir nada. No puede refutarse con un experimento. Su certeza es lógica, no empírica.</p>
+        </div>
+        <div class="two-col-card">
+          <h4><span class="col-badge factica">Geometría Física</span></h4>
+          <p>Para verificar el teorema en el mundo real, medimos los lados de triángulos rectángulos físicos. Siempre existe un margen de error instrumental. El resultado es <strong>probablemente verdadero</strong> dentro de cierta precisión. Pueden aparecer discrepancias si el espacio real no es euclidiano.</p>
+        </div>
+      </div>
+
+      <p class="article-p">El mismo enunciado — "en un triángulo rectángulo, a² + b² = c²" — tiene dos estatutos epistemológicos completamente distintos según desde qué ciencia lo abordemos. En matemática, es una verdad necesaria y a priori. En física, es una hipótesis que debemos verificar y que puede resultar falsa en ciertas condiciones.</p>
+
+      <div class="callout blue">
+        <span class="callout-icon">📏</span>
+        <p><strong>Demostrar no es lo mismo que medir.</strong> Un teorema no mejora con más datos — una medición sí. Puedo tener la demostración más elegante del teorema de Pitágoras y eso no me dice nada sobre si el espacio del universo es euclidiano. Y si mido un millón de triángulos con resultados perfectos, eso no es lo mismo que haberlo demostrado.</p>
+      </div>
+
+      <p class="article-p">El teorema de Tales presenta la misma distinción: como enunciado formal, se demuestra por semejanza de triángulos a partir de los axiomas. Como enunciado fáctico, se verifica midiendo segmentos en planos reales, con todos los límites de precisión que eso implica.</p>
+    </section>
+
+    <!-- 5. Deductivo -->
+    <section id="deductivo" class="reveal">
+      <h2><i class="fa-solid fa-diagram-successor" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>El método deductivo como ideal cognitivo</h2>
+      <p class="article-p">¿Por qué Euclides fue tan influyente? Porque ofrecía algo que ninguna ciencia empírica puede ofrecer: <strong>certeza absoluta</strong>. Los experimentos dan probabilidades, no certezas. Las observaciones pueden estar mal, los instrumentos pueden fallar, los sentidos engañan. Pero un teorema demostrado con rigor lógico es irrefutable mientras los axiomas sean aceptados.</p>
+      <p class="article-p">Esta idea conecta directamente con el <strong>silogismo aristotélico</strong>, la forma más básica del razonamiento deductivo. Aristóteles identificó la estructura del argumento válido:</p>
+
+      <div class="callout" style="flex-direction:column;align-items:flex-start">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <span class="callout-icon">🏛️</span>
+          <div>
+            <p style="font:700 15px 'Playfair Display',serif;color:var(--text);margin-bottom:12px">El silogismo Barbara — la forma deductiva canónica</p>
+            <p style="font:italic 15px/1.9 'Libre Baskerville',serif;color:var(--text2)">Todo M es P<br>Todo S es M<br><span style="border-top:1px solid var(--border);display:inline-block;padding-top:6px;margin-top:4px;font-weight:700;color:var(--text)">Por lo tanto, todo S es P</span></p>
+            <p style="font-size:12px;color:var(--text3);margin-top:10px">Ejemplo: Todo mamífero respira / Todo delfín es mamífero / Luego todo delfín respira</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="article-p">En la antigüedad, el ideal era que toda ciencia fuera deductiva: partir de verdades autoevidentes (axiomas) y derivar mediante silogismos todo el conocimiento disponible. La geometría euclidiana era la prueba de que era posible. Aristóteles intentó construir la biología, la física y la metafísica con ese mismo esquema.</p>
+      <p class="article-p">El problema profundo es: <strong>¿cuándo un axioma es realmente "autoevidente"?</strong> El primer postulado de Euclides — que por dos puntos pasa una recta — parece evidente. Pero el quinto postulado — la cuestión de las paralelas — no es tan obvio. Y si no es tan obvio, quizás puede demostrarse a partir de los otros cuatro. Si puede demostrarse, entonces no es un axioma sino un teorema. Si no puede demostrarse, entonces quizás puede <em>reemplazarse</em> por otro enunciado diferente y construir una geometría distinta.</p>
+
+      <div class="callout blue reveal">
+        <span class="callout-icon">🔮</span>
+        <p>Este ideal deductivo explica por qué el quinto postulado fue un problema histórico monumental. Los matemáticos intentaron durante dos mil años demostrar que se seguía de los otros cuatro. Cuando en el siglo XIX descubrieron que era independiente — y que podía reemplazarse — abrieron la puerta a las geometrías no euclidianas. Eso cambia la historia de la matemática <em>y</em> la historia del universo. Lo veremos en la próxima clase.</p>
+      </div>
+    </section>
+
+    <!-- 6. Pitagoras demo -->
+    <section id="pitagoras-demo" class="reveal">
+      <h2><i class="fa-solid fa-flask" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Actividad: demostración vs. verificación empírica</h2>
+      <p class="article-p">Ahora vamos a ver la diferencia epistemológica en acción. El teorema de Pitágoras puede abordarse de dos maneras completamente distintas. Explorá ambas y comparalas.</p>
+
+      <!-- Interactive Demo -->
+      <div class="pyth-demo-wrap reveal" id="pythDemoWrap">
+        <div class="pyth-tabs">
+          <div class="pyth-tab active" onclick="showPythTab('formal')" id="tab-formal">
+            <i class="fa-solid fa-infinity" style="margin-right:6px"></i>Demostración formal
+          </div>
+          <div class="pyth-tab" onclick="showPythTab('empirica')" id="tab-empirica">
+            <i class="fa-solid fa-ruler" style="margin-right:6px"></i>Verificación empírica
+          </div>
+        </div>
+
+        <!-- Panel Formal -->
+        <div class="pyth-panel active" id="panel-formal">
+          <p style="font-size:13.5px;line-height:1.8;color:var(--text2);margin-bottom:20px">Esta es la <strong>prueba por rearranjo</strong> (proof without words). Cuatro triángulos rectángulos idénticos con catetos a y b e hipotenusa c pueden organizarse de dos maneras dentro del mismo cuadrado de lado (a+b), demostrando que a² + b² = c².</p>
+
+          <div class="pyth-svg-area">
+            <svg id="pythSvg" width="380" height="260" viewBox="0 0 380 260" style="overflow:visible">
+              <!-- Cuadrado grande izquierdo: (a+b)² -->
+              <g id="leftSquare" transform="translate(20,20)">
+                <rect x="0" y="0" width="160" height="160" fill="none" stroke="var(--border)" stroke-width="2" stroke-dasharray="6,3"/>
+                <!-- 4 triángulos en disposición: c² en centro -->
+                <!-- Triángulo 1: arriba izquierda -->
+                <polygon points="0,0 100,0 0,60" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Triángulo 2: arriba derecha -->
+                <polygon points="100,0 160,0 160,100" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Triángulo 3: abajo derecha -->
+                <polygon points="160,100 160,160 60,160" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Triángulo 4: abajo izquierda -->
+                <polygon points="0,60 60,160 0,160" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Cuadrado c² en centro -->
+                <polygon points="100,0 160,100 60,160 0,60" fill="rgba(250,204,21,.25)" stroke="var(--yellow)" stroke-width="2"/>
+                <text x="80" y="85" text-anchor="middle" font-family="Libre Baskerville,serif" font-size="15" font-style="italic" fill="var(--yellow-dark)" font-weight="700">c²</text>
+                <text x="38" y="24" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="rgba(168,85,247,.9)" font-weight="700">a</text>
+                <text x="136" y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="rgba(168,85,247,.9)" font-weight="700">b</text>
+              </g>
+
+              <!-- Flecha central -->
+              <text x="200" y="105" text-anchor="middle" font-size="24" fill="var(--accent)" font-family="Inter,sans-serif" font-weight="700">=</text>
+              <text x="200" y="130" text-anchor="middle" font-size="11" fill="var(--text3)" font-family="Inter,sans-serif" font-weight="700">misma</text>
+              <text x="200" y="145" text-anchor="middle" font-size="11" fill="var(--text3)" font-family="Inter,sans-serif" font-weight="700">área</text>
+
+              <!-- Cuadrado grande derecho: a² + b² -->
+              <g id="rightSquare" transform="translate(215,20)">
+                <rect x="0" y="0" width="160" height="160" fill="none" stroke="var(--border)" stroke-width="2" stroke-dasharray="6,3"/>
+                <!-- 4 triángulos en otra disposición -->
+                <polygon points="0,0 100,0 100,60 0,60" fill="none"/>
+                <!-- Triángulo 1 -->
+                <polygon points="0,60 100,0 100,60" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Triángulo 2 -->
+                <polygon points="0,60 0,160 100,160" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Triángulo 3 -->
+                <polygon points="100,0 160,0 160,100" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Triángulo 4 -->
+                <polygon points="100,60 160,100 100,160" fill="rgba(168,85,247,.35)" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Cuadrado a² -->
+                <rect x="0" y="0" width="100" height="60" fill="rgba(59,130,246,.22)" stroke="var(--blue)" stroke-width="2"/>
+                <text x="50" y="35" text-anchor="middle" font-family="Libre Baskerville,serif" font-size="14" font-style="italic" fill="var(--blue)" font-weight="700">a²</text>
+                <!-- Cuadrado b² -->
+                <rect x="100" y="100" width="60" height="60" fill="rgba(34,197,94,.22)" stroke="var(--green)" stroke-width="2"/>
+                <text x="130" y="134" text-anchor="middle" font-family="Libre Baskerville,serif" font-size="14" font-style="italic" fill="var(--green)" font-weight="700">b²</text>
+              </g>
+
+              <!-- Ecuación -->
+              <text x="190" y="220" text-anchor="middle" font-family="Libre Baskerville,serif" font-size="18" font-weight="700" fill="var(--text)">a² + b² = c²</text>
+              <text x="190" y="245" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="var(--text3)">Los 4 triángulos ocupan el mismo espacio en ambos cuadrados</text>
+            </svg>
+          </div>
+
+          <div class="pyth-explain">
+            <strong>¿Qué hace esta demostración?</strong> Muestra que los cuatro triángulos se pueden reorganizar de dos maneras distintas dentro del mismo cuadrado. La diferencia entre las dos configuraciones es exactamente la diferencia entre c² (izquierda) y a² + b² (derecha). Como los cuadrados son iguales y los cuatro triángulos son idénticos, c² = a² + b². Esta prueba no mide nada — es un argumento sobre formas abstractas. Su validez no depende de ningún triángulo físico.
+          </div>
+        </div>
+
+        <!-- Panel Empírico -->
+        <div class="pyth-panel" id="panel-empirica">
+          <p style="font-size:13.5px;line-height:1.8;color:var(--text2);margin-bottom:20px">A continuación, cinco triángulos rectángulos medidos con instrumentos reales. Notá las pequeñas diferencias entre a² + b² calculado y c² medido — son el <em>error de medición instrumental</em>, siempre presente en la ciencia fáctica.</p>
+
+          <div class="table-wrap" style="margin:0">
+            <table class="verif-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Cateto a (cm)</th>
+                  <th>Cateto b (cm)</th>
+                  <th>a² + b²</th>
+                  <th>Hipotenusa c (cm)</th>
+                  <th>c² medido</th>
+                  <th>Diferencia</th>
+                  <th>Error</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>3.00</td>
+                  <td>4.00</td>
+                  <td>25.00</td>
+                  <td>5.01</td>
+                  <td>25.10</td>
+                  <td>+0.10</td>
+                  <td><span class="diff-chip small">±0.1 cm</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>5.00</td>
+                  <td>12.00</td>
+                  <td>169.00</td>
+                  <td>12.98</td>
+                  <td>168.48</td>
+                  <td>−0.52</td>
+                  <td><span class="diff-chip small">±0.1 cm</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>8.00</td>
+                  <td>6.00</td>
+                  <td>100.00</td>
+                  <td>10.02</td>
+                  <td>100.40</td>
+                  <td>+0.40</td>
+                  <td><span class="diff-chip small">±0.1 cm</span></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>7.00</td>
+                  <td>24.00</td>
+                  <td>625.00</td>
+                  <td>24.97</td>
+                  <td>623.50</td>
+                  <td>−1.50</td>
+                  <td><span class="diff-chip medium">±0.5 cm</span></td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>9.00</td>
+                  <td>40.00</td>
+                  <td>1681.00</td>
+                  <td>41.03</td>
+                  <td>1683.46</td>
+                  <td>+2.46</td>
+                  <td><span class="diff-chip medium">±0.5 cm</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pyth-explain" style="margin-top:20px">
+            <strong>¿Qué muestra esta tabla?</strong> Que ninguna medición produce exactamente a² + b² = c². Siempre hay una pequeña diferencia — no porque el teorema sea falso, sino porque los instrumentos no son perfectos, los ángulos rectos no son exactamente 90°, y las superficies tienen imperfecciones. La ciencia fáctica trabaja con aproximaciones; la formal con exactitudes.
+          </div>
+
+          <div style="margin-top:20px;padding:16px 20px;border-radius:12px;background:var(--bg3);border:1px solid var(--border)">
+            <p style="font:700 14px 'Playfair Display',serif;color:var(--text);margin-bottom:10px">Pregunta para pensar:</p>
+            <p style="font-size:14px;line-height:1.78;color:var(--text2)">¿Cuál de los dos métodos te convence más? ¿El que demuestra o el que mide? ¿Es posible que algo sea formalmente verdadero pero fácticamente falso?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout accent reveal" style="margin-top:28px">
+        <span class="callout-icon">🧠</span>
+        <p>La <strong>convicción lógica</strong> es necesaria y a priori: no depende de experiencia alguna. La <strong>convicción empírica</strong> es probable y a posteriori: depende de los datos disponibles y siempre puede ser revisada. Un matemático y un físico que leen el mismo teorema lo están leyendo de maneras epistemológicamente distintas.</p>
+      </div>
+    </section>
+
+    <!-- 7. Nexo Biblioteca -->
+    <section id="nexo-biblioteca" class="reveal">
+      <div class="biblioteca-section">
+        <div class="bib-inner">
+          <div class="bib-header">
+            <div class="bib-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div>
+              <div class="bib-eyebrow">Para ir más lejos — Nexo histórico</div>
+              <div class="bib-title">¿Y si el espacio físico no es euclidiano?</div>
+            </div>
+          </div>
+
+          <p class="bib-body">Durante siglos se asumió que la geometría formal de Euclides y la geometría del espacio físico eran la misma cosa. En el siglo XIX, matemáticos como Gauss, Lobachevski, Bolyai y Riemann demostraron que es posible construir geometrías completamente consistentes que niegan el quinto postulado — las llamadas <strong>geometrías no euclidianas</strong>. Lo veremos en detalle en las próximas clases. Pero aquí queremos adelantar algo extraordinario.</p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin:16px 0">
+            <span class="minkowski-chip"><i class="fa-solid fa-atom" style="font-size:11px"></i> Relatividad Especial (1905)</span>
+            <span class="minkowski-chip"><i class="fa-solid fa-clock" style="font-size:11px"></i> Espacio-tiempo (1907)</span>
+            <span class="minkowski-chip"><i class="fa-solid fa-circle-nodes" style="font-size:11px"></i> Geometría de Riemann (1854)</span>
+            <span class="minkowski-chip"><i class="fa-solid fa-star" style="font-size:11px"></i> Relatividad General (1915)</span>
+          </div>
+
+          <p class="bib-body"><strong>Hermann Minkowski (1864–1909)</strong> fue profesor de Albert Einstein en el ETH Zürich. En 1907, dos años después de que Einstein publicara la Relatividad Especial, Minkowski mostró que esa teoría equivale matemáticamente a una geometría de cuatro dimensiones: tres espaciales y una temporal. El espacio y el tiempo no son entidades separadas — son partes de un único objeto geométrico: el <em>espacio-tiempo</em>.</p>
+
+          <div class="bib-quote">
+            "De ahora en adelante, el espacio por sí solo y el tiempo por sí solo están condenados a desvanecerse como meras sombras, y solo una unión de los dos preservará una realidad independiente."
+            <cite>Hermann Minkowski, Colonia, 1908</cite>
+          </div>
+
+          <p class="bib-body">La reacción inicial de Einstein fue llamarlo <em>"erudición matemática superflua"</em>. Pocos años después reconoció que era absolutamente esencial: para formular la Relatividad General (1915), Einstein necesitó precisamente la geometría de Riemann — una geometría no euclidiana con curvatura variable. La gravedad, en la visión de Einstein, no es una fuerza sino la <strong>curvatura del espacio-tiempo</strong>. Y esa curvatura se describe con la misma geometría formal que Riemann había desarrollado en 1854, sin pensar en absoluto en aplicaciones físicas.</p>
+
+          <p class="bib-body" style="font:700 14px 'Playfair Display',serif;color:rgba(240,236,228,.95);margin-bottom:6px">Conclusión pedagógica:</p>
+          <p class="bib-body">Una geometría formal desarrollada sin ningún propósito físico en mente — la geometría riemanniana, creada como ejercicio matemático puro — resultó ser exactamente el lenguaje que la física necesitaba para describir la gravedad y la estructura del universo. Esto es una demostración extraordinaria de la <em>efectividad irracional de las matemáticas</em>, como la llamó el físico Eugene Wigner en 1960.</p>
+
+          <a href="biblioteca.html" class="bib-btn"><i class="fa-solid fa-arrow-right"></i> Explorar más en la Biblioteca</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Síntesis -->
+    <section id="sintesis" class="reveal">
+      <h2><i class="fa-solid fa-lightbulb" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Síntesis de la clase</h2>
+
+      <div class="synthesis-grid">
+        <div class="syn-card">
+          <div class="syn-num">01</div>
+          <h4>Doble naturaleza de la geometría</h4>
+          <p>La geometría existe como ciencia formal (Euclides, entes abstractos, demostración) y como ciencia fáctica (agrimensura, espacio físico, medición). Son dos tipos de conocimiento distintos con criterios de validación distintos.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">02</div>
+          <h4>Origen empírico, transformación formal</h4>
+          <p>La geometría nació de una necesidad práctica en Egipto y fue transformada en sistema deductivo por los griegos. Esta transformación es un hito en la historia del pensamiento: el pasaje de lo aproximado a lo exacto, de lo empírico a lo necesario.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">03</div>
+          <h4>Demostrar ≠ Medir</h4>
+          <p>Un teorema demostrado es verdadero por razones lógicas, sin importar cuántos experimentos se hagan. Una medición verifica con cierta precisión, pero nunca con certeza absoluta. Pitágoras puede demostrarse y también verificarse; son actos epistemológicos completamente distintos.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">04</div>
+          <h4>Geometría formal y universo real</h4>
+          <p>Una geometría formal (Riemann, 1854) puede acabar describiendo el universo real (Einstein, 1915). Esto muestra que la distinción formal/fáctica no implica que lo formal sea irrelevante para lo físico — al contrario, puede ser indispensable.</p>
+        </div>
+      </div>
+
+      <h3 style="font:700 18px 'Playfair Display',serif;margin:36px 0 16px;color:var(--text)">Preguntas para debatir en clase</h3>
+      <div class="question-list">
+        <div class="question-item">
+          <div class="q-num">1</div>
+          <p>¿Tiene sentido decir que Euclides "descubrió" los teoremas de geometría o que los "inventó"? ¿En qué se diferencia eso de lo que hace un físico cuando descubre una ley natural?</p>
+        </div>
+        <div class="question-item">
+          <div class="q-num">2</div>
+          <p>Si el universo real resulta ser no euclidiano (como lo muestra la Relatividad General), ¿eso significa que Euclides estaba equivocado? ¿O que la geometría euclidiana sigue siendo "verdadera" en algún sentido?</p>
+        </div>
+        <div class="question-item">
+          <div class="q-num">3</div>
+          <p>¿Por qué las matemáticas, siendo una ciencia formal que no estudia el mundo, resultan tan útiles para describir el mundo? ¿Es una coincidencia o hay algo más profundo detrás?</p>
+        </div>
+      </div>
+
+      <!-- Nav bottom -->
+      <div class="nav-bottom" style="margin-top:40px">
+        <a href="unidad6-clase32.html" class="nav-bottom-btn back"><i class="fa-solid fa-arrow-left"></i> Clase 32 — Ciencias formales y fácticas</a>
+        <a href="unidad6-clase34.html" class="nav-bottom-btn next">Clase 34 — Geometrías no euclidianas <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ── Dark mode ── */
+(function(){
+  const saved = localStorage.getItem('theme');
+  if(saved === 'dark') document.documentElement.classList.add('dark');
+})();
+function toggleDark(){
+  const html = document.documentElement;
+  html.classList.toggle('dark');
+  localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+}
+
+/* ── Progress bar ── */
+window.addEventListener('scroll', function(){
+  const prog = document.getElementById('prog');
+  if(!prog) return;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (docH > 0 ? (window.scrollY / docH * 100) : 0) + '%';
+});
+
+/* ── Reveal on scroll ── */
+const revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
+
+/* ── TOC active ── */
+(function(){
+  const sections = document.querySelectorAll('.article-body section[id]');
+  const tocLinks = document.querySelectorAll('.toc-item a');
+  if(!sections.length) return;
+  const obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        const id = e.target.getAttribute('id');
+        tocLinks.forEach(function(a){
+          const href = a.getAttribute('href');
+          a.classList.toggle('active', href === '#' + id);
+        });
+      }
+    });
+  }, {rootMargin:'-20% 0px -70% 0px', threshold: 0});
+  sections.forEach(function(s){ obs.observe(s); });
+})();
+
+/* ── Pythagorean tabs ── */
+function showPythTab(mode){
+  ['formal','empirica'].forEach(function(m){
+    document.getElementById('panel-' + m).classList.toggle('active', m === mode);
+    document.getElementById('tab-' + m).classList.toggle('active', m === mode);
+  });
+}
+</script>
+</body>
+</html>

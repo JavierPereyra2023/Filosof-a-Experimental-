@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas axiomáticos: los ladrillos del razonamiento formal | FILOSOFÍA & CIENCIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+/* ── Variables ── */
+:root{
+  --yellow:#facc15;--yellow-dark:#eab308;--yellow-bg:rgba(250,204,21,.09);
+  --accent:#a855f7;--accent-bg:rgba(168,85,247,.09);--accent-dark:#9333ea;
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.09);
+  --green:#22c55e;--green-bg:rgba(34,197,94,.09);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.09);
+  --orange:#f97316;--orange-bg:rgba(249,115,22,.09);
+  --teal:#14b8a6;--teal-bg:rgba(20,184,166,.09);
+  --bg:#f9f7f4;--bg2:#ffffff;--bg3:#f1ede6;
+  --card:#ffffff;--text:#1a1a1a;--text2:#3d3d3d;--text3:#6b6b6b;
+  --border:#e0d9d0;--shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.15);
+  --radius:20px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.dark{--bg:#111;--bg2:#1a1a1a;--bg3:#222;--card:#1e1e1e;--text:#f0ece4;--text2:#c8c0b4;--text3:#91897f;--border:#333;--shadow:0 6px 28px rgba(0,0,0,.35)}
+
+/* ── Reset ── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background .4s,color .4s;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--accent)}
+
+/* ── Progress bar ── */
+#prog{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--yellow),var(--accent));z-index:9999;transition:width .1s}
+
+/* ── Top nav ── */
+#topnav{
+  position:sticky;top:0;z-index:50;height:56px;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 28px;background:var(--bg2);
+  border-bottom:1px solid var(--border);box-shadow:var(--shadow);
+}
+.tnl,.tnr{display:flex;align-items:center;gap:12px}
+.tnc{font:700 13px 'Playfair Display',serif;color:var(--text2);display:none}
+.nav-sep{color:var(--border);font-size:18px;font-weight:300}
+.u6-badge{
+  font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-bg);
+  border:1px solid rgba(168,85,247,.3);padding:3px 12px;border-radius:999px;
+  white-space:nowrap;
+}
+.nav-logo{font:900 16px 'Playfair Display',serif;letter-spacing:-.02em}
+.nav-logo span{color:var(--accent)}
+.nav-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;border-radius:999px;
+  font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  transition:all .2s;cursor:pointer;white-space:nowrap;
+}
+.nav-pill.back{background:var(--bg3);color:var(--text3)}
+.nav-pill.back:hover{background:var(--border);color:var(--text)}
+.nav-pill.next{background:var(--yellow);color:#000}
+.nav-pill.next:hover{background:var(--yellow-dark)}
+.nav-pill.disabled{opacity:.35;pointer-events:none;cursor:default}
+.dtoggle{
+  width:38px;height:20px;border:1px solid var(--border);border-radius:999px;
+  background:transparent;position:relative;cursor:pointer;transition:.3s;flex-shrink:0;
+}
+.dtoggle:after{
+  content:'';position:absolute;left:3px;top:50%;
+  width:13px;height:13px;border-radius:50%;
+  background:var(--text3);transform:translateY(-50%);transition:.3s;
+}
+.dark .dtoggle{background:var(--yellow);border-color:var(--yellow)}
+.dark .dtoggle:after{left:21px;background:#000}
+
+/* ── Hero ── */
+#art-hero{
+  min-height:92vh;padding:96px 24px 88px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#fff;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 25%,rgba(168,85,247,.25) 0,transparent 38%),
+    radial-gradient(circle at 82% 18%,rgba(250,204,21,.2) 0,transparent 30%),
+    radial-gradient(circle at 55% 80%,rgba(20,184,166,.18) 0,transparent 32%),
+    linear-gradient(150deg,#0a0a0f 0%,#0f0b1a 40%,#0d1117 100%);
+}
+#art-hero:before{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.float-sym{
+  position:absolute;font-family:'Libre Baskerville',serif;
+  color:rgba(168,85,247,.15);font-weight:400;
+  animation:floatSym 15s ease-in-out infinite;
+  user-select:none;pointer-events:none;
+}
+.float-sym:nth-child(1){font-size:80px;left:6%;top:14%;animation-duration:16s}
+.float-sym:nth-child(2){font-size:60px;right:8%;top:18%;color:rgba(250,204,21,.14);animation-duration:13s;animation-delay:-3s}
+.float-sym:nth-child(3){font-size:68px;left:14%;bottom:24%;color:rgba(20,184,166,.14);animation-duration:17s;animation-delay:-6s}
+.float-sym:nth-child(4){font-size:48px;right:14%;bottom:20%;animation-duration:14s;animation-delay:-9s}
+.float-sym:nth-child(5){font-size:38px;left:40%;top:8%;color:rgba(250,204,21,.1);animation-duration:18s;animation-delay:-4s}
+.float-sym:nth-child(6){font-size:52px;right:30%;bottom:26%;color:rgba(20,184,166,.1);animation-duration:12s;animation-delay:-7s}
+@keyframes floatSym{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  33%{transform:translateY(-16px) rotate(4deg)}
+  66%{transform:translateY(9px) rotate(-3deg)}
+}
+.hero-inner{position:relative;z-index:2;max-width:980px}
+.hero-breadcrumb{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.hero-badge{
+  padding:4px 14px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+}
+.hero-badge.fill{background:var(--accent);color:#fff}
+.hero-badge.outline{border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.eyebrow{margin-bottom:18px;font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.hero-title{font:900 clamp(40px,7vw,82px)/.9 'Playfair Display',serif;letter-spacing:-.03em;margin-bottom:22px}
+.hero-title em{color:var(--yellow);font-style:italic}
+.hero-subtitle{
+  max-width:700px;margin:0 auto 32px;
+  font:italic clamp(15px,2vw,19px)/1.75 'Libre Baskerville',serif;
+  color:rgba(255,255,255,.78);
+}
+.hero-meta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:26px;font-size:12px;color:rgba(255,255,255,.65)}
+.hero-meta i{color:var(--yellow)}
+.hero-topics{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.hero-topics span{
+  padding:6px 14px;border-radius:999px;
+  border:1px solid rgba(168,85,247,.35);background:rgba(168,85,247,.1);
+  color:rgba(200,150,255,.9);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.hero-scroll{
+  margin-top:44px;display:inline-flex;align-items:center;gap:10px;
+  padding:12px 24px;border-radius:999px;
+  background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.35);
+  color:rgba(255,255,255,.8);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .25s;
+}
+.hero-scroll:hover{background:rgba(168,85,247,.3);color:#fff}
+
+/* ── Layout ── */
+.article-wrap{
+  max-width:1240px;margin:0 auto;
+  padding:72px 28px 92px;
+  display:grid;grid-template-columns:260px 1fr;gap:56px;
+  align-items:start;
+}
+.article-body{min-width:0}
+.sidebar{position:sticky;top:72px;align-self:start;order:-1}
+
+/* ── Sidebar ── */
+.sidebar-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:20px;box-shadow:var(--shadow);
+  margin-bottom:20px;
+}
+.sidebar-card-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+  font:800 10px 'Inter',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);
+}
+.sidebar-card-header i{
+  width:24px;height:24px;border-radius:8px;
+  background:var(--yellow);color:#000;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:10px;
+  font-size:12px;font-weight:500;color:var(--text3);
+  transition:all .2s;border-left:2px solid transparent;
+}
+.toc-item a:hover{background:var(--bg3);color:var(--text);border-left-color:var(--accent)}
+.toc-item a.active{background:var(--accent-bg);color:var(--accent);border-left-color:var(--accent);font-weight:700}
+.toc-num{
+  font:800 10px 'Inter',sans-serif;letter-spacing:.06em;
+  color:var(--accent);background:var(--accent-bg);
+  min-width:22px;height:22px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.toc-item a.active .toc-num{background:var(--accent);color:#fff}
+.concept-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.concept-list li{font-size:13px;line-height:1.65;color:var(--text2);padding-left:14px;position:relative}
+.concept-list li:before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.concept-list li strong{color:var(--text);font-weight:700}
+.author-list{display:flex;flex-direction:column;gap:10px}
+.author-card{display:flex;align-items:center;gap:10px}
+.author-icon{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font:700 14px 'Playfair Display',serif;color:#fff;
+  background:var(--accent);
+}
+.author-info{flex:1;min-width:0}
+.author-name{font-size:13px;font-weight:700;color:var(--text)}
+.author-role{font-size:11px;color:var(--text3)}
+.next-class-card{
+  background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(250,204,21,.08));
+  border:1px solid rgba(168,85,247,.25);border-radius:14px;padding:18px;
+}
+.next-class-card .nc-label{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.next-class-card .nc-title{font:700 14px 'Playfair Display',serif;color:var(--text);margin-bottom:12px;line-height:1.4}
+.nc-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--accent);color:#fff;transition:all .2s;
+}
+.nc-btn:hover{background:var(--accent-dark)}
+.nc-btn.disabled{opacity:.35;pointer-events:none;background:var(--bg3);color:var(--text3)}
+
+/* ── Article sections ── */
+.article-body section+section{margin-top:80px}
+.article-body h2{
+  margin:0 0 28px;padding-bottom:14px;
+  border-bottom:2px solid var(--yellow);
+  font:900 clamp(1.7rem,3.5vw,2.4rem)/1.15 'Playfair Display',serif;
+}
+.article-p{margin-bottom:26px;font:17px/1.92 'Libre Baskerville',serif;color:var(--text2)}
+.article-p strong{color:var(--text)}
+.dropcap::first-letter{
+  float:left;margin:6px 16px -4px 0;
+  font:900 88px/.78 'Playfair Display',serif;
+  color:var(--accent);line-height:.78;
+}
+
+/* ── Pull quote ── */
+.pull-quote{
+  margin:36px 0;padding:32px 40px 32px 44px;
+  border-left:5px solid var(--accent);border-radius:0 20px 20px 0;
+  background:var(--accent-bg);position:relative;overflow:hidden;
+}
+.pull-quote:before{
+  content:'\201C';position:absolute;top:-10px;left:14px;
+  font:900 100px 'Playfair Display',serif;color:var(--accent);opacity:.18;
+}
+.pull-quote blockquote{font:italic clamp(18px,2.5vw,23px)/1.5 'Playfair Display',serif;color:var(--text)}
+.pull-quote cite{display:block;margin-top:14px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+/* ── Callout ── */
+.callout{
+  margin:28px 0;padding:20px 24px;border-radius:16px;
+  border:1px solid rgba(234,179,8,.25);border-left:4px solid var(--yellow-dark);
+  background:var(--yellow-bg);display:flex;gap:18px;align-items:flex-start;
+}
+.callout.accent{border-left-color:var(--accent);background:var(--accent-bg);border-color:rgba(168,85,247,.2)}
+.callout.blue{border-left-color:var(--blue);background:var(--blue-bg);border-color:rgba(59,130,246,.2)}
+.callout.teal{border-left-color:var(--teal);background:var(--teal-bg);border-color:rgba(20,184,166,.2)}
+.callout.green{border-left-color:var(--green);background:var(--green-bg);border-color:rgba(34,197,94,.2)}
+.callout-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.callout p{font-size:14.5px;line-height:1.82;color:var(--text2)}
+.callout p strong{color:var(--text)}
+
+/* ── Reveal ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── Component cards (5 pillars) ── */
+.comp-pillars{display:flex;flex-direction:column;gap:24px;margin:32px 0}
+.pillar-card{
+  display:flex;gap:24px;align-items:flex-start;
+  padding:26px;border-radius:18px;
+  background:var(--card);border:1px solid var(--border);
+  box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;
+}
+.pillar-card:hover{transform:translateX(4px);box-shadow:var(--shadow-lg)}
+.pillar-icon{
+  width:56px;height:56px;border-radius:16px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.pillar-icon.violet{background:var(--accent-bg);color:var(--accent)}
+.pillar-icon.blue{background:var(--blue-bg);color:var(--blue)}
+.pillar-icon.yellow{background:var(--yellow-bg);color:var(--yellow-dark)}
+.pillar-icon.teal{background:var(--teal-bg);color:var(--teal)}
+.pillar-icon.green{background:var(--green-bg);color:var(--green)}
+.pillar-body{flex:1;min-width:0}
+.pillar-label{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px}
+.pillar-label.violet{color:var(--accent)}
+.pillar-label.blue{color:var(--blue)}
+.pillar-label.yellow{color:var(--yellow-dark)}
+.pillar-label.teal{color:var(--teal)}
+.pillar-label.green{color:var(--green)}
+.pillar-card h3{font:700 18px 'Playfair Display',serif;margin-bottom:10px;color:var(--text)}
+.pillar-card p{font-size:14px;line-height:1.78;color:var(--text2);margin-bottom:0}
+.pillar-card p+p{margin-top:8px}
+.pillar-example{
+  margin-top:12px;padding:10px 14px;border-radius:10px;
+  background:var(--bg3);font-size:13px;line-height:1.65;color:var(--text3);
+  font-style:italic;
+}
+
+/* ── Inference rules grid ── */
+.rules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:28px 0}
+.rule-card{
+  padding:22px;border-radius:16px;
+  background:var(--card);border:1px solid var(--border);
+  box-shadow:var(--shadow);transition:transform .25s;
+}
+.rule-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.rule-name{font:800 11px 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.rule-form{
+  padding:10px 14px;border-radius:10px;
+  background:var(--bg3);font:600 14px 'Libre Baskerville',serif;
+  margin-bottom:12px;color:var(--text);
+}
+.rule-form .logic-sym{color:var(--accent);font-style:normal}
+.rule-example{font-size:13px;line-height:1.72;color:var(--text2);margin-bottom:8px}
+.rule-math{
+  font-size:12px;color:var(--text3);font-style:italic;
+  border-top:1px solid var(--border);padding-top:8px;margin-top:8px;
+}
+
+/* ── FBF cards ── */
+.fbf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0}
+.fbf-card{
+  padding:18px;border-radius:14px;text-align:center;
+  border:2px solid var(--border);background:var(--card);
+  transition:all .25s;
+}
+.fbf-card.valid{border-color:rgba(34,197,94,.4);background:var(--green-bg)}
+.fbf-card.invalid{border-color:rgba(239,68,68,.4);background:var(--red-bg)}
+.fbf-expr{
+  font:700 16px 'Libre Baskerville',serif;margin-bottom:8px;color:var(--text);
+  word-break:break-all;
+}
+.fbf-status{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.fbf-card.valid .fbf-status{background:var(--green);color:#fff}
+.fbf-card.invalid .fbf-status{background:var(--red);color:#fff}
+.fbf-reason{font-size:11.5px;line-height:1.6;color:var(--text3);margin-top:8px}
+
+/* ── Dark callout block ── */
+.dark-block{
+  margin:36px 0;padding:36px 40px;border-radius:20px;
+  background:linear-gradient(145deg,#0d0a18,#111827);
+  border:1px solid rgba(168,85,247,.35);
+  border-left:5px solid var(--yellow);
+  color:#fff;
+}
+.dark-block .db-label{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px}
+.dark-block h3{font:700 clamp(18px,2.5vw,26px)/1.25 'Playfair Display',serif;margin-bottom:14px;color:#fff}
+.dark-block p{font-size:14.5px;line-height:1.82;color:rgba(255,255,255,.75);margin-bottom:12px}
+.dark-block p:last-child{margin-bottom:0}
+.dark-block .db-quote{
+  margin:16px 0;padding:16px 22px;border-radius:12px;
+  background:rgba(250,204,21,.08);border:1px solid rgba(250,204,21,.2);
+  font:italic 16px/1.65 'Libre Baskerville',serif;color:rgba(255,255,255,.9);
+}
+.dark-block .db-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:999px;
+  font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--yellow);color:#000;
+  margin-top:16px;transition:all .2s;
+}
+.dark-block .db-btn:hover{background:var(--yellow-dark);transform:translateX(2px)}
+
+/* ── Game system ── */
+.axiom-cards{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+.axiom-card{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:18px 20px;border-radius:14px;
+  background:var(--card);border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+.axiom-num{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font:800 14px 'Inter',sans-serif;
+}
+.axiom-text{flex:1;min-width:0}
+.axiom-text strong{display:block;font:700 14px 'Inter',sans-serif;color:var(--text);margin-bottom:4px}
+.axiom-text p{font-size:13px;line-height:1.7;color:var(--text2)}
+
+.theorem-chain{margin:24px 0}
+.chain-node{
+  display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border-radius:12px;background:var(--bg3);border:1px solid var(--border);
+  margin-bottom:0;cursor:pointer;transition:all .3s;user-select:none;
+}
+.chain-node:not(:last-child){border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none}
+.chain-node:not(:first-child){border-top-left-radius:0;border-top-right-radius:0}
+.chain-node:hover{background:var(--accent-bg);border-color:rgba(168,85,247,.3)}
+.chain-node.active{background:var(--accent-bg);border-color:var(--accent)}
+.chain-icon{font-size:16px;flex-shrink:0}
+.chain-label{flex:1;font:600 13px 'Inter',sans-serif;color:var(--text)}
+.chain-type{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:999px}
+.chain-type.ax{background:var(--yellow-bg);color:var(--yellow-dark)}
+.chain-type.th{background:var(--green-bg);color:var(--green)}
+.chain-detail{
+  font-size:13px;line-height:1.7;color:var(--text3);
+  max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;
+  padding:0 18px 0 46px;background:var(--accent-bg);
+  border:1px solid var(--accent);border-top:none;
+  border-radius:0 0 12px 12px;
+}
+.chain-detail.open{max-height:120px;padding:12px 18px 12px 46px}
+
+/* ── Lab inference ── */
+.lab-wrap{
+  margin:32px 0;padding:32px;border-radius:20px;
+  background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow-lg);
+}
+.lab-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border);
+  flex-wrap:wrap;gap:12px;
+}
+.lab-title{font:800 17px 'Playfair Display',serif;color:var(--text)}
+.lab-counter{
+  font:800 12px 'Inter',sans-serif;color:var(--text3);
+  background:var(--bg3);padding:6px 14px;border-radius:999px;
+}
+.lab-q-area{min-height:180px}
+.lab-q-label{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.lab-premises{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.lab-premise{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;border-radius:12px;
+  background:var(--bg3);border:1px solid var(--border);
+  font:500 14px 'Libre Baskerville',serif;color:var(--text2);
+}
+.prem-num{
+  width:24px;height:24px;border-radius:6px;flex-shrink:0;
+  background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font:800 10px 'Inter',sans-serif;
+}
+.lab-conclusion-q{
+  padding:12px 16px;border-radius:12px;
+  border:2px dashed var(--border);background:var(--yellow-bg);
+  font:italic 14px/1.6 'Libre Baskerville',serif;color:var(--text3);
+  margin-bottom:20px;
+}
+.lab-rules-btns{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.lab-rule-btn{
+  padding:8px 16px;border-radius:999px;
+  font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  border:2px solid var(--border);background:transparent;color:var(--text3);
+  cursor:pointer;transition:all .2s;
+}
+.lab-rule-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.lab-rule-btn.selected{border-color:var(--accent);background:var(--accent);color:#fff}
+.lab-confirm-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:999px;
+  font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--yellow);color:#000;cursor:pointer;border:none;
+  transition:all .2s;
+}
+.lab-confirm-btn:hover{background:var(--yellow-dark)}
+.lab-confirm-btn:disabled{opacity:.4;cursor:default}
+.lab-feedback{
+  margin-top:16px;padding:16px 20px;border-radius:14px;
+  display:none;
+}
+.lab-feedback.correct{background:var(--green-bg);border:1px solid rgba(34,197,94,.35)}
+.lab-feedback.wrong{background:var(--red-bg);border:1px solid rgba(239,68,68,.35)}
+.lab-feedback.show{display:block}
+.lab-feedback-icon{font-size:18px;margin-bottom:4px}
+.lab-feedback p{font-size:13.5px;line-height:1.72;color:var(--text)}
+.lab-nav-btns{display:flex;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.lab-nav-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 18px;border-radius:999px;
+  font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--bg3);color:var(--text3);
+  cursor:pointer;transition:all .2s;
+}
+.lab-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+.lab-nav-btn:disabled{opacity:.35;cursor:default}
+.lab-score{
+  text-align:center;padding:40px 20px;display:none;
+}
+.lab-score.show{display:block}
+.score-num{font:900 64px 'Playfair Display',serif;color:var(--accent)}
+.score-label{font-size:16px;color:var(--text2);margin-bottom:20px}
+.score-msg{font:italic 15px 'Libre Baskerville',serif;color:var(--text3);max-width:400px;margin:0 auto 24px}
+.score-retry{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 24px;border-radius:999px;
+  font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--accent);color:#fff;cursor:pointer;border:none;transition:all .2s;
+}
+.score-retry:hover{background:var(--accent-dark)}
+
+/* ── Synthesis grid ── */
+.synthesis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
+.syn-card{padding:20px;border-radius:16px;background:var(--bg3);border:1px solid var(--border)}
+.syn-num{font:900 36px 'Playfair Display',serif;color:rgba(168,85,247,.2);margin-bottom:4px;line-height:1}
+.syn-card h4{font:700 14px 'Playfair Display',serif;margin-bottom:8px;color:var(--text)}
+.syn-card p{font-size:13px;line-height:1.72;color:var(--text2)}
+
+/* ── Questions ── */
+.question-list{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+.question-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 18px;border-radius:14px;
+  background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);
+}
+.q-num{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--yellow);color:#000;
+  display:flex;align-items:center;justify-content:center;
+  font:800 12px 'Inter',sans-serif;
+}
+.question-item p{font-size:14px;line-height:1.72;color:var(--text2)}
+
+/* ── Bottom nav ── */
+.bottom-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:60px;padding-top:28px;border-top:1px solid var(--border);
+  flex-wrap:wrap;gap:14px;
+}
+
+/* ── Responsive ── */
+@media(min-width:1100px){.tnc{display:block}}
+@media(min-width:761px) and (max-width:1099px){
+  .article-wrap{grid-template-columns:1fr;gap:40px}
+  .sidebar{position:static;order:0}
+  .rules-grid{grid-template-columns:1fr}
+  .fbf-grid{grid-template-columns:repeat(2,1fr)}
+  .synthesis-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .article-wrap{grid-template-columns:1fr;padding:40px 18px 60px;gap:32px}
+  .sidebar{position:static;order:0}
+  #topnav{padding:0 14px}
+  .tnl,.tnr{gap:8px}
+  .nav-pill{padding:6px 10px;font-size:10px}
+  .rules-grid{grid-template-columns:1fr}
+  .fbf-grid{grid-template-columns:1fr}
+  .synthesis-grid{grid-template-columns:1fr}
+  .pillar-card{flex-direction:column;gap:14px}
+  .lab-rules-btns{gap:6px}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav id="topnav">
+  <div class="tnl">
+    <a href="index.html" class="nav-logo">F<span>&</span>C</a>
+    <span class="nav-sep">|</span>
+    <span class="u6-badge">U6 · C34</span>
+    <span class="nav-sep">|</span>
+    <span class="tnc">Sistemas axiomáticos</span>
+  </div>
+  <div class="tnr">
+    <button class="dtoggle" onclick="toggleDark()" aria-label="Modo oscuro"></button>
+    <a href="unidad6-clase33.html" class="nav-pill back"><i class="fa-solid fa-arrow-left"></i> Clase 33</a>
+    <a href="unidad6-clase35.html" class="nav-pill next"><i class="fa-solid fa-arrow-right"></i> Clase 35</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="art-hero">
+  <span class="float-sym">⊢</span>
+  <span class="float-sym">∀</span>
+  <span class="float-sym">∃</span>
+  <span class="float-sym">⊨</span>
+  <span class="float-sym">≡</span>
+  <span class="float-sym">∧</span>
+
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <span class="hero-badge fill">Unidad 6</span>
+      <span class="hero-badge outline">Clase 34</span>
+      <span class="hero-badge outline">Lógica Formal</span>
+    </div>
+    <p class="eyebrow">Euclides · Hilbert · Tarski · Frege</p>
+    <h1 class="hero-title">Sistemas axiomáticos:<br>los <em>ladrillos</em> del<br>razonamiento formal</h1>
+    <p class="hero-subtitle">Cómo la matemática y la lógica construyeron una arquitectura de la verdad: de los cinco pilares de todo sistema formal al sueño imposible de Hilbert.</p>
+    <div class="hero-meta">
+      <span><i class="fa-solid fa-book-open"></i> Unidad 6 — Lógica y Sistemas</span>
+      <span><i class="fa-regular fa-clock"></i> Clase 34</span>
+      <span><i class="fa-solid fa-location-dot"></i> Los Polvorines, Buenos Aires</span>
+    </div>
+    <div class="hero-topics">
+      <span>Axiomas</span>
+      <span>Primitivos</span>
+      <span>FBF</span>
+      <span>Reglas de inferencia</span>
+      <span>Teoremas</span>
+      <span>Modelos</span>
+      <span>Hilbert</span>
+    </div>
+    <a href="#intro" class="hero-scroll"><i class="fa-solid fa-chevron-down"></i> Comenzar lectura</a>
+  </div>
+</section>
+
+<!-- Article -->
+<div class="article-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-list"></i>
+        Contenidos
+      </div>
+      <ul class="toc-list" id="toc">
+        <li class="toc-item"><a href="#intro"><span class="toc-num">01</span> Por qué necesitamos sistemas</a></li>
+        <li class="toc-item"><a href="#componentes"><span class="toc-num">02</span> Los cinco componentes</a></li>
+        <li class="toc-item"><a href="#fbf"><span class="toc-num">03</span> Fórmulas bien formadas</a></li>
+        <li class="toc-item"><a href="#reglas-inferencia"><span class="toc-num">04</span> Las reglas en acción</a></li>
+        <li class="toc-item"><a href="#laboratorio"><span class="toc-num">05</span> Laboratorio</a></li>
+        <li class="toc-item"><a href="#modelos"><span class="toc-num">06</span> Modelos e interpretación</a></li>
+        <li class="toc-item"><a href="#juego-sistema"><span class="toc-num">07</span> Actividad: diseñá tu sistema</a></li>
+        <li class="toc-item"><a href="#nexo-biblioteca"><span class="toc-num">08</span> El sueño de Hilbert</a></li>
+        <li class="toc-item"><a href="#sintesis"><span class="toc-num">09</span> Síntesis</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-key"></i>
+        Conceptos clave
+      </div>
+      <ul class="concept-list">
+        <li><strong>Primitivos:</strong> términos base que el sistema acepta sin definir</li>
+        <li><strong>Definición:</strong> construcción a partir de primitivos</li>
+        <li><strong>Axioma:</strong> enunciado aceptado sin demostración</li>
+        <li><strong>Regla de inferencia:</strong> permite pasar de enunciados a otros</li>
+        <li><strong>Modus Ponens:</strong> si P y P→Q, entonces Q</li>
+        <li><strong>Modus Tollens:</strong> si ¬Q y P→Q, entonces ¬P</li>
+        <li><strong>Teorema:</strong> demostrado a partir de axiomas + reglas</li>
+        <li><strong>FBF:</strong> fórmula bien formada según la gramática del sistema</li>
+        <li><strong>Modelo:</strong> interpretación concreta que satisface los axiomas</li>
+        <li><strong>Sistema axiomático:</strong> máquina formal de producción de verdades</li>
+        <li><strong>Hilbert:</strong> programa de axiomatización total de la matemática</li>
+        <li><strong>Silogismo hipotético:</strong> encadenamiento de condicionales</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-user"></i>
+        Protagonistas
+      </div>
+      <div class="author-list">
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--teal)">Eu</div>
+          <div class="author-info">
+            <div class="author-name">Euclides</div>
+            <div class="author-role">~300 a.C. — Los Elementos</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--yellow-dark);color:#000">Hi</div>
+          <div class="author-info">
+            <div class="author-name">David Hilbert</div>
+            <div class="author-role">1862–1943 — Programa de Hilbert</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--blue)">Ta</div>
+          <div class="author-info">
+            <div class="author-name">Alfred Tarski</div>
+            <div class="author-role">1901–1983 — Verdad y modelos</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--accent)">Fr</div>
+          <div class="author-info">
+            <div class="author-name">Gottlob Frege</div>
+            <div class="author-role">1848–1925 — Lenguaje formal moderno</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="next-class-card">
+        <div class="nc-label">Próxima clase</div>
+        <div class="nc-title">Consistencia, completitud e independencia de sistemas</div>
+        <a href="unidad6-clase35.html" class="nc-btn"><i class="fa-solid fa-arrow-right"></i> Ir a Clase 35</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Article body -->
+  <article class="article-body">
+
+    <!-- Sección 1: Intro -->
+    <section id="intro" class="reveal">
+      <h2>Por qué necesitamos sistemas</h2>
+
+      <p class="article-p dropcap">El gran logro de la matemática y la lógica del siglo XIX y XX fue hacer <strong>explícito lo que antes era implícito</strong>. Durante siglos, los matemáticos razonaban con genialidad pero sin declarar sus reglas del juego. ¿Qué se puede asumir? ¿Qué se puede deducir? ¿A partir de qué? Las respuestas flotaban invisibles en cada demostración.</p>
+
+      <p class="article-p">Un sistema axiomático impone una disciplina radical: obliga a declarar desde dónde se parte (los axiomas), qué operaciones están permitidas (las reglas de inferencia) y qué se puede derivar legítimamente (los teoremas). Nada se da por supuesto. Nada se cuela por las sombras del sentido común.</p>
+
+      <p class="article-p">Euclides fue el primer gran constructor de sistemas: en sus <em>Elementos</em> (300 a.C.) tomó cinco postulados simples sobre puntos y rectas y derivó toda la geometría conocida. La elegancia del proyecto fue tan impactante que durante dos mil años nadie cuestionó sus fundamentos. Hasta que en el siglo XIX alguien preguntó: ¿y si el quinto postulado no fuera verdadero?</p>
+
+      <div class="pull-quote">
+        <blockquote>Un sistema axiomático es una máquina de verdades: si los axiomas son verdaderos y las reglas son válidas, los teoremas son inevitables.</blockquote>
+        <cite>Tradición lógico-matemática, siglo XX</cite>
+      </div>
+
+      <p class="article-p">La respuesta fue explosiva: cambiando ese postulado nacieron geometrías completamente nuevas (esférica, hiperbólica) que resultaron ser <em>también</em> coherentes y útiles. La lección filosófica fue inmensa: <strong>un sistema axiomático no captura la verdad del mundo — define un espacio lógico coherente</strong>. La física después decide qué geometría describe el universo real.</p>
+    </section>
+
+    <!-- Sección 2: Componentes -->
+    <section id="componentes" class="reveal">
+      <h2>Los cinco componentes del sistema</h2>
+
+      <p class="article-p">Todo sistema axiomático bien construido tiene exactamente cinco tipos de elementos. No más, no menos. Cada uno cumple una función irreemplazable en la arquitectura de la demostración.</p>
+
+      <div class="comp-pillars">
+
+        <!-- 1. Primitivos -->
+        <div class="pillar-card reveal">
+          <div class="pillar-icon violet"><i class="fa-solid fa-circle-dot"></i></div>
+          <div class="pillar-body">
+            <div class="pillar-label violet">Componente 1</div>
+            <h3>Primitivos no definidos</h3>
+            <p>Son los términos básicos que el sistema acepta sin definir. En geometría euclidiana: "punto", "recta", "plano". Todos los usan, nadie los define.</p>
+            <p>Si intentamos definirlos, necesitamos términos más básicos, y así hasta el infinito. En algún punto hay que detenerse y aceptar ciertos conceptos como <em>comprensibles sin definición</em>.</p>
+            <div class="pillar-example">
+              <strong>Analogía:</strong> En un diccionario, algunas palabras se usan para definir otras. Pero en algún punto hay términos que todos comprenden sin necesidad de definición formal. Son los primitivos del lenguaje.
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Definiciones -->
+        <div class="pillar-card reveal">
+          <div class="pillar-icon blue"><i class="fa-solid fa-book"></i></div>
+          <div class="pillar-body">
+            <div class="pillar-label blue">Componente 2</div>
+            <h3>Definiciones</h3>
+            <p>Expresiones construidas a partir de los primitivos. Las definiciones introducen nuevos términos abreviando combinaciones más complejas.</p>
+            <p>Ejemplo: <em>"triángulo"</em> = figura formada por tres puntos no colineales y los segmentos que los unen.</p>
+            <div class="pillar-example">
+              <strong>Importante:</strong> Las definiciones no son verdaderas ni falsas — son <em>convenciones de lenguaje</em>. Podríamos llamar "triángulo" a otra cosa; lo que importa es que el uso sea consistente dentro del sistema.
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Axiomas -->
+        <div class="pillar-card reveal">
+          <div class="pillar-icon yellow"><i class="fa-solid fa-star"></i></div>
+          <div class="pillar-body">
+            <div class="pillar-label yellow">Componente 3</div>
+            <h3>Axiomas / Postulados</h3>
+            <p>Enunciados que se aceptan sin demostración como punto de partida del sistema. No se "prueban" — se <em>adoptan</em>. Son las semillas del sistema.</p>
+            <p>La elección de axiomas define el sistema entero: cambiar un axioma produce un sistema diferente con resultados diferentes.</p>
+            <div class="pillar-example">
+              <strong>Distinción histórica:</strong> En Euclides, "axiomas" eran verdades universales ("el todo es mayor que la parte") y "postulados" eran verdades específicas de la geometría. Hoy ambos términos se usan como sinónimos.
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Reglas de inferencia -->
+        <div class="pillar-card reveal">
+          <div class="pillar-icon teal"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+          <div class="pillar-body">
+            <div class="pillar-label teal">Componente 4</div>
+            <h3>Reglas de inferencia</h3>
+            <p>Reglas que permiten pasar legítimamente de ciertos enunciados a otros. Son las "operaciones" del sistema — el mecanismo que produce nuevos resultados a partir de los existentes.</p>
+            <p>Las principales: <strong>Modus Ponens, Modus Tollens, Silogismo hipotético, Adición, Simplificación</strong>. Cada una será explorada en detalle más adelante.</p>
+            <div class="pillar-example">
+              <strong>Clave:</strong> Las reglas de inferencia son <em>formales</em>: operan sobre la forma de los enunciados, no sobre su contenido. Un sistema puede derivar conclusiones correctas sobre temas que el diseñador nunca imaginó.
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Teoremas -->
+        <div class="pillar-card reveal">
+          <div class="pillar-icon green"><i class="fa-solid fa-check-circle"></i></div>
+          <div class="pillar-body">
+            <div class="pillar-label green">Componente 5</div>
+            <h3>Teoremas</h3>
+            <p>Enunciados <em>demostrados</em> a partir de axiomas más reglas de inferencia. Son el "producto" del sistema — las verdades que el sistema genera.</p>
+            <p>Un teorema no puede ser refutado empíricamente dentro del sistema formal: su validez depende exclusivamente de la cadena de razonamiento que lo produce.</p>
+            <div class="pillar-example">
+              <strong>Ejemplo:</strong> El teorema de Pitágoras (a²+b²=c²) fue demostrado por Euclides a partir de sus postulados. Cualquier sistema que adopte esos mismos postulados <em>debe</em> contener el teorema de Pitágoras — no es opcional.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout accent reveal">
+        <div class="callout-icon"><i class="fa-solid fa-lightbulb" style="color:var(--accent)"></i></div>
+        <p><strong>El orden importa:</strong> primitivos → definiciones → axiomas → reglas de inferencia → teoremas. Este flujo unidireccional garantiza que cada paso esté fundado sobre bases explícitas. Ningún teorema puede usar información que no haya sido introducida en alguno de los pasos anteriores.</p>
+      </div>
+    </section>
+
+    <!-- Sección 3: FBF -->
+    <section id="fbf" class="reveal">
+      <h2>Fórmulas bien formadas (FBF)</h2>
+
+      <p class="article-p">Antes de poder razonar, necesitamos saber qué expresiones son legítimas dentro del sistema. No toda cadena de símbolos constituye una expresión válida — del mismo modo que en español "el perro ladra" es gramaticalmente correcta pero "perro ladra el" no lo es, en lógica formal hay expresiones que respetan la gramática y expresiones que no.</p>
+
+      <p class="article-p">Una <strong>fórmula bien formada (FBF)</strong> es una expresión que respeta las reglas de formación del lenguaje formal. Las reglas de formación son análogas a la gramática: especifican exactamente qué combinaciones de símbolos están permitidas.</p>
+
+      <div class="callout teal reveal">
+        <div class="callout-icon"><i class="fa-solid fa-quote-left" style="color:var(--teal)"></i></div>
+        <p><strong>La forma importa antes que el contenido.</strong> En lógica formal, una expresión mal formada no es falsa — es directamente ilegítima. No puede ser verdadera ni falsa porque ni siquiera cuenta como enunciado del sistema.</p>
+      </div>
+
+      <p class="article-p">¿Por qué esto es filosóficamente importante? Porque introduce una <em>distinción radical</em>: la diferencia entre el nivel sintáctico (la forma) y el nivel semántico (el contenido). Un sistema formal puede trabajar completamente en el nivel sintáctico, manipulando símbolos sin conocer su significado, y aun así llegar a conclusiones correctas cuando los símbolos son interpretados.</p>
+
+      <p class="article-p">Veamos ejemplos concretos. ¿Cuáles de estas expresiones son FBF en lógica proposicional?</p>
+
+      <div class="fbf-grid reveal">
+        <div class="fbf-card valid">
+          <div class="fbf-expr">P ∧ Q</div>
+          <span class="fbf-status"><i class="fa-solid fa-check"></i> FBF válida</span>
+          <p class="fbf-reason">Conjunción de dos proposiciones atómicas. Estructura: [prop] ∧ [prop]</p>
+        </div>
+        <div class="fbf-card valid">
+          <div class="fbf-expr">¬P → (Q ∨ R)</div>
+          <span class="fbf-status"><i class="fa-solid fa-check"></i> FBF válida</span>
+          <p class="fbf-reason">Condicional bien formado con negación y disyunción entre paréntesis</p>
+        </div>
+        <div class="fbf-card valid">
+          <div class="fbf-expr">(P ∧ Q) → ¬R</div>
+          <span class="fbf-status"><i class="fa-solid fa-check"></i> FBF válida</span>
+          <p class="fbf-reason">Condicional cuyo antecedente es una conjunción parentizada</p>
+        </div>
+        <div class="fbf-card invalid">
+          <div class="fbf-expr">∧ P Q ∧</div>
+          <span class="fbf-status"><i class="fa-solid fa-xmark"></i> No es FBF</span>
+          <p class="fbf-reason">El conector ∧ no puede estar al inicio ni al final — requiere dos proposiciones a sus lados</p>
+        </div>
+        <div class="fbf-card invalid">
+          <div class="fbf-expr">P ∧ ∨ Q</div>
+          <span class="fbf-status"><i class="fa-solid fa-xmark"></i> No es FBF</span>
+          <p class="fbf-reason">Dos conectores binarios seguidos sin proposición entre ellos. Ilegítimo.</p>
+        </div>
+        <div class="fbf-card invalid">
+          <div class="fbf-expr">→ ¬ P Q</div>
+          <span class="fbf-status"><i class="fa-solid fa-xmark"></i> No es FBF</span>
+          <p class="fbf-reason">El condicional → necesita una proposición completa a su izquierda y una a su derecha</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <div class="callout-icon"><i class="fa-solid fa-triangle-exclamation" style="color:var(--yellow-dark)"></i></div>
+        <p><strong>Regla práctica:</strong> En lógica proposicional, toda variable proposicional (P, Q, R...) es una FBF. Si φ es FBF, entonces ¬φ también lo es. Si φ y ψ son FBF, entonces (φ ∧ ψ), (φ ∨ ψ), (φ → ψ), (φ ↔ ψ) también lo son. Esas son todas las FBF posibles.</p>
+      </div>
+    </section>
+
+    <!-- Sección 4: Reglas de inferencia -->
+    <section id="reglas-inferencia" class="reveal">
+      <h2>Las reglas de inferencia en acción</h2>
+
+      <p class="article-p">Las reglas de inferencia son el corazón operativo del sistema. Permiten construir cadenas de razonamiento que van desde las premisas hasta la conclusión. No son sugerencias ni atajos: son los únicos movimientos legales del sistema.</p>
+
+      <div class="rules-grid">
+
+        <div class="rule-card reveal">
+          <div class="rule-name" style="color:var(--accent)">Modus Ponens</div>
+          <div class="rule-form">
+            P<br>
+            P <span class="logic-sym">→</span> Q<br>
+            ∴ Q
+          </div>
+          <div class="rule-example">
+            <strong>Cotidiano:</strong> "Si hay humo, hay fuego. Hay humo. → Hay fuego."
+          </div>
+          <div class="rule-math">
+            <strong>Matemático:</strong> "Si n es par, entonces n² es par. n = 4 es par. → 4² = 16 es par."
+          </div>
+        </div>
+
+        <div class="rule-card reveal">
+          <div class="rule-name" style="color:var(--blue)">Modus Tollens</div>
+          <div class="rule-form">
+            <span class="logic-sym">¬</span>Q<br>
+            P <span class="logic-sym">→</span> Q<br>
+            ∴ <span class="logic-sym">¬</span>P
+          </div>
+          <div class="rule-example">
+            <strong>Cotidiano:</strong> "Si hay fuego, hay calor. No hay calor. → No hay fuego."
+          </div>
+          <div class="rule-math">
+            <strong>Matemático:</strong> "Si n es par, entonces n² es par. n² = 9 no es par. → n no es par."
+          </div>
+        </div>
+
+        <div class="rule-card reveal">
+          <div class="rule-name" style="color:var(--teal)">Silogismo Hipotético</div>
+          <div class="rule-form">
+            P <span class="logic-sym">→</span> Q<br>
+            Q <span class="logic-sym">→</span> R<br>
+            ∴ P <span class="logic-sym">→</span> R
+          </div>
+          <div class="rule-example">
+            <strong>Cotidiano:</strong> "Si estudio → apruebo. Si apruebo → festejo. → Si estudio → festejo."
+          </div>
+          <div class="rule-math">
+            <strong>Matemático:</strong> "Si n es par → n es divisible por 2. Si n es divisible por 2 → n/2 es entero. → Si n es par → n/2 es entero."
+          </div>
+        </div>
+
+        <div class="rule-card reveal">
+          <div class="rule-name" style="color:var(--green)">Adición</div>
+          <div class="rule-form">
+            P<br>
+            ∴ P <span class="logic-sym">∨</span> Q
+          </div>
+          <div class="rule-example">
+            <strong>Cotidiano:</strong> "Está lloviendo. → Está lloviendo O hace sol."
+          </div>
+          <div class="rule-math">
+            <strong>Matemático:</strong> "5 es primo. → 5 es primo ∨ 5 es par."
+          </div>
+        </div>
+
+        <div class="rule-card reveal" style="grid-column:1/-1">
+          <div class="rule-name" style="color:var(--orange)">Simplificación</div>
+          <div class="rule-form">
+            P <span class="logic-sym">∧</span> Q<br>
+            ∴ P
+          </div>
+          <div class="rule-example">
+            <strong>Cotidiano:</strong> "Está lloviendo Y hace frío. → Está lloviendo." (también podría concluirse "Hace frío")
+          </div>
+          <div class="rule-math">
+            <strong>Matemático:</strong> "n es par ∧ n es divisible por 3. → n es par." (Podríamos continuar con esta sola premisa)
+          </div>
+        </div>
+
+      </div>
+
+      <div class="callout blue reveal">
+        <div class="callout-icon"><i class="fa-solid fa-info-circle" style="color:var(--blue)"></i></div>
+        <p><strong>Reglas válidas vs. falacias:</strong> Las reglas de inferencia son <em>preservadoras de verdad</em> — si las premisas son verdaderas y aplicamos la regla correctamente, la conclusión <em>debe</em> ser verdadera. Las falacias (como "afirmar el consecuente": Q y P→Q, ∴ P) son patrones que parecen válidos pero no lo son.</p>
+      </div>
+    </section>
+
+    <!-- Sección 5: Laboratorio -->
+    <section id="laboratorio" class="reveal">
+      <h2>Laboratorio de reglas de inferencia</h2>
+
+      <p class="article-p">Hora de poner a prueba tu comprensión. Se presentan seis argumentos: en cada uno hay premisas dadas y una conclusión propuesta. Tu tarea: identificar qué regla de inferencia justifica (o no) ese paso. ¡Hay una trampa!</p>
+
+      <div class="lab-wrap reveal">
+        <div class="lab-header">
+          <span class="lab-title"><i class="fa-solid fa-flask" style="color:var(--accent);margin-right:8px"></i>Laboratorio de inferencias</span>
+          <span class="lab-counter" id="lab-counter">Argumento 1 / 6</span>
+        </div>
+
+        <div id="lab-q-area" class="lab-q-area">
+          <div class="lab-q-label">Premisas:</div>
+          <div class="lab-premises" id="lab-premises"></div>
+          <div class="lab-q-label" style="margin-top:0">Conclusión propuesta:</div>
+          <div class="lab-conclusion-q" id="lab-conclusion"></div>
+          <div class="lab-q-label">¿Qué regla aplica?</div>
+          <div class="lab-rules-btns" id="lab-rules-btns">
+            <button class="lab-rule-btn" onclick="selectRule('Modus Ponens')">Modus Ponens</button>
+            <button class="lab-rule-btn" onclick="selectRule('Modus Tollens')">Modus Tollens</button>
+            <button class="lab-rule-btn" onclick="selectRule('Silogismo hipotético')">Silogismo hipotético</button>
+            <button class="lab-rule-btn" onclick="selectRule('Adición')">Adición</button>
+            <button class="lab-rule-btn" onclick="selectRule('Simplificación')">Simplificación</button>
+            <button class="lab-rule-btn" onclick="selectRule('Ninguna válida')">Ninguna válida</button>
+          </div>
+          <button class="lab-confirm-btn" id="lab-confirm-btn" onclick="confirmAnswer()" disabled>
+            <i class="fa-solid fa-check"></i> Confirmar
+          </button>
+          <div class="lab-feedback" id="lab-feedback">
+            <div class="lab-feedback-icon" id="lab-fb-icon"></div>
+            <p id="lab-fb-text"></p>
+          </div>
+        </div>
+
+        <div class="lab-score" id="lab-score">
+          <div class="score-num" id="score-num">0/6</div>
+          <div class="score-label">respuestas correctas</div>
+          <p class="score-msg" id="score-msg"></p>
+          <button class="score-retry" onclick="resetLab()"><i class="fa-solid fa-rotate-right"></i> Reintentar</button>
+        </div>
+
+        <div class="lab-nav-btns">
+          <button class="lab-nav-btn" id="lab-prev-btn" onclick="labPrev()" disabled>
+            <i class="fa-solid fa-arrow-left"></i> Anterior
+          </button>
+          <button class="lab-nav-btn" id="lab-next-btn" onclick="labNext()" disabled>
+            Siguiente <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 6: Modelos -->
+    <section id="modelos" class="reveal">
+      <h2>Modelos: cuando el sistema se interpreta</h2>
+
+      <p class="article-p">Un sistema axiomático es, en sí mismo, un <strong>molde vacío</strong>. Sus axiomas son enunciados sobre símbolos abstractos sin contenido específico. Lo que le da vida es la <em>interpretación</em>: la asignación de significados concretos a los símbolos del sistema.</p>
+
+      <p class="article-p">Un <strong>modelo</strong> es una interpretación concreta que satisface todos los axiomas del sistema. Si en esa interpretación todos los axiomas resultan verdaderos, entonces todos los teoremas también lo serán — inevitablemente.</p>
+
+      <p class="article-p">Una consecuencia profunda: el mismo sistema puede tener <em>múltiples modelos</em>. Esto no es una debilidad — es una muestra de la <strong>abstracción genuina</strong> del sistema. La misma estructura formal captura patrones que aparecen en dominios completamente diferentes.</p>
+
+      <div class="callout accent reveal">
+        <div class="callout-icon"><i class="fa-solid fa-chess" style="color:var(--accent)"></i></div>
+        <p><strong>El ajedrez como modelo:</strong> Las reglas del ajedrez forman un sistema axiomático completo. Los primitivos son las piezas y el tablero. Los axiomas son los movimientos legales. Los teoremas son consecuencias necesarias de esas reglas: el jaque mate es posible, el enroque tiene condiciones precisas, el rey no puede ponerse en jaque voluntariamente. El sistema es idéntico si usamos piezas de madera o piezas de oro — el "modelo material" es intercambiable; la estructura formal es invariante.</p>
+      </div>
+
+      <p class="article-p">Otro ejemplo: la <strong>aritmética módulo 7</strong> (un "reloj" de solo 7 números: 0,1,2,3,4,5,6) satisface los mismos axiomas que la aritmética ordinaria de los enteros — es simplemente otro modelo de la misma estructura abstracta. En este sistema, 6 + 2 = 1 (porque da 8, y 8 módulo 7 = 1), pero todas las propiedades algebraicas del sistema se preservan.</p>
+
+      <p class="article-p">Esta idea fue formalizada magistralmente por Alfred Tarski en los años 1930. Tarski definió con precisión matemática qué significa que un enunciado sea <em>verdadero en un modelo</em>. Su definición de verdad semántica se convirtió en uno de los pilares de la lógica matemática del siglo XX.</p>
+
+      <div class="callout accent reveal">
+        <div class="callout-icon"><i class="fa-solid fa-anchor" style="color:var(--accent)"></i></div>
+        <p><strong>Los modelos son lo que "ancla" un sistema formal a la realidad.</strong> Sin modelos, el sistema flota libre de todo contenido — es pura forma sin sustancia. Los modelos son el puente entre el mundo abstracto de los símbolos y el mundo concreto de los fenómenos.</p>
+      </div>
+    </section>
+
+    <!-- Sección 7: Actividad -->
+    <section id="juego-sistema" class="reveal">
+      <h2>Actividad: diseñá tu sistema</h2>
+
+      <p class="article-p">Para entender un sistema axiomático desde adentro, nada mejor que construir uno desde cero. Presentamos "El juego de las fichas" — un sistema mínimo con cuatro axiomas del que se pueden derivar teoremas sorprendentes.</p>
+
+      <p class="article-p"><strong>El juego:</strong> Hay fichas de colores (rojo, azul, verde) sobre una mesa. Las siguientes reglas son los axiomas del sistema:</p>
+
+      <div class="axiom-cards reveal">
+        <div class="axiom-card">
+          <div class="axiom-num">A1</div>
+          <div class="axiom-text">
+            <strong>Axioma de presencia</strong>
+            <p>Siempre hay al menos una ficha roja sobre la mesa.</p>
+          </div>
+        </div>
+        <div class="axiom-card">
+          <div class="axiom-num">A2</div>
+          <div class="axiom-text">
+            <strong>Axioma de adyacencia</strong>
+            <p>Toda ficha roja tiene exactamente una ficha azul a su derecha.</p>
+          </div>
+        </div>
+        <div class="axiom-card">
+          <div class="axiom-num">A3</div>
+          <div class="axiom-text">
+            <strong>Axioma de cierre</strong>
+            <p>Toda ficha azul tiene exactamente una ficha verde a su derecha.</p>
+          </div>
+        </div>
+        <div class="axiom-card">
+          <div class="axiom-num">A4</div>
+          <div class="axiom-text">
+            <strong>Axioma de límite</strong>
+            <p>Ninguna ficha verde tiene fichas a su derecha.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="article-p">A partir de estos cuatro axiomas, podemos <em>demostrar</em> los siguientes teoremas. Hacé click en cada uno para ver cómo se deriva:</p>
+
+      <div class="theorem-chain reveal" id="thm-chain">
+
+        <div class="chain-node" onclick="toggleChain('t1')">
+          <span class="chain-icon">🔵</span>
+          <span class="chain-label">Siempre hay al menos una ficha azul</span>
+          <span class="chain-type th">Teorema</span>
+        </div>
+        <div class="chain-detail" id="t1">
+          <strong>Demostración:</strong> Por A1, hay al menos una ficha roja. Por A2, toda ficha roja tiene una ficha azul a su derecha. Entonces hay al menos una ficha azul. ∎
+        </div>
+
+        <div class="chain-node" onclick="toggleChain('t2')">
+          <span class="chain-icon">🟢</span>
+          <span class="chain-label">Siempre hay al menos una ficha verde</span>
+          <span class="chain-type th">Teorema</span>
+        </div>
+        <div class="chain-detail" id="t2">
+          <strong>Demostración:</strong> Por el Teorema anterior, hay al menos una ficha azul. Por A3, toda ficha azul tiene una ficha verde a su derecha. Entonces hay al menos una ficha verde. ∎
+        </div>
+
+        <div class="chain-node" onclick="toggleChain('t3')">
+          <span class="chain-icon">🔴</span>
+          <span class="chain-label">Toda cadena tiene exactamente 3 fichas: rojo–azul–verde</span>
+          <span class="chain-type th">Teorema</span>
+        </div>
+        <div class="chain-detail" id="t3">
+          <strong>Demostración:</strong> A1 garantiza rojo. A2 garantiza azul después del rojo. A3 garantiza verde después del azul. A4 prohíbe cualquier ficha después del verde. La estructura completa es necesariamente: Rojo → Azul → Verde → fin. ∎
+        </div>
+
+        <div class="chain-node" onclick="toggleChain('t4')">
+          <span class="chain-icon">✅</span>
+          <span class="chain-label">El sistema es consistente (no hay contradicción)</span>
+          <span class="chain-type th">Meta-teorema</span>
+        </div>
+        <div class="chain-detail" id="t4">
+          <strong>Verificación:</strong> Podemos construir un modelo concreto: una mesa con exactamente una triada Rojo–Azul–Verde. Ese modelo satisface los cuatro axiomas sin contradicción. La existencia de un modelo prueba la consistencia. ∎
+        </div>
+
+      </div>
+
+      <div class="callout green reveal">
+        <div class="callout-icon"><i class="fa-solid fa-lightbulb" style="color:var(--green)"></i></div>
+        <p><strong>Para reflexionar:</strong> ¿Qué pasaría si elimináramos A4? ¿El sistema seguiría siendo consistente? ¿Podría tener infinitas fichas? ¿Podrías agregar un A5 que dijera "Hay exactamente dos fichas rojas" — ese axioma es compatible con los demás?</p>
+      </div>
+    </section>
+
+    <!-- Sección 8: Hilbert -->
+    <section id="nexo-biblioteca" class="reveal">
+      <h2>Para ir más lejos: El sueño de Hilbert</h2>
+
+      <div class="dark-block reveal">
+        <div class="db-label">Nexo histórico — David Hilbert (1862–1943)</div>
+        <h3>El matemático que quiso axiomatizar todo</h3>
+        <p>En el Congreso Internacional de Matemáticas de París, año 1900, David Hilbert —el matemático más influyente de su época— presentó su lista de 23 problemas que definirían la agenda de la matemática del siglo XX. Pero su proyecto más ambicioso no estaba en esa lista: era el llamado <strong>Programa de Hilbert</strong>.</p>
+        <p>La idea era simple en su enunciado y colosal en su alcance: encontrar un sistema axiomático <em>completo, consistente e independiente</em> que contuviera toda la matemática. Completo = todo enunciado verdadero sería demostrable. Consistente = jamás se derivaría una contradicción. Independiente = ningún axioma sería deducible de los demás.</p>
+        <div class="db-quote">
+          "No habrá 'ignorabimus' en las matemáticas. Podemos conocer, debemos conocer."<br>
+          — David Hilbert, 1930
+        </div>
+        <p>Hilbert estaba convencido de que, con suficiente ingenio, la razón humana podría encerrar toda la verdad matemática en un sistema formal finito. La confianza era absoluta. Las herramientas parecían al alcance. Y entonces, en 1931, un matemático austríaco de 25 años llamado <strong>Kurt Gödel</strong> publicó un artículo de 25 páginas que destruyó el sueño.</p>
+        <p>Los Teoremas de Incompletitud de Gödel (Clase 36) demostraron que ningún sistema axiomático suficientemente poderoso puede ser al mismo tiempo completo y consistente. Siempre habrá enunciados verdaderos que el sistema no puede demostrar. El <em>ignorabimus</em> existe. No en la ciencia empírica — en el corazón mismo de la matemática formal.</p>
+        <a href="biblioteca.html" class="db-btn"><i class="fa-solid fa-arrow-right"></i> Explorar más en la Biblioteca</a>
+      </div>
+    </section>
+
+    <!-- Sección 9: Síntesis -->
+    <section id="sintesis" class="reveal">
+      <h2>Síntesis</h2>
+
+      <p class="article-p">Un sistema axiomático bien construido reúne cinco elementos en un orden preciso. Cada uno es indispensable — ninguno puede faltar sin que el sistema pierda su carácter formal.</p>
+
+      <div class="synthesis-grid reveal">
+        <div class="syn-card">
+          <div class="syn-num">01</div>
+          <h4>Primitivos no definidos</h4>
+          <p>Los conceptos base que todos aceptan sin definir. Sin ellos, la cadena de definiciones retrocede al infinito.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">02</div>
+          <h4>Definiciones</h4>
+          <p>Nuevos términos construidos desde los primitivos. No son verdaderas ni falsas: son convenciones de lenguaje que unifican el sistema.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">03</div>
+          <h4>Axiomas</h4>
+          <p>Las semillas del sistema. Se adoptan sin demostración. La elección de axiomas determina todo lo que el sistema puede producir.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">04</div>
+          <h4>Reglas de inferencia</h4>
+          <p>El motor del sistema. Modus Ponens, Modus Tollens, Silogismo hipotético: los pasos legales de la demostración.</p>
+        </div>
+        <div class="syn-card" style="grid-column:1/-1">
+          <div class="syn-num">05</div>
+          <h4>Teoremas y Modelos</h4>
+          <p>Los teoremas son los frutos del sistema — verdades necesarias dada la elección de axiomas. Los modelos "anclan" el sistema a interpretaciones concretas y verifican su consistencia.</p>
+        </div>
+      </div>
+
+      <div class="question-list reveal">
+        <div class="question-item">
+          <div class="q-num">1</div>
+          <p>¿Por qué los primitivos no se pueden definir dentro del mismo sistema que los usa? ¿Qué problema filosófico genera intentar hacerlo?</p>
+        </div>
+        <div class="question-item">
+          <div class="q-num">2</div>
+          <p>Si dos sistemas tienen los mismos axiomas pero distintas reglas de inferencia, ¿serán necesariamente distintos? Justificá con un ejemplo.</p>
+        </div>
+        <div class="question-item">
+          <div class="q-num">3</div>
+          <p>Hilbert quería un sistema completo y consistente. Gödel demostró que eso es imposible. ¿Esto "destruye" la matemática o simplemente cambia cómo la entendemos?</p>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <a href="unidad6-clase33.html" class="nav-pill back"><i class="fa-solid fa-arrow-left"></i> Clase 33</a>
+        <a href="unidad6-clase35.html" class="nav-pill next">Clase 35 <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+  </article>
+</div>
+
+<script>
+/* ── Dark mode ── */
+(function(){
+  if(localStorage.getItem('darkMode')==='true') document.documentElement.classList.add('dark');
+})();
+function toggleDark(){
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+}
+
+/* ── Progress bar ── */
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const prog=d.scrollTop/(d.scrollHeight-d.clientHeight)*100;
+  document.getElementById('prog').style.width=prog+'%';
+});
+
+/* ── Reveal on scroll ── */
+const reveals=document.querySelectorAll('.reveal');
+const revObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target);}});
+},{threshold:.12});
+reveals.forEach(el=>revObs.observe(el));
+
+/* ── TOC active ── */
+const sections=document.querySelectorAll('section[id]');
+const tocLinks=document.querySelectorAll('.toc-item a');
+const tocObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      tocLinks.forEach(l=>l.classList.remove('active'));
+      const active=document.querySelector(`.toc-item a[href="#${e.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(s=>tocObs.observe(s));
+
+/* ── Chain toggle ── */
+function toggleChain(id){
+  const detail=document.getElementById(id);
+  detail.classList.toggle('open');
+  const node=detail.previousElementSibling;
+  if(node) node.classList.toggle('active');
+}
+
+/* ── Lab inference ── */
+const labData=[
+  {
+    premises:['Está lloviendo (P)','Si está lloviendo, la calle está mojada (P → Q)'],
+    conclusion:'La calle está mojada (Q)',
+    answer:'Modus Ponens',
+    explanation:'De P y P→Q se concluye Q directamente. Es la regla más fundamental del razonamiento deductivo.'
+  },
+  {
+    premises:['Si el experimento funciona, la hipótesis es correcta (P → Q)','La hipótesis no es correcta (¬Q)'],
+    conclusion:'El experimento no funcionó (¬P)',
+    answer:'Modus Tollens',
+    explanation:'De ¬Q y P→Q se niega el antecedente: ¬P. Es la forma "por contraposición" del razonamiento.'
+  },
+  {
+    premises:['Si estudio física, entiendo el movimiento (P → Q)','Si entiendo el movimiento, puedo resolver el examen (Q → R)'],
+    conclusion:'Si estudio física, puedo resolver el examen (P → R)',
+    answer:'Silogismo hipotético',
+    explanation:'Se encadenan dos condicionales: de P→Q y Q→R se obtiene P→R. La "cadena de implicaciones".'
+  },
+  {
+    premises:['El número 7 es primo (P)'],
+    conclusion:'El número 7 es primo O es par (P ∨ Q)',
+    answer:'Adición',
+    explanation:'De una sola premisa P se puede añadir cualquier disyunto: P ∨ Q. Aunque Q sea falso, P ∨ Q es verdadero si P lo es.'
+  },
+  {
+    premises:['El triángulo tiene tres lados Y la suma de sus ángulos es 180° (P ∧ Q)'],
+    conclusion:'La suma de los ángulos del triángulo es 180° (Q)',
+    answer:'Simplificación',
+    explanation:'De una conjunción P ∧ Q se puede extraer cualquiera de los conjuntos por separado: tanto P como Q.'
+  },
+  {
+    premises:['La conclusión es verdadera (Q)','Si llueve, la conclusión es verdadera (P → Q)'],
+    conclusion:'Está lloviendo (P)',
+    answer:'Ninguna válida',
+    explanation:'¡Cuidado! Esto es la FALACIA de afirmar el consecuente. De Q y P→Q NO se puede concluir P. Ejemplo: "Si es perro, es animal. Es animal. Por lo tanto es perro" — falso, puede ser gato.'
+  }
+];
+
+let labIdx=0;
+let labAnswers=new Array(labData.length).fill(null);
+let labConfirmed=new Array(labData.length).fill(false);
+let labCorrect=new Array(labData.length).fill(false);
+let selectedRule=null;
+
+function renderLab(){
+  const q=labData[labIdx];
+  document.getElementById('lab-counter').textContent=`Argumento ${labIdx+1} / ${labData.length}`;
+
+  // Premises
+  const premDiv=document.getElementById('lab-premises');
+  premDiv.innerHTML=q.premises.map((p,i)=>`
+    <div class="lab-premise">
+      <div class="prem-num">P${i+1}</div>
+      ${p}
+    </div>
+  `).join('');
+
+  // Conclusion
+  document.getElementById('lab-conclusion').textContent=q.conclusion;
+
+  // Restore selection
+  selectedRule=labAnswers[labIdx];
+  document.querySelectorAll('.lab-rule-btn').forEach(btn=>{
+    btn.classList.toggle('selected', btn.textContent===selectedRule);
+  });
+  document.getElementById('lab-confirm-btn').disabled=!selectedRule || labConfirmed[labIdx];
+
+  // Feedback
+  const fb=document.getElementById('lab-feedback');
+  fb.className='lab-feedback';
+  if(labConfirmed[labIdx]){
+    const correct=labCorrect[labIdx];
+    fb.classList.add(correct?'correct':'wrong','show');
+    document.getElementById('lab-fb-icon').textContent=correct?'✅':'❌';
+    document.getElementById('lab-fb-text').innerHTML=`<strong>${correct?'¡Correcto!':'Incorrecto.'}</strong> ${q.explanation}`;
+  }
+
+  // Nav buttons
+  document.getElementById('lab-prev-btn').disabled=labIdx===0;
+  document.getElementById('lab-next-btn').disabled=!labConfirmed[labIdx];
+
+  // Score / area visibility
+  document.getElementById('lab-q-area').style.display='block';
+  document.getElementById('lab-score').classList.remove('show');
+}
+
+function selectRule(rule){
+  if(labConfirmed[labIdx]) return;
+  selectedRule=rule;
+  labAnswers[labIdx]=rule;
+  document.querySelectorAll('.lab-rule-btn').forEach(btn=>{
+    btn.classList.toggle('selected', btn.textContent===rule);
+  });
+  document.getElementById('lab-confirm-btn').disabled=false;
+}
+
+function confirmAnswer(){
+  if(!selectedRule || labConfirmed[labIdx]) return;
+  labConfirmed[labIdx]=true;
+  labCorrect[labIdx]=(selectedRule===labData[labIdx].answer);
+  renderLab();
+
+  // If last one confirmed, show next button or score
+  if(labIdx===labData.length-1){
+    document.getElementById('lab-next-btn').disabled=false;
+    document.getElementById('lab-next-btn').textContent=' Ver resultados ';
+    document.getElementById('lab-next-btn').innerHTML='Ver resultados <i class="fa-solid fa-trophy"></i>';
+  }
+}
+
+function labPrev(){
+  if(labIdx>0){labIdx--;renderLab();}
+}
+
+function labNext(){
+  if(labIdx<labData.length-1){labIdx++;renderLab();}
+  else{showScore();}
+}
+
+function showScore(){
+  const total=labCorrect.filter(Boolean).length;
+  document.getElementById('lab-q-area').style.display='none';
+  const scoreEl=document.getElementById('lab-score');
+  scoreEl.classList.add('show');
+  document.getElementById('score-num').textContent=`${total}/${labData.length}`;
+  const msgs=[
+    'Seguí practicando — la lógica se aprende con la repetición.',
+    'Buen comienzo. Revisá las reglas que fallaste.',
+    'Bastante bien. Ya tenés el esquema básico.',
+    'Muy bien. Dominás la mayoría de las reglas.',
+    'Excelente. Solo un desliz — revisalo.',
+    '¡Perfecto! Dominás todas las reglas de inferencia.'
+  ];
+  document.getElementById('score-msg').textContent=msgs[total]||msgs[msgs.length-1];
+  document.getElementById('lab-prev-btn').disabled=true;
+  document.getElementById('lab-next-btn').disabled=true;
+}
+
+function resetLab(){
+  labIdx=0;
+  labAnswers=new Array(labData.length).fill(null);
+  labConfirmed=new Array(labData.length).fill(false);
+  labCorrect=new Array(labData.length).fill(false);
+  selectedRule=null;
+  document.getElementById('lab-next-btn').innerHTML='Siguiente <i class="fa-solid fa-arrow-right"></i>';
+  renderLab();
+}
+
+renderLab();
+</script>
+</body>
+</html>

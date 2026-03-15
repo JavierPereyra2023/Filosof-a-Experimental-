@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ciencias formales y fácticas: clasificación, modelos e interdisciplina | FILOSOFÍA & CIENCIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+/* ── Variables ── */
+:root{
+  --yellow:#facc15;--yellow-dark:#eab308;--yellow-bg:rgba(250,204,21,.09);
+  --accent:#a855f7;--accent-bg:rgba(168,85,247,.09);--accent-dark:#9333ea;
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.09);
+  --green:#22c55e;--green-bg:rgba(34,197,94,.09);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.09);
+  --orange:#f97316;--orange-bg:rgba(249,115,22,.09);
+  --teal:#14b8a6;--teal-bg:rgba(20,184,166,.09);
+  --pink:#ec4899;--pink-bg:rgba(236,72,153,.09);
+  --sepia:#92400e;--sepia-bg:rgba(146,64,14,.09);
+  --bg:#f9f7f4;--bg2:#ffffff;--bg3:#f1ede6;
+  --card:#ffffff;--text:#1a1a1a;--text2:#3d3d3d;--text3:#6b6b6b;
+  --border:#e0d9d0;--shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.15);
+  --radius:20px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.dark{
+  --bg:#111;--bg2:#1a1a1a;--bg3:#222;--card:#1e1e1e;
+  --text:#f0ece4;--text2:#c8c0b4;--text3:#888880;
+  --border:#333;--shadow:0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.6);
+}
+
+/* ── Reset ── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background .4s,color .4s;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--accent)}
+
+/* ── Progress bar ── */
+#prog{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--yellow),var(--accent));z-index:9999;transition:width .1s}
+
+/* ── Top nav ── */
+#topnav{
+  position:sticky;top:0;z-index:50;height:56px;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 28px;background:var(--bg2);
+  border-bottom:1px solid var(--border);box-shadow:var(--shadow);
+}
+.tnl,.tnr{display:flex;align-items:center;gap:12px}
+.tnc{font:700 13px 'Playfair Display',serif;color:var(--text2);display:none}
+.nav-sep{color:var(--border);font-size:18px;font-weight:300}
+.u6-badge{
+  font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-bg);
+  border:1px solid rgba(168,85,247,.3);padding:3px 12px;border-radius:999px;
+  white-space:nowrap;
+}
+.nav-logo{font:900 16px 'Playfair Display',serif;letter-spacing:-.02em}
+.nav-logo span{color:var(--accent)}
+.nav-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;border-radius:999px;
+  font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  transition:all .2s;cursor:pointer;white-space:nowrap;
+}
+.nav-pill.back{background:var(--bg3);color:var(--text3)}
+.nav-pill.back:hover{background:var(--border);color:var(--text)}
+.nav-pill.next{background:var(--yellow);color:#000}
+.nav-pill.next:hover{background:var(--yellow-dark)}
+.nav-pill.disabled{opacity:.35;pointer-events:none;cursor:default}
+.dtoggle{
+  width:38px;height:20px;border:1px solid var(--border);border-radius:999px;
+  background:transparent;position:relative;cursor:pointer;transition:.3s;flex-shrink:0;
+}
+.dtoggle:after{
+  content:'';position:absolute;left:3px;top:50%;
+  width:13px;height:13px;border-radius:50%;
+  background:var(--text3);transform:translateY(-50%);transition:.3s;
+}
+.dark .dtoggle{background:var(--yellow);border-color:var(--yellow)}
+.dark .dtoggle:after{left:21px;background:#000}
+
+/* ── Hero ── */
+#art-hero{
+  min-height:92vh;padding:96px 24px 88px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#fff;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 25%,rgba(168,85,247,.25) 0,transparent 38%),
+    radial-gradient(circle at 82% 18%,rgba(250,204,21,.2) 0,transparent 30%),
+    radial-gradient(circle at 55% 80%,rgba(59,130,246,.15) 0,transparent 32%),
+    linear-gradient(150deg,#0a0a0f 0%,#0f0b1a 40%,#0d1117 100%);
+}
+#art-hero:before{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.float-sym{
+  position:absolute;font-family:'Libre Baskerville',serif;
+  color:rgba(168,85,247,.15);font-weight:400;
+  animation:floatSym 15s ease-in-out infinite;
+  user-select:none;pointer-events:none;
+}
+.float-sym:nth-child(1){font-size:80px;left:6%;top:14%;animation-duration:16s}
+.float-sym:nth-child(2){font-size:60px;right:8%;top:18%;color:rgba(250,204,21,.14);animation-duration:13s;animation-delay:-3s}
+.float-sym:nth-child(3){font-size:68px;left:14%;bottom:24%;color:rgba(59,130,246,.14);animation-duration:17s;animation-delay:-6s}
+.float-sym:nth-child(4){font-size:48px;right:14%;bottom:20%;animation-duration:14s;animation-delay:-9s}
+.float-sym:nth-child(5){font-size:38px;left:40%;top:8%;color:rgba(250,204,21,.1);animation-duration:18s;animation-delay:-4s}
+.float-sym:nth-child(6){font-size:52px;right:30%;bottom:26%;color:rgba(59,130,246,.1);animation-duration:12s;animation-delay:-7s}
+@keyframes floatSym{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  33%{transform:translateY(-16px) rotate(4deg)}
+  66%{transform:translateY(9px) rotate(-3deg)}
+}
+.hero-inner{position:relative;z-index:2;max-width:980px}
+.hero-breadcrumb{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.hero-badge{
+  padding:4px 14px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+}
+.hero-badge.fill{background:var(--accent);color:#fff}
+.hero-badge.outline{border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.eyebrow{margin-bottom:18px;font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.hero-title{font:900 clamp(40px,7vw,82px)/.9 'Playfair Display',serif;letter-spacing:-.03em;margin-bottom:22px}
+.hero-title em{color:var(--yellow);font-style:italic}
+.hero-subtitle{
+  max-width:700px;margin:0 auto 32px;
+  font:italic clamp(15px,2vw,19px)/1.75 'Libre Baskerville',serif;
+  color:rgba(255,255,255,.78);
+}
+.hero-meta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:26px;font-size:12px;color:rgba(255,255,255,.65)}
+.hero-meta i{color:var(--yellow)}
+.hero-topics{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.hero-topics span{
+  padding:6px 14px;border-radius:999px;
+  border:1px solid rgba(168,85,247,.35);background:rgba(168,85,247,.1);
+  color:rgba(200,150,255,.9);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.hero-scroll{
+  margin-top:44px;display:inline-flex;align-items:center;gap:10px;
+  padding:12px 24px;border-radius:999px;
+  background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.35);
+  color:rgba(255,255,255,.8);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .25s;
+}
+.hero-scroll:hover{background:rgba(168,85,247,.3);color:#fff}
+
+/* ── Layout ── */
+.article-wrap{
+  max-width:1240px;margin:0 auto;
+  padding:72px 28px 92px;
+  display:grid;grid-template-columns:260px 1fr;gap:56px;
+  align-items:start;
+}
+.article-body{min-width:0}
+.sidebar{position:sticky;top:72px;align-self:start;order:-1}
+
+/* ── Sidebar cards ── */
+.sidebar-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:20px;box-shadow:var(--shadow);
+  margin-bottom:20px;
+}
+.sidebar-card-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+  font:800 10px 'Inter',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);
+}
+.sidebar-card-header i{
+  width:24px;height:24px;border-radius:8px;
+  background:var(--yellow);color:#000;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 10px;border-radius:10px;
+  font-size:12px;font-weight:500;color:var(--text3);
+  transition:all .2s;border-left:2px solid transparent;
+}
+.toc-item a:hover{background:var(--bg3);color:var(--text);border-left-color:var(--accent)}
+.toc-item a.active{background:var(--accent-bg);color:var(--accent);border-left-color:var(--accent);font-weight:700}
+.toc-num{
+  font:800 10px 'Inter',sans-serif;letter-spacing:.06em;
+  color:var(--accent);background:var(--accent-bg);
+  min-width:22px;height:22px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.toc-item a.active .toc-num{background:var(--accent);color:#fff}
+.concept-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.concept-list li{font-size:13px;line-height:1.65;color:var(--text2);padding-left:14px;position:relative}
+.concept-list li:before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.concept-list li strong{color:var(--text);font-weight:700}
+.author-list{display:flex;flex-direction:column;gap:10px}
+.author-card{display:flex;align-items:center;gap:10px}
+.author-icon{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font:700 14px 'Playfair Display',serif;color:#fff;
+  background:var(--accent);
+}
+.author-info{flex:1;min-width:0}
+.author-name{font-size:13px;font-weight:700;color:var(--text)}
+.author-role{font-size:11px;color:var(--text3)}
+.next-class-card{
+  background:linear-gradient(135deg,rgba(168,85,247,.12),rgba(250,204,21,.08));
+  border:1px solid rgba(168,85,247,.25);border-radius:14px;padding:18px;
+}
+.next-class-card .nc-label{font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.next-class-card .nc-title{font:700 14px 'Playfair Display',serif;color:var(--text);margin-bottom:12px;line-height:1.4}
+.nc-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--accent);color:#fff;transition:all .2s;
+}
+.nc-btn:hover{background:var(--accent-dark)}
+.nc-btn.disabled{opacity:.35;pointer-events:none;background:var(--bg3);color:var(--text3)}
+
+/* ── Article sections ── */
+.article-body section+section{margin-top:80px}
+.article-body h2{
+  margin:0 0 28px;padding-bottom:14px;
+  border-bottom:2px solid var(--yellow);
+  font:900 clamp(1.7rem,3.5vw,2.4rem)/1.15 'Playfair Display',serif;
+}
+.article-p{margin-bottom:26px;font:17px/1.92 'Libre Baskerville',serif;color:var(--text2)}
+.article-p strong{color:var(--text)}
+.dropcap::first-letter{
+  float:left;margin:6px 16px -4px 0;
+  font:900 88px/.78 'Playfair Display',serif;
+  color:var(--accent);line-height:.78;
+}
+
+/* ── Pull quote ── */
+.pull-quote{
+  margin:36px 0;padding:32px 40px 32px 44px;
+  border-left:5px solid var(--accent);border-radius:0 20px 20px 0;
+  background:var(--accent-bg);position:relative;overflow:hidden;
+}
+.pull-quote:before{
+  content:'\201C';position:absolute;top:-10px;left:14px;
+  font:900 100px 'Playfair Display',serif;color:var(--accent);opacity:.18;
+}
+.pull-quote blockquote{font:italic clamp(18px,2.5vw,23px)/1.5 'Playfair Display',serif;color:var(--text)}
+.pull-quote cite{display:block;margin-top:14px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+
+/* ── Callout ── */
+.callout{
+  margin:28px 0;padding:20px 24px;border-radius:16px;
+  border:1px solid rgba(234,179,8,.25);border-left:4px solid var(--yellow-dark);
+  background:var(--yellow-bg);display:flex;gap:18px;align-items:flex-start;
+}
+.callout.accent{border-left-color:var(--accent);background:var(--accent-bg);border-color:rgba(168,85,247,.2)}
+.callout.blue{border-left-color:var(--blue);background:var(--blue-bg);border-color:rgba(59,130,246,.2)}
+.callout.red{border-left-color:var(--red);background:var(--red-bg);border-color:rgba(239,68,68,.2)}
+.callout-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.callout p{font-size:14.5px;line-height:1.82;color:var(--text2)}
+.callout p strong{color:var(--text)}
+
+/* ── Reveal ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── Sci Tree ── */
+.sci-tree{margin:36px 0;overflow-x:auto;padding-bottom:8px}
+.sci-tree-inner{display:flex;flex-direction:column;align-items:center;min-width:580px}
+.sci-root{
+  background:var(--accent);color:#fff;
+  padding:12px 32px;border-radius:12px;
+  font:800 15px 'Inter',sans-serif;text-align:center;
+  position:relative;
+}
+.sci-root:after{
+  content:'';position:absolute;bottom:-22px;left:50%;
+  transform:translateX(-50%);
+  width:2px;height:22px;background:var(--border);
+}
+.sci-branches{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:22px;
+  position:relative;width:100%;
+}
+.sci-branches:before{
+  content:'';position:absolute;top:-22px;left:25%;right:25%;
+  height:2px;background:var(--border);
+}
+.sci-branch{display:flex;flex-direction:column;align-items:center;position:relative}
+.sci-branch:before{
+  content:'';position:absolute;top:-22px;left:50%;
+  transform:translateX(-50%);width:2px;height:22px;background:var(--border);
+}
+.sci-branch-head{
+  padding:10px 24px;border-radius:10px;
+  font:700 13px 'Inter',sans-serif;text-align:center;position:relative;
+}
+.sci-branch-head.formal{background:var(--blue-bg);color:var(--blue);border:2px solid rgba(59,130,246,.3)}
+.sci-branch-head.factual{background:var(--orange-bg);color:var(--orange);border:2px solid rgba(249,115,22,.3)}
+.sci-branch-head:after{
+  content:'';position:absolute;bottom:-18px;left:50%;
+  transform:translateX(-50%);width:2px;height:18px;background:var(--border);
+}
+.sci-leaves{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;
+  position:relative;
+}
+.sci-leaves:before{
+  content:'';position:absolute;top:-18px;left:12%;right:12%;
+  height:2px;background:var(--border);
+}
+.sci-leaf{
+  padding:6px 14px;border-radius:8px;
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+  background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+  white-space:nowrap;position:relative;
+}
+.sci-leaf:before{
+  content:'';position:absolute;top:-18px;left:50%;
+  transform:translateX(-50%);width:1px;height:18px;background:var(--border);
+}
+
+/* ── Table ── */
+.table-wrap{margin:28px 0;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table thead th{
+  padding:12px 20px;text-align:left;
+  font:800 10px 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+}
+.comp-table thead th:first-child{background:var(--text3);width:140px}
+.comp-table thead th:nth-child(2){background:var(--blue)}
+.comp-table thead th:nth-child(3){background:var(--orange)}
+.comp-table tbody tr:nth-child(even){background:var(--bg3)}
+.comp-table tbody td{
+  padding:13px 20px;font-size:13.5px;line-height:1.65;
+  color:var(--text2);border-bottom:1px solid var(--border);
+}
+.comp-table tbody td:first-child{font-weight:700;color:var(--text);font-size:12px}
+.comp-table tbody tr:last-child td{border-bottom:none}
+
+/* ── Card grid 3col ── */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:28px 0}
+.sci-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:22px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;
+}
+.sci-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.sci-card-icon{
+  width:48px;height:48px;border-radius:14px;margin-bottom:14px;
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.sci-card h3{font:700 15px 'Playfair Display',serif;margin-bottom:8px;color:var(--text)}
+.sci-card p{font-size:13px;line-height:1.72;color:var(--text3)}
+
+/* ── Discipline tags grid ── */
+.disc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
+.disc-tag{
+  padding:14px 16px;border-radius:14px;text-align:center;
+  border:1px solid;
+}
+.disc-tag .disc-name{font:700 14px 'Playfair Display',serif;margin-bottom:4px}
+.disc-tag .disc-cat{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.disc-tag.fisica{background:rgba(59,130,246,.09);border-color:rgba(59,130,246,.25);color:#1d4ed8}
+.disc-tag.quimica{background:rgba(34,197,94,.09);border-color:rgba(34,197,94,.25);color:#166534}
+.disc-tag.biologia{background:rgba(20,184,166,.09);border-color:rgba(20,184,166,.25);color:#0f766e}
+.disc-tag.historia{background:rgba(146,64,14,.09);border-color:rgba(146,64,14,.25);color:#92400e}
+.disc-tag.economia{background:rgba(249,115,22,.09);border-color:rgba(249,115,22,.25);color:#c2410c}
+.disc-tag.sociologia{background:rgba(236,72,153,.09);border-color:rgba(236,72,153,.25);color:#be185d}
+.dark .disc-tag.fisica{color:#93c5fd}
+.dark .disc-tag.quimica{color:#86efac}
+.dark .disc-tag.biologia{color:#5eead4}
+.dark .disc-tag.historia{color:#fbbf24}
+.dark .disc-tag.economia{color:#fed7aa}
+.dark .disc-tag.sociologia{color:#f9a8d4}
+
+/* ── Model diagram ── */
+.model-diagram{
+  margin:32px 0;display:flex;align-items:center;justify-content:center;
+  gap:0;flex-wrap:wrap;
+}
+.md-node{
+  background:var(--card);border:2px solid var(--border);border-radius:14px;
+  padding:14px 20px;text-align:center;min-width:120px;
+  transition:border-color .3s,box-shadow .3s;
+}
+.md-node:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(168,85,247,.2)}
+.md-node .mn-icon{font-size:24px;margin-bottom:6px}
+.md-node .mn-label{font-size:12px;font-weight:700;color:var(--text)}
+.md-node .mn-sub{font-size:10px;color:var(--text3);margin-top:2px}
+.md-arrow{
+  font-size:22px;color:var(--accent);padding:0 8px;
+  display:flex;align-items:center;
+}
+
+/* ── Pseudo checklist ── */
+.pseudo-list{display:flex;flex-direction:column;gap:10px;margin:24px 0}
+.pseudo-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 18px;border-radius:14px;cursor:pointer;
+  background:var(--bg3);border:2px solid var(--border);
+  transition:all .3s;user-select:none;
+}
+.pseudo-item:hover{border-color:var(--accent)}
+.pseudo-item.checked-no{background:var(--red-bg);border-color:rgba(239,68,68,.3)}
+.pseudo-item.checked-yes{background:var(--green-bg);border-color:rgba(34,197,94,.3)}
+.pseudo-mark{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  border:2px solid var(--border);background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:800;transition:all .3s;color:var(--text3);
+}
+.pseudo-item.checked-no .pseudo-mark{background:var(--red);border-color:var(--red);color:#fff}
+.pseudo-item.checked-yes .pseudo-mark{background:var(--green);border-color:var(--green);color:#fff}
+.pseudo-content{flex:1;min-width:0}
+.pseudo-criterion{font:700 14px 'Inter',sans-serif;color:var(--text);margin-bottom:4px}
+.pseudo-explain{
+  font-size:13px;line-height:1.7;color:var(--text3);
+  max-height:0;overflow:hidden;transition:max-height .4s ease,margin-top .3s;
+}
+.pseudo-item.checked-no .pseudo-explain,
+.pseudo-item.checked-yes .pseudo-explain{max-height:200px;margin-top:6px}
+.pseudo-item.checked-no .pseudo-explain{color:var(--red)}
+.pseudo-hint{font-size:11px;font-weight:600;color:var(--text3);text-align:center;margin-top:8px;font-style:italic}
+
+/* ── Venn diagram ── */
+.venn-wrap{margin:32px 0;display:flex;flex-direction:column;align-items:center;gap:24px}
+.venn-svg-wrap{position:relative;width:340px;height:260px;flex-shrink:0}
+.venn-svg-wrap svg{width:100%;height:100%}
+.venn-labels{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:500px}
+.venn-label{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;
+  font-size:12px;font-weight:700;background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+}
+.venn-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.venn-center-label{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:#fff;text-align:center;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+
+/* ── Classifier ── */
+.classifier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}
+.clf-card{
+  padding:14px;border-radius:14px;
+  background:var(--bg3);border:2px solid var(--border);
+  text-align:center;transition:all .3s;
+}
+.clf-card.formal-set{background:var(--blue-bg);border-color:rgba(59,130,246,.4)}
+.clf-card.factual-set{background:var(--orange-bg);border-color:rgba(249,115,22,.4)}
+.clf-name{font:700 13px 'Playfair Display',serif;margin-bottom:8px;color:var(--text)}
+.clf-explain{font-size:11px;line-height:1.55;color:var(--text3);margin-bottom:10px;min-height:36px}
+.clf-card.formal-set .clf-explain{color:var(--blue)}
+.clf-card.factual-set .clf-explain{color:var(--orange)}
+.clf-btns{display:flex;gap:6px;justify-content:center}
+.clf-btn{
+  padding:5px 12px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  cursor:pointer;border:1px solid;transition:all .2s;background:transparent;
+}
+.clf-btn.f{color:var(--blue);border-color:rgba(59,130,246,.4)}
+.clf-btn.f:hover,.clf-card.formal-set .clf-btn.f{background:var(--blue);color:#fff;border-color:var(--blue)}
+.clf-btn.b{color:var(--orange);border-color:rgba(249,115,22,.4)}
+.clf-btn.b:hover,.clf-card.factual-set .clf-btn.b{background:var(--orange);color:#fff;border-color:var(--orange)}
+.clf-result{
+  margin-top:16px;padding:14px 18px;border-radius:14px;
+  background:linear-gradient(135deg,var(--accent-bg),var(--yellow-bg));
+  border:1px solid rgba(168,85,247,.25);display:none;text-align:center;
+}
+.clf-result.show{display:block}
+.clf-result p{font-size:14px;font-weight:700;color:var(--text)}
+
+/* ── Timeline vertical ── */
+.timeline-vert{margin:32px 0;position:relative;padding-left:40px}
+.timeline-vert:before{
+  content:'';position:absolute;left:14px;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--accent),var(--yellow));
+}
+.tl-item{position:relative;margin-bottom:32px}
+.tl-item:last-child{margin-bottom:0}
+.tl-node{
+  position:absolute;left:-32px;top:4px;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--accent);border:3px solid var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 3px rgba(168,85,247,.25);
+  font:800 9px 'Inter',sans-serif;color:#fff;
+}
+.tl-year{
+  font:800 11px 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:4px;
+}
+.tl-title{font:700 15px 'Playfair Display',serif;margin-bottom:6px;color:var(--text)}
+.tl-body{font-size:13.5px;line-height:1.72;color:var(--text2)}
+.tl-tag{
+  display:inline-block;margin-top:6px;
+  padding:3px 10px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+}
+
+/* ── RMN interdisciplina diagram ── */
+.rmn-diagram{margin:28px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.rmn-node{
+  padding:18px;border-radius:16px;cursor:pointer;
+  border:2px solid var(--border);background:var(--bg3);
+  transition:all .3s;
+}
+.rmn-node:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(168,85,247,.15)}
+.rmn-node.active{border-color:var(--accent);background:var(--accent-bg)}
+.rmn-node-head{display:flex;align-items:center;gap:10px;margin-bottom:0}
+.rmn-node-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.rmn-node-name{font:700 13px 'Inter',sans-serif;color:var(--text)}
+.rmn-node-detail{
+  font-size:12.5px;line-height:1.7;color:var(--text2);
+  max-height:0;overflow:hidden;transition:max-height .4s ease,margin-top .3s;
+}
+.rmn-node.active .rmn-node-detail{max-height:200px;margin-top:10px}
+.rmn-arrow-wrap{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 0}
+.rmn-arrow-box{
+  padding:14px 22px;border-radius:14px;text-align:center;
+  background:linear-gradient(135deg,var(--accent-bg),var(--yellow-bg));
+  border:2px solid rgba(168,85,247,.3);flex:1;
+}
+.rmn-arrow-box .rab-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.rmn-arrow-box .rab-val{font:700 14px 'Playfair Display',serif;color:var(--text)}
+.rmn-arrow-sep{font-size:24px;color:var(--accent);font-weight:700}
+
+/* ── Synthesis ── */
+.synthesis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
+.syn-card{
+  padding:20px;border-radius:16px;
+  background:var(--bg3);border:1px solid var(--border);
+}
+.syn-num{
+  font:900 36px 'Playfair Display',serif;
+  color:rgba(168,85,247,.2);margin-bottom:4px;line-height:1;
+}
+.syn-card h4{font:700 14px 'Playfair Display',serif;margin-bottom:8px;color:var(--text)}
+.syn-card p{font-size:13px;line-height:1.72;color:var(--text2)}
+
+/* ── Questions ── */
+.question-list{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+.question-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 18px;border-radius:14px;
+  background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);
+}
+.q-num{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:var(--yellow);color:#000;
+  display:flex;align-items:center;justify-content:center;
+  font:800 12px 'Inter',sans-serif;
+}
+.question-item p{font-size:14px;line-height:1.72;color:var(--text2)}
+
+/* ── Science Network ── */
+.net-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin:28px 0}
+.net-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:14px 20px;background:var(--bg3);border-bottom:1px solid var(--border)}
+.net-btn{padding:8px 20px;border-radius:999px;background:var(--accent);color:#fff;border:none;font:700 11px 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.net-btn:hover{background:var(--accent-dark)}
+.net-legend{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--text3)}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;display:inline-block}
+.leg-dash{width:22px;height:0;border-top:2px dashed #f97316;flex-shrink:0;display:inline-block}
+#sci-network{display:block;width:100%}
+.sci-node{cursor:pointer}
+.sci-node circle{transition:filter .2s}
+.sci-node:hover circle{filter:brightness(1.3)}
+.sci-node text{font-family:'Inter',sans-serif;pointer-events:none;user-select:none}
+.net-tooltip{padding:16px 22px;border-top:1px solid var(--border);background:var(--bg);display:none;align-items:flex-start;gap:14px}
+.net-tooltip.show{display:flex}
+.net-tip-dot{width:13px;height:13px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.net-tip-title{font:900 1.05rem 'Playfair Display',serif;margin-bottom:6px}
+.net-tip-desc{font-size:13.5px;line-height:1.75;color:var(--text2)}
+.net-tip-tag{display:inline-flex;margin-top:10px;padding:4px 12px;border-radius:999px;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
+@media(max-width:480px){.net-controls{flex-direction:column;align-items:flex-start}.net-legend{gap:8px}}
+
+/* ── Responsive ── */
+@media(min-width:1100px){
+  .tnc{display:block}
+}
+@media(min-width:761px) and (max-width:1099px){
+  .article-wrap{grid-template-columns:1fr;gap:40px}
+  .sidebar{position:static;order:0}
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .classifier-grid{grid-template-columns:repeat(3,1fr)}
+  .synthesis-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .article-wrap{grid-template-columns:1fr;padding:40px 18px 60px;gap:32px}
+  .sidebar{position:static;order:0}
+  #topnav{padding:0 14px}
+  .tnl,.tnr{gap:8px}
+  .nav-pill{padding:6px 10px;font-size:10px}
+  .card-grid{grid-template-columns:1fr}
+  .disc-grid{grid-template-columns:repeat(2,1fr)}
+  .classifier-grid{grid-template-columns:repeat(2,1fr)}
+  .synthesis-grid{grid-template-columns:1fr}
+  .rmn-diagram{grid-template-columns:1fr}
+  .rmn-arrow-wrap{flex-wrap:wrap}
+  .model-diagram{gap:4px}
+  .md-arrow{padding:0 2px;font-size:18px}
+  .sci-branches{grid-template-columns:1fr;gap:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="prog"></div>
+
+<!-- Top nav -->
+<nav id="topnav">
+  <div class="tnl">
+    <a href="index.html" class="nav-logo">F<span>&</span>C</a>
+    <span class="nav-sep">|</span>
+    <span class="u6-badge">Unidad 6</span>
+    <span class="nav-sep">|</span>
+    <span class="tnc">Ciencias formales y fácticas</span>
+  </div>
+  <div class="tnr">
+    <button class="dtoggle" onclick="toggleDark()" aria-label="Modo oscuro"></button>
+    <a href="unidad6-introduccion.html" class="nav-pill back"><i class="fa-solid fa-arrow-left"></i> Intro</a>
+    <a href="unidad6-clase33.html" class="nav-pill next"><i class="fa-solid fa-arrow-right"></i> Clase 33</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="art-hero">
+  <span class="float-sym">∀</span>
+  <span class="float-sym">∑</span>
+  <span class="float-sym">∈</span>
+  <span class="float-sym">∂</span>
+  <span class="float-sym">≡</span>
+  <span class="float-sym">∫</span>
+
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <span class="hero-badge fill">Unidad 6</span>
+      <span class="hero-badge outline">Clase 32</span>
+      <span class="hero-badge outline">Filosofía de la Ciencia</span>
+    </div>
+    <p class="eyebrow">Mario Bunge · Karl Popper · Interdisciplina</p>
+    <h1 class="hero-title">Ciencias <em>formales</em> y fácticas:<br>clasificación, modelos<br>e interdisciplina</h1>
+    <p class="hero-subtitle">¿Qué hace a una disciplina una ciencia? ¿Por qué la matemática puede describir el mundo sin ser parte de él? Del árbol de Bunge a la resonancia magnética.</p>
+    <div class="hero-meta">
+      <span><i class="fa-solid fa-book-open"></i> Unidad 6 — Lógica y Sistemas</span>
+      <span><i class="fa-regular fa-clock"></i> Clase 32</span>
+      <span><i class="fa-solid fa-location-dot"></i> Los Polvorines, Buenos Aires</span>
+    </div>
+    <div class="hero-topics">
+      <span>Clasificación de Bunge</span>
+      <span>Ciencias formales</span>
+      <span>Ciencias fácticas</span>
+      <span>Pseudociencias</span>
+      <span>Interdisciplina</span>
+      <span>RMN</span>
+    </div>
+    <a href="#intro" class="hero-scroll"><i class="fa-solid fa-chevron-down"></i> Comenzar lectura</a>
+  </div>
+</section>
+
+<!-- Article -->
+<div class="article-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-list"></i>
+        Contenidos
+      </div>
+      <ul class="toc-list" id="toc">
+        <li class="toc-item"><a href="#intro"><span class="toc-num">01</span> Por qué clasificar</a></li>
+        <li class="toc-item"><a href="#clasificacion"><span class="toc-num">02</span> La clasificación de Bunge</a></li>
+        <li class="toc-item"><a href="#red"><span class="toc-num">03</span> Red de ciencias</a></li>
+        <li class="toc-item"><a href="#campo-formales"><span class="toc-num">04</span> Ciencias formales</a></li>
+        <li class="toc-item"><a href="#campo-facticas"><span class="toc-num">05</span> Ciencias fácticas</a></li>
+        <li class="toc-item"><a href="#modelar"><span class="toc-num">06</span> Modelar la realidad</a></li>
+        <li class="toc-item"><a href="#pseudociencias"><span class="toc-num">07</span> Pseudociencias</a></li>
+        <li class="toc-item"><a href="#interdisciplina"><span class="toc-num">08</span> Interdisciplina</a></li>
+        <li class="toc-item"><a href="#rmn"><span class="toc-num">09</span> Caso: RMN</a></li>
+        <li class="toc-item"><a href="#sintesis"><span class="toc-num">10</span> Síntesis</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-key"></i>
+        Conceptos clave
+      </div>
+      <ul class="concept-list">
+        <li><strong>Ciencias formales:</strong> no refieren a hechos del mundo, validan por coherencia lógica</li>
+        <li><strong>Ciencias fácticas:</strong> estudian hechos del mundo, validan por contraste empírico</li>
+        <li><strong>Modelo científico:</strong> representación abstracta que captura aspectos de un fenómeno</li>
+        <li><strong>Falsabilidad:</strong> criterio de Popper para distinguir ciencia de pseudociencia</li>
+        <li><strong>Interdisciplina:</strong> integración real de métodos de dos o más disciplinas</li>
+        <li><strong>Transformada de Fourier:</strong> herramienta matemática que hace posible la RMN</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-header">
+        <i class="fa-solid fa-user"></i>
+        Protagonistas
+      </div>
+      <div class="author-list">
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--accent)">B</div>
+          <div class="author-info">
+            <div class="author-name">Mario Bunge</div>
+            <div class="author-role">Filósofo de la ciencia (1919–2020)</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--blue)">P</div>
+          <div class="author-info">
+            <div class="author-name">Karl Popper</div>
+            <div class="author-role">Falsabilidad y demarcación</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--orange)">F</div>
+          <div class="author-info">
+            <div class="author-name">Joseph Fourier</div>
+            <div class="author-role">Matemático (1768–1830)</div>
+          </div>
+        </div>
+        <div class="author-card">
+          <div class="author-icon" style="background:var(--teal)">L</div>
+          <div class="author-info">
+            <div class="author-name">Paul Lauterbur</div>
+            <div class="author-role">Nobel 2003 — RMN diagnóstica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-class-card">
+      <div class="nc-label">Próxima clase</div>
+      <div class="nc-title">Clase 33 — Lógica formal: proposiciones, conectivas y tablas de verdad</div>
+      <a class="nc-btn disabled"><i class="fa-solid fa-lock"></i> Próximamente</a>
+    </div>
+  </aside>
+
+  <!-- Article body -->
+  <main class="article-body">
+
+    <!-- 1. Intro -->
+    <section id="intro" class="reveal">
+      <h2><i class="fa-solid fa-sitemap" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Por qué clasificar las ciencias</h2>
+      <p class="article-p dropcap">Cuando pensamos en "ciencia", solemos imaginar un laboratorio, un experimento, datos y conclusiones. Pero esa imagen es parcial: la matemática también es ciencia, aunque ningún matemático haya medido un átomo. La lógica también es ciencia, aunque no se pueda verificar en un tubo de ensayo. ¿Qué tienen en común estas actividades tan diferentes? ¿Por qué merecen todas el nombre de "ciencias"?</p>
+      <p class="article-p">La respuesta no es trivial. La clasificación de las ciencias no es un capricho académico —es una reflexión filosófica sobre qué tipo de conocimiento produce cada disciplina, qué estudia, cómo lo estudia y con qué criterios decide que algo es verdadero o falso. Una clasificación bien hecha ilumina las diferencias profundas entre disciplinas que, a primera vista, parecen similares.</p>
+      <p class="article-p">La referencia canónica en el mundo hispanohablante es <strong>Mario Bunge</strong>, filósofo argentino y uno de los más importantes pensadores científicos del siglo XX. En su monumental <em>Treatise on Basic Philosophy</em> (1974), Bunge propone una división que sigue siendo el punto de partida en los programas de filosofía de la ciencia de todo el mundo.</p>
+
+      <div class="pull-quote">
+        <blockquote>"Una ciencia se define no solo por lo que estudia sino por cómo valida lo que afirma."</blockquote>
+        <cite>Mario Bunge</cite>
+      </div>
+
+      <p class="article-p">Esta afirmación es más profunda de lo que parece. Dos disciplinas pueden estudiar el mismo objeto —pongamos, el comportamiento humano— y sin embargo pertenecer a tipos distintos de ciencia según el método que usen para validar sus afirmaciones. Entender esto es el primer paso para navegar con lucidez el mapa del conocimiento.</p>
+    </section>
+
+    <!-- 2. Clasificación -->
+    <section id="clasificacion" class="reveal">
+      <h2><i class="fa-solid fa-diagram-project" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>La clasificación de Bunge</h2>
+      <p class="article-p">Bunge divide el conocimiento científico en dos grandes ramas. El criterio no es el grado de rigor —ambas pueden ser igualmente rigurosas— sino la naturaleza de su objeto y el modo en que se validan sus proposiciones.</p>
+
+      <!-- Árbol CSS -->
+      <div class="sci-tree reveal">
+        <div class="sci-tree-inner">
+          <div class="sci-root">Ciencias</div>
+          <div class="sci-branches">
+            <div class="sci-branch">
+              <div class="sci-branch-head formal">Ciencias Formales</div>
+              <div class="sci-leaves">
+                <div class="sci-leaf">Lógica</div>
+                <div class="sci-leaf">Matemática</div>
+                <div class="sci-leaf">Teoría de conjuntos</div>
+              </div>
+            </div>
+            <div class="sci-branch">
+              <div class="sci-branch-head factual">Ciencias Fácticas</div>
+              <div class="sci-leaves">
+                <div class="sci-leaf">Física</div>
+                <div class="sci-leaf">Química</div>
+                <div class="sci-leaf">Biología</div>
+                <div class="sci-leaf">Historia</div>
+                <div class="sci-leaf">Economía</div>
+                <div class="sci-leaf">Sociología</div>
+                <div class="sci-leaf">Medicina</div>
+                <div class="sci-leaf">Ingeniería</div>
+                <div class="sci-leaf">Psicología</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla comparativa -->
+      <div class="table-wrap reveal">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Dimensión</th>
+              <th><i class="fa-solid fa-infinity" style="margin-right:6px"></i>Ciencias Formales</th>
+              <th><i class="fa-solid fa-flask" style="margin-right:6px"></i>Ciencias Fácticas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Objeto</td>
+              <td>Entes abstractos: números, proposiciones, estructuras, conjuntos</td>
+              <td>Hechos y procesos del mundo real: físicos, biológicos, sociales, históricos</td>
+            </tr>
+            <tr>
+              <td>Método</td>
+              <td>Deducción lógica a partir de axiomas. Demostración formal</td>
+              <td>Observación, experimento, hipótesis, contrastación empírica</td>
+            </tr>
+            <tr>
+              <td>Validación</td>
+              <td>Coherencia lógica interna; demostración. No requiere datos empíricos</td>
+              <td>Contraste con la experiencia y los datos. Requiere evidencia</td>
+            </tr>
+            <tr>
+              <td>Verdad</td>
+              <td>Verdad formal: si sigue lógicamente de los axiomas, es verdadero</td>
+              <td>Verdad fáctica: provisional, aproximada, sujeta a revisión</td>
+            </tr>
+            <tr>
+              <td>Ejemplos</td>
+              <td>Teorema de Pitágoras, lógica proposicional, álgebra de Boole</td>
+              <td>Ley de gravedad, evolución biológica, ciclos económicos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Clasificador interactivo -->
+      <div class="callout accent reveal">
+        <span class="callout-icon"><i class="fa-solid fa-gamepad"></i></span>
+        <div>
+          <p><strong>Actividad: Clasificá estas disciplinas.</strong> Hacé click en "Formal" o "Fáctica" para cada disciplina y comprobá si acertás.</p>
+        </div>
+      </div>
+
+      <div class="classifier-grid reveal" id="classGrid">
+        <!-- filled by JS -->
+      </div>
+      <div class="clf-result" id="clfResult">
+        <p>¡Completaste todas! La clasificación de Bunge te da un mapa del territorio científico. ¿Hay alguna que te haya sorprendido?</p>
+      </div>
+    </section>
+
+    <!-- 3. Red dinámica de ciencias -->
+    <section id="red" class="reveal">
+      <h2><i class="fa-solid fa-circle-nodes" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>La red de las ciencias</h2>
+      <p class="article-p">La clasificación de Bunge no separa las ciencias en compartimentos estancos. La siguiente red muestra cómo se conectan y organizan. Las líneas sólidas representan relaciones de clasificación; la línea punteada entre <strong>Matemática</strong> y <strong>Física</strong> representa la relación de <em>axiomatización y modelización</em> — el puente filosófico central de esta unidad. Hacé click en cualquier nodo para ver su descripción.</p>
+
+      <div class="net-wrap">
+        <div class="net-controls">
+          <button class="net-btn" onclick="initNetwork()">
+            <i class="fa-solid fa-play fa-xs"></i> Reproducir animación
+          </button>
+          <div class="net-legend">
+            <span class="leg-item"><span class="leg-dot" style="background:#a855f7"></span>Ciencias formales</span>
+            <span class="leg-item"><span class="leg-dot" style="background:#3b82f6"></span>Ciencias fácticas</span>
+            <span class="leg-item"><span class="leg-dash"></span>Relación formal ↔ fáctica</span>
+          </div>
+        </div>
+
+        <svg id="sci-network" viewBox="0 0 900 330" aria-label="Red de clasificación de las ciencias">
+          <defs>
+            <filter id="glow-net" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="3.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- ── Líneas clasificación ── -->
+          <!-- Raíz → L1 -->
+          <line id="nl-root-f"  x1="450" y1="65" x2="215" y2="140" stroke="#a855f7" stroke-width="2"   stroke-dasharray="255" stroke-dashoffset="255"/>
+          <line id="nl-root-fc" x1="450" y1="65" x2="685" y2="140" stroke="#3b82f6" stroke-width="2"   stroke-dasharray="255" stroke-dashoffset="255"/>
+          <!-- Formales → L2 -->
+          <line id="nl-f-log"   x1="215" y1="162" x2="72"  y2="258" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="200" stroke-dashoffset="200"/>
+          <line id="nl-f-mat"   x1="215" y1="162" x2="210" y2="258" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="98"  stroke-dashoffset="98"/>
+          <line id="nl-f-geo"   x1="215" y1="162" x2="348" y2="258" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="188" stroke-dashoffset="188"/>
+          <!-- Fácticas → L2 -->
+          <line id="nl-fc-fis"  x1="685" y1="162" x2="515" y2="258" stroke="#14b8a6" stroke-width="1.5" stroke-dasharray="220" stroke-dashoffset="220"/>
+          <line id="nl-fc-qui"  x1="685" y1="162" x2="622" y2="258" stroke="#14b8a6" stroke-width="1.5" stroke-dasharray="148" stroke-dashoffset="148"/>
+          <line id="nl-fc-bio"  x1="685" y1="162" x2="724" y2="258" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="138" stroke-dashoffset="138"/>
+          <line id="nl-fc-his"  x1="685" y1="162" x2="833" y2="258" stroke="#f97316" stroke-width="1.5" stroke-dasharray="200" stroke-dashoffset="200"/>
+
+          <!-- ── Línea punteada formal↔fáctica ── -->
+          <path id="nl-cross" d="M 210 257 Q 362 185 515 257"
+                fill="none" stroke="#f97316" stroke-width="2"
+                stroke-dasharray="7 5" opacity="0"/>
+          <text id="nl-cross-lbl" x="362" y="200" text-anchor="middle"
+                font-size="10" font-weight="700" fill="#f97316"
+                letter-spacing=".04em" opacity="0">axiomatización / modelos</text>
+
+          <!-- ── Nodos ── -->
+          <!-- Raíz -->
+          <g class="sci-node" id="nn-root" opacity="0" onclick="showNetTip('root')">
+            <circle cx="450" cy="48" r="30" fill="#facc15" filter="url(#glow-net)"/>
+            <text x="450" y="52" text-anchor="middle" font-size="11.5" fill="#000" font-weight="800">Ciencias</text>
+          </g>
+          <!-- L1 -->
+          <g class="sci-node" id="nn-formales" opacity="0" onclick="showNetTip('formales')">
+            <circle cx="215" cy="151" r="26" fill="#a855f7" filter="url(#glow-net)"/>
+            <text x="215" y="155" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Formales</text>
+          </g>
+          <g class="sci-node" id="nn-facticas" opacity="0" onclick="showNetTip('facticas')">
+            <circle cx="685" cy="151" r="26" fill="#3b82f6" filter="url(#glow-net)"/>
+            <text x="685" y="155" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">Fácticas</text>
+          </g>
+          <!-- L2 Formales -->
+          <g class="sci-node" id="nn-logica" opacity="0" onclick="showNetTip('logica')">
+            <circle cx="72" cy="278" r="22" fill="#a855f7"/>
+            <text x="72" y="275" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">Lógica</text>
+          </g>
+          <g class="sci-node" id="nn-mat" opacity="0" onclick="showNetTip('mat')">
+            <circle cx="210" cy="278" r="22" fill="#a855f7"/>
+            <text x="210" y="275" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="700">Matemática</text>
+          </g>
+          <g class="sci-node" id="nn-geom" opacity="0" onclick="showNetTip('geom')">
+            <circle cx="348" cy="278" r="22" fill="#9333ea"/>
+            <text x="348" y="275" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="700">Geometría</text>
+          </g>
+          <!-- L2 Fácticas -->
+          <g class="sci-node" id="nn-fis" opacity="0" onclick="showNetTip('fis')">
+            <circle cx="515" cy="278" r="22" fill="#14b8a6"/>
+            <text x="515" y="282" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">Física</text>
+          </g>
+          <g class="sci-node" id="nn-qui" opacity="0" onclick="showNetTip('qui')">
+            <circle cx="622" cy="278" r="22" fill="#14b8a6"/>
+            <text x="622" y="282" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">Química</text>
+          </g>
+          <g class="sci-node" id="nn-bio" opacity="0" onclick="showNetTip('bio')">
+            <circle cx="724" cy="278" r="22" fill="#22c55e"/>
+            <text x="724" y="282" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">Biología</text>
+          </g>
+          <g class="sci-node" id="nn-his" opacity="0" onclick="showNetTip('his')">
+            <circle cx="833" cy="278" r="22" fill="#f97316"/>
+            <text x="833" y="282" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">Historia</text>
+          </g>
+        </svg>
+
+        <!-- Tooltip panel -->
+        <div id="net-tooltip" class="net-tooltip">
+          <div class="net-tip-dot" id="ntd"></div>
+          <div style="min-width:0">
+            <div class="net-tip-title" id="ntt"></div>
+            <div class="net-tip-desc" id="ntx"></div>
+            <div class="net-tip-tag" id="nttag"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout accent reveal">
+        <span style="font-size:20px;flex-shrink:0">🔗</span>
+        <p>La línea punteada entre <strong>Matemática</strong> y <strong>Física</strong> es el puente filosófico central de la unidad: una ciencia formal provee el lenguaje (ecuaciones, funciones, vectores) que una ciencia fáctica necesita para describir el mundo. Sin esa conexión, la física moderna sería imposible.</p>
+      </div>
+    </section>
+
+    <!-- 4. Formales -->
+    <section id="campo-formales" class="reveal">
+      <h2><i class="fa-solid fa-infinity" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Campo de acción: ciencias formales</h2>
+      <p class="article-p">Las ciencias formales son aquellas que estudian formas, relaciones y estructuras abstractas, sin referirse a ningún objeto del mundo físico. Su método es la demostración: a partir de axiomas (proposiciones aceptadas sin demostración) se derivan teoremas mediante reglas de inferencia. La verdad de un teorema no depende de ningún experimento — depende únicamente de que la deducción sea correcta.</p>
+
+      <div class="card-grid reveal">
+        <div class="sci-card">
+          <div class="sci-card-icon" style="background:var(--blue-bg)"><i class="fa-solid fa-project-diagram" style="color:var(--blue)"></i></div>
+          <h3>Lógica</h3>
+          <p>Estudia las formas válidas de inferencia. No importa de qué traten las premisas — importa si la conclusión se sigue necesariamente de ellas. El silogismo aristotélico y el cálculo proposicional moderno son sus herramientas centrales.</p>
+        </div>
+        <div class="sci-card">
+          <div class="sci-card-icon" style="background:rgba(168,85,247,.1)"><i class="fa-solid fa-square-root-variable" style="color:var(--accent)"></i></div>
+          <h3>Matemática</h3>
+          <p>Estudia relaciones entre entes abstractos: números, espacios, funciones, estructuras algebraicas. Desde la aritmética de los naturales hasta la geometría diferencial que Einstein necesitó para la Relatividad General.</p>
+        </div>
+        <div class="sci-card">
+          <div class="sci-card-icon" style="background:var(--teal-bg)"><i class="fa-solid fa-braille" style="color:var(--teal)"></i></div>
+          <h3>Teoría de conjuntos</h3>
+          <p>Es el lenguaje universal de la matemática moderna. Todo objeto matemático — número, función, espacio — puede definirse en términos de conjuntos. Fundada por Georg Cantor en el siglo XIX, revolucionó el modo en que entendemos el infinito.</p>
+        </div>
+      </div>
+
+      <div class="callout accent reveal">
+        <span class="callout-icon"><i class="fa-solid fa-lightbulb"></i></span>
+        <div>
+          <p><strong>"Las ciencias formales no describen el mundo — construyen el lenguaje con el que lo describimos."</strong> Un triángulo matemático no existe en la naturaleza. Pero el Teorema de Pitágoras sirve para calcular distancias reales con exactitud perfecta. ¿Cómo es posible? Esta pregunta inquietó a Platón, a Kant y sigue siendo uno de los grandes misterios filosóficos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Fácticas -->
+    <section id="campo-facticas" class="reveal">
+      <h2><i class="fa-solid fa-flask" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Campo de acción: ciencias fácticas</h2>
+      <p class="article-p">Las ciencias fácticas estudian fenómenos del mundo real. Su método fundamental es el contraste empírico: una hipótesis científica debe ser puesta a prueba con datos, observaciones o experimentos. Si los datos no se corresponden con la hipótesis, la hipótesis debe revisarse o descartarse.</p>
+      <p class="article-p">Bunge las subdivide en <strong>ciencias naturales</strong> (que estudian fenómenos físicos, químicos, biológicos) y <strong>ciencias sociales</strong> (que estudian fenómenos humanos, históricos, económicos). A estas se suman las <strong>ciencias aplicadas o mixtas</strong> (Medicina, Ingeniería, Psicología) que combinan conocimiento teórico con aplicación práctica.</p>
+
+      <div class="disc-grid reveal">
+        <div class="disc-tag fisica"><div class="disc-name">Física</div><div class="disc-cat">Natural</div></div>
+        <div class="disc-tag quimica"><div class="disc-name">Química</div><div class="disc-cat">Natural</div></div>
+        <div class="disc-tag biologia"><div class="disc-name">Biología</div><div class="disc-cat">Natural</div></div>
+        <div class="disc-tag historia"><div class="disc-name">Historia</div><div class="disc-cat">Social</div></div>
+        <div class="disc-tag economia"><div class="disc-name">Economía</div><div class="disc-cat">Social</div></div>
+        <div class="disc-tag sociologia"><div class="disc-name">Sociología</div><div class="disc-cat">Social</div></div>
+      </div>
+
+      <div class="callout reveal">
+        <span class="callout-icon"><i class="fa-solid fa-arrows-split-up-and-left"></i></span>
+        <div>
+          <p><strong>La frontera no siempre es nítida.</strong> Existen ciencias de interfaz donde los límites se borran. La <strong>Psicología cognitiva</strong> combina biología cerebral con análisis de procesos mentales. La <strong>Lingüística computacional</strong> cruza lógica formal, ciencias sociales e informática. La <strong>Bioestadística</strong> aplica matemática a datos biológicos. Estas zonas grises son algunas de las más fértiles en la ciencia actual.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Modelar -->
+    <section id="modelar" class="reveal">
+      <h2><i class="fa-solid fa-chart-line" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Cómo las ciencias formales modelan la realidad</h2>
+      <p class="article-p">Si las ciencias formales no estudian el mundo real, ¿cómo pueden ser tan útiles para describirlo? La respuesta está en el concepto de <strong>modelo</strong>. Un modelo es una representación abstracta de ciertos aspectos de un fenómeno, construida usando el lenguaje de las ciencias formales.</p>
+      <p class="article-p">La parábola matemática —una curva definida por una ecuación algebraica— no existe en la naturaleza. Pero cuando Galileo estudió el movimiento de los proyectiles, descubrió que su trayectoria seguía exactamente esa curva. La ecuación cuadrática <em>y = x²</em> <strong>modela</strong> el movimiento real. Del mismo modo, las ecuaciones de Maxwell modelan el electromagnetismo; la distribución normal de Gauss modela la variabilidad biológica; las matrices de Schrödinger modelan el comportamiento cuántico.</p>
+
+      <!-- Diagrama de modelado -->
+      <div class="model-diagram reveal">
+        <div class="md-node">
+          <div class="mn-icon"><i class="fa-solid fa-globe" style="color:var(--teal)"></i></div>
+          <div class="mn-label">Fenómeno real</div>
+          <div class="mn-sub">Observación</div>
+        </div>
+        <div class="md-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="md-node">
+          <div class="mn-icon"><i class="fa-solid fa-square-root-variable" style="color:var(--accent)"></i></div>
+          <div class="mn-label">Modelo matemático</div>
+          <div class="mn-sub">Abstracción</div>
+        </div>
+        <div class="md-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="md-node">
+          <div class="mn-icon"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--yellow-dark)"></i></div>
+          <div class="mn-label">Predicciones</div>
+          <div class="mn-sub">Deducción</div>
+        </div>
+        <div class="md-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="md-node">
+          <div class="mn-icon"><i class="fa-solid fa-vial" style="color:var(--blue)"></i></div>
+          <div class="mn-label">Contraste empírico</div>
+          <div class="mn-sub">Verificación</div>
+        </div>
+      </div>
+
+      <div class="pull-quote reveal">
+        <blockquote>"Un modelo no es la realidad — es una representación útil de ciertos aspectos de la realidad."</blockquote>
+        <cite>Mario Bunge</cite>
+      </div>
+
+      <div class="callout reveal">
+        <span class="callout-icon"><i class="fa-solid fa-map"></i></span>
+        <div>
+          <p><strong>El mapa no es el territorio.</strong> Esta frase del lingüista Alfred Korzybski captura la relación entre modelo y realidad. Un mapa de Buenos Aires es útil para orientarse — pero si lo confundimos con la ciudad real, tenemos un problema filosófico serio. Del mismo modo, las ecuaciones de Newton <em>modelan</em> el movimiento, pero no <em>son</em> el movimiento. La distinción entre el mapa y el territorio es fundamental en epistemología.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Pseudociencias -->
+    <section id="pseudociencias" class="reveal">
+      <h2><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Pseudociencias: el caso de la astrología</h2>
+      <p class="article-p">Una <strong>pseudociencia</strong> es un conjunto de creencias o prácticas que se presenta con la apariencia exterior de la ciencia —usa términos técnicos, hace "predicciones", cita "estudios"— pero que no cumple los criterios metodológicos que definen a la ciencia real. El problema no es que sea "diferente" a la ciencia —la filosofía, el arte y la religión también son diferentes y son actividades humanas valiosas. El problema es que la pseudociencia <em>pretende ser ciencia</em> y usa ese prestigio para ganar credibilidad que no le corresponde.</p>
+      <p class="article-p">Karl Popper propuso el <strong>criterio de falsabilidad</strong> como herramienta de demarcación: una teoría es científica si y solo si es, en principio, refutable por la experiencia. Mario Bunge añadió criterios más detallados. Aplicados a la astrología, el resultado es claro.</p>
+
+      <div class="pull-quote reveal">
+        <blockquote>"Una teoría que no puede refutarse por ningún suceso concebible no es científica. La irrefutabilidad no es una virtud de la teoría, sino un vicio."</blockquote>
+        <cite>Karl Popper, Conjectures and Refutations (1963)</cite>
+      </div>
+
+      <p class="article-p" style="font-weight:700;margin-bottom:10px">¿Cumple la astrología los criterios de cientificidad? Hacé click en cada criterio para evaluarlo:</p>
+
+      <div class="pseudo-list" id="pseudoList">
+        <!-- filled by JS -->
+      </div>
+      <p class="pseudo-hint" id="pseudoHint">Hacé click en cada criterio para revelarlo</p>
+
+      <div class="callout red reveal" style="margin-top:32px">
+        <span class="callout-icon"><i class="fa-solid fa-exclamation-circle"></i></span>
+        <div>
+          <p><strong>Importante: distinguir pseudociencia de religión, arte y filosofía.</strong> La religión, el arte y la filosofía no pretenden ser ciencias — y por eso no son pseudociencias. La homeopatía, la grafología y la numerología son problemáticas porque usan el vocabulario y la imagen de la ciencia para vender credibilidad que no tienen. Creer en el zodiaco como práctica cultural o lúdica es una cosa; presentar la astrología como un sistema de predicción científicamente válido es otra muy diferente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Interdisciplina -->
+    <section id="interdisciplina" class="reveal">
+      <h2><i class="fa-solid fa-circle-nodes" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Interdisciplina: la ciencia como trabajo transversal</h2>
+      <p class="article-p">La imagen del científico solitario encerrado en su disciplina es un mito del pasado. Los grandes avances científicos del siglo XX y XXI surgieron en la intersección de múltiples campos: la biología molecular nació de la física y la química; la neurociencia cognitiva combina biología, psicología, informática y filosofía; la economía conductual mezcla psicología con teoría económica.</p>
+
+      <div class="callout accent reveal">
+        <span class="callout-icon"><i class="fa-solid fa-arrows-to-circle"></i></span>
+        <div>
+          <p><strong>Tres niveles de integración:</strong><br>
+          · <strong>Multidisciplina:</strong> varias disciplinas trabajan sobre el mismo problema, cada una en su carril, sin integrarse realmente.<br>
+          · <strong>Interdisciplina:</strong> integración real de métodos, conceptos y resultados. Las disciplinas se transforman mutuamente.<br>
+          · <strong>Transdisciplina:</strong> va más allá de las disciplinas establecidas; crea marcos conceptuales nuevos que trascienden las fronteras disciplinares.</p>
+        </div>
+      </div>
+
+      <!-- Venn -->
+      <div class="venn-wrap reveal">
+        <div class="venn-svg-wrap">
+          <svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+            <!-- Círculo A -->
+            <circle cx="120" cy="120" r="90" fill="rgba(59,130,246,0.18)" stroke="rgba(59,130,246,0.5)" stroke-width="2"/>
+            <!-- Círculo B -->
+            <circle cx="220" cy="120" r="90" fill="rgba(168,85,247,0.18)" stroke="rgba(168,85,247,0.5)" stroke-width="2"/>
+            <!-- Círculo C -->
+            <circle cx="170" cy="195" r="90" fill="rgba(250,204,21,0.18)" stroke="rgba(234,179,8,0.5)" stroke-width="2"/>
+            <!-- Labels -->
+            <text x="80" y="100" fill="rgba(59,130,246,0.9)" font-size="11" font-weight="800" font-family="Inter,sans-serif" text-anchor="middle">Disciplina A</text>
+            <text x="260" y="100" fill="rgba(168,85,247,0.9)" font-size="11" font-weight="800" font-family="Inter,sans-serif" text-anchor="middle">Disciplina B</text>
+            <text x="170" y="252" fill="rgba(161,120,0,0.9)" font-size="11" font-weight="800" font-family="Inter,sans-serif" text-anchor="middle">Disciplina C</text>
+          </svg>
+          <div class="venn-center-label">INTER<br>DISCIPLINA</div>
+        </div>
+        <div class="venn-labels">
+          <div class="venn-label"><div class="venn-dot" style="background:rgba(59,130,246,.8)"></div> Biofísica</div>
+          <div class="venn-label"><div class="venn-dot" style="background:rgba(168,85,247,.8)"></div> Neurociencias</div>
+          <div class="venn-label"><div class="venn-dot" style="background:rgba(234,179,8,.8)"></div> Economía conductual</div>
+          <div class="venn-label"><div class="venn-dot" style="background:var(--teal)"></div> Bioestadística</div>
+          <div class="venn-label"><div class="venn-dot" style="background:var(--pink)"></div> Cs. de la computación</div>
+        </div>
+      </div>
+
+      <p class="article-p">Campos como la <strong>Biofísica</strong>, la <strong>Neurociencias</strong>, la <strong>Economía conductual</strong> y las <strong>Ciencias de la computación</strong> son hoy algunos de los más activos y productivos justamente porque no respetan las fronteras tradicionales entre disciplinas. La interdisciplina no es una moda — es una respuesta epistemológicamente necesaria a la complejidad del mundo real.</p>
+    </section>
+
+    <!-- 8. RMN -->
+    <section id="rmn" class="reveal">
+      <h2><i class="fa-solid fa-atom" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Caso de estudio: Resonancia Magnética Nuclear</h2>
+      <p class="article-p" style="font-style:italic;font-size:18px;color:var(--text3)">"De la física cuántica al diagnóstico médico"</p>
+      <p class="article-p">La Resonancia Magnética Nuclear (RMN) — que conocemos como MRI en los hospitales — es quizás el mejor ejemplo del siglo XX de cómo la ciencia formal, la ciencia fáctica, la ingeniería y la medicina pueden convergir para producir algo radicalmente nuevo. Permite obtener imágenes detalladas del interior del cuerpo humano sin radiación ionizante, con una resolución imposible de lograr de otro modo. Y su fundamento es un objeto puramente matemático inventado en el siglo XIX.</p>
+
+      <!-- Timeline -->
+      <div class="timeline-vert reveal">
+        <div class="tl-item">
+          <div class="tl-node">1</div>
+          <div class="tl-year">1924</div>
+          <div class="tl-title">Wolfgang Pauli predice el spin nuclear</div>
+          <div class="tl-body">En el marco de la mecánica cuántica emergente, Pauli propone que los núcleos atómicos poseen un momento angular intrínseco — el <em>spin</em>. Es una predicción teórica, sin verificación experimental todavía.</div>
+          <span class="tl-tag" style="background:var(--blue-bg);color:var(--blue)">Física teórica</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-node">2</div>
+          <div class="tl-year">1938</div>
+          <div class="tl-title">Isidor Rabi mide el spin con campos magnéticos</div>
+          <div class="tl-body">Rabi desarrolla el método de resonancia molecular por haces, demostrando experimentalmente que los núcleos absorben energía electromagnética a frecuencias específicas según su spin. Recibe el Premio Nobel en 1944.</div>
+          <span class="tl-tag" style="background:var(--teal-bg);color:var(--teal)">Física experimental · Nobel 1944</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-node">3</div>
+          <div class="tl-year">1946</div>
+          <div class="tl-title">Bloch y Purcell descubren la RMN en materia condensada</div>
+          <div class="tl-body">Felix Bloch (Stanford) y Edward Purcell (Harvard), trabajando de manera independiente, detectan la señal de RMN en muestras sólidas y líquidas. Abren la puerta a aplicaciones en química y física del estado sólido. Nobel 1952.</div>
+          <span class="tl-tag" style="background:var(--teal-bg);color:var(--teal)">Nobel 1952</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-node">4</div>
+          <div class="tl-year">1967</div>
+          <div class="tl-title">Aplicación en química analítica</div>
+          <div class="tl-body">La espectroscopía de RMN se convierte en herramienta estándar para identificar estructuras moleculares. Los químicos pueden "leer" la arquitectura de moléculas complejas a través de sus señales de resonancia.</div>
+          <span class="tl-tag" style="background:var(--green-bg);color:var(--green)">Química analítica</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-node">5</div>
+          <div class="tl-year">1973</div>
+          <div class="tl-title">Paul Lauterbur propone los gradientes de campo</div>
+          <div class="tl-body">Lauterbur se da cuenta de que si se aplican gradientes de campo magnético en distintas direcciones, la señal de RMN codifica información espacial. Usando la <strong>Transformada de Fourier</strong>, es posible reconstruir imágenes bidimensionales. Nobel 2003.</div>
+          <span class="tl-tag" style="background:var(--accent-bg);color:var(--accent)">Nobel 2003 · Matemática aplicada</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-node">6</div>
+          <div class="tl-year">1977</div>
+          <div class="tl-title">Primer escáner de cuerpo humano completo</div>
+          <div class="tl-body">Raymond Damadian construye el primer escáner MRI capaz de obtener imágenes de un cuerpo humano entero. El proceso dura varias horas, pero prueba que la tecnología es viable para uso médico.</div>
+          <span class="tl-tag" style="background:var(--pink-bg);color:var(--pink)">Ingeniería médica</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-node">7</div>
+          <div class="tl-year">1980s</div>
+          <div class="tl-title">Comercialización del MRI</div>
+          <div class="tl-body">Los fabricantes desarrollan superconductores criogénicos para generar campos magnéticos ultra-intensos y estables. La computación de la época permite procesar las señales en minutos. El MRI se convierte en herramienta estándar en hospitales del mundo.</div>
+          <span class="tl-tag" style="background:var(--orange-bg);color:var(--orange)">Tecnología médica</span>
+        </div>
+      </div>
+
+      <div class="callout blue reveal">
+        <span class="callout-icon"><i class="fa-solid fa-wave-square"></i></span>
+        <div>
+          <p><strong>La Transformada de Fourier</strong> — un objeto puramente matemático desarrollado por Joseph Fourier en el siglo XIX para estudiar la conducción del calor — es lo que hace posible reconstruir una imagen del interior del cuerpo humano a partir de señales de radio. Fourier no imaginó que su herramienta matemática serviría para salvar vidas dos siglos después.</p>
+        </div>
+      </div>
+
+      <!-- Diagrama de interdisciplina RMN -->
+      <p class="article-p" style="font-weight:700;margin-bottom:10px">Las disciplinas que convergen en la RMN — hacé click en cada nodo para ver su contribución específica:</p>
+
+      <div class="rmn-diagram reveal" id="rmnDiagram">
+        <div class="rmn-node" onclick="toggleRmn(this)" data-detail="El spin nuclear y su respuesta a campos magnéticos son fenómenos estrictamente cuánticos. Sin la mecánica cuántica de Pauli, Dirac y Schrödinger, no hay RMN. La ecuación de Bloch describe la evolución temporal de la magnetización nuclear.">
+          <div class="rmn-node-head">
+            <div class="rmn-node-icon" style="background:var(--blue-bg)"><i class="fa-solid fa-atom" style="color:var(--blue)"></i></div>
+            <div class="rmn-node-name">Física cuántica — spin nuclear</div>
+          </div>
+          <div class="rmn-node-detail"></div>
+        </div>
+        <div class="rmn-node" onclick="toggleRmn(this)" data-detail="La Transformada de Fourier convierte señales en el dominio del tiempo en información en el dominio de la frecuencia — y viceversa. En la RMN, permite 'descomponer' la señal captada por la bobina receptora y reconstruir una imagen espacial. Sin matemática del siglo XIX, no habría imágenes médicas del siglo XXI.">
+          <div class="rmn-node-head">
+            <div class="rmn-node-icon" style="background:var(--accent-bg)"><i class="fa-solid fa-chart-area" style="color:var(--accent)"></i></div>
+            <div class="rmn-node-name">Matemática — Transformada de Fourier</div>
+          </div>
+          <div class="rmn-node-detail"></div>
+        </div>
+        <div class="rmn-node" onclick="toggleRmn(this)" data-detail="Los imanes superconductores generan campos de 1.5 a 7 Teslas (60.000 veces el campo magnético terrestre) enfriados a -269°C con helio líquido. Las bobinas de gradiente crean los campos espacialmente variables que codifican la posición. La ingeniería electrónica captura señales de radio de microvoltios.">
+          <div class="rmn-node-head">
+            <div class="rmn-node-icon" style="background:var(--orange-bg)"><i class="fa-solid fa-microchip" style="color:var(--orange)"></i></div>
+            <div class="rmn-node-name">Ingeniería — superconductores y electrónica</div>
+          </div>
+          <div class="rmn-node-detail"></div>
+        </div>
+        <div class="rmn-node" onclick="toggleRmn(this)" data-detail="Los algoritmos de reconstrucción de imágenes (Fast Fourier Transform, relleno de espacio k) procesan gigabytes de datos en segundos. La computación permitió pasar de horas de procesamiento en 1977 a imágenes en tiempo real. El aprendizaje automático moderno permite reconstrucciones con menos datos (MRI acelerado).">
+          <div class="rmn-node-head">
+            <div class="rmn-node-icon" style="background:var(--teal-bg)"><i class="fa-solid fa-computer" style="color:var(--teal)"></i></div>
+            <div class="rmn-node-name">Computación — algoritmos de imagen</div>
+          </div>
+          <div class="rmn-node-detail"></div>
+        </div>
+
+        <div class="rmn-arrow-wrap">
+          <div class="rmn-arrow-box">
+            <div class="rab-label">Resultado</div>
+            <div class="rab-val">Diagnóstico médico por imágenes sin radiación ionizante</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout accent reveal">
+        <span class="callout-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+        <div>
+          <p><strong>Nota pedagógica.</strong> La RMN muestra que la distinción entre ciencias formales y fácticas no implica separación ni jerarquía. Las ciencias formales son indispensables para las fácticas. No hay física cuántica sin álgebra de operadores; no hay imágenes de RMN sin la Transformada de Fourier. La clasificación de Bunge es una distinción analítica, no una muralla.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Síntesis -->
+    <section id="sintesis" class="reveal">
+      <h2><i class="fa-solid fa-check-double" style="color:var(--accent);margin-right:12px;font-size:.85em"></i>Síntesis y preguntas</h2>
+      <p class="article-p">La clasificación de Bunge y los casos estudiados en esta clase nos dejan cuatro ideas centrales:</p>
+
+      <div class="synthesis-grid reveal">
+        <div class="syn-card">
+          <div class="syn-num">01</div>
+          <h4>Las ciencias se diferencian por cómo validan</h4>
+          <p>No por su grado de rigor, sino por el tipo de objeto que estudian y el método de validación: demostración lógica (formales) vs. contraste empírico (fácticas).</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">02</div>
+          <h4>Los modelos son el puente</h4>
+          <p>Las ciencias formales proveen el lenguaje; las fácticas construyen modelos con ese lenguaje para representar y predecir fenómenos del mundo real. El mapa no es el territorio.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">03</div>
+          <h4>La falsabilidad distingue ciencia de pseudociencia</h4>
+          <p>Una disciplina que no puede ser refutada por ningún dato posible no es científica, aunque use vocabulario técnico. La pseudociencia es problemática porque usa el prestigio de la ciencia sin su método.</p>
+        </div>
+        <div class="syn-card">
+          <div class="syn-num">04</div>
+          <h4>La interdisciplina es productiva por necesidad</h4>
+          <p>Los problemas reales no respetan las fronteras disciplinares. La RMN, la neurociencia y la biología molecular nacieron en la intersección de campos, no en sus centros.</p>
+        </div>
+      </div>
+
+      <p class="article-p" style="font-weight:700;font-size:16px;margin-top:40px;margin-bottom:10px">Preguntas para pensar y debatir</p>
+
+      <div class="question-list reveal">
+        <div class="question-item">
+          <div class="q-num">1</div>
+          <p>Si la matemática no estudia objetos del mundo real, ¿por qué es tan efectiva para describirlo? El físico Eugene Wigner llamó a esto "la irrazonable efectividad de las matemáticas". ¿Qué explicación le darías vos?</p>
+        </div>
+        <div class="question-item">
+          <div class="q-num">2</div>
+          <p>¿La psicología es una ciencia formal, fáctica o mixta? Justificá. ¿Cambia tu respuesta si hablamos de psicología cognitiva, psicoanálisis o psicología social?</p>
+        </div>
+        <div class="question-item">
+          <div class="q-num">3</div>
+          <p>El criterio de falsabilidad de Popper dice que una teoría científica debe poder ser refutada. ¿La evolución darwiniana es falsable? ¿Y la mecánica cuántica? ¿Tienen el mismo grado de falsabilidad?</p>
+        </div>
+        <div class="question-item">
+          <div class="q-num">4</div>
+          <p>Un horóscopo suele decir cosas como "hoy es un buen día para reflexionar". ¿Por qué este tipo de predicciones hace que la astrología sea difícilmente falsable? ¿Cómo se diferencia esto de una predicción meteorológica?</p>
+        </div>
+      </div>
+
+      <div class="callout accent reveal" style="margin-top:40px">
+        <span class="callout-icon"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+        <div>
+          <p><strong>Próxima clase: Lógica formal — proposiciones, conectivas y tablas de verdad.</strong> Habiendo entendido qué son las ciencias formales y por qué importan, en la clase 33 nos adentramos en el corazón de la lógica proposicional: las herramientas que todo pensamiento riguroso necesita.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer style="background:var(--bg3);border-top:1px solid var(--border);padding:40px 28px;text-align:center;margin-top:0">
+  <div style="max-width:800px;margin:0 auto">
+    <div style="font:900 22px 'Playfair Display',serif;letter-spacing:-.02em;margin-bottom:8px">Filosofía <span style="color:var(--accent)">&</span> Ciencia</div>
+    <div style="font-size:13px;color:var(--text3);margin-bottom:16px">6to Año · Los Polvorines, Buenos Aires · Prof. Javier Pereyra</div>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:20px">
+      <a href="index.html" style="font-size:12px;color:var(--text3);font-weight:600">Inicio</a>
+      <a href="unidad6-introduccion.html" style="font-size:12px;color:var(--text3);font-weight:600">Unidad 6</a>
+    </div>
+    <div style="font-size:11px;color:var(--text3)">Unidad 6 · Clase 32 · Ciencias formales y fácticas</div>
+  </div>
+</footer>
+
+<script>
+/* ── Dark mode ── */
+(function(){
+  const saved = localStorage.getItem('theme');
+  if(saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+    document.documentElement.classList.add('dark');
+  }
+})();
+function toggleDark(){
+  const html = document.documentElement;
+  html.classList.toggle('dark');
+  localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+}
+
+/* ── Progress bar ── */
+window.addEventListener('scroll', function(){
+  const prog = document.getElementById('prog');
+  const body = document.body;
+  const html = document.documentElement;
+  const scrollTop = window.scrollY || html.scrollTop;
+  const scrollHeight = Math.max(body.scrollHeight, html.scrollHeight) - html.clientHeight;
+  prog.style.width = (scrollTop / scrollHeight * 100) + '%';
+}, {passive: true});
+
+/* ── Reveal on scroll ── */
+const revealObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(function(el){ revealObs.observe(el); });
+
+/* ── Science Network ── */
+const netData = {
+  'root':     { title:'Ciencias', color:'#facc15', tag:'Clasificación general', desc:'Conjunto organizado de conocimientos. Bunge las clasifica por objeto de estudio y criterio de validación: formales (demostración) vs. fácticas (verificación empírica).' },
+  'formales': { title:'Ciencias Formales', color:'#a855f7', tag:'Método: demostración deductiva', desc:'Estudian objetos abstractos: proposiciones, números, figuras. Su verdad no depende de ningún experimento — depende de que la deducción a partir de axiomas sea correcta.' },
+  'facticas': { title:'Ciencias Fácticas', color:'#3b82f6', tag:'Método: observación y experimento', desc:'Estudian fenómenos del mundo real. Validan sus enunciados contrastándolos con datos empíricos. Se subdividen en naturales (Física, Química, Biología) y sociales (Historia, Economía).' },
+  'logica':   { title:'Lógica', color:'#a855f7', tag:'Formal — inferencia y validez', desc:'Estudia las formas válidas del razonamiento. Sus objetos son proposiciones y conectivos lógicos. No habla del mundo — habla sobre la estructura del pensamiento correcto.' },
+  'mat':      { title:'Matemática', color:'#a855f7', tag:'Formal — números y estructuras', desc:'Estudia relaciones entre entes abstractos. Es el lenguaje de la física y de gran parte de la ciencia fáctica. Sus verdades se demuestran, nunca se miden.' },
+  'geom':     { title:'Geometría', color:'#9333ea', tag:'Caso especial: formal Y fáctica', desc:'Existe como geometría formal (Euclides — teoremas desde axiomas) y como geometría física (medición del espacio real). Es el mejor ejemplo de la distinción de Bunge.' },
+  'fis':      { title:'Física', color:'#14b8a6', tag:'Fáctica natural — experimento', desc:'Estudia materia y energía. Usa la matemática como lenguaje: las ecuaciones de Maxwell, la mecánica cuántica y la relatividad son modelos matemáticos del mundo físico.' },
+  'qui':      { title:'Química', color:'#14b8a6', tag:'Fáctica natural — laboratorio', desc:'Estudia la composición y transformación de la materia. La estequiometría, la química cuántica y la espectroscopía aplican modelos formales a fenómenos fácticos.' },
+  'bio':      { title:'Biología', color:'#22c55e', tag:'Fáctica natural — observación', desc:'Estudia los seres vivos. La estadística (formal) y la bioinformática (formal + computación) son sus herramientas clave para analizar poblaciones y secuencias genéticas.' },
+  'his':      { title:'Historia', color:'#f97316', tag:'Fáctica social — fuentes e interpretación', desc:'Estudia los procesos del pasado humano. A diferencia de las naturales, no puede experimentar — trabaja con documentos, testimonios y arqueología.' }
+};
+const netLines = ['nl-root-f','nl-root-fc','nl-f-log','nl-f-mat','nl-f-geo','nl-fc-fis','nl-fc-qui','nl-fc-bio','nl-fc-his'];
+const netNodes = ['nn-root','nn-formales','nn-facticas','nn-logica','nn-mat','nn-geom','nn-fis','nn-qui','nn-bio','nn-his'];
+
+function animateLine(id, delay) {
+  setTimeout(function() {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var da = parseFloat(el.getAttribute('stroke-dasharray') || el.style.strokeDasharray);
+    el.style.transition = 'stroke-dashoffset 0.55s ease';
+    el.style.strokeDashoffset = '0';
+  }, delay);
+}
+function animateNode(id, delay) {
+  setTimeout(function() {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.style.transition = 'opacity 0.4s ease';
+    el.style.opacity = '1';
+  }, delay);
+}
+function animateCross(delay) {
+  setTimeout(function() {
+    var path = document.getElementById('nl-cross');
+    var lbl  = document.getElementById('nl-cross-lbl');
+    if (path) { path.style.transition = 'opacity 0.6s ease'; path.style.opacity = '1'; }
+    if (lbl)  { lbl.style.transition  = 'opacity 0.5s 0.4s ease'; lbl.style.opacity = '1'; }
+  }, delay);
+}
+function resetNetwork() {
+  netLines.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.style.transition = 'none';
+    var da = el.getAttribute('stroke-dasharray');
+    if (da) el.style.strokeDashoffset = da;
+  });
+  var cross = document.getElementById('nl-cross');
+  if (cross) { cross.style.transition = 'none'; cross.style.opacity = '0'; }
+  var crossLbl = document.getElementById('nl-cross-lbl');
+  if (crossLbl) { crossLbl.style.transition = 'none'; crossLbl.style.opacity = '0'; }
+  netNodes.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) { el.style.transition = 'none'; el.style.opacity = '0'; }
+  });
+  var tip = document.getElementById('net-tooltip');
+  if (tip) { tip.classList.remove('show'); tip.style.display = 'none'; }
+}
+function initNetwork() {
+  resetNetwork();
+  document.getElementById('sci-network').getBoundingClientRect(); // force reflow
+  // Phase 1 — raíz
+  animateNode('nn-root', 150);
+  // Phase 2 — L1
+  animateLine('nl-root-f',  700);
+  animateLine('nl-root-fc', 700);
+  animateNode('nn-formales', 1300);
+  animateNode('nn-facticas', 1300);
+  // Phase 3 — L2
+  animateLine('nl-f-log',  1850); animateLine('nl-f-mat',  2000); animateLine('nl-f-geo',  2150);
+  animateLine('nl-fc-fis', 1850); animateLine('nl-fc-qui', 2000); animateLine('nl-fc-bio', 2150); animateLine('nl-fc-his', 2300);
+  animateNode('nn-logica', 2500); animateNode('nn-mat',    2650); animateNode('nn-geom',   2800);
+  animateNode('nn-fis',    2500); animateNode('nn-qui',    2650); animateNode('nn-bio',    2800); animateNode('nn-his',    2950);
+  // Phase 4 — cross-link
+  animateCross(3400);
+}
+function showNetTip(key) {
+  var d = netData[key]; if (!d) return;
+  document.getElementById('ntd').style.background = d.color;
+  document.getElementById('ntt').textContent = d.title;
+  document.getElementById('ntx').textContent = d.desc;
+  document.getElementById('nttag').textContent = d.tag;
+  var tip = document.getElementById('net-tooltip');
+  tip.style.display = 'flex'; tip.classList.add('show');
+}
+// Auto-start when la sección entra en viewport
+(function() {
+  var sec = document.getElementById('red');
+  if (!sec) return;
+  var triggered = false;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !triggered) { triggered = true; initNetwork(); obs.disconnect(); }
+    });
+  }, { threshold: 0.25 });
+  obs.observe(sec);
+})();
+
+/* ── TOC active ── */
+const sections = document.querySelectorAll('.article-body section[id]');
+const tocLinks = document.querySelectorAll('#toc .toc-item a');
+const tocObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      tocLinks.forEach(function(l){ l.classList.remove('active'); });
+      const active = document.querySelector('#toc a[href="#'+e.target.id+'"]');
+      if(active) active.classList.add('active');
+    }
+  });
+}, {rootMargin: '-20% 0px -70% 0px'});
+sections.forEach(function(s){ tocObs.observe(s); });
+
+/* ── Classifier ── */
+const disciplines = [
+  {name:'Lógica', formal:true, explain:'Estudia las formas de inferencia válida. No requiere datos del mundo.'},
+  {name:'Matemática', formal:true, explain:'Sus verdades se demuestran, no se miden. √2 es irracional por demostración, no por experimento.'},
+  {name:'Física', formal:false, explain:'Estudia fenómenos naturales. Sus leyes se validan con experimentos y mediciones.'},
+  {name:'Química', formal:false, explain:'Estudia la composición y transformación de la materia. Requiere experimentación en laboratorio.'},
+  {name:'Historia', formal:false, explain:'Estudia hechos del pasado humano. Valida mediante fuentes, documentos y evidencias arqueológicas.'},
+  {name:'Estadística', formal:true, explain:'Rama de la matemática. Sus teoremas se demuestran; su aplicación a datos es fáctica.'},
+  {name:'Biología', formal:false, explain:'Estudia los seres vivos. Valida con experimentos, observación y genómica.'},
+  {name:'Sociología', formal:false, explain:'Estudia las relaciones sociales. Usa métodos cuantitativos y cualitativos con datos reales.'},
+  {name:'Teoría de conjuntos', formal:true, explain:'Es el lenguaje fundacional de la matemática. Sus proposiciones se demuestran formalmente.'},
+  {name:'Economía', formal:false, explain:'Estudia la producción, distribución y consumo. Sus teorías se contrastan con datos económicos reales.'},
+  {name:'Lógica computacional', formal:true, explain:'Rama formal. Los algoritmos se demuestran correctos mediante pruebas matemáticas.'},
+  {name:'Psicología', formal:false, explain:'Estudia el comportamiento y los procesos mentales. Sus hipótesis se contrastan con experimentos y datos.'},
+];
+
+let answered = 0;
+const grid = document.getElementById('classGrid');
+disciplines.forEach(function(d, i){
+  const card = document.createElement('div');
+  card.className = 'clf-card';
+  card.innerHTML =
+    '<div class="clf-name">'+d.name+'</div>'+
+    '<div class="clf-explain" id="clfEx'+i+'"> </div>'+
+    '<div class="clf-btns">'+
+      '<button class="clf-btn f" onclick="classify('+i+',true)">Formal</button>'+
+      '<button class="clf-btn b" onclick="classify('+i+',false)">Fáctica</button>'+
+    '</div>';
+  card.id = 'clfCard'+i;
+  grid.appendChild(card);
+});
+function classify(i, isFormai){
+  const d = disciplines[i];
+  const card = document.getElementById('clfCard'+i);
+  const ex = document.getElementById('clfEx'+i);
+  if(card.dataset.answered) return;
+  card.dataset.answered = '1';
+  const correct = (isFormai === d.formal);
+  card.classList.add(d.formal ? 'formal-set' : 'factual-set');
+  ex.textContent = (correct ? '✓ Correcto. ' : '✗ Era ' + (d.formal ? 'Formal' : 'Fáctica') + '. ') + d.explain;
+  answered++;
+  if(answered === disciplines.length){
+    const r = document.getElementById('clfResult');
+    r.classList.add('show');
+  }
+}
+
+/* ── Pseudo checklist ── */
+const pseudoCriteria = [
+  {
+    name: 'Falsabilidad',
+    no_explain: 'La astrología no cumple. Los horóscopos son tan vagos ("te espera un cambio importante") que cualquier evento puede confirmarlo. No hay dato posible que los refute.'
+  },
+  {
+    name: 'Predicciones verificables y específicas',
+    no_explain: 'La astrología no cumple. Sus predicciones son ambiguas e interpretables de múltiples formas. Los estudios de doble ciego muestran que los astrólogos no predicen mejor que el azar.'
+  },
+  {
+    name: 'Método sistemático y replicable',
+    no_explain: 'La astrología no cumple. Dos astrólogos distintos analizando la misma carta natal pueden llegar a conclusiones opuestas. No hay procedimiento estándar verificable.'
+  },
+  {
+    name: 'Revisabilidad ante evidencia negativa',
+    no_explain: 'La astrología no cumple. Cuando los estudios muestran que no funciona, sus defensores cambian las reglas o invalidan el estudio — no modifican la teoría.'
+  },
+  {
+    name: 'Comunidad crítica y revisión por pares',
+    no_explain: 'La astrología no cumple. No tiene revistas científicas revisadas por pares. Su "comunidad" no critica ni refuta sus propias bases — las acepta como dadas.'
+  },
+  {
+    name: 'Mecanismo causal plausible',
+    no_explain: 'La astrología no cumple. No puede explicar físicamente cómo la posición de Marte en el momento del nacimiento afecta la personalidad. La fuerza gravitacional de los planetas lejanos es ínfima comparada con la del médico que asiste el parto.'
+  },
+];
+
+const pseudoList = document.getElementById('pseudoList');
+const pseudoHint = document.getElementById('pseudoHint');
+let pseudoChecked = 0;
+pseudoCriteria.forEach(function(c, i){
+  const item = document.createElement('div');
+  item.className = 'pseudo-item';
+  item.id = 'pseudo'+i;
+  item.innerHTML =
+    '<div class="pseudo-mark" id="pmark'+i+'">?</div>'+
+    '<div class="pseudo-content">'+
+      '<div class="pseudo-criterion">'+c.name+'</div>'+
+      '<div class="pseudo-explain" id="pex'+i+'">'+c.no_explain+'</div>'+
+    '</div>';
+  item.onclick = function(){ checkPseudo(i); };
+  pseudoList.appendChild(item);
+});
+function checkPseudo(i){
+  const item = document.getElementById('pseudo'+i);
+  const mark = document.getElementById('pmark'+i);
+  if(item.classList.contains('checked-no') || item.classList.contains('checked-yes')) return;
+  item.classList.add('checked-no');
+  mark.textContent = '✗';
+  pseudoChecked++;
+  if(pseudoChecked === pseudoCriteria.length){
+    pseudoHint.textContent = 'Resultado: la astrología no cumple ninguno de los 6 criterios de cientificidad. Es una pseudociencia.';
+    pseudoHint.style.color = 'var(--red)';
+    pseudoHint.style.fontWeight = '700';
+  } else {
+    pseudoHint.textContent = pseudoChecked + ' de ' + pseudoCriteria.length + ' evaluados. Seguí haciendo click en los restantes.';
+  }
+}
+
+/* ── RMN diagram ── */
+function toggleRmn(node){
+  const detail = node.querySelector('.rmn-node-detail');
+  const isActive = node.classList.contains('active');
+  // close all
+  document.querySelectorAll('.rmn-node').forEach(function(n){
+    n.classList.remove('active');
+  });
+  if(!isActive){
+    node.classList.add('active');
+    const dataKey = node.getAttribute('data-detail');
+    detail.textContent = dataKey;
+  }
+}
+
+/* ── Smooth scroll for hero btn ── */
+document.querySelector('.hero-scroll').addEventListener('click', function(e){
+  e.preventDefault();
+  document.getElementById('intro').scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body>
+</html>

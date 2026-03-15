@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad 6 — Ciencias Formales: Lógica y Sistemas | FILOSOFÍA & CIENCIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+/* ── Variables ── */
+:root{
+  --yellow:#facc15;--yellow-dark:#eab308;--yellow-bg:rgba(250,204,21,.09);
+  --accent:#a855f7;--accent-bg:rgba(168,85,247,.09);
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.09);
+  --green:#22c55e;--green-bg:rgba(34,197,94,.09);
+  --bg:#f9f7f4;--bg2:#fff;--bg3:#f1ede6;
+  --text:#1a1a1a;--text2:#3d3d3d;--text3:#6b6b6b;
+  --border:#e0d9d0;--shadow:0 4px 24px rgba(0,0,0,.08);
+  --radius:20px;
+}
+.dark{
+  --bg:#111;--bg2:#1a1a1a;--bg3:#222;
+  --text:#f0ece4;--text2:#c8c0b4;--text3:#91897f;
+  --border:#333;--shadow:0 6px 28px rgba(0,0,0,.35);
+}
+
+/* ── Reset ── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background .3s,color .3s;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--accent)}
+::-webkit-scrollbar-track{background:var(--bg3)}
+
+/* ── Progress bar ── */
+#prog{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--yellow),var(--accent));z-index:9999;transition:width .1s}
+
+/* ── Top nav ── */
+#topnav{
+  position:sticky;top:0;z-index:50;
+  height:56px;display:flex;justify-content:space-between;align-items:center;
+  padding:0 28px;background:var(--bg2);
+  border-bottom:1px solid var(--border);box-shadow:var(--shadow);
+}
+.tnl,.tnr{display:flex;align-items:center;gap:12px}
+.tnc{font:700 13px 'Playfair Display',serif;color:var(--text2)}
+.nav-sep{color:var(--border);font-size:18px;font-weight:300}
+.u6-badge{
+  font-size:9px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);background:var(--accent-bg);
+  border:1px solid rgba(168,85,247,.3);padding:3px 12px;border-radius:999px;
+}
+.nav-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 16px;border-radius:999px;
+  font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  transition:all .2s;cursor:pointer;
+}
+.nav-pill.back{background:var(--bg3);color:var(--text3)}
+.nav-pill.back:hover{background:var(--border);color:var(--text)}
+.nav-pill.next{background:var(--yellow);color:#000}
+.nav-pill.next:hover{background:var(--yellow-dark)}
+.nav-pill.disabled{opacity:.35;pointer-events:none}
+.dtoggle{
+  width:38px;height:20px;border:1px solid var(--border);border-radius:999px;
+  background:transparent;position:relative;cursor:pointer;transition:.3s;
+}
+.dtoggle:after{
+  content:'';position:absolute;left:3px;top:50%;
+  width:13px;height:13px;border-radius:50%;
+  background:var(--text3);transform:translateY(-50%);transition:.3s;
+}
+.dark .dtoggle{background:var(--yellow);border-color:var(--yellow)}
+.dark .dtoggle:after{left:21px;background:#000}
+
+/* ── Hero ── */
+#art-hero{
+  min-height:92vh;padding:96px 24px 88px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#fff;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 25%,rgba(168,85,247,.22) 0,transparent 38%),
+    radial-gradient(circle at 82% 18%,rgba(250,204,21,.18) 0,transparent 30%),
+    radial-gradient(circle at 55% 80%,rgba(59,130,246,.15) 0,transparent 32%),
+    linear-gradient(150deg,#0a0a0f 0%,#0f0b1a 40%,#0d1117 100%);
+}
+/* Grid background */
+#art-hero:before{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+
+/* Floating logic symbols */
+.sym{
+  position:absolute;font-family:'Libre Baskerville',serif;
+  color:rgba(168,85,247,.18);font-weight:400;
+  animation:floatSym 14s ease-in-out infinite;
+  user-select:none;pointer-events:none;
+}
+.sym:nth-child(1){font-size:88px;left:6%;top:12%;animation-duration:16s;animation-delay:0s}
+.sym:nth-child(2){font-size:64px;right:8%;top:20%;color:rgba(250,204,21,.16);animation-duration:13s;animation-delay:-3s}
+.sym:nth-child(3){font-size:72px;left:14%;bottom:22%;color:rgba(59,130,246,.16);animation-duration:17s;animation-delay:-6s}
+.sym:nth-child(4){font-size:52px;right:15%;bottom:18%;color:rgba(168,85,247,.14);animation-duration:15s;animation-delay:-9s}
+.sym:nth-child(5){font-size:42px;left:38%;top:10%;color:rgba(250,204,21,.12);animation-duration:18s;animation-delay:-4s}
+.sym:nth-child(6){font-size:56px;right:32%;bottom:28%;color:rgba(59,130,246,.12);animation-duration:12s;animation-delay:-7s}
+.sym:nth-child(7){font-size:36px;left:54%;top:76%;color:rgba(168,85,247,.1);animation-duration:19s;animation-delay:-11s}
+.sym:nth-child(8){font-size:46px;left:78%;top:60%;color:rgba(250,204,21,.1);animation-duration:14s;animation-delay:-2s}
+@keyframes floatSym{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  33%{transform:translateY(-18px) rotate(4deg)}
+  66%{transform:translateY(10px) rotate(-3deg)}
+}
+
+.hero-inner{position:relative;z-index:2;max-width:980px}
+.hero-breadcrumb{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.hero-badge{
+  padding:4px 14px;border-radius:999px;
+  font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+}
+.hero-badge.fill{background:var(--accent);color:#fff}
+.hero-badge.outline{border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.eyebrow{
+  margin-bottom:18px;font-size:11px;font-weight:800;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
+}
+.hero-title{
+  font:900 clamp(42px,7vw,84px)/.9 'Playfair Display',serif;
+  letter-spacing:-.03em;margin-bottom:22px;
+}
+.hero-title em{color:var(--yellow);font-style:italic}
+.hero-subtitle{
+  max-width:700px;margin:0 auto 32px;
+  font:italic clamp(15px,2vw,20px)/1.75 'Libre Baskerville',serif;
+  color:rgba(255,255,255,.8);
+}
+.hero-meta{
+  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:26px;font-size:12px;color:rgba(255,255,255,.65);
+}
+.hero-meta i{color:var(--yellow)}
+.hero-topics{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.hero-topics span{
+  padding:6px 14px;border-radius:999px;
+  border:1px solid rgba(168,85,247,.35);background:rgba(168,85,247,.1);
+  color:rgba(200,150,255,.9);font-size:10px;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.hero-scroll{
+  margin-top:44px;display:inline-flex;align-items:center;gap:10px;
+  padding:12px 24px;border-radius:999px;
+  background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.35);
+  color:rgba(255,255,255,.8);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:all .25s;
+}
+.hero-scroll:hover{background:rgba(168,85,247,.3);color:#fff}
+
+/* ── Marquee ── */
+.marquee-strip{
+  background:var(--accent);color:#fff;
+  overflow:hidden;padding:0;height:40px;display:flex;align-items:center;
+}
+.marquee-track{
+  display:flex;gap:0;white-space:nowrap;
+  animation:scrollMarquee 32s linear infinite;
+}
+.marquee-strip:hover .marquee-track{animation-play-state:paused}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0 32px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.marquee-sep{color:rgba(255,255,255,.4);font-size:16px}
+@keyframes scrollMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── Layout ── */
+.article-wrap{
+  max-width:1240px;margin:0 auto;
+  padding:72px 28px 92px;
+  display:grid;grid-template-columns:1fr 300px;gap:60px;
+  align-items:start;
+}
+.article-body{min-width:0}
+.sidebar{position:sticky;top:72px;align-self:start}
+
+/* ── Sections ── */
+.article-body section+section{margin-top:80px}
+.article-body h2{
+  margin:0 0 28px;padding-bottom:14px;
+  border-bottom:2px solid var(--yellow);
+  font:900 clamp(1.7rem,3.5vw,2.4rem)/1.15 'Playfair Display',serif;
+}
+.article-p{
+  margin-bottom:26px;
+  font:17px/1.92 'Libre Baskerville',serif;color:var(--text2);
+}
+.article-p strong{color:var(--text)}
+.dropcap::first-letter{
+  float:left;margin:6px 16px -4px 0;
+  font:900 88px/.8 'Playfair Display',serif;
+  color:var(--accent);line-height:.78;
+}
+
+/* ── Pull quote ── */
+.pull-quote{
+  margin:36px 0;padding:32px 40px 32px 44px;
+  border-left:5px solid var(--accent);border-radius:0 20px 20px 0;
+  background:var(--accent-bg);position:relative;overflow:hidden;
+}
+.pull-quote:before{
+  content:'\201C';position:absolute;top:-10px;left:14px;
+  font:900 100px 'Playfair Display',serif;color:var(--accent);opacity:.18;
+}
+.pull-quote blockquote{
+  font:italic clamp(18px,2.5vw,24px)/1.5 'Playfair Display',serif;color:var(--text);
+}
+.pull-quote cite{
+  display:block;margin-top:14px;
+  font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+}
+
+/* ── Callout ── */
+.callout{
+  margin:28px 0;padding:22px 26px;
+  border-radius:16px;border-left:4px solid var(--yellow-dark);
+  background:var(--yellow-bg);border:1px solid rgba(234,179,8,.25);
+  display:flex;gap:18px;align-items:flex-start;
+}
+.callout-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.callout p{font-size:14.5px;line-height:1.82;color:var(--text2)}
+.callout p strong{color:var(--text)}
+.callout.accent{border-left-color:var(--accent);background:var(--accent-bg);border-color:rgba(168,85,247,.2)}
+.callout.blue{border-left-color:var(--blue);background:var(--blue-bg);border-color:rgba(59,130,246,.2)}
+
+/* ── Banner ── */
+.banner{
+  padding:32px 36px;margin:32px 0;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.banner h3{margin-bottom:18px;font:900 1.2rem 'Playfair Display',serif}
+.bullet-grid{list-style:none;display:grid;gap:12px}
+.bullet-grid li{
+  padding-left:22px;position:relative;
+  font-size:15px;line-height:1.78;color:var(--text2);
+}
+.bullet-grid li:before{
+  content:'';position:absolute;left:0;top:11px;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--yellow-dark);
+}
+
+/* ── Formal vs Factual comparison ── */
+.compare-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;margin:32px 0;box-shadow:var(--shadow);
+}
+.compare-col{padding:0}
+.compare-head{
+  padding:16px 24px;font-size:11px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;text-align:center;
+}
+.compare-col:first-child .compare-head{background:var(--blue);color:#fff}
+.compare-col:last-child .compare-head{background:var(--accent);color:#fff}
+.compare-row{display:grid;grid-template-columns:1fr 1fr}
+.compare-cell{
+  padding:16px 22px;font-size:14px;line-height:1.7;color:var(--text2);
+  border-top:1px solid var(--border);
+}
+.compare-row .compare-cell:first-child{
+  border-right:1px solid var(--border);
+  background:rgba(59,130,246,.04);
+}
+.compare-row .compare-cell:last-child{background:rgba(168,85,247,.04)}
+.compare-cell .tag{
+  display:inline-block;margin-bottom:6px;
+  font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+}
+.compare-cell:first-child .tag{color:var(--blue)}
+.compare-cell:last-child .tag{color:var(--accent)}
+.compare-divider{
+  grid-column:1/-1;padding:10px 24px;
+  background:var(--bg3);font-size:10px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--text3);
+  border-top:1px solid var(--border);
+}
+
+/* ── Topic cards ── */
+.topics{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:28px 0}
+.topic{
+  padding:24px;border-radius:18px;border:1px solid var(--border);
+  background:var(--bg2);box-shadow:var(--shadow);
+  transition:transform .25s,box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.topic:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(0,0,0,.12)}
+.topic:before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.topic:nth-child(1):before{background:var(--blue)}
+.topic:nth-child(2):before{background:var(--accent)}
+.topic:nth-child(3):before{background:var(--yellow-dark)}
+.topic:nth-child(4):before{background:var(--green)}
+.topic:nth-child(5):before{background:#f97316}
+.topic:nth-child(6):before{background:#ec4899}
+.topic-num{
+  font:900 11px 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.topic:nth-child(1) .topic-num{color:var(--blue)}
+.topic:nth-child(2) .topic-num{color:var(--accent)}
+.topic:nth-child(3) .topic-num{color:var(--yellow-dark)}
+.topic:nth-child(4) .topic-num{color:var(--green)}
+.topic:nth-child(5) .topic-num{color:#f97316}
+.topic:nth-child(6) .topic-num{color:#ec4899}
+.topic h3{margin-bottom:10px;font:900 1.1rem 'Playfair Display',serif}
+.topic p{margin-bottom:14px;font-size:14px;line-height:1.75;color:var(--text2)}
+.pill{
+  display:inline-flex;gap:7px;align-items:center;
+  padding:5px 12px;border-radius:999px;
+  background:rgba(250,204,21,.12);color:var(--yellow-dark);
+  font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+}
+
+/* ── Timeline ── */
+.timeline-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
+  margin:28px 0;
+}
+.tl-layer{padding:26px 30px}
+.tl-layer+.tl-layer{border-top:1px solid var(--border)}
+.tl-label{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:18px;font-size:11px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--text3);
+}
+.tl-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;
+}
+.tl-nodes{display:flex;gap:14px;flex-wrap:wrap}
+.tl-node{
+  flex:1 1 160px;padding:18px;border-radius:14px;
+  background:var(--bg3);border:1px solid var(--border);
+}
+.tl-node strong{display:block;margin-bottom:8px;font-size:14px}
+.tl-node span{font-size:13px;line-height:1.65;color:var(--text3)}
+
+/* ── Interactive quiz ── */
+.quiz-wrap{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin:32px 0;
+}
+.quiz-head{
+  padding:18px 26px;background:linear-gradient(135deg,#1a0a2e,#0f172a);
+  font:900 1.1rem 'Playfair Display',serif;color:#fff;
+  display:flex;align-items:center;gap:14px;
+}
+.quiz-head i{color:var(--accent)}
+.quiz-body{padding:26px}
+.quiz-intro{margin-bottom:22px;font-size:14px;line-height:1.75;color:var(--text2)}
+.quiz-item{margin-bottom:28px}
+.quiz-item:last-child{margin-bottom:0}
+.quiz-q{
+  margin-bottom:14px;padding:16px 20px;
+  background:var(--bg3);border-radius:12px;border:1px solid var(--border);
+  font-size:15px;line-height:1.7;color:var(--text);
+}
+.quiz-q .premisas{font-size:14px;color:var(--text2);margin:6px 0}
+.quiz-q .conclusion{color:var(--text);font-weight:700}
+.quiz-buttons{display:flex;gap:10px;flex-wrap:wrap}
+.quiz-btn{
+  padding:9px 22px;border-radius:999px;font-size:12px;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+  border:1px solid var(--border);background:var(--bg3);color:var(--text3);
+  transition:all .2s;
+}
+.quiz-btn:hover{background:var(--border);color:var(--text)}
+.quiz-btn.valido:hover,.quiz-btn.valido.active{background:#22c55e;border-color:#22c55e;color:#fff}
+.quiz-btn.invalido:hover,.quiz-btn.invalido.active{background:#ef4444;border-color:#ef4444;color:#fff}
+.quiz-feedback{
+  display:none;margin-top:12px;padding:12px 18px;
+  border-radius:10px;font-size:13.5px;line-height:1.7;
+}
+.quiz-feedback.show{display:block}
+.quiz-feedback.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--text2)}
+.quiz-feedback.err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--text2)}
+.quiz-score{
+  display:none;margin-top:20px;padding:18px 22px;
+  border-radius:14px;background:var(--accent-bg);border:1px solid rgba(168,85,247,.3);
+  font-size:15px;font-weight:700;color:var(--text);text-align:center;
+}
+.quiz-score.show{display:block}
+
+/* ── Figures ── */
+.figures{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
+.figure{
+  padding:22px;border-radius:18px;border:1px solid var(--border);
+  background:var(--bg2);box-shadow:var(--shadow);
+  transition:transform .25s;
+}
+.figure:hover{transform:translateY(-3px)}
+.fhead{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.ficon{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font:900 17px 'Playfair Display',serif;
+}
+.fname{font:900 1rem 'Playfair Display',serif;margin-bottom:3px}
+.frole{font-size:11px;color:var(--text3);font-weight:600;letter-spacing:.05em}
+.figure p{font-size:13.5px;line-height:1.75;color:var(--text2)}
+.ftag{
+  display:inline-flex;margin-top:12px;
+  padding:4px 12px;border-radius:999px;
+  font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--bg3);color:var(--text3);border:1px solid var(--border);
+}
+
+/* ── Central question ── */
+.question-card{
+  background:linear-gradient(135deg,#0a0a14,#12061f);
+  border:1px solid rgba(168,85,247,.3);border-radius:var(--radius);
+  padding:44px 48px;margin:28px 0;color:#fff;box-shadow:var(--shadow);
+  position:relative;overflow:hidden;
+}
+.question-card:before{
+  content:'\2234';position:absolute;right:-10px;bottom:-30px;
+  font:900 260px 'Libre Baskerville',serif;
+  color:rgba(168,85,247,.07);line-height:1;
+}
+.question-label{
+  font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:20px;
+}
+.question-card blockquote{
+  font:italic clamp(20px,3vw,30px)/1.45 'Playfair Display',serif;
+  color:#fff;margin-bottom:24px;position:relative;z-index:1;
+}
+.question-card p{font-size:15px;line-height:1.8;color:rgba(255,255,255,.7);position:relative;z-index:1}
+
+/* ── Nav cards ── */
+.navcards{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;
+  margin:44px 0 0;
+}
+.navcard{
+  display:block;padding:24px;border-radius:18px;
+  border:1px solid var(--border);background:var(--bg2);
+  box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;
+}
+.navcard:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
+.navcard .nb{
+  font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--yellow-dark);margin-bottom:10px;display:block;
+}
+.navcard .nd{
+  font-size:12px;color:var(--text3);margin-bottom:10px;display:block;
+}
+.navcard .nt{font:900 1.2rem/1.25 'Playfair Display',serif;display:block}
+.disabled-card{opacity:.65;pointer-events:none}
+.disabled-card .nb{color:var(--text3)}
+
+/* ── Sidebar ── */
+.sidebar-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  overflow:hidden;margin-bottom:20px;
+}
+.sidebar-card-header{
+  padding:12px 20px;background:var(--bg3);
+  font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--yellow-dark);display:flex;align-items:center;gap:8px;
+}
+.sidebar-card-body{padding:18px 20px}
+.toc{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc a{
+  display:flex;gap:10px;padding:9px 10px;border-radius:8px;
+  border-left:3px solid transparent;font-size:12.5px;color:var(--text3);
+  transition:all .18s;
+}
+.toc a:hover,.toc a.active{
+  background:rgba(250,204,21,.08);color:var(--text);border-left-color:var(--yellow);
+}
+.toc-num{
+  width:22px;flex-shrink:0;font:700 12px 'Playfair Display',serif;
+  color:var(--yellow-dark);
+}
+.concepts{display:flex;flex-wrap:wrap;gap:7px}
+.concept-tag{
+  padding:4px 10px;border-radius:999px;
+  font-size:11px;font-weight:700;background:var(--bg3);
+  border:1px solid var(--border);color:var(--text2);cursor:default;
+  transition:all .2s;
+}
+.concept-tag:hover{background:var(--yellow-bg);border-color:var(--yellow);color:var(--text)}
+
+/* ── Reveal ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── Responsive: tablet ── */
+@media(max-width:1099px){
+  .article-wrap{grid-template-columns:1fr}
+  .sidebar{display:none}
+}
+@media(min-width:761px) and (max-width:1099px){
+  .article-wrap{padding:56px 32px 72px}
+  .figures{grid-template-columns:repeat(2,1fr)}
+  .compare-wrap{grid-template-columns:1fr 1fr}
+}
+@media(max-width:900px){
+  .topics{grid-template-columns:1fr}
+  .figures{grid-template-columns:1fr 1fr}
+  .navcards{grid-template-columns:1fr}
+}
+
+/* ── Responsive: mobile ── */
+@media(max-width:760px){
+  #topnav{padding:10px 14px;height:auto;flex-wrap:wrap;gap:8px}
+  .tnl,.tnr{width:100%;justify-content:space-between}
+  .tnc{display:none}
+  .nav-sep{display:none}
+  #art-hero{min-height:auto;padding:88px 18px 72px}
+  .hero-title{font-size:clamp(38px,12vw,60px)}
+  .hero-subtitle{font-size:16px}
+  .article-wrap{padding:44px 16px 64px;gap:40px}
+  .article-body h2{font-size:1.6rem}
+  .article-p{font-size:16px;line-height:1.85}
+  .dropcap::first-letter{font-size:72px}
+  .pull-quote{padding:22px 18px 22px 22px;margin:24px 0}
+  .pull-quote blockquote{font-size:17px}
+  .callout{flex-direction:column;gap:10px;padding:18px 18px 20px}
+  .banner{padding:24px 20px}
+  .compare-wrap{grid-template-columns:1fr}
+  .compare-row{grid-template-columns:1fr}
+  .compare-row .compare-cell:first-child{border-right:none;border-bottom:1px solid var(--border)}
+  .topics{grid-template-columns:1fr}
+  .figures{grid-template-columns:1fr}
+  .question-card{padding:28px 22px}
+  .question-card blockquote{font-size:18px}
+  .navcards{grid-template-columns:1fr}
+  .quiz-buttons{flex-direction:row}
+  .tl-nodes{flex-direction:column}
+  .sym{display:none}
+}
+@media(max-width:480px){
+  .hero-title{font-size:clamp(34px,14vw,52px)}
+  .article-wrap{padding:36px 14px 52px}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<!-- ══ Top Nav ══ -->
+<nav id="topnav">
+  <div class="tnl">
+    <a href="index.html" style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--yellow);letter-spacing:.04em">F&amp;C</a>
+    <span class="nav-sep">|</span>
+    <span class="u6-badge">UNIDAD 6</span>
+    <span class="tnc">Ciencias Formales: Lógica y Sistemas</span>
+  </div>
+  <div class="tnr">
+    <button class="dtoggle" id="themeToggle" aria-label="Cambiar tema"></button>
+    <a href="index.html" class="nav-pill back"><i class="fa-solid fa-house fa-sm"></i> Inicio</a>
+    <a href="unidad6-clase32.html" class="nav-pill next">Clase 32 <i class="fa-solid fa-arrow-right fa-sm"></i></a>
+  </div>
+</nav>
+
+<!-- ══ Hero ══ -->
+<section id="art-hero">
+  <!-- Floating logic symbols -->
+  <span class="sym">∀</span>
+  <span class="sym">∃</span>
+  <span class="sym">∧</span>
+  <span class="sym">∨</span>
+  <span class="sym">→</span>
+  <span class="sym">¬</span>
+  <span class="sym">∴</span>
+  <span class="sym">⊢</span>
+
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <span class="hero-badge fill">Unidad 6</span>
+      <span class="hero-badge outline">Introducción</span>
+      <span class="hero-badge outline">Ciencias Formales</span>
+    </div>
+    <div class="eyebrow">Lógica · Axiomas · Validez · Demostración</div>
+    <h1 class="hero-title">
+      Forma, <em>validez</em><br>y sistemas
+    </h1>
+    <p class="hero-subtitle">
+      Una unidad sobre ciencias que no observan el mundo sino que construyen lenguajes rigurosos. La pregunta ya no es si algo es verdadero en la naturaleza, sino si una inferencia se sigue necesariamente de sus premisas.
+    </p>
+    <div class="hero-meta">
+      <span><i class="fa-solid fa-infinity"></i> 6 núcleos temáticos</span>
+      <span><i class="fa-solid fa-scale-balanced"></i> Validez y falacias</span>
+      <span><i class="fa-solid fa-diagram-project"></i> Sistemas axiomáticos</span>
+      <span><i class="fa-solid fa-puzzle-piece"></i> Completitud e incompletitud</span>
+    </div>
+    <div class="hero-topics">
+      <span>Ciencias formales</span>
+      <span>Axiomas y teoremas</span>
+      <span>Completitud</span>
+      <span>Consistencia</span>
+      <span>Falacias</span>
+      <span>Método indirecto</span>
+      <span>Modelos</span>
+      <span>Gödel</span>
+    </div>
+    <div class="hero-scroll" onclick="document.getElementById('panorama').scrollIntoView({behavior:'smooth'})">
+      <i class="fa-solid fa-arrow-down fa-sm"></i> Explorar la unidad
+    </div>
+  </div>
+</section>
+
+<!-- ══ Marquee ══ -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- Track duplicado para loop continuo -->
+    <span class="marquee-item">∀x (P(x) → Q(x)) <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Si p, entonces q <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Modus ponens <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Reducción al absurdo <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Todo sistema suficientemente potente es incompleto <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">¬(P ∧ ¬P) <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Validez ≠ Verdad <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Demostrar ≠ Verificar <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">∀x (P(x) → Q(x)) <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Si p, entonces q <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Modus ponens <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Reducción al absurdo <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Todo sistema suficientemente potente es incompleto <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">¬(P ∧ ¬P) <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Validez ≠ Verdad <span class="marquee-sep">◆</span></span>
+    <span class="marquee-item">Demostrar ≠ Verificar <span class="marquee-sep">◆</span></span>
+  </div>
+</div>
+
+<!-- ══ Main layout ══ -->
+<div class="article-wrap">
+<main class="article-body">
+
+  <!-- § Panorama -->
+  <section id="panorama">
+    <h2>Panorama de la unidad</h2>
+    <p class="article-p reveal dropcap">
+      La Unidad 6 cambia de registro respecto de todo lo anterior. Las unidades precedentes preguntaban cómo se produce, valida, difunde o impugna el conocimiento sobre el mundo. Esta unidad pregunta algo distinto: <strong>¿qué hace que un razonamiento sea válido con independencia de su contenido?</strong>
+    </p>
+    <p class="article-p reveal">
+      Eso nos lleva al territorio de las <strong>ciencias formales</strong>: la lógica y las matemáticas. Son ciencias que no hacen experimentos ni observan fenómenos. Trabajan con <strong>símbolos, reglas y relaciones entre expresiones</strong>. Su criterio de validación no es la correspondencia con la realidad sino la demostración dentro de un sistema.
+    </p>
+
+    <div class="pull-quote reveal">
+      <blockquote>
+        "Las ciencias formales no tienen contenido material; son lenguajes que permiten hablar con precisión absoluta sobre cualquier contenido."
+      </blockquote>
+      <cite>— Paráfrasis de Mario Bunge, Treatise on Basic Philosophy, 1974</cite>
+    </div>
+
+    <div class="banner reveal">
+      <h3>En esta introducción vas a encontrar</h3>
+      <ul class="bullet-grid">
+        <li>La distinción entre <strong>ciencias formales y ciencias fácticas</strong>: objetos, métodos y criterios de validación.</li>
+        <li>Qué es un <strong>sistema axiomático</strong> y cuáles son sus componentes básicos.</li>
+        <li>La diferencia entre <strong>demostración, interpretación, modelo y verdad formal</strong>.</li>
+        <li>Las propiedades de <strong>completitud, consistencia e independencia</strong> de un sistema.</li>
+        <li>Cómo se aplica la lógica al análisis de <strong>argumentos válidos, falacias y método indirecto</strong>.</li>
+        <li>Una referencia a los <strong>teoremas de incompletitud de Gödel</strong> como horizonte filosófico de la unidad.</li>
+      </ul>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-icon">🗺️</span>
+      <p><strong>Esta página funciona como mapa de entrada.</strong> Ordena los temas antes de ir a las clases. La idea es ver el recorrido completo: primero se construye el lenguaje formal, después se analizan sus propiedades y por último se aplica el sistema al análisis de argumentos concretos.</p>
+    </div>
+  </section>
+
+  <!-- § Ciencias formales vs fácticas -->
+  <section id="formal-factual">
+    <h2>Ciencias formales y ciencias fácticas</h2>
+    <p class="article-p reveal">
+      El filósofo argentino <strong>Mario Bunge</strong> propuso una distinción que es el punto de partida clásico para pensar las ciencias formales. No todas las ciencias buscan conocer el mundo empírico. Algunas construyen sistemas de relaciones entre objetos ideales: números, figuras, proposiciones. Comparar los dos tipos ayuda a entender qué clase de validez puede tener una demostración matemática.
+    </p>
+
+    <!-- Tabla comparativa -->
+    <div class="compare-wrap reveal">
+      <div class="compare-divider">Dimensión de comparación → Ciencias fácticas / Ciencias formales</div>
+      <div class="compare-row">
+        <div class="compare-cell">
+          <span class="tag">Ciencias fácticas</span><br>
+          <strong>Objeto:</strong> hechos, procesos y fenómenos del mundo real (físico, biológico, social).
+        </div>
+        <div class="compare-cell">
+          <span class="tag">Ciencias formales</span><br>
+          <strong>Objeto:</strong> entes ideales — números, conjuntos, proposiciones, estructuras lógicas.
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">
+          <strong>Método:</strong> observación, experimentación, contrastación con datos empíricos.
+        </div>
+        <div class="compare-cell">
+          <strong>Método:</strong> deducción formal a partir de axiomas mediante reglas de inferencia.
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">
+          <strong>Validación:</strong> corroboración o refutación empírica; los enunciados pueden ser falsados.
+        </div>
+        <div class="compare-cell">
+          <strong>Validación:</strong> demostración dentro del sistema; no hay experimento que refute un teorema.
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">
+          <strong>Verdad:</strong> corresponde (o no) a estados de cosas del mundo.
+        </div>
+        <div class="compare-cell">
+          <strong>Verdad:</strong> validez sintáctica + satisfacibilidad en modelos de interpretación.
+        </div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">
+          <strong>Ejemplos:</strong> Física, Biología, Historia, Química, Economía.
+        </div>
+        <div class="compare-cell">
+          <strong>Ejemplos:</strong> Lógica, Matemática, Teoría de conjuntos, Álgebra abstracta.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout accent reveal">
+      <span class="callout-icon">⚠️</span>
+      <p><strong>Una aclaración importante:</strong> que las ciencias formales no hablen del mundo no significa que sean inútiles para conocerlo. Al contrario: son el andamiaje que permite construir modelos precisos de cualquier dominio. La física cuántica, la biología computacional y la economía matemática dependen de estructuras formales.</p>
+    </div>
+  </section>
+
+  <!-- § Recorrido por los 6 núcleos -->
+  <section id="recorrido">
+    <h2>Los seis núcleos de la unidad</h2>
+    <p class="article-p reveal">
+      La unidad está organizada en seis núcleos que se encadenan. Cada uno agrega una pieza al problema central: qué hace que un sistema de razonamiento sea riguroso y qué significa exactamente que una conclusión sea válida.
+    </p>
+    <div class="topics reveal">
+      <article class="topic">
+        <div class="topic-num">Núcleo 1</div>
+        <h3>Ciencias formales y ciencias fácticas</h3>
+        <p>La distinción fundante de la unidad. Qué producen y cómo validan su conocimiento las ciencias que no trabajan con fenómenos empíricos.</p>
+        <span class="pill"><i class="fa-solid fa-book-open fa-xs"></i> Base conceptual</span>
+      </article>
+      <article class="topic">
+        <div class="topic-num">Núcleo 2</div>
+        <h3>Qué es un sistema axiomático</h3>
+        <p>Un sistema formado por símbolos, reglas de formación, reglas de inferencia y puntos de partida explícitos desde los cuales se deriva todo lo demás.</p>
+        <span class="pill"><i class="fa-solid fa-diagram-project fa-xs"></i> Estructura</span>
+      </article>
+      <article class="topic">
+        <div class="topic-num">Núcleo 3</div>
+        <h3>Primitivos, fórmulas, axiomas y teoremas</h3>
+        <p>Las piezas internas del sistema: qué se toma sin definir, cómo se forman expresiones legítimas y de qué manera unos enunciados se derivan de otros.</p>
+        <span class="pill"><i class="fa-solid fa-cubes fa-xs"></i> Componentes</span>
+      </article>
+      <article class="topic">
+        <div class="topic-num">Núcleo 4</div>
+        <h3>Verdad, axiomatización e interpretación</h3>
+        <p>Diferencia entre demostrar dentro de un sistema e interpretar ese sistema en un modelo. Qué significa verdad en el terreno formal.</p>
+        <span class="pill"><i class="fa-solid fa-language fa-xs"></i> Semántica</span>
+      </article>
+      <article class="topic">
+        <div class="topic-num">Núcleo 5</div>
+        <h3>Completitud, consistencia e independencia</h3>
+        <p>Tres propiedades que todo sistema formal aspira a tener. Y el resultado de Gödel que muestra los límites de esa aspiración.</p>
+        <span class="pill"><i class="fa-solid fa-infinity fa-xs"></i> Propiedades</span>
+      </article>
+      <article class="topic">
+        <div class="topic-num">Núcleo 6</div>
+        <h3>Razonamientos válidos, falacias y método indirecto</h3>
+        <p>Aplicación de la lógica al análisis de argumentos concretos: cuándo una inferencia es válida, cuándo falla y cómo funciona la demostración por reducción al absurdo.</p>
+        <span class="pill"><i class="fa-solid fa-scale-balanced fa-xs"></i> Aplicación</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- § Hilo conductor -->
+  <section id="hilo">
+    <h2>Hilo conductor de la unidad</h2>
+    <p class="article-p reveal">
+      Toda la unidad puede leerse como una pregunta encadenada: si la validez no depende del contenido material de un enunciado, entonces hay que estudiar cómo se construye la forma del razonamiento, cómo se demuestra dentro de un sistema y cómo se interpreta ese sistema en modelos concretos.
+    </p>
+
+    <div class="timeline-card reveal">
+      <div class="tl-layer">
+        <div class="tl-label">
+          <div class="tl-dot" style="background:var(--blue)"></div>
+          Capa 1 · Construcción del lenguaje formal
+        </div>
+        <div class="tl-nodes">
+          <div class="tl-node">
+            <strong>Distinción inicial</strong>
+            <span>Separar ciencias formales y fácticas para ubicar el problema: ¿qué tipo de objeto estudio y cómo lo valido?</span>
+          </div>
+          <div class="tl-node">
+            <strong>Sistema axiomático</strong>
+            <span>Definir los elementos y reglas que hacen posible la deducción: símbolos, formación, inferencia.</span>
+          </div>
+          <div class="tl-node">
+            <strong>Componentes internos</strong>
+            <span>Precisar primitivos, fórmulas bien formadas, axiomas y teoremas como piezas del sistema.</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-layer">
+        <div class="tl-label">
+          <div class="tl-dot" style="background:var(--accent)"></div>
+          Capa 2 · Propiedades e interpretación
+        </div>
+        <div class="tl-nodes">
+          <div class="tl-node">
+            <strong>Verdad formal</strong>
+            <span>Distinguir validez sintáctica, interpretación semántica y noción de modelo. Demostrar ≠ verificar.</span>
+          </div>
+          <div class="tl-node">
+            <strong>Propiedades del sistema</strong>
+            <span>Preguntar si el sistema es completo (demuestra todo lo verdadero), consistente (sin contradicción) e independiente (sin axiomas redundantes).</span>
+          </div>
+          <div class="tl-node">
+            <strong>Los límites: Gödel</strong>
+            <span>Todo sistema formal suficientemente expresivo contiene enunciados verdaderos que no puede demostrar.</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-layer">
+        <div class="tl-label">
+          <div class="tl-dot" style="background:var(--yellow-dark)"></div>
+          Capa 3 · Aplicación argumentativa
+        </div>
+        <div class="tl-nodes">
+          <div class="tl-node">
+            <strong>Validez y falacias</strong>
+            <span>Evaluar cuándo una conclusión se sigue necesariamente de las premisas y cuándo la inferencia comete un error.</span>
+          </div>
+          <div class="tl-node">
+            <strong>Método indirecto</strong>
+            <span>Usar la reducción al absurdo: suponer la negación de lo que queremos demostrar y derivar una contradicción.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="callout-icon">💡</span>
+      <p><strong>Idea fuerza de la unidad:</strong> en las ciencias formales no alcanza con que una conclusión resulte convincente o intuitivamente verdadera. Tiene que poder mostrarse qué reglas la habilitan, bajo qué interpretación funciona y por qué la inferencia es válida y no falaz.</p>
+    </div>
+  </section>
+
+  <!-- § Quiz interactivo -->
+  <section id="quiz">
+    <h2>¿Podés reconocer la validez?</h2>
+    <p class="article-p reveal">
+      Antes de estudiar la lógica formal en profundidad, conviene tener una intuición de qué significa que un argumento sea válido. Un argumento es <strong>válido</strong> cuando, si las premisas son verdaderas, la conclusión <em>necesariamente</em> lo es también. Eso es independiente de que las premisas sean falsas en el mundo real.
+    </p>
+
+    <div class="quiz-wrap reveal">
+      <div class="quiz-head">
+        <i class="fa-solid fa-brain"></i>
+        <span>Mini-quiz: ¿Válido o inválido?</span>
+      </div>
+      <div class="quiz-body">
+        <p class="quiz-intro">Leé cada argumento e indicá si es <strong>válido</strong> (la conclusión se sigue necesariamente) o <strong>inválido</strong> (la estructura permite que las premisas sean verdaderas y la conclusión falsa).</p>
+
+        <!-- Pregunta 1 -->
+        <div class="quiz-item" data-answer="valido">
+          <div class="quiz-q">
+            <div class="premisas">P1: Si llueve, la calle se moja.<br>P2: Está lloviendo.</div>
+            <div class="conclusion">∴ La calle se moja.</div>
+          </div>
+          <div class="quiz-buttons">
+            <button class="quiz-btn valido" onclick="responder(this,1,'valido')">✓ Válido</button>
+            <button class="quiz-btn invalido" onclick="responder(this,1,'invalido')">✗ Inválido</button>
+          </div>
+          <div class="quiz-feedback" id="fb1"></div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="quiz-item" data-answer="invalido">
+          <div class="quiz-q">
+            <div class="premisas">P1: Si estudié, aprobé.<br>P2: Aprobé.</div>
+            <div class="conclusion">∴ Estudié.</div>
+          </div>
+          <div class="quiz-buttons">
+            <button class="quiz-btn valido" onclick="responder(this,2,'valido')">✓ Válido</button>
+            <button class="quiz-btn invalido" onclick="responder(this,2,'invalido')">✗ Inválido</button>
+          </div>
+          <div class="quiz-feedback" id="fb2"></div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="quiz-item" data-answer="valido">
+          <div class="quiz-q">
+            <div class="premisas">P1: Todos los mamíferos son vertebrados.<br>P2: La ballena es mamífero.</div>
+            <div class="conclusion">∴ La ballena es vertebrada.</div>
+          </div>
+          <div class="quiz-buttons">
+            <button class="quiz-btn valido" onclick="responder(this,3,'valido')">✓ Válido</button>
+            <button class="quiz-btn invalido" onclick="responder(this,3,'invalido')">✗ Inválido</button>
+          </div>
+          <div class="quiz-feedback" id="fb3"></div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="quiz-item" data-answer="invalido">
+          <div class="quiz-q">
+            <div class="premisas">P1: Algunos políticos son corruptos.<br>P2: Juan es político.</div>
+            <div class="conclusion">∴ Juan es corrupto.</div>
+          </div>
+          <div class="quiz-buttons">
+            <button class="quiz-btn valido" onclick="responder(this,4,'valido')">✓ Válido</button>
+            <button class="quiz-btn invalido" onclick="responder(this,4,'invalido')">✗ Inválido</button>
+          </div>
+          <div class="quiz-feedback" id="fb4"></div>
+        </div>
+
+        <div class="quiz-score" id="quiz-score"></div>
+      </div>
+    </div>
+
+    <div class="callout blue reveal">
+      <span class="callout-icon">📌</span>
+      <p>Los argumentos 2 y 4 ilustran <strong>falacias formales</strong> muy comunes. El argumento 2 es la <em>falacia de afirmación del consecuente</em>; el 4 comete un error de cuantificación al tratar "algunos" como "todos". Estas estructuras defectuosas se estudiarán en detalle en el Núcleo 6.</p>
+    </div>
+  </section>
+
+  <!-- § Autores -->
+  <section id="figuras">
+    <h2>Autores y referencias de la unidad</h2>
+    <p class="article-p reveal">
+      La unidad recupera pensadores que, desde tradiciones muy distintas, contribuyeron a construir la lógica formal y a reflexionar sobre sus alcances y límites.
+    </p>
+    <div class="figures reveal">
+      <article class="figure">
+        <div class="fhead">
+          <div class="ficon" style="background:#7c3aed">A</div>
+          <div>
+            <div class="fname">Aristóteles</div>
+            <div class="frole">384–322 a.C.</div>
+          </div>
+        </div>
+        <p>Fundador de la lógica occidental. En los <em>Analíticos</em> sistematizó los silogismos: estructuras de razonamiento donde la conclusión se sigue necesariamente de dos premisas que comparten un término medio.</p>
+        <span class="ftag">Silogística · Formas válidas</span>
+      </article>
+      <article class="figure">
+        <div class="fhead">
+          <div class="ficon" style="background:#2563eb">E</div>
+          <div>
+            <div class="fname">Euclides</div>
+            <div class="frole">~300 a.C.</div>
+          </div>
+        </div>
+        <p>Sus <em>Elementos</em> son el modelo histórico de sistema axiomático: 5 postulados, definiciones y una cadena de 465 proposiciones demostradas. Fue el ideal de rigor matemático durante dos mil años.</p>
+        <span class="ftag">Geometría axiomática · Deducción</span>
+      </article>
+      <article class="figure">
+        <div class="fhead">
+          <div class="ficon" style="background:#0891b2">G</div>
+          <div>
+            <div class="fname">Gottlob Frege</div>
+            <div class="frole">1848–1925</div>
+          </div>
+        </div>
+        <p>Creó la primera lógica formal moderna en su <em>Begriffsschrift</em> (1879): un lenguaje de símbolos para expresar inferencias con total precisión, independientemente del lenguaje natural.</p>
+        <span class="ftag">Lógica formal · Cuantificadores</span>
+      </article>
+      <article class="figure">
+        <div class="fhead">
+          <div class="ficon" style="background:#0d9488">R</div>
+          <div>
+            <div class="fname">Russell &amp; Whitehead</div>
+            <div class="frole">Principia Mathematica, 1910</div>
+          </div>
+        </div>
+        <p>Intentaron demostrar que toda la matemática podía derivarse de axiomas puramente lógicos. Su proyecto mostró hasta dónde podía llegar la formalización y preparó el terreno para el golpe de Gödel.</p>
+        <span class="ftag">Logicismo · Fundamentos</span>
+      </article>
+      <article class="figure">
+        <div class="fhead">
+          <div class="ficon" style="background:#dc2626">K</div>
+          <div>
+            <div class="fname">Kurt Gödel</div>
+            <div class="frole">1906–1978</div>
+          </div>
+        </div>
+        <p>Sus teoremas de incompletitud (1931) mostraron que en todo sistema axiomático suficientemente expresivo hay enunciados verdaderos que el sistema no puede demostrar. Es uno de los resultados más perturbadores del siglo XX.</p>
+        <span class="ftag">Incompletitud · Límites del sistema</span>
+      </article>
+      <article class="figure">
+        <div class="fhead">
+          <div class="ficon" style="background:#b45309">M</div>
+          <div>
+            <div class="fname">Mario Bunge</div>
+            <div class="frole">1919–2020</div>
+          </div>
+        </div>
+        <p>Filósofo argentino que sistematizó la distinción entre ciencias formales y ciencias fácticas en su <em>Treatise on Basic Philosophy</em>. Es el marco conceptual de referencia para la primera parte de esta unidad.</p>
+        <span class="ftag">Epistemología · Clasificación ciencias</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- § Pregunta central -->
+  <section id="pregunta">
+    <h2>La pregunta central</h2>
+    <div class="question-card reveal">
+      <div class="question-label">Pregunta que articula la Unidad 6</div>
+      <blockquote>
+        "Si un sistema formal trabaja con signos y reglas sin contenido empírico, ¿qué significa entonces decir que algo es verdadero, demostrado o válido?"
+      </blockquote>
+      <p>
+        La unidad propone distinguir tres cosas que suelen confundirse: una proposición puede ser <strong>verdadera</strong> en un modelo de interpretación; una fórmula puede ser <strong>demostrable</strong> dentro del sistema formal; y una conclusión puede <strong>seguirse válidamente</strong> de las premisas. Esas tres nociones no son lo mismo, y clarificarlas es el núcleo del trabajo filosófico de esta unidad.
+      </p>
+    </div>
+    <p class="article-p reveal">
+      El resultado de Gödel viene a complicar aún más el panorama: hay enunciados que son verdaderos (en todos los modelos del sistema) pero que no pueden demostrarse dentro del sistema. Eso plantea preguntas filosóficas de largo alcance sobre los <strong>límites del conocimiento formal</strong> y sobre si la intuición matemática puede ir más allá de lo que cualquier sistema de reglas puede capturar.
+    </p>
+  </section>
+
+  <!-- § Cierre y nav -->
+  <section id="cierre">
+    <h2>Antes de entrar a las clases</h2>
+    <p class="article-p reveal">
+      Esta introducción plantea el mapa general de la unidad. Las clases van a profundizar cada tramo del recorrido. El punto de entrada es siempre la distinción entre ciencias formales y fácticas; desde ahí se construye el vocabulario de la lógica formal y se llega a la aplicación concreta en el análisis de argumentos y falacias.
+    </p>
+    <div class="callout reveal">
+      <span class="callout-icon">📚</span>
+      <p><strong>Recomendación de lectura previa:</strong> antes de la primera clase conviene releer la sección de Kuhn sobre "precisión" y "consistencia" como valores cognitivos de la ciencia (Unidad 1, Clase 6). La pregunta de qué hace a un sistema <em>consistente</em> conecta directamente con lo que trabajamos en lógica formal.</p>
+    </div>
+    <div class="navcards reveal">
+      <a href="unidad5-introduccion.html" class="navcard">
+        <span class="nb"><i class="fa-solid fa-arrow-left fa-xs"></i> Unidad 5</span>
+        <span class="nd">Volver a la unidad anterior</span>
+        <span class="nt">Articulación entre ciencia, tecnología y sociedad</span>
+      </a>
+      <div class="navcard disabled-card">
+        <span class="nb"><i class="fa-solid fa-hourglass-half fa-xs"></i> En preparación</span>
+        <span class="nd">Las clases se incorporarán próximamente</span>
+        <span class="nt">Clases de lógica y sistemas axiomáticos</span>
+      </div>
+    </div>
+  </section>
+
+</main><!-- /article-body -->
+
+<!-- ══ Sidebar ══ -->
+<aside class="sidebar">
+  <div class="sidebar-card">
+    <div class="sidebar-card-header"><i class="fa-solid fa-list-ul"></i> En esta página</div>
+    <div class="sidebar-card-body">
+      <ul class="toc" id="toc">
+        <li><a href="#panorama"><span class="toc-num">01</span> Panorama</a></li>
+        <li><a href="#formal-factual"><span class="toc-num">02</span> Formales vs. fácticas</a></li>
+        <li><a href="#recorrido"><span class="toc-num">03</span> Los seis núcleos</a></li>
+        <li><a href="#hilo"><span class="toc-num">04</span> Hilo conductor</a></li>
+        <li><a href="#quiz"><span class="toc-num">05</span> Mini-quiz</a></li>
+        <li><a href="#figuras"><span class="toc-num">06</span> Autores</a></li>
+        <li><a href="#pregunta"><span class="toc-num">07</span> Pregunta central</a></li>
+        <li><a href="#cierre"><span class="toc-num">08</span> Cierre</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="sidebar-card-header"><i class="fa-solid fa-tags"></i> Conceptos clave</div>
+    <div class="sidebar-card-body">
+      <div class="concepts">
+        <span class="concept-tag">Ciencias fácticas</span>
+        <span class="concept-tag">Ciencias formales</span>
+        <span class="concept-tag">Sistema axiomático</span>
+        <span class="concept-tag">Primitivos</span>
+        <span class="concept-tag">FBF</span>
+        <span class="concept-tag">Axiomas</span>
+        <span class="concept-tag">Teoremas</span>
+        <span class="concept-tag">Completitud</span>
+        <span class="concept-tag">Consistencia</span>
+        <span class="concept-tag">Independencia</span>
+        <span class="concept-tag">Modelo</span>
+        <span class="concept-tag">Modus ponens</span>
+        <span class="concept-tag">Falacias</span>
+        <span class="concept-tag">Reducción al absurdo</span>
+        <span class="concept-tag">Gödel</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-card">
+    <div class="sidebar-card-header"><i class="fa-solid fa-user-pen"></i> Filósofos de la unidad</div>
+    <div class="sidebar-card-body" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:#7c3aed;display:flex;align-items:center;justify-content:center;color:#fff;font:900 13px 'Playfair Display',serif;flex-shrink:0">A</div>
+        <div><div style="font-size:13px;font-weight:700">Aristóteles</div><div style="font-size:11px;color:var(--text3)">Silogística clásica</div></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:#2563eb;display:flex;align-items:center;justify-content:center;color:#fff;font:900 13px 'Playfair Display',serif;flex-shrink:0">E</div>
+        <div><div style="font-size:13px;font-weight:700">Euclides</div><div style="font-size:11px;color:var(--text3)">Geometría axiomática</div></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:#0891b2;display:flex;align-items:center;justify-content:center;color:#fff;font:900 13px 'Playfair Display',serif;flex-shrink:0">G</div>
+        <div><div style="font-size:13px;font-weight:700">Frege</div><div style="font-size:11px;color:var(--text3)">Lógica formal moderna</div></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:#dc2626;display:flex;align-items:center;justify-content:center;color:#fff;font:900 13px 'Playfair Display',serif;flex-shrink:0">K</div>
+        <div><div style="font-size:13px;font-weight:700">Kurt Gödel</div><div style="font-size:11px;color:var(--text3)">Teoremas de incompletitud</div></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:32px;height:32px;border-radius:50%;background:#b45309;display:flex;align-items:center;justify-content:center;color:#fff;font:900 13px 'Playfair Display',serif;flex-shrink:0">M</div>
+        <div><div style="font-size:13px;font-weight:700">Mario Bunge</div><div style="font-size:11px;color:var(--text3)">Ciencias formales vs. fácticas</div></div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+</div><!-- /article-wrap -->
+
+<script>
+/* ── Dark mode ── */
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+if(localStorage.getItem('theme') === 'dark') root.classList.add('dark');
+toggle.addEventListener('click', () => {
+  root.classList.toggle('dark');
+  localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+});
+
+/* ── Progress bar ── */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const body = document.body, html = document.documentElement;
+  const scrollTop = window.scrollY || html.scrollTop;
+  const scrollHeight = Math.max(body.scrollHeight, html.scrollHeight) - html.clientHeight;
+  prog.style.width = (scrollTop / scrollHeight * 100) + '%';
+}, {passive: true});
+
+/* ── Reveal on scroll ── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ── TOC active link ── */
+const secIds = ['panorama','formal-factual','recorrido','hilo','quiz','figuras','pregunta','cierre'];
+const tocLinks = document.querySelectorAll('#toc a');
+const secEls = secIds.map(id => document.getElementById(id)).filter(Boolean);
+const tocObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      tocLinks.forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`#toc a[href="#${e.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+}, { rootMargin:'-20% 0px -70% 0px' });
+secEls.forEach(s => tocObs.observe(s));
+
+/* ── Quiz ── */
+const answers = { 1:'valido', 2:'invalido', 3:'valido', 4:'invalido' };
+const feedbacks = {
+  1: { ok:'✓ Correcto. Este es el <strong>Modus Ponens</strong> (afirmación del antecedente): si P→Q y P, entonces Q. Forma válida clásica.', err:'✗ Incorrecto. Este argumento SÍ es válido. Es el Modus Ponens: la conclusión se sigue necesariamente de las premisas.' },
+  2: { ok:'✓ Correcto. Es la <strong>falacia de afirmación del consecuente</strong>: que Q sea verdadero no prueba que P lo sea (pudo haber aprobado por otro motivo).', err:'✗ Incorrecto. Es un argumento INVÁLIDO. Aprobar no implica que hayas estudiado — hay otras causas posibles. Es la falacia de afirmación del consecuente.' },
+  3: { ok:'✓ Correcto. Es un <strong>silogismo universal válido</strong> (Barbara): Todo M es P, todo S es M, luego todo S es P.', err:'✗ Incorrecto. Este argumento SÍ es válido. Si todos los mamíferos son vertebrados y la ballena es mamífero, necesariamente es vertebrada.' },
+  4: { ok:'✓ Correcto. El cuantificador "algunos" no autoriza la generalización. Es una <strong>falacia de generalización indebida</strong>: que algunos X sean Y no implica que todo X lo sea.', err:'✗ Incorrecto. El argumento es INVÁLIDO. "Algunos" políticos son corruptos no dice nada sobre Juan en particular — es una falacia de cuantificador.' }
+};
+let answered = {};
+function responder(btn, n, resp) {
+  if(answered[n]) return;
+  answered[n] = resp;
+  const correct = answers[n] === resp;
+  const fb = document.getElementById('fb' + n);
+  btn.parentElement.querySelectorAll('.quiz-btn').forEach(b => b.disabled = true);
+  btn.classList.add('active');
+  fb.innerHTML = (correct ? feedbacks[n].ok : feedbacks[n].err);
+  fb.className = 'quiz-feedback show ' + (correct ? 'ok' : 'err');
+  if(Object.keys(answered).length === 4){
+    let correctCount = 0;
+    for(let k in answered){ if(answers[k] === answered[k]) correctCount++; }
+    const scoreEl = document.getElementById('quiz-score');
+    scoreEl.innerHTML = `Resultado: <strong>${correctCount}/4</strong> — ${correctCount===4?'Excelente, dominás la distinción válido/inválido.':correctCount>=2?'Buen comienzo. Las falacias se estudiarán en detalle en el Núcleo 6.':'Seguí practicando — la diferencia entre validez y verdad se vuelve más clara en las clases.'}`;
+    scoreEl.className = 'quiz-score show';
+  }
+}
+</script>
+</body>
+</html>

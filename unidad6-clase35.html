@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El método indirecto y las geometrías imposibles | FILOSOFÍA&CIENCIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+:root{
+  --yellow:#facc15;--yellow-dark:#eab308;--yellow-bg:rgba(250,204,21,.09);
+  --accent:#a855f7;--accent-bg:rgba(168,85,247,.09);--accent-dark:#9333ea;
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,.09);
+  --green:#22c55e;--green-bg:rgba(34,197,94,.09);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.09);
+  --orange:#f97316;--orange-bg:rgba(249,115,22,.09);
+  --teal:#14b8a6;--teal-bg:rgba(20,184,166,.09);
+  --bg:#f9f7f4;--bg2:#ffffff;--bg3:#f1ede6;
+  --card:#ffffff;--text:#1a1a1a;--text2:#3d3d3d;--text3:#6b6b6b;
+  --border:#e0d9d0;--shadow:0 4px 24px rgba(0,0,0,.08);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.15);
+  --radius:20px;
+  --transition:.3s cubic-bezier(.4,0,.2,1);
+}
+.dark{--bg:#111;--bg2:#1a1a1a;--bg3:#222;--card:#1e1e1e;--text:#f0ece4;--text2:#c8c0b4;--text3:#91897f;--border:#333;--shadow:0 6px 28px rgba(0,0,0,.35)}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);transition:background .4s,color .4s;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--accent)}
+
+/* PROGRESS BAR */
+#prog{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--yellow),var(--accent));z-index:9999;transition:width .1s}
+
+/* TOPNAV */
+#topnav{position:sticky;top:0;z-index:500;background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;box-shadow:var(--shadow);transition:background .4s,border-color .4s}
+.tnav-left,.tnav-right{display:flex;align-items:center;gap:12px}
+.back-link{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.07em;color:var(--text3);transition:color var(--transition)}
+.back-link:hover{color:var(--text)}
+.back-link i{font-size:10px}
+.tnav-badge{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.1em}
+.nav-btn{background:none;border:1px solid var(--border);color:var(--text3);cursor:pointer;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.07em;display:flex;align-items:center;gap:6px;transition:all var(--transition)}
+.nav-btn:hover{border-color:var(--yellow);color:var(--text)}
+.dark-tog{background:none;border:1px solid var(--border);width:36px;height:20px;border-radius:999px;position:relative;cursor:pointer;transition:all var(--transition);flex-shrink:0}
+.dark-tog::after{content:'';position:absolute;left:3px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;background:var(--text3);transition:all var(--transition)}
+.dark .dark-tog{border-color:var(--yellow);background:var(--yellow)}
+.dark .dark-tog::after{left:calc(100% - 16px);background:#000}
+
+/* HERO */
+#art-hero{
+  min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;color:#fff;padding:80px 24px 60px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 120% 80% at 60% 40%,rgba(168,85,247,.18) 0%,transparent 60%),
+             radial-gradient(ellipse 80% 60% at 20% 70%,rgba(59,130,246,.15) 0%,transparent 55%),
+             linear-gradient(160deg,#000 0%,#0a0014 40%,#000820 70%,#000 100%);
+}
+/* Floating math particles */
+.hero-particle{position:absolute;pointer-events:none;font-family:'Libre Baskerville',serif;color:rgba(168,85,247,.18);font-style:italic;user-select:none}
+.hp1{font-size:80px;top:8%;left:5%;animation:floatP 9s ease-in-out infinite}
+.hp2{font-size:48px;top:20%;right:8%;animation:floatP 11s ease-in-out infinite .5s;color:rgba(250,204,21,.15)}
+.hp3{font-size:60px;bottom:18%;left:10%;animation:floatP 8s ease-in-out infinite 1s;color:rgba(59,130,246,.15)}
+.hp4{font-size:36px;bottom:30%;right:12%;animation:floatP 12s ease-in-out infinite 2s;color:rgba(168,85,247,.13)}
+.hp5{font-size:100px;top:40%;left:50%;animation:floatP 10s ease-in-out infinite .8s;color:rgba(250,204,21,.06)}
+@keyframes floatP{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-18px) rotate(3deg)}}
+
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(168,85,247,.18);border:1px solid rgba(168,85,247,.4);padding:6px 18px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:28px;color:rgba(255,255,255,.85)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5.5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:18px;letter-spacing:-.01em}
+.hero-title em{color:var(--yellow);font-style:normal}
+.hero-subtitle{font-family:'Libre Baskerville',serif;font-size:clamp(1rem,2vw,1.25rem);font-style:italic;opacity:.8;max-width:580px;margin:0 auto 32px;line-height:1.6}
+.hero-meta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;font-size:12px;font-weight:600;letter-spacing:.08em;opacity:.6}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);animation:scrollBob 2s ease-in-out infinite;opacity:.5;z-index:2}
+@keyframes scrollBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ARTICLE LAYOUT */
+.article-wrap{max-width:1240px;margin:0 auto;padding:60px 24px 80px;display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
+@media(max-width:900px){.article-wrap{grid-template-columns:1fr}}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:72px;display:flex;flex-direction:column;gap:20px}
+@media(max-width:900px){.sidebar{position:static}}
+.sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.sidebar-card-header{background:var(--accent-bg);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.sidebar-card-header i{font-size:12px}
+.sidebar-card-body{padding:16px}
+
+/* TOC */
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;font-size:12px;font-weight:500;color:var(--text3);transition:all var(--transition);border-left:2px solid transparent}
+.toc-item a:hover,.toc-item a.active{background:var(--accent-bg);color:var(--accent);border-left-color:var(--accent)}
+.toc-num{font-family:'Playfair Display',serif;font-size:10px;font-weight:700;color:var(--accent);min-width:18px;opacity:.7}
+
+/* Concept tags */
+.concept-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ctag{background:var(--bg3);border:1px solid var(--border);padding:4px 10px;border-radius:999px;font-size:11px;color:var(--text2);font-weight:500;transition:all var(--transition)}
+.ctag:hover{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
+
+/* Protagonists */
+.phil-list{display:flex;flex-direction:column;gap:10px}
+.phil-item{display:flex;align-items:flex-start;gap:10px}
+.phil-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent-dark),var(--blue));display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;flex-shrink:0}
+.phil-info{flex:1}
+.phil-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.2}
+.phil-desc{font-size:11px;color:var(--text3);margin-top:2px;line-height:1.3}
+
+/* Next class card */
+.next-card{background:linear-gradient(135deg,var(--accent-dark),var(--blue));border-radius:12px;padding:14px;color:#fff;text-align:center}
+.next-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+.next-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;line-height:1.3}
+.next-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:rgba(255,255,255,.18);padding:6px 14px;border-radius:999px;font-size:11px;font-weight:600;transition:background var(--transition)}
+.next-btn:hover{background:rgba(255,255,255,.3)}
+
+/* ARTICLE MAIN */
+.article-main{}
+.section-block{margin-bottom:64px}
+.section-block:last-child{margin-bottom:0}
+
+.section-label{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.section-label::before{content:'';display:inline-block;width:24px;height:2px;background:var(--accent)}
+
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;line-height:1.2;margin-bottom:20px;color:var(--text)}
+
+p{font-size:1.05rem;line-height:1.8;color:var(--text2);margin-bottom:16px}
+
+/* DROPCAP */
+.dropcap::first-letter{float:left;font-family:'Playfair Display',serif;font-size:5rem;line-height:.75;font-weight:900;color:var(--accent);margin-right:10px;margin-top:4px;text-shadow:0 4px 16px rgba(168,85,247,.3)}
+
+/* PULL QUOTE */
+.pull-quote{background:var(--accent-bg);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:28px 0;font-family:'Libre Baskerville',serif;font-size:1.08rem;font-style:italic;color:var(--text);line-height:1.7}
+.pull-quote cite{display:block;margin-top:8px;font-size:.82rem;color:var(--text3);font-style:normal;font-weight:600;letter-spacing:.06em}
+
+/* CALLOUTS */
+.callout{border-radius:12px;padding:18px 20px;margin:24px 0;display:flex;gap:14px;align-items:flex-start}
+.callout i{font-size:16px;flex-shrink:0;margin-top:2px}
+.callout-body{flex:1}
+.callout-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.callout-text{font-size:.93rem;line-height:1.65;color:var(--text2)}
+.callout-yellow{background:var(--yellow-bg);border-left:3px solid var(--yellow)}
+.callout-yellow i,.callout-yellow .callout-title{color:var(--yellow-dark)}
+.callout-red{background:var(--red-bg);border-left:3px solid var(--red)}
+.callout-red i,.callout-red .callout-title{color:var(--red)}
+.callout-blue{background:var(--blue-bg);border-left:3px solid var(--blue)}
+.callout-blue i,.callout-blue .callout-title{color:var(--blue)}
+.callout-accent{background:var(--accent-bg);border-left:3px solid var(--accent)}
+.callout-accent i,.callout-accent .callout-title{color:var(--accent)}
+.callout-teal{background:var(--teal-bg);border-left:3px solid var(--teal)}
+.callout-teal i,.callout-teal .callout-title{color:var(--teal)}
+
+/* DIRECT VS INDIRECT */
+.method-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0}
+@media(max-width:600px){.method-compare{grid-template-columns:1fr}}
+.method-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center}
+.method-card.indirect{border-color:var(--accent);background:var(--accent-bg)}
+.method-icon{font-size:28px;margin-bottom:10px}
+.method-name{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;color:var(--text3)}
+.method-card.indirect .method-name{color:var(--accent)}
+.method-formula{font-family:'Libre Baskerville',serif;font-size:1rem;color:var(--text);line-height:1.7;font-style:italic}
+
+/* PROOF STEPS */
+.proof-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin:28px 0;box-shadow:var(--shadow)}
+.proof-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text);display:flex;align-items:center;gap:10px}
+.proof-title span{background:var(--accent);color:#fff;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.proof-steps{list-style:none;display:flex;flex-direction:column;gap:0}
+.proof-step{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border)}
+.proof-step:last-child{border-bottom:none}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;transition:all var(--transition)}
+.step-num.normal{background:var(--bg3);color:var(--text3)}
+.step-num.highlight{background:var(--accent);color:#fff}
+.step-num.contradiction{background:var(--red);color:#fff;animation:contradPulse 1.5s ease-in-out infinite}
+@keyframes contradPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+.step-content{flex:1;padding-top:5px}
+.step-text{font-size:.95rem;line-height:1.65;color:var(--text2)}
+.step-text strong{color:var(--text);font-weight:600}
+.step-math{font-family:'Libre Baskerville',serif;font-style:italic;font-size:1rem;color:var(--accent);margin-top:4px;display:block}
+.contrad-badge{display:inline-flex;align-items:center;gap:6px;background:var(--red-bg);border:1px solid var(--red);color:var(--red);padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.08em;margin-top:8px}
+
+/* PROOF SVG */
+.proof-svg-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin:28px 0;overflow:hidden}
+.proof-svg-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;text-align:center}
+
+/* POSTULATE CARDS */
+.postulate-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:28px 0}
+.postulate-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;transition:all var(--transition)}
+.postulate-card:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+.postulate-card.special{border-color:var(--red);background:var(--red-bg)}
+.postulate-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--accent);opacity:.3;line-height:1;margin-bottom:6px}
+.postulate-card.special .postulate-num{color:var(--red)}
+.postulate-text{font-size:.88rem;line-height:1.6;color:var(--text2)}
+.postulate-card.special .postulate-text{color:var(--text)}
+
+/* GEOMETER CARDS */
+.geometer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin:28px 0}
+.geometer-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:all var(--transition)}
+.geometer-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.geom-flag{font-size:22px;margin-bottom:8px}
+.geom-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.geom-year{font-size:11px;color:var(--text3);font-weight:600;margin-bottom:8px}
+.geom-desc{font-size:.88rem;line-height:1.6;color:var(--text2)}
+.geom-badge{display:inline-block;margin-top:8px;background:var(--accent-bg);color:var(--accent);padding:3px 10px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:.08em}
+
+/* TRIANGLE COMPARISON */
+.triangle-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+@media(max-width:600px){.triangle-compare{grid-template-columns:1fr}}
+.tri-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;transition:all var(--transition)}
+.tri-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.tri-name{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;color:var(--text3)}
+.tri-sum{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;margin-top:10px}
+.tri-card.euclidean .tri-name{color:var(--blue)}
+.tri-card.euclidean .tri-sum{color:var(--blue)}
+.tri-card.elliptic .tri-name{color:var(--green)}
+.tri-card.elliptic .tri-sum{color:var(--green)}
+.tri-card.hyperbolic .tri-name{color:var(--orange)}
+.tri-card.hyperbolic .tri-sum{color:var(--orange)}
+.tri-desc{font-size:.82rem;color:var(--text3);margin-top:4px}
+
+/* GEOMETRY EXPLORER */
+.geo-explorer{background:var(--card);border:2px solid var(--accent);border-radius:20px;overflow:hidden;margin:28px 0;box-shadow:var(--shadow-lg)}
+.geo-tabs{display:flex;border-bottom:1px solid var(--border)}
+.geo-tab{flex:1;padding:14px 8px;text-align:center;font-size:12px;font-weight:700;letter-spacing:.08em;cursor:pointer;border:none;background:none;color:var(--text3);transition:all var(--transition);border-bottom:3px solid transparent}
+.geo-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
+.geo-tab:hover:not(.active){color:var(--text);background:var(--bg3)}
+.geo-panel{display:none;padding:24px}
+.geo-panel.active{display:block}
+.geo-panel-inner{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+@media(max-width:700px){.geo-panel-inner{grid-template-columns:1fr}}
+.geo-info{display:flex;flex-direction:column;gap:12px}
+.geo-parallel{background:var(--bg3);border-radius:10px;padding:12px 14px}
+.geo-parallel-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.geo-parallel-text{font-size:.92rem;font-weight:600;color:var(--text)}
+.geo-angle{background:var(--bg3);border-radius:10px;padding:12px 14px}
+.geo-angle-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.geo-angle-value{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900}
+.geo-application{background:var(--yellow-bg);border:1px solid rgba(250,204,21,.3);border-radius:10px;padding:12px 14px}
+.geo-app-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow-dark);margin-bottom:4px}
+.geo-app-text{font-size:.88rem;color:var(--text2);line-height:1.5}
+
+/* EINSTEIN SECTION */
+.nexo-section{background:linear-gradient(160deg,#000 0%,#000820 50%,#060015 100%);border:1px solid rgba(250,204,21,.25);border-radius:20px;padding:40px;margin:28px 0;color:#fff;position:relative;overflow:hidden}
+.nexo-section::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(250,204,21,.12),transparent 70%);pointer-events:none}
+.nexo-section::after{content:'';position:absolute;bottom:-40px;left:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%);pointer-events:none}
+.nexo-eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px;opacity:.8}
+.nexo-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;margin-bottom:24px;line-height:1.2;color:#fff}
+.nexo-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}
+@media(max-width:700px){.nexo-grid{grid-template-columns:1fr}}
+.nexo-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;position:relative;z-index:1}
+.nexo-card:hover{background:rgba(255,255,255,.08)}
+.nexo-person-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--yellow);margin-bottom:4px}
+.nexo-person-years{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:10px;font-weight:600;letter-spacing:.06em}
+.nexo-person-text{font-size:.88rem;line-height:1.7;color:rgba(255,255,255,.75)}
+.nexo-quote{font-family:'Libre Baskerville',serif;font-style:italic;font-size:1rem;color:rgba(255,255,255,.85);border-left:3px solid var(--yellow);padding-left:18px;margin:20px 0;line-height:1.65}
+.nexo-quote cite{display:block;margin-top:6px;font-size:.8rem;color:rgba(255,255,255,.45);font-style:normal;letter-spacing:.06em}
+.nexo-btn{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:#000;padding:10px 22px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.1em;margin-top:16px;transition:all var(--transition);position:relative;z-index:1}
+.nexo-btn:hover{background:var(--yellow-dark);transform:translateY(-1px)}
+
+/* SYNTHESIS */
+.synth-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+@media(max-width:600px){.synth-grid{grid-template-columns:1fr}}
+.synth-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;gap:12px;align-items:flex-start;transition:all var(--transition)}
+.synth-card:hover{border-color:var(--accent);background:var(--accent-bg)}
+.synth-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.synth-text h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.synth-text p{font-size:.85rem;line-height:1.55;color:var(--text2);margin:0}
+
+/* QUESTIONS */
+.question-list{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.question-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.q-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.q-text{font-size:.93rem;line-height:1.6;color:var(--text2);padding-top:3px}
+
+/* BOTTOM NAV */
+.bottom-nav{display:flex;justify-content:space-between;gap:16px;padding-top:48px;border-top:1px solid var(--border);flex-wrap:wrap}
+.bnav-btn{display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 20px;flex:1;min-width:160px;cursor:pointer;transition:all var(--transition)}
+.bnav-btn:hover{border-color:var(--accent);box-shadow:var(--shadow)}
+.bnav-btn.next-nav{align-items:flex-end}
+.bnav-dir{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3)}
+.bnav-title{font-size:.9rem;font-weight:600;color:var(--text)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .method-compare{grid-template-columns:1fr}
+  .triangle-compare{grid-template-columns:1fr}
+  .geo-panel-inner{grid-template-columns:1fr}
+  .nexo-grid{grid-template-columns:1fr}
+  .synth-grid{grid-template-columns:1fr}
+}
+
+/* SPACETIME DIAGRAM */
+.spacetime-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin:20px 0;text-align:center}
+.spacetime-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-top:10px}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="prog"></div>
+
+<!-- TOPNAV -->
+<nav id="topnav">
+  <div class="tnav-left">
+    <a class="back-link" href="unidad6-clase34.html"><i class="fas fa-arrow-left"></i> Clase 34</a>
+    <span style="color:var(--border)">|</span>
+    <span class="tnav-badge">U6 · C35</span>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--text2);display:none;" id="topnav-title">El método indirecto</div>
+  <div class="tnav-right">
+    <a class="nav-btn" href="unidad6-clase36.html">Clase 36 <i class="fas fa-arrow-right"></i></a>
+    <button class="dark-tog" id="darkToggle" title="Modo oscuro" aria-label="Toggle dark mode"></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="art-hero">
+  <!-- Floating math particles -->
+  <div class="hero-particle hp1">¬P</div>
+  <div class="hero-particle hp2">⊥</div>
+  <div class="hero-particle hp3">∴P</div>
+  <div class="hero-particle hp4">∠α+∠β+∠γ</div>
+  <div class="hero-particle hp5">∞</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow"><i class="fas fa-infinity"></i> Unidad 6 &mdash; Clase 35</div>
+    <h1 class="hero-title">El método indirecto y las<br><em>geometrías imposibles</em></h1>
+    <p class="hero-subtitle">Cómo la negación de un axioma abrió universos matemáticos nuevos</p>
+    <div class="hero-meta">
+      <span><i class="fas fa-calendar"></i> 2026</span>
+      <span><i class="fas fa-book"></i> Filosofía e Historia de la Ciencia</span>
+      <span><i class="fas fa-school"></i> 6to Año — Los Polvorines</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><i class="fas fa-chevron-down" style="color:rgba(255,255,255,.4);font-size:18px"></i></div>
+</header>
+
+<!-- ARTICLE WRAP -->
+<div class="article-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- TOC -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header"><i class="fas fa-list"></i> Contenido</div>
+      <div class="sidebar-card-body">
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#intro"><span class="toc-num">01</span> La reducción al absurdo</a></li>
+          <li class="toc-item"><a href="#raiz2"><span class="toc-num">02</span> √2 es irracional</a></li>
+          <li class="toc-item"><a href="#quinto-postulado"><span class="toc-num">03</span> El quinto postulado</a></li>
+          <li class="toc-item"><a href="#geometrias-no-euclideanas"><span class="toc-num">04</span> Geometrías alternativas</a></li>
+          <li class="toc-item"><a href="#superficies"><span class="toc-num">05</span> Explorador de geometrías</a></li>
+          <li class="toc-item"><a href="#implicacion"><span class="toc-num">06</span> Implicación filosófica</a></li>
+          <li class="toc-item"><a href="#nexo-biblioteca"><span class="toc-num">07</span> Einstein y el espacio curvo</a></li>
+          <li class="toc-item"><a href="#sintesis"><span class="toc-num">08</span> Síntesis</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Conceptos clave -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header"><i class="fas fa-tags"></i> Conceptos clave</div>
+      <div class="sidebar-card-body">
+        <div class="concept-tags">
+          <span class="ctag">Reducción al absurdo</span>
+          <span class="ctag">Método indirecto</span>
+          <span class="ctag">Quinto postulado</span>
+          <span class="ctag">Geometría euclidiana</span>
+          <span class="ctag">Geometría hiperbólica</span>
+          <span class="ctag">Geometría elíptica</span>
+          <span class="ctag">Curvatura</span>
+          <span class="ctag">Paralelismo</span>
+          <span class="ctag">Suma de ángulos</span>
+          <span class="ctag">Espacio-tiempo</span>
+          <span class="ctag">Geodésica</span>
+          <span class="ctag">Riemann</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Protagonistas -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header"><i class="fas fa-user-circle"></i> Protagonistas</div>
+      <div class="sidebar-card-body">
+        <div class="phil-list">
+          <div class="phil-item">
+            <div class="phil-avatar">Eu</div>
+            <div class="phil-info">
+              <div class="phil-name">Euclides</div>
+              <div class="phil-desc">Los 5 postulados fundamentales</div>
+            </div>
+          </div>
+          <div class="phil-item">
+            <div class="phil-avatar">Lo</div>
+            <div class="phil-info">
+              <div class="phil-name">Nikolái Lobachevski</div>
+              <div class="phil-desc">1792–1856 · Geometría hiperbólica</div>
+            </div>
+          </div>
+          <div class="phil-item">
+            <div class="phil-avatar">Ri</div>
+            <div class="phil-info">
+              <div class="phil-name">Bernhard Riemann</div>
+              <div class="phil-desc">1826–1866 · Geometría elíptica / curvatura</div>
+            </div>
+          </div>
+          <div class="phil-item">
+            <div class="phil-avatar">Mi</div>
+            <div class="phil-info">
+              <div class="phil-name">Hermann Minkowski</div>
+              <div class="phil-desc">1864–1909 · Espacio-tiempo 4D</div>
+            </div>
+          </div>
+          <div class="phil-item">
+            <div class="phil-avatar">Ei</div>
+            <div class="phil-info">
+              <div class="phil-name">Albert Einstein</div>
+              <div class="phil-desc">1879–1955 · Relatividad General</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Próxima clase -->
+    <div class="sidebar-card">
+      <div class="sidebar-card-header"><i class="fas fa-forward"></i> Próxima clase</div>
+      <div class="sidebar-card-body">
+        <div class="next-card">
+          <div class="next-label">Clase 36</div>
+          <div class="next-title">Axiomas, sistemas formales y los límites del conocimiento</div>
+          <a href="unidad6-clase36.html" class="next-btn">Ir a clase 36 <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN ARTICLE -->
+  <main class="article-main">
+
+    <!-- SECCIÓN 1: INTRO -->
+    <section id="intro" class="section-block reveal">
+      <div class="section-label">01 &mdash; Método indirecto</div>
+      <h2 class="section-title">El argumento más poderoso de la lógica</h2>
+
+      <p class="dropcap">En matemáticas y en filosofía existe una estrategia que, a primera vista, parece un rodeo innecesario: en lugar de demostrar directamente lo que queremos probar, asumimos su <em>contrario</em>. Y después esperamos que el contrario se destruya a sí mismo.</p>
+
+      <p>Este procedimiento se llama <strong>reducción al absurdo</strong> o <em>reductio ad absurdum</em>, y también se conoce como <strong>demostración indirecta</strong> o <strong>método indirecto</strong>. Su lógica es tan antigua como Aristóteles y tan poderosa como cualquier herramienta del pensamiento humano.</p>
+
+      <div class="method-compare">
+        <div class="method-card">
+          <div class="method-icon">🔨</div>
+          <div class="method-name">Demostración directa</div>
+          <div class="method-formula">
+            Partimos de axiomas y reglas de inferencia.<br>
+            Construimos una cadena de pasos que conduce a P.<br>
+            Probamos P <em>positivamente</em>.
+          </div>
+        </div>
+        <div class="method-card indirect">
+          <div class="method-icon">🪤</div>
+          <div class="method-name">Demostración indirecta</div>
+          <div class="method-formula">
+            Suponemos ¬P (la negación de lo que queremos probar).<br>
+            Derivamos una contradicción: Q ∧ ¬Q.<br>
+            Concluimos que ¬P es falso, luego <em>P es verdadero</em>.
+          </div>
+        </div>
+      </div>
+
+      <p>La forma lógica es elegante en su simpleza: si asumir ¬P nos lleva inevitablemente a afirmar <em>al mismo tiempo</em> una proposición Q y su negación ¬Q —algo imposible en cualquier sistema coherente— entonces ¬P no puede ser verdadero. Por la ley del tercio excluso, si ¬P es falso, P debe ser verdadero.</p>
+
+      <div class="pull-quote">
+        "Probar lo que algo es, a veces, requiere demostrar que su negación es imposible. La ausencia de contradicción se convierte en la presencia de verdad."
+        <cite>— Paráfrasis de la tradición lógica aristotélica</cite>
+      </div>
+
+      <div class="callout callout-accent">
+        <i class="fas fa-lightbulb"></i>
+        <div class="callout-body">
+          <div class="callout-title">Distinción clave</div>
+          <div class="callout-text">En la demostración directa <em>construimos</em> la verdad de P. En la demostración indirecta la <em>deducimos por eliminación</em>: si el universo no puede contener ¬P sin contradicción, entonces P debe ocupar ese lugar.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: √2 -->
+    <section id="raiz2" class="section-block reveal">
+      <div class="section-label">02 &mdash; Ejemplo clásico</div>
+      <h2 class="section-title">√2 es irracional: la demostración que escandalizó a Grecia</h2>
+
+      <p>El ejemplo más famoso de reducción al absurdo en la historia de las matemáticas es la demostración de que la raíz cuadrada de 2 no puede expresarse como una fracción. Para los pitagóricos, esto fue un verdadero cataclismo intelectual: habían construido toda su filosofía sobre la idea de que el universo era racional, medible, proporcional. Y este resultado decía que había magnitudes que escapaban a toda fracción.</p>
+
+      <p>La demostración es una joya de claridad lógica. Seguila paso a paso:</p>
+
+      <div class="proof-box">
+        <div class="proof-title">
+          <span><i class="fas fa-square-root-alt"></i></span>
+          Demostración: √2 es irracional
+        </div>
+        <ul class="proof-steps">
+          <li class="proof-step">
+            <div class="step-num highlight">¬P</div>
+            <div class="step-content">
+              <div class="step-text"><strong>Hipótesis de la reducción al absurdo:</strong> suponemos que √2 <em>sí</em> es racional.</div>
+              <span class="step-math">√2 = p/q , con p, q ∈ ℤ, q ≠ 0, mcd(p,q) = 1 (fracción irreducible)</span>
+            </div>
+          </li>
+          <li class="proof-step">
+            <div class="step-num normal">2</div>
+            <div class="step-content">
+              <div class="step-text">Elevamos ambos lados al cuadrado:</div>
+              <span class="step-math">2 = p² / q²  →  p² = 2q²</span>
+            </div>
+          </li>
+          <li class="proof-step">
+            <div class="step-num highlight">3</div>
+            <div class="step-content">
+              <div class="step-text">Como p² es igual a 2 veces algo, <strong>p² es par</strong>. Todo número par al cuadrado proviene de un número par, así que <strong>p es par</strong>. Escribimos p = 2k para algún entero k.</div>
+              <span class="step-math">p = 2k</span>
+            </div>
+          </li>
+          <li class="proof-step">
+            <div class="step-num normal">4</div>
+            <div class="step-content">
+              <div class="step-text">Sustituimos p = 2k en la ecuación p² = 2q²:</div>
+              <span class="step-math">(2k)² = 2q²  →  4k² = 2q²  →  q² = 2k²</span>
+            </div>
+          </li>
+          <li class="proof-step">
+            <div class="step-num highlight">5</div>
+            <div class="step-content">
+              <div class="step-text">Ahora q² es par, luego <strong>q también es par</strong>.</div>
+              <span class="step-math">q = 2m para algún entero m</span>
+            </div>
+          </li>
+          <li class="proof-step">
+            <div class="step-num contradiction">⊥</div>
+            <div class="step-content">
+              <div class="step-text"><strong>¡Contradicción!</strong> Si p es par y q es par, ambos son divisibles por 2. Pero habíamos supuesto que p/q era irreducible (sin factores comunes). No puede ser las dos cosas a la vez.</div>
+              <span class="contrad-badge"><i class="fas fa-bolt"></i> CONTRADICCIÓN — ¬P es falso</span>
+            </div>
+          </li>
+          <li class="proof-step">
+            <div class="step-num" style="background:var(--accent);color:#fff">∴</div>
+            <div class="step-content">
+              <div class="step-text"><strong>Conclusión:</strong> la suposición inicial era falsa. √2 <em>no puede ser racional</em>. Es irracional.</div>
+              <span class="step-math">√2 ∉ ℚ  (√2 no pertenece a los números racionales)</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- SVG escalera de la demostración -->
+      <div class="proof-svg-wrap">
+        <div class="proof-svg-title">La escalera lógica de la demostración</div>
+        <svg viewBox="0 0 600 220" width="100%" style="max-width:600px;display:block;margin:0 auto">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#a855f7"/>
+            </marker>
+            <marker id="arr-red" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 Z" fill="#ef4444"/>
+            </marker>
+          </defs>
+          <!-- Steps -->
+          <rect x="10" y="10" width="120" height="34" rx="8" fill="rgba(168,85,247,.15)" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="70" y="32" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#a855f7">Suponer √2=p/q</text>
+          <line x1="130" y1="27" x2="158" y2="27" stroke="#a855f7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+          <rect x="160" y="10" width="100" height="34" rx="8" fill="rgba(59,130,246,.1)" stroke="#3b82f6" stroke-width="1.5"/>
+          <text x="210" y="32" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#3b82f6">p²=2q²</text>
+          <line x1="260" y1="27" x2="288" y2="27" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr)"/>
+
+          <rect x="290" y="10" width="100" height="34" rx="8" fill="rgba(34,197,94,.1)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="340" y="32" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#22c55e">p es par</text>
+          <line x1="340" y1="44" x2="340" y2="62" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr)"/>
+
+          <rect x="290" y="64" width="100" height="34" rx="8" fill="rgba(34,197,94,.1)" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="340" y="86" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#22c55e">p=2k</text>
+          <line x1="340" y1="98" x2="340" y2="116" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr)"/>
+
+          <rect x="255" y="118" width="170" height="34" rx="8" fill="rgba(249,115,22,.1)" stroke="#f97316" stroke-width="1.5"/>
+          <text x="340" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#f97316">q²=2k² → q es par</text>
+          <line x1="340" y1="152" x2="340" y2="168" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr-red)"/>
+
+          <rect x="210" y="170" width="260" height="40" rx="10" fill="rgba(239,68,68,.18)" stroke="#ef4444" stroke-width="2"/>
+          <text x="340" y="188" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#ef4444" font-weight="bold">⊥ p y q ambos pares → NO irreducible</text>
+          <text x="340" y="202" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#ef4444">∴ √2 ∉ ℚ (irracional)</text>
+
+          <!-- Return arrow showing contradiction collapses the hypothesis -->
+          <path d="M210,190 Q80,190 70,44" stroke="#ef4444" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-red)"/>
+          <text x="30" y="120" font-family="Inter,sans-serif" font-size="10" fill="#ef4444" transform="rotate(-85,30,120)">¬P es falso</text>
+        </svg>
+      </div>
+
+      <div class="callout callout-yellow">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div class="callout-body">
+          <div class="callout-title">Escándalo filosófico griego</div>
+          <div class="callout-text">Los griegos llamaron a estas magnitudes "alogos" (sin razón, inexpresables). Según la leyenda, Hipaso de Metaponto descubrió la irracionalidad de √2 y fue arrojado al mar por sus compañeros pitagóricos. La idea de que podían existir <strong>magnitudes inconmensurables</strong> —que no pueden medirse con ninguna unidad común— sacudió los fundamentos de la matemática antigua.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: QUINTO POSTULADO -->
+    <section id="quinto-postulado" class="section-block reveal">
+      <div class="section-label">03 &mdash; El problema de 2000 años</div>
+      <h2 class="section-title">El quinto postulado: el axioma que nadie podía dejar de tocar</h2>
+
+      <p>Euclides, en sus <em>Elementos</em> (siglo III a.C.), construyó toda la geometría a partir de cinco postulados. Los primeros cuatro son breves, intuitivos, casi indiscutibles. El quinto es otra cosa.</p>
+
+      <div class="postulate-grid">
+        <div class="postulate-card">
+          <div class="postulate-num">I</div>
+          <div class="postulate-text">Entre dos puntos cualesquiera se puede trazar exactamente una recta.</div>
+        </div>
+        <div class="postulate-card">
+          <div class="postulate-num">II</div>
+          <div class="postulate-text">Un segmento de recta puede extenderse indefinidamente en ambas direcciones.</div>
+        </div>
+        <div class="postulate-card">
+          <div class="postulate-num">III</div>
+          <div class="postulate-text">Con cualquier punto como centro y cualquier radio se puede trazar un círculo.</div>
+        </div>
+        <div class="postulate-card">
+          <div class="postulate-num">IV</div>
+          <div class="postulate-text">Todos los ángulos rectos son iguales entre sí.</div>
+        </div>
+        <div class="postulate-card special">
+          <div class="postulate-num">V</div>
+          <div class="postulate-text"><strong>(Formulación de Playfair):</strong> Por un punto exterior a una recta pasa exactamente <em>una</em> recta paralela a esa recta.</div>
+        </div>
+      </div>
+
+      <p>¿Por qué el quinto postulado era sospechoso? Comparado con los otros cuatro, su enunciado es considerablemente más complejo. Los primeros cuatro hablan de operaciones inmediatas y locales. El quinto habla de <em>líneas que se extienden al infinito</em> —algo que nunca podemos verificar directamente. Muchos matemáticos intuyeron que no era un axioma genuino sino un <strong>teorema disfrazado</strong>, algo que debería poder demostrarse a partir de los otros cuatro.</p>
+
+      <p>Durante casi dos milenios, las mentes matemáticas más brillantes intentaron demostrar el quinto postulado. Saccheri en el siglo XVIII trabajó durante años suponiéndolo falso, esperando derivar una contradicción —la clásica estrategia de la reducción al absurdo. Lambert hizo lo mismo. Legendre lo intentó varias veces con distintos enfoques. Todos creyeron en algún momento haber encontrado la contradicción que buscaban.</p>
+
+      <div class="callout callout-red">
+        <i class="fas fa-fire"></i>
+        <div class="callout-body">
+          <div class="callout-title">El giro histórico decisivo</div>
+          <div class="callout-text">Cada vez que alguien creía haber derivado un absurdo del quinto postulado negado, en realidad estaba construyendo —sin darse cuenta— los teoremas de una geometría alternativa perfectamente coherente. Las "contradicciones" que encontraban no eran contradicciones reales: eran resultados extraños, contraintuitivos, pero lógicamente impecables. El "absurdo" estaba en sus intuiciones euclideanas, no en la lógica.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: GEOMETRÍAS NO EUCLIDEANAS -->
+    <section id="geometrias-no-euclideanas" class="section-block reveal">
+      <div class="section-label">04 &mdash; Revolución geométrica</div>
+      <h2 class="section-title">Las geometrías alternativas: tres mundos posibles</h2>
+
+      <p>A principios del siglo XIX, casi simultáneamente y sin conocerse entre sí, varios matemáticos dieron el paso que dos mil años de intentos habían evitado: en lugar de buscar una contradicción en la negación del quinto postulado, <em>la aceptaron</em> y construyeron geometrías completas y consistentes sobre esa base.</p>
+
+      <div class="geometer-grid">
+        <div class="geometer-card">
+          <div class="geom-flag">🇷🇺</div>
+          <div class="geom-name">Nikolái Lobachevski</div>
+          <div class="geom-year">Rusia, 1829</div>
+          <div class="geom-desc">Niega el quinto postulado en la dirección "muchas paralelas": por un punto exterior a una recta pasan <strong>infinitas rectas paralelas</strong>. Desarrolla una geometría completa que llama "geometría imaginaria".</div>
+          <div class="geom-badge">Geometría hiperbólica</div>
+        </div>
+        <div class="geometer-card">
+          <div class="geom-flag">🇭🇺</div>
+          <div class="geom-name">János Bolyai</div>
+          <div class="geom-year">Hungría, 1832</div>
+          <div class="geom-desc">Llega al mismo resultado que Lobachevski de forma independiente. Su padre, también matemático, le advirtió que no publicara: "No vayas por ese camino; temo que lo voy a lamentar toda mi vida".</div>
+          <div class="geom-badge">Geometría hiperbólica</div>
+        </div>
+        <div class="geometer-card">
+          <div class="geom-flag">🇩🇪</div>
+          <div class="geom-name">Carl Friedrich Gauss</div>
+          <div class="geom-year">Alemania (no publicó)</div>
+          <div class="geom-desc">El "príncipe de las matemáticas" había calculado antes que Lobachevski y Bolyai que el quinto postulado era independiente. <strong>No publicó por miedo al escándalo</strong> filosófico y matemático de la época.</div>
+          <div class="geom-badge">Precursor silencioso</div>
+        </div>
+        <div class="geometer-card">
+          <div class="geom-flag">🇩🇪</div>
+          <div class="geom-name">Bernhard Riemann</div>
+          <div class="geom-year">Göttingen, 1854</div>
+          <div class="geom-desc">En su célebre tesis habilitante, niega el quinto postulado en la otra dirección: <strong>no existen rectas paralelas</strong>. Toda par de rectas se interseca. Generaliza el concepto de curvatura a espacios de cualquier dimensión.</div>
+          <div class="geom-badge">Geometría elíptica</div>
+        </div>
+      </div>
+
+      <p>Lo más importante no es que cada uno haya construido su sistema diferente, sino que <em>cada sistema es internamente consistente</em>. No hay contradicciones. Son geometrías tan válidas lógicamente como la euclidiana —simplemente describen espacios con propiedades distintas.</p>
+
+      <p>La diferencia más visible aparece en la suma de los ángulos interiores de un triángulo:</p>
+
+      <div class="triangle-compare">
+        <div class="tri-card euclidean">
+          <div class="tri-name">Euclidiana (plana)</div>
+          <svg viewBox="-5 -5 110 100" width="100%" style="max-width:160px;display:block;margin:0 auto">
+            <polygon points="55,5 5,90 105,90" fill="rgba(59,130,246,.1)" stroke="#3b82f6" stroke-width="2"/>
+            <text x="55" y="22" text-anchor="middle" font-size="10" fill="#3b82f6">α</text>
+            <text x="15" y="88" text-anchor="middle" font-size="10" fill="#3b82f6">β</text>
+            <text x="96" y="88" text-anchor="middle" font-size="10" fill="#3b82f6">γ</text>
+          </svg>
+          <div class="tri-sum">= 180°</div>
+          <div class="tri-desc">Curvatura 0 — espacio plano</div>
+        </div>
+        <div class="tri-card elliptic">
+          <div class="tri-name">Elíptica (esfera)</div>
+          <svg viewBox="-10 -10 120 110" width="100%" style="max-width:160px;display:block;margin:0 auto">
+            <ellipse cx="50" cy="45" rx="50" ry="45" fill="rgba(34,197,94,.08)" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4,2"/>
+            <!-- Curved triangle on sphere (approximated with paths) -->
+            <path d="M50,3 Q95,25 90,85 Q50,95 10,85 Q5,25 50,3Z" fill="rgba(34,197,94,.15)" stroke="#22c55e" stroke-width="2"/>
+            <text x="50" y="18" text-anchor="middle" font-size="10" fill="#22c55e">α</text>
+            <text x="20" y="90" text-anchor="middle" font-size="10" fill="#22c55e">β</text>
+            <text x="84" y="90" text-anchor="middle" font-size="10" fill="#22c55e">γ</text>
+          </svg>
+          <div class="tri-sum">&gt; 180°</div>
+          <div class="tri-desc">Curvatura positiva — esfera</div>
+        </div>
+        <div class="tri-card hyperbolic">
+          <div class="tri-name">Hiperbólica (silla)</div>
+          <svg viewBox="-5 -5 110 100" width="100%" style="max-width:160px;display:block;margin:0 auto">
+            <!-- Hyperbolic triangle: concave sides -->
+            <path d="M55,10 Q75,60 100,88 Q55,70 10,88 Q35,60 55,10Z" fill="rgba(249,115,22,.12)" stroke="#f97316" stroke-width="2"/>
+            <text x="55" y="24" text-anchor="middle" font-size="10" fill="#f97316">α</text>
+            <text x="20" y="88" text-anchor="middle" font-size="10" fill="#f97316">β</text>
+            <text x="93" y="88" text-anchor="middle" font-size="10" fill="#f97316">γ</text>
+          </svg>
+          <div class="tri-sum">&lt; 180°</div>
+          <div class="tri-desc">Curvatura negativa — silla de montar</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: EXPLORADOR INTERACTIVO -->
+    <section id="superficies" class="section-block reveal">
+      <div class="section-label">05 &mdash; Interactivo</div>
+      <h2 class="section-title">Explorador de geometrías</h2>
+
+      <p>Las tres geometrías no son sólo abstracciones. Cada una corresponde a un tipo de superficie con curvatura específica, y tiene aplicaciones concretas en la realidad. Explorá cada una:</p>
+
+      <div class="geo-explorer">
+        <div class="geo-tabs">
+          <button class="geo-tab active" onclick="showGeo('flat')">🟦 Plana (Euclides)</button>
+          <button class="geo-tab" onclick="showGeo('spherical')">🌐 Esférica (Riemann)</button>
+          <button class="geo-tab" onclick="showGeo('hyperbolic')">🌀 Hiperbólica (Lobachevski)</button>
+        </div>
+
+        <!-- FLAT -->
+        <div class="geo-panel active" id="geo-flat">
+          <div class="geo-panel-inner">
+            <svg id="svg-flat" viewBox="0 0 240 200" width="100%" style="max-width:280px;background:var(--bg3);border-radius:12px;border:1px solid var(--border)">
+              <!-- Grid lines -->
+              <defs>
+                <pattern id="flatgrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(59,130,246,.2)" stroke-width=".8"/>
+                </pattern>
+              </defs>
+              <rect width="240" height="200" fill="url(#flatgrid)"/>
+              <!-- Triangle -->
+              <polygon id="tri-flat" points="120,30 30,170 210,170" fill="rgba(59,130,246,.15)" stroke="#3b82f6" stroke-width="2.5"/>
+              <!-- Angle arcs -->
+              <path d="M120,30 m0,16 a16,16 0 0,1 -10,12" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+              <path d="M30,170 m16,0 a16,16 0 0,1 12,-10" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+              <path d="M210,170 m-16,0 a16,16 0 0,0 -12,-10" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+              <!-- Angle labels -->
+              <text x="120" y="66" text-anchor="middle" font-size="11" fill="#3b82f6" font-weight="bold">60°</text>
+              <text x="55" y="165" text-anchor="middle" font-size="11" fill="#3b82f6" font-weight="bold">60°</text>
+              <text x="185" y="165" text-anchor="middle" font-size="11" fill="#3b82f6" font-weight="bold">60°</text>
+              <!-- Parallel lines -->
+              <line x1="10" y1="100" x2="230" y2="100" stroke="#facc15" stroke-width="1.5" stroke-dasharray="8,4"/>
+              <line x1="10" y1="130" x2="230" y2="130" stroke="#facc15" stroke-width="1.5" stroke-dasharray="8,4"/>
+              <text x="235" y="104" font-size="9" fill="#eab308">p₁</text>
+              <text x="235" y="134" font-size="9" fill="#eab308">p₂</text>
+              <text x="120" y="195" text-anchor="middle" font-size="10" fill="var(--text3)">Curvatura = 0</text>
+            </svg>
+            <div class="geo-info">
+              <div class="geo-parallel">
+                <div class="geo-parallel-label">Postulado paralelas</div>
+                <div class="geo-parallel-text">Por un punto exterior a una recta pasa exactamente <strong>UNA</strong> paralela.</div>
+              </div>
+              <div class="geo-angle">
+                <div class="geo-angle-label">Suma de ángulos del triángulo</div>
+                <div class="geo-angle-value" style="color:var(--blue)">= 180°</div>
+              </div>
+              <div class="geo-application">
+                <div class="geo-app-label">Aplicaciones reales</div>
+                <div class="geo-app-text">Arquitectura, ingeniería civil, topografía de superficies pequeñas, diseño gráfico. La geometría que usamos en la vida cotidiana.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPHERICAL -->
+        <div class="geo-panel" id="geo-spherical">
+          <div class="geo-panel-inner">
+            <svg viewBox="0 0 240 200" width="100%" style="max-width:280px;background:var(--bg3);border-radius:12px;border:1px solid var(--border)">
+              <!-- Sphere base -->
+              <ellipse cx="120" cy="100" rx="95" ry="95" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+              <!-- Longitude lines (all converge at poles — no true parallels) -->
+              <ellipse cx="120" cy="100" rx="40" ry="95" fill="none" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+              <ellipse cx="120" cy="100" rx="70" ry="95" fill="none" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+              <ellipse cx="120" cy="100" rx="95" ry="95" fill="none" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+              <!-- Equator -->
+              <ellipse cx="120" cy="100" rx="95" ry="25" fill="none" stroke="rgba(34,197,94,.35)" stroke-width="1.5" stroke-dasharray="6,3"/>
+              <!-- Spherical triangle (large) -->
+              <path d="M120,10 Q210,60 190,170 Q120,140 50,170 Q30,60 120,10Z" fill="rgba(34,197,94,.2)" stroke="#22c55e" stroke-width="2.5"/>
+              <!-- Angle values -->
+              <text x="120" y="32" text-anchor="middle" font-size="11" fill="#22c55e" font-weight="bold">90°</text>
+              <text x="60" y="175" text-anchor="middle" font-size="11" fill="#22c55e" font-weight="bold">90°</text>
+              <text x="182" y="175" text-anchor="middle" font-size="11" fill="#22c55e" font-weight="bold">90°</text>
+              <text x="120" y="195" text-anchor="middle" font-size="10" fill="var(--text3)">Curvatura &gt; 0</text>
+            </svg>
+            <div class="geo-info">
+              <div class="geo-parallel">
+                <div class="geo-parallel-label">Postulado paralelas</div>
+                <div class="geo-parallel-text">Por un punto exterior a una recta <strong>NO pasa ninguna paralela</strong>. Toda par de "rectas" (geodésicas) se interseca.</div>
+              </div>
+              <div class="geo-angle">
+                <div class="geo-angle-label">Suma de ángulos del triángulo</div>
+                <div class="geo-angle-value" style="color:var(--green)">&gt; 180°</div>
+              </div>
+              <div class="geo-application">
+                <div class="geo-app-label">Aplicaciones reales</div>
+                <div class="geo-app-text">Navegación aérea y marítima, cartografía terrestre, GPS y satélites. Los meridianos del globo son "rectas" en esta geometría y se cruzan en los polos.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HYPERBOLIC -->
+        <div class="geo-panel" id="geo-hyperbolic">
+          <div class="geo-panel-inner">
+            <svg viewBox="0 0 240 200" width="100%" style="max-width:280px;background:var(--bg3);border-radius:12px;border:1px solid var(--border)">
+              <!-- Poincaré disk model suggestion -->
+              <circle cx="120" cy="100" r="90" fill="rgba(249,115,22,.05)" stroke="rgba(249,115,22,.3)" stroke-width="1.5"/>
+              <!-- Hyperbolic "lines" (arcs) -->
+              <path d="M30,100 Q120,20 210,100" fill="none" stroke="rgba(249,115,22,.2)" stroke-width="1"/>
+              <path d="M30,100 Q120,180 210,100" fill="none" stroke="rgba(249,115,22,.2)" stroke-width="1"/>
+              <path d="M60,30 Q80,100 60,170" fill="none" stroke="rgba(249,115,22,.15)" stroke-width="1"/>
+              <path d="M180,30 Q160,100 180,170" fill="none" stroke="rgba(249,115,22,.15)" stroke-width="1"/>
+              <!-- Hyperbolic triangle (concave sides) -->
+              <path d="M120,22 Q158,80 148,165 Q120,148 92,165 Q82,80 120,22Z" fill="rgba(249,115,22,.18)" stroke="#f97316" stroke-width="2.5"/>
+              <!-- Angle labels (small) -->
+              <text x="120" y="40" text-anchor="middle" font-size="11" fill="#f97316" font-weight="bold">40°</text>
+              <text x="96" y="165" text-anchor="middle" font-size="11" fill="#f97316" font-weight="bold">40°</text>
+              <text x="148" y="165" text-anchor="middle" font-size="11" fill="#f97316" font-weight="bold">40°</text>
+              <!-- Multiple parallel lines through point -->
+              <path d="M40,80 Q120,60 200,80" fill="none" stroke="#facc15" stroke-width="1.5" stroke-dasharray="6,3"/>
+              <path d="M40,100 Q120,80 200,100" fill="none" stroke="#facc15" stroke-width="1.5" stroke-dasharray="6,3"/>
+              <path d="M40,120 Q120,100 200,120" fill="none" stroke="#facc15" stroke-width="1.5" stroke-dasharray="6,3"/>
+              <text x="205" y="78" font-size="8" fill="#eab308">∞ paralelas</text>
+              <text x="120" y="195" text-anchor="middle" font-size="10" fill="var(--text3)">Curvatura &lt; 0</text>
+            </svg>
+            <div class="geo-info">
+              <div class="geo-parallel">
+                <div class="geo-parallel-label">Postulado paralelas</div>
+                <div class="geo-parallel-text">Por un punto exterior a una recta pasan <strong>INFINITAS rectas paralelas</strong> que no la cortan.</div>
+              </div>
+              <div class="geo-angle">
+                <div class="geo-angle-label">Suma de ángulos del triángulo</div>
+                <div class="geo-angle-value" style="color:var(--orange)">&lt; 180°</div>
+              </div>
+              <div class="geo-application">
+                <div class="geo-app-label">Aplicaciones reales</div>
+                <div class="geo-app-text">Relatividad General (espacio-tiempo cerca de agujeros negros), redes de internet (el grafo de internet tiene estructura hiperbólica), modelos de evolución biológica.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-teal">
+        <i class="fas fa-apple-alt"></i>
+        <div class="callout-body">
+          <div class="callout-title">Analogía con cucharas</div>
+          <div class="callout-text">Podés pensar en las tres geometrías comparando superficies cotidianas: el <strong>dorso de una cuchara</strong> (convexo, esférico — curvatura positiva), una <strong>hoja de papel</strong> (plana — curvatura cero), y el <strong>interior de una cuchara</strong> (cóncavo, como silla de montar — curvatura negativa). La geometría no euclidiana no es "mala geometría": es geometría perfectamente válida para describir superficies curvas.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: IMPLICACIÓN FILOSÓFICA -->
+    <section id="implicacion" class="section-block reveal">
+      <div class="section-label">06 &mdash; Filosofía</div>
+      <h2 class="section-title">La implicación filosófica: ¿cuál geometría es "real"?</h2>
+
+      <p>El surgimiento de múltiples geometrías igualmente consistentes no fue sólo un evento matemático. Fue una revolución filosófica. Si hay tres sistemas de geometría posibles —y los tres son internamente coherentes— entonces la pregunta se vuelve inevitable: <strong>¿cuál de ellos describe el espacio real en que vivimos?</strong></p>
+
+      <p>La respuesta que las geometrías no euclideanas ofrecen es sorprendente: la matemática formal, por sí sola, no puede decirte cuál geometría es la "verdadera". Eso lo determina la <em>física</em>, es decir, la experiencia y el experimento.</p>
+
+      <p>Este resultado golpea directamente a Immanuel Kant, quien en su <em>Crítica de la Razón Pura</em> (1781) había sostenido que la geometría euclidiana era una verdad <em>a priori</em> del entendimiento humano: no necesitábamos ir al mundo a verificarla, la teníamos grabada en nuestra forma de percibir el espacio. Las geometrías no euclideanas mostraron que eso era incorrecto: podemos concebir coherentemente espacios no euclideanos, lo que significa que la estructura euclidiana no es una necesidad lógica del pensamiento.</p>
+
+      <div class="callout callout-blue">
+        <i class="fas fa-brain"></i>
+        <div class="callout-body">
+          <div class="callout-title">Kant y las geometrías no euclideanas</div>
+          <div class="callout-text">Kant afirmaba que la geometría euclidiana era una intuición pura del espacio, impuesta por nuestra mente a toda experiencia posible. Pero si podemos construir coherentemente geometrías distintas, eso muestra que la mente no está "obligada" a pensar el espacio de forma euclidiana. La geometría del espacio es una pregunta empírica, abierta, no una verdad definitiva de la razón.</div>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        "La geometría del espacio es una cuestión empírica, no lógica. La experiencia debe decidir qué geometría describe nuestro universo —y puede decidir que no es la de Euclides."
+        <cite>— Paráfrasis de Bernhard Riemann, Habilitationsschrift (1854)</cite>
+      </div>
+
+      <p>Esto marca una separación histórica y definitiva entre <strong>geometría formal</strong> (sistema lógico con axiomas y reglas de deducción) y <strong>geometría física</strong> (descripción del espacio real). La primera es dominio de las matemáticas. La segunda es dominio de la física. Y como veremos en la siguiente sección, la física terminó dándole la razón a Riemann.</p>
+    </section>
+
+    <!-- SECCIÓN 7: NEXO EINSTEIN -->
+    <section id="nexo-biblioteca" class="section-block reveal">
+      <div class="nexo-section">
+        <div class="nexo-eyebrow"><i class="fas fa-star"></i> Conexión con la física</div>
+        <h2 class="nexo-title">Einstein y el espacio curvo:<br>cuando la geometría formal se convirtió en física real</h2>
+
+        <p style="color:rgba(255,255,255,.72);font-size:.98rem;line-height:1.75;margin-bottom:24px">La historia de la Relatividad General es quizás el ejemplo más espectacular de la relación entre matemática pura y ciencia aplicada: una geometría desarrollada como ejercicio abstracto, sin ningún propósito práctico inmediato, resultó ser décadas después el lenguaje exacto que la física necesitaba para describir la gravedad.</p>
+
+        <div class="nexo-grid">
+          <div class="nexo-card">
+            <div class="nexo-person-name">Hermann Minkowski</div>
+            <div class="nexo-person-years">1864 – 1909 · Profesor de Einstein en ETH Zürich</div>
+            <div class="nexo-person-text">En 1907, dos años después de la Relatividad Especial de Einstein, Minkowski hizo algo que cambió todo: reformuló la teoría como una geometría de cuatro dimensiones, uniendo las tres dimensiones espaciales con el tiempo en un único objeto matemático: el <strong>espacio-tiempo</strong>. Este espacio-tiempo no es euclidiano —tiene una métrica particular que mezcla espacio y tiempo con un signo negativo.</div>
+            <div class="nexo-quote" style="margin-top:14px;font-size:.9rem">
+              "De ahora en adelante, el espacio por sí solo y el tiempo por sí solo están condenados a desvanecerse como meras sombras, y solo una unión de los dos preservará una realidad independiente."
+              <cite>— Hermann Minkowski, Colonia, 1908</cite>
+            </div>
+            <p style="color:rgba(255,255,255,.55);font-size:.82rem;margin-top:8px;line-height:1.5">La reacción inicial de Einstein fue llamar esto "erudición superflua". Pocos años después, lo consideraría indispensable.</p>
+          </div>
+
+          <div class="nexo-card">
+            <div class="nexo-person-name">Albert Einstein y la geometría de Riemann</div>
+            <div class="nexo-person-years">1879 – 1955 · Relatividad General, 1915</div>
+            <div class="nexo-person-text">Para formular la Relatividad General, Einstein necesitaba describir matemáticamente un espacio que podía <em>curvarse</em> en presencia de masa. Su amigo y condiscípulo Marcel Grossmann le presentó entonces la <strong>geometría diferencial de Riemann</strong> —desarrollada en 1854, exactamente el instrumento que necesitaba. La gravedad, en la Relatividad General, no es una fuerza misteriosa que actúa a distancia: es la <strong>curvatura del espacio-tiempo</strong> causada por la masa y la energía.</div>
+            <p style="color:rgba(255,255,255,.72);font-size:.88rem;line-height:1.6;margin-top:10px">Un planeta "orbita" al Sol no porque una fuerza lo jale, sino porque sigue la <strong>geodésica</strong> —la línea más recta posible— en un espacio-tiempo curvado por la masa solar. Lo que Riemann llamó "curvatura" es lo que Newton llamó "gravedad".</p>
+          </div>
+        </div>
+
+        <!-- Spacetime diagram SVG -->
+        <div class="spacetime-wrap" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)">
+          <svg viewBox="0 0 400 220" width="100%" style="max-width:440px;display:block;margin:0 auto">
+            <!-- Grid fabric of spacetime -->
+            <defs>
+              <radialGradient id="massGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(250,204,21,.9)"/>
+                <stop offset="100%" stop-color="rgba(250,204,21,.2)"/>
+              </radialGradient>
+            </defs>
+            <!-- Horizontal grid lines — curved by mass -->
+            <path d="M10,30 Q200,30 390,30" fill="none" stroke="rgba(168,85,247,.2)" stroke-width=".8"/>
+            <path d="M10,55 Q200,55 390,55" fill="none" stroke="rgba(168,85,247,.2)" stroke-width=".8"/>
+            <path d="M10,80 Q170,80 190,110 Q210,140 230,80 Q280,80 390,80" fill="none" stroke="rgba(168,85,247,.3)" stroke-width=".8"/>
+            <path d="M10,105 Q150,105 185,140 Q200,165 215,140 Q250,105 390,105" fill="none" stroke="rgba(168,85,247,.3)" stroke-width=".8"/>
+            <path d="M10,130 Q140,130 180,160 Q200,180 220,160 Q260,130 390,130" fill="none" stroke="rgba(168,85,247,.35)" stroke-width="1"/>
+            <path d="M10,155 Q160,155 185,170 Q200,182 215,170 Q240,155 390,155" fill="none" stroke="rgba(168,85,247,.25)" stroke-width=".8"/>
+            <path d="M10,180 Q200,180 390,180" fill="none" stroke="rgba(168,85,247,.2)" stroke-width=".8"/>
+
+            <!-- Vertical grid lines — curved -->
+            <path d="M60,10 Q60,110 60,210" fill="none" stroke="rgba(168,85,247,.15)" stroke-width=".8"/>
+            <path d="M120,10 Q118,90 115,140 Q113,170 115,210" fill="none" stroke="rgba(168,85,247,.2)" stroke-width=".8"/>
+            <path d="M160,10 Q155,80 155,130 Q155,165 158,210" fill="none" stroke="rgba(168,85,247,.25)" stroke-width=".8"/>
+            <path d="M200,10 Q195,70 196,120 Q197,160 200,210" fill="none" stroke="rgba(168,85,247,.3)" stroke-width="1"/>
+            <path d="M240,10 Q244,80 244,130 Q244,165 242,210" fill="none" stroke="rgba(168,85,247,.25)" stroke-width=".8"/>
+            <path d="M280,10 Q282,90 284,140 Q285,170 284,210" fill="none" stroke="rgba(168,85,247,.2)" stroke-width=".8"/>
+            <path d="M340,10 Q340,110 340,210" fill="none" stroke="rgba(168,85,247,.15)" stroke-width=".8"/>
+
+            <!-- Massive object (Sun) -->
+            <circle cx="200" cy="148" r="18" fill="url(#massGrad)" filter="url(#glow)"/>
+            <circle cx="200" cy="148" r="22" fill="none" stroke="rgba(250,204,21,.4)" stroke-width="1.5"/>
+
+            <!-- Orbiting planet (geodesic) -->
+            <ellipse cx="200" cy="148" rx="48" ry="36" fill="none" stroke="rgba(59,130,246,.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <circle cx="248" cy="148" r="6" fill="#3b82f6"/>
+
+            <!-- Labels -->
+            <text x="200" y="148" text-anchor="middle" dominant-baseline="middle" font-size="9" fill="#000" font-weight="bold">M</text>
+            <text x="200" y="210" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.4)">Curvatura del espacio-tiempo por la masa</text>
+            <text x="255" y="144" font-size="8" fill="rgba(59,130,246,.8)">geodésica →</text>
+          </svg>
+          <div class="spacetime-label" style="color:rgba(255,255,255,.35)">La órbita planetaria como geodésica en espacio-tiempo curvado</div>
+        </div>
+
+        <div class="nexo-quote">
+          "La geometría de Riemann, desarrollada como ejercicio abstracto en 1854, resultó ser el lenguaje exacto que la física necesitaba en 1915. La matemática pura, sin propósito práctico inmediato, se convirtió en la descripción más precisa de la gravedad que existe."
+          <cite>— Reflexión pedagógica sobre la Relatividad General</cite>
+        </div>
+
+        <p style="color:rgba(255,255,255,.65);font-size:.9rem;line-height:1.7;margin-top:8px">Este es quizás el ejemplo más poderoso de que las matemáticas formales, desarrolladas sin ninguna intención de "servir" a la física, resultan luego el lenguaje indispensable para describir la naturaleza. La separación entre "matemáticas puras" y "matemáticas aplicadas" es, en última instancia, provisional.</p>
+
+        <a href="biblioteca.html" class="nexo-btn"><i class="fas fa-book-open"></i> Explorar más en la Biblioteca</a>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: SÍNTESIS -->
+    <section id="sintesis" class="section-block reveal">
+      <div class="section-label">08 &mdash; Síntesis</div>
+      <h2 class="section-title">Ideas clave de esta clase</h2>
+
+      <div class="synth-grid">
+        <div class="synth-card">
+          <div class="synth-icon" style="background:var(--accent-bg);color:var(--accent)"><i class="fas fa-not-equal"></i></div>
+          <div class="synth-text">
+            <h4>Reducción al absurdo</h4>
+            <p>Probar P asumiendo ¬P y derivando una contradicción. Es el método indirecto: la ausencia de contradicción en ¬P se vuelve evidencia de la verdad de P.</p>
+          </div>
+        </div>
+        <div class="synth-card">
+          <div class="synth-icon" style="background:var(--red-bg);color:var(--red)"><i class="fas fa-question-circle"></i></div>
+          <div class="synth-text">
+            <h4>El quinto postulado</h4>
+            <p>Dos mil años de intentos por demostrarlo como teorema fracasaron porque es genuinamente independiente de los otros cuatro: su negación genera geometrías distintas, no contradicciones.</p>
+          </div>
+        </div>
+        <div class="synth-card">
+          <div class="synth-icon" style="background:var(--green-bg);color:var(--green)"><i class="fas fa-globe"></i></div>
+          <div class="synth-text">
+            <h4>Pluralismo geométrico</h4>
+            <p>Hay tres geometrías consistentes: euclidiana (plana), elíptica (esférica) e hiperbólica (silla de montar). Cada una tiene su propia aritmética de ángulos y paralelas.</p>
+          </div>
+        </div>
+        <div class="synth-card">
+          <div class="synth-icon" style="background:var(--yellow-bg);color:var(--yellow-dark)"><i class="fas fa-atom"></i></div>
+          <div class="synth-text">
+            <h4>Geometría formal ≠ Geometría física</h4>
+            <p>Qué geometría es "verdadera" para el espacio real lo determina la física, no la lógica. Einstein demostró que el universo sigue la geometría de Riemann, no la de Euclides.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin:36px 0 16px;color:var(--text)">Preguntas para reflexionar</h3>
+      <div class="question-list">
+        <div class="question-item">
+          <div class="q-num">1</div>
+          <div class="q-text">Cuando Saccheri negó el quinto postulado esperando obtener una contradicción y en cambio obtuvo teoremas de geometría hiperbólica, ¿en qué sentido su intuición le jugó una mala pasada? ¿Qué suposición implícita le impedía reconocer que no había contradicción?</div>
+        </div>
+        <div class="question-item">
+          <div class="q-num">2</div>
+          <div class="q-text">Kant sostuvo que la geometría euclidiana era una verdad a priori. ¿Cómo refutan esta tesis las geometrías no euclideanas? ¿Qué dice esto sobre los límites del conocimiento a priori en general?</div>
+        </div>
+        <div class="question-item">
+          <div class="q-num">3</div>
+          <div class="q-text">Riemann desarrolló su geometría en 1854 sin ningún propósito físico. Einstein la usó en 1915 para describir la gravedad. ¿Qué nos dice esto sobre la relación entre matemática pura y ciencia aplicada? ¿Puede ser "útil" algo que no fue diseñado para serlo?</div>
+        </div>
+      </div>
+
+      <!-- Bottom navigation -->
+      <div class="bottom-nav">
+        <a href="unidad6-clase34.html" class="bnav-btn">
+          <div class="bnav-dir"><i class="fas fa-arrow-left"></i> Anterior</div>
+          <div class="bnav-title">Clase 34</div>
+        </a>
+        <a href="unidad6-clase36.html" class="bnav-btn next-nav">
+          <div class="bnav-dir">Siguiente <i class="fas fa-arrow-right"></i></div>
+          <div class="bnav-title">Clase 36</div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div><!-- /article-wrap -->
+
+<script>
+// ===================== DARK MODE =====================
+(function(){
+  const html = document.documentElement;
+  const saved = localStorage.getItem('filo-dark');
+  if(saved === 'true') html.classList.add('dark');
+  document.getElementById('darkToggle').addEventListener('click', function(){
+    const isDark = html.classList.toggle('dark');
+    localStorage.setItem('filo-dark', isDark);
+  });
+})();
+
+// ===================== PROGRESS BAR =====================
+(function(){
+  const bar = document.getElementById('prog');
+  function update(){
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    bar.style.width = (total > 0 ? (scrolled/total)*100 : 0) + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+
+// ===================== REVEAL ON SCROLL =====================
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el => obs.observe(el));
+})();
+
+// ===================== TOC ACTIVE =====================
+(function(){
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.toc-item a');
+  function setActive(){
+    let current = '';
+    sections.forEach(s => {
+      if(window.scrollY >= s.offsetTop - 90) current = s.id;
+    });
+    links.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#'+current);
+    });
+  }
+  window.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+})();
+
+// ===================== TOPNAV CENTER TITLE =====================
+(function(){
+  const title = document.getElementById('topnav-title');
+  const hero = document.getElementById('art-hero');
+  if(!title || !hero) return;
+  title.style.display = 'none';
+  const obs = new IntersectionObserver(entries => {
+    title.style.display = entries[0].isIntersecting ? 'none' : 'block';
+  }, {threshold:0});
+  obs.observe(hero);
+  title.style.display = window.scrollY > hero.offsetHeight ? 'block' : 'none';
+})();
+
+// ===================== GEOMETRY EXPLORER =====================
+function showGeo(type){
+  // Tabs
+  document.querySelectorAll('.geo-tab').forEach((tab, i) => {
+    const types = ['flat','spherical','hyperbolic'];
+    tab.classList.toggle('active', types[i] === type);
+  });
+  // Panels
+  document.querySelectorAll('.geo-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'geo-'+type);
+  });
+}
+</script>
+</body>
+</html>
